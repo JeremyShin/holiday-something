@@ -26,14 +26,14 @@ Holiday Something Document 1.0
 ----------------
 ### 개발환경
 ----------------
-프레임워크 : Spring Boot 2.0
-데이터베이스 : mysql 
-배포 : Docker, AWS(EC2, RDS)
-프론트 : React
-IDE : IntelliJ
-빌드 도구 : Gradle
-Java JDK 1.8
-JPA
+- 프레임워크 : Spring Boot 2.0
+- 데이터베이스 : mysql 
+- 배포 : Docker, AWS(EC2, RDS)
+- 프론트 : React
+- IDE : IntelliJ
+- 빌드 도구 : Gradle
+- Language : Java JDK 1.8
+- JPA
 
 -----------------
 
