@@ -1,16 +1,15 @@
-package com.holidaysomething.holidaysomething.dto;
+package com.holidaysomething.holidaysomething.domain;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
+@Entity
 @Getter
 @Setter
-@Entity
-@Table(name = "MEMBER_COUPONS")
-public class MemberCoupon {
+@Table(name="CART_PRODUCTS")
+public class CartProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,12 +19,12 @@ public class MemberCoupon {
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name = "coupon_id")
-    private Coupon coupon;
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     @Column(nullable = false)
-    private LocalDateTime startDate;
+    private int price;
 
     @Column(nullable = false)
-    private LocalDateTime expireDate;
+    private int quantity;
 }

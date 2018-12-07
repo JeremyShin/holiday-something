@@ -1,4 +1,4 @@
-package com.holidaysomething.holidaysomething.dto;
+package com.holidaysomething.holidaysomething.domain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +15,7 @@ public class ExchangeRefund {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 255, nullable = false)
+    @Column(nullable = false)
     private String type;
 
     @Column(nullable = false)

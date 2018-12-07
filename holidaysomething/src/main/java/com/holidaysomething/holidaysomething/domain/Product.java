@@ -1,4 +1,4 @@
-package com.holidaysomething.holidaysomething.dto;
+package com.holidaysomething.holidaysomething.domain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,10 +24,10 @@ public class Product {
     @Column(nullable = false)
     private int sellingPrice;
 
-    @Column(length = 255, nullable = false)
+    @Column(nullable = false)
     private String code;
 
-    @Column(length = 255, nullable = false)
+    @Column(nullable = false)
     private String manufacturer;
 
     @Column(nullable = false)
@@ -36,36 +36,35 @@ public class Product {
     @Column(nullable = false)
     private int quantity;
 
-    @Column(length = 255)
+    @Column(nullable = false)
     private String optionalPriceText;
 
     @ManyToOne
-    @JoinColumn(name = "PRODUCT_ID")
+    @JoinColumn(name = "product_category_id")
     private ProductCategory productCategory;
 
     @OneToOne
-    @JoinColumn(name = "PRODUCT_DETAIL_ID")
+    @JoinColumn(name = "product_detail_id")
     private ProductDetail productDetail;
 
-    @OneToMany(mappedBy = "PRODUCT")
+    @OneToMany(mappedBy = "product")
     private List<ProductReview> productReviews;
 
-    @OneToMany(mappedBy = "PRODUCT")
+    @OneToMany(mappedBy = "product")
     private List<ProductQuestion> productQuestions;
 
-    @OneToMany(mappedBy = "PRODUCT")
+    @OneToMany(mappedBy = "product")
     private List<ProductImage> productImages;
 
     @ManyToMany
-    @JoinTable(name = "PRODUCT_CONTENTS",
-            joinColumns = @JoinColumn(name = "PRODUCT_ID"),
-            inverseJoinColumns = @JoinColumn(name = "CONTENT_ID"))
+    @JoinTable(name = "product_contents",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "content_id"))
     private List<Content> contents;
 
     @ManyToMany
-    @JoinTable(name = "WISH_PRODUCTS",
-            joinColumns = @JoinColumn(name = "PRODUCT_ID"),
-            inverseJoinColumns = @JoinColumn(name = "MEMBER_ID"))
+    @JoinTable(name = "wish_products",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "member_id"))
     private List<Member> members;
-
 }

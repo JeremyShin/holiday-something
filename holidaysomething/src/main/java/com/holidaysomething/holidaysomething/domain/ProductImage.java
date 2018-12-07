@@ -1,4 +1,4 @@
-package com.holidaysomething.holidaysomething.dto;
+package com.holidaysomething.holidaysomething.domain;
 
 import lombok.Getter;
 import lombok.Setter;
