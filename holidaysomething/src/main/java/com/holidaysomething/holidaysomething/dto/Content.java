@@ -2,11 +2,14 @@ package com.holidaysomething.holidaysomething.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 @Table(name = "CONTENT")
 public class Content {
@@ -16,9 +19,11 @@ public class Content {
 
     private String title;
 
+    @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime regDate;
 
+    @UpdateTimestamp
     @Column(nullable = false)
     private LocalDateTime updateDate;
 
@@ -26,5 +31,7 @@ public class Content {
     @JoinColumn(name = "content_body_id")
     private ContentBody contentBody;
 
-    private Long contentCategoryId;
+    @ManyToOne
+    @JoinColumn(name = "content_category_id")
+    private ContentCategory contentCategory;
 }

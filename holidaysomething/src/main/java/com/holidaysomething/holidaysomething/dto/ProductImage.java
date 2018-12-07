@@ -3,10 +3,15 @@ package com.holidaysomething.holidaysomething.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
-
-@Getter @Setter
+@Entity
+@Table(name = "PRODUCT_IMAGES")
+@Getter
+@Setter
 public class ProductImage {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String path;
     private String originalFileName;
@@ -15,5 +20,8 @@ public class ProductImage {
     private String fileType;
     private LocalDateTime regDate;
     private LocalDateTime updateDate;
-    private Long productId;
+
+//    @ManyToOne
+//    @JoinColumn(name = "product_id")
+//    private Product product;
 }
