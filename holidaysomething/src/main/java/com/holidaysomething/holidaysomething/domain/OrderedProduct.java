@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ORDERED_PRODUCT")
+@Table(name = "ORDERED_PRODUCTS")
 @Getter
 @Setter
 public class OrderedProduct {
@@ -24,17 +24,14 @@ public class OrderedProduct {
     private int quantity;
 
     @ManyToOne
-    @JoinColumn(name = "ordered_product_id")
+    @JoinColumn(name = "order_id")
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "ordered_product_id")
-    private Long productId;
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     @OneToOne
     @JoinColumn(name = "exchange_refund_id")
     private ExchangeRefund exchangeRefund;
-
-
-    private Long couponId;
 }

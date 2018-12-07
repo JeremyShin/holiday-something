@@ -2,9 +2,12 @@ package com.holidaysomething.holidaysomething.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "PRODUCT_IMAGES")
 @Getter
@@ -13,15 +16,27 @@ public class ProductImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String path;
-    private String originalFileName;
-    private String storedFileName;
-    private int size;
-    private String fileType;
-    private LocalDateTime regDate;
-    private LocalDateTime updateDate;
 
-//    @ManyToOne
-//    @JoinColumn(name = "product_id")
-//    private Product product;
+    @Column(nullable = false)
+    private String path;
+
+    @Column(nullable = false)
+    private String originalFileName;
+
+    @Column(nullable = false)
+    private String storedFileName;
+
+    @Column(nullable = false)
+    private int size;
+
+    @Column(nullable = false)
+    private String fileType;
+
+    @Column(nullable = false)
+    @CreationTimestamp
+    private LocalDateTime regDate;
+
+    @Column(nullable = false)
+    @UpdateTimestamp
+    private LocalDateTime updateDate;
 }

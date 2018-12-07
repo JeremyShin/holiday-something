@@ -4,10 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "PRODUCT")
+@Table(name = "PRODUCTS")
 @Getter
 @Setter
 public class Product {
@@ -36,7 +36,6 @@ public class Product {
     @Column(nullable = false)
     private int quantity;
 
-    @Column(nullable = false)
     private String optionalPriceText;
 
     @ManyToOne
@@ -48,23 +47,5 @@ public class Product {
     private ProductDetail productDetail;
 
     @OneToMany(mappedBy = "product")
-    private List<ProductReview> productReviews;
-
-    @OneToMany(mappedBy = "product")
-    private List<ProductQuestion> productQuestions;
-
-    @OneToMany(mappedBy = "product")
-    private List<ProductImage> productImages;
-
-    @ManyToMany
-    @JoinTable(name = "product_contents",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "content_id"))
-    private List<Content> contents;
-
-    @ManyToMany
-    @JoinTable(name = "wish_products",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "member_id"))
-    private List<Member> members;
+    private Set<ProductImage> productImages;
 }

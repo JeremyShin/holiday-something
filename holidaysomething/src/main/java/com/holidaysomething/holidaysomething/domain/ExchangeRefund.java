@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "EXCHANGE_REFUND")
+@Table(name = "EXCHANGE_REFUNDS")
 @Getter
 @Setter
 public class ExchangeRefund {
@@ -27,12 +27,8 @@ public class ExchangeRefund {
 
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    private LocalDateTime allowDate;
+    private LocalDateTime approveDate;
 
     @Column(nullable = false)
-    private Boolean allow;
-
-    @OneToOne
-    @JoinColumn(name = "EXCHANGE_REFUND_DETAIL_ID")
-    private ExchangeRefundDetail exchangeRefundDetail;
+    private Boolean approve;
 }

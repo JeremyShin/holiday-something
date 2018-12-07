@@ -13,9 +13,7 @@ public class ProductDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Lob
     private String description;
-
-//    @OneToOne
-//    private Product product;
 }
