@@ -39,4 +39,8 @@ public class ProductImage {
     @Column(nullable = false)
     @UpdateTimestamp
     private LocalDateTime updateDate;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 }

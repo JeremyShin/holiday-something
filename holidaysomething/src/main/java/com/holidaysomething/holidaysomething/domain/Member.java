@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Set;
 
 @Getter
@@ -36,7 +37,7 @@ public class Member {
 
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    private LocalDate birthday;
+    private Date birthday;
 
     @Column(length = 20, nullable = false)
     private String postcode;

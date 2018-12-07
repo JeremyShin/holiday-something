@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,11 +23,9 @@ public class ExchangeRefund {
     private int price;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
     private LocalDateTime applyDate;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
     private LocalDateTime approveDate;
 
     @Column(nullable = false)
