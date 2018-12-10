@@ -36,7 +36,6 @@ public class ProductImage {
     @CreationTimestamp
     private LocalDateTime regDate;
 
-    @Column(nullable = false)
     @UpdateTimestamp
     private LocalDateTime updateDate;
 

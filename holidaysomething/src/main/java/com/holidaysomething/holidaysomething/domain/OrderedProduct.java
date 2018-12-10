@@ -18,7 +18,7 @@ public class OrderedProduct {
     private int orderPrice;
 
     @Column(nullable = false)
-    private int savedMoney;
+    private int mileage;
 
     @Column(nullable = false)
     private int quantity;

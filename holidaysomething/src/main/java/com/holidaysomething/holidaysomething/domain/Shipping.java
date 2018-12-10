@@ -42,9 +42,6 @@ public class Shipping {
     @Column(length = 50, nullable = false)
     private String status;
 
-    @Column(nullable = false)
     private LocalDateTime startDate;
-
-    @Column(nullable = false)
     private LocalDateTime arrivalDate;
 }
