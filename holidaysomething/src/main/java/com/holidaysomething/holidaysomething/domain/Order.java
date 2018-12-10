@@ -29,7 +29,7 @@ public class Order {
     @Column(nullable = false)
     private String status;
 
-    private Integer savedMoney;
+    private Integer mileage;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
