@@ -19,8 +19,7 @@ public class ProductOption {
 
     private Integer price;
 
-    //사용자가 신청한 personal 옵션
-    private String personalOption;
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
