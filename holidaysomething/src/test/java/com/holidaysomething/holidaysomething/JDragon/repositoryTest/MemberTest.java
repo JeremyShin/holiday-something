@@ -22,7 +22,12 @@ public class MemberTest {
     public void 사용자정보loginId로읽어들이기() throws Exception{
         Member member = memberRepository.findByIdContaining("root");
 
-        System.out.println(member.toString());
+        System.out.println("=====================================");
+        System.out.println(member.getId());
+        System.out.println(member.getEmail());
+        System.out.println(member.getName());
+        System.out.println(member.getBirthday());
+        System.out.println("=====================================");
 
     }
 }
