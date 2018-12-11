@@ -1,6 +1,5 @@
 
 
--- 교환,환불 테이블
 INSERT INTO exchange_refund(apply_date, approve, approve_date, price, type) VALUES (now(), 1, now(), 3000, '환불');
 INSERT INTO exchange_refund(apply_date, approve, approve_date, price, type) VALUES (now(), 1, now(), 3000, '환불');
 INSERT INTO exchange_refund(apply_date, approve, approve_date, price, type) VALUES (now(), 1, now(), 3000, '환불');
@@ -33,103 +32,129 @@ INSERT INTO exchange_refund(apply_date, approve, approve_date, price, type) VALU
 INSERT INTO exchange_refund(apply_date, approve, approve_date, price, type) VALUES (now(), 1, now(), 3000, '환불');
 
 
--- member
-
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'root', '1234', 'root@naver.com', '김루트', 'rootnickname', '02-1111-1111', '1977-11-10', '04557', '서울특별시 중구 퇴계로', '211-5', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'holiday', '1234', 'holidaysomething@gmail.com', '김홀리', 'holidaysomething', '02-7622-7622', '1988-12-31', '04547', '서울특별시 중구 동호로', '361', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'larimar', '1234', 'larimar@gmail.com', '라리마', 'larimar', '010-3561-6124', '1990-01-28', '04757', '서울특별시 성동구 마장로 42길 16', '201호', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'crazy', '1234', 'jhkim4685@gmail.com', '김준형', 'CrAzy', '010-2925-4685', '1995-02-01', '04960', '서울특별시 광진구 자양로 48길 34', '301호', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'marin', '1111', 'marin24@gmail.com', '임요환', 'SlayersBoxeR', '010-1111-1111', '1980-09-04', '11111', '경기도 포천시 이동면 성장로', '111', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'yellow', '22', 'yellow22@gmail.com', '홍진호', '콩진호콩진호', '010-2222-2222', '1982-10-31', '22222', '인천광역시 미추홀구 학익소로 63', '22', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'faker', '1234', 'faker142@gmail.com', '이상혁', 'faker', '010-5671-6135', '1996-05-07', '12567', '경기도 양평군 개군면 양덕길 83', '', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'ambition', '1234', 'ambition48@gmail.com', '강찬용', 'ambition', '010-6167-6125', '1992-10-27', '15256', '경기도 안산시 상록구', '', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'blue', '1234', 'blue1528@gmail.com', '강블루', 'blue', '010-4125-4412', '1989-10-25', '14256', '경기도 광명시 오리로 801', '101', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'black', '1234', 'black1528@gmail.com', '강블랙', 'black', '010-1631-2455', '1992-05-24', '15234', '경기도 안산시 단원구 선부로 166', '101', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'white', '1234', 'blacka1528@gmail.com', '강하양', 'white', '010-5252-2245', '1992-07-14', '15234', '경기도 안산시 단원구 선부로 166', '201', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'pink', '1234', 'pink1524@gmail.com', '김분홍', 'pink', '010-1124-5521', '1994-05-14', '15234', '경기도 안산시 단원구 선부로 166', '202', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'red', '1234', 'red1524@gmail.com', '김빨강', 'red', '010-5512-4678', '1993-02-13', '15234', '경기도 안산시 단원구 선부로 166', '203', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'green', '1234', 'green1524@gmail.com', '박초록', 'green', '010-4567-1379', '1991-01-14', '15234', '경기도 안산시 단원구 선부로 166', '303', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'orange', '1234', 'orange2556@gmail.com', '나주황', 'orange', '010-5678-1251', '1991-11-14', '15234', '경기도 안산시 단원구 선부로 166', '302', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'violet', '1234', 'violet26@gmail.com', '최보라', 'violet', '010-5511-2567', '1991-11-24', '15212', '경기도 안산시 단원구 우목골길 3-7', '101호', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'navy', '1234', 'navy126@gmail.com', '최남색', 'navy', '010-5511-2252', '1989-09-29', '15212', '경기도 안산시 단원구 우목골길 3-7', '102호', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'sky', '1234', 'sky126@gmail.com', '김하늘', 'sky', '010-5722-2567', '1989-03-07', '15212', '경기도 안산시 단원구 우목골길 3-7', '202호', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'sea', '1234', 'sea126@gmail.com', '최바다', 'sea', '010-6661-2256', '1989-04-07', '15212', '경기도 안산시 단원구 우목골길 3-7', '201호', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'earth', '1234', 'ground16@gmail.com', '박대지', 'earth', '010-5555-5555', '1988-05-07', '15212', '경기도 안산시 단원구 우목골길 3-7', '302호', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'rlacjftn10', '1234', 'kcs1256@gmail.com', '김철수', 'kcs', '010-1257-2545', '1978-08-10', '11790', '경기도 의정부시 오목로35번길 49', '101호', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'rladudgml10', '1234', 'kyh1252@gmail.com', '김영희', 'kyh', '010-7764-6896', '1980-04-10', '11790', '경기도 의정부시 오목로35번길 49', '102호', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'monster', '1234', 'ryu99@gmail.com', '류현진', 'monster', '010-9999-9999', '1987-03-25', '06344', '서울시 강남구 일원동 689-1', '101', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'kimalias', '1234', 'alias52@gmail.com', '김태균', 'kimalias', '010-5252-5252', '1982-05-29', '06344', '서울시 강남구 일원동 689-1', '102', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'chuchutrain', '1234', 'train17@gmail.com', '추신수', 'chuchutrain', '010-1717-1717', '1982-07-13', '06344', '서울시 강남구 일원동 689-1', '103', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'bigboy', '1234', 'bigboy10@gmail.com', '이대호', 'bigboy', '010-1010-1010', '1982-06-21', '06344', '서울시 강남구 일원동 689-1', '104', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'kimtakgu', '1234', 'kimtakgu29@gmail.com', '김광현', 'kimtakgu', '010-2929-2929', '1988-07-22', '06344', '서울시 강남구 일원동 689-1', '201', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'devil', '1234', 'devil8@gmail.com', '정근우', 'devil', '010-8888-8888', '1982-10-02', '06344', '서울시 강남구 일원동 689-1', '202', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'whitetiger', '1234', 'whitetiger50@gmail.com', '강백호', 'whitetiger', '010-5050-5050', '1999-07-29', '06344', '서울시 강남구 일원동 689-1', '203', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender) VALUES (null, 'TooMuchTalker', '1234', 'TooMuchTalker61@gmail.com', '박찬호', 'TooMuchTalker', '010-6161-6161', '1973-06-29', '06344', '서울시 강남구 일원동 689-1', '204', 1, 1, 1, 1, null);
-
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'root', '1234', 'root@naver.com', '김루트', 'rootnickname', '02-1111-1111', '1977-11-10', '04557', '서울특별시 중구 퇴계로', '211-5', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'holiday', '1234', 'holidaysomething@gmail.com', '김홀리', 'holidaysomething', '02-7622-7622', '1988-12-31', '04547', '서울특별시 중구 동호로', '361', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'larimar', '1234', 'larimar@gmail.com', '라리마', 'larimar', '010-3561-6124', '1990-01-28', '04757', '서울특별시 성동구 마장로 42길 16', '201호', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'crazy', '1234', 'jhkim4685@gmail.com', '김준형', 'CrAzy', '010-2925-4685', '1995-02-01', '04960', '서울특별시 광진구 자양로 48길 34', '301호', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'marin', '1111', 'marin24@gmail.com', '임요환', 'SlayersBoxeR', '010-1111-1111', '1980-09-04', '11111', '경기도 포천시 이동면 성장로', '111', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'yellow', '22', 'yellow22@gmail.com', '홍진호', '콩진호콩진호', '010-2222-2222', '1982-10-31', '22222', '인천광역시 미추홀구 학익소로 63', '22', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'faker', '1234', 'faker142@gmail.com', '이상혁', 'faker', '010-5671-6135', '1996-05-07', '12567', '경기도 양평군 개군면 양덕길 83', '', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'ambition', '1234', 'ambition48@gmail.com', '강찬용', 'ambition', '010-6167-6125', '1992-10-27', '15256', '경기도 안산시 상록구', '', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'blue', '1234', 'blue1528@gmail.com', '강블루', 'blue', '010-4125-4412', '1989-10-25', '14256', '경기도 광명시 오리로 801', '101', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'black', '1234', 'black1528@gmail.com', '강블랙', 'black', '010-1631-2455', '1992-05-24', '15234', '경기도 안산시 단원구 선부로 166', '101', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'white', '1234', 'blacka1528@gmail.com', '강하양', 'white', '010-5252-2245', '1992-07-14', '15234', '경기도 안산시 단원구 선부로 166', '201', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'pink', '1234', 'pink1524@gmail.com', '김분홍', 'pink', '010-1124-5521', '1994-05-14', '15234', '경기도 안산시 단원구 선부로 166', '202', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'red', '1234', 'red1524@gmail.com', '김빨강', 'red', '010-5512-4678', '1993-02-13', '15234', '경기도 안산시 단원구 선부로 166', '203', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'green', '1234', 'green1524@gmail.com', '박초록', 'green', '010-4567-1379', '1991-01-14', '15234', '경기도 안산시 단원구 선부로 166', '303', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'orange', '1234', 'orange2556@gmail.com', '나주황', 'orange', '010-5678-1251', '1991-11-14', '15234', '경기도 안산시 단원구 선부로 166', '302', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'violet', '1234', 'violet26@gmail.com', '최보라', 'violet', '010-5511-2567', '1991-11-24', '15212', '경기도 안산시 단원구 우목골길 3-7', '101호', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'navy', '1234', 'navy126@gmail.com', '최남색', 'navy', '010-5511-2252', '1989-09-29', '15212', '경기도 안산시 단원구 우목골길 3-7', '102호', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'sky', '1234', 'sky126@gmail.com', '김하늘', 'sky', '010-5722-2567', '1989-03-07', '15212', '경기도 안산시 단원구 우목골길 3-7', '202호', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'sea', '1234', 'sea126@gmail.com', '최바다', 'sea', '010-6661-2256', '1989-04-07', '15212', '경기도 안산시 단원구 우목골길 3-7', '201호', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'earth', '1234', 'ground16@gmail.com', '박대지', 'earth', '010-5555-5555', '1988-05-07', '15212', '경기도 안산시 단원구 우목골길 3-7', '302호', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'rlacjftn10', '1234', 'kcs1256@gmail.com', '김철수', 'kcs', '010-1257-2545', '1978-08-10', '11790', '경기도 의정부시 오목로35번길 49', '101호', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'rladudgml10', '1234', 'kyh1252@gmail.com', '김영희', 'kyh', '010-7764-6896', '1980-04-10', '11790', '경기도 의정부시 오목로35번길 49', '102호', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'monster', '1234', 'ryu99@gmail.com', '류현진', 'monster', '010-9999-9999', '1987-03-25', '06344', '서울시 강남구 일원동 689-1', '101', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'kimalias', '1234', 'alias52@gmail.com', '김태균', 'kimalias', '010-5252-5252', '1982-05-29', '06344', '서울시 강남구 일원동 689-1', '102', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'chuchutrain', '1234', 'train17@gmail.com', '추신수', 'chuchutrain', '010-1717-1717', '1982-07-13', '06344', '서울시 강남구 일원동 689-1', '103', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'bigboy', '1234', 'bigboy10@gmail.com', '이대호', 'bigboy', '010-1010-1010', '1982-06-21', '06344', '서울시 강남구 일원동 689-1', '104', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'kimtakgu', '1234', 'kimtakgu29@gmail.com', '김광현', 'kimtakgu', '010-2929-2929', '1988-07-22', '06344', '서울시 강남구 일원동 689-1', '201', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'devil', '1234', 'devil8@gmail.com', '정근우', 'devil', '010-8888-8888', '1982-10-02', '06344', '서울시 강남구 일원동 689-1', '202', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'whitetiger', '1234', 'whitetiger50@gmail.com', '강백호', 'whitetiger', '010-5050-5050', '1999-07-29', '06344', '서울시 강남구 일원동 689-1', '203', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
+VALUES (null, 'TooMuchTalker', '1234', 'TooMuchTalker61@gmail.com', '박찬호', 'TooMuchTalker', '010-6161-6161', '1973-06-29', '06344', '서울시 강남구 일원동 689-1', '204', 1, 1, 1, 1, null);
 
 
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
 VALUES(1,'buyeraddr1','afa1@gmail.com','buyer1','postcode1','01099233293','http://suunyvale.com/1','merchant1','msg1','name1','whatmethod1','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(2,'buyeraddr2','afa2@gmail.com','buyer2','postcode2','01099233291','http://suunyvale.com/2','merchant2','msg2','name2','whatmethod2','pg1');
+VALUES(2,'buyeraddr2','afa2@gmail.com','buyer2','postcode2','01099233291','http://suunyvale.com/2','merchant2','msg2','name2','whatmethod2','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(3,'buyeraddr3','afa3@gmail.com','buyer3','postcode3','01099233292','http://suunyvale.com/3','merchant3','msg3','name3','whatmethod3','pg1');
+VALUES(3,'buyeraddr3','afa3@gmail.com','buyer3','postcode3','01099233292','http://suunyvale.com/3','merchant3','msg3','name3','whatmethod3','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(4,'buyeraddr4','afa4@gmail.com','buyer4','postcode4','01099233294','http://suunyvale.com/4','merchant4','msg4','name4','whatmethod4','pg1');
+VALUES(4,'buyeraddr4','afa4@gmail.com','buyer4','postcode4','01099233294','http://suunyvale.com/4','merchant4','msg4','name4','whatmethod4','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(5,'buyeraddr5','afa5@gmail.com','buyer5','postcode5','01099233295','http://suunyvale.com/5','merchant5','msg5','name5','whatmethod5','pg1');
+VALUES(5,'buyeraddr5','afa5@gmail.com','buyer5','postcode5','01099233295','http://suunyvale.com/5','merchant5','msg5','name5','whatmethod5','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(6,'buyeraddr6','afa6@gmail.com','buyer6','postcode6','01099233296','http://suunyvale.com/6','merchant6','msg6','name6','whatmethod6','pg1');
+VALUES(6,'buyeraddr6','afa6@gmail.com','buyer6','postcode6','01099233296','http://suunyvale.com/6','merchant6','msg6','name6','whatmethod6','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(7,'buyeraddr7','afa7@gmail.com','buyer7','postcode7','01099233297','http://suunyvale.com/7','merchant7','msg7','name7','whatmethod7','pg1');
+VALUES(7,'buyeraddr7','afa7@gmail.com','buyer7','postcode7','01099233297','http://suunyvale.com/7','merchant7','msg7','name7','whatmethod7','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(8,'buyeraddr8','afa8@gmail.com','buyer8','postcode8','01099233298','http://suunyvale.com/8','merchant8','msg8','name8','whatmethod8','pg1');
+VALUES(8,'buyeraddr8','afa8@gmail.com','buyer8','postcode8','01099233298','http://suunyvale.com/8','merchant8','msg8','name8','whatmethod8','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(9,'buyeraddr9','afa9@gmail.com','buyer9','postcode9','01099233299','http://suunyvale.com/9','merchant9','msg9','name9','whatmethod9','pg1');
+VALUES(9,'buyeraddr9','afa9@gmail.com','buyer9','postcode9','01099233299','http://suunyvale.com/9','merchant9','msg9','name9','whatmethod9','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(10,'buyeraddr10','afa10@gmail.com','buyer10','postcode10','01099233212','http://suunyvale.com/10','merchant10','msg10','name10','whatmethod10','pg1');
+VALUES(10,'buyeraddr10','afa10@gmail.com','buyer10','postcode10','01099233212','http://suunyvale.com/10','merchant10','msg10','name10','whatmethod10','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(11,'buyeraddr11','afa11@gmail.com','buyer11','postcode11','01099233231','http://suunyvale.com/11','merchant11','msg11','name11','whatmethod11','pg1');
+VALUES(11,'buyeraddr11','afa11@gmail.com','buyer11','postcode11','01099233231','http://suunyvale.com/11','merchant11','msg11','name11','whatmethod11','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(12,'buyeraddr12','afa12@gmail.com','buyer12','postcode12','01099233232','http://suunyvale.com/12','merchant12','msg12','name12','whatmethod12','pg1');
+VALUES(12,'buyeraddr12','afa12@gmail.com','buyer12','postcode12','01099233232','http://suunyvale.com/12','merchant12','msg12','name12','whatmethod12','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(13,'buyeraddr13','afa13@gmail.com','buyer13','postcode13','01099233233','http://suunyvale.com/13','merchant13','msg13','name13','whatmethod13','pg1');
+VALUES(13,'buyeraddr13','afa13@gmail.com','buyer13','postcode13','01099233233','http://suunyvale.com/13','merchant13','msg13','name13','whatmethod13','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(14,'buyeraddr14','afa14@gmail.com','buyer14','postcode14','01099233234','http://suunyvale.com/14','merchant14','msg14','name14','whatmethod14','pg1');
+VALUES(14,'buyeraddr14','afa14@gmail.com','buyer14','postcode14','01099233234','http://suunyvale.com/14','merchant14','msg14','name14','whatmethod14','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(15,'buyeraddr15','afa15@gmail.com','buyer15','postcode15','01099233234','http://suunyvale.com/15','merchant15','msg15','name15','whatmethod15','pg1');
+VALUES(15,'buyeraddr15','afa15@gmail.com','buyer15','postcode15','01099233234','http://suunyvale.com/15','merchant15','msg15','name15','whatmethod15','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(16,'buyeraddr16','afa16@gmail.com','buyer16','postcode16','01099233236','http://suunyvale.com/16','merchant16','msg16','name16','whatmethod16','pg1');
+VALUES(16,'buyeraddr16','afa16@gmail.com','buyer16','postcode16','01099233236','http://suunyvale.com/16','merchant16','msg16','name16','whatmethod16','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(17,'buyeraddr17','afa17@gmail.com','buyer17','postcode17','01099233237','http://suunyvale.com/17','merchant17','msg17','name17','whatmethod17','pg1');
+VALUES(17,'buyeraddr17','afa17@gmail.com','buyer17','postcode17','01099233237','http://suunyvale.com/17','merchant17','msg17','name17','whatmethod17','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(18,'buyeraddr18','afa18@gmail.com','buyer18','postcode18','01099233238','http://suunyvale.com/18','merchant18','msg18','name18','whatmethod18','pg1');
+VALUES(18,'buyeraddr18','afa18@gmail.com','buyer18','postcode18','01099233238','http://suunyvale.com/18','merchant18','msg18','name18','whatmethod18','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(19,'buyeraddr19','afa19@gmail.com','buyer19','postcode19','01099233239','http://suunyvale.com/19','merchant19','msg19','name19','whatmethod19','pg1');
+VALUES(19,'buyeraddr19','afa19@gmail.com','buyer19','postcode19','01099233239','http://suunyvale.com/19','merchant19','msg19','name19','whatmethod19','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(20,'buyeraddr20','afa20@gmail.com','buyer20','postcode20','01099233240','http://suunyvale.com/20','merchant20','msg20','name20','whatmethod20','pg1');
+VALUES(20,'buyeraddr20','afa20@gmail.com','buyer20','postcode20','01099233240','http://suunyvale.com/20','merchant20','msg20','name20','whatmethod20','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(21,'buyeraddr21','afa21@gmail.com','buyer21','postcode21','01099233251','http://suunyvale.com/21','merchant21','msg21','name21','whatmethod21','pg1');
+VALUES(21,'buyeraddr21','afa21@gmail.com','buyer21','postcode21','01099233251','http://suunyvale.com/21','merchant21','msg21','name21','whatmethod21','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(22,'buyeraddr22','afa22@gmail.com','buyer22','postcode22','01099233252','http://suunyvale.com/22','merchant22','msg22','name22','whatmethod22','pg1');
+VALUES(22,'buyeraddr22','afa22@gmail.com','buyer22','postcode22','01099233252','http://suunyvale.com/22','merchant22','msg22','name22','whatmethod22','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(23,'buyeraddr23','afa23@gmail.com','buyer23','postcode23','01099233256','http://suunyvale.com/23','merchant23','msg23','name23','whatmethod23','pg1');
+VALUES(23,'buyeraddr23','afa23@gmail.com','buyer23','postcode23','01099233256','http://suunyvale.com/23','merchant23','msg23','name23','whatmethod23','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(24,'buyeraddr24','afa24@gmail.com','buyer24','postcode24','01099233267','http://suunyvale.com/24','merchant24','msg24','name24','whatmethod24','pg1');
+VALUES(24,'buyeraddr24','afa24@gmail.com','buyer24','postcode24','01099233267','http://suunyvale.com/24','merchant24','msg24','name24','whatmethod24','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(25,'buyeraddr25','afa25@gmail.com','buyer25','postcode25','01099233298','http://suunyvale.com/25','merchant25','msg25','name25','whatmethod25','pg1');
+VALUES(25,'buyeraddr25','afa25@gmail.com','buyer25','postcode25','01099233298','http://suunyvale.com/25','merchant25','msg25','name25','whatmethod25','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(26,'buyeraddr26','afa26@gmail.com','buyer26','postcode26','01099233277','http://suunyvale.com/26','merchant26','msg26','name26','whatmethod26','pg1');
+VALUES(26,'buyeraddr26','afa26@gmail.com','buyer26','postcode26','01099233277','http://suunyvale.com/26','merchant26','msg26','name26','whatmethod26','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(27,'buyeraddr27','afa27@gmail.com','buyer27','postcode27','01099233266','http://suunyvale.com/27','merchant27','msg27','name27','whatmethod27','pg1');
+VALUES(27,'buyeraddr27','afa27@gmail.com','buyer27','postcode27','01099233266','http://suunyvale.com/27','merchant27','msg27','name27','whatmethod27','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(28,'buyeraddr28','afa28@gmail.com','buyer28','postcode28','01099233296','http://suunyvale.com/28','merchant28','msg28','name28','whatmethod28','pg1');
+VALUES(28,'buyeraddr28','afa28@gmail.com','buyer28','postcode28','01099233296','http://suunyvale.com/28','merchant28','msg28','name28','whatmethod28','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(29,'buyeraddr29','afa29@gmail.com','buyer29','postcode29','01099233263','http://suunyvale.com/29','merchant29','msg29','name29','whatmethod29','pg1');
+VALUES(29,'buyeraddr29','afa29@gmail.com','buyer29','postcode29','01099233263','http://suunyvale.com/29','merchant29','msg29','name29','whatmethod29','pg1');
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-  VALUES(30,'buyeraddr30','afa30@gmail.com','buyer30','postcode30','01099233267','http://suunyvale.com/30','merchant30','msg30','name30','whatmethod30','pg1');
+VALUES(30,'buyeraddr30','afa30@gmail.com','buyer30','postcode30','01099233267','http://suunyvale.com/30','merchant30','msg30','name30','whatmethod30','pg1');
 
--- shipping
 
 INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
 VALUES (null, '인천광역시 미추홀구 토금북로28번길 15', '104호', '경비실에 맡겨주세요.', '010-8693-3454', '22186', '권은철', '305672231034', 3000, NULL, NULL, '입금 확인');
@@ -192,8 +217,7 @@ VALUES (null, '부산광역시 부산진구 동평로 352', '106동 305호', '�
 INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
 VALUES (null, '제주특별자치도 제주시 첨단로 213-4', '102호', '배송 전 연락주세요.', '010-6384-6230', '63309', '김혜비', '435345345354', 3000, NULL, NULL, '입금 확인');
 
--- ordered_product insert 시 필요.
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110140057511', NOW(), 11000, '구매확정', 110, 2, 1, 1);
+
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110240057512', NOW(), 12000, '구매확정', 120, 2, 2, 2);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110230057613', NOW(), 12000, '구매확정', 120, 2, 3, 3);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110360057614', NOW(), 9000, '구매확정', 90, 2, 4, 4);
@@ -224,7 +248,6 @@ INSERT INTO orders (id, order_number, date, total_price, status, mileage, member
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137529', NOW(), 4500, '배송준비중', 40, 24, 29, 29);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137530', NOW(), 4500, '배송준비중', 40, 24, 30, 30);
 
--- PRODUCT category
 
 INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'디자인문구',NULL,1);
 INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'디자인문구',NULL,2);
@@ -258,7 +281,7 @@ INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'레이어 
 INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'먼슬리플래너',14,30);
 INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'위클리플래너',9,31);
 
--- product_detail
+
 INSERT INTO product_detail(id, description) VALUES (null, 'May가 추천하는 상점 공식 굿즈');
 INSERT INTO product_detail(id, description) VALUES (null, 'Holii가 추천하는 상점 공식 굿즈');
 INSERT INTO product_detail(id, description) VALUES (null, '‘훌리, 메이, 춘’ 세 사람이 추천하는 상점 공식 굿즈');
@@ -291,134 +314,123 @@ INSERT INTO product_detail(id, description) VALUES (null, '덴스 로고 라벨�
 INSERT INTO product_detail(id, description) VALUES (null, '덴스 로고 라벨과 어우러진 장갑입니다. 깔끔하면서도 포인트가 되는 겨울 아이템으로 엄지, 검지, 중지 끝부분이 특수 전도 섬유로 제작되어 착용한 상태로 스마트폰이나 태블릿 PC 등의 조작이 가능해 실용적입니다.');
 
 
--- product
-
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (1,'2177670','서울 공장','스밋코구라시 데일리다이어리',NULL,1000,40,4000,2500,2,1,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (2,'2104689','경기도 공장','아이코닉 일상집 2019',NULL,1000,50,11800,2500,2,2,1, 0, 3, 0, false,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (3,'2086287','인천 공장','바이풀디자인_세컨 플래너_미디움2019','오늘만공짜',2000,50,8500,2500,29,3,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05' );
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (4,'2134984','강원도 공장','[루카랩]2019 플랜더 - 캘린더 겸 플래너',NULL,1000,40,15000,2500,30,4,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (5,'2177678','서울 공장','스밋코구라시 좌철수첩',NULL,200,20,1000,2500,3,5,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (6,'1846002','서울 공장','[디즈니] 빈티지 포스터 스티커 세트',NULL,50,10,6800,2500,4,6,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (7,'279397','서울 공장','The Black-Photo album(ver.3.0)',NULL,2000,15,15800,3000,5,7,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (8,'1904263','서울 공장','아이코닉 마일드 젤펜',NULL,100,10,1800,2500,25,8,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (9,'974044','서울 공장','핸드메이드X-mas카드 (16종 중 택 1)',NULL,100,20,4000,2500,26,9,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (10,'1916891','서울 공장','네모생활_클래식원고지',NULL,200,10,2500,2500,27,10,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (11,'50709','경기도 공장','File F102(3ea)',NULL,2000,50,6600,2500,28,11,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (12,'2102505','인천 공장','나의 색 나의 하루 스티커',NULL,50,50,1500,2500,21,12,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (13,'2175906','인천 공장','러브이즈기빙 하트베어 광안리의 밤(2ea)',NULL,1000,50,6000,2500,21,13,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (14,'2171036','인천 공장','꾸꾸 스티커',NULL,5,100,1500,2500,21,14,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (15,'2160767','인천 공장','수바코_보석스티커',NULL,100,100,2500,2500,21,15,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (16,'1792257','서울 공장','Hello, I am 내지노트 7종 -A5',NULL,500,20,3000,2500,16,16,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (17,'2098234','서울 공장','버튼 오거나이저 V2 - A5 [커버+멀티파일]',NULL,1000,40,28000,2500,16,17,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (18,'2102851','서울 공장','나의 색 나의 하루 노트',NULL,2000,200,9800,2500,17,18,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (19,'2111083','서울 공장','[18루니툰]스케치북/컬렉터 에디션 L',NULL,10000,50,69300,2500,17,19,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (20,'470057','강원도 공장','[주문제작] 퍼니맨 만년 원형 책도장',NULL,70,100,7800,2500,20,20,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (21,'2154334','강원도 공장','하트 핑거 스탬프 잉크 스탬프패드 스탬프잉크 12색',NULL,1000,10,3000,2500,20,21,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (22,'1901799','서울 공장','체크 수학 오답노트',NULL,100,10,2000,2500,19,22,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (23,'2176209','서울 공장','위 베어 베어스 수학연습장 - 그리즐리',NULL,200,100,2500,2500,19,23,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (24,'1889317','서울 공장','레트로 라이트 육공 모눈노트',NULL,4000,200,11000,2500,18,24,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (25,'1621980','서울 공장','피키트 만년다이어리 커버 4종',NULL,4000,100,18000,2500,18,25,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (26,'2123220','서울 공장','오거나이저 (중) 모던 버튼 3 Color',NULL,10000,100,58000,2500,13,26,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (27,'2171171','경기도 공장','GROOVY DAYS DIARY - Sky Blue',NULL,2000,10,13500,2500,12,27,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (28,'2170967','경기도 공장','정원 만년 다이어리',NULL,4000,20,15000,2500,12,28,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (29,'2170965','경기도 공장','어두운숲 만년 다이어리',NULL,8000,50,15000,2500,12,29,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturer_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date) VALUES (30,'2168986','경기도 공장','2019 럭스 Hologram 다이어리',NULL,10000,10,29800,2500,12,30,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
-
--- product_option/*
--- Query: SELECT * FROM hsdb.product_option
-LIMIT 0, 1000
-
--- Date: 2018-12-09 23:19
-*/
-INSERT INTO product_option (id,name,price,product_id) VALUES (1,'A타입',NULL,1);
-INSERT INTO product_option (id,name,price,product_id) VALUES (2,'B타입',NULL,1);
-INSERT INTO product_option (id,name,price,product_id) VALUES (3,'요가',NULL,2);
-INSERT INTO product_option (id,name,price,product_id) VALUES (4,'세탁실',NULL,2);
-INSERT INTO product_option (id,name,price,product_id) VALUES (5,'꿈',NULL,2);
-INSERT INTO product_option (id,name,price,product_id) VALUES (8,'저녁',NULL,2);
-INSERT INTO product_option (id,name,price,product_id) VALUES (9,'카페',NULL,2);
-INSERT INTO product_option (id,name,price,product_id) VALUES (10,'친구',NULL,2);
-INSERT INTO product_option (id,name,price,product_id) VALUES (16,'레드',NULL,4);
-INSERT INTO product_option (id,name,price,product_id) VALUES (17,'블랙',NULL,4);
-INSERT INTO product_option (id,name,price,product_id) VALUES (18,'옐로우',NULL,4);
-INSERT INTO product_option (id,name,price,product_id) VALUES (19,'블루',NULL,4);
-INSERT INTO product_option (id,name,price,product_id) VALUES (20,'그레이',NULL,4);
-INSERT INTO product_option (id,name,price,product_id) VALUES (21,'스카이블루',200,4);
-INSERT INTO product_option (id,name,price,product_id) VALUES (22,'그린',NULL,5);
-INSERT INTO product_option (id,name,price,product_id) VALUES (23,'핑크',NULL,5);
-INSERT INTO product_option (id,name,price,product_id) VALUES (24,'머스타드',NULL,5);
-INSERT INTO product_option (id,name,price,product_id) VALUES (25,'스카이블루',NULL,5);
-INSERT INTO product_option (id,name,price,product_id) VALUES (26,'레드',NULL,12);
-INSERT INTO product_option (id,name,price,product_id) VALUES (27,'블랙',NULL,12);
-INSERT INTO product_option (id,name,price,product_id) VALUES (28,'그레이',2500,12);
-INSERT INTO product_option (id,name,price,product_id) VALUES (29,'핑크',NULL,12);
-INSERT INTO product_option (id,name,price,product_id) VALUES (30,'바이올렛',NULL,12);
-
--- insert OrderedProduct (table = ordered_product)
-
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(10000,1,100,null,1,1);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(111000,2,300,null,21,21);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(131000,3,400,null,3,4);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(121000,4,2100,null,21,3);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(151000,5,2300,null,11,24);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(151000,6,2300,null,1,12);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(141000,7,2100,null,21,29);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(121000,8,2200,null,24,11);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(112000,11,2100,11,21,21);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(111000,1,2090,null,4,11);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(11000,1,2000,null,7,2);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(131000,1,2100,null,5,1);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(1000,3,1200,null,11,9);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(3000,88,3200,null,15,8);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(18000,12,3200,null,19,17);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(17000,23,2300,null,20,11);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(61000,1,2500,null,21,30);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(51000,2,2500,null,22,20);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(81000,2,2500,null,12,10);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(71000,3,2500,null,6,11);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(91000,5,5200,null,2,23);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(81000,7,1200,null,3,21);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(71000,2,2200,null,7,22);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(18000,21,3200,null,9,19);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(23000,7,2400,null,10,17);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(123000,9,2010,null,16,13);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(14000,12,2100,null,12,11);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(111000,12,2200,null,11,8);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(119000,2,2300,null,20,7);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id)
-  VALUES(1100000,200,2400,null,23,5);
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (1,'2177670','서울 공장','스밋코구라시 데일리다이어리',NULL,1000,40,4000,2500,2,1,1, 0, 3, 0, true, '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (2,'2104689','경기도 공장','아이코닉 일상집 2019',NULL,1000,50,11800,2500,2,2,1, 0, 3, 0, false, '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (3,'2086287','인천 공장','바이풀디자인_세컨 플래너_미디움2019','오늘만공짜',2000,50,8500,2500,29,3,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05' );
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (4,'2134984','강원도 공장','[루카랩]2019 플랜더 - 캘린더 겸 플래너',NULL,1000,40,15000,2500,30,4,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (5,'2177678','서울 공장','스밋코구라시 좌철수첩',NULL,200,20,1000,2500,3,5,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (6,'1846002','서울 공장','[디즈니] 빈티지 포스터 스티커 세트',NULL,50,10,6800,2500,4,6,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (7,'279397','서울 공장','The Black-Photo album(ver.3.0)',NULL,2000,15,15800,3000,5,7,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (8,'1904263','서울 공장','아이코닉 마일드 젤펜',NULL,100,10,1800,2500,25,8,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (9,'974044','서울 공장','핸드메이드X-mas카드 (16종 중 택 1)',NULL,100,20,4000,2500,26,9,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (10,'1916891','서울 공장','네모생활_클래식원고지',NULL,200,10,2500,2500,27,10,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (11,'50709','경기도 공장','File F102(3ea)',NULL,2000,50,6600,2500,28,11,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (12,'2102505','인천 공장','나의 색 나의 하루 스티커',NULL,50,50,1500,2500,21,12,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (13,'2175906','인천 공장','러브이즈기빙 하트베어 광안리의 밤(2ea)',NULL,1000,50,6000,2500,21,13,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (14,'2171036','인천 공장','꾸꾸 스티커',NULL,5,100,1500,2500,21,14,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (15,'2160767','인천 공장','수바코_보석스티커',NULL,100,100,2500,2500,21,15,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (16,'1792257','서울 공장','Hello, I am 내지노트 7종 -A5',NULL,500,20,3000,2500,16,16,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (17,'2098234','서울 공장','버튼 오거나이저 V2 - A5 [커버+멀티파일]',NULL,1000,40,28000,2500,16,17,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (18,'2102851','서울 공장','나의 색 나의 하루 노트',NULL,2000,200,9800,2500,17,18,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (19,'2111083','서울 공장','[18루니툰]스케치북/컬렉터 에디션 L',NULL,10000,50,69300,2500,17,19,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (20,'470057','강원도 공장','[주문제작] 퍼니맨 만년 원형 책도장',NULL,70,100,7800,2500,20,20,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (21,'2154334','강원도 공장','하트 핑거 스탬프 잉크 스탬프패드 스탬프잉크 12색',NULL,1000,10,3000,2500,20,21,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (22,'1901799','서울 공장','체크 수학 오답노트',NULL,100,10,2000,2500,19,22,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (23,'2176209','서울 공장','위 베어 베어스 수학연습장 - 그리즐리',NULL,200,100,2500,2500,19,23,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (24,'1889317','서울 공장','레트로 라이트 육공 모눈노트',NULL,4000,200,11000,2500,18,24,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (25,'1621980','서울 공장','피키트 만년다이어리 커버 4종',NULL,4000,100,18000,2500,18,25,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (26,'2123220','서울 공장','오거나이저 (중) 모던 버튼 3 Color',NULL,10000,100,58000,2500,13,26,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (27,'2171171','경기도 공장','GROOVY DAYS DIARY - Sky Blue',NULL,2000,10,13500,2500,12,27,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (28,'2170967','경기도 공장','정원 만년 다이어리',NULL,4000,20,15000,2500,12,28,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (29,'2170965','경기도 공장','어두운숲 만년 다이어리',NULL,8000,50,15000,2500,12,29,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
+VALUES (30,'2168986','경기도 공장','2019 럭스 Hologram 다이어리',NULL,10000,10,29800,2500,12,30,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 
 
--- 규민
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (1,'A타입',NULL,NULL,1);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (2,'B타입',NULL,NULL,1);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (3,'요가',NULL,NULL,2);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (4,'세탁실',NULL,NULL,2);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (5,'꿈',NULL,NULL,2);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (8,'저녁',NULL,NULL,2);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (9,'카페',NULL,NULL,2);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (10,'친구',NULL,NULL,2);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (16,'레드',NULL,NULL,4);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (17,'블랙',NULL,NULL,4);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (18,'옐로우',NULL,NULL,4);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (19,'블루',NULL,NULL,4);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (20,'그레이',NULL,NULL,4);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (21,'스카이블루',200,NULL,4);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (22,'그린',NULL,NULL,5);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (23,'핑크',NULL,NULL,5);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (24,'머스타드',NULL,NULL,5);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (25,'스카이블루',NULL,NULL,5);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (26,'레드',NULL,NULL,12);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (27,'블랙',NULL,NULL,12);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (28,'그레이',2500,NULL,12);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (29,'핑크',NULL,NULL,12);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (30,'바이올렛',NULL,NULL,12);
+
+
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(10000,1,100,null,1,1);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(111000,2,300,null,21,21);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(131000,3,400,null,3,4);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(121000,4,2100,null,21,3);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(151000,5,2300,null,11,24);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(151000,6,2300,null,1,12);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(141000,7,2100,null,21,29);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(121000,8,2200,null,24,11);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(112000,11,2100,11,21,21);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(111000,1,2090,null,4,11);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(11000,1,2000,null,7,2);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(131000,1,2100,null,5,1);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(1000,3,1200,null,11,9);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(3000,88,3200,null,15,8);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(18000,12,3200,null,19,17);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(17000,23,2300,null,20,11);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(61000,1,2500,null,21,30);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(51000,2,2500,null,22,20);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(81000,2,2500,null,12,10);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(71000,3,2500,null,6,11);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(91000,5,5200,null,2,23);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(81000,7,1200,null,3,21);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(71000,2,2200,null,7,22);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(18000,21,3200,null,9,19);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(23000,7,2400,null,10,17);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(123000,9,2010,null,16,13);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(14000,12,2100,null,12,11);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(111000,12,2200,null,11,8);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(119000,2,2300,null,20,7);
+INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(1100000,200,2400,null,23,5);
 
 INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
 VALUES (null, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-3.jpg', 'https://contents.sixshop.com/thumbnails/uploadedFiles/30497/product/image_1537526126133_2500.jpg', '2018-12-03 09:23:35', 13900.0, 'holidaymemopad', '2018-12-03 09:33:35', 1);
@@ -482,9 +494,6 @@ INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, siz
 VALUES (null, 'image/jpeg', '68930523-4568.jpg', 'https://www.petitcolas.net/watermarking/image_database/pills.jpg', '2018-05-05 13:52:51', 13598, 'pills', '2018-05-14 11:52:49', 28);
 
 
-
-
--- 장바구니, 제품 매핑 테이블
 INSERT INTO cart_product(price, quantity, member_id, product_id) VALUES (3000, 1, 1, 1);
 INSERT INTO cart_product(price, quantity, member_id, product_id) VALUES (1000, 2, 2, 1);
 INSERT INTO cart_product(price, quantity, member_id, product_id) VALUES (500, 1, 1, 2);
@@ -515,4 +524,3 @@ INSERT INTO cart_product(price, quantity, member_id, product_id) VALUES (1000, 1
 INSERT INTO cart_product(price, quantity, member_id, product_id) VALUES (1000, 2, 2, 1);
 INSERT INTO cart_product(price, quantity, member_id, product_id) VALUES (1000, 2, 1, 1);
 INSERT INTO cart_product(price, quantity, member_id, product_id) VALUES (1000, 1, 1, 1);
-
