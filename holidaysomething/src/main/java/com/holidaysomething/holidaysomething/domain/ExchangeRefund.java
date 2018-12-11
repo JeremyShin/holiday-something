@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "EXCHANGE_REFUNDS")
+@Table(name = "EXCHANGE_REFUND")
 @Getter
 @Setter
 public class ExchangeRefund {

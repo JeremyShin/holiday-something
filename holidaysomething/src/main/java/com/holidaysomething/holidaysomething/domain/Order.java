@@ -29,7 +29,8 @@ public class Order {
     @Column(nullable = false)
     private String status;
 
-    private Integer mileage;
+    @Column(columnDefinition = "integer default 0")
+    private int mileage;
 
     @ManyToOne
     @JoinColumn(name = "member_id")

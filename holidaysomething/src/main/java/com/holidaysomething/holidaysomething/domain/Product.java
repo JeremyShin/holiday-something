@@ -4,10 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
-@Table(name = "PRODUCTS")
+@Table(name = "PRODUCT")
 @Getter
 @Setter
 public class Product {
@@ -25,6 +26,9 @@ public class Product {
     private int sellingPrice;
 
     @Column(nullable = false)
+    private int manufacturingPrice;
+
+    @Column(nullable = false)
     private String code;
 
     @Column(nullable = false)
@@ -36,7 +40,20 @@ public class Product {
     @Column(nullable = false)
     private int quantity;
 
+    @Column(columnDefinition = "integer default 0")
+    private int sellingQuantity;
+
+    @Column(columnDefinition = "integer default 0")
+    private int safeQuantity;
+
+    @Column(columnDefinition = "integer default 0")
+    private int mileage;
+
+    private Boolean display;
     private String optionalPriceText;
+    private LocalDateTime regDate;
+    private LocalDateTime manufactureDate;
+    private LocalDateTime releaseDate;
 
     @ManyToOne
     @JoinColumn(name = "product_category_id")

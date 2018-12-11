@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "PRODUCT_IMAGES")
+@Table(name = "PRODUCT_IMAGE")
 @Getter
 @Setter
 public class ProductImage {
