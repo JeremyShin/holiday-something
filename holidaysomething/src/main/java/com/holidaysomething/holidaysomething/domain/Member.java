@@ -11,7 +11,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "MEMBERS")
+@Table(name = "MEMBER")
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +34,9 @@ public class Member {
 
     @Column(length = 50, nullable = false, unique = true)
     private String phone;
+
+    @Column(columnDefinition = "integer default 0")
+    private int mileage;
 
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
