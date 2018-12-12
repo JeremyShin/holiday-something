@@ -249,37 +249,52 @@ INSERT INTO orders (id, order_number, date, total_price, status, mileage, member
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137530', NOW(), 4500, '배송준비중', 40, 24, 30, 30);
 
 
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'디자인문구',NULL,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'디자인문구',NULL,2);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'다이어리/플래너',1,3);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'노트/메모지',1,4);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'데코레이션',1,5);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'포토앨범/레코드북',1,6);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'필기류/펜 케이스',1,7);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'카드/편지/봉투',1,8);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'파일링/바인더',1,9);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'오피스 용품',1,10);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'데스크 정리/보관',1,11);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'캐릭터문구',1,12);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'다이어리',2,13);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'오거나이저',2,14);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'스케쥴러/플래너',2,15);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'캘린더',2,16);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'베이직노트',3,17);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'하드커버 노트',3,18);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'바인더/6공 노트',3,19);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'스프링 노트',3,20);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'스탬프',4,21);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'스티커',4,22);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'앨범',5,23);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'미니앨범',5,24);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'필기구',6,25);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'고급필기류',6,26);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'카드',7,27);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'편지지',7,28);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'레이어 폴더/파일폴더',8,29);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'먼슬리플래너',14,30);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'위클리플래너',9,31);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'STATIONERY',0,1);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'TOY',0,2);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'필통/필기류',1,1);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'노트/메모',1,2);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'다이어리/캘린더',1,3);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'카드,엽서',1,4);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'ETC',1,5);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'HolidaySomething',2,1);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'HolidaySomething',3,2);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'HolidaySomething',4,2);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'HolidaySomething',5,2);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'오롤리데이',2,1);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'덴스',3,1);
+
+
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'디자인문구1',NULL,1);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'디자인문구2',NULL,2);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'다이어리/플래너',1,3);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'노트/메모지',1,4);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'데코레이션',1,5);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'포토앨범/레코드북',1,6);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'필기류/펜 케이스',1,7);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'카드/편지/봉투',1,8);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'파일링/바인더',1,9);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'오피스 용품',1,10);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'데스크 정리/보관',1,11);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'캐릭터문구',1,12);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'다이어리',2,13);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'오거나이저',2,14);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'스케쥴러/플래너',2,15);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'캘린더',2,16);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'베이직노트',3,17);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'하드커버 노트',3,18);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'바인더/6공 노트',3,19);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'스프링 노트',3,20);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'스탬프',4,21);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'스티커',4,22);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'앨범',5,23);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'미니앨범',5,24);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'필기구',6,25);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'고급필기류',6,26);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'카드',7,27);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'편지지',7,28);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'레이어 폴더/파일폴더',8,29);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'먼슬리플래너',14,30);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'위클리플래너',9,31);
 
 
 INSERT INTO product_detail(id, description) VALUES (null, 'May가 추천하는 상점 공식 굿즈');
@@ -315,13 +330,13 @@ INSERT INTO product_detail(id, description) VALUES (null, '덴스 로고 라벨�
 
 
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (1,'2177670','서울 공장','스밋코구라시 데일리다이어리',NULL,1000,40,4000,2500,2,1,1, 0, 3, 0, true, '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (1,'2177670','서울 공장','스밋코구라시 데일리다이어리',NULL,1000,40,4000,2500,1,1,1, 0, 3, 0, true, '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
 VALUES (2,'2104689','경기도 공장','아이코닉 일상집 2019',NULL,1000,50,11800,2500,2,2,1, 0, 3, 0, false, '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (3,'2086287','인천 공장','바이풀디자인_세컨 플래너_미디움2019','오늘만공짜',2000,50,8500,2500,29,3,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05' );
+VALUES (3,'2086287','인천 공장','바이풀디자인_세컨 플래너_미디움2019','오늘만공짜',2000,50,8500,2500,2,3,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05' );
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (4,'2134984','강원도 공장','[루카랩]2019 플랜더 - 캘린더 겸 플래너',NULL,1000,40,15000,2500,30,4,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (4,'2134984','강원도 공장','[루카랩]2019 플랜더 - 캘린더 겸 플래너',NULL,1000,40,15000,2500,3,4,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
 VALUES (5,'2177678','서울 공장','스밋코구라시 좌철수첩',NULL,200,20,1000,2500,3,5,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
@@ -329,51 +344,51 @@ VALUES (6,'1846002','서울 공장','[디즈니] 빈티지 포스터 스티커 �
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
 VALUES (7,'279397','서울 공장','The Black-Photo album(ver.3.0)',NULL,2000,15,15800,3000,5,7,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (8,'1904263','서울 공장','아이코닉 마일드 젤펜',NULL,100,10,1800,2500,25,8,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (8,'1904263','서울 공장','아이코닉 마일드 젤펜',NULL,100,10,1800,2500,2,8,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (9,'974044','서울 공장','핸드메이드X-mas카드 (16종 중 택 1)',NULL,100,20,4000,2500,26,9,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (9,'974044','서울 공장','핸드메이드X-mas카드 (16종 중 택 1)',NULL,100,20,4000,2500,2,9,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (10,'1916891','서울 공장','네모생활_클래식원고지',NULL,200,10,2500,2500,27,10,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (10,'1916891','서울 공장','네모생활_클래식원고지',NULL,200,10,2500,2500,7,10,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (11,'50709','경기도 공장','File F102(3ea)',NULL,2000,50,6600,2500,28,11,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (11,'50709','경기도 공장','File F102(3ea)',NULL,2000,50,6600,2500,2,11,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (12,'2102505','인천 공장','나의 색 나의 하루 스티커',NULL,50,50,1500,2500,21,12,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (12,'2102505','인천 공장','나의 색 나의 하루 스티커',NULL,50,50,1500,2500,1,12,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (13,'2175906','인천 공장','러브이즈기빙 하트베어 광안리의 밤(2ea)',NULL,1000,50,6000,2500,21,13,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (13,'2175906','인천 공장','러브이즈기빙 하트베어 광안리의 밤(2ea)',NULL,1000,50,6000,2500,6,13,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (14,'2171036','인천 공장','꾸꾸 스티커',NULL,5,100,1500,2500,21,14,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (14,'2171036','인천 공장','꾸꾸 스티커',NULL,5,100,1500,2500,5,14,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (15,'2160767','인천 공장','수바코_보석스티커',NULL,100,100,2500,2500,21,15,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (15,'2160767','인천 공장','수바코_보석스티커',NULL,100,100,2500,2500,6,15,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (16,'1792257','서울 공장','Hello, I am 내지노트 7종 -A5',NULL,500,20,3000,2500,16,16,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (16,'1792257','서울 공장','Hello, I am 내지노트 7종 -A5',NULL,500,20,3000,2500,6,16,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (17,'2098234','서울 공장','버튼 오거나이저 V2 - A5 [커버+멀티파일]',NULL,1000,40,28000,2500,16,17,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (17,'2098234','서울 공장','버튼 오거나이저 V2 - A5 [커버+멀티파일]',NULL,1000,40,28000,2500,7,17,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (18,'2102851','서울 공장','나의 색 나의 하루 노트',NULL,2000,200,9800,2500,17,18,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (18,'2102851','서울 공장','나의 색 나의 하루 노트',NULL,2000,200,9800,2500,7,18,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (19,'2111083','서울 공장','[18루니툰]스케치북/컬렉터 에디션 L',NULL,10000,50,69300,2500,17,19,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (19,'2111083','서울 공장','[18루니툰]스케치북/컬렉터 에디션 L',NULL,10000,50,69300,2500,7,19,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (20,'470057','강원도 공장','[주문제작] 퍼니맨 만년 원형 책도장',NULL,70,100,7800,2500,20,20,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (20,'470057','강원도 공장','[주문제작] 퍼니맨 만년 원형 책도장',NULL,70,100,7800,2500,2,20,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (21,'2154334','강원도 공장','하트 핑거 스탬프 잉크 스탬프패드 스탬프잉크 12색',NULL,1000,10,3000,2500,20,21,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (21,'2154334','강원도 공장','하트 핑거 스탬프 잉크 스탬프패드 스탬프잉크 12색',NULL,1000,10,3000,2500,3,21,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (22,'1901799','서울 공장','체크 수학 오답노트',NULL,100,10,2000,2500,19,22,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (22,'1901799','서울 공장','체크 수학 오답노트',NULL,100,10,2000,2500,4,22,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (23,'2176209','서울 공장','위 베어 베어스 수학연습장 - 그리즐리',NULL,200,100,2500,2500,19,23,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (23,'2176209','서울 공장','위 베어 베어스 수학연습장 - 그리즐리',NULL,200,100,2500,2500,4,23,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (24,'1889317','서울 공장','레트로 라이트 육공 모눈노트',NULL,4000,200,11000,2500,18,24,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (24,'1889317','서울 공장','레트로 라이트 육공 모눈노트',NULL,4000,200,11000,2500,4,24,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (25,'1621980','서울 공장','피키트 만년다이어리 커버 4종',NULL,4000,100,18000,2500,18,25,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (25,'1621980','서울 공장','피키트 만년다이어리 커버 4종',NULL,4000,100,18000,2500,5,25,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (26,'2123220','서울 공장','오거나이저 (중) 모던 버튼 3 Color',NULL,10000,100,58000,2500,13,26,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (26,'2123220','서울 공장','오거나이저 (중) 모던 버튼 3 Color',NULL,10000,100,58000,2500,6,26,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (27,'2171171','경기도 공장','GROOVY DAYS DIARY - Sky Blue',NULL,2000,10,13500,2500,12,27,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (27,'2171171','경기도 공장','GROOVY DAYS DIARY - Sky Blue',NULL,2000,10,13500,2500,7,27,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (28,'2170967','경기도 공장','정원 만년 다이어리',NULL,4000,20,15000,2500,12,28,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (28,'2170967','경기도 공장','정원 만년 다이어리',NULL,4000,20,15000,2500,6,28,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (29,'2170965','경기도 공장','어두운숲 만년 다이어리',NULL,8000,50,15000,2500,12,29,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (29,'2170965','경기도 공장','어두운숲 만년 다이어리',NULL,8000,50,15000,2500,5,29,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (30,'2168986','경기도 공장','2019 럭스 Hologram 다이어리',NULL,10000,10,29800,2500,12,30,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (30,'2168986','경기도 공장','2019 럭스 Hologram 다이어리',NULL,10000,10,29800,2500,6,30,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 
 
 INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (1,'A타입',NULL,NULL,1);

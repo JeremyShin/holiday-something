@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http:/www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+
+
+<h1>Product Register</h1>
+
+<script type="text/javascript">
+    function getCategoryList(parentId) {
+        var html = '';
+        var method = "onclick='getCategoryBrandList(";
+
+        $.getJSON("/admin/product/product_detail/register/lowcategories/"+parentId, function(list) {
+            $(list).each(
+                function() {
+                    html += "<li><span class='span' "+ method + this.id + ")')>" + this.name + "</span></li> ";
+                }
+            );
+            $("#secondCategoryUl").html('');
+            $("#thirdCategoryUl").html('');
+            $("#secondCategoryUl").html(html);
+
+        });
+    }
+
+    function getCategoryBrandList(parentId) {
+        var html = '';
+        var method = "onclick='getCategoryList(";
+        $.getJSON("/admin/product/product_detail/register/lowcategories/"+parentId, function(list) {
+            // $("#currentCategory").html("<label>"+ this.id + "</label>");
+            $(list).each(
+                function() {
+                    html += "<li><span class='span' "+ method + this.id + ")')>" + this.name + "</span></li> ";
+                }
+            );
+            $("#thirdCategoryUl").html('');
+            $("#thirdCategoryUl").html(html);
+        });
+    }
+
+    // $(function () {
+    //    $(".span").click(function() {
+    //        $("#currentCategory label").text("test");
+    //    })
+    // });
+
+
+</script>
+
+<!--------------------------
+        | Product Registration |
+        -------------------------->
+
+
+<div>
+    <div style='display:inline;min-width:900px;position:relative;left:300px;border:1px solid gold;'>
+        <div id="firstCategory" style='display:inline;float:left;width:200px;'>
+            <ul>
+                <li th:each="category : ${categories}" th:if="${category.parentId == 0 }">
+                    <span class="span" th:onclick="'getCategoryList(' + ${category.id} + ')'" th:text="${category.name}"></span>
+                </li>
+            </ul>
+        </div>
+
+        <div id="secondCategory" style='display:inline;float:left;width:200px;'>
+            <ul id="secondCategoryUl">
+
+            </ul>
+
+        </div>
+
+        <div id="thirdCategory" style='display:inline;float:left;width:200px;'>
+            <ul id="thirdCategoryUl">
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- 현재 선택한 카테고리가 무엇인지 보여주는 부분. -->
+<div id="currentCategory">
+    <span id="testspan">hahgagagaaha</span>
+    <label></label>
+</div>
+
+
+<script type="text/javascript">
+
+    $(function() {
+        $('.span').on('click', function() {
+            var text = $(".span").text();
+            console.log(text);
+            $("#testspan").text(text);
+        });
+    });
+
+</script>
+
+
+
+
+
+
+</body>
+</html>
