@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/main.css}" />
+    <script th:src="@{/js/main.js}"></script>
     <title>옵션 관리</title>
 </head>
 <body>
@@ -188,7 +189,7 @@
                                 </colgroup>
                                 <thead>
                                     <tr>
-                                        <th scope="col"><input type="checkbox"/></th>
+                                        <th scope="col"><input type="checkbox" id="checkbox-all" onclick="toggle(this);" /></th>
                                         <th scope="col">No</th>
                                         <th scope="col">옵션명<button type="button">오름차순 정렬</button></th>
                                         <th scope="col">옵션값</th>
@@ -196,7 +197,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="productOption : ${productOptionList}">
+                                    <tr th:each="productOption : ${productOptionList}" id="productOptionTr">
                                         <td><input type="checkbox" name="productOptionId" th:value="${productOption.id}"/></td>
                                         <td th:text="${productOption.id}">###</td>
                                         <td th:text="${productOption.name}">###</td>
