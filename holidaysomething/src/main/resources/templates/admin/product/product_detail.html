@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/main.css}" />
-    <script th:src="@{/js/main.js}"></script>
+    <!--<script th:src="@{/js/main.js}"></script>-->
     <title>옵션 관리</title>
 </head>
 <body>
@@ -178,8 +178,8 @@
                         </div>
                     </div>
                     <div>
-                        <form method="POST" action="/admin/product/delete/product_option">
-                            <table class="">
+                        <form method="POST" action="/admin/product/delete/product_option" id="productOptionForm">
+                            <table>
                                 <colgroup>
                                     <col class="chk" />
                                     <col style="width:50px;" />
@@ -207,12 +207,14 @@
                                 </tbody>
                             </table>
 
-                            <button type="submit">삭제</button>
+                            <button type="submit" id="productOptionFormSubmit">삭제</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script th:src="@{/js/main.js}"></script>
 </body>
 </html>
