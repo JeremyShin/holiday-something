@@ -169,15 +169,15 @@
                         </div>
                     </div>
                     <div>
-                        <div>
-                            <span>선택한 항목을</span><a href="#"><span>삭제</span></a>
-                        </div>
+                        <!--<div>-->
+                            <!--<span>선택한 항목을</span><a href="#"><span>삭제</span></a>-->
+                        <!--</div>-->
                         <div>
                             <a href="#"><span>옵션등록</span></a>
                         </div>
                     </div>
                     <div>
-                        <form method="POST" action="/">
+                        <form method="POST" action="/admin/product/delete/product_option">
                             <table class="">
                                 <colgroup>
                                     <col class="chk" />
@@ -197,14 +197,16 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="productOption : ${productOptionList}">
-                                        <td><input type="checkbox"/></td>
-                                        <td th:text="${productOption.id}"></td>
-                                        <td th:text="${productOption.name}">111</td>
-                                        <td th:text="${productOption.price}">111</td>
-                                        <td th:text="${productOption.description}">111</td>
+                                        <td><input type="checkbox" name="productOptionId" th:value="${productOption.id}"/></td>
+                                        <td th:text="${productOption.id}">###</td>
+                                        <td th:text="${productOption.name}">###</td>
+                                        <td th:text="${productOption.price}">###</td>
+                                        <td th:text="${productOption.description}">###</td>
                                     </tr>
                                 </tbody>
                             </table>
+
+                            <button type="submit">삭제</button>
                         </form>
                     </div>
                 </div>

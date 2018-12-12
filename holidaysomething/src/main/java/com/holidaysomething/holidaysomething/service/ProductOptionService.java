@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ProductOptionService {
     List<ProductOption> getAllProductOptions();
+    ProductOption getProductOption(Long id);
+    void deleteProductOption(Long id);
 }
