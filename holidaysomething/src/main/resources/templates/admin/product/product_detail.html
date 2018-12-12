@@ -1,12 +1,228 @@
-<!DOCTYPE html>
-<html xml:th="http:/www.thymeleaf.org">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Title</title>
-</head>
 <body>
-    <h1>Hello World ! ! !</h1>
-    <h1>Admin ! ! !</h1>
-    상품 세부 관리 페이지입니다.
+<div id="wrap" class="">
+    <div id="header">
+        <h2>주요메뉴</h2>
+
+        <div id="gnb" class="menu12">
+            <ul>
+                <li id="shop" class=""><a id="QA_Gnb_store" href="#none" menuno="1" treeno="150">상점관리</a></li>
+                <li id="product" class=" selected"><a id="QA_Gnb_product2" href="#none" menuno="2056" treeno="977">상품관리</a></li>
+                <li id="order" class=""><a id="QA_Gnb_sales" href="#none" menuno="1681" treeno="867">주문관리</a></li>
+                <li id="member" class=""><a id="QA_Gnb_member" href="#none" menuno="6" treeno="153">고객관리</a></li>
+                <li id="board" class=""><a id="QA_Gnb_board" href="#none" menuno="7" treeno="154">게시판관리</a></li>
+                <li id="mobile" class=""><a id="QA_Gnb_mobile" href="#none" menuno="1502" treeno="224">모바일쇼핑몰</a></li>
+                <li id="promotion" class=""><a id="QA_Gnb_promotion" href="#none" menuno="1250" treeno="225">프로모션</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="container">
+        <div id="sidebar">
+            <div class="snbArea">
+                <div id="snb" class="sub">
+                    <ul class="menu">
+                        <li class="depth1 expandable ">
+                            <a id="QA_Lnb_Menu2027" href="#none" menuno="2027" treeno="948" class="" targetframe="F">상품분류관리</a>
+                            <ul>
+                                <li class="">
+                                    <a id="QA_Lnb_Menu2136" href="/disp/admin/shop1/product/categorymanage" menuno="2136" treeno="1053" class="" targetframe="F">분류 관리</a>
+                                </li>
+                                <li class="">
+                                    <a id="QA_Lnb_Menu2137" href="/disp/admin/shop1/product/CategorySetting" menuno="2137" treeno="1054" class="" targetframe="F">분류 환경설정</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="depth1 expandable collapsable">
+                            <a id="QA_Lnb_Menu2028" href="#none" menuno="2028" treeno="949" class=" menu_action_m" targetframe="F">상품옵션관리</a>
+                            <ul>
+                                <li class="depth2 expandable ">
+                                    <a href="#none" class="">품목생성형 옵션</a>
+                                    <ul>
+                                        <li class="">
+                                            <a id="QA_Lnb_Menu2029" href="/disp/admin/shop1/product/optionlist" menuno="2029" treeno="950" class="" targetframe="F">옵션관리</a>
+                                        </li>
+                                        <li class="">
+                                            <a id="QA_Lnb_Menu2030" href="/disp/admin/shop1/product/optionsetlist" menuno="2030" treeno="951" class="" targetframe="F">옵션세트관리</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="depth2 collapsable ">
+                                    <a href="#none" class="">상품연동형 옵션</a>
+                                    <ul>
+                                        <li class="selected">
+                                            <a id="QA_Lnb_Menu2191" href="/disp/admin/shop1/product/optionlist?related_type=1" menuno="2191" treeno="2055" class="" targetframe="F">옵션관리</a>
+                                        </li>
+                                        <li class="">
+                                            <a id="QA_Lnb_Menu2192" href="/disp/admin/shop1/product/optionsetlist?related_type=1" menuno="2192" treeno="2056" class="" targetframe="F">옵션세트관리</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="depth1 expandable ">
+                            <a id="QA_Lnb_Menu2031" href="#none" menuno="2031" treeno="952" class=" menu_action_m" targetframe="F">상품등록</a>
+                            <ul>
+                                <li class="">
+                                    <a id="QA_Lnb_Menu2032" href="/disp/admin/shop1/product/ProductSimpleRegister" menuno="2032" treeno="953" class="" targetframe="F">간단 등록</a>
+                                </li>
+                                <li class="">
+                                    <a id="QA_Lnb_Menu2033" href="/disp/admin/shop1/product/productregister" menuno="2033" treeno="954" class="" targetframe="F">상품 등록</a>
+                                </li>
+                                <li class="">
+                                    <a id="QA_Lnb_Menu2035" href="/disp/admin/shop1/product/ProductExcelUpload" menuno="2035" treeno="956" class="" targetframe="F">엑셀 등록</a>
+                                </li>
+                                <li class="">
+                                    <a id="QA_Lnb_Menu2138" href="/disp/admin/shop1/product/productsetregister" menuno="2138" treeno="1055" class="" targetframe="F">세트상품 등록</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="depth1 expandable ">
+                            <a id="QA_Lnb_Menu2036" href="#none" menuno="2036" treeno="957" class=" menu_action_m" targetframe="F">상품관리</a>
+                            <ul>
+                                <li class="">
+                                    <a id="QA_Lnb_Menu2037" href="/disp/admin/shop1/product/productmanage" menuno="2037" treeno="958" class="" targetframe="F">상품목록</a>
+                                </li>
+                                <li class="">
+                                    <a id="QA_Lnb_Menu2041" href="/disp/admin/shop1/product/ShowInfoMain" menuno="2041" treeno="962" class="" targetframe="F">메인 상품 진열관리</a>
+                                </li>
+                                <li class="">
+                                    <a id="QA_Lnb_Menu2464" href="javascript:MENU_NAVIGATION_GNB.openShowInfoMainPlus();" menuno="2464" treeno="2653" class="" targetframe="F">메인 상품 진열관리+<span class="icon new">NEW</span></a>
+                                </li>
+                                <li class="">
+                                    <a id="QA_Lnb_Menu2355" href="/disp/admin/shop1/product/ShowInfoCategory" menuno="2355" treeno="2233" class="" targetframe="F">분류별 상품 진열관리</a>
+                                </li>
+                                <li class="">
+                                    <a id="QA_Lnb_Menu2415" href="/disp/admin/shop1/product/ShowReserveManage" menuno="2415" treeno="2296" class="" targetframe="F">상품 진열 예약관리</a>
+                                </li>
+                                <li class="">
+                                    <a id="QA_Lnb_Menu2038" href="/disp/admin/shop1/product/ProductBatchManage" menuno="2038" treeno="959" class="" targetframe="F">상품정보 일괄변경</a>
+                                </li>
+                                <li class="">
+                                    <a id="QA_Lnb_Menu2043" href="/disp/admin/shop1/product/ShowDeleteProduct" menuno="2043" treeno="960" class="" targetframe="F">삭제상품 목록</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <hr class="layout">
+
+        <div id="content">
+            <div class="section" id="QA_list1">
+                <div class="mBoard gSmall">
+                    <form method="get" id="eSearchForm">
+                        <input type="hidden" name="related_type" value="1">
+                        <input type="hidden" name="Limit" id="iLimit">
+                        <input type="hidden" name="SortKey" id="sSortKey">
+                        <input type="hidden" name="Sort" id="sSort">
+                        <input type="hidden" name="Page" id="iPage">
+                        <input type="hidden" name="isPopup" id="isPopup" value="">
+                        <table>
+                            <caption>옵션 검색</caption>
+                            <tbody>
+                            <tr>
+                                <th scope="row">옵션검색</th>
+                                <td>
+                                    <select class="fSelect" name="SearchKey" id="eSearchKey">
+                                        <option value="OptionName">옵션명</option>
+                                        <option value="OptionCode">옵션코드</option>
+                                        <option value="OptionValue">옵션값</option>
+                                        <option value="OptionDesc">옵션설명</option>
+                                        <option value="OptionStyle">옵션스타일</option>
+                                    </select>
+                                    <select class="fSelect" name="option_display_type" style="display:none">
+                                        <option value="S">셀렉트박스</option>
+                                        <option value="P">미리보기</option>
+                                        <option value="B">텍스트버튼</option>
+                                        <option value="R">라디오버튼</option>
+                                    </select>
+                                    <input type="text" name="SearchValue" class="fText" style="width:300px;" value="" id="eSearchValue">
+                                    <a href="#none" class="btnSearch" id="eSearch"><span>검색</span></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+            <div class="section" id="QA_list2">
+                <div class="mTitle">
+                    <h2>옵션 목록</h2>
+                </div>
+                <div class="mState">
+                    <div class="gLeft">
+                        <p class="total">[총 <strong>0</strong>개]</p>
+                    </div>
+                    <div class="gRight">
+                        <select class="fSelect" id="eListLimitCount">
+                            <option value="10">10개씩보기</option>
+                            <option value="20" selected="selected">20개씩보기</option>
+                            <option value="30">30개씩보기</option>
+                            <option value="50">50개씩보기</option>
+                            <option value="100">100개씩보기</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mCtrl typeHeader">
+                    <div class="gLeft">
+                        <span class="txtLess">선택한 항목을</span><a href="#none" class="btnNormal eOptionDelete"><span><em class="icoDel"></em> 삭제</span></a>
+                    </div>
+                    <div class="gRight">
+                        <a href="/admin/product/product_detail_add_option" class="btnCtrl"><span>옵션등록</span></a>
+                    </div>
+                </div>
+                <div class="mBoard">
+                    <form method="POST" action="/exec/admin/shop1/product/optiondelete" id="eDeleteForm">
+                        <input type="hidden" name="related_type" value="1">
+                        <table class="eChkColor">
+                            <colgroup>
+                                <col class="chk">
+                                <col style="width:50px;">
+                                <col style="width:190px;">
+                                <col style="width:auto;">
+                                <col style="width:auto;">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th scope="col"><input type="checkbox"></th>
+                                <th scope="col">No</th>
+                                <th scope="col">옵션명<button type="button">오름차순 정렬</button></th>
+                                <th scope="col">옵션값</th>
+                                <th scope="col">옵션설명</th>
+                            </tr>
+                            </thead>
+                            <tbody class="empty">
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>111</td>
+                                <td>111</td>
+                                <td>111</td>
+                                <td>111</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>222</td>
+                                <td>222</td>
+                                <td>222</td>
+                                <td>222</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>333</td>
+                                <td>333</td>
+                                <td>333</td>
+                                <td>333</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
-</html>
