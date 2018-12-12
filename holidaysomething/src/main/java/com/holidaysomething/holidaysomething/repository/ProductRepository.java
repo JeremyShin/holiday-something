@@ -12,7 +12,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     // admin : product searching by name
     @Query(value = "select p from Product p where p.name LIKE CONCAT('%', :productName, '%')")
-    public Page<Product> findbyProductNameContainig(@Param("productName") String productName, Pageable pageable);
+    public Page<Product> findbyProductNameContaining(@Param("productName") String productName, Pageable pageable);
 
 
 }

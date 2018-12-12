@@ -45,6 +45,7 @@ public class AdminProductController {
     public String searchResult(ModelMap modelMap,
                                @RequestParam(value = "productName") String product,
                                @RequestParam(value = "page", defaultValue = "0") int start) {
+
         Pageable pageable = PageRequest.of(start, start+5);
 
         Page<Product> products = productService.findByProductNameContaining(product, pageable);
@@ -54,7 +55,4 @@ public class AdminProductController {
 
         return "admin/product/product_search_result";
     }
-
-
-
 }

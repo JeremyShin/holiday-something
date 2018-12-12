@@ -4,23 +4,24 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Title</title>
 </head>
-
+<body>
 <h1>조회결과출력페이지!</h1>
 <div>
-<h2>제품검색결과</h2>
+    <h2>제품검색결과</h2>
+    <table border="1">
+        <th>product name</th>
+        <tr th:each="product : ${product}"><!--first line-->
+            <td th:text="${product.name}">${product.name}</td>
+        </tr>
+    </table>
 
-    <th:text items="${productName}" var="productName">
-        ${productName}<br>
-    </th:text>
 </div>
 <br>
 <br>
 <!--Pagenation-->
 <div>
-<h2>페이지네이션</h2>
-    <th:each begin="1" end="${totalPages}" step="1" var="page">
-        <a href="/admin/product/product_search?page=${page}">${page}</a>
-    </th:each>
+    <h2>페이지네이션</h2>
+
 </div>
 
 
