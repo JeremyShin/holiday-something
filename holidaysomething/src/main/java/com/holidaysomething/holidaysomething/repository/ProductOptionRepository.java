@@ -10,11 +10,5 @@ import java.util.List;
 
 @Repository
 public interface ProductOptionRepository extends JpaRepository<ProductOption, Long> {
-
-//    @Query(value="select me from Member me where me.loginId=(:loginId)")
-//    ProductOption findByIdContaining(@Param("loginId") String loginId);
-//
-//    List<ProductOption> findByOrderIdOrderByProductId(Long orderId);
-
-
+  
 }
