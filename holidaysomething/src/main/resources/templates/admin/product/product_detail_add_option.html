@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xml:th="http:/www.thymeleaf.org">
+<html xml:th="http:/www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Title</title>
@@ -142,24 +142,9 @@
                             </td>
 
                             <td>
-                                <select class="fSelect eOptPriceMark" name="optAddPriceMark[1][]">
-                                    <option value="+">대</option>
-                                    <option value="-">-</option>
-                                </select>
-
-                                <select class="fSelect eOptPriceMark" name="optAddPriceMark[1][]">
-                                    <option value="+">중</option>
-                                    <option value="-">-</option>
-                                </select>
-
-                                <select class="fSelect eOptPriceMark" name="optAddPriceMark[1][]">
-                                    <option value="+">소</option>
-                                    <option value="-">-</option>
-                                </select>
-
-                                <select class="fSelect eOptPriceMark" name="optAddPriceMark[1][]">
-                                    <option value="+">상품</option>
-                                    <option value="-">-</option>
+                                <select class="select" name="productId" id="productId">
+                                    <option value="--ALL--">상품선택</option>
+                                    <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
                                 </select>
                             </td>
                         </tr>

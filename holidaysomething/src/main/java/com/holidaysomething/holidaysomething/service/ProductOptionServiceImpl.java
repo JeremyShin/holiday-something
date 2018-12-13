@@ -2,7 +2,6 @@ package com.holidaysomething.holidaysomething.service;
 
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.repository.ProductOptionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
