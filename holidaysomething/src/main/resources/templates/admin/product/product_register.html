@@ -20,7 +20,7 @@
         $.getJSON("/admin/product/product_detail/register/lowcategories/"+parentId, function(list) {
             $(list).each(
                 function() {
-                    html += "<li><span class='span' "+ method + this.id + ")')>" + this.name + "</span></li> ";
+                    html += "<li><span data-categoryid="+this.id+ " class='span' "+ method + this.id + ")')>" + this.name + "</span></li> ";
                 }
             );
             $("#secondCategoryUl").html('');
@@ -37,7 +37,7 @@
             // $("#currentCategory").html("<label>"+ this.id + "</label>");
             $(list).each(
                 function() {
-                    html += "<li><span class='span' "+ method + this.id + ")')>" + this.name + "</span></li> ";
+                    html += "<li><span data-categoryid=" + this.id + " class='span'> " + this.name + "</span></li> ";
                 }
             );
             $("#thirdCategoryUl").html('');
@@ -57,14 +57,16 @@
 <!--------------------------
         | Product Registration |
         -------------------------->
+<!--  block은 CSS로 크기조절이 가능하고 inline은 안 된다. -->
 
+<div style="display:block; ">
+    <!-- 카테코리 출력 부분 (3개의 div)-->
+    <div style='display:inline-block;min-width:900px;position:relative;left:130px;border:1px solid gold;'>
 
-<div>
-    <div style='display:inline;min-width:900px;position:relative;left:300px;border:1px solid gold;'>
         <div id="firstCategory" style='display:inline;float:left;width:200px;'>
             <ul>
                 <li th:each="category : ${categories}" th:if="${category.parentId == 0 }">
-                    <span class="span" th:onclick="'getCategoryList(' + ${category.id} + ')'" th:text="${category.name}"></span>
+                    <span th:attr="data-categoryid=${category.id}" class="span" th:onclick="'getCategoryList(' + ${category.id} + ')'" th:text="${category.name}"></span>
                 </li>
             </ul>
         </div>
@@ -83,25 +85,33 @@
 
         </div>
 
+    </div> <!-- 카테고리 출력부분 끝.-->
+
+    <!-- 현재 선택한 카테고리가 무엇인지 보여주는 부분. -->
+    <div style="display:block; left:150px;" id="currentCategory">
+        <label>선택한 카테고리 : </label>
+        <span id="categoryName"></span>
+        <span id="categoryId"></span>
+
     </div>
-
 </div>
 
 
-<!-- 현재 선택한 카테고리가 무엇인지 보여주는 부분. -->
-<div id="currentCategory">
-    <span id="testspan">hahgagagaaha</span>
-    <label></label>
-</div>
+
+
+
+
 
 
 <script type="text/javascript">
-
-    $(function() {
-        $('.span').on('click', function() {
-            var text = $(".span").text();
-            console.log(text);
-            $("#testspan").text(text);
+    $(document).ready(function() {
+        $(document).on('click','.span', function() {
+            var name = $(this).text();
+            var id = $(this).attr("data-categoryid");
+            console.log(name);
+            console.log(id);
+            $("#categoryName").text(name);
+            $("#categoryId").text(id);
         });
     });
 
