@@ -23,6 +23,9 @@ public class OrderedProduct {
     @Column(nullable = false)
     private int quantity;
 
+    // 사용자가 신청한 personal 옵션
+    private String personalOption;
+
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
