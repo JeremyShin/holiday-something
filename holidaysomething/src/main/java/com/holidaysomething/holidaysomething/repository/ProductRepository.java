@@ -2,17 +2,19 @@ package com.holidaysomething.holidaysomething.repository;
 
 import com.holidaysomething.holidaysomething.domain.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-
-
-
-
-
-
     // 상품등록
+    public Product save(Product product);
+
+    @Query("select count(p) from Product p")
+    public int countAll();
+
 
 
 

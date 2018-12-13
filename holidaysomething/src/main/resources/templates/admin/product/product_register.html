@@ -33,6 +33,7 @@
     function getCategoryBrandList(parentId) {
         var html = '';
         var method = "onclick='getCategoryList(";
+
         $.getJSON("/admin/product/product_detail/register/lowcategories/"+parentId, function(list) {
             // $("#currentCategory").html("<label>"+ this.id + "</label>");
             $(list).each(
@@ -44,23 +45,16 @@
             $("#thirdCategoryUl").html(html);
         });
     }
-
-    // $(function () {
-    //    $(".span").click(function() {
-    //        $("#currentCategory label").text("test");
-    //    })
-    // });
-
-
 </script>
 
 <!--------------------------
         | Product Registration |
         -------------------------->
 <!--  block은 CSS로 크기조절이 가능하고 inline은 안 된다. -->
+<!--  div 는 기본이 block! -->
 
 <div style="display:block; ">
-    <!-- 카테코리 출력 부분 (3개의 div)-->
+    <!-- Start(카테코리 출력 부분) (3개의 div) -->
     <div style='display:inline-block;min-width:900px;position:relative;left:130px;border:1px solid gold;'>
 
         <div id="firstCategory" style='display:inline;float:left;width:200px;'>
@@ -85,15 +79,56 @@
 
         </div>
 
-    </div> <!-- 카테고리 출력부분 끝.-->
+    </div>
+    <!-- End(카테고리)-->
 
-    <!-- 현재 선택한 카테고리가 무엇인지 보여주는 부분. -->
-    <div style="display:block; left:150px;" id="currentCategory">
+    <!-- Start(현재 선택한 카테고리가 무엇인지 보여주는 부분) -->
+    <div style="display:inline-block;position:relative;left:130px;" id="currentCategory">
         <label>선택한 카테고리 : </label>
         <span id="categoryName"></span>
         <span id="categoryId"></span>
+    </div>
+    <!-- End (현재 선택한 카테고리 보여주는 부분)-->
+
+    <!-- Start (상품 기본정보 등록) -->
+    <div >
+        <div>
+            <label>상품명 : </label>
+            <input type="text" placeholder="Product Name">
+        </div>
+        <div>
+            <label>제조사 : </label>
+            <input type="text" placeholder="Manufacturer">
+        </div>
+        <div>
+            <label>상품코드 : </label>
+            <input type="text" placeholder="Product Code">
+        </div>
+        <div>
+            <label>원가 : </label>
+            <input type="text" placeholder="Original Price">
+        </div>
+        <div>
+            <label>판매가 : </label>
+            <input type="text" placeholder="Selling Price">
+        </div>
+        <div>
+            <label>제조가 : </label>
+            <input type="text" placeholder="Manufacturing Price">
+        </div>
+        <div>
+            <label>배송비 : </label>
+            <input type="text" placeholder="Shipping Fee">
+        </div>
+        <div>
+            <label>상품 설명 : </label>
+            <input type="text" placeholder="Product Description">
+        </div>
 
     </div>
+
+
+
 </div>
 
 
@@ -116,8 +151,6 @@
     });
 
 </script>
-
-
 
 
 
