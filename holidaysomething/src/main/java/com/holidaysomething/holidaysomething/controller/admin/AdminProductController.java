@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/admin/product")
@@ -43,16 +44,22 @@ public class AdminProductController {
 
     @PostMapping("/product_search/result")
     public String searchResult(ModelMap modelMap,
-                               @RequestParam(value = "productName") String product,
-                               @RequestParam(value = "page", defaultValue = "0") int start) {
+                                     @RequestParam(value = "productName") String product,
+                                     @RequestParam(value = "page", defaultValue = "0") int start) {
+
+
+        //pagination
+        ModelAndView mav = new ModelAndView("/product_search/result");
 
         Pageable pageable = PageRequest.of(start, start+5);
 
         Page<Product> products = productService.findByProductNameContaining(product, pageable);
 
+        // mav.addObject("products", productService.findByProductNameContaining(product, pageable));
         modelMap.addAttribute("productName", products);
         modelMap.addAttribute("totalPages", products.getTotalPages());
+        modelMap.addAttribute("presentPage", products.getNumber()+1);
 
-        return "admin/product/product_search_result";
+        return "/admin/product/product_search_result";
     }
 }
