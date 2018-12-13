@@ -24,3 +24,10 @@ productOptionFormSubmitBtn.addEventListener('click', (event) => {
         alert('적용할 옵션이 없습니다.');
     }
 });
+
+let validateProductOptionForm = function(form) {
+    if (confirm('체크된 옵션을 모두 삭제하시겠습니까?'))
+        form.submit();
+    else
+        return false;
+};
