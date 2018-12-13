@@ -16,4 +16,9 @@ public class ProductDetail {
 
     @Lob
     private String description;
+
+
+    public ProductDetail(String description) {
+        this.description = description;
+    }
 }

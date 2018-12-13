@@ -1,9 +1,13 @@
 package com.holidaysomething.holidaysomething.service.admin;
 
 
+import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductCategoryDto;
+import com.holidaysomething.holidaysomething.domain.ProductDetail;
 import com.holidaysomething.holidaysomething.repository.ProductCategoryRepository;
+import com.holidaysomething.holidaysomething.repository.ProductDetailRepository;
+import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +19,12 @@ import java.util.List;
 public class AdminProductServiceImpl implements AdminProductService {
     @Autowired
     ProductCategoryRepository productCategoryRepository;
+
+    @Autowired
+    ProductDetailRepository productDetailRepository;
+
+    @Autowired
+    ProductRepository productRepository;
 
     @Override
     @Transactional
@@ -47,6 +57,18 @@ public class AdminProductServiceImpl implements AdminProductService {
 
 //        System.out.println("******************************* " + categoryDtos.size());
         return categories;
+    }
+
+
+    @Override
+    @Transactional
+    public Product productRegister(Product product, String description) {
+        // 상품 등록하기 전에 상품내용먼저 등록한 후에 그 데이터를 상품에 set 해준다.
+        ProductDetail pd = productDetailRepository.save(new ProductDetail(description));
+        product.setProductDetail(pd);
+        productRepository.save(product);
+
+        return product;
     }
 
 

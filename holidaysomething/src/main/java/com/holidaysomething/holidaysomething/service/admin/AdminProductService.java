@@ -1,7 +1,7 @@
 package com.holidaysomething.holidaysomething.service.admin;
 
+import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
-import com.holidaysomething.holidaysomething.domain.ProductCategoryDto;
 
 import java.util.List;
 
@@ -14,5 +14,7 @@ public interface AdminProductService {
     public List<ProductCategory> productLowLevelCategoryList(Long parentId);
 
     // 상품 등록 하기야!! (상품, 상품_디테일 테이블 두개 insert)
-    
+    public Product productRegister(Product product, String description);
+
+
 }
