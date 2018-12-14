@@ -2,167 +2,84 @@
 <html xml:th="http:/www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
     <title>Title</title>
 </head>
 <body>
-<h1>Hello World ! ! !</h1>
-<h1>Admin ! ! !</h1>
-옵션 등록 페이지입니다.
 
 
-
-<div class="mBoard">
-    <form name="option_value_form" action="/admin/product/product_detail_add_option" method="post" id="option_value_form">
-        <input type="hidden" name="related_type" value="1">
-        <input type="hidden" name="use_related" value="T">
-        <table border="1" summary="">
-            <caption>기본정보</caption>
-            <colgroup>
-                <col style="width:150px">
-                <col style="width:auto">
-            </colgroup>
+<div>
+    <form name="option_value_form" action="/admin/product/product_detail_add_option" method="post">
+        <table>
             <tbody>
             <tr>
-            <td class="top">
-                <div class="mState">
-                    <div class="gLeft">
-                        <strong class="icoOptPicker name"></strong> 옵션명
-                        <strong class="icoOptPicker value"></strong> 옵션값
-                        <p class="txtInfo" style="float:right; margin:auto 1em; ">옵션명과 옵션값에는 , (콤마), ; (세미콜론), " (쌍따옴표), \ (역슬래시), #$% (특수문자)는 등록할 수 없습니다.</p>
+            <td>
+                <div>
+                    <div>
+                        <p>옵션명과 옵션값에는 , (콤마), ; (세미콜론), " (쌍따옴표), \ (역슬래시), #$% (특수문자)는 등록할 수 없습니다.</p>
                     </div>
                 </div>
-                <div class="mCtrl typeHeader">
-                    <div class="gLeft">
-                        <span class="txtLess">선택한 항목을</span> <a href="#" class="btnNormal" id="eOptionDelete"><span><em class="icoDel"></em> 삭제</span></a>
+                <div>
+                    <div>
+                        <span>선택한 항목을</span> <a href="#" id="eOptionDelete"><span>삭제</span></a>
                     </div>
-                    <div class="gRight">
-                        <select class="fSelect" id="option_row_count">
-                            <option>- 입력필드 추가 - </option>
-                            <option value="1">1개</option>
-                            <option value="2">2개</option>
-                            <option value="3">3개</option>
-                            <option value="4">4개</option>
-                            <option value="5">5개</option>
-                        </select>
-                        <a href="javascript:;" class="btnCtrl" id="eOptionCountSet"><span>추가</span></a>
+                    <div>
+                        <span id="createRow">추가</span>
                     </div>
                 </div>
-                <div class="mBoard gScroll" style="min-height:440px;">
-                    <!--
-                        옵션값 항목(td)가 늘어날경우 col의 갯수도 같이 증가 시켜주세요.
-                    -->
-                    <table border="1" summary="" class="eChkColor">
-                        <caption>옵션값</caption>
-                        <colgroup class="eOptionListColArea">
-                            <col class="chk">
-                            <col style="width:80px;">
-                            <col style="width:60px;">
-
-                            <col style="width:280px;">
-
-
-                            <col style="width:160px;">
-                            <col style="width:200px;">
-                            <col style="width:200px;">
-                            <col style="width:200px;">
-                            <col style="width:200px;">
-                            <col style="width:200px;">
-                            <col style="width:200px;">
-                        </colgroup>
+                <div>
+                    <table border="1" id="optionValueTable">
                         <thead>
                         <tr>
-                            <th scope="col"><input type="checkbox" class="allChk"></th>
-                            <th scope="col">편집</th>
-                            <th scope="col">순서</th>
-                            <th scope="col">한국어 쇼핑몰 (한국어)<span class="icoDefault">기본 </span></th>
-                            <th scope="col" class="eOptionStylePreview" style="display: none;">버튼이미지 설정 <div class="cTip" code="PR.PO.IT.OM.60"><div class="mTooltip gLarge">
-                                <button type="button" class="icon eTipScroll">도움말</button>
-                                <div class="tooltip" style="z-index : 1; ">
-                                    <div class="content">
-                                        <strong class="titleEm">버튼이미지 설정</strong>
-                                        <ul class="mList"><li>옵션 스타일을 '미리보기'로 선택 시, 본 항목에 입력한 값으로 옵션의 버튼 모양이 결정됩니다.</li></ul>
-                                        <ul class="mList"><li>색상과 이미지를 모두 등록하면 버튼은 이미지로 표시됩니다.</li></ul>
-                                        <ul class="mList"><li>단, 옵션 구성방식이 '조합 일체선택형'인 경우에는 텍스트버튼으로 표시됩니다.</li></ul>
-                                        <ol class="mList"><li><div class="gImage"><img src="//m-img.cafe24img.com/images/help/PR/PRPOIOOM60_2.jpg?1541994671"></div></li></ol>
-                                    </div>
-                                    <button type="button" class="close eClose">닫기</button>
-                                    <span class="edge"></span>
-                                </div>
-                            </div>
-                            </div></th>
-
-                            <th scope="col">상품 설정 <div class="cTip" code="PR.PO.IT.OM.70"><div class="mTooltip">
-                                <div class="tooltip" style="z-index : 1; width: 520px">
-                                    <span class="edge"></span>
-                                </div>
-                            </div>
-                            </div></th>
+                            <th><input type="checkbox"></th>
+                            <th>옵션 명 및 가격 설정</th>
+                            <th>적용할 상품 선택</th>
                         </tr>
                         </thead>
-                        <tbody id="option_value_rows" class="ui-sortable">
-                        <tr class="heading">
-                            <td class="center">-</td>
-                            <td class="center">-</td>
-                            <td class="center">-</td>
-                            <td class="left">
-                                <input type="text" name="option_name[1]" placeholder="예시) 색상" class="fText eOptionName" style="width: 250px;" value="" shop_num="1">
-                                <span style="display:none" class="language"></span>
-                            </td>
-                            <td class="center eOptionStylePreview" style="display: none;">-</td>
 
-                        </tr>
-                        <tr id="option_value_template" data-is-olnkregister="T" class="eOptionRowSort" style="">
-                            <td class="center"><input type="checkbox" class="rowChk option_check"></td>
-                            <td class="center">
-                                <button type="button" class="btnOption lv1Down"><span>선택한 항목 한줄 아래로 이동</span></button>
-                                <button type="button" class="btnOption lv1Up"><span>선택한 항목 한줄 위로 이동</span></button>
-                            </td>
-                            <td class="center option_seq"></td>
-                            <td class="left">
-                                <input type="text" name="name" placeholder="예시) 옵션명을 입력하시오" class="fText eOptionValue" style="width:110px;" shop_num="1" maxlength="50">
-                                <button type="button" class="btnOption lv1Minus" style="display: inline-block;" idx="8"><span>삭제</span></button>
-                                <button type="button" class="btnOption lv1Plus" style="display: none;"><span>추가</span></button>
-                                <span style="display:none" class="language"></span>
-
-                                <div class="addAmount addAmountclose addPriceForm">
-                                    추가금액 : <!-- 추가금액 펼쳐진 후  addAmountclose 클래스 삭제 -->
-                                    <input type="text" name="price" class="fText right eOptionAddPrice" style="width:70px;" data-shop_no="1">
-                                    <span id="eOptionAddPriceCurrency" class="txtCode">KRW</span>
-                                </div>
-                            </td>
-                            <td class="left eOptionStylePreview" style="display: none;">
-                                <div class="mImgPicker">
-                                    <p class="selected"><img class="eUploadButtonImage" src="//img.echosting.cafe24.com/ec/product/ico_no_picker.gif" alt=""></p>
-                                    <input type="text" readonly="readonly" name="option_image_file[]" value="" class="fText" style="width:70px" disabled="">
-                                    <span class="selector">
-                                                    <a href="#layerButtonImgSelectLocal" class="btnIcon icoPlus eModal eButtonImageRegister"><span>수정</span></a>
-                                                    <a href="#none" class="btnIcon icoDel eButtonImageDelete" style="display:none"><span>삭제</span></a>
-                                                </span>
-                                </div>
-                            </td>
-
+                        <tbody id="option_value_rows">
+                        <!---------- 추가 버튼 클릭 시 추가할 row ---------->
+                        <tr>
                             <td>
-                                <select class="select" name="productId" id="productId">
+                                <input type="checkbox" class="rowChk option_check">
+                            </td>
+
+                            <td width="500">
+                                <div>
+                                옵션명 :
+                                    <input type="text" name="name" placeholder="예시) 옵션명을 입력하시오" maxlength="50" size="70">
+                                </div>
+                                <div>
+                                    추가금액 :
+                                    <input type="text" name="price" size="70">
+                                </div>
+                                <div>
+                                    옵션설명 :
+                                    <input type="text" name="description" size="70" style="height:30px;">
+                                </div>
+                            </td>
+
+                            <td width="500">
+                                <select name="productId" class="productId">
                                     <option value="--ALL--">상품선택</option>
                                     <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
                                 </select>
                             </td>
                         </tr>
+                        <!---------- 추가 버튼 클릭 시 추가할 row ---------->
+                        </tbody>
                     </table>
                 </div>
             </td>
             </tr>
-            <tr>
-                <th scope="row">옵션설명</th>
-                <td>
-                    <input type="text" name="option_desc" class="fText" style="width:400px;" value="">
-                    <span class="txtInfo">문자, 숫자 200Byte 이내 입력</span>
-                </td>
-            </tr>
+
             </tbody>
         </table>
         <input type="submit" value="옵션등록">
     </form>
 </div>
+
+
+    <script th:src="@{/js/productOption.js}"></script>
 </body>
 </html>

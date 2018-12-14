@@ -57,11 +57,14 @@ public class AdminProductController {
 
     /* 옵션 등록 */
     @PostMapping("/product_detail_add_option")
-    public String addProductOption(ProductOption productOption,
+    public String addProductOption(List<ProductOption> productOptions,
                                    @RequestParam(value = "productId", defaultValue = "") Long productId) {
 
-        productOption.setProduct(productService.getProduct(productId));
-        productOptionService.addProductOption(productOption);
+        for(ProductOption productOption : productOptions){
+            productOption.setProduct(productService.getProduct(productId));
+            productOptionService.addProductOption(productOption);
+        }
+
         return "admin/product/product_detail_add_option";
     }
 }
