@@ -55,6 +55,7 @@
 
 <div style="display:block; ">
     <!-- Start(카테코리 출력 부분) (3개의 div) -->
+
     <div style='display:inline-block;min-width:900px;position:relative;left:130px;border:1px solid gold;'>
 
         <div id="firstCategory" style='display:inline;float:left;width:200px;'>
@@ -81,54 +82,60 @@
 
     </div>
     <!-- End(카테고리)-->
+    <form action="#" th:action="@{/admin/product/product_detail/register}" method="post" th:object="${ProductDto}">
 
     <!-- Start(현재 선택한 카테고리가 무엇인지 보여주는 부분) -->
     <div style="display:inline-block;position:relative;left:130px;" id="currentCategory">
         <label>선택한 카테고리 : </label>
         <span id="categoryName"></span>
-        <span id="categoryId"></span>
+        <span name="productCategoryId" id="categoryId"></span>
+        <input id="categoryId2" type="hidden" name="productCategoryId" value="">
+        <!--<input th:field="*{productCategoryId}" type="text" placeholder="">-->
     </div>
     <!-- End (현재 선택한 카테고리 보여주는 부분)-->
 
     <!-- Start (상품 기본정보 등록) -->
-    <div >
+    <div>
         <div>
             <label>상품명 : </label>
-            <input type="text" placeholder="Product Name">
+            <input name="name" type="text" placeholder="Product Name">
         </div>
         <div>
             <label>제조사 : </label>
-            <input type="text" placeholder="Manufacturer">
+            <input name="manufacturer" type="text" placeholder="Manufacturer">
         </div>
         <div>
             <label>상품코드 : </label>
-            <input type="text" placeholder="Product Code">
+            <input name="code" type="text" placeholder="Product Code">
         </div>
         <div>
             <label>원가 : </label>
-            <input type="text" placeholder="Original Price">
+            <input name="originalPrice" type="text" placeholder="Original Price">
         </div>
         <div>
             <label>판매가 : </label>
-            <input type="text" placeholder="Selling Price">
+            <input name="sellingPrice" type="text" placeholder="Selling Price">
         </div>
         <div>
             <label>제조가 : </label>
-            <input type="text" placeholder="Manufacturing Price">
+            <input name="manufacturingPrice" type="text" placeholder="Manufacturing Price">
         </div>
         <div>
             <label>배송비 : </label>
-            <input type="text" placeholder="Shipping Fee">
+            <input name="shippingPrice" type="text" placeholder="Shipping Fee">
         </div>
         <div>
             <label>상품 설명 : </label>
-            <input type="text" placeholder="Product Description">
+            <input name="productDescription" type="text" placeholder="Product Description">
+        </div>
+        <div>
+            <input type="submit" text="상품등록">
         </div>
 
     </div>
 
 
-
+    </form>
 </div>
 
 
@@ -147,6 +154,7 @@
             console.log(id);
             $("#categoryName").text(name);
             $("#categoryId").text(id);
+            $("#categoryId2").val(id);
         });
     });
 

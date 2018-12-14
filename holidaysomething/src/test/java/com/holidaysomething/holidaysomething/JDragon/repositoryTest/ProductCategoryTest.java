@@ -30,7 +30,7 @@ public class ProductCategoryTest {
 
     @Test
     public void 대분류카테고리만읽어와버리기() {
-        List<ProductCategory> categories = productCategoryRepository.findLevelOne();
+        List<ProductCategory> categories = productCategoryRepository.findCategory(0l);
         for(ProductCategory pc : categories) {
             System.out.println(pc.getName());
         }
@@ -38,7 +38,7 @@ public class ProductCategoryTest {
 
     @Test
     public void 낮은분류카테고리읽어오기() {
-        List<ProductCategory> categories = productCategoryRepository.findLowLevel(1l);
+        List<ProductCategory> categories = productCategoryRepository.findCategory(1l);
         for(ProductCategory pc : categories) {
             System.out.println(pc.getName());
         }

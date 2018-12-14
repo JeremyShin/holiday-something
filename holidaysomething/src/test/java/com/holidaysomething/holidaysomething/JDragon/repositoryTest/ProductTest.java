@@ -26,8 +26,6 @@ public class ProductTest {
     @Autowired
     ProductDetailRepository productDetailRepository;
 
-    @Autowired
-    AdminProductService adminProductService;
 
     @Test
     public void 전체상품갯수조회하기() {
@@ -41,15 +39,12 @@ public class ProductTest {
     @Test
     public void 상품등록하깃() {
         ProductDetail pd = new ProductDetail("");
-        pd.setDescription("상품 설명이다!!!!!!!!!");
+        pd.setDescription("이거 방탄 펜슬이야!!");
         ProductDetail pds = productDetailRepository.save(pd);
-
-
-
         Product p = new Product();
 
         p.setName("애플펜슬");
-        p.setManufacturer("애플");
+        p.setManufacturer("삼성");
         p.setCode("ajax1234");
         p.setOriginalPrice(500);
         p.setSellingPrice(10000000);
@@ -66,28 +61,6 @@ public class ProductTest {
         System.out.println("상품의 getProductDetail().getId() : " + pp.getProductDetail().getId());
     }
 
-    @Test
-    public void 상품서비스에서등록하기테스트() {
-        Product p = new Product();
-
-        p.setName("애플펜슬2");
-        p.setManufacturer("애플2");
-        p.setCode("ajax12345");
-        p.setOriginalPrice(500);
-        p.setSellingPrice(10000000);
-        p.setManufacturingPrice(100);
-        p.setShippingPrice(50000);
-
-        Product pp = adminProductService.productRegister(p,"애플펜슬2 설명입니다!!!!!!");
-
-        System.out.println("================================");
-        System.out.println("상품설명 id : "+ pp.getProductDetail().getId());
-        System.out.println("상품설명 description : "+ pp.getProductDetail().getDescription());
-        System.out.println("상품 id : "+pp.getId());
-
-
-
-    }
 
 
 }

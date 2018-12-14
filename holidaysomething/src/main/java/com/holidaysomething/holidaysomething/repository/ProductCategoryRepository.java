@@ -16,15 +16,13 @@ public interface ProductCategoryRepository extends JpaRepository<ProductCategory
 
     public List<ProductCategory> findAll();
 
-    @Query(value="select pc from ProductCategory pc where pc.parentId=null")
-    public List<ProductCategory> findLevelOne();
 
     @Query(value="select pc from ProductCategory pc where pc.parentId=(:parentId)")
-    public List<ProductCategory> findLowLevel(@Param("parentId") Long parentId);
+    public List<ProductCategory> findCategory(@Param("parentId") Long parentId);
 
 
     @Query(value="select pc from ProductCategory pc where pc.id=(:id)")
-    public List<ProductCategory> findByIdContaining1(@Param("id") String id);
+    public ProductCategory findByIdContaining(@Param("id") Long id);
 
 
 }

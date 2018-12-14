@@ -21,4 +21,5 @@ public class ProductDetail {
     public ProductDetail(String description) {
         this.description = description;
     }
+    public ProductDetail(){}
 }

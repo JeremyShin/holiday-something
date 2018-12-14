@@ -17,6 +17,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
 
 
+    // 상품 등록 (fk 카테고리 추가)
+    // public Product save(Product product,Long categoryId);
+
+
+
 
 
 }
