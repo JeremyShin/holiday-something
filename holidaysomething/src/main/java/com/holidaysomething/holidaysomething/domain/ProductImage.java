@@ -18,6 +18,9 @@ public class ProductImage {
     private Long id;
 
     @Column(nullable = false)
+    private Long category;
+
+    @Column(nullable = false)
     private String path;
 
     @Column(nullable = false)
@@ -27,7 +30,7 @@ public class ProductImage {
     private String storedFileName;
 
     @Column(nullable = false)
-    private int size;
+    private Long size;
 
     @Column(nullable = false)
     private String fileType;
