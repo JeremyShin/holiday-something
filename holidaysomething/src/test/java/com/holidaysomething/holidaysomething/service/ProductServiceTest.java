@@ -1,6 +1,7 @@
 package com.holidaysomething.holidaysomething.service;
 
 import com.holidaysomething.holidaysomething.domain.Product;
+import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -28,5 +31,15 @@ public class ProductServiceTest {
 
         System.out.println(products.getTotalElements());
         System.out.println(products.getTotalPages());
+    }
+
+    @Test
+    public void 제품Big카테고리검색() {
+        List<ProductCategory> productCategories = productService.findByProductBigCategoryContaining();
+        System.out.println("---");
+        for(ProductCategory productCategory : productCategories) {
+            System.out.println(productCategory.getName());
+        }
+
     }
 }

@@ -2,13 +2,63 @@
 <html xml:th="http:/www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Title</title>
+    <title>상품검색페이지</title>
 </head>
 <body>
-<form method="post" action="/admin/product/product_search/result">
-    product : <input type="text" name="productName">
-    <input type="submit">
-</form>
+<h1>상품검색하는페이지</h1>
+<div>
+    <table border="1" summary="">
+        <caption>상품검색</caption>
+        <tbody>
+        <tr>
+            <th scope="row">검색분류</th>
+            <td>
+                <select>
+                    <option value="product_name">상품명</option>
+                    <option value="item_name">상품명(관리자)</option>
+                    <option value="product_code">상품명(관리자)</option>
+                </select>
+                <span>
+                    <form method="post" action="/admin/product/product_search/result">
+                        <input type="text" name="productName">
+                        <input type="submit">
+                    </form>
+                </span>
 
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">상품분류</th>
+            <td>
+                    <select name="productCategoryId">
+                        <option value="">대분류</option>
+                        <option th:each="big : ${bigCategory}" th:value="${big.id}" th:text="${big.name}"></option>
+                    </select>
+                    <select>
+                        <option value="">중분류</option>
+                    </select>
+                    <select>
+                        <option value="">소분류</option>
+                    </select>
+
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">상품등록일</th>
+            <td>
+                <select>
+                    <option value="regdate">상품등록일</option>
+                    <option value="showdate">상품게시일</option>
+                </select>
+                <a href="javascript:;" id="start-date"><span>달력보기</span></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <input type="submit">
+</div>
+<!--제품검색결과페이지 추가-->
 </body>
 </html>

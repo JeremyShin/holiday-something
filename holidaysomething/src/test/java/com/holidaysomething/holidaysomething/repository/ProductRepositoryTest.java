@@ -1,6 +1,7 @@
 package com.holidaysomething.holidaysomething.repository;
 
 import com.holidaysomething.holidaysomething.domain.Product;
+import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -31,6 +34,20 @@ public class ProductRepositoryTest {
         for(Product product : products) {
             System.out.println(product.getName());
         }
+
+    }
+
+    @Test
+    public void 카테고리로Product검색하기() throws Exception {
+        List<ProductCategory> productCategories = productRepository.findByProductBigCategoryContaining();
+
+        System.out.println("----");
+        System.out.println("----");
+        for(ProductCategory productCategory : productCategories) {
+            System.out.println(productCategory.getName());
+        }
+        System.out.println("---");
+        System.out.println("---");
 
     }
 }
