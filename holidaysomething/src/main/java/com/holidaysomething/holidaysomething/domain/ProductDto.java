@@ -1,42 +1,51 @@
 package com.holidaysomething.holidaysomething.domain;
 
+import java.time.LocalDate;
 import lombok.Data;
 import org.springframework.context.annotation.Bean;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
 @Data
 public class ProductDto {
-    private Long id;
-    private String name;
-    private int originalPrice;
-    private int sellingPrice;
 
-    private int manufacturingPrice;
+  private Long id;
+  private String name;
+  private int originalPrice;
+  private int sellingPrice;
 
-    private String code;
-    private String manufacturer;
+  private int manufacturingPrice;
 
-    private int shippingPrice;
+  private String code;
+  private String manufacturer;
 
-    private int quantity;
+  private int shippingPrice;
 
-    private int sellingQuantity;
+  private int quantity;
 
-    private int safeQuantity;
+  private int sellingQuantity;
 
-    private int mileage;
+  private int safeQuantity;
 
-    private Boolean display;
-    private String optionalPriceText;
-    private LocalDateTime regDate;
-    private LocalDateTime manufactureDate;
-    private LocalDateTime releaseDate;
+  private int mileage;
+
+  private Boolean display;
+  private String optionalPriceText;
+  private LocalDateTime regDate;
 
 
-    private Long productCategoryId;
-    private String productDescription;
+  private LocalDateTime manufactureDate;
 
-    //private Set<ProductImage> productImages;
-    //private Set<ProductOption> productOptions;
+//  @DateTimeFormat(pattern = "yyyy-MM-dd")
+//  private LocalDateTime releaseDate;
+
+  private LocalDateTime releaseDate;
+
+
+  private Long productCategoryId;
+  private String productDescription;
+
+  //private Set<ProductImage> productImages;
+  //private Set<ProductOption> productOptions;
 }

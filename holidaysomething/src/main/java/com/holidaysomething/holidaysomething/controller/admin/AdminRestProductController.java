@@ -15,15 +15,14 @@ import java.util.Map;
 
 @RestController
 public class AdminRestProductController {
-    @Autowired
-    AdminProductService adminProductService;
 
-    @GetMapping("/hello")
-    ResponseEntity<String> hello() {
-        return new ResponseEntity<>("Hello World!", HttpStatus.OK);
-    }
+  @Autowired
+  AdminProductService adminProductService;
 
-
+  @GetMapping("/hello")
+  ResponseEntity<String> hello() {
+    return new ResponseEntity<>("Hello World!", HttpStatus.OK);
+  }
 
 //    @RequestMapping(value = "/admin/product/product_detail/register/lowcategories/{parentId}",method = RequestMethod.GET)
 //    public ResponseEntity<List<ProductCategory>> getLowLevelCategories(@PathVariable("parentId") Long parentId){

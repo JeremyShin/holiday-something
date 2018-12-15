@@ -9,19 +9,15 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
+
     // 상품등록
     public Product save(Product product);
 
     @Query("select count(p) from Product p")
     public int countAll();
 
-
-
     // 상품 등록 (fk 카테고리 추가)
     // public Product save(Product product,Long categoryId);
-
-
-
 
 
 }

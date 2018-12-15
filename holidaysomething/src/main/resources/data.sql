@@ -391,8 +391,8 @@ INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_pric
 VALUES (30,'2168986','경기도 공장','2019 럭스 Hologram 다이어리',NULL,10000,10,29800,2500,6,30,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 
 
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (1,'A타입',NULL,NULL,1);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (2,'B타입',NULL,NULL,1);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (1,'A타입',3000,NULL,1);
+INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (2,'B타입',2000,NULL,1);
 INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (3,'요가',NULL,NULL,2);
 INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (4,'세탁실',NULL,NULL,2);
 INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (5,'꿈',NULL,NULL,2);

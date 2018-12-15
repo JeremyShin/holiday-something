@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class ProductDetail {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,5 +22,7 @@ public class ProductDetail {
     public ProductDetail(String description) {
         this.description = description;
     }
-    public ProductDetail(){}
+
+    public ProductDetail() {
+    }
 }

@@ -21,7 +21,6 @@ import javax.annotation.Resource;
 public class ProductServiceTest {
 
 
-
     @Autowired
     private AdminProductService adminProductService;
 
@@ -42,18 +41,17 @@ public class ProductServiceTest {
         p.setShippingPrice(50000);
         p.setProductCategory(pc);
 
+        String description = "이거 방탄유리야!!!!!!!!";
 
-        String description ="이거 방탄유리야!!!!!!!!";
-
-        Product insertedProduct = adminProductService.productRegister(p,description,pc.getId());
+        Product insertedProduct = adminProductService.productRegister(p, description, pc.getId());
 
         System.out.println("================================");
-        System.out.println("상품 id : "+ insertedProduct.getId());
-        System.out.println("상품 name : "+ insertedProduct.getName());
-        System.out.println("상품 description : "+ insertedProduct.getProductDetail().getDescription());
-        System.out.println("상품 category id : "+ insertedProduct.getProductCategory().getId());
-        System.out.println("상품 category name : "+ insertedProduct.getProductCategory().getName());
-
+        System.out.println("상품 id : " + insertedProduct.getId());
+        System.out.println("상품 name : " + insertedProduct.getName());
+        System.out
+                .println("상품 description : " + insertedProduct.getProductDetail().getDescription());
+        System.out.println("상품 category id : " + insertedProduct.getProductCategory().getId());
+        System.out.println("상품 category name : " + insertedProduct.getProductCategory().getName());
 
 
     }

@@ -3,9 +3,12 @@
       xmlns:th="http:/www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <title>Title</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <!--<script src="http://code.jquery.com/jquery-latest.min.js"></script>-->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <title>Title</title>
 </head>
 <body>
 
@@ -13,38 +16,41 @@
 <h1>Product Register</h1>
 
 <script type="text/javascript">
-    function getCategoryList(parentId) {
-        var html = '';
-        var method = "onclick='getCategoryBrandList(";
+  function getCategoryList(parentId) {
+    var html = '';
+    var method = "onclick='getCategoryBrandList(";
 
-        $.getJSON("/admin/product/product_detail/register/lowcategories/"+parentId, function(list) {
-            $(list).each(
-                function() {
-                    html += "<li><span data-categoryid="+this.id+ " class='span' "+ method + this.id + ")')>" + this.name + "</span></li> ";
-                }
-            );
-            $("#secondCategoryUl").html('');
-            $("#thirdCategoryUl").html('');
-            $("#secondCategoryUl").html(html);
+    $.getJSON("/admin/product/product_detail/register/lowcategories/" + parentId, function (list) {
+      $(list).each(
+          function () {
+            html += "<li><span data-categoryid=" + this.id + " class='span' " + method + this.id
+                + ")')>" + this.name + "</span></li> ";
+          }
+      );
+      $("#secondCategoryUl").html('');
+      $("#thirdCategoryUl").html('');
+      $("#secondCategoryUl").html(html);
 
-        });
-    }
+    });
+  }
 
-    function getCategoryBrandList(parentId) {
-        var html = '';
-        var method = "onclick='getCategoryList(";
+  function getCategoryBrandList(parentId) {
+    var html = '';
+    var method = "onclick='getCategoryList(";
 
-        $.getJSON("/admin/product/product_detail/register/lowcategories/"+parentId, function(list) {
-            // $("#currentCategory").html("<label>"+ this.id + "</label>");
-            $(list).each(
-                function() {
-                    html += "<li><span data-categoryid=" + this.id + " class='span'> " + this.name + "</span></li> ";
-                }
-            );
-            $("#thirdCategoryUl").html('');
-            $("#thirdCategoryUl").html(html);
-        });
-    }
+    $.getJSON("/admin/product/product_detail/register/lowcategories/" + parentId, function (list) {
+      // $("#currentCategory").html("<label>"+ this.id + "</label>");
+      $(list).each(
+          function () {
+            html += "<li><span data-categoryid=" + this.id + " class='span'> " + this.name
+                + "</span></li> ";
+          }
+      );
+      $("#thirdCategoryUl").html('');
+      $("#thirdCategoryUl").html(html);
+    });
+  }
+
 </script>
 
 <!--------------------------
@@ -54,113 +60,186 @@
 <!--  div 는 기본이 block! -->
 
 <div style="display:block; ">
-    <!-- Start(카테코리 출력 부분) (3개의 div) -->
+  <!-- Start(카테코리 출력 부분) (3개의 div) -->
 
-    <div style='display:inline-block;min-width:900px;position:relative;left:130px;border:1px solid gold;'>
+  <div
+      style='display:inline-block;min-width:900px;position:relative;left:130px;border:1px solid gold;'>
 
-        <div id="firstCategory" style='display:inline;float:left;width:200px;'>
-            <ul>
-                <li th:each="category : ${categories}" th:if="${category.parentId == 0 }">
-                    <span th:attr="data-categoryid=${category.id}" class="span" th:onclick="'getCategoryList(' + ${category.id} + ')'" th:text="${category.name}"></span>
-                </li>
-            </ul>
-        </div>
+    <div id="firstCategory" style='display:inline;float:left;width:200px;'>
+      <ul>
+        <li th:each="category : ${categories}" th:if="${category.parentId == 0 }">
+          <span th:attr="data-categoryid=${category.id}" class="span"
+                th:onclick="'getCategoryList(' + ${category.id} + ')'"
+                th:text="${category.name}"></span>
+        </li>
+      </ul>
+    </div>
 
-        <div id="secondCategory" style='display:inline;float:left;width:200px;'>
-            <ul id="secondCategoryUl">
+    <div id="secondCategory" style='display:inline;float:left;width:200px;'>
+      <ul id="secondCategoryUl">
 
-            </ul>
-
-        </div>
-
-        <div id="thirdCategory" style='display:inline;float:left;width:200px;'>
-            <ul id="thirdCategoryUl">
-
-            </ul>
-
-        </div>
+      </ul>
 
     </div>
-    <!-- End(카테고리)-->
-    <form action="#" th:action="@{/admin/product/product_detail/register}" method="post" th:object="${ProductDto}">
+
+    <div id="thirdCategory" style='display:inline;float:left;width:200px;'>
+      <ul id="thirdCategoryUl">
+
+      </ul>
+
+    </div>
+
+  </div>
+  <!-- End(카테고리)-->
+
+  <!-- th:field="*{product.productDetail.description}" 이런식으로 해도 된다는데... 실패했었음.-->
+  <form action="#" th:action="@{/admin/product/product_detail/register}" method="post"
+        th:object="${ProductDto}">
 
     <!-- Start(현재 선택한 카테고리가 무엇인지 보여주는 부분) -->
     <div style="display:inline-block;position:relative;left:130px;" id="currentCategory">
-        <label>선택한 카테고리 : </label>
-        <span id="categoryName"></span>
-        <span name="productCategoryId" id="categoryId"></span>
-        <input id="categoryId2" type="hidden" name="productCategoryId" value="">
-        <!--<input th:field="*{productCategoryId}" type="text" placeholder="">-->
+      <label>선택한 카테고리 : </label>
+      <span id="categoryName"></span>
+      <span name="productCategoryId" id="categoryId"></span>
+      <input id="categoryId2" type="hidden" name="productCategoryId" value="">
+      <!--<input th:field="*{productCategoryId}" type="text" placeholder="">-->
     </div>
     <!-- End (현재 선택한 카테고리 보여주는 부분)-->
 
     <!-- Start (상품 기본정보 등록) -->
-    <div>
-        <div>
-            <label>상품명 : </label>
-            <input name="name" type="text" placeholder="Product Name">
-        </div>
-        <div>
-            <label>제조사 : </label>
-            <input name="manufacturer" type="text" placeholder="Manufacturer">
-        </div>
-        <div>
-            <label>상품코드 : </label>
-            <input name="code" type="text" placeholder="Product Code">
-        </div>
-        <div>
-            <label>원가 : </label>
-            <input name="originalPrice" type="text" placeholder="Original Price">
-        </div>
-        <div>
-            <label>판매가 : </label>
-            <input name="sellingPrice" type="text" placeholder="Selling Price">
-        </div>
-        <div>
-            <label>제조가 : </label>
-            <input name="manufacturingPrice" type="text" placeholder="Manufacturing Price">
-        </div>
-        <div>
-            <label>배송비 : </label>
-            <input name="shippingPrice" type="text" placeholder="Shipping Fee">
-        </div>
-        <div>
-            <label>상품 설명 : </label>
-            <input name="productDescription" type="text" placeholder="Product Description">
-        </div>
-        <div>
-            <input type="submit" text="상품등록">
-        </div>
+    <div style="display: block; position:relative;left:130px;">
+      <div>
+        <label>상품명 : </label>
+        <input name="name" type="text" placeholder="Product Name">
+      </div>
+      <div>
+        <label>제조사 : </label>
+        <input name="manufacturer" type="text" placeholder="Manufacturer">
+      </div>
+      <div>
+        <label>상품코드 : </label>
+        <input name="code" type="text" placeholder="Product Code">
+      </div>
+      <div>
+        <label>원가 : </label>
+        <input name="originalPrice" type="text" placeholder="Original Price">
+      </div>
+      <div>
+        <label>판매가 : </label>
+        <input name="sellingPrice" type="text" placeholder="Selling Price">
+      </div>
+      <div>
+        <label>제조가 : </label>
+        <input name="manufacturingPrice" type="text" placeholder="Manufacturing Price">
+      </div>
+      <div>
+        <label>배송비 : </label>
+        <input name="shippingPrice" type="text" placeholder="Shipping Fee">
+      </div>
+      <div>
+        <label>상품 설명 : </label>
+        <input name="productDescription" type="text" placeholder="Product Description">
+      </div>
+
+      <div>
+        <label>제조일 : </label>
+        <input name="date1" type="datetime-local" placeholder="Manufacture Date">
+        <!--<input name="date1" type="datetime-local" id="datepicker">-->
+      </div>
+      <div>
+        <label>등록일 : 서비스에서 넣어주면 될듯!? </label>
+        <input type="hidden">
+      </div>
+      <div>
+        <label>출시일 : </label> <!-- datetime-local -->
+        <input name="date2" type="datetime-local" placeholder="Release Date">
+        <!--<input name="releaseDate" type="text" id="datepicker2" placeholder="Release Date">-->
+      </div>
+
+      <div>
+        <label>적립금 : </label>
+        <input name="mileage" type="text" placeholder="Mileage">
+      </div>
+      <div>
+        <label>재고??? : </label>quantity
+        <input name="quantity" type="text" placeholder="Quantity">
+      </div>
+      <div>
+        <label>안전재고?? : </label>
+        <input name="safeQuantity" type="text" placeholder="Safe Quantity">
+      </div>
+      <div>
+        <label>화면에 바로 보여줄거에요? </label>
+        <!-- 체크박스 -->
+        <input name="display" type="checkbox">
+      </div>
+
+      <div>
+        <input type="submit" text="상품등록">
+      </div>
 
     </div>
 
 
-    </form>
+  </form>
 </div>
 
 
-
-
-
-
-
-
 <script type="text/javascript">
-    $(document).ready(function() {
-        $(document).on('click','.span', function() {
-            var name = $(this).text();
-            var id = $(this).attr("data-categoryid");
-            console.log(name);
-            console.log(id);
-            $("#categoryName").text(name);
-            $("#categoryId").text(id);
-            $("#categoryId2").val(id);
-        });
+  $(document).ready(function () {
+    $(document).on('click', '.span', function () {
+      var name = $(this).text();
+      var id = $(this).attr("data-categoryid");
+      console.log(name);
+      console.log(id);
+      $("#categoryName").text(name);
+      $("#categoryId").text(id);
+      $("#categoryId2").val(id);
     });
+  });
 
 </script>
 
 
+<script>
+
+  $(function () {
+    //모든 datepicker에 대한 공통 옵션 설정
+    $.datepicker.setDefaults({
+      dateFormat: 'yy-mm-dd' //Input Display Format 변경
+      , showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+      , showMonthAfterYear: true //년도 먼저 나오고, 뒤에 월 표시
+      , changeYear: true //콤보박스에서 년 선택 가능
+      , changeMonth: true //콤보박스에서 월 선택 가능
+      , showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시
+      , buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+      , buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+      , buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트
+      , yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
+      , monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'] //달력의 월 부분 텍스트
+      , monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'] //달력의 월 부분 Tooltip 텍스트
+      , dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'] //달력의 요일 부분 텍스트
+      , dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'] //달력의 요일 부분 Tooltip 텍스트
+      , minDate: "-1M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+      , maxDate: "+1M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
+    });
+
+    //input을 datepicker로 선언
+    //$("#datepicker").datepicker();
+    // $("#datepicker2").datepicker();
+
+    //From의 초기값을 오늘 날짜로 설정
+    //$('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+    //To의 초기값을 내일로 설정
+    // $('#datepicker2').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+
+    var date1 = $('#datepicker').val();
+    console.log(date1);
+
+  });
+
+
+</script>
 
 
 </body>
