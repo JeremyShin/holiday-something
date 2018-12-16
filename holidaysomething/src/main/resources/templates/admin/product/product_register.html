@@ -173,6 +173,13 @@
         <!-- 체크박스 -->
         <input name="display" type="checkbox">
       </div>
+      <div>
+        <select name="optionId" class="">
+          <option value="--ALL--">옵션선택</option>
+          <option th:each="option : ${options}" th:value="${option.id}"
+                  th:text="${option.name}"></option>
+        </select>
+      </div>
 
       <div>
         <input type="submit" text="상품등록">

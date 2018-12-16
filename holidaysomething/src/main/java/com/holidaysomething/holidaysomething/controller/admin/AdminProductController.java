@@ -47,9 +47,9 @@ public class AdminProductController {
   public String productRegister(ModelMap model) {
     List<ProductCategory> categories = adminProductService.productCategoryList(0l);
 
-    Product product = new Product();
-    ProductDetail productDetail = new ProductDetail();
-    ProductCategory productCategory = new ProductCategory();
+//    Product product = new Product();
+//    ProductDetail productDetail = new ProductDetail();
+//    ProductCategory productCategory = new ProductCategory();
     ProductDto productDto = new ProductDto();
 
     model.addAttribute("categories", categories);
