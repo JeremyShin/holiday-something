@@ -4,14 +4,15 @@ import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.service.ProductOptionService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/product")
@@ -24,20 +25,29 @@ public class AdminProductController {
     }
 
     @GetMapping
-    public String product(){
+    public String product() {
         return "admin/product/product";
     }
 
     @GetMapping("/product_category")
-    public String productCategory(){
+    public String productCategory() {
         return "admin/product/product_category";
     }
 
-    @GetMapping("/product_detail")
-    public String productDetail(ModelMap modelMap) {
+    @GetMapping({"/product_detail", "/product_detail/{pageStart}"})
+    public String productDetail(ModelMap modelMap, @PathVariable Optional<Integer> pageStart) {
         List<ProductOption> productOptionList = productOptionService.getAllProductOptions();
+        int productOptionListSize = productOptionList.size();
         modelMap.addAttribute("productOptionList", productOptionList);
-        modelMap.addAttribute("productOptionListSize", productOptionList.size());
+        modelMap.addAttribute("productOptionListSize", productOptionListSize);
+
+        Pageable pageable = PageRequest.of(pageStart.isPresent() ? pageStart.get()-1 : 0, 10);
+        Page<ProductOption> productOptions = productOptionService.getAllProductOptionsPage(pageable);
+
+        int pageCount = productOptions.getTotalPages();
+        log.info("pageCount: " + pageCount);
+        modelMap.addAttribute("pageCount", pageCount);
+        modelMap.addAttribute("productOptions", productOptions);
 
         return "admin/product/product_detail";
     }
@@ -52,6 +62,19 @@ public class AdminProductController {
         }
 
         // 옵션 삭제 후 현재 페이지로 redirect
+        return "redirect:/admin/product/product_detail";
+    }
+
+    @GetMapping("/get/name")
+    public String getProductOptionsByName(
+            @RequestParam("productOptionSearchName") String productOptionSearchField,
+            @RequestParam("productOptionSearchValue") String productOptionSearchValue) {
+        log.info("productOptionSearchName: " + productOptionSearchField);
+        log.info("productOptionSearchValue: " + productOptionSearchValue);
+
+        // `product_option`에서 productOptionSearchField가 productOptionSearchValue인 row를 검색
+        // 검색된 결과를 페이징 처리하여 보여준다
+
         return "redirect:/admin/product/product_detail";
     }
 }

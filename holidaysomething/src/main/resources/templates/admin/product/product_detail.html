@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/main.css}" />
-    <!--<script th:src="@{/js/main.js}"></script>-->
     <title>옵션 관리</title>
 </head>
 <body>
@@ -121,30 +120,31 @@
             <div>
                 <div>
                     <div>
-                        <form method="get">
+                        <form method="get" action="/admin/product/get/name">
                             <table>
                                 <caption>옵션 검색</caption>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">옵션검색</th>
-                                    <td>
-                                        <select name="SearchKey">
-                                            <option value="OptionName">옵션명</option>
-                                            <option value="OptionCode">옵션코드</option>
-                                            <option value="OptionValue">옵션값</option>
-                                            <option value="OptionDesc">옵션설명</option>
-                                            <option value="OptionStyle">옵션스타일</option>
-                                        </select>
-                                        <select name="option_display_type" style="display:none">
-                                            <option value="S">셀렉트박스</option>
-                                            <option value="P">미리보기</option>
-                                            <option value="B">텍스트버튼</option>
-                                            <option value="R">라디오버튼</option>
-                                        </select>
-                                        <input type="text" name="SearchValue" style="width:300px;" value="">
-                                        <a href="#"><span>검색</span></a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <th scope="row">옵션검색</th>
+                                        <td>
+                                            <!-- product_option 내 필드 선택 -->
+                                            <label>
+                                                <select name="productOptionSearchField" required>
+                                                    <option disabled>옵션을 선택하세요</option>
+                                                    <option value="optionName">옵션명</option>
+                                                    <option value="optionDesc">옵션설명</option>
+                                                    <option value="optionPrice">옵션가격</option>
+                                                </select>
+                                            </label>
+
+                                            <!-- 옵션 검색어 -->
+                                            <label>
+                                                <input type="text" name="productOptionSearchValue" style="width:300px;" required>
+                                            </label>
+
+                                            <input type="submit" value="검색">
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </form>
@@ -170,9 +170,6 @@
                         </div>
                     </div>
                     <div>
-                        <!--<div>-->
-                            <!--<span>선택한 항목을</span><a href="#"><span>삭제</span></a>-->
-                        <!--</div>-->
                         <div>
                             <a href="#"><span>옵션등록</span></a>
                         </div>
@@ -197,7 +194,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="productOption : ${productOptionList}" id="productOptionTr">
+                                    <tr th:each="productOption : ${productOptions}" id="productOptionTr">
                                         <td><input type="checkbox" name="productOptionId" th:value="${productOption.id}"/></td>
                                         <td th:text="${productOption.id}">###</td>
                                         <td th:text="${productOption.name}">###</td>
@@ -209,6 +206,18 @@
 
                             <button type="submit" id="productOptionFormSubmit">삭제</button>
                         </form>
+
+                        <!-- Page 번호 -->
+                        <div>
+                            <p>페이지 번호 테스트</p>
+                            <p>
+                                <th:block th:each="item : ${#numbers.sequence(1, pageCount)}">
+                                    <a th:href="@{'/admin/product/product_detail/' + ${item}}">
+                                        <span th:text="${item}"></span>
+                                    </a>
+                                </th:block>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
