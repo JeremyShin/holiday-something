@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,7 +21,14 @@ public class ProductCategory {
     @Column(nullable = false)
     private String name;
 
-    private Long parentId;
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "parentId", referencedColumnName = "id", nullable = true)
+    private ProductCategory parentProductCategory;
+
+    @OneToMany(mappedBy = "parentProductCategory")
+    private List<ProductCategory> productCategories = new ArrayList<>();
 
     private int orders;
 

@@ -25,9 +25,9 @@ public class ProductServiceImpl implements ProductService{
         return productByName;
     }
 
-    @Override
-    public List<ProductCategory> findByProductBigCategoryContaining() {
-        List<ProductCategory> productCategories = productRepository .findByProductBigCategoryContaining();
-        return productCategories;
-    }
+//    @Override
+//    public List<ProductCategory> findByProductBigCategoryContaining() {
+//        List<ProductCategory> productCategories = productRepository .findByProductBigCategoryContaining();
+//        return productCategories;
+//    }
 }

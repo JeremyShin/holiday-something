@@ -40,14 +40,14 @@ public class AdminProductController {
         return "admin/product/product_detail";
     }
 
-    @GetMapping("/product_search")
-    public String productSearch(ModelMap modelMap) {
-
-        List<ProductCategory> productCategories =  productService.findByProductBigCategoryContaining();
-        modelMap.addAttribute("bigCategory", productCategories);
-
-        return "admin/product/product_search";
-    }
+//    @GetMapping("/product_search")
+//    public String productSearch(ModelMap modelMap) {
+//
+//        List<ProductCategory> productCategories =  productService.findByProductBigCategoryContaining();
+//        modelMap.addAttribute("bigCategory", productCategories);
+//
+//        return "admin/product/product_search";
+//    }
 
     @PostMapping("/product_search/result")
     public String searchResult(ModelMap modelMap,

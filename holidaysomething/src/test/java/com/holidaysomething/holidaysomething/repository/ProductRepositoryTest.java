@@ -38,32 +38,20 @@ public class ProductRepositoryTest {
 
     }
 
-    @Test
-    public void 카테고리로Product검색하기() throws Exception {
-        List<ProductCategory> productCategories = productRepository.findByProductBigCategoryContaining();
-
-        System.out.println("----");
-        System.out.println("----");
-        for(ProductCategory productCategory : productCategories) {
-            System.out.println(productCategory.getName());
-        }
-        System.out.println("---");
-        System.out.println("---");
-
-    }
-
-    @Test
-    public void 중분류Product검색하기() throws Exception {
-        List<ProductCategory> productCategories = productRepository.findByProductMiddleCategoryContaining(1L);
-
-        System.out.println("---");
-        System.out.println("---");
-        for(ProductCategory productCategory : productCategories) {
-            System.out.println(productCategory.getName());
-        }
-        System.out.println("---");
-        System.out.println("---");
 
 
-    }
+//    @Test
+//    public void 중분류Product검색하기() throws Exception {
+//        List<ProductCategory> productCategories = productRepository.findByProductMiddleCategoryContaining(1L);
+//
+//        System.out.println("---");
+//        System.out.println("---");
+//        for(ProductCategory productCategory : productCategories) {
+//            System.out.println(productCategory.getName());
+//        }
+//        System.out.println("---");
+//        System.out.println("---");
+//
+//
+//    }
 }
