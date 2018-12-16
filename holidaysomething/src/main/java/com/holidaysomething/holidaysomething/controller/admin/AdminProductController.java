@@ -21,4 +21,9 @@ public class AdminProductController {
     public String productDetail(){
         return "admin/product/product_detail";
     }
+
+    @GetMapping("/product_list")
+    public String productList(){
+        return "admin/product/product_list";
+    }
 }
