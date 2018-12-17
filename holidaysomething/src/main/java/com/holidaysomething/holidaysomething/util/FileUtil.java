@@ -58,7 +58,7 @@ public class FileUtil {
         ProductImage productImage = new ProductImage();
         productImage.setOriginalFileName(file.getOriginalFilename());
         productImage.setStoredFileName(saveFile);
-        productImage.setSize(file.getSize());
+      productImage.setSize((int) file.getSize());
         productImage.setFileType(file.getContentType());
 
         return productImage;
