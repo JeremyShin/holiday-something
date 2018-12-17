@@ -1,4 +1,4 @@
-package com.holidaysomething.holidaysomething.domain;
+package com.holidaysomething.holidaysomething.dto;
 
 import java.time.LocalDate;
 import lombok.Data;
