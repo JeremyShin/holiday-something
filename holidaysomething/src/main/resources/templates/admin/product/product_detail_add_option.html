@@ -2,10 +2,51 @@
 <html xml:th="http:/www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/main.css}" />
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Noto+Sans+KR:300,700" rel="stylesheet">
+    <title>ADMIN &mdash; HolidaySomething</title>
 </head>
 <body>
+<div id="header" class="sticky">
+    <!--<a href="#"><div class="header-menu">상점관리</div></a>-->
+    <img src="/img/logo.png"/>
+    <a href="#"><div class="header-menu">상품관리</div></a>
+    <a href="#"><div class="header-menu">주문관리</div></a>
+    <a href="#"><div class="header-menu">고객관리</div></a>
+    <a href="#"><div class="header-menu">게시판관리</div></a>
+    <a href="#"><div class="header-menu">프로모션</div></a>
+</div>
+
+<div id="container">
+    <div class="left-navbar">
+        <div class="navbar-menu">
+            <a href="#">상품분류관리</a>
+        </div>
+        <div class="navbar-menu">
+            <a href="#">상품옵션관리</a>
+        </div>
+        <div class="navbar-menu">
+            <a href="#">상품등록</a>
+        </div>
+        <div class="navbar-menu">
+            <a href="#">상품관리</a>
+        </div>
+        <div class="navbar-menu">
+            <a href="#">상품표시관리</a>
+        </div>
+        <div class="navbar-menu">
+            <a href="#">판매분류관리</a>
+        </div>
+        <div class="navbar-menu">
+            <a href="#">재고관리</a>
+        </div>
+        <div class="navbar-menu">
+            <a href="#">즐겨찾는 메뉴</a>
+        </div>
+    </div>
+
 
 
 <div>
@@ -21,7 +62,7 @@
                 </div>
                 <div>
                     <div>
-                        <span>선택한 항목을</span> <a href="#" id="eOptionDelete"><span>삭제</span></a>
+                        <span>선택한 항목을</span> <span id="deleteRow" onclick="delRow();">삭제</span>
                     </div>
                     <div>
                         <span id="createRow">추가</span>
@@ -41,10 +82,12 @@
                         <!---------- 추가 버튼 클릭 시 추가할 row ---------->
                         <tr id="optionCheckTr">
                             <td>
-                                <input type="checkbox" class="rowChk option_check">
+                                <span class="delete" onclick="delRow(this);">삭제</span>
+                                <input type="checkbox" class="optionCheckFrame">
                             </td>
 
                             <td width="500">
+
                                 <select name="productId" class="productId">
                                     <option value="--ALL--">상품선택</option>
                                     <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
