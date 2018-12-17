@@ -40,37 +40,46 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin/product")
 public class AdminProductController {
+    private static final Log log = LogFactory.getLog(AdminProductController.class);
 
+    private ProductOptionService productOptionService;
     private ProductService productService;
     private FileUtil fileUtil;
+
+
+    public AdminProductController(){}
+
+    public AdminProductController(ProductOptionService productOptionService) {
+        this.productOptionService = productOptionService;
+    }
 
     public AdminProductController (ProductService productService, FileUtil fileUtil){
         this.productService = productService;
         this.fileUtil = fileUtil;
     }
 
-  @Autowired
+    @Autowired
   AdminProductService adminProductService;
+
 
 
   @GetMapping
   public String product() {
     return "admin/product/product";
   }
-
-  @GetMapping("/product_category")
+    @GetMapping("/product_category")
   public String productCategory() {
     return "admin/product/product_category";
   }
+//  @GetMapping("/product_detail")
+//  public String productDetail() {
+//    return "admin/product/product_detail";
 
-  @GetMapping("/product_detail")
-  public String productDetail() {
-    return "admin/product/product_detail";
-  }
+//  }
 
 
-  // 대분류 불러오기.
-  @GetMapping("/product_detail/register")
+    // 대분류 불러오기.
+    @GetMapping("/product_detail/register")
   public String productRegister(ModelMap model) {
     List<ProductCategory> categories = adminProductService.productCategoryList(0l);
 
@@ -89,7 +98,8 @@ public class AdminProductController {
     return "admin/product/product_register";
   }
 
-  // 중소분류 읽어오기.
+    // 중소분류 읽어오기.
+
   @ResponseBody
   @GetMapping("/product_detail/register/lowcategories/{parentId}")
   public List<ProductCategory> getLowLevelCategories(@PathVariable("parentId") Long parentId) {
@@ -98,9 +108,8 @@ public class AdminProductController {
     return categories;
   }
 
-
-  // 상품등록 , date1 : 제조일  ,  date2 : 출시일.
-  @PostMapping("/product_detail/register")
+    // 상품등록 , date1 : 제조일  ,  date2 : 출시일.
+    @PostMapping("/product_detail/register")
   public String registerProduct(@ModelAttribute(value = "productDto") ProductDto productDto,
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date1,
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date2,
@@ -143,13 +152,6 @@ public class AdminProductController {
 
 
   }
-
-    private ProductOptionService productOptionService;
-    private static final Log log = LogFactory.getLog(AdminProductController.class);
-
-    public AdminProductController(ProductOptionService productOptionService) {
-        this.productOptionService = productOptionService;
-    }
 
 
     @GetMapping("/product_list")
