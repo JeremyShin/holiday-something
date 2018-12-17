@@ -2,10 +2,10 @@ package com.holidaysomething.holidaysomething.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -13,6 +13,7 @@ import java.util.Set;
 @Table(name = "PRODUCT_CATEGORY")
 @Getter
 @Setter
+@ToString
 public class ProductCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,8 +21,6 @@ public class ProductCategory {
 
     @Column(nullable = false)
     private String name;
-
-
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "parentId", referencedColumnName = "id", nullable = true)

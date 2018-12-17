@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.repository;
 
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class ProductRepositoryTest {
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    ProductCategoryRepository productCategoryRepository;
+
     // admin : search by name test
     @Test
     public void 이름포함된Product구하기() throws Exception {
@@ -35,23 +39,54 @@ public class ProductRepositoryTest {
         for(Product product : products) {
             System.out.println(product.getName());
         }
+    }
+
+    @Test
+    public void 중분류Product검색하기() throws Exception {
+        List<ProductCategory> productCategories = productCategoryRepository.findByProductMiddleCategoryContaining(1L);
+
+        System.out.println("---");
+        System.out.println("---");
+        for(ProductCategory productCategory : productCategories) {
+            if(productCategory.getParentProductCategory() != null){
+                System.out.println(productCategory.getId()+", "+productCategory.getParentProductCategory().toString());
+            } else {
+                System.out.println(productCategory.getId());
+            }
+        }
+        Assert.assertNotNull(productCategories);
+        System.out.println(productCategories.size());
+        System.out.println("---");
+        System.out.println("---");
 
     }
 
+    @Test
+    public void 대분류Product검색하기() throws Exception {
+        List<ProductCategory> productCategories = productCategoryRepository.findByProductBigCategoryContaining();
 
+        System.out.println("----");
+        System.out.println("----");
+        for(ProductCategory productCategory : productCategories) {
+            System.out.println(productCategory.getName());
+        }
+        System.out.println("---");
+        System.out.println("---");
 
-//    @Test
-//    public void 중분류Product검색하기() throws Exception {
-//        List<ProductCategory> productCategories = productRepository.findByProductMiddleCategoryContaining(1L);
-//
-//        System.out.println("---");
-//        System.out.println("---");
+    }
+
+    @Test
+    public void 테스트() throws Exception {
+        List<ProductCategory> productCategories = productCategoryRepository.findAll();
+
+        for(ProductCategory productCategory : productCategories) {
+            System.out.println(productCategory.getId()+", "+productCategory.getParentProductCategory().toString());
+        }
+
 //        for(ProductCategory productCategory : productCategories) {
-//            System.out.println(productCategory.getName());
+//            System.out.println(productCategory.getId()+", "+productCategory.getParentProductCategory().getName());
 //        }
-//        System.out.println("---");
-//        System.out.println("---");
-//
-//
-//    }
+
+
+    }
 }
