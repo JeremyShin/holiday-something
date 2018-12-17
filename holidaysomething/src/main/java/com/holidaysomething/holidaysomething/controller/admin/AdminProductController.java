@@ -44,15 +44,6 @@ public class AdminProductController {
     private ProductOptionService productOptionService;
     private ProductService productService;
     private FileUtil fileUtil;
-  private ProductOptionService productOptionService;
-  private static final Log log = LogFactory.getLog(AdminProductController.class);
-
-  public AdminProductController(ProductOptionService productOptionService) {
-    this.productOptionService = productOptionService;
-  }
-
-
-    public AdminProductController(){}
 
     public AdminProductController(ProductOptionService productOptionService) {
         this.productOptionService = productOptionService;
@@ -79,6 +70,11 @@ public class AdminProductController {
     @GetMapping("/product_category")
   public String productCategory() {
     return "admin/product/product_category";
+  }
+
+  @GetMapping("/product_detail")
+  public String productDetail() {
+    return "admin/product/product_detail";
   }
 
     // 대분류 불러오기.
@@ -178,14 +174,15 @@ public class AdminProductController {
         return "redirect:/admin/product/product_list";
      }
 
-    @GetMapping("/product_detail")
-    public String productDetail(ModelMap modelMap) {
-        List<ProductOption> productOptionList = productOptionService.getAllProductOptions();
-        modelMap.addAttribute("productOptionList", productOptionList);
-        modelMap.addAttribute("productOptionListSize", productOptionList.size());
-
-        return "admin/product/product_detail";
-    }
+  // 오류난다~~~~~!
+//    @GetMapping("/product_detail")
+//    public String productDetail(ModelMap modelMap) {
+//        List<ProductOption> productOptionList = productOptionService.getAllProductOptions();
+//        modelMap.addAttribute("productOptionList", productOptionList);
+//        modelMap.addAttribute("productOptionListSize", productOptionList.size());
+//
+//        return "admin/product/product_detail";
+//    }
 
     @PostMapping("/delete/product_option")
     public String deleteProductOption(@RequestParam("productOptionId") String[] productOptionIds) {
