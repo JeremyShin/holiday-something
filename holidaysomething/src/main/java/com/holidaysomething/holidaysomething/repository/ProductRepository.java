@@ -10,5 +10,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAlByOrderByName();
 
     //카테고리 번호로 상품을 검색
-   public List<Product> findByProductCategoryIdOrderByName(Long productCategoryId);
+   List<Product> findByProductCategoryIdOrderByName(Long productCategoryId);
 }

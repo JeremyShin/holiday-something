@@ -29,13 +29,5 @@ public interface MemberRepository extends JpaRepository<Member,String> {
 
     // 회원정보조회
     @Query(value="select me from Member me where me.loginId=(:loginId)")
-    public Member findByIdContaining(@Param("loginId") String loginId);
-
-
-
-    //
-
-
-
-
+    Member findByIdContaining(@Param("loginId") String loginId);
 }
