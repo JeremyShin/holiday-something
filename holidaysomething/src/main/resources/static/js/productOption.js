@@ -1,11 +1,14 @@
 let createRowBtn = document.querySelector('#createRow');
 
+/* 옵션 추가 버튼 누를 시, 행 생성 */
 createRowBtn.addEventListener('click', () => {
     let tr = document.createElement('tr');
+    tr.setAttribute('id', 'optionCheckTr');
 
     let td1 = document.createElement('td');
     let input1 = document.createElement('input');
     input1.setAttribute('type', 'checkbox');
+    input1.setAttribute('name','checkRow');
     td1.appendChild(input1);
     tr.appendChild(td1);
 
@@ -21,25 +24,22 @@ createRowBtn.addEventListener('click', () => {
     button1.setAttribute('type', 'button');
     button1.setAttribute('style', 'display: inline-block;');
     let span1 = document.createElement('span');
-    let textNode1 = document.createTextNode('삭제');
-    span1.appendChild(textNode1);
     button1.appendChild(span1);
     td2.appendChild(button1);
 
     let div1 = document.createElement('div');
     let textNode2 = document.createTextNode('추가금액: ');
-    div.appendChild(textNode2);
+    div1.appendChild(textNode2);
     let input3 = document.createElement('input');
     input3.setAttribute('type', 'text');
     input3.setAttribute('name', 'price');
     input3.setAttribute('style', 'width:70px;');
     div1.appendChild(input3);
     let span2 = document.createElement('span');
-    let textNode3 = document.createTextNode('KRW');
-    span2.appendChild(textNode3);
     div1.appendChild(span2);
-    td2.appendChild(div);
+    td2.appendChild(div1);
     tr.appendChild(td2);
+
 
     let td3 = document.createElement('td');
     let select = document.createElement('select');
@@ -56,17 +56,32 @@ createRowBtn.addEventListener('click', () => {
     td3.appendChild(select);
     tr.appendChild(td3);
 
-    let td4 = document.createElement('td');
+    let div2 = document.createElement('div');
+    let textNode4 = document.createTextNode('옵션설명: ');
+    div2.appendChild(textNode4);
     let input4 = document.createElement('input');
     input4.setAttribute('type', 'text');
     input4.setAttribute('name', 'description');
     input4.setAttribute('size', '70');
     input4.setAttribute('style', 'height:30px;');
-    td4.appendChild(input4);
 
+    div2.appendChild(input4);
+    td2.appendChild(div2);
+
+    tr.appendChild(td2);
 
 
 
     let optionValueRows = document.querySelector('#option_value_rows');
     optionValueRows.appendChild(tr);
 });
+
+/* checkbox 전체 선택 */
+let toggle = function(source) {
+    let optionCheckTrs = document.querySelectorAll('#optionCheckTr');
+    for (let i = 0; i < optionCheckTrs.length; i++) {
+        let OptionCheckboxInput = optionCheckTrs[i].getElementsByTagName('input')[0];
+        if (OptionCheckboxInput !== source)
+            OptionCheckboxInput.checked = source.checked;
+    }
+};

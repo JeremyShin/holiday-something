@@ -31,17 +31,24 @@
                     <table border="1" id="optionValueTable">
                         <thead>
                         <tr>
-                            <th><input type="checkbox"></th>
-                            <th>옵션 명 및 가격 설정</th>
+                            <th><input type="checkbox" id="selectAllCheckbox" onclick="toggle(this);"></th>
                             <th>적용할 상품 선택</th>
+                            <th>옵션 명 및 가격 설정</th>
                         </tr>
                         </thead>
 
                         <tbody id="option_value_rows">
                         <!---------- 추가 버튼 클릭 시 추가할 row ---------->
-                        <tr>
+                        <tr id="optionCheckTr">
                             <td>
                                 <input type="checkbox" class="rowChk option_check">
+                            </td>
+
+                            <td width="500">
+                                <select name="productId" class="productId">
+                                    <option value="--ALL--">상품선택</option>
+                                    <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+                                </select>
                             </td>
 
                             <td width="500">
@@ -58,13 +65,6 @@
                                     <input type="text" name="description" size="70" style="height:30px;">
                                 </div>
                             </td>
-
-                            <td width="500">
-                                <select name="productId" class="productId">
-                                    <option value="--ALL--">상품선택</option>
-                                    <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
-                                </select>
-                            </td>
                         </tr>
                         <!---------- 추가 버튼 클릭 시 추가할 row ---------->
                         </tbody>
@@ -75,7 +75,7 @@
 
             </tbody>
         </table>
-        <input type="submit" value="옵션등록">
+        <input type="submit" value="submit">
     </form>
 </div>
 

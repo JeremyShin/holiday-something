@@ -21,12 +21,11 @@ import java.util.List;
 @RequestMapping("/admin/product")
 public class AdminProductController {
     private ProductOptionService productOptionService;
-    private ProductCategoryService productCategoryService;
     private ProductService productService;
 
-    public AdminProductController(ProductOptionService productOptionService, ProductCategoryService productCategoryService, ProductService productService) {
+    @Autowired
+  public AdminProductController(ProductOptionService productOptionService, ProductService productService) {
         this.productOptionService = productOptionService;
-        this.productCategoryService = productCategoryService;
         this.productService = productService;
     }
 
@@ -57,13 +56,16 @@ public class AdminProductController {
 
     /* 옵션 등록 */
     @PostMapping("/product_detail_add_option")
-    public String addProductOption(List<ProductOption> productOptions,
+    public String addProductOption(ProductOption productOption,
                                    @RequestParam(value = "productId", defaultValue = "") Long productId) {
 
-        for(ProductOption productOption : productOptions){
             productOption.setProduct(productService.getProduct(productId));
             productOptionService.addProductOption(productOption);
-        }
+//
+//        for(ProductOption productOption : productOptions){
+//            productOption.setProduct(productService.getProduct(productId));
+//            productOptionService.addProductOption(productOption);
+//        }
 
         return "admin/product/product_detail_add_option";
     }
