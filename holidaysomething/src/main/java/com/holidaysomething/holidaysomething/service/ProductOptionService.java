@@ -15,6 +15,4 @@ public interface ProductOptionService {
     Page<ProductOption> getAllProductOptionsByNamePage(String name, Pageable pageable);
     Page<ProductOption> getAllProductOptionsByDescriptionPage(String productOptionSearchValue, Pageable pageable);
     Page<ProductOption> getAllProductOptionsByPricePage(String productOptionSearchValue, Pageable pageable);
-
-//    Page<ProductOption> getAllProductOptionsSearchPage(String search, Pageable pageable);
 }
