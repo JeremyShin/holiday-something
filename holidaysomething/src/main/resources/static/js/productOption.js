@@ -7,12 +7,17 @@ createRowBtn.addEventListener('click', () => {
 
     let td1 = document.createElement('td');
     let input1 = document.createElement('input');
-    //let textNodeDelete = document.createTextNode('삭제');
-    //textNodeDelete.setAttribute('class', 'option_value_rows');
-    //td1.appendChild(textNodeDelete);
     input1.setAttribute('type', 'checkbox');
     input1.setAttribute('name','checkRow');
     input1.setAttribute('class', 'optionCheckFrame');
+
+    let delInput = document.createElement('input');
+    delInput.setAttribute('type', 'button');
+    delInput.setAttribute('value', '삭제');
+    delInput.setAttribute('onclick', 'delRow(this);');
+    //delInput.onclick("delRow(this)")
+    td1.appendChild(delInput);
+
     td1.appendChild(input1);
     tr.appendChild(td1);
 
@@ -90,24 +95,9 @@ let toggle = function(source) {
     }
 };
 
-/* checked 된 행 삭제 */
-// let delRow = function () {
-//     let my_tbody = document.getElementById('option_value_rows');
-// //element의 parent
-//     for (let i = 0; i < my_tbody.rows.length; i++){
-//         //let OptionCheckboxInput = my_tbody.rows[i].getElementsByTagName('input')[0];
-//         let OptionCheckboxInput = my_tbody.rows[i].getElementsByClassName('optionCheckFrame');
-//         my_tbody
-//
-//         if(OptionCheckboxInput.checked)
-//             my_tbody.deleteRow(i);
-//     }
-// };
-
-
+/* 선택한 row 삭제 */
 let delRow = function (source) {
     let my_tbody = document.getElementById('option_value_rows');
-    console.log("Row index is: " + source.rowIndex);
-    my_tbody.deleteRow(source.rowIndex);
-
+    console.log("Row index is: " + source.parentElement.parentElement.rowIndex - 1);
+    my_tbody.deleteRow(source.parentElement.parentElement.rowIndex - 1);
 };
