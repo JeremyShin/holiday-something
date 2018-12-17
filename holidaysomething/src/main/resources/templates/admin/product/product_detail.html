@@ -72,23 +72,20 @@
                     <h2>옵션 목록</h2>
                 </div>
                 <div>
-                    <div>
-                        <p>[총 <strong th:text="${productOptionListSize}"></strong>개]</p>
-                    </div>
-                    <div>
-                        <select>
+                    <p>[총 <strong th:text="${productOptionListSize}"></strong>개]</p>
+                    <form method="post" action="/admin/product/product_detail/bundle">
+                        <select onchange="this.form.submit()" name="productOptionBundleSize">
+                            <option disabled selected>개수 선택</option>
                             <option value="10">10개씩보기</option>
                             <option value="20">20개씩보기</option>
                             <option value="30">30개씩보기</option>
                             <option value="50">50개씩보기</option>
                             <option value="100">100개씩보기</option>
                         </select>
-                    </div>
+                    </form>
                 </div>
                 <div>
-                    <div>
-                        <a href="#"><span>옵션등록</span></a>
-                    </div>
+                    <a href="#"><span>옵션등록</span></a>
                 </div>
                 <div>
                     <form method="POST" action="/admin/product/delete/product_option" id="productOptionForm" onsubmit="return validateProductOptionForm(this);">

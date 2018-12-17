@@ -54,6 +54,25 @@ public class AdminProductController {
         return "admin/product/product_detail";
     }
 
+    @PostMapping("/product_detail/bundle")
+    public String productDetailBundle(ModelMap modelMap,
+                                      @RequestParam("productOptionBundleSize") int size) {
+        List<ProductOption> productOptionList = productOptionService.getAllProductOptions();
+        int productOptionListSize = productOptionList.size();
+        modelMap.addAttribute("productOptionList", productOptionList);
+        modelMap.addAttribute("productOptionListSize", productOptionListSize);
+
+        Pageable pageable = PageRequest.of(0, size);
+        Page<ProductOption> productOptions = productOptionService.getAllProductOptionsPage(pageable);
+
+        int pageCount = productOptions.getTotalPages();
+        log.info("pageCount: " + pageCount);
+        modelMap.addAttribute("pageCount", pageCount);
+        modelMap.addAttribute("productOptions", productOptions);
+
+        return "admin/product/product_detail";
+    }
+
     @PostMapping("/delete/product_option")
     public String deleteProductOption(@RequestParam("productOptionId") String[] productOptionIds) {
 
