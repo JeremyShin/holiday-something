@@ -12,22 +12,23 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class ExchangeRefund {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Column(nullable = false)
-    private String type;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(nullable = false)
-    private int price;
+  @Column(nullable = false)
+  private String type;
 
-    @Column(nullable = false)
-    private LocalDateTime applyDate;
+  @Column(nullable = false)
+  private int price;
 
-    @Column(nullable = false)
-    private LocalDateTime approveDate;
+  @Column(nullable = false)
+  private LocalDateTime applyDate;
 
-    @Column(nullable = false)
-    private Boolean approve;
+  @Column(nullable = false)
+  private LocalDateTime approveDate;
+
+  @Column(nullable = false)
+  private Boolean approve;
 }

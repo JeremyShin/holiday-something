@@ -10,28 +10,29 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class OrderedProduct {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Column(nullable = false)
-    private int orderPrice;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(nullable = false)
-    private int mileage;
+  @Column(nullable = false)
+  private int orderPrice;
 
-    @Column(nullable = false)
-    private int quantity;
+  @Column(nullable = false)
+  private int mileage;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
+  @Column(nullable = false)
+  private int quantity;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+  @ManyToOne
+  @JoinColumn(name = "order_id")
+  private Order order;
 
-    @OneToOne
-    @JoinColumn(name = "exchange_refund_id")
-    private ExchangeRefund exchangeRefund;
+  @ManyToOne
+  @JoinColumn(name = "product_id")
+  private Product product;
+
+  @OneToOne
+  @JoinColumn(name = "exchange_refund_id")
+  private ExchangeRefund exchangeRefund;
 }

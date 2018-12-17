@@ -15,19 +15,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class MemberTest {
 
-    @Autowired
-    MemberRepository memberRepository;
+  @Autowired
+  MemberRepository memberRepository;
 
-    @Test
-    public void 사용자정보loginId로읽어들이기() throws Exception{
-        Member member = memberRepository.findByIdContaining("root");
+  @Test
+  public void 사용자정보loginId로읽어들이기() throws Exception {
+    Member member = memberRepository.findByIdContaining("root");
 
-        System.out.println("=====================================");
-        System.out.println(member.getId());
-        System.out.println(member.getEmail());
-        System.out.println(member.getName());
-        System.out.println(member.getBirthday());
-        System.out.println("=====================================");
+    System.out.println("=====================================");
+    System.out.println(member.getId());
+    System.out.println(member.getEmail());
+    System.out.println(member.getName());
+    System.out.println(member.getBirthday());
+    System.out.println("=====================================");
 
-    }
+  }
 }
