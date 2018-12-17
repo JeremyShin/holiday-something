@@ -1,64 +1,110 @@
 <!DOCTYPE html>
-<html xml:th="http:/www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.springframework.org/schema/data/jaxb">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>상품검색페이지</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/main.css}" />
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Noto+Sans+KR:300,700" rel="stylesheet">
+    <title>ADMIN &mdash; HolidaySomething</title>
 </head>
 <body>
-<h1>상품검색하는페이지</h1>
-<div>
-    <table border="1" summary="">
-        <caption>상품검색</caption>
-        <tbody>
-        <tr>
-            <th scope="row">검색분류</th>
-            <td>
-                <select>
-                    <option value="product_name">상품명</option>
-                    <option value="item_name">상품명(관리자)</option>
-                    <option value="product_code">상품명(관리자)</option>
-                </select>
-                <span>
+<div id="header" class="sticky">
+    <img src="/img/logo.png"/>
+    <a href="#"><div class="header-menu">상품관리</div></a>
+    <a href="#"><div class="header-menu">주문관리</div></a>
+    <a href="#"><div class="header-menu">고객관리</div></a>
+    <a href="#"><div class="header-menu">게시판관리</div></a>
+    <a href="#"><div class="header-menu">프로모션</div></a>
+</div>
+
+<div id="container">
+    <div class="left-navbar">
+        <div class="navbar-menu">
+            <a href="#">상품분류관리</a>
+        </div>
+        <div class="navbar-menu">
+            <a href="#">상품옵션관리</a>
+        </div>
+        <div class="navbar-menu">
+            <a href="#">상품등록</a>
+        </div>
+        <div class="navbar-menu">
+            <a href="#">상품관리</a>
+        </div>
+        <div class="navbar-menu">
+            <a href="#">상품표시관리</a>
+        </div>
+        <div class="navbar-menu">
+            <a href="#">판매분류관리</a>
+        </div>
+        <div class="navbar-menu">
+            <a href="#">재고관리</a>
+        </div>
+        <div class="navbar-menu">
+            <a href="#">즐겨찾는 메뉴</a>
+        </div>
+    </div>
+
+    <div id="dashboard">
+        <h1>상품검색하는페이지</h1>
+        <div>
+            <table border="1" summary="">
+                <caption>상품검색</caption>
+                <tbody>
+                <tr>
+                    <th scope="row">검색분류</th>
+                    <td>
+                        <select>
+                            <option value="product_name">상품명</option>
+                            <option value="item_name">상품명(관리자)</option>
+                            <option value="product_code">상품명(관리자)</option>
+                        </select>
+                        <span>
                     <form method="post" action="/admin/product/product_search/result">
                         <input type="text" name="productName">
                         <input type="submit">
                     </form>
                 </span>
 
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">상품분류</th>
-            <td>
-                    <select name="productCategoryId">
-                        <option value="">대분류</option>
-                        <option th:each="big : ${bigCategory}" th:value="${big.id}" th:text="${big.name}"></option>
-                    </select>
-                    <select>
-                        <option value="">중분류</option>
-                    </select>
-                    <select>
-                        <option value="">소분류</option>
-                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">상품분류</th>
+                    <td>
+                        <select name="productCategoryId">
+                            <option value="">대분류</option>
+                            <option th:each="big : ${bigCategory}" th:value="${big.id}" th:text="${big.name}"></option>
+                        </select>
+                        <select>
+                            <option value="">중분류</option>
+                        </select>
+                        <select>
+                            <option value="">소분류</option>
+                        </select>
 
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">상품등록일</th>
-            <td>
-                <select>
-                    <option value="regdate">상품등록일</option>
-                    <option value="showdate">상품게시일</option>
-                </select>
-                <a href="javascript:;" id="start-date"><span>달력보기</span></a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">상품등록일</th>
+                    <td>
+                        <select>
+                            <option value="regdate">상품등록일</option>
+                            <option value="showdate">상품게시일</option>
+                        </select>
+                        <a href="javascript:;" id="start-date"><span>달력보기</span></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <input type="submit">
+        </div>
+        <!--제품검색결과페이지 추가-->
+    </div>
 </div>
-<div>
-    <input type="submit">
-</div>
-<!--제품검색결과페이지 추가-->
+
+<script th:src="@{/js/main.js}"></script>
 </body>
 </html>

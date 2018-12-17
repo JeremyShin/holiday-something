@@ -49,7 +49,7 @@ public class ProductRepositoryTest {
         System.out.println("---");
         for(ProductCategory productCategory : productCategories) {
             if(productCategory.getParentProductCategory() != null){
-                System.out.println(productCategory.getId()+", "+productCategory.getParentProductCategory().toString());
+                System.out.println(productCategory.getId()+", "+productCategory.getParentProductCategory().getId());
             } else {
                 System.out.println(productCategory.getId());
             }

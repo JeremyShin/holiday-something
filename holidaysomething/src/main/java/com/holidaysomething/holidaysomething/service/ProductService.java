@@ -11,5 +11,5 @@ import java.util.List;
 @Service
 public interface ProductService {
     public Page<Product> findByProductNameContaining(String productName, Pageable pageable);
-//    public List<ProductCategory> findByProductBigCategoryContaining();
+    public List<ProductCategory> findByProductBigCategoryContaining();
 }

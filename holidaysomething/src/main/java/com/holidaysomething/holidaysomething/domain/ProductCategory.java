@@ -13,7 +13,6 @@ import java.util.Set;
 @Table(name = "PRODUCT_CATEGORY")
 @Getter
 @Setter
-@ToString
 public class ProductCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.service;
 
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
+import com.holidaysomething.holidaysomething.repository.ProductCategoryRepository;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +14,7 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService{
     private ProductRepository productRepository;
+    private ProductCategoryRepository productCategoryRepository;
 
     public ProductServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
@@ -25,9 +27,9 @@ public class ProductServiceImpl implements ProductService{
         return productByName;
     }
 
-//    @Override
-//    public List<ProductCategory> findByProductBigCategoryContaining() {
-//        List<ProductCategory> productCategories = productRepository .findByProductBigCategoryContaining();
-//        return productCategories;
-//    }
+    @Override
+    public List<ProductCategory> findByProductBigCategoryContaining() {
+        List<ProductCategory> productCategories = productCategoryRepository.findByProductBigCategoryContaining();
+        return productCategories;
+    }
 }
