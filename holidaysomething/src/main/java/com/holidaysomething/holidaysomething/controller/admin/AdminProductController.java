@@ -98,7 +98,7 @@ public class AdminProductController {
             ModelMap modelMap,
             @RequestParam("productOptionSearchField") String productOptionSearchField,
             @RequestParam("productOptionSearchValue") String productOptionSearchValue) {
-        log.info("productOptionSearchName: " + productOptionSearchField);
+        log.info("productOptionSearchField: " + productOptionSearchField);
         log.info("productOptionSearchValue: " + productOptionSearchValue);
 
         // `product_option`에서 productOptionSearchField가 productOptionSearchValue인 row를 검색
@@ -113,7 +113,9 @@ public class AdminProductController {
         } else if (productOptionSearchField.equals("price")) {
             productOptions = productOptionService.getAllProductOptionsByPricePage(productOptionSearchValue, pageable);
         }
-
+        int pageCount = productOptions.getTotalPages();
+        log.info("pageCount: " + pageCount);
+        modelMap.addAttribute("pageCount", pageCount);
         modelMap.addAttribute("productOptionsSearchResult", productOptions);
 
         return "/admin/product/product_detail";
