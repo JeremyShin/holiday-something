@@ -10,7 +10,6 @@
 </head>
 <body>
     <div id="header" class="sticky">
-        <!--<a href="#"><div class="header-menu">상점관리</div></a>-->
         <img src="/img/logo.png"/>
         <a href="#"><div class="header-menu">상품관리</div></a>
         <a href="#"><div class="header-menu">주문관리</div></a>
@@ -50,7 +49,6 @@
         <div id="dashboard">
             <h1>옵션 검색</h1>
             <h2>옵션 목록 <span>[총 <strong th:text="${productOptionListSize}"></strong>개]</span></h2>
-            <!--<p>[총 <strong th:text="${productOptionListSize}"></strong>개]</p>-->
 
             <form method="get" action="/admin/product/get/name" id="product-option-search-form">
                 <!-- product_option 내 필드 선택 -->
@@ -71,19 +69,21 @@
                 <input type="submit" value="검색">
             </form>
 
-            <form method="post" action="/admin/product/product_detail/bundle">
-                <select onchange="this.form.submit()" name="productOptionBundleSize">
-                    <option disabled selected>개수 선택</option>
-                    <option value="10">10개씩 보기</option>
-                    <option value="20">20개씩 보기</option>
-                    <option value="30">30개씩 보기</option>
-                    <option value="50">50개씩 보기</option>
-                    <option value="100">100개씩 보기</option>
-                </select>
-            </form>
-            <!--<a href="#"><span>옵션등록</span></a>-->
+            <div class="tbl-container">
+                <div class="above-tbl">
+                    <form method="post" action="/admin/product/product_detail/bundle">
+                        <select onchange="this.form.submit()" name="productOptionBundleSize">
+                            <option disabled selected>개수 선택</option>
+                            <option value="10">10개씩 보기</option>
+                            <option value="20">20개씩 보기</option>
+                            <option value="30">30개씩 보기</option>
+                            <option value="50">50개씩 보기</option>
+                            <option value="100">100개씩 보기</option>
+                        </select>
+                    </form>
+                    <a href="/admin/product/product_detail_add_option"><span>옵션등록</span></a>
+                </div>
 
-            <div>
                 <form method="POST" action="/admin/product/delete/product_option" id="productOptionForm" onsubmit="return validateProductOptionForm(this);">
                     <table id="product-option-list-tbl">
                         <colgroup>
@@ -122,13 +122,11 @@
 
                 <!-- Page 번호 -->
                 <div id="page-numbers">
-                    <!--<p id="page-numbers">-->
-                        <th:block th:each="item : ${#numbers.sequence(1, pageCount)}">
-                            <a th:href="@{'/admin/product/product_detail/' + ${item}}">
-                                <span th:text="${item}"></span>
-                            </a>
-                        </th:block>
-                    <!--</p>-->
+                    <th:block th:each="item : ${#numbers.sequence(1, pageCount)}">
+                        <a th:href="@{'/admin/product/product_detail/' + ${item}}">
+                            <span th:text="${item}"></span>
+                        </a>
+                    </th:block>
                 </div>
             </div>
         </div>

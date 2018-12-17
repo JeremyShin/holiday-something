@@ -86,8 +86,22 @@
     margin-bottom: 30px;
 }
 
+.tbl-container {
+    width: 85%;
+}
+
+.above-tbl {
+    display: flex;
+    justify-content: space-between;
+}
+
+.above-tbl a {
+    /*margin-right: 118px;*/
+}
+
 #product-option-list-tbl {
-    width: 90%;
+    width: 100%;
+    margin-top: 10px;
 }
 
 #product-option-list-tbl th, td {
@@ -103,7 +117,8 @@
 }
 
 #page-numbers {
-    margin-top: 50px;
+    margin-top: 30px;
+    text-align: center;
 }
 
 #page-numbers a {
