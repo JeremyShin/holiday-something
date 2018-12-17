@@ -4,5 +4,5 @@ import com.holidaysomething.holidaysomething.domain.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
-    //결제수단 정보
+  //결제수단 정보
 }
