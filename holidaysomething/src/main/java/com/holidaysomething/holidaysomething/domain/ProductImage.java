@@ -17,10 +17,8 @@ public class ProductImage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private Long category;
 
-    @Column(nullable = false)
     private String path;
 
     @Column(nullable = false)
