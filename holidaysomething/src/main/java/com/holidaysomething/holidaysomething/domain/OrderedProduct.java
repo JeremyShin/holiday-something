@@ -21,8 +21,14 @@ public class OrderedProduct {
   @Column(nullable = false)
   private int mileage;
 
+
   @Column(nullable = false)
   private int quantity;
+
+  // 사용자가 신청한 personal 옵션
+  private String personalOption;
+
+
 
   @ManyToOne
   @JoinColumn(name = "order_id")
@@ -35,4 +41,5 @@ public class OrderedProduct {
   @OneToOne
   @JoinColumn(name = "exchange_refund_id")
   private ExchangeRefund exchangeRefund;
+
 }

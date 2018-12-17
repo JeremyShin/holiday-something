@@ -9,5 +9,4 @@ public interface ProductOptionRepository extends JpaRepository<ProductOption, Lo
 
   // 전체 옵션 출력하기!
   public List<ProductOption> findAll();
-
 }
