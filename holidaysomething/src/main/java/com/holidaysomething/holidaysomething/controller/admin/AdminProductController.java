@@ -2,13 +2,9 @@ package com.holidaysomething.holidaysomething.controller.admin;
 
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
-import com.holidaysomething.holidaysomething.domain.ProductDetail;
 import com.holidaysomething.holidaysomething.domain.ProductDto;
 import com.holidaysomething.holidaysomething.service.admin.AdminProductService;
-import java.time.Clock;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -78,6 +74,18 @@ public class AdminProductController {
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date1,
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date2,
       BindingResult bindingResult) {
+
+    /*
+     * if(bindingResult.hasErrors) {
+     *   return "/admin/product/product_detail/register";
+     * }else{
+     *   등록작업
+     *   return "rediret";
+     * }
+     */
+    // productDto 로 날짜들을 가져올때... 타입이 맞지 않는다고 오류가 난다
+    // 뷰에서 input으로 데이터를 보낼때 String으로 보내고. 컨트롤러에선 LocalDateTime으로 받아야하니
+    // 문제가 생기는거같다. 그래서 일단은 날짜 받는부분은 따로 처리했다.
 
     String description = productDto.getProductDescription();
     Long parentId = productDto.getProductCategoryId();
