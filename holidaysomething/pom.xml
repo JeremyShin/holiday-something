@@ -77,7 +77,6 @@
             <scope>test</scope>
         </dependency>
 
-<<<<<<< HEAD
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
@@ -89,7 +88,7 @@
             <artifactId>commons-fileupload</artifactId>
             <version>1.2.2</version>
         </dependency>
-=======
+
         <!-- thymeleaf 페이징처리 해주는 라이브러리. -->
         <dependency>
             <groupId>io.github.jpenren</groupId>
@@ -121,7 +120,6 @@
             <!--<version>1.9.13</version>-->
         <!--</dependency>-->
 
->>>>>>> product-reg_JDragon
 
     </dependencies>
 
