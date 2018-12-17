@@ -1,6 +1,7 @@
 package com.holidaysomething.holidaysomething.repository;
 
 import com.holidaysomething.holidaysomething.domain.ProductOption;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,4 +23,6 @@ public interface ProductOptionRepository extends JpaRepository<ProductOption, Lo
 
     @Query(value = "select po from ProductOption po where po.price LIKE CONCAT('%', :productOptionPrice, '%')")
     Page<ProductOption> findAllProductOptionByPriceContaining(@Param("productOptionPrice") String productOptionPrice, Pageable pageable);
+
+    ProductOption save(ProductOption productOption);
 }

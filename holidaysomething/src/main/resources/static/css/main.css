@@ -1,5 +1,4 @@
 #header {
-    /*background-color: #2D3852;*/
     background-color: #EABD47;
     width: 100%;
     height: 70px;
@@ -31,7 +30,6 @@
 }
 
 .header-menu:hover {
-    /*background-color: #1C273A;*/
     background-color: #eaae1c;
 }
 

@@ -21,6 +21,7 @@ public class ProductOption {
 
     private Integer price;
 
+    @Lob
     private String description;
 
     @ManyToOne

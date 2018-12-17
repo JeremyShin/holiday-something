@@ -62,8 +62,7 @@ public class ProductOptionServiceImpl implements ProductOptionService {
         return productOptionRepository.findAll(pageable);
     }
 
-    //    @Override
-//    public Page<ProductOption> getAllProductOptionsSearchPage(String name, Pageable pageable) {
-//        return productOptionRepository.findAllProductOptionByNameContaining(name, pageable);
-//    }
+    public void addProductOption(ProductOption productOption){
+        productOptionRepository.save(productOption);
+    }
 }

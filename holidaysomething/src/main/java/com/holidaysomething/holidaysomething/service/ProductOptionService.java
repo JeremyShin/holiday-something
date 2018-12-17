@@ -9,6 +9,7 @@ import java.util.List;
 public interface ProductOptionService {
     List<ProductOption> getAllProductOptions();
     ProductOption getProductOption(Long id);
+    public void addProductOption(ProductOption productOption);
     void deleteProductOption(Long id);
     List<ProductOption> getAllProductOptionsByName(String name);
     Page<ProductOption> getAllProductOptionsPage(Pageable pageable);

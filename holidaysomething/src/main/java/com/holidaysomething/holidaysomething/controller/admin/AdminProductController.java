@@ -1,6 +1,8 @@
 package com.holidaysomething.holidaysomething.controller.admin;
 
 import com.holidaysomething.holidaysomething.domain.ProductOption;
+import com.holidaysomething.holidaysomething.domain.Product;
+import com.holidaysomething.holidaysomething.service.ProductService;
 import com.holidaysomething.holidaysomething.service.ProductOptionService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -16,14 +18,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.ui.Model;
+
 @Controller
 @RequestMapping("/admin/product")
 public class AdminProductController {
     private ProductOptionService productOptionService;
+    private ProductService productService;
+
     private static final Log log = LogFactory.getLog(AdminProductController.class);
 
-    public AdminProductController(ProductOptionService productOptionService) {
+    public AdminProductController(ProductOptionService productOptionService, ProductService productService) {
         this.productOptionService = productOptionService;
+        this.productService = productService;
     }
 
     @GetMapping
@@ -110,5 +117,31 @@ public class AdminProductController {
         modelMap.addAttribute("productOptionsSearchResult", productOptions);
 
         return "/admin/product/product_detail";
+    }
+
+    /* 옵션 등록 */
+    @GetMapping("/product_detail_add_option")
+    public String addOption(Model model) {
+        // 모든 상품목록 가져오기
+        List<Product> products = productService.getAllProducts();
+        model.addAttribute("products", products);
+
+        return "admin/product/product_detail_add_option";
+    }
+
+    /* 옵션 등록 */
+    @PostMapping("/product_detail_add_option")
+    public String addProductOption(ProductOption productOption,
+                                   @RequestParam(value = "productId", defaultValue = "") Long productId) {
+
+            productOption.setProduct(productService.getProduct(productId));
+            productOptionService.addProductOption(productOption);
+//
+//        for(ProductOption productOption : productOptions){
+//            productOption.setProduct(productService.getProduct(productId));
+//            productOptionService.addProductOption(productOption);
+//        }
+
+        return "admin/product/product_detail_add_option";
     }
 }
