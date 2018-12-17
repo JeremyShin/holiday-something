@@ -1,4 +1,79 @@
-body {
-    width: 80%;
-    margin: 150px auto;
+/*body {*/
+    /*width: 80%;*/
+    /*margin: 150px auto;*/
+/*}*/
+
+#header {
+    background-color: #2D3852;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    padding: 0 15px 0 40px;
+    position: fixed;
+    top: 0;
+}
+
+#header a {
+    text-decoration: none;
+}
+
+.header-menu {
+    width: 80px;
+    height: 100%;
+    text-align: center;
+    align-self: center;
+    line-height: 70px;
+    color: #CBDAF5;
+    padding: 0 10px;
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+.header-menu:hover {
+    background-color: #1C273A;
+}
+
+.header-menu {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.header-menu a {
+    vertical-align: middle;
+    line-height: normal;
+    text-decoration: none;
+}
+
+#container {
+    display: flex;
+}
+
+.left-navbar {
+    width: 250px;
+    height: 900px;
+    background-color: #efefef;
+    padding-top: 40px;
+    margin-top: 65px;
+}
+
+.navbar-menu {
+    padding: 5px 10px;
+    margin: 5px 5px 5px 15px;
+}
+
+.navbar-menu a {
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.navbar-menu a:visited {
+    color: black;
+}
+
+.navbar-menu a:hover {
+    color: #5F95D7;
+}
+
+#dashboard {
+    margin: 90px 0 0 40px;
 }
