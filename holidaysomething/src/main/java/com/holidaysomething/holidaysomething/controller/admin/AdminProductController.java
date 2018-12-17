@@ -5,12 +5,14 @@ import com.holidaysomething.holidaysomething.service.ProductOptionService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,14 +69,27 @@ public class AdminProductController {
 
     @GetMapping("/get/name")
     public String getProductOptionsByName(
-            @RequestParam("productOptionSearchName") String productOptionSearchField,
+            ModelMap modelMap,
+            @RequestParam("productOptionSearchField") String productOptionSearchField,
             @RequestParam("productOptionSearchValue") String productOptionSearchValue) {
         log.info("productOptionSearchName: " + productOptionSearchField);
         log.info("productOptionSearchValue: " + productOptionSearchValue);
 
         // `product_option`에서 productOptionSearchField가 productOptionSearchValue인 row를 검색
         // 검색된 결과를 페이징 처리하여 보여준다
+        Page<ProductOption> productOptions = new PageImpl<>(new ArrayList<>());
+        Pageable pageable = PageRequest.of(0, 10);
 
-        return "redirect:/admin/product/product_detail";
+        if (productOptionSearchField.equals("name")) {
+            productOptions = productOptionService.getAllProductOptionsByNamePage(productOptionSearchValue, pageable);
+        } else if (productOptionSearchField.equals("description")) {
+            productOptions = productOptionService.getAllProductOptionsByDescriptionPage(productOptionSearchValue, pageable);
+        } else if (productOptionSearchField.equals("price")) {
+            productOptions = productOptionService.getAllProductOptionsByPricePage(productOptionSearchValue, pageable);
+        }
+
+        modelMap.addAttribute("productOptionsSearchResult", productOptions);
+
+        return "/admin/product/product_detail";
     }
 }

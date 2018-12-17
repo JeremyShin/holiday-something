@@ -14,8 +14,12 @@ import java.util.List;
 public interface ProductOptionRepository extends JpaRepository<ProductOption, Long> {
     List<ProductOption> findAllByNameContaining(String name);
 
-//    Page<ProductOption> findAll(Pageable pageable);
-
     @Query(value = "select po from ProductOption po where po.name LIKE CONCAT('%', :productOptionName, '%')")
     Page<ProductOption> findAllProductOptionByNameContaining(@Param("productOptionName") String productOptionName, Pageable pageable);
+
+    @Query(value = "select po from ProductOption po where po.description LIKE CONCAT('%', :productOptionDescription, '%')")
+    Page<ProductOption> findAllProductOptionByDescriptionContaining(@Param("productOptionDescription") String productOptionDescription, Pageable pageable);
+
+    @Query(value = "select po from ProductOption po where po.price LIKE CONCAT('%', :productOptionPrice, '%')")
+    Page<ProductOption> findAllProductOptionByPriceContaining(@Param("productOptionPrice") String productOptionPrice, Pageable pageable);
 }

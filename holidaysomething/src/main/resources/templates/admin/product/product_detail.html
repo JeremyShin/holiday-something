@@ -131,9 +131,9 @@
                                             <label>
                                                 <select name="productOptionSearchField" required>
                                                     <option disabled>옵션을 선택하세요</option>
-                                                    <option value="optionName">옵션명</option>
-                                                    <option value="optionDesc">옵션설명</option>
-                                                    <option value="optionPrice">옵션가격</option>
+                                                    <option value="name">옵션명</option>
+                                                    <option value="description">옵션설명</option>
+                                                    <option value="price">옵션가격</option>
                                                 </select>
                                             </label>
 
@@ -194,7 +194,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="productOption : ${productOptions}" id="productOptionTr">
+                                    <tr th:each="productOption : ${productOptions != null ? productOptions : productOptionsSearchResult}" class="productOptionTr">
                                         <td><input type="checkbox" name="productOptionId" th:value="${productOption.id}"/></td>
                                         <td th:text="${productOption.id}">###</td>
                                         <td th:text="${productOption.name}">###</td>

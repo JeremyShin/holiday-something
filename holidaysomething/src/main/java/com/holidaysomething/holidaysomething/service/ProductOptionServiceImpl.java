@@ -42,13 +42,28 @@ public class ProductOptionServiceImpl implements ProductOptionService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<ProductOption> getAllProductOptionsPage(Pageable pageable) {
-        return productOptionRepository.findAll(pageable);
+    public Page<ProductOption> getAllProductOptionsByNamePage(String name, Pageable pageable) {
+        return productOptionRepository.findAllProductOptionByNameContaining(name, pageable);
+    }
+
+    @Override
+    public Page<ProductOption> getAllProductOptionsByDescriptionPage(String description, Pageable pageable) {
+        return productOptionRepository.findAllProductOptionByDescriptionContaining(description, pageable);
+    }
+
+    @Override
+    public Page<ProductOption> getAllProductOptionsByPricePage(String price, Pageable pageable) {
+        return productOptionRepository.findAllProductOptionByPriceContaining(price, pageable);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Page<ProductOption> getAllProductOptionsByNamePage(String name, Pageable pageable) {
-        return productOptionRepository.findAllProductOptionByNameContaining(name, pageable);
+    public Page<ProductOption> getAllProductOptionsPage(Pageable pageable) {
+        return productOptionRepository.findAll(pageable);
     }
+
+    //    @Override
+//    public Page<ProductOption> getAllProductOptionsSearchPage(String name, Pageable pageable) {
+//        return productOptionRepository.findAllProductOptionByNameContaining(name, pageable);
+//    }
 }
