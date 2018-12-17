@@ -1,10 +1,6 @@
-/*body {*/
-    /*width: 80%;*/
-    /*margin: 150px auto;*/
-/*}*/
-
 #header {
-    background-color: #2D3852;
+    /*background-color: #2D3852;*/
+    background-color: #EABD47;
     width: 100%;
     height: 70px;
     display: flex;
@@ -17,24 +13,31 @@
     text-decoration: none;
 }
 
+#header img {
+    width: auto;
+    height: 30px;
+    margin: auto 20px auto 5px;
+}
+
 .header-menu {
     width: 80px;
     height: 100%;
     text-align: center;
     align-self: center;
     line-height: 70px;
-    color: #CBDAF5;
+    color: #444444;
     padding: 0 10px;
     font-family: 'Do Hyeon', sans-serif;
 }
 
 .header-menu:hover {
-    background-color: #1C273A;
+    /*background-color: #1C273A;*/
+    background-color: #eaae1c;
 }
 
 .header-menu {
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .header-menu a {
@@ -76,4 +79,39 @@
 
 #dashboard {
     margin: 90px 0 0 40px;
+    width: 80%;
+}
+
+#product-option-search-form {
+    margin-bottom: 30px;
+}
+
+#product-option-list-tbl {
+    width: 90%;
+}
+
+#product-option-list-tbl th, td {
+    padding: 6px;
+}
+
+#product-option-list-tbl th {
+    background-color: rgba(214, 214, 214, 0.57);
+}
+
+#product-option-list-tbl th:nth-of-type(1), td:nth-of-type(1) {
+    text-align: left;
+}
+
+#page-numbers {
+    margin-top: 50px;
+}
+
+#page-numbers a {
+    margin-right: 10px;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+#page-numbers a:visited {
+    color: inherit;
 }
