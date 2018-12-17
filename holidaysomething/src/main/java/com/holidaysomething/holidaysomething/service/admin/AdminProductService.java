@@ -2,8 +2,7 @@ package com.holidaysomething.holidaysomething.service.admin;
 
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
-import com.holidaysomething.holidaysomething.domain.ProductDetail;
-import com.holidaysomething.holidaysomething.domain.ProductDto;
+import com.holidaysomething.holidaysomething.dto.ProductDto;
 
 import java.util.List;
 

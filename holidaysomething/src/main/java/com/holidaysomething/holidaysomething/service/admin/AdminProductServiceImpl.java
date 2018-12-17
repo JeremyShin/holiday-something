@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.service.admin;
 
 
 import com.holidaysomething.holidaysomething.domain.*;
+import com.holidaysomething.holidaysomething.dto.ProductDto;
 import com.holidaysomething.holidaysomething.repository.ProductCategoryRepository;
 import com.holidaysomething.holidaysomething.repository.ProductDetailRepository;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

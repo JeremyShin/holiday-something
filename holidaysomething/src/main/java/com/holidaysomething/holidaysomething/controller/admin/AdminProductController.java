@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
-import com.holidaysomething.holidaysomething.domain.ProductDto;
+import com.holidaysomething.holidaysomething.dto.ProductDto;
 import com.holidaysomething.holidaysomething.service.admin.AdminProductService;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +27,7 @@ import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.service.ProductOptionService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +44,12 @@ public class AdminProductController {
     private ProductOptionService productOptionService;
     private ProductService productService;
     private FileUtil fileUtil;
+  private ProductOptionService productOptionService;
+  private static final Log log = LogFactory.getLog(AdminProductController.class);
+
+  public AdminProductController(ProductOptionService productOptionService) {
+    this.productOptionService = productOptionService;
+  }
 
 
     public AdminProductController(){}
@@ -58,7 +63,11 @@ public class AdminProductController {
         this.fileUtil = fileUtil;
     }
 
-    @Autowired
+
+  public AdminProductController() {
+  }
+
+  @Autowired
   AdminProductService adminProductService;
 
 
@@ -71,12 +80,6 @@ public class AdminProductController {
   public String productCategory() {
     return "admin/product/product_category";
   }
-//  @GetMapping("/product_detail")
-//  public String productDetail() {
-//    return "admin/product/product_detail";
-
-//  }
-
 
     // 대분류 불러오기.
     @GetMapping("/product_detail/register")
@@ -152,8 +155,6 @@ public class AdminProductController {
 
 
   }
-
-
     @GetMapping("/product_list")
     public String productList(ModelMap modelMap, @PageableDefault(sort = { "id" }, direction = Sort.Direction.DESC , size = 10)Pageable pageable){
         Page<Product> products = productService.findAll(pageable);
