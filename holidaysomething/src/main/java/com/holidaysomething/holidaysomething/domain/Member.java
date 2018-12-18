@@ -13,59 +13,60 @@ import java.util.Set;
 @Entity
 @Table(name = "MEMBER")
 public class Member {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Column(length = 50, nullable = false, unique = true)
-    private String loginId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(nullable = false)
-    private String password;
+  @Column(length = 50, nullable = false, unique = true)
+  private String loginId;
 
-    @Column(nullable = false, unique = true)
-    private String email;
+  @Column(nullable = false)
+  private String password;
 
-    @Column(length = 20, nullable = false)
-    private String name;
+  @Column(nullable = false, unique = true)
+  private String email;
 
-    @Column(length = 50, nullable = false, unique = true)
-    private String nickname;
+  @Column(length = 20, nullable = false)
+  private String name;
 
-    @Column(length = 50, nullable = false, unique = true)
-    private String phone;
+  @Column(length = 50, nullable = false, unique = true)
+  private String nickname;
 
-    @Column(columnDefinition = "integer default 0")
-    private int mileage;
+  @Column(length = 50, nullable = false, unique = true)
+  private String phone;
 
-    @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date birthday;
+  @Column(columnDefinition = "integer default 0")
+  private int mileage;
 
-    @Column(length = 20, nullable = false)
-    private String postcode;
+  @Column(nullable = false)
+  @Temporal(TemporalType.DATE)
+  private Date birthday;
 
-    @Column(nullable = false)
-    private String address1;
+  @Column(length = 20, nullable = false)
+  private String postcode;
 
-    @Column(nullable = false)
-    private String address2;
+  @Column(nullable = false)
+  private String address1;
 
-    @Column(nullable = false)
-    private boolean receiveEmail;
+  @Column(nullable = false)
+  private String address2;
 
-    @Column(nullable = false)
-    private boolean receiveSms;
+  @Column(nullable = false)
+  private boolean receiveEmail;
 
-    @Column(nullable = false)
-    private boolean marketing;
+  @Column(nullable = false)
+  private boolean receiveSms;
 
-    @Column(nullable = false)
-    private boolean personalInfo;
+  @Column(nullable = false)
+  private boolean marketing;
 
-    @Column(length = 20)
-    private String recommender;
+  @Column(nullable = false)
+  private boolean personalInfo;
 
-    @OneToMany(mappedBy = "member")
-    private Set<CartProduct> cartProducts;
+  @Column(length = 20)
+  private String recommender;
+
+  @OneToMany(mappedBy = "member")
+  private Set<CartProduct> cartProducts;
 }

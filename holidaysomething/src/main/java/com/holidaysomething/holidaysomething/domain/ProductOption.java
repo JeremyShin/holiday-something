@@ -13,14 +13,13 @@ import java.util.List;
 @Setter
 @ToString
 public class ProductOption {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Column(nullable = false)
-    private String name;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    private Integer price;
+  @Column(nullable = false)
+  private String name;
 
     @Lob
     private String description;
@@ -28,5 +27,7 @@ public class ProductOption {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+  
+    private Integer price;
 
 }

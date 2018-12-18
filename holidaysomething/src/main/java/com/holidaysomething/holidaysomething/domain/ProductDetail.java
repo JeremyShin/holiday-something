@@ -10,10 +10,19 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class ProductDetail {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Lob
     private String description;
+
+
+    public ProductDetail(String description) {
+        this.description = description;
+    }
+
+    public ProductDetail() {
+    }
 }

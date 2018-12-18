@@ -13,33 +13,35 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class ProductImage {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(nullable = false)
-    private String path;
+  private Long category;
 
-    @Column(nullable = false)
-    private String originalFileName;
+  private String path;
 
-    @Column(nullable = false)
-    private String storedFileName;
+  @Column(nullable = false)
+  private String originalFileName;
 
-    @Column(nullable = false)
-    private int size;
+  @Column(nullable = false)
+  private String storedFileName;
 
-    @Column(nullable = false)
-    private String fileType;
 
-    @Column(nullable = false)
-    @CreationTimestamp
-    private LocalDateTime regDate;
+  @Column(nullable = false)
+  private int size;
 
-    @UpdateTimestamp
-    private LocalDateTime updateDate;
+  @Column(nullable = false)
+  private String fileType;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+  @Column(nullable = false)
+  @CreationTimestamp
+  private LocalDateTime regDate;
+
+  @UpdateTimestamp
+  private LocalDateTime updateDate;
+
+  @ManyToOne
+  @JoinColumn(name = "product_id")
+  private Product product;
 }
