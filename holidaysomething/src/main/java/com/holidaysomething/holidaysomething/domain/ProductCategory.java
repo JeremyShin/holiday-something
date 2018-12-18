@@ -12,6 +12,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Table(name = "PRODUCT_CATEGORY")
@@ -29,6 +34,12 @@ public class ProductCategory {
 
   private Long parentId;
 
+//     @ManyToOne(cascade = CascadeType.ALL)
+//     @JoinColumn(name = "parentId", referencedColumnName = "id", nullable = true)
+//     private ProductCategory parentProductCategory;
+
+//     @OneToMany(mappedBy = "parentProductCategory")
+//     private List<ProductCategory> productCategories = new ArrayList<>();
 
   private int orders;
 

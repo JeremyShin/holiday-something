@@ -1,6 +1,5 @@
 package com.holidaysomething.holidaysomething.controller.admin;
 
-
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
@@ -41,6 +40,11 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/admin/product")
 public class AdminProductController {
+    private ProductService productService;
+
+    public AdminProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
   private static final Log log = LogFactory.getLog(AdminProductController.class);
   private ProductOptionService productOptionService;
@@ -254,6 +258,37 @@ public class AdminProductController {
 
     return "/admin/product/product_detail";
   }
+
+    @GetMapping("/product_search")
+    public String productSearch(ModelMap modelMap) {
+
+        List<ProductCategory> productBigCategories =  productService.findByProductBigCategoryContaining();
+        modelMap.addAttribute("bigCategory", productBigCategories);
+//        if(bigId == null) {
+//
+//        }else {
+//            List<ProductCategory> productMiddleCategories = productService.findByProductMiddleCategoryContaining(bigId);
+//            modelMap.addAttribute("middleCategory", productMiddleCategories);
+//        }
+
+        return "admin/product/product_search";
+    }
+
+    @PostMapping("/product_search/result")
+    public String searchResult(ModelMap modelMap,
+                                     @RequestParam(value = "productName") String product,
+                                     @RequestParam(value = "page", defaultValue = "1") int start) {
+
+        Pageable pageable = PageRequest.of(start, start+5);
+
+        // 제품명으로 검색하기
+        Page<Product> products = productService.findByProductNameContaining(product, pageable);
+        modelMap.addAttribute("productName", products);
+        modelMap.addAttribute("totalPages", products.getTotalPages());
+        modelMap.addAttribute("presentPage", products.getNumber());
+
+        return "/admin/product/product_search_result";
+    }
 
   /* 옵션 등록 */
   @GetMapping("/product_detail_add_option")
