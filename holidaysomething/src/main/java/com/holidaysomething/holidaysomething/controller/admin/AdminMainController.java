@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin")
 public class AdminMainController {
-    private static final Log log = LogFactory.getLog(AdminMainController.class);
 
-    @GetMapping
-    public String index() {
-        log.info("index method");
-        return "admin/index";
-    }
+  private static final Log log = LogFactory.getLog(AdminMainController.class);
+
+  @GetMapping
+  public String index() {
+    log.info("index method");
+    return "admin/index";
+  }
 }

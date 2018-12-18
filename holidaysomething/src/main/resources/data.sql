@@ -1,3 +1,8 @@
+alter table product_image_category default character set utf8;
+
+INSERT INTO product_image_category (id, name) VALUES (1, "상세이미지");
+INSERT INTO product_image_category (id, name) VALUES (2, "목록이미지");
+INSERT INTO product_image_category (id, name) VALUES (3, "추가이미지");
 
 INSERT INTO exchange_refund(apply_date, approve, approve_date, price, type) VALUES (now(), 1, now(), 3000, '환불');
 INSERT INTO exchange_refund(apply_date, approve, approve_date, price, type) VALUES (now(), 1, now(), 3000, '환불');
@@ -248,8 +253,8 @@ INSERT INTO orders (id, order_number, date, total_price, status, mileage, member
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137530', NOW(), 4500, '배송준비중', 40, 24, 30, 30);
 
 
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (1,'디자인문구',NULL ,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (2,'디자인문구',NULL ,2);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (1,'문구', 0 ,1);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (2,'디자인', 0 ,2);
 INSERT INTO product_category (id,name,parent_id,orders) VALUES (3,'다이어리/플래너',1,3);
 INSERT INTO product_category (id,name,parent_id,orders) VALUES (4,'노트/메모지',1,4);
 INSERT INTO product_category (id,name,parent_id,orders) VALUES (5,'데코레이션',1,5);
@@ -280,6 +285,19 @@ INSERT INTO product_category (id,name,parent_id,orders) VALUES (29,'레이어 �
 INSERT INTO product_category (id,name,parent_id,orders) VALUES (30,'먼슬리플래너',14,30);
 INSERT INTO product_category (id,name,parent_id,orders) VALUES (31,'위클리플래너',9,31);
 
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (32,'STATIONERY',0,1);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (33,'TOY',0,2);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (34,'필통/필기류',1,1);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (35,'노트/메모',1,2);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (36,'다이어리/캘린더',1,3);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (37,'카드,엽서',1,4);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (38,'ETC',1,5);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (39,'HolidaySomething',2,1);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (40,'HolidaySomething',3,2);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (41,'HolidaySomething',4,2);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (42,'HolidaySomething',5,2);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (43,'오롤리데이',2,1);
+INSERT INTO product_category (id,name,parent_id,orders) VALUES (44,'덴스',3,1)
 
 INSERT INTO product_detail(id, description) VALUES (null, 'May가 추천하는 상점 공식 굿즈');
 INSERT INTO product_detail(id, description) VALUES (null, 'Holii가 추천하는 상점 공식 굿즈');
@@ -314,13 +332,13 @@ INSERT INTO product_detail(id, description) VALUES (null, '덴스 로고 라벨�
 
 
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (1,'2177670','서울 공장','스밋코구라시 데일리다이어리',NULL,1000,40,4000,2500,2,1,1, 0, 3, 0, true, '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (1,'2177670','서울 공장','스밋코구라시 데일리다이어리',NULL,1000,40,4000,2500,1,1,1, 0, 3, 0, true, '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
 VALUES (2,'2104689','경기도 공장','아이코닉 일상집 2019',NULL,1000,50,11800,2500,2,2,1, 0, 3, 0, false, '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (3,'2086287','인천 공장','바이풀디자인_세컨 플래너_미디움2019','오늘만공짜',2000,50,8500,2500,29,3,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05' );
+VALUES (3,'2086287','인천 공장','바이풀디자인_세컨 플래너_미디움2019','오늘만공짜',2000,50,8500,2500,2,3,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05' );
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (4,'2134984','강원도 공장','[루카랩]2019 플랜더 - 캘린더 겸 플래너',NULL,1000,40,15000,2500,30,4,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (4,'2134984','강원도 공장','[루카랩]2019 플랜더 - 캘린더 겸 플래너',NULL,1000,40,15000,2500,3,4,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
 VALUES (5,'2177678','서울 공장','스밋코구라시 좌철수첩',NULL,200,20,1000,2500,3,5,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
@@ -328,169 +346,170 @@ VALUES (6,'1846002','서울 공장','[디즈니] 빈티지 포스터 스티커 �
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
 VALUES (7,'279397','서울 공장','The Black-Photo album(ver.3.0)',NULL,2000,15,15800,3000,5,7,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (8,'1904263','서울 공장','아이코닉 마일드 젤펜',NULL,100,10,1800,2500,25,8,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (8,'1904263','서울 공장','아이코닉 마일드 젤펜',NULL,100,10,1800,2500,2,8,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (9,'974044','서울 공장','핸드메이드X-mas카드 (16종 중 택 1)',NULL,100,20,4000,2500,26,9,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (9,'974044','서울 공장','핸드메이드X-mas카드 (16종 중 택 1)',NULL,100,20,4000,2500,2,9,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (10,'1916891','서울 공장','네모생활_클래식원고지',NULL,200,10,2500,2500,27,10,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (10,'1916891','서울 공장','네모생활_클래식원고지',NULL,200,10,2500,2500,7,10,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (11,'50709','경기도 공장','File F102(3ea)',NULL,2000,50,6600,2500,28,11,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (11,'50709','경기도 공장','File F102(3ea)',NULL,2000,50,6600,2500,2,11,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (12,'2102505','인천 공장','나의 색 나의 하루 스티커',NULL,50,50,1500,2500,21,12,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (12,'2102505','인천 공장','나의 색 나의 하루 스티커',NULL,50,50,1500,2500,1,12,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (13,'2175906','인천 공장','러브이즈기빙 하트베어 광안리의 밤(2ea)',NULL,1000,50,6000,2500,21,13,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (13,'2175906','인천 공장','러브이즈기빙 하트베어 광안리의 밤(2ea)',NULL,1000,50,6000,2500,6,13,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (14,'2171036','인천 공장','꾸꾸 스티커',NULL,5,100,1500,2500,21,14,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (14,'2171036','인천 공장','꾸꾸 스티커',NULL,5,100,1500,2500,5,14,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (15,'2160767','인천 공장','수바코_보석스티커',NULL,100,100,2500,2500,21,15,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (15,'2160767','인천 공장','수바코_보석스티커',NULL,100,100,2500,2500,6,15,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (16,'1792257','서울 공장','Hello, I am 내지노트 7종 -A5',NULL,500,20,3000,2500,16,16,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (16,'1792257','서울 공장','Hello, I am 내지노트 7종 -A5',NULL,500,20,3000,2500,6,16,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (17,'2098234','서울 공장','버튼 오거나이저 V2 - A5 [커버+멀티파일]',NULL,1000,40,28000,2500,16,17,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (17,'2098234','서울 공장','버튼 오거나이저 V2 - A5 [커버+멀티파일]',NULL,1000,40,28000,2500,7,17,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (18,'2102851','서울 공장','나의 색 나의 하루 노트',NULL,2000,200,9800,2500,17,18,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (18,'2102851','서울 공장','나의 색 나의 하루 노트',NULL,2000,200,9800,2500,7,18,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (19,'2111083','서울 공장','[18루니툰]스케치북/컬렉터 에디션 L',NULL,10000,50,69300,2500,17,19,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (19,'2111083','서울 공장','[18루니툰]스케치북/컬렉터 에디션 L',NULL,10000,50,69300,2500,7,19,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (20,'470057','강원도 공장','[주문제작] 퍼니맨 만년 원형 책도장',NULL,70,100,7800,2500,20,20,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (20,'470057','강원도 공장','[주문제작] 퍼니맨 만년 원형 책도장',NULL,70,100,7800,2500,2,20,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (21,'2154334','강원도 공장','하트 핑거 스탬프 잉크 스탬프패드 스탬프잉크 12색',NULL,1000,10,3000,2500,20,21,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (21,'2154334','강원도 공장','하트 핑거 스탬프 잉크 스탬프패드 스탬프잉크 12색',NULL,1000,10,3000,2500,3,21,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (22,'1901799','서울 공장','체크 수학 오답노트',NULL,100,10,2000,2500,19,22,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (22,'1901799','서울 공장','체크 수학 오답노트',NULL,100,10,2000,2500,4,22,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (23,'2176209','서울 공장','위 베어 베어스 수학연습장 - 그리즐리',NULL,200,100,2500,2500,19,23,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (23,'2176209','서울 공장','위 베어 베어스 수학연습장 - 그리즐리',NULL,200,100,2500,2500,4,23,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (24,'1889317','서울 공장','레트로 라이트 육공 모눈노트',NULL,4000,200,11000,2500,18,24,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (24,'1889317','서울 공장','레트로 라이트 육공 모눈노트',NULL,4000,200,11000,2500,4,24,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (25,'1621980','서울 공장','피키트 만년다이어리 커버 4종',NULL,4000,100,18000,2500,18,25,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (25,'1621980','서울 공장','피키트 만년다이어리 커버 4종',NULL,4000,100,18000,2500,5,25,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (26,'2123220','서울 공장','오거나이저 (중) 모던 버튼 3 Color',NULL,10000,100,58000,2500,13,26,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (26,'2123220','서울 공장','오거나이저 (중) 모던 버튼 3 Color',NULL,10000,100,58000,2500,6,26,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (27,'2171171','경기도 공장','GROOVY DAYS DIARY - Sky Blue',NULL,2000,10,13500,2500,12,27,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (27,'2171171','경기도 공장','GROOVY DAYS DIARY - Sky Blue',NULL,2000,10,13500,2500,7,27,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (28,'2170967','경기도 공장','정원 만년 다이어리',NULL,4000,20,15000,2500,12,28,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (28,'2170967','경기도 공장','정원 만년 다이어리',NULL,4000,20,15000,2500,6,28,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (29,'2170965','경기도 공장','어두운숲 만년 다이어리',NULL,8000,50,15000,2500,12,29,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (29,'2170965','경기도 공장','어두운숲 만년 다이어리',NULL,8000,50,15000,2500,5,29,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (30,'2168986','경기도 공장','2019 럭스 Hologram 다이어리',NULL,10000,10,29800,2500,12,30,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (30,'2168986','경기도 공장','2019 럭스 Hologram 다이어리',NULL,10000,10,29800,2500,6,30,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 
 
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (1,'A타입',NULL,NULL,1);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (2,'B타입',NULL,NULL,1);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (3,'요가',NULL,NULL,2);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (4,'세탁실',NULL,NULL,2);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (5,'꿈',NULL,NULL,2);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (8,'저녁',NULL,NULL,2);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (9,'카페',NULL,NULL,2);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (10,'친구',NULL,NULL,2);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (16,'레드',NULL,NULL,4);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (17,'블랙',NULL,NULL,4);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (18,'옐로우',NULL,NULL,4);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (19,'블루',NULL,NULL,4);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (20,'그레이',NULL,NULL,4);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (21,'스카이블루',200,NULL,4);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (22,'그린',NULL,NULL,5);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (23,'핑크',NULL,NULL,5);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (24,'머스타드',NULL,NULL,5);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (25,'스카이블루',NULL,NULL,5);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (26,'레드',NULL,NULL,12);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (27,'블랙',NULL,NULL,12);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (28,'그레이',2500,NULL,12);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (29,'핑크',NULL,NULL,12);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (30,'바이올렛',NULL,NULL,12);
+
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (1,'A타입',NULL,'뭐,,좋네요',1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (2,'B타입',NULL,'떨이',1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (3,'요가',NULL,'요가관련 상품',2);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (4,'세탁실',NULL,NULL,2);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (5,'꿈',NULL,NULL,2);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (8,'저녁',NULL,NULL,2);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (9,'카페',NULL,NULL,2);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (10,'친구',NULL,'친구선물 용도',2);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (16,'레드',NULL,NULL,4);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (17,'블랙',NULL,NULL,4);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (18,'옐로우',NULL,NULL,4);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (19,'블루',NULL,NULL,4);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (20,'그레이',NULL,NULL,4);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (21,'스카이블루',200,NULL,4);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (22,'그린',NULL,NULL,5);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (23,'핑크',NULL,NULL,5);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (24,'머스타드',NULL,'머스타드 ==> 겨자색',5);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (25,'스카이블루',NULL,NULL,5);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (26,'레드',NULL,NULL,12);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (27,'블랙',NULL,NULL,12);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (28,'그레이',2500,NULL,12);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (29,'핑크',NULL,NULL,12);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (30,'바이올렛',NULL,NULL,12);
 
 
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(10000,1,100,null,1,1);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(111000,2,300,null,21,21);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(131000,3,400,null,3,4);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(121000,4,2100,null,21,3);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(151000,5,2300,null,11,24);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(151000,6,2300,null,1,12);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(141000,7,2100,null,21,29);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(121000,8,2200,null,24,11);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(112000,11,2100,11,21,21);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(111000,1,2090,null,4,11);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(11000,1,2000,null,7,2);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(131000,1,2100,null,5,1);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(1000,3,1200,null,11,9);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(3000,88,3200,null,15,8);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(18000,12,3200,null,19,17);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(17000,23,2300,null,20,11);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(61000,1,2500,null,21,30);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(51000,2,2500,null,22,20);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(81000,2,2500,null,12,10);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(71000,3,2500,null,6,11);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(91000,5,5200,null,2,23);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(81000,7,1200,null,3,21);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(71000,2,2200,null,7,22);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(18000,21,3200,null,9,19);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(23000,7,2400,null,10,17);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(123000,9,2010,null,16,13);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(14000,12,2100,null,12,11);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(111000,12,2200,null,11,8);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(119000,2,2300,null,20,7);
-INSERT INTO ordered_product(order_price,quantity,mileage,exchange_refund_id, order_id, product_id) VALUES(1100000,200,2400,null,23,5);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(10000,1,100,NULL,NULL,1,1);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(111000,2,300,NULL,NULL,21,21);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(131000,3,400,NULL,NULL,3,4);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(121000,4,2100,NULL,NULL,21,3);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(151000,5,2300,NULL,NULL,11,24);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(151000,6,2300,NULL,NULL,1,12);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(141000,7,2100,NULL,NULL,21,29);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(121000,8,2200,NULL,NULL,24,11);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(112000,11,2100,NULL,11,21,21);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(111000,1,2090,NULL,NULL,4,11);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(11000,1,2000,NULL,NULL,7,2);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(131000,1,2100,NULL,NULL,5,1);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(1000,3,1200,NULL,NULL,11,9);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(3000,88,3200,NULL,NULL,15,8);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(18000,12,3200,NULL,NULL,19,17);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(17000,23,2300,NULL,NULL,20,11);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(61000,1,2500,NULL,NULL,21,30);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(51000,2,2500,NULL,NULL,22,20);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(81000,2,2500,NULL,NULL,12,10);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(71000,3,2500,NULL,NULL,6,11);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(91000,5,5200,NULL,NULL,2,23);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(81000,7,1200,NULL,NULL,3,21);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(71000,2,2200,NULL,NULL,7,22);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(18000,21,3200,NULL,NULL,9,19);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(23000,7,2400,NULL,NULL,10,17);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(123000,9,2010,NULL,NULL,16,13);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(14000,12,2100,NULL,NULL,12,11);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(111000,12,2200,NULL,NULL,11,8);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(119000,2,2300,NULL,NULL,20,7);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(1100000,200,2400,NULL,NULL,23,5);
 
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-3.jpg', 'https://contents.sixshop.com/thumbnails/uploadedFiles/30497/product/image_1537526126133_2500.jpg', '2018-12-03 09:23:35', 13900.0, 'holidaymemopad', '2018-12-03 09:33:35', 1);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-1.jpg', 'https://contents.sixshop.com/thumbnails/uploadedFiles/30497/product/image_1537526152021_2500.jpg', '2018-12-13 19:23:35', 23839, 'stickerpack', '2018-12-13 20:23:35', 2);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-2.jpg', 'https://contents.sixshop.com/thumbnails/uploadedFiles/30497/product/image_1537526140470_2500.jpg', '2018-12-09 11:52:49', 23295, 'myownholiday', NULL, 3);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/webp', '89734598-3598.webp', 'https://www.petitcolas.net/watermarking/image_database/waterfall.jpg', '2018-12-27 15:24:49', 23298, 'waterfall', NULL, 3);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/jpeg', '86723953-9872.jpg', 'https://www.petitcolas.net/watermarking/image_database/water.jpg', '2017-03-31 17:34:09', 14529, 'water', '2017-04-02 11:24:52', 3);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/gif', '34609583-3452.gif', 'https://www.petitcolas.net/watermarking/image_database/watch.jpg', '2018-08-07 11:52:49', 25389, 'watch', '2018-08-12 11:52:49', 4);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/jpeg', '23865349-8346.jpg', 'https://www.petitcolas.net/watermarking/image_database/wildflowers.jpg', '2018-12-12 22:34:49', 7682, 'wildflowers', '2018-12-13 11:52:09', 5);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/jpeg', '34689534-9734.jpg', 'https://www.petitcolas.net/watermarking/image_database/alu.jpg', '2018-04-22 07:52:49', 39872, 'alu', '2018-04-25 11:38:49', 6);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/png', '27340985-3456.png', 'https://homepages.cae.wisc.edu/~ece533/images/tulips.png', '2018-11-11 11:52:49', 59872, 'tulips', '2018-12-09 11:52:49', 7);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/jpeg', '68923545-7248.jpg', 'https://www.petitcolas.net/watermarking/image_database/bandon.jpg', '2018-12-25 19:34:49', 38972, 'bandon', '2018-12-26 11:52:49', 8);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/webp', '38975343-2369.webp', 'https://www.petitcolas.net/watermarking/image_database/terraux.jpg', '2018-07-31 16:23:49', 23522, 'terraux', '2018-08-05 00:00:00', 9);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/jpeg', '13068953-6389.jpg', 'https://www.petitcolas.net/watermarking/image_database/brandyrose.jpg', '2018-06-09 15:32:49', 135882, 'brandyrose', '2018-06-10 11:52:49', 10);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/jpeg', '06892568-6980.jpg', 'https://www.petitcolas.net/watermarking/image_database/fourviere.jpg', '2018-04-09 10:52:49', 235892, 'fourviere', '2018-04-09 21:52:49', 11);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/webp', '37489324-9383.webp', 'https://www.petitcolas.net/watermarking/image_database/bear.jpg', '2018-07-24 19:34:00', 63589, 'bear', '2018-07-26 14:52:34', 12);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/jpeg', '36984323-3709.jpg', 'https://www.petitcolas.net/watermarking/image_database/kid.jpg', '2018-12-14 21:34:12', 89623, 'kid', NULL, 13);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/gif', '62089452-6893.gif', 'https://www.petitcolas.net/watermarking/image_database/z1x25.jpg', '2018-12-19 11:52:49', 1983, 'z1x25', '2018-12-20 20:52:13', 14);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/jpeg', '72364980-3679.jpg', 'https://www.petitcolas.net/watermarking/image_database/lochness.gif', '2018-11-01 10:52:33', 8962, 'lochness', '2018-11-10 11:52:50', 15);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/jpeg', '27323476-7689.jpg', 'https://www.petitcolas.net/watermarking/image_database/papermachine.jpg', '2018-12-10 10:52:21', 7862, 'papermachine', '2018-12-10 09:52:49', 16);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/jpeg', '23689542-7982.jpg', 'https://www.petitcolas.net/watermarking/image_database/skyline_arch.jpg', '2018-12-25 14:22:05', 49862, 'skyline_arch', '2019-01-03 11:24:14', 17);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/webp', '28733452-9073.webp', 'https://www.petitcolas.net/watermarking/image_database/pueblo_bonito.jpg', '2018-12-24 10:52:42', 98763, 'pueblo_bonito', NULL, 18);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/gif', '60893452-3638.gif', 'https://www.petitcolas.net/watermarking/image_database/newyork.gif', '2017-12-09 11:52:49', 308754, 'newyork', '2018-01-22 19:52:24', 19);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/jpeg', '23465089-3790.jpg', 'https://www.petitcolas.net/watermarking/image_database/F14.jpg', '2018-12-11 18:24:04', 49762, 'F14', '2018-12-14 11:22:59', 20);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/jpeg', '23764935-3698.jpg', 'https://www.petitcolas.net/watermarking/image_database/opera.jpg', '2018-12-18 11:54:34', 3498, 'opera', '2018-12-20 11:22:39', 21);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/gif', '68235345-3456.gif', 'https://www.petitcolas.net/watermarking/image_database/arctic_hare.jpg', '2018-12-22 04:34:49', 8792, 'arctic_hare', '2018-12-23 20:52:34', 22);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/jpeg', '06983645-2360.jpg', 'https://www.petitcolas.net/watermarking/image_database/baboon.jpg', '2018-10-09 17:22:42', 21984, 'baboon', '2018-10-11 12:52:22', 23);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/gif', '60892345-6893.gif', 'https://www.petitcolas.net/watermarking/image_database/f16.jpg', '2018-12-29 14:52:49', 29843, 'f16', '2018-12-31 11:42:14', 24);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/webp', '19874343-9834.webp', 'https://www.petitcolas.net/watermarking/image_database/fishingboat.jpg', '2018-02-08 11:22:23', 5983, 'fishingboat', '2018-02-11 09:54:29', 25);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/jpeg', '63895234-3452.jpg', 'https://www.petitcolas.net/watermarking/image_database/lena.jpg', '2018-12-03 16:42:43', 49872, 'lena', NULL, 26);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/jpeg', '23698423-5743.jpg', 'https://www.petitcolas.net/watermarking/image_database/peppers.jpg', '2018-12-21 12:22:42', 24983, 'peppers', '2018-12-23 18:52:42', 27);
-INSERT INTO product_image(id, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 'image/jpeg', '68930523-4568.jpg', 'https://www.petitcolas.net/watermarking/image_database/pills.jpg', '2018-05-05 13:52:51', 13598, 'pills', '2018-05-14 11:52:49', 28);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-3.jpg', 'https://contents.sixshop.com/thumbnails/uploadedFiles/30497/product/image_1537526126133_2500.jpg', '2018-12-03 09:23:35', 13900.0, 'holidaymemopad', '2018-12-03 09:33:35', 1);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-1.jpg', 'https://contents.sixshop.com/thumbnails/uploadedFiles/30497/product/image_1537526152021_2500.jpg', '2018-12-13 19:23:35', 23839, 'stickerpack', '2018-12-13 20:23:35', 2);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-2.jpg', 'https://contents.sixshop.com/thumbnails/uploadedFiles/30497/product/image_1537526140470_2500.jpg', '2018-12-09 11:52:49', 23295, 'myownholiday', NULL, 3);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/webp', '89734598-3598.webp', 'https://www.petitcolas.net/watermarking/image_database/waterfall.jpg', '2018-12-27 15:24:49', 23298, 'waterfall', NULL, 3);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', '86723953-9872.jpg', 'https://www.petitcolas.net/watermarking/image_database/water.jpg', '2017-03-31 17:34:09', 14529, 'water', '2017-04-02 11:24:52', 3);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/gif', '34609583-3452.gif', 'https://www.petitcolas.net/watermarking/image_database/watch.jpg', '2018-08-07 11:52:49', 25389, 'watch', '2018-08-12 11:52:49', 4);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', '23865349-8346.jpg', 'https://www.petitcolas.net/watermarking/image_database/wildflowers.jpg', '2018-12-12 22:34:49', 7682, 'wildflowers', '2018-12-13 11:52:09', 5);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', '34689534-9734.jpg', 'https://www.petitcolas.net/watermarking/image_database/alu.jpg', '2018-04-22 07:52:49', 39872, 'alu', '2018-04-25 11:38:49', 6);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/png', '27340985-3456.png', 'https://homepages.cae.wisc.edu/~ece533/images/tulips.png', '2018-11-11 11:52:49', 59872, 'tulips', '2018-12-09 11:52:49', 7);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', '68923545-7248.jpg', 'https://www.petitcolas.net/watermarking/image_database/bandon.jpg', '2018-12-25 19:34:49', 38972, 'bandon', '2018-12-26 11:52:49', 8);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 2, 'image/webp', '38975343-2369.webp', 'https://www.petitcolas.net/watermarking/image_database/terraux.jpg', '2018-07-31 16:23:49', 23522, 'terraux', '2018-08-05 00:00:00', 9);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 2, 'image/jpeg', '13068953-6389.jpg', 'https://www.petitcolas.net/watermarking/image_database/brandyrose.jpg', '2018-06-09 15:32:49', 135882, 'brandyrose', '2018-06-10 11:52:49', 10);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 2, 'image/jpeg', '06892568-6980.jpg', 'https://www.petitcolas.net/watermarking/image_database/fourviere.jpg', '2018-04-09 10:52:49', 235892, 'fourviere', '2018-04-09 21:52:49', 11);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 2, 'image/webp', '37489324-9383.webp', 'https://www.petitcolas.net/watermarking/image_database/bear.jpg', '2018-07-24 19:34:00', 63589, 'bear', '2018-07-26 14:52:34', 12);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 2, 'image/jpeg', '36984323-3709.jpg', 'https://www.petitcolas.net/watermarking/image_database/kid.jpg', '2018-12-14 21:34:12', 89623, 'kid', NULL, 13);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 2, 'image/gif', '62089452-6893.gif', 'https://www.petitcolas.net/watermarking/image_database/z1x25.jpg', '2018-12-19 11:52:49', 1983, 'z1x25', '2018-12-20 20:52:13', 14);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 2, 'image/jpeg', '72364980-3679.jpg', 'https://www.petitcolas.net/watermarking/image_database/lochness.gif', '2018-11-01 10:52:33', 8962, 'lochness', '2018-11-10 11:52:50', 15);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 2, 'image/jpeg', '27323476-7689.jpg', 'https://www.petitcolas.net/watermarking/image_database/papermachine.jpg', '2018-12-10 10:52:21', 7862, 'papermachine', '2018-12-10 09:52:49', 16);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 2, 'image/jpeg', '23689542-7982.jpg', 'https://www.petitcolas.net/watermarking/image_database/skyline_arch.jpg', '2018-12-25 14:22:05', 49862, 'skyline_arch', '2019-01-03 11:24:14', 17);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 2, 'image/webp', '28733452-9073.webp', 'https://www.petitcolas.net/watermarking/image_database/pueblo_bonito.jpg', '2018-12-24 10:52:42', 98763, 'pueblo_bonito', NULL, 18);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 3, 'image/gif', '60893452-3638.gif', 'https://www.petitcolas.net/watermarking/image_database/newyork.gif', '2017-12-09 11:52:49', 308754, 'newyork', '2018-01-22 19:52:24', 19);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 3, 'image/jpeg', '23465089-3790.jpg', 'https://www.petitcolas.net/watermarking/image_database/F14.jpg', '2018-12-11 18:24:04', 49762, 'F14', '2018-12-14 11:22:59', 20);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 3, 'image/jpeg', '23764935-3698.jpg', 'https://www.petitcolas.net/watermarking/image_database/opera.jpg', '2018-12-18 11:54:34', 3498, 'opera', '2018-12-20 11:22:39', 21);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 3, 'image/gif', '68235345-3456.gif', 'https://www.petitcolas.net/watermarking/image_database/arctic_hare.jpg', '2018-12-22 04:34:49', 8792, 'arctic_hare', '2018-12-23 20:52:34', 22);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 3, 'image/jpeg', '06983645-2360.jpg', 'https://www.petitcolas.net/watermarking/image_database/baboon.jpg', '2018-10-09 17:22:42', 21984, 'baboon', '2018-10-11 12:52:22', 23);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 3, 'image/gif', '60892345-6893.gif', 'https://www.petitcolas.net/watermarking/image_database/f16.jpg', '2018-12-29 14:52:49', 29843, 'f16', '2018-12-31 11:42:14', 24);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 3, 'image/webp', '19874343-9834.webp', 'https://www.petitcolas.net/watermarking/image_database/fishingboat.jpg', '2018-02-08 11:22:23', 5983, 'fishingboat', '2018-02-11 09:54:29', 25);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 3, 'image/jpeg', '63895234-3452.jpg', 'https://www.petitcolas.net/watermarking/image_database/lena.jpg', '2018-12-03 16:42:43', 49872, 'lena', NULL, 26);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 3, 'image/jpeg', '23698423-5743.jpg', 'https://www.petitcolas.net/watermarking/image_database/peppers.jpg', '2018-12-21 12:22:42', 24983, 'peppers', '2018-12-23 18:52:42', 27);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 3, 'image/jpeg', '68930523-4568.jpg', 'https://www.petitcolas.net/watermarking/image_database/pills.jpg', '2018-05-05 13:52:51', 13598, 'pills', '2018-05-14 11:52:49', 28);
 
 
 INSERT INTO cart_product(price, quantity, member_id, product_id) VALUES (3000, 1, 1, 1);

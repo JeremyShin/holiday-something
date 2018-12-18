@@ -1,15 +1,22 @@
 <!DOCTYPE html>
-<html xml:th="http:/www.thymeleaf.org">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Title</title>
-</head>
-<body>
-    <h1>상품관리페이지입니다.</h1>
-    <h1>Admin ! ! !</h1>
-    <a href="/admin/product/product_category">상품관리 분류 페이지 입니다.</a>
-    <a href="/admin/product/product_detail">상품세부관리 페이지 입니다.</a>
-    <a href="/admin/product/product_search">상품검색 페이지 입니다.</a>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default">
 
-</body>
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+</th:block>
+
+<!-- 사용자 스크립트 추가 -->
+<th:block layout:fragment="script">
+</th:block>
+
+
+<div layout:fragment="content">
+  <h1>상품관리페이지입니다.</h1>
+  <h1>Admin ! ! !</h1>
+  <a href="/admin/product/product_category">상품관리 분류 페이지 입니다.</a>
+  <a href="/admin/product/product_detail">상품세부관리 페이지 입니다.</a>
+</div>
+
 </html>

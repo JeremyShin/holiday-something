@@ -1,47 +1,52 @@
 package com.holidaysomething.holidaysomething.domain;
 
+import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "SHIPPING")
 @Getter
 @Setter
 public class Shipping {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Column(nullable = false)
-    private String recipient;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(nullable = false)
-    private String phone;
+  @Column(nullable = false)
+  private String recipient;
 
-    @Column(length = 50, nullable = false)
-    private String postcode;
+  @Column(nullable = false)
+  private String phone;
 
-    @Column(nullable = false)
-    private String address;
+  @Column(length = 50, nullable = false)
+  private String postcode;
 
-    @Column(nullable = false)
-    private String addressDetail;
+  @Column(nullable = false)
+  private String address;
 
-    @Column(nullable = false)
-    private String message;
+  @Column(nullable = false)
+  private String addressDetail;
 
-    @Column(nullable = false)
-    private int shippingPrice;
+  @Column(nullable = false)
+  private String message;
 
-    @Column(length = 50, nullable = false)
-    private String shippingNumber;
+  @Column(nullable = false)
+  private int shippingPrice;
 
-    @Column(length = 50, nullable = false)
-    private String status;
+  @Column(length = 50, nullable = false)
+  private String shippingNumber;
 
-    private LocalDateTime startDate;
-    private LocalDateTime arrivalDate;
+  @Column(length = 50, nullable = false)
+  private String status;
+
+  private LocalDateTime startDate;
+  private LocalDateTime arrivalDate;
 }
