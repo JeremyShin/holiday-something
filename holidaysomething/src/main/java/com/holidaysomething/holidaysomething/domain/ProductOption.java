@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "PRODUCT_OPTION")
@@ -20,14 +21,13 @@ public class ProductOption {
   @Column(nullable = false)
   private String name;
 
-  private Integer price;
+    @Lob
+    private String description;
 
-  private String description;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+  
+    private Integer price;
 
-  //사용자가 신청한 personal 옵션
-  private String personalOption;
-
-  @ManyToOne
-  @JoinColumn(name = "product_id")
-  private Product product;
 }

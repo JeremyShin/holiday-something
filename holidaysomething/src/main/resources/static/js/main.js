@@ -1,5 +1,5 @@
 let toggle = function(source) {
-    let productOptionTrs = document.querySelectorAll('#productOptionTr');
+    let productOptionTrs = document.querySelectorAll('.productOptionTr');
     for (let i = 0; i < productOptionTrs.length; i++) {
         let productOptionCheckboxInput = productOptionTrs[i].getElementsByTagName('input')[0];
         if (productOptionCheckboxInput !== source)

@@ -395,29 +395,30 @@ INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_pric
 VALUES (30,'2168986','경기도 공장','2019 럭스 Hologram 다이어리',NULL,10000,10,29800,2500,6,30,1, 0, 3, 0, true,  '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 
 
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (1,'A타입',3000,NULL,1);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (2,'B타입',2000,NULL,1);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (3,'요가',NULL,NULL,2);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (4,'세탁실',NULL,NULL,2);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (5,'꿈',NULL,NULL,2);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (8,'저녁',NULL,NULL,2);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (9,'카페',NULL,NULL,2);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (10,'친구',NULL,NULL,2);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (16,'레드',NULL,NULL,4);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (17,'블랙',NULL,NULL,4);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (18,'옐로우',NULL,NULL,4);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (19,'블루',NULL,NULL,4);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (20,'그레이',NULL,NULL,4);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (21,'스카이블루',200,NULL,4);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (22,'그린',NULL,NULL,5);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (23,'핑크',NULL,NULL,5);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (24,'머스타드',NULL,NULL,5);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (25,'스카이블루',NULL,NULL,5);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (26,'레드',NULL,NULL,12);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (27,'블랙',NULL,NULL,12);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (28,'그레이',2500,NULL,12);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (29,'핑크',NULL,NULL,12);
-INSERT INTO product_option (id,name,price,personal_option,product_id) VALUES (30,'바이올렛',NULL,NULL,12);
+
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (1,'A타입',NULL,'뭐,,좋네요',1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (2,'B타입',NULL,'떨이',1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (3,'요가',NULL,'요가관련 상품',2);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (4,'세탁실',NULL,NULL,2);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (5,'꿈',NULL,NULL,2);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (8,'저녁',NULL,NULL,2);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (9,'카페',NULL,NULL,2);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (10,'친구',NULL,'친구선물 용도',2);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (16,'레드',NULL,NULL,4);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (17,'블랙',NULL,NULL,4);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (18,'옐로우',NULL,NULL,4);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (19,'블루',NULL,NULL,4);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (20,'그레이',NULL,NULL,4);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (21,'스카이블루',200,NULL,4);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (22,'그린',NULL,NULL,5);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (23,'핑크',NULL,NULL,5);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (24,'머스타드',NULL,'머스타드 ==> 겨자색',5);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (25,'스카이블루',NULL,NULL,5);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (26,'레드',NULL,NULL,12);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (27,'블랙',NULL,NULL,12);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (28,'그레이',2500,NULL,12);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (29,'핑크',NULL,NULL,12);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (30,'바이올렛',NULL,NULL,12);
 
 
 INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(10000,1,100,NULL,NULL,1,1);
