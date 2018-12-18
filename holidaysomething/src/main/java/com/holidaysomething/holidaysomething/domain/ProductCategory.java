@@ -2,12 +2,16 @@ package com.holidaysomething.holidaysomething.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.bind.annotation.ModelAttribute;
-
-import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "PRODUCT_CATEGORY")
@@ -15,24 +19,24 @@ import java.util.Set;
 @Setter
 public class ProductCategory {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(nullable = false)
-    private String name;
-
-
-    private Long parentId;
+  @Column(nullable = false)
+  private String name;
 
 
-    private int orders;
+  private Long parentId;
 
-    @OneToMany(mappedBy = "productCategory")
-    @Column(nullable = true)
-    @JsonIgnore
-    @JsonIgnoreProperties
-    private Set<Product> products;
+
+  private int orders;
+
+  @OneToMany(mappedBy = "productCategory")
+  @Column(nullable = true)
+  @JsonIgnore
+  @JsonIgnoreProperties
+  private Set<Product> products;
 
 
 }

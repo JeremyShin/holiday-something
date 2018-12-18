@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Getter
 @Setter
 public class UploadFileInfo {
-    private String description;
-    private MultipartFile[] fileDatas;
+
+  private String description;
+  private MultipartFile[] fileDatas;
 }

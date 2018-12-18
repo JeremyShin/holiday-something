@@ -1,122 +1,135 @@
 <!DOCTYPE html>
-<html xml:th="http:/www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xml:th="http:/www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/main.css}" />
-    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Noto+Sans+KR:300,700" rel="stylesheet">
-    <title>ADMIN &mdash; HolidaySomething</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/main.css}"/>
+  <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Noto+Sans+KR:300,700"
+        rel="stylesheet">
+  <title>ADMIN &mdash; HolidaySomething</title>
 </head>
 <body>
-    <div id="header" class="sticky">
-        <!--<a href="#"><div class="header-menu">상점관리</div></a>-->
-        <img src="/img/logo.png"/>
-        <a href="#"><div class="header-menu">상품관리</div></a>
-        <a href="#"><div class="header-menu">주문관리</div></a>
-        <a href="#"><div class="header-menu">고객관리</div></a>
-        <a href="#"><div class="header-menu">게시판관리</div></a>
-        <a href="#"><div class="header-menu">프로모션</div></a>
+<div id="header" class="sticky">
+  <!--<a href="#"><div class="header-menu">상점관리</div></a>-->
+  <img src="/img/logo.png"/>
+  <a href="#">
+    <div class="header-menu">상품관리</div>
+  </a>
+  <a href="#">
+    <div class="header-menu">주문관리</div>
+  </a>
+  <a href="#">
+    <div class="header-menu">고객관리</div>
+  </a>
+  <a href="#">
+    <div class="header-menu">게시판관리</div>
+  </a>
+  <a href="#">
+    <div class="header-menu">프로모션</div>
+  </a>
+</div>
+
+<div id="container">
+  <div class="left-navbar">
+    <div class="navbar-menu">
+      <a href="#">상품분류관리</a>
     </div>
-
-    <div id="container">
-        <div class="left-navbar">
-            <div class="navbar-menu">
-                <a href="#">상품분류관리</a>
-            </div>
-            <div class="navbar-menu">
-                <a href="#">상품옵션관리</a>
-            </div>
-            <div class="navbar-menu">
-                <a href="#">상품등록</a>
-            </div>
-            <div class="navbar-menu">
-                <a href="#">상품관리</a>
-            </div>
-            <div class="navbar-menu">
-                <a href="#">상품표시관리</a>
-            </div>
-            <div class="navbar-menu">
-                <a href="#">판매분류관리</a>
-            </div>
-            <div class="navbar-menu">
-                <a href="#">재고관리</a>
-            </div>
-            <div class="navbar-menu">
-                <a href="#">즐겨찾는 메뉴</a>
-            </div>
-        </div>
-
-        <div id="dashboard">
-            <form name="option_value_form" action="/admin/product/product_detail_add_option" method="post">
-                <table>
-                    <tbody>
-                    <tr>
-                    <td>
-                        <p>옵션명과 옵션값에는 , (콤마), ; (세미콜론), " (쌍따옴표), \ (역슬래시), #$% (특수문자)는 등록할 수 없습니다.</p>
-                        <div>
-                            <div>
-                                선택한 항목을 <span id="deleteRow">삭제</span>
-                            </div>
-                            <div>
-                                <span id="createRow">추가</span>
-                            </div>
-                        </div>
-                        <div>
-                            <table border="1" id="optionValueTable">
-                                <thead>
-                                <tr>
-                                    <th><input type="checkbox" id="selectAllCheckbox" onclick="toggle(this);"></th>
-                                    <th>적용할 상품 선택</th>
-                                    <th>옵션 명 및 가격 설정</th>
-                                </tr>
-                                </thead>
-
-                                <tbody id="option_value_rows">
-                                <!---------- 추가 버튼 클릭 시 추가할 row ---------->
-                                <tr id="optionCheckTr">
-                                    <td>
-                                        <span class="delete">삭제</span>
-                                        <input type="checkbox" class="optionCheckFrame">
-                                    </td>
-
-                                    <td width="500">
-
-                                        <select name="productId" class="productId">
-                                            <option value="--ALL--">상품선택</option>
-                                            <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
-                                        </select>
-                                    </td>
-
-                                    <td width="500">
-                                        <div>
-                                        옵션명 :
-                                            <input type="text" name="name" placeholder="예시) 옵션명을 입력하시오" maxlength="50" size="70">
-                                        </div>
-                                        <div>
-                                            추가금액 :
-                                            <input type="text" name="price" size="70">
-                                        </div>
-                                        <div>
-                                            옵션설명 :
-                                            <input type="text" name="description" size="70" style="height:30px;">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <!---------- 추가 버튼 클릭 시 추가할 row ---------->
-                                </tbody>
-                            </table>
-                        </div>
-                    </td>
-                    </tr>
-
-                    </tbody>
-                </table>
-                <input type="submit" value="submit">
-            </form>
-        </div>
+    <div class="navbar-menu">
+      <a href="#">상품옵션관리</a>
     </div>
+    <div class="navbar-menu">
+      <a href="#">상품등록</a>
+    </div>
+    <div class="navbar-menu">
+      <a href="#">상품관리</a>
+    </div>
+    <div class="navbar-menu">
+      <a href="#">상품표시관리</a>
+    </div>
+    <div class="navbar-menu">
+      <a href="#">판매분류관리</a>
+    </div>
+    <div class="navbar-menu">
+      <a href="#">재고관리</a>
+    </div>
+    <div class="navbar-menu">
+      <a href="#">즐겨찾는 메뉴</a>
+    </div>
+  </div>
 
-    <script th:src="@{/js/productOption.js}"></script>
+  <div id="dashboard">
+    <form name="option_value_form" action="/admin/product/product_detail_add_option" method="post">
+      <table>
+        <tbody>
+        <tr>
+          <td>
+            <p>옵션명과 옵션값에는 , (콤마), ; (세미콜론), " (쌍따옴표), \ (역슬래시), #$% (특수문자)는 등록할 수 없습니다.</p>
+            <div>
+              <div>
+                선택한 항목을 <span id="deleteRow">삭제</span>
+              </div>
+              <div>
+                <span id="createRow">추가</span>
+              </div>
+            </div>
+            <div>
+              <table border="1" id="optionValueTable">
+                <thead>
+                <tr>
+                  <th><input type="checkbox" id="selectAllCheckbox" onclick="toggle(this);"></th>
+                  <th>적용할 상품 선택</th>
+                  <th>옵션 명 및 가격 설정</th>
+                </tr>
+                </thead>
+
+                <tbody id="option_value_rows">
+                <!---------- 추가 버튼 클릭 시 추가할 row ---------->
+                <tr id="optionCheckTr">
+                  <td>
+                    <span class="delete">삭제</span>
+                    <input type="checkbox" class="optionCheckFrame">
+                  </td>
+
+                  <td width="500">
+
+                    <select name="productId" class="productId">
+                      <option value="--ALL--">상품선택</option>
+                      <option th:each="product : ${products}" th:value="${product.id}"
+                              th:text="${product.name}"></option>
+                    </select>
+                  </td>
+
+                  <td width="500">
+                    <div>
+                      옵션명 :
+                      <input type="text" name="name" placeholder="예시) 옵션명을 입력하시오" maxlength="50"
+                             size="70">
+                    </div>
+                    <div>
+                      추가금액 :
+                      <input type="text" name="price" size="70">
+                    </div>
+                    <div>
+                      옵션설명 :
+                      <input type="text" name="description" size="70" style="height:30px;">
+                    </div>
+                  </td>
+                </tr>
+                <!---------- 추가 버튼 클릭 시 추가할 row ---------->
+                </tbody>
+              </table>
+            </div>
+          </td>
+        </tr>
+
+        </tbody>
+      </table>
+      <input type="submit" value="submit">
+    </form>
+  </div>
+</div>
+
+<script th:src="@{/js/productOption.js}"></script>
 </body>
 </html>

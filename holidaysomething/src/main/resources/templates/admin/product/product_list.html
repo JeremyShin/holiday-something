@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>등록한 상품 리스트</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>등록한 상품 리스트</title>
 </head>
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th>이름</th><th>판매가</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="product : ${products}">
-                <td th:text="${product.name}"></td>
-                <td th:text="${product.sellingPrice}"></td>
-            </tr>
-        </tbody>
-    </table>
+<table>
+  <thead>
+  <tr>
+    <th>이름</th>
+    <th>판매가</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="product : ${products}">
+    <td th:text="${product.name}"></td>
+    <td th:text="${product.sellingPrice}"></td>
+  </tr>
+  </tbody>
+</table>
 
 <div>
-    <p>페이징 처리 부분</p>
-    <p>
-        <li th:if="${products.hasPrevious()}"> <!--이전 페이지가 있다면 보임-->
-    <a th:href="@{'/admin/product/product_list?page=' + ${products.number - 1}}">&larr; Newer Products</a>
-        </li>
-    </p>
+  <p>페이징 처리 부분</p>
+  <p>
+  <li th:if="${products.hasPrevious()}"> <!--이전 페이지가 있다면 보임-->
+    <a th:href="@{'/admin/product/product_list?page=' + ${products.number - 1}}">&larr; Newer
+      Products</a>
+  </li>
+  </p>
 
-    <p> <!-- 페이징 리스트 -->
-        <th:block th:each="page : ${#numbers.sequence(1, products.getTotalPages())}">
-        <a th:href="@{'/admin/product/product_list?page=' + ${page - 1}}">
+  <p> <!-- 페이징 리스트 -->
+    <th:block th:each="page : ${#numbers.sequence(1, products.getTotalPages())}">
+      <a th:href="@{'/admin/product/product_list?page=' + ${page - 1}}">
         <span th:text="${page}"></span>
-        </a>
-        </th:block>
-    </p>
+      </a>
+    </th:block>
+  </p>
 
-    <p>
-        <li th:if="${products.hasNext()}"> <!--다음 페이지가 있다면 보임-->
-    <a th:href="@{'/admin/product/product_list?page=' + ${products.number + 1}}">Older Products &rarr;</a>
-    </li>
-    </p>
+  <p>
+  <li th:if="${products.hasNext()}"> <!--다음 페이지가 있다면 보임-->
+    <a th:href="@{'/admin/product/product_list?page=' + ${products.number + 1}}">Older Products
+      &rarr;</a>
+  </li>
+  </p>
 </div>
 </body>
 </html>

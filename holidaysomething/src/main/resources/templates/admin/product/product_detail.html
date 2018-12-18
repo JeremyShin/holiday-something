@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.springframework.org/schema/data/jaxb"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout/default">
 
@@ -8,98 +8,140 @@
 
 <!-- 사용자 스크립트 추가 -->
 <th:block layout:fragment="script">
+
+  <script type="text/javascript">
+
+    let toggle = function (source) {
+      let productOptionTrs = document.querySelectorAll('.productOptionTr');
+      for (let i = 0; i < productOptionTrs.length; i++) {
+        let productOptionCheckboxInput = productOptionTrs[i].getElementsByTagName('input')[0];
+        if (productOptionCheckboxInput !== source) {
+          productOptionCheckboxInput.checked = source.checked;
+        }
+      }
+    };
+
+    let productOptionFormSubmitBtn = document.querySelector('#productOptionForm').querySelector(
+        '#productOptionFormSubmit');
+    productOptionFormSubmitBtn.addEventListener('click', (event) => {
+      let productOptionCheckboxInput = document.getElementsByName('productOptionId');
+
+      // productOptionCheckboxInput이 하나도 체크되어 있지 않을 경우 submit 버튼 비활성화
+      let allBtnUnchecked = true;
+      for (let i = 0; i < productOptionCheckboxInput.length; i++) {
+        if (productOptionCheckboxInput[i].checked === true) {
+          allBtnUnchecked = false;
+          break;
+        }
+      }
+      if (allBtnUnchecked === true) {
+        event.preventDefault();
+        alert('적용할 옵션이 없습니다.');
+      }
+    });
+
+    let validateProductOptionForm = function (form) {
+      if (confirm('체크된 옵션을 모두 삭제하시겠습니까?')) {
+        form.submit();
+      } else {
+        return false;
+      }
+    };
+
+
+  </script>
+
 </th:block>
 
 
 <div layout:fragment="content">
-  
+
   <div id="dashboard">
-            <h1>옵션 검색</h1>
-            <h2>옵션 목록 <span>[총 <strong th:text="${productOptionListSize}"></strong>개]</span></h2>
+    <h1>옵션 검색</h1>
+    <h2>옵션 목록 <span>[총 <strong th:text="${productOptionListSize}"></strong>개]</span></h2>
 
-            <form method="get" action="/admin/product/get/name" id="product-option-search-form">
-                <!-- product_option 내 필드 선택 -->
-                <label>
-                    <select name="productOptionSearchField" required>
-                        <option disabled>옵션을 선택하세요</option>
-                        <option value="name">옵션명</option>
-                        <option value="description">옵션설명</option>
-                        <option value="price">옵션가격</option>
-                    </select>
-                </label>
+    <form method="get" action="/admin/product/get/name" id="product-option-search-form">
+      <!-- product_option 내 필드 선택 -->
+      <label>
+        <select name="productOptionSearchField" required>
+          <option disabled>옵션을 선택하세요</option>
+          <option value="name">옵션명</option>
+          <option value="description">옵션설명</option>
+          <option value="price">옵션가격</option>
+        </select>
+      </label>
 
-                <!-- 옵션 검색어 -->
-                <label>
-                    <input type="text" name="productOptionSearchValue" style="width:300px;" required>
-                </label>
+      <!-- 옵션 검색어 -->
+      <label>
+        <input type="text" name="productOptionSearchValue" style="width:300px;" required>
+      </label>
 
-                <input type="submit" value="검색">
-            </form>
+      <input type="submit" value="검색">
+    </form>
 
-            <div class="tbl-container">
-                <div class="above-tbl">
-                    <form method="post" action="/admin/product/product_detail/bundle">
-                        <select onchange="this.form.submit()" name="productOptionBundleSize">
-                            <option disabled selected>개수 선택</option>
-                            <option value="10">10개씩 보기</option>
-                            <option value="20">20개씩 보기</option>
-                            <option value="30">30개씩 보기</option>
-                            <option value="50">50개씩 보기</option>
-                            <option value="100">100개씩 보기</option>
-                        </select>
-                    </form>
-                    <a href="/admin/product/product_detail_add_option"><span>옵션등록</span></a>
-                </div>
+    <div class="tbl-container">
+      <div class="above-tbl">
+        <form method="post" action="/admin/product/product_detail/bundle">
+          <select onchange="this.form.submit()" name="productOptionBundleSize">
+            <option disabled selected>개수 선택</option>
+            <option value="10">10개씩 보기</option>
+            <option value="20">20개씩 보기</option>
+            <option value="30">30개씩 보기</option>
+            <option value="50">50개씩 보기</option>
+            <option value="100">100개씩 보기</option>
+          </select>
+        </form>
+        <a href="/admin/product/product_detail_add_option"><span>옵션등록</span></a>
+      </div>
 
-                <form method="POST" action="/admin/product/delete/product_option" id="productOptionForm" onsubmit="return validateProductOptionForm(this);">
-                    <table id="product-option-list-tbl">
-                        <colgroup>
-                            <col class="chk" />
-                            <col style="width:50px;" />
-                            <col style="width:190px;" />
-                            <col style="width:auto;" />
-                            <col style="width:auto;" />
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th><input type="checkbox" id="checkbox-all" onclick="toggle(this);" /></th>
-                                <th>No</th>
-                                <th>옵션명<!--<button type="button">오름차순 정렬</button>--></th>
-                                <th>옵션값</th>
-                                <th>옵션설명</th>
-                                <th>상품코드</th>
-                                <th>상품명</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="productOption : ${productOptions != null ? productOptions : productOptionsSearchResult}" class="productOptionTr">
-                                <td><input type="checkbox" name="productOptionId" th:value="${productOption.id}"/></td>
-                                <td th:text="${productOption.id}">###</td>
-                                <td th:text="${productOption.name}">###</td>
-                                <td th:text="${productOption.price}">###</td>
-                                <td th:text="${productOption.description}">###</td>
-                                <td th:text="${productOption.product.code}">###</td>
-                                <td th:text="${productOption.product.name}">###</td>
-                            </tr>
-                        </tbody>
-                    </table>
+      <form method="POST" action="/admin/product/delete/product_option" id="productOptionForm"
+            onsubmit="return validateProductOptionForm(this);">
+        <table id="product-option-list-tbl">
+          <colgroup>
+            <col class="chk"/>
+            <col style="width:50px;"/>
+            <col style="width:190px;"/>
+            <col style="width:auto;"/>
+            <col style="width:auto;"/>
+          </colgroup>
+          <thead>
+          <tr>
+            <th><input type="checkbox" id="checkbox-all" onclick="toggle(this);"/></th>
+            <th>No</th>
+            <th>옵션명<!--<button type="button">오름차순 정렬</button>--></th>
+            <th>옵션값</th>
+            <th>옵션설명</th>
+            <th>상품코드</th>
+            <th>상품명</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="productOption : ${productOptions != null ? productOptions : productOptionsSearchResult}"
+              class="productOptionTr">
+            <td><input type="checkbox" name="productOptionId" th:value="${productOption.id}"/></td>
+            <td th:text="${productOption.id}">###</td>
+            <td th:text="${productOption.name}">###</td>
+            <td th:text="${productOption.price}">###</td>
+            <td th:text="${productOption.description}">###</td>
+            <td th:text="${productOption.product.code}">###</td>
+            <td th:text="${productOption.product.name}">###</td>
+          </tr>
+          </tbody>
+        </table>
 
-                    <button type="submit" id="productOptionFormSubmit">삭제</button>
-                </form>
+        <button type="submit" id="productOptionFormSubmit">삭제</button>
+      </form>
 
-                <!-- Page 번호 -->
-                <div id="page-numbers">
-                    <th:block th:each="item : ${#numbers.sequence(1, pageCount)}">
-                        <a th:href="@{'/admin/product/product_detail/' + ${item}}">
-                            <span th:text="${item}"></span>
-                        </a>
-                    </th:block>
-                </div>
-            </div>
-        </div>
+      <!-- Page 번호 -->
+      <div id="page-numbers">
+        <th:block th:each="item : ${#numbers.sequence(1, pageCount)}">
+          <a th:href="@{'/admin/product/product_detail/' + ${item}}">
+            <span th:text="${item}"></span>
+          </a>
+        </th:block>
+      </div>
     </div>
-  
-  
+  </div>
 </div>
 
 

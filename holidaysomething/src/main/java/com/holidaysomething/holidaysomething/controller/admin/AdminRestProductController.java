@@ -1,23 +1,21 @@
 package com.holidaysomething.holidaysomething.controller.admin;
 
 
-import com.holidaysomething.holidaysomething.domain.ProductCategory;
-import com.holidaysomething.holidaysomething.domain.ProductCategoryDto;
 import com.holidaysomething.holidaysomething.service.admin.AdminProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 public class AdminRestProductController {
 
-  @Autowired
-  AdminProductService adminProductService;
+  private AdminProductService adminProductService;
+
+  public AdminRestProductController(AdminProductService adminProductService) {
+    this.adminProductService = adminProductService;
+  }
 
   @GetMapping("/hello")
   ResponseEntity<String> hello() {

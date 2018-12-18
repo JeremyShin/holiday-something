@@ -1,19 +1,15 @@
 package com.holidaysomething.holidaysomething.JDragon.repositoryTest;
 
 import com.holidaysomething.holidaysomething.domain.Product;
-import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductDetail;
 import com.holidaysomething.holidaysomething.repository.ProductDetailRepository;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
-import com.holidaysomething.holidaysomething.service.admin.AdminProductService;
-import com.holidaysomething.holidaysomething.service.admin.AdminProductServiceImpl;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 

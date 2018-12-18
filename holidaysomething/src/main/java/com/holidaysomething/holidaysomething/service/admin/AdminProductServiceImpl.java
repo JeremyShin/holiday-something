@@ -1,30 +1,31 @@
 package com.holidaysomething.holidaysomething.service.admin;
 
-
-import com.holidaysomething.holidaysomething.domain.*;
+import com.holidaysomething.holidaysomething.domain.Product;
+import com.holidaysomething.holidaysomething.domain.ProductCategory;
+import com.holidaysomething.holidaysomething.domain.ProductDetail;
 import com.holidaysomething.holidaysomething.dto.ProductDto;
 import com.holidaysomething.holidaysomething.repository.ProductCategoryRepository;
 import com.holidaysomething.holidaysomething.repository.ProductDetailRepository;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 public class AdminProductServiceImpl implements AdminProductService {
 
-  @Autowired
-  ProductCategoryRepository productCategoryRepository;
+  private ProductCategoryRepository productCategoryRepository;
+  private ProductDetailRepository productDetailRepository;
+  private ProductRepository productRepository;
 
-  @Autowired
-  ProductDetailRepository productDetailRepository;
+  public AdminProductServiceImpl(ProductCategoryRepository productCategoryRepository,
+      ProductDetailRepository productDetailRepository, ProductRepository productRepository) {
+    this.productCategoryRepository = productCategoryRepository;
+    this.productDetailRepository = productDetailRepository;
+    this.productRepository = productRepository;
+  }
 
-  @Autowired
-  ProductRepository productRepository;
-
-//    @Override
+  //    @Override
 //    @Transactional
 //    public List<ProductCategory> productCategoryList() {
 //
@@ -113,6 +114,4 @@ public class AdminProductServiceImpl implements AdminProductService {
 
     return product;
   }
-
-
 }
