@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 public interface ProductCategoryRepository extends JpaRepository<ProductCategory, Long> {
 
   // admin : product searching by category(대분류)
-//     @Query(value = "SELECT pc FROM ProductCategory pc WHERE pc.parentProductCategory IS NULL")
+//     @Query(value = "SELECT pc FROM ProductCategory pc WHERE pc.parentProductCategory = 0")
 //     public List<ProductCategory> findByProductBigCategoryContaining();
 
 //     //admin : product searching by category(중분류)

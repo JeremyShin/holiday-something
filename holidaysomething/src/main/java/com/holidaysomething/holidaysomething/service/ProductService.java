@@ -1,6 +1,7 @@
 package com.holidaysomething.holidaysomething.service;
 
 import com.holidaysomething.holidaysomething.domain.Product;
+import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import java.util.List;
 import org.springframework.data.domain.Page;

@@ -17,20 +17,22 @@
       var html = '';
       var method = "onclick='getCategoryBrandList(";
 
-      $.getJSON("/admin/product/product_detail/register/lowcategories/" + parentId,
-          function (list) {
-            $(list).each(
-                function () {
-                  html += "<li><span data-categoryid=" + this.id + " class='span' " + method
-                      + this.id
-                      + ")')>" + this.name + "</span></li> ";
-                }
-            );
-            $("#secondCategoryUl").html('');
-            $("#thirdCategoryUl").html('');
-            $("#secondCategoryUl").html(html);
+      $.getJSON(`/admin/product/product_detail/register/lowcategories/${parentId}`,
+        function (list) {
+          $(list).each(
+            function () {
+              console.log('getCategoryList - $(list).each 진입');
 
-          });
+              html +=
+                  `<li><span data-categoryid=${this.id} class="span" ${method}=${this.id}>${this.name}</span></li>`;
+
+              console.log(`getCategoryList - html: ${html}`);
+            }
+          );
+          $("#secondCategoryUl").html('');
+          $("#thirdCategoryUl").html('');
+          $("#secondCategoryUl").html(html);
+      });
     }
 
     function getCategoryBrandList(parentId) {

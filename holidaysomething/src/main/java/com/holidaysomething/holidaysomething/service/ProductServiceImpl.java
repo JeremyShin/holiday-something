@@ -1,6 +1,7 @@
 package com.holidaysomething.holidaysomething.service;
 
 import com.holidaysomething.holidaysomething.domain.Product;
+import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.repository.ProductCategoryRepository;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
@@ -30,12 +31,12 @@ public class ProductServiceImpl implements ProductService {
     return productByName;
   }
 
-  //    @Override
+//      @Override
 //    public List<ProductCategory> findByProductBigCategoryContaining() {
 //        List<ProductCategory> productCategories = productCategoryRepository.findByProductBigCategoryContaining();
 //        return productCategories;
 //    }
-//
+
 //    @Override
 //    public List<ProductCategory> findByProductMiddleCategoryContaining(Long bigId) {
 //        List<ProductCategory> productCategories = productCategoryRepository.findByProductMiddleCategoryContaining(bigId);
