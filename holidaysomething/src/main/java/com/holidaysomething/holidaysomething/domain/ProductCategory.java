@@ -12,10 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Entity

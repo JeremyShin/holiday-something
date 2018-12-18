@@ -1,4 +1,4 @@
-package com.holidaysomething.holidaysomething.Repository;
+package com.holidaysomething.holidaysomething.repository;
 
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

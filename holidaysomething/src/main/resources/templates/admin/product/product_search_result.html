@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html xml:th="http:/www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xml:th="http:/www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Title</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>Title</title>
 </head>
 <body>
 <h1>조회결과출력페이지!</h1>
 <div>
-    <h2>제품검색결과</h2>
-    <table border="1">
-        <th>product name</th>
-        <tr th:each="product : ${productName}"><!--first line-->
-            <td th:text="${product.name}">${product.name}</td>
-        </tr>
-    </table>
+  <h2>제품검색결과</h2>
+  <table border="1">
+    <th>product name</th>
+    <tr th:each="product : ${productName}"><!--first line-->
+      <td th:text="${product.name}">${product.name}</td>
+    </tr>
+  </table>
 
 </div>
 <br>
 <br>
 <!--Pagenation-->
 <div>
-    <h2>페이지네이션</h2>
+  <h2>페이지네이션</h2>
 
-    <span th:text="${presentPage}">${presentPage}</span>
+  <span th:text="${presentPage}">${presentPage}</span>
 </div>
 
 

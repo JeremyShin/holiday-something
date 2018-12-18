@@ -1,7 +1,6 @@
-package com.holidaysomething.holidaysomething.Repository;
+package com.holidaysomething.holidaysomething.repository;
 
 import com.holidaysomething.holidaysomething.domain.Product;
-import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;

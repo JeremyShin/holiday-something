@@ -41,9 +41,8 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/admin/product")
 public class AdminProductController {
 
-  private ProductService productService;
-
   private static final Log log = LogFactory.getLog(AdminProductController.class);
+  private ProductService productService;
   private ProductOptionService productOptionService;
 
   private AdminProductService adminProductService;
@@ -271,21 +270,21 @@ public class AdminProductController {
 //        return "admin/product/product_search";
 //    }
 
-    @PostMapping("/product_search/result")
-    public String searchResult(ModelMap modelMap,
-                                     @RequestParam(value = "productName") String product,
-                                     @RequestParam(value = "page", defaultValue = "1") int start) {
+  @PostMapping("/product_search/result")
+  public String searchResult(ModelMap modelMap,
+      @RequestParam(value = "productName") String product,
+      @RequestParam(value = "page", defaultValue = "1") int start) {
 
-        Pageable pageable = PageRequest.of(start, start+5);
+    Pageable pageable = PageRequest.of(start, start + 5);
 
-        // 제품명으로 검색하기
-        Page<Product> products = productService.findByProductNameContaining(product, pageable);
-        modelMap.addAttribute("productName", products);
-        modelMap.addAttribute("totalPages", products.getTotalPages());
-        modelMap.addAttribute("presentPage", products.getNumber());
+    // 제품명으로 검색하기
+    Page<Product> products = productService.findByProductNameContaining(product, pageable);
+    modelMap.addAttribute("productName", products);
+    modelMap.addAttribute("totalPages", products.getTotalPages());
+    modelMap.addAttribute("presentPage", products.getNumber());
 
-        return "/admin/product/product_search_result";
-    }
+    return "/admin/product/product_search_result";
+  }
 
   /* 옵션 등록 */
   @GetMapping("/product_detail_add_option")
