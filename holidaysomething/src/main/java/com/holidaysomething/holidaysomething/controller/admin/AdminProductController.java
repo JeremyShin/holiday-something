@@ -40,15 +40,12 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/admin/product")
 public class AdminProductController {
-    private ProductService productService;
 
-    public AdminProductController(ProductService productService) {
-        this.productService = productService;
-    }
+  private ProductService productService;
 
   private static final Log log = LogFactory.getLog(AdminProductController.class);
   private ProductOptionService productOptionService;
-  private ProductService productService;
+
   private AdminProductService adminProductService;
   private FileUtil fileUtil;
 
@@ -259,20 +256,20 @@ public class AdminProductController {
     return "/admin/product/product_detail";
   }
 
-    @GetMapping("/product_search")
-    public String productSearch(ModelMap modelMap) {
-
-        List<ProductCategory> productBigCategories =  productService.findByProductBigCategoryContaining();
-        modelMap.addAttribute("bigCategory", productBigCategories);
-//        if(bigId == null) {
+//    @GetMapping("/product_search")
+//    public String productSearch(ModelMap modelMap) {
 //
-//        }else {
-//            List<ProductCategory> productMiddleCategories = productService.findByProductMiddleCategoryContaining(bigId);
-//            modelMap.addAttribute("middleCategory", productMiddleCategories);
-//        }
-
-        return "admin/product/product_search";
-    }
+//        List<ProductCategory> productBigCategories =  productService.findByProductBigCategoryContaining();
+//        modelMap.addAttribute("bigCategory", productBigCategories);
+////        if(bigId == null) {
+////
+////        }else {
+////            List<ProductCategory> productMiddleCategories = productService.findByProductMiddleCategoryContaining(bigId);
+////            modelMap.addAttribute("middleCategory", productMiddleCategories);
+////        }
+//
+//        return "admin/product/product_search";
+//    }
 
     @PostMapping("/product_search/result")
     public String searchResult(ModelMap modelMap,
