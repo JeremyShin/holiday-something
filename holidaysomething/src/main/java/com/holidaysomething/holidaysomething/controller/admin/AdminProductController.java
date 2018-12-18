@@ -138,11 +138,6 @@ public class AdminProductController {
 
             productOption.setProduct(productService.getProduct(productId));
             productOptionService.addProductOption(productOption);
-//
-//        for(ProductOption productOption : productOptions){
-//            productOption.setProduct(productService.getProduct(productId));
-//            productOptionService.addProductOption(productOption);
-//        }
 
         return "admin/product/product_detail_add_option";
     }

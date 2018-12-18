@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "PRODUCT_OPTION")
@@ -27,4 +28,5 @@ public class ProductOption {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
 }
