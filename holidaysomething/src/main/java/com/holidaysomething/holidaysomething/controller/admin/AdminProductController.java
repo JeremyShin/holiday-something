@@ -43,8 +43,14 @@ public class AdminProductController {
     @GetMapping("/product_search")
     public String productSearch(ModelMap modelMap) {
 
-        List<ProductCategory> productCategories =  productService.findByProductBigCategoryContaining();
-        modelMap.addAttribute("bigCategory", productCategories);
+        List<ProductCategory> productBigCategories =  productService.findByProductBigCategoryContaining();
+        modelMap.addAttribute("bigCategory", productBigCategories);
+//        if(bigId == null) {
+//
+//        }else {
+//            List<ProductCategory> productMiddleCategories = productService.findByProductMiddleCategoryContaining(bigId);
+//            modelMap.addAttribute("middleCategory", productMiddleCategories);
+//        }
 
         return "admin/product/product_search";
     }
@@ -52,7 +58,7 @@ public class AdminProductController {
     @PostMapping("/product_search/result")
     public String searchResult(ModelMap modelMap,
                                      @RequestParam(value = "productName") String product,
-                                     @RequestParam(value = "page", defaultValue = "0") int start) {
+                                     @RequestParam(value = "page", defaultValue = "1") int start) {
 
         Pageable pageable = PageRequest.of(start, start+5);
 
@@ -60,7 +66,7 @@ public class AdminProductController {
         Page<Product> products = productService.findByProductNameContaining(product, pageable);
         modelMap.addAttribute("productName", products);
         modelMap.addAttribute("totalPages", products.getTotalPages());
-        modelMap.addAttribute("presentPage", products.getNumber()+1);
+        modelMap.addAttribute("presentPage", products.getNumber());
 
         return "/admin/product/product_search_result";
     }

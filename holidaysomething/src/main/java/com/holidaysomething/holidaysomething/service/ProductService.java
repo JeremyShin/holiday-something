@@ -12,4 +12,5 @@ import java.util.List;
 public interface ProductService {
     public Page<Product> findByProductNameContaining(String productName, Pageable pageable);
     public List<ProductCategory> findByProductBigCategoryContaining();
+    public List<ProductCategory> findByProductMiddleCategoryContaining(Long bigId);
 }

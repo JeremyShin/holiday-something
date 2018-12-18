@@ -15,6 +15,6 @@ public interface ProductCategoryRepository extends JpaRepository<ProductCategory
     public List<ProductCategory> findByProductBigCategoryContaining();
 
     //admin : product searching by category(중분류)
-    @Query(value = "SELECT c FROM ProductCategory c LEFT JOIN c.parentProductCategory WHERE c.id=:id")
+    @Query(value = "SELECT c FROM ProductCategory c LEFT JOIN c.parentProductCategory WHERE c.parentProductCategory.id =:id")
     public List<ProductCategory> findByProductMiddleCategoryContaining(@Param("id") Long id);
 }

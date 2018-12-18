@@ -16,8 +16,9 @@ public class ProductServiceImpl implements ProductService{
     private ProductRepository productRepository;
     private ProductCategoryRepository productCategoryRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, ProductCategoryRepository productCategoryRepository) {
         this.productRepository = productRepository;
+        this.productCategoryRepository = productCategoryRepository;
     }
 
     @Transactional(readOnly = true)
@@ -30,6 +31,12 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public List<ProductCategory> findByProductBigCategoryContaining() {
         List<ProductCategory> productCategories = productCategoryRepository.findByProductBigCategoryContaining();
+        return productCategories;
+    }
+
+    @Override
+    public List<ProductCategory> findByProductMiddleCategoryContaining(Long bigId) {
+        List<ProductCategory> productCategories = productCategoryRepository.findByProductMiddleCategoryContaining(bigId);
         return productCategories;
     }
 }

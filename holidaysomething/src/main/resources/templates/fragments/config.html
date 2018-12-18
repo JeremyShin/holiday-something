@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:fragment="configFragment">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+    <!-- 공통으로 쓰이는 css파일을넣는다.-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/main.css}"/>
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Noto+Sans+KR:400,700"
+          rel="stylesheet"/>
+
+    <!-- 사용자 CSS 영역이 들어감 -->
+    <th:block layout:fragment="css"></th:block>
+
+
+    <!-- 공통으로 쓰이는 js파일을넣는다.-->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- 사용자 스크립트 영역이 들어감 -->
+    <th:block layout:fragment="script"></th:block>
+</head>
+
+</html>

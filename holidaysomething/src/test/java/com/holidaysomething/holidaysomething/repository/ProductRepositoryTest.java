@@ -74,19 +74,4 @@ public class ProductRepositoryTest {
         System.out.println("---");
 
     }
-
-    @Test
-    public void 테스트() throws Exception {
-        List<ProductCategory> productCategories = productCategoryRepository.findAll();
-
-        for(ProductCategory productCategory : productCategories) {
-            System.out.println(productCategory.getId()+", "+productCategory.getParentProductCategory().toString());
-        }
-
-//        for(ProductCategory productCategory : productCategories) {
-//            System.out.println(productCategory.getId()+", "+productCategory.getParentProductCategory().getName());
-//        }
-
-
-    }
 }
