@@ -6,6 +6,7 @@
   padding: 0 15px 0 40px;
   position: fixed;
   top: 0;
+  z-index: 1;
 }
 
 #header a {
