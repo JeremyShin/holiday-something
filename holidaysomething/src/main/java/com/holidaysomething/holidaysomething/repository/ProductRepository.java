@@ -18,6 +18,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
   public Page<Product> findbyProductNameContaining(@Param("productName") String productName,
       Pageable pageable);
 
+  //admin : product searching by code
+  @Query(value = "SELECT p FROM Product p WHERE p.code LIKE CONCAT('%', :productCode, '%')")
+  public Page<Product> findbyProductCodeContaining(@Param("productCode") String productCode,
+                                                   Pageable pageable);
+
   Page<Product> findAll(Pageable pageable);
 
   // 상품 이미지 저장하기

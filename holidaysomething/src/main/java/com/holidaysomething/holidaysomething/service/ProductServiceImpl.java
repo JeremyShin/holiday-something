@@ -31,17 +31,6 @@ public class ProductServiceImpl implements ProductService {
     return productByName;
   }
 
-//      @Override
-//    public List<ProductCategory> findByProductBigCategoryContaining() {
-//        List<ProductCategory> productCategories = productCategoryRepository.findByProductBigCategoryContaining();
-//        return productCategories;
-//    }
-
-//    @Override
-//    public List<ProductCategory> findByProductMiddleCategoryContaining(Long bigId) {
-//        List<ProductCategory> productCategories = productCategoryRepository.findByProductMiddleCategoryContaining(bigId);
-//        return productCategories;
-//    }
   @Override
   @Transactional(readOnly = true)
   public List<Product> getAllProducts() {

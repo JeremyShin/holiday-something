@@ -152,6 +152,7 @@ public class AdminProductController {
     // 문제가 생기는거같다. 그래서 일단은 날짜 받는부분은 따로 처리했다.
 
     String description = productDto.getProductDescription();
+
     Long parentId = productDto.getProductCategoryId();
 
     System.out.println("상품명 : " + productDto.getName());
@@ -279,11 +280,11 @@ public class AdminProductController {
 
     // 제품명으로 검색하기
     Page<Product> products = productService.findByProductNameContaining(product, pageable);
-    modelMap.addAttribute("productName", products);
+    modelMap.addAttribute("products", products);
     modelMap.addAttribute("totalPages", products.getTotalPages());
     modelMap.addAttribute("presentPage", products.getNumber());
 
-    return "/admin/product/product_search_result";
+    return "admin/product/product_search_result";
   }
 
   /* 옵션 등록 */
