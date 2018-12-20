@@ -7,10 +7,10 @@ createRowBtn.addEventListener('click', () => {
   tr.setAttribute('id', 'optionCheckTr');
 
   let td1 = document.createElement('td');
-  let input1 = document.createElement('input');
-  input1.setAttribute('type', 'checkbox');
-  input1.setAttribute('name', 'checkRow');
-  input1.setAttribute('class', 'optionCheckFrame');
+  // let input1 = document.createElement('input');
+  // // input1.setAttribute('type', 'checkbox');
+  // // input1.setAttribute('name', 'checkRow');
+  // // input1.setAttribute('class', 'optionCheckFrame');
 
   let delInput = document.createElement('input');
   delInput.setAttribute('type', 'button');
@@ -19,20 +19,23 @@ createRowBtn.addEventListener('click', () => {
   //delInput.onclick("delRow(this)")
   td1.appendChild(delInput);
 
-  td1.appendChild(input1);
+  // td1.appendChild(input1);
   tr.appendChild(td1);
 
   let td2 = document.createElement('td');
   let div1 = document.createElement('div');
-  let textNode1 = document.createTextNode('옵션명');
+  let textNode1 = document.createTextNode('옵션명:   ');
   div1.appendChild(textNode1);
   let input2 = document.createElement('input');
   input2.setAttribute('type', 'text');
   input2.setAttribute('name', 'productOptions[' + num + '].name');
   input2.setAttribute('placeholder', '예시) 옵션명을 입력하시오');
-  input2.setAttribute('style', 'width:110px;');
-  input2.setAttribute('maxlength', 50);
+ // input2.setAttribute('style', 'width:110px;');
+  input2.setAttribute('maxlength', '50');
+  input2.setAttribute('size', '70');
   div1.appendChild(input2);
+  let span1 = document.createElement('span');
+  div1.appendChild(span1);
   td2.appendChild(div1);
   tr.appendChild(td2);
 
@@ -42,7 +45,8 @@ createRowBtn.addEventListener('click', () => {
   let input3 = document.createElement('input');
   input3.setAttribute('type', 'text');
   input3.setAttribute('name', 'productOptions[' + num + '].price');
-  input3.setAttribute('style', 'width:70px;');
+  //input3.setAttribute('style', 'width:70px;');
+  input3.setAttribute('size', '70');
   div2.appendChild(input3);
   let span2 = document.createElement('span');
   div2.appendChild(span2);

@@ -19,25 +19,20 @@
             <p>옵션명과 옵션값에는 , (콤마), ; (세미콜론), " (쌍따옴표), \ (역슬래시), #$% (특수문자)는 등록할 수 없습니다.</p>
             <div>
               <div>
-                선택한 항목을 <span id="deleteRow">삭제</span>
-              </div>
-              <div>
                 <select name="productId" class="productId">
                   <option value="--ALL--">상품선택</option>
                   <option th:each="product : ${products}" th:value="${product.id}"
                           th:text="${product.name}"></option>
                 </select>
               </div>
-              <div>
-                <span id="createRow">추가</span>
-              </div>
+
             </div>
             <div>
               <table border="1" id="optionValueTable">
                 <thead>
                 <tr>
-                  <th><input type="checkbox" id="selectAllCheckbox" onclick="toggle(this);"></th>
-                  <th>옵션 명 및 가격 설정</th>
+                  <th> <input type="button" value="추가" id="createRow"></th>
+                  <th>옵션명 및 가격 설정</th>
                 </tr>
                 </thead>
 
@@ -45,8 +40,8 @@
                 <!---------- 추가 버튼 클릭 시 추가할 row ---------->
                 <tr id="optionCheckTr">
                   <td>
-                    <span class="delete">삭제</span>
-                    <input type="checkbox" class="optionCheckFrame">
+                    <input type="button" value="삭제" class="delete" onclick="delRow(this);">
+                    <!--<input type="checkbox" class="optionCheckFrame">-->
                   </td>
 
                   <td width="500">
