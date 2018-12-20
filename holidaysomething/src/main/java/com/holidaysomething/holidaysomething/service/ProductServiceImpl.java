@@ -24,9 +24,8 @@ public class ProductServiceImpl implements ProductService {
 
   @Transactional(readOnly = true)
   @Override
-  public Page<Product> findByProductNameContaining(String productName, Pageable pageable) {
-    Page<Product> productByName = productRepository
-        .findbyProductNameContaining(productName, pageable);
+  public Product findByProductNameContaining(String productName) {
+    Product productByName = productRepository.findbyProductNameContaining(productName);
     return productByName;
   }
 

@@ -265,33 +265,24 @@ public class AdminProductController {
     return "/admin/product/product_detail";
   }
 
-//    @GetMapping("/product_search")
-//    public String productSearch(ModelMap modelMap) {
-//
-//        List<ProductCategory> productBigCategories =  productService.findByProductBigCategoryContaining();
-//        modelMap.addAttribute("bigCategory", productBigCategories);
-////        if(bigId == null) {
-////
-////        }else {
-////            List<ProductCategory> productMiddleCategories = productService.findByProductMiddleCategoryContaining(bigId);
-////            modelMap.addAttribute("middleCategory", productMiddleCategories);
-////        }
-//
-//        return "admin/product/product_search";
-//    }
+  @GetMapping("/product_search")
+  public String productSearch(ModelMap modelMap) {
+
+    return "admin/product/product_search";
+  }
 
   @PostMapping("/product_search/result")
   public String searchResult(ModelMap modelMap,
-      @RequestParam(value = "productName") String product,
+      @RequestParam(value = "productName") String productName,
       @RequestParam(value = "page", defaultValue = "1") int start) {
 
     Pageable pageable = PageRequest.of(start, start + 5);
 
     // 제품명으로 검색하기
-    Page<Product> products = productService.findByProductNameContaining(product, pageable);
-    modelMap.addAttribute("productName", products);
-    modelMap.addAttribute("totalPages", products.getTotalPages());
-    modelMap.addAttribute("presentPage", products.getNumber());
+    Product product = productService.findByProductNameContaining(productName);
+    modelMap.addAttribute("product", product);
+    //modelMap.addAttribute("totalPages", products.getTotalPages());
+    //modelMap.addAttribute("presentPage", products.getNumber());
 
     return "/admin/product/product_search_result";
   }
