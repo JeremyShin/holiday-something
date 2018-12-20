@@ -6,61 +6,61 @@
   <h1>상품검색하는 페이지</h1>
   <div>
     <table border="1" summary="">
-      <caption>상품검색</caption>
-      <tbody>
-      <tr>
-        <th scope="row">검색분류</th>
-        <td>
-          <select>
-            <option value="product_name">상품명</option>
-            <option value="item_name">상품명(관리자)</option>
-            <option value="product_code">상품명(관리자)</option>
-          </select>
-          <span>
-                    <form method="post" action="/admin/product/product_search/result">
-                        <input type="text" name="productName">
-                        <input type="submit">
-                    </form>
-                </span>
-
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">상품분류</th>
-        <td>
-          <select name="productCategoryId">
-            <option value="">대분류</option>
-            <option th:each="big : ${bigCategory}" th:value="${big.id}"
-                    th:text="${big.name}"></option>
-          </select>
-          <select>
-            <option value="">중분류</option>
-            <option th:each="middle : ${middleCategory}" th:value="${middle.id}"
-                    th:text="${middle.name}"></option>
-          </select>
-          <select>
-            <option value="">소분류</option>
-          </select>
-
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">상품등록일</th>
-        <td>
-          <select>
-            <option value="regdate">상품등록일</option>
-            <option value="showdate">상품게시일</option>
-          </select>
-          <a href="javascript:;" id="start-date"><span>달력보기</span></a>
-        </td>
-      </tr>
-      </tbody>
+      <form method="post" action="/admin/product/product_search">
+        <tbody>
+        <tr>
+          <th scope="row">검색분류</th>
+          <td>
+            <select>
+              <option disabled selected>검색 옵션 선택</option>
+              <option value="product_name">상품명</option>
+              <option value="item_name">상품명(관리자)</option>
+              <option value="product_code">상품명(관리자)</option>
+            </select>
+            <span>
+              <input type="text" name="productName">
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">상품분류</th>
+          <td>
+            <select name="productCategoryId" class="product-category-select" onchange="updateMiddleCategory(this.selectedIndex.valueOf())">
+              <option disabled selected>대분류</option>
+              <option th:each="large : ${largeCategories}" th:value="${large.id}" th:text="${large.name}"></option>
+            </select>
+            <select name="productCategoryId" class="product-category-select" onchange="updateSmallCategory(this.selectedIndex.valueOf())">
+              <option disabled selected>중분류</option>
+              <!--<option th:each="middle : ${middleCategory}" th:value="${middle.id}" th:text="${middle.name}"></option>-->
+            </select>
+            <select name="productCategoryId" class="product-category-select">
+              <option disabled selected>소분류</option>
+              <!--<option th:each="small : ${smallCategory}" th:value="${small.id}" th:text="${small.name}"></option>-->
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">상품등록일</th>
+          <td>
+            <select>
+              <option value="regdate">상품등록일</option>
+              <option value="showdate">상품게시일</option>
+            </select>
+            <a href="#" id="start-date"><span>달력보기</span></a>
+          </td>
+        </tr>
+        <tr>
+          <input type="submit"/>
+        </tr>
+        </tbody>
+      </form>
     </table>
   </div>
-  <div>
-    <input type="submit">
-  </div>
+
   <!--제품검색결과페이지 추가-->
+
+
+  <script th:src="@{/js/main.js}"></script>
 </div>
 
 </html>

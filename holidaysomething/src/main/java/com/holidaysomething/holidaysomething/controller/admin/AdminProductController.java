@@ -128,7 +128,7 @@ public class AdminProductController {
   @GetMapping("/product_detail/register/lowcategories/{parentId}")
   public List<ProductCategory> getLowLevelCategories(@PathVariable("parentId") Long parentId) {
     List<ProductCategory> categories = adminProductService.productCategoryList(parentId);
-    System.out.println("===================  " + categories.size());
+    log.info("===================  " + categories.size());
     return categories;
   }
 
@@ -258,6 +258,9 @@ public class AdminProductController {
     @GetMapping("/product_search")
     public String productSearch(ModelMap modelMap) {
 
+      List<ProductCategory> largeCategories = adminProductService.productCategoryList(0L);
+      modelMap.addAttribute("largeCategories", largeCategories);
+
 //        List<ProductCategory> productBigCategories =  productService.findByProductBigCategoryContaining();
 //        modelMap.addAttribute("bigCategory", productBigCategories);
 //        if(bigId == null) {
@@ -270,7 +273,7 @@ public class AdminProductController {
         return "admin/product/product_search";
     }
 
-  @PostMapping("/product_search/result")
+  @PostMapping("/product_search")
   public String searchResult(ModelMap modelMap,
       @RequestParam(value = "productName") String product,
       @RequestParam(value = "page", defaultValue = "0") int start) {

@@ -17,13 +17,12 @@
       var html = '';
       var method = "onclick='getCategoryBrandList(";
 
-      $.getJSON("/admin/product/product_detail/register/lowcategories/" + parentId,
+      // getJSON의 1번째 인자로 요청을 보내 받은 데이터가 2번째 인자인 함수의 매개변수(list)로 들어간다.
+      $.getJSON(`/admin/product/product_detail/register/lowcategories/${parentId}`,
           function (list) {
             $(list).each(
                 function () {
-                  html += "<li><span data-categoryid=" + this.id + " class='span' " + method
-                      + this.id
-                      + ")')>" + this.name + "</span></li> ";
+                  html += `<li><span data-categoryid=${this.id} class='span' ${method}${this.id})')>${this.name}</span></li> `;
                 }
             );
             $("#secondCategoryUl").html('');

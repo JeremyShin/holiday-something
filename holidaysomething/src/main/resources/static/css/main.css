@@ -45,7 +45,7 @@
   display: flex;
 }
 
-#container > div:nth-of-type(2) {
+#container > div {
   margin-top: 65px;
 }
 
@@ -54,7 +54,6 @@
   height: 900px;
   background-color: #efefef;
   padding-top: 40px;
-  margin-top: 65px;
 }
 
 .navbar-menu {
