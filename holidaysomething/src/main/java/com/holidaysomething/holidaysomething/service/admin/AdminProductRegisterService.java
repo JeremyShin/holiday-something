@@ -5,7 +5,7 @@ import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.dto.ProductDto;
 import java.util.List;
 
-public interface AdminProductService {
+public interface AdminProductRegisterService {
 
 //    // 상품 대분류 카테고리 읽어오기야!
 //    public List<ProductCategory> productCategoryList();

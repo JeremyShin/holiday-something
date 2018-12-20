@@ -1,8 +1,7 @@
-alter table product_image_category default character set utf8;
-
-INSERT INTO product_image_category (id, name) VALUES (1, "상세이미지");
-INSERT INTO product_image_category (id, name) VALUES (2, "목록이미지");
-INSERT INTO product_image_category (id, name) VALUES (3, "추가이미지");
+-- alter table product_image_category default character set utf8;
+INSERT INTO product_image_category (id, name) VALUES (1, '상세이미지');
+INSERT INTO product_image_category (id, name) VALUES (2, '목록이미지');
+INSERT INTO product_image_category (id, name) VALUES (3, '추가이미지');
 
 INSERT INTO exchange_refund(apply_date, approve, approve_date, price, type) VALUES (now(), 1, now(), 3000, '환불');
 INSERT INTO exchange_refund(apply_date, approve, approve_date, price, type) VALUES (now(), 1, now(), 3000, '환불');

@@ -5,12 +5,10 @@ import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.domain.ProductOptionCommand;
-import com.holidaysomething.holidaysomething.dto.ProductDto;
 import com.holidaysomething.holidaysomething.service.ProductOptionService;
 import com.holidaysomething.holidaysomething.service.ProductService;
 import com.holidaysomething.holidaysomething.service.admin.AdminProductOptionService;
-import com.holidaysomething.holidaysomething.service.admin.AdminProductOptionServiceImpl;
-import com.holidaysomething.holidaysomething.service.admin.AdminProductService;
+import com.holidaysomething.holidaysomething.service.admin.AdminProductRegisterService;
 import com.holidaysomething.holidaysomething.util.FileUtil;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -48,16 +46,16 @@ public class AdminProductController {
   private ProductService productService;
   private ProductOptionService productOptionService;
 
-  private AdminProductService adminProductService;
+  private AdminProductRegisterService adminProductRegisterService;
   private AdminProductOptionService adminProductOptionService;
   private FileUtil fileUtil;
 
   public AdminProductController(ProductOptionService productOptionService,
-      ProductService productService, AdminProductService adminProductService,
+      ProductService productService, AdminProductRegisterService adminProductRegisterService,
       FileUtil fileUtil, AdminProductOptionService adminProductOptionService) {
     this.productOptionService = productOptionService;
     this.productService = productService;
-    this.adminProductService = adminProductService;
+    this.adminProductRegisterService = adminProductRegisterService;
     this.fileUtil = fileUtil;
     this.adminProductOptionService = adminProductOptionService;
   }
@@ -112,20 +110,10 @@ public class AdminProductController {
   // 대분류 불러오기.
   @GetMapping("/product_detail/register")
   public String productRegister(ModelMap model) {
-    List<ProductCategory> categories = adminProductService.productCategoryList(0l);
-
+    List<ProductCategory> categories = adminProductRegisterService.productCategoryList(0l);
     Product product = new Product();
-//    ProductDetail productDetail = new ProductDetail();
-//    ProductCategory productCategory = new ProductCategory();
-    ProductDto productDto = new ProductDto();
-
     model.addAttribute("categories", categories);
     model.addAttribute("product", product);
-//        model.addAttribute("productDetail",productDetail);
-//        model.addAttribute("productCategory",productCategory);
-//    model.addAttribute("productDto", productDto);
-
-    //model.put("categories", categories);
     return "admin/product/product_register";
   }
 
@@ -133,7 +121,7 @@ public class AdminProductController {
   @ResponseBody
   @GetMapping("/product_detail/register/lowcategories/{parentId}")
   public List<ProductCategory> getLowLevelCategories(@PathVariable("parentId") Long parentId) {
-    List<ProductCategory> categories = adminProductService.productCategoryList(parentId);
+    List<ProductCategory> categories = adminProductRegisterService.productCategoryList(parentId);
     System.out.println("===================  " + categories.size());
     return categories;
   }
@@ -158,12 +146,6 @@ public class AdminProductController {
     // 문제가 생기는거같다. 그래서 일단은 날짜 받는부분은 따로 처리했다.
     // 아니다. 계속 null 값만 받아와서. 그렇다.
 
-//    String description = productDto.getProductDescription();
-//    Long parentId = productDto.getProductCategoryId();
-
-//    System.out.println("상품명 : " + productDto.getName());
-//    System.out.println("체크박스 :  " + productDto.getDisplay());
-
     String description = product.getProductDetail().getDescription();
     System.out.println("================ description : " + description);
 
@@ -171,26 +153,9 @@ public class AdminProductController {
     product.setReleaseDate(date2);
     product.setRegDate(LocalDateTime.now());
 
-    System.out.println("등록일 : " + product.getRegDate());
-    System.out.println(
-        "============ product : " + product.getName() + " ++++++ " + product.getSellingPrice());
-    System.out.println("========= date1 : " + date1);
-    System.out.println("========= product.getManufactureDate() : " + product.getManufactureDate());
-    System.out.println("========= date2 : " + date2);
-    System.out.println("========= product.getReleaseDate() : " + product.getReleaseDate());
-    System.out.println("========= regdate : " + product.getRegDate());
-
-    System.out.println(
-        "================ product.getCategory() : " + product.getProductCategory().getId());
-
-//    date2 = date2.replace("T"," ");
-//    System.out.println("RequestParam , String : " + date2);
-//    LocalDateTime ldt = LocalDateTime.parse(date2, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-//    System.out.println("RequestParam , String : " + ldt.toString());
-
-//    Product product = adminProductService.productDtoToProduct(productDto);
+//    Product product = adminProductRegisterService.productDtoToProduct(productDto);
 //
-    product = adminProductService.productRegister(product);
+    product = adminProductRegisterService.productRegister(product);
 
     return "redirect:/admin/product/product_detail/register";
 
@@ -319,4 +284,14 @@ public class AdminProductController {
 
     return "redirect:/admin/product/product_detail_add_option";
   }
+
+  @GetMapping("/{productId}")
+  public String getProductDetail(@PathVariable("productId") Long productid,
+      ModelMap model) {
+    Product product = productService.getProduct(productid);
+    model.addAttribute("product", product);
+
+    return "admin/product/product_detail_view";
+  }
+
 }

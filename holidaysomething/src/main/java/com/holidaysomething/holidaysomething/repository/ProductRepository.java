@@ -36,6 +36,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
   //카테고리 번호로 상품을 검색
   List<Product> findByProductCategoryIdOrderByName(Long productCategoryId);
+
+  // 상품 한개 조회하기.
+
+  @Override
+  Product getOne(Long productId);
 }
 
 

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.springframework.org/schema/data/jaxb"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorator="layout/default">
+
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+</th:block>
+
+
+<div layout:fragment="content">
+  <!-- 사용자 스크립트 추가 -->
+  <th:block layout:fragment="script">
+  </th:block>
+
+  <h1> Product Detail </h1>
+
+  <!--------------------------
+          | Product Detail  |
+          -------------------------->
+  <!--  block은 CSS로 크기조절이 가능하고 inline은 안 된다. -->
+  <!--  div 는 기본이 block! -->
+
+
+  <table border="1">
+    <thead>
+    <tr>
+      <p> Product Detail </p>
+    </tr>
+    </thead>
+    <tr>
+      <td rowspan="3" colspan="2"><img th:src="@{/img/macbook.jpeg}"/></td>
+      <td colspan="2">상품이름</td>
+      <td colspan="2"><label th:text="${product.name}"></label></td>
+    </tr>
+    <tr>
+      <td colspan="2">상품코드</td>
+      <td colspan="2"><label th:text="${product.code}">상품코드</label></td>
+    </tr>
+    <tr>
+      <td colspan="2">상품설명</td>
+      <td colspan="2"><textarea th:text="${product.productDetail.description}">상품설명</textarea></td>
+    </tr>
+    <tr>
+      <td>상품원가</td>
+      <td><label th:text="${product.originalPrice}">상품원가</label></td>
+      <td>배송비</td>
+      <td><label th:text="${product.shippingPrice}">배송비</label></td>
+      <td>카테고리이름</td>
+      <td><label th:text="${product.productCategory.name}">카테고리</label></td>
+    </tr>
+    <tr>
+      <td>판매가</td>
+      <td><label th:text="${product.sellingPrice}"></label></td>
+      <td>적립금</td>
+      <td><label th:text="${product.mileage}"></label></td>
+      <td>등록일</td>
+      <td><label th:text="${#temporals.format(product.regDate , 'yyyy-MM-dd HH:mm:ss')}"></label>
+      </td>
+    </tr>
+    <tr>
+      <td>제조가</td>
+      <td><label th:text="${product.manufacturingPrice}"></label></td>
+      <td>제조사</td>
+      <td><label th:text="${product.manufacturer}"></label></td>
+      <td>제조일</td>
+      <td><label
+          th:text="${#temporals.format(product.manufactureDate , 'yyyy-MM-dd HH:mm:ss')}"></label>
+      </td>
+    </tr>
+    <tr>
+      <td>재고</td>
+      <td><label th:text="${product.quantity}"></label></td>
+      <td>안전재고</td>
+      <td><label th:text="${product.safeQuantity}"></label></td>
+      <td>출시일</td>
+      <td><label
+          th:text="${#temporals.format(product.releaseDate , 'yyyy-MM-dd HH:mm:ss')}"></label></td>
+    </tr>
+  </table>
+
+
+</div>
+</html>
