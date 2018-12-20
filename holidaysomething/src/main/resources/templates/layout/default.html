@@ -5,13 +5,10 @@
   <head th:replace="fragments/config :: configFragment"></head>
 
   <header th:replace="fragments/header :: headerFragment"></header>
-
-  <div style="display: flex;">
+  <div id="container">
     <div th:replace="fragments/leftNavbar :: leftNavbarFragment"></div>
-
     <div layout:fragment="content"></div>
   </div>
-
 
   <!--<footer th:replace="fragments/footer:: footerFragment"></footer>-->
 
