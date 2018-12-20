@@ -179,8 +179,8 @@ public class AdminProductController {
   }
 
   @GetMapping("/product_list")
-  public String productList(ModelMap modelMap, @PageableDefault(sort = {
-      "id"}, direction = Sort.Direction.DESC, size = 10) Pageable pageable) {
+  public String productList(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 10) Pageable pageable,
+                            ModelMap modelMap) {
     Page<Product> products = productService.findAll(pageable);
     modelMap.addAttribute("products", products);
     return "admin/product/product_list";
