@@ -23,7 +23,7 @@ public class ProductServiceTest {
   @Test
   public void 상품서비스에서등록하기테스트() {
     Product p = new Product();
-    ProductDetail pd = new ProductDetail();
+    ProductDetail pd = new ProductDetail("이거 방탄유리야!!");
     ProductCategory pc = new ProductCategory();
     pc.setId(2l);
     pc.setName("하하");
@@ -35,11 +35,10 @@ public class ProductServiceTest {
     p.setSellingPrice(10000000);
     p.setManufacturingPrice(100);
     p.setShippingPrice(50000);
+    p.setProductDetail(pd);
     p.setProductCategory(pc);
 
-    String description = "이거 방탄유리야!!!!!!!!";
-
-    Product insertedProduct = adminProductService.productRegister(p, description, pc.getId());
+    Product insertedProduct = adminProductService.productRegister(p);
 
     System.out.println("================================");
     System.out.println("상품 id : " + insertedProduct.getId());

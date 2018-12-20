@@ -19,5 +19,5 @@ public interface AdminProductService {
 
 
   // 상품 등록 하기야!! (상품, 상품_디테일 테이블 두개 insert)
-  Product productRegister(Product product, String description, Long parentCategoryId);
+  Product productRegister(Product product);
 }

@@ -1,8 +1,8 @@
 let createRowBtn = document.querySelector('#createRow');
 
 /* 옵션 추가 버튼 누를 시, 행 생성 */
+let num = 1;
 createRowBtn.addEventListener('click', () => {
-  let num = 1;
   let tr = document.createElement('tr');
   tr.setAttribute('id', 'optionCheckTr');
 

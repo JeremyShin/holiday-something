@@ -164,6 +164,9 @@ public class AdminProductController {
 //    System.out.println("상품명 : " + productDto.getName());
 //    System.out.println("체크박스 :  " + productDto.getDisplay());
 
+    String description = product.getProductDetail().getDescription();
+    System.out.println("================ description : " + description);
+
     product.setManufactureDate(date1);
     product.setReleaseDate(date2);
     product.setRegDate(LocalDateTime.now());
@@ -172,10 +175,13 @@ public class AdminProductController {
     System.out.println(
         "============ product : " + product.getName() + " ++++++ " + product.getSellingPrice());
     System.out.println("========= date1 : " + date1);
-    System.out.println("========= date1 : " + product.getManufactureDate());
+    System.out.println("========= product.getManufactureDate() : " + product.getManufactureDate());
     System.out.println("========= date2 : " + date2);
-    System.out.println("========= date2 : " + product.getReleaseDate());
+    System.out.println("========= product.getReleaseDate() : " + product.getReleaseDate());
     System.out.println("========= regdate : " + product.getRegDate());
+
+    System.out.println(
+        "================ product.getCategory() : " + product.getProductCategory().getId());
 
 //    date2 = date2.replace("T"," ");
 //    System.out.println("RequestParam , String : " + date2);
@@ -184,7 +190,7 @@ public class AdminProductController {
 
 //    Product product = adminProductService.productDtoToProduct(productDto);
 //
-//    product = adminProductService.productRegister(product, description, parentId);
+    product = adminProductService.productRegister(product);
 
     return "redirect:/admin/product/product_detail/register";
 
@@ -214,16 +220,6 @@ public class AdminProductController {
     productService.saveProductImage(productImage);
     return "redirect:/admin/product/product_list";
   }
-
-  // 오류난다~~~~~!
-//    @GetMapping("/product_detail")
-//    public String productDetail(ModelMap modelMap) {
-//        List<ProductOption> productOptionList = productOptionService.getAllProductOptions();
-//        modelMap.addAttribute("productOptionList", productOptionList);
-//        modelMap.addAttribute("productOptionListSize", productOptionList.size());
-//
-//        return "admin/product/product_detail";
-//    }
 
   @PostMapping("/delete/product_option")
   public String deleteProductOption(@RequestParam("productOptionId") String[] productOptionIds) {
