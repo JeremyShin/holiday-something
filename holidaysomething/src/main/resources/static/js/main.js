@@ -42,34 +42,48 @@ let validateProductOptionForm = function (form) {
   }
 };
 
-let updateMiddleCategory = function(largerId) {
-  console.log('updateMiddleCategory is triggered');
-  let option = '';
+let updateMiddleCategory = function(largeId) {
+  console.log('updateMiddleCategory() is triggered');
 
-  $.getJSON(`/admin/product/subCategory/${largerId}`,
+  $.getJSON(`/admin/product/subCategory/${largeId}`,
             function(category) {
-              $(category).each(
-                  function() {
-                    option += `<option value=${this.id}>${this.name}</option>`;
-                  }
-              );
-              let productCategorySelects = document.querySelectorAll('.product-category-select');
-              productCategorySelects[1].appendChild(option);
+              let productMiddleCategorySelect = document.getElementsByName('productMiddleCategoryId')[0];
+              // 중분류에 남아있을지 모르는 option 태그 모두 삭제 ('중분류' selected option만 남기고)
+              while (productMiddleCategorySelect.length > 1) {
+                productMiddleCategorySelect.removeChild(productMiddleCategorySelect.lastChild);
+              }
+
+              let productSmallCategorySelect = document.getElementsByName('productSmallCategoryId')[0];
+              // 소분류에 남아있을지 모르는 option 태그 모두 삭제 ('소분류' selected option만 남기고)
+              while (productSmallCategorySelect.length > 1) {
+                productSmallCategorySelect.removeChild(productSmallCategorySelect.lastChild);
+              }
+
+              $(category).each(function() {
+                let option = document.createElement('option');
+                option.text = this.name;
+                option.value = this.id;
+                productMiddleCategorySelect.appendChild(option);
+              });
             });
 };
 
 let updateSmallCategory = function(middleId) {
-  console.log('updateSmallCategory is triggered');
-  // let option = '';
-  //
-  // $.getJSON(`/admin/product/subCategory/${middleId}`,
-  //     function(category) {
-  //       $(category).each(
-  //           function() {
-  //             option += `<option value=${this.id}>${this.name}</option>`;
-  //           }
-  //       );
-  //       // let productCategorySelects = document.querySelectorAll('.product-category-select');
-  //       // productCategorySelects[1].appendChild(option);
-  //     });
+  console.log('updateSmallCategory() is triggered');
+
+  $.getJSON(`/admin/product/subCategory/${middleId}`,
+      function(category) {
+        let productSmallCategorySelect = document.getElementsByName('productSmallCategoryId')[0];
+        // 소분류에 남아있을지 모르는 option 태그 모두 삭제 (selected option만 남기고)
+        while (productSmallCategorySelect.length > 1) {
+          productSmallCategorySelect.removeChild(productSmallCategorySelect.lastChild);
+        }
+
+        $(category).each(function() {
+          let option = document.createElement('option');
+          option.text = this.name;
+          option.value = this.id;
+          productSmallCategorySelect.appendChild(option);
+        });
+      });
 };

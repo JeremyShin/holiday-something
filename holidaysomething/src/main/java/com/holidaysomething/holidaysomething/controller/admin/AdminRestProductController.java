@@ -29,7 +29,10 @@ public class AdminRestProductController {
   public List<ProductCategory> getSubCategories(@PathVariable("largerId") Long largerId) {
     log.info("getSubCategories 진입, largerId: " + largerId);
     List<ProductCategory> categories = adminProductService.productCategoryList(largerId);
-    log.info("하위 카테고리를 받음");
+    for (ProductCategory category : categories) {
+      log.info("하위 카테고리: " + category.getName());
+    }
+
     return categories;
   }
 }
