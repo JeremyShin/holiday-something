@@ -296,28 +296,6 @@ public class AdminProductController {
     return "/admin/product/product_search_result";
   }
 
-  /* 옵션 수정 -> 수정 버튼을 눌렀을 때 */
-  @GetMapping("/product_detail_modify_option")
-  public String modifyOption(ProductOption productOption, ModelMap modelMap){
-    String modification = "으아아아";
-    modelMap.addAttribute("productOptionMod", productOption);
-    modelMap.addAttribute("modification", modification);
-
-    log.info("옵션수정버튼을 눌렀습니다.");
-    log.info("modification : " + modification);
-
-    return "redirect:/admin/product/product_detail";
-  }
-
-  /* 옵션 수정 -> 수정완료 버튼을 눌렀을 때 */
-  @PostMapping("/product_detail_modify_option")
-  public String modifyProductOption(ProductOption productOption,
-      @RequestParam(value = "productId", defaultValue = "") Long productId){
-    //update
-
-    return "admin/product/product_detail";
-  }
-
   /* 옵션 등록 */
   @GetMapping("/product_detail_add_option")
   public String addOption(Model model) {

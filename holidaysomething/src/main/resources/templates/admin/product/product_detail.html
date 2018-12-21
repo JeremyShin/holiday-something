@@ -47,9 +47,6 @@
         <a href="/admin/product/product_detail_add_option"><span>옵션등록</span></a>
       </div>
 
-      <h2>수정수정<span th:text="${productOptionListSize}"></span></h2>
-      <h2>수정의값<span th:text="${modification}"></span></h2>
-
       <form method="POST" action="/admin/product/delete/product_option" id="productOptionForm"
             onsubmit="return validateProductOptionForm(this);">
         <table id="product-option-list-tbl">
@@ -57,10 +54,7 @@
             <col class="chk"/>
             <col style="width:50px;"/>
             <col style="width:190px;"/>
-            <col style="width:100px;"/>
-            <col style="width:400px;"/>
             <col style="width:auto;"/>
-            <col style="width:400px;"/>
             <col style="width:auto;"/>
           </colgroup>
           <thead>
@@ -68,25 +62,22 @@
             <th><input type="checkbox" id="checkbox-all" onclick="toggle(this);"/></th>
             <th>No</th>
             <th>옵션명<!--<button type="button">오름차순 정렬</button>--></th>
-            <th>옵션가격</th>
+            <th>옵션값</th>
             <th>옵션설명</th>
             <th>상품코드</th>
             <th>상품명</th>
-            <th></th>
           </tr>
           </thead>
           <tbody>
           <tr th:each="productOption : ${productOptions != null ? productOptions : productOptionsSearchResult}"
               class="productOptionTr">
             <td><input type="checkbox" name="productOptionId" th:value="${productOption.id}"/></td>
-            <td th:if="${modification}==true" th:text="하이욤"></td>
-            <td th:unless="${modification}==true" th:text="${productOption.id}">###</td>
+            <td th:text="${productOption.id}">###</td>
             <td th:text="${productOption.name}">###</td>
             <td th:text="${productOption.price}">###</td>
             <td th:text="${productOption.description}">###</td>
             <td th:text="${productOption.product.code}">###</td>
             <td th:text="${productOption.product.name}">###</td>
-            <td><input type="button" value="수정" onclick="window.location.href='/admin/product/product_detail_modify_option'"></td>
           </tr>
           </tbody>
         </table>
