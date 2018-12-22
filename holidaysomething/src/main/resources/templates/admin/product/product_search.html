@@ -26,35 +26,26 @@
       </tr>
       <tr>
         <th scope="row">상품분류</th>
-<!--        <td>
-          <select name="productCategoryId">
-            <option value="">대분류</option>
-            <option th:each="big : ${bigCategory}" th:value="${big.id}"
-                    th:text="${big.name}"></option>
-          </select>
-          <select>
-            <option value="">중분류</option>
-            <option th:each="middle : ${middleCategory}" th:value="${middle.id}"
-                    th:text="${middle.name}"></option>
-          </select>
-          <select>
-            <option value="">소분류</option>
-          </select>
-
-        </td>-->
       </tr>
       <tr>
         <th scope="row">상품등록일</th>
         <td>
-          <select>
-            <option value="regdate">상품등록일</option>
-            <option value="showdate">상품게시일</option>
-          </select>
-          <a href="javascript:;" id="start-date"><span>달력보기</span></a>
+          <form method="post" action="/admin/product/product_search/result">
+            <!--<select id="product-select-by-date" name="productDate">
+              <option value="regdate11">상품등록일</option>
+              <option value="showdate">상품게시일</option>
+
+            </select>-->
+            <input name="regdateStart" type="datetime-local" placeholder="Start Registration Date">시작일
+            <input name="regdateEnd" type="datetime-local" placeholder="Ended Registration Date">종료일
+            <input type="submit">
+          </form>
         </td>
       </tr>
       </tbody>
     </table>
+
+
   </div>
   <div>
     <input type="submit">

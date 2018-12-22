@@ -22,6 +22,12 @@
         </ul>
 
     </div>
+    <h4>등록일 별 날짜가 나와야함</h4>
+    <div>
+        <li th:each="product : ${regdateStart}">
+            <span th:text="${product.name}"></span>
+        </li>
+    </div>
     <br>
     <br>
     <!--Pagenation-->
