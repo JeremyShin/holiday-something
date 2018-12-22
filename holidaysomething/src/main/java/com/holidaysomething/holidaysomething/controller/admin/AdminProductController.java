@@ -287,7 +287,7 @@ public class AdminProductController {
 
   @GetMapping("/{productId}")
   public String getProductDetail(@PathVariable("productId") Long productId,
-      @RequestParam("optionPage") Optional<Integer> pageNum,
+      @RequestParam(required = false, value = "optionPage") Optional<Integer> pageNum,
       ModelMap model) {
     // 상품id 로 상품 정보 가져오기.
     Product product = productService.getProduct(productId);
@@ -296,12 +296,17 @@ public class AdminProductController {
     // html 파일에서 페이징 처리 한 부분은 1로 시작하고
     // Pageable 에서 페이지는 0 부터 시작하므로 1을 빼줘야한다.
     Pageable pageable;
-    // pageNum을. 즉 주소창에 admin/product/1?optionPage=0 을 입력했을시
-    // 처리하는 로직
-    if (pageNum.get().equals(0)) {
-      pageable = PageRequest.of(0, 5);
+
+    if (pageNum.isPresent()) {
+      if (pageNum.get().equals(0)) {
+        // pageNum을. 즉 주소창에 admin/product/1?optionPage=0 을 입력했을시
+        // 정상 처리하는 로직
+        pageable = PageRequest.of(0, 5);
+      } else {
+        pageable = PageRequest.of(pageNum.isPresent() ? pageNum.get() - 1 : 0, 5);
+      }
     } else {
-      pageable = PageRequest.of(pageNum.isPresent() ? pageNum.get() - 1 : 0, 5);
+      pageable = PageRequest.of(0, 5);
     }
 
     //Page<ProductOption> productOptions =
