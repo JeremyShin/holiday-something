@@ -417,6 +417,17 @@ INSERT INTO product_option (id,name,price,description,product_id) VALUES (28,'�
 INSERT INTO product_option (id,name,price,description,product_id) VALUES (29,'핑크',NULL,NULL,12);
 INSERT INTO product_option (id,name,price,description,product_id) VALUES (30,'바이올렛',NULL,NULL,12);
 
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (31,'스카이블루',200,NULL,1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (32,'그린',NULL,NULL,1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (33,'핑크',NULL,NULL,1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (34,'머스타드',NULL,'머스타드 ==> 겨자색',1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (35,'블루',NULL,NULL,1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (36,'레드',NULL,NULL,1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (37,'블랙',NULL,NULL,1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (38,'그레이',2500,NULL,1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (39,'검정',NULL,NULL,1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (40,'바이올렛',NULL,NULL,1);
+
 
 INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(10000,1,100,NULL,NULL,1,1);
 INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(111000,2,300,NULL,NULL,21,21);

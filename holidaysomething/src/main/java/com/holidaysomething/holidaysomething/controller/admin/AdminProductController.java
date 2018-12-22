@@ -286,12 +286,56 @@ public class AdminProductController {
   }
 
   @GetMapping("/{productId}")
-  public String getProductDetail(@PathVariable("productId") Long productid,
+  public String getProductDetail(@PathVariable("productId") Long productId,
+      @RequestParam("optionPage") Optional<Integer> pageNum,
       ModelMap model) {
-    Product product = productService.getProduct(productid);
+    // 상품id 로 상품 정보 가져오기.
+    Product product = productService.getProduct(productId);
     model.addAttribute("product", product);
+
+    // html 파일에서 페이징 처리 한 부분은 1로 시작하고
+    // Pageable 에서 페이지는 0 부터 시작하므로 1을 빼줘야한다.
+    Pageable pageable;
+    // pageNum을. 즉 주소창에 admin/product/1?optionPage=0 을 입력했을시
+    // 처리하는 로직
+    if (pageNum.get().equals(0)) {
+      pageable = PageRequest.of(0, 5);
+    } else {
+      pageable = PageRequest.of(pageNum.isPresent() ? pageNum.get() - 1 : 0, 5);
+    }
+
+    //Page<ProductOption> productOptions =
+    Page<ProductOption> productOptions = productOptionService
+        .getProductOptionsByProductId(productId, pageable);
+
+    model.addAttribute("productOptions", productOptions);
+
+    int pageCount = productOptions.getTotalPages();
+    model.addAttribute("pageCount", pageCount);
+    model.addAttribute("productId", productId);
+
+
+
 
     return "admin/product/product_detail_view";
   }
+
+//  @GetMapping({"/product_detail", "/product_detail/{pageStart}"})
+//  public String productDetailOptions(ModelMap modelMap, @PathVariable Optional<Integer> pageStart) {
+//    List<ProductOption> productOptionList = productOptionService.getAllProductOptions();
+//    int productOptionListSize = productOptionList.size();
+//    modelMap.addAttribute("productOptionList", productOptionList);
+//    modelMap.addAttribute("productOptionListSize", productOptionListSize);
+//
+//    Pageable pageable = PageRequest.of(pageStart.isPresent() ? pageStart.get() - 1 : 0, 10);
+//    Page<ProductOption> productOptions = productOptionService.getAllProductOptionsPage(pageable);
+//
+//    int pageCount = productOptions.getTotalPages();
+//    log.info("pageCount: " + pageCount);
+//    modelMap.addAttribute("pageCount", pageCount);
+//    modelMap.addAttribute("productOptions", productOptions);
+//
+//    return "admin/product/product_detail";
+//  }
 
 }

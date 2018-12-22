@@ -87,6 +87,57 @@
 
   <h3> Option List </h3>
 
+  <div id="optionList">
 
+    <div class="tbl-container">
+
+      <table id="product-option-list-tbl">
+        <colgroup>
+          <col class="chk"/>
+          <col style="width:50px;"/>
+          <col style="width:190px;"/>
+          <col style="width:auto;"/>
+          <col style="width:auto;"/>
+        </colgroup>
+        <thead>
+        <tr>
+          <th><input type="checkbox" id="checkbox-all" onclick="toggle(this);"/></th>
+          <th>No</th>
+          <th>옵션명<!--<button type="button">오름차순 정렬</button>--></th>
+          <th>옵션값</th>
+          <th>옵션설명</th>
+          <th>상품코드</th>
+          <th>상품명</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="productOption : ${productOptions != null ? productOptions : productOptions}"
+            class="productOptionTr">
+          <td><input type="checkbox" name="productOptionId" th:value="${productOption.id}"/></td>
+          <td th:text="${productOption.id}">###</td>
+          <td th:text="${productOption.name}">###</td>
+          <td th:text="${productOption.price}">###</td>
+          <td th:text="${productOption.description}">###</td>
+          <td th:text="${productOption.product.code}">###</td>
+          <td th:text="${productOption.product.name}">###</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <!-- Page 번호 -->
+      <div id="page-numbers">
+        <th:block th:each="item : ${#numbers.sequence(1, pageCount)}">
+          <a th:href="@{'/admin/product/'+ ${productId} + '?optionPage=' + ${item}}">
+            <span th:text="${item}"></span>
+          </a>
+        </th:block>
+      </div>
+    </div>
+  </div>
+
+
+  <th:block layout:fragment="script">
+    <script th:src="@{/js/main.js}"></script>
+  </th:block>
 </div>
 </html>

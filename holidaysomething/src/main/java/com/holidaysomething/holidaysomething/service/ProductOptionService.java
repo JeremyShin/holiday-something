@@ -26,4 +26,6 @@ public interface ProductOptionService {
 
   Page<ProductOption> getAllProductOptionsByPricePage(String productOptionSearchValue,
       Pageable pageable);
+
+  Page<ProductOption> getProductOptionsByProductId(Long productId, Pageable pageable);
 }
