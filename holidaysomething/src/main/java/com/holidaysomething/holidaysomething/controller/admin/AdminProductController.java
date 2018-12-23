@@ -181,12 +181,12 @@ public class AdminProductController {
 
   @GetMapping("/product_list")
   public String productList(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 10) Pageable pageable,
-                            ModelMap modelMap, ProductSearch productSearch) {
+                            @ModelAttribute("search")ProductSearch productSearch, ModelMap modelMap) {
+    // 커맨드 객체와 @ModelAttribute 같다. 다만 @ModelAttribute 뷰에서 사용할 모델의 이름을 변경할 때 사용
 
     Page<Product> products = productService.findProductAllOrSearch(productSearch, pageable);
 
     modelMap.addAttribute("products", products);
-    modelMap.addAttribute("productSearch", productSearch);
 
     return "admin/product/product_list";
   }
