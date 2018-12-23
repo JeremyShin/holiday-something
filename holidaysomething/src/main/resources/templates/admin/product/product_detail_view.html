@@ -40,8 +40,8 @@
       <td colspan="2"><label th:text="${product.code}">상품코드</label></td>
     </tr>
     <tr>
-      <td colspan="2">상품설명</td>
-      <td colspan="2"><label th:text="${product.productDetail.description}">상품설명</label></td>
+      <td colspan="2">상품요약설명</td>
+      <td colspan="2">상품요약설명이 있으면 어떨까?</td>
     </tr>
     <tr>
       <td>상품원가</td>
@@ -79,6 +79,12 @@
       <td><label
           th:text="${#temporals.format(product.releaseDate , 'yyyy-MM-dd HH:mm:ss')}"></label></td>
     </tr>
+    <tr>
+      <td colspan="6">상품설명</td>
+    </tr>
+    <tr>
+      <td colspan="6"><label th:text="${product.productDetail.description}">상품설명</label></td>
+    </tr>
   </table>
 
 
@@ -89,13 +95,14 @@
 
   <div style="margin-left: 50px;" id="optionList">
 
-    <div class="tbl-container">
+    <div style="width: fit-content;" class="tbl-container">
 
       <table id="product-option-list-tbl">
         <colgroup>
           <col class="chk"/>
           <col style="width:50px;"/>
           <col style="width:190px;"/>
+          <col style="width:auto;"/>
           <col style="width:auto;"/>
           <col style="width:auto;"/>
         </colgroup>
@@ -135,9 +142,5 @@
     </div>
   </div>
 
-
-  <th:block layout:fragment="script">
-    <script th:src="@{/js/main.js}"></script>
-  </th:block>
 </div>
 </html>

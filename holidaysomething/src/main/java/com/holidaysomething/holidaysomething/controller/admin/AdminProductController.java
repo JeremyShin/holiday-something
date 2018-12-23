@@ -299,7 +299,7 @@ public class AdminProductController {
 
     if (pageNum.isPresent()) {
       if (pageNum.get().equals(0)) {
-        // pageNum을. 즉 주소창에 admin/product/1?optionPage=0 을 입력했을시
+        // 주소창에 admin/product/1?optionPage=0 을 입력했을시
         // 정상 처리하는 로직
         pageable = PageRequest.of(0, 5);
       } else {
@@ -324,23 +324,5 @@ public class AdminProductController {
 
     return "admin/product/product_detail_view";
   }
-
-//  @GetMapping({"/product_detail", "/product_detail/{pageStart}"})
-//  public String productDetailOptions(ModelMap modelMap, @PathVariable Optional<Integer> pageStart) {
-//    List<ProductOption> productOptionList = productOptionService.getAllProductOptions();
-//    int productOptionListSize = productOptionList.size();
-//    modelMap.addAttribute("productOptionList", productOptionList);
-//    modelMap.addAttribute("productOptionListSize", productOptionListSize);
-//
-//    Pageable pageable = PageRequest.of(pageStart.isPresent() ? pageStart.get() - 1 : 0, 10);
-//    Page<ProductOption> productOptions = productOptionService.getAllProductOptionsPage(pageable);
-//
-//    int pageCount = productOptions.getTotalPages();
-//    log.info("pageCount: " + pageCount);
-//    modelMap.addAttribute("pageCount", pageCount);
-//    modelMap.addAttribute("productOptions", productOptions);
-//
-//    return "admin/product/product_detail";
-//  }
 
 }
