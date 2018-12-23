@@ -12,10 +12,6 @@
   <div id="dashboard">
     <h1 align="center">상품 목록</h1>
 
-    <!-- 상품 검색 폼 -->
-    <!--<form method="get" action="/admin/product/product_list?${}" id="product-search-form">-->
-    <!-- 상품 검색 구현 하기 -->
-    <!--</form>-->
     <div>
     <form method="GET" action="/admin/product/product_list" id="product-search-form">
       <table width="200" boarder="0" align="center">
@@ -35,6 +31,11 @@
         </tr>
       </table>
     </form>
+    </div>
+
+    <div align="right">
+      <button type="button" name="sort" value="sellingQuantity" onclick="location.href='/admin/product/product_list?sort=sellingQuantity'">판매량순</button>
+      <button type="button" name="sort" value="releaseDate" onclick="location.href='/admin/product/product_list?sort=sellingPrice'">출시일순</button>
     </div>
 
     <div class="tbl-container">
