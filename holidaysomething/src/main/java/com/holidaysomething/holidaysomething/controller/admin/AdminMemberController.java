@@ -1,5 +1,6 @@
 package com.holidaysomething.holidaysomething.controller.admin;
 
+import com.holidaysomething.holidaysomething.dto.Search;
 import com.holidaysomething.holidaysomething.service.MemberService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,7 +25,7 @@ public class AdminMemberController {
 
     @GetMapping("/mileage/search")
     public String mileageSearch(@PageableDefault(sort = {"loginId"}, size = 10)Pageable pageable,
-                                @ModelAttribute("search")MemberSearch memberSearch, ModelMap modelMap){
+                                @ModelAttribute("search") Search search, ModelMap modelMap){
         return "/admin/member/mileage_search";
     }
 }

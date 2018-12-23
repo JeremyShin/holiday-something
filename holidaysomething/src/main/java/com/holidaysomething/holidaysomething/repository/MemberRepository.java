@@ -1,9 +1,12 @@
 package com.holidaysomething.holidaysomething.repository;
 
 import com.holidaysomething.holidaysomething.domain.Member;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import java.awt.print.Pageable;
 
 public interface MemberRepository extends JpaRepository<Member, String> {
 
@@ -28,4 +31,11 @@ public interface MemberRepository extends JpaRepository<Member, String> {
   // 회원정보조회
   @Query(value = "select me from Member me where me.loginId=(:loginId)")
   Member findByIdContaining(@Param("loginId") String loginId);
+
+  // -- jun --
+  // member search all
+  Page<Member> findAll(Pageable pageable);
+  // member search by loginId
+//  @Query(value = "SELECT m FROM Member m WHERE m.loginId = (:loginId)")
+  Page<Member> findMembersByLoginId(String loginId, Pageable pageable);
 }
