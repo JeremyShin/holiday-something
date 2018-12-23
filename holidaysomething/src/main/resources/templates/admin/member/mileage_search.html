@@ -1,0 +1,61 @@
+<html xmlns:th="http://www.springframework.org/schema/data/jaxb"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default">
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+</th:block>
+
+<div layout:fragment="content">
+
+    <div id="dashboard">
+        <h1 align="center">회원 적립금 관리</h1>
+        <!-- cafe24는 적립금을 엑셀파일로 관리... -->
+        <h4>회원 검색</h4>
+        <div>
+            <form method="GET" action="/admin/member/mileage/search" id="member-mileage-search-form">
+                <table width="500px" border="1" align="center">
+                    <tr>
+                        <th scope="row" style="width: 180px;">아이디</th>
+                        <td>
+                            <input type="text" name="loginId" style="width: 300px;" placeholder="검색">
+                        </td>
+                        <td style="width: 50px; font-size: small; border: 0px;"><input type="submit" value="검색"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <br>
+
+        <h4>회원 적립금 내역</h4>
+        <div class="tbl-container">
+            <table id="member-mileage-search-tbl" border="1" style="width: 150%">
+                <thead>
+                <tr bgcolor="#ffd700">
+                    <th scope="col">아이디</th>
+                    <th scope="col">현재적립금</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="member : ${members}">
+                    <td th:text="${member.loginId}"></td>
+                    <td th:text="${member.mileage}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <!-- 모든 리스트 페이징 처리 -->
+        </div>
+
+        <div>
+            <!-- 검색된 리스트 페이징 처리 -->
+        </div>
+
+    </div>
+    <!-- 사용자 스크립트 추가 -->
+    <script></script>
+</div>
+</html>
+
