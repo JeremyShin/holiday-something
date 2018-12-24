@@ -11,6 +11,7 @@ public class AdminMemberController {
 
   @GetMapping("/order/search")
   public String memberOrderSearch() {
+
     return "admin/member/member_order";
   }
 

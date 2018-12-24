@@ -14,7 +14,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
-@Entity
+@Entity(name = "ORDERS")
 @Table(name = "ORDERS")
 @Getter
 @Setter

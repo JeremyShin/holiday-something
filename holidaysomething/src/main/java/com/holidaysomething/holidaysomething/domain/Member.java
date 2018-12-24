@@ -1,6 +1,7 @@
 package com.holidaysomething.holidaysomething.domain;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -75,4 +76,7 @@ public class Member {
 
   @OneToMany(mappedBy = "member")
   private Set<CartProduct> cartProducts;
+
+  @OneToMany(mappedBy = "member")
+  private List<Order> orders;
 }
