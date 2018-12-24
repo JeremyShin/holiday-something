@@ -255,23 +255,23 @@ public class AdminProductController {
     return "/admin/product/product_detail";
   }
 
-    @GetMapping("/product_search")
-    public String productSearch(ModelMap modelMap) {
+  @GetMapping("/product_search")
+  public String productSearch(ModelMap modelMap) {
 
-      List<ProductCategory> largeCategories = adminProductService.productCategoryList(0L);
-      modelMap.addAttribute("largeCategories", largeCategories);
+    List<ProductCategory> largeCategories = adminProductService.productCategoryList(0L);
+    modelMap.addAttribute("largeCategories", largeCategories);
 
-//        List<ProductCategory> productBigCategories =  productService.findByProductBigCategoryContaining();
-//        modelMap.addAttribute("bigCategory", productBigCategories);
-//        if(bigId == null) {
+//    List<ProductCategory> productBigCategories =  productService.findByProductBigCategoryContaining();
+//    modelMap.addAttribute("bigCategory", productBigCategories);
+//    if(bigId == null) {
 //
-//        }else {
-//            List<ProductCategory> productMiddleCategories = productService.findByProductMiddleCategoryContaining(bigId);
-//            modelMap.addAttribute("middleCategory", productMiddleCategories);
-//        }
+//    }else {
+//        List<ProductCategory> productMiddleCategories = productService.findByProductMiddleCategoryContaining(bigId);
+//        modelMap.addAttribute("middleCategory", productMiddleCategories);
+//    }
 
-        return "admin/product/product_search";
-    }
+    return "admin/product/product_search";
+  }
 
   @PostMapping("/product_search")
   public String searchResult(ModelMap modelMap,

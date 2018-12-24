@@ -27,11 +27,14 @@ public class AdminRestProductController {
 
   @GetMapping("/subCategory/{largerId}")
   public List<ProductCategory> getSubCategories(@PathVariable("largerId") Long largerId) {
+    log.info("========================================================");
     log.info("getSubCategories 진입, largerId: " + largerId);
     List<ProductCategory> categories = adminProductService.productCategoryList(largerId);
+    log.info("========================================================");
     for (ProductCategory category : categories) {
       log.info("하위 카테고리: " + category.getName());
     }
+    log.info("========================================================");
 
     return categories;
   }

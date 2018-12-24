@@ -42,8 +42,9 @@ let validateProductOptionForm = function (form) {
   }
 };
 
-let updateMiddleCategory = function(largeId) {
-  console.log('updateMiddleCategory() is triggered');
+let updateMiddleCategory = function(option) {
+  let largeId = option.value;
+  console.log(`updateMiddleCategory(${largeId}) is triggered`);
 
   $.getJSON(`/admin/product/subCategory/${largeId}`,
             function(category) {
@@ -68,8 +69,9 @@ let updateMiddleCategory = function(largeId) {
             });
 };
 
-let updateSmallCategory = function(middleId) {
-  console.log('updateSmallCategory() is triggered');
+let updateSmallCategory = function(option) {
+  let middleId = option.value;
+  console.log(`updateMiddleCategory(${middleId}) is triggered`);
 
   $.getJSON(`/admin/product/subCategory/${middleId}`,
       function(category) {

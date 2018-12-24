@@ -25,11 +25,11 @@
         <tr>
           <th scope="row">상품분류</th>
           <td>
-            <select name="productLargeCategoryId" class="product-category-select" onchange="updateMiddleCategory(this.selectedIndex.valueOf())">
+            <select name="productLargeCategoryId" class="product-category-select" onchange="updateMiddleCategory(this)">
               <option disabled selected>대분류</option>
-              <option th:each="large : ${largeCategories}" th:value="${large.id}" th:text="${large.name}"></option>
+              <option th:each="category : ${largeCategories}" th:value="${category.id}" th:text="${category.name}"></option>
             </select>
-            <select name="productMiddleCategoryId" class="product-category-select" onchange="updateSmallCategory(this.selectedIndex.valueOf())">
+            <select name="productMiddleCategoryId" class="product-category-select" onchange="updateSmallCategory(this)">
               <option disabled selected>중분류</option>
             </select>
             <select name="productSmallCategoryId" class="product-category-select">
