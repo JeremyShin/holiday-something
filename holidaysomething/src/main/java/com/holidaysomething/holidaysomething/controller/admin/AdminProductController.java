@@ -11,6 +11,7 @@ import com.holidaysomething.holidaysomething.service.admin.AdminProductService;
 import com.holidaysomething.holidaysomething.util.FileUtil;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
@@ -274,19 +275,40 @@ public class AdminProductController {
 
   @PostMapping("/product_search")
   public String searchResult(ModelMap modelMap,
-      @RequestParam(value = "productName") String product,
-      @RequestParam(value = "page", defaultValue = "0") int start) {
+      @RequestParam("productSearchClassification") String productSearchClassificationValue,
+      @RequestParam("productLargeCategoryId") Long largeId,
+      @RequestParam("productMiddleCategoryId") Long middleId,
+      @RequestParam("productSmallCategoryId") Long smallId,
+      @RequestParam("productSearchDate") String productSearchDateValue) {
+//      @RequestParam("productSearchDateInput") @DateTimeFormat(pattern="yyyy/MM/dd") Date productSearchDateInput) {
+//    @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date1,
+//    @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date2,
 
-    Pageable pageable = PageRequest.of(start, start + 5);
+    log.info("productSearchClassificationValue: " + productSearchClassificationValue);
+    log.info("largeId: " + largeId);
+    log.info("middleId: " + middleId);
+    log.info("smallId: " + smallId);
+    log.info("productSearchDateValue: " + productSearchDateValue);
+//    log.info("productSearchDateInput: " + productSearchDateInput);
 
-    // 제품명으로 검색하기
-    Page<Product> products = productService.findByProductNameContaining(product, pageable);
-    modelMap.addAttribute("productName", products);
-    modelMap.addAttribute("totalPages", products.getTotalPages());
-    modelMap.addAttribute("presentPage", products.getNumber());
 
-    return "/admin/product/product_search_result";
+    return "admin/product/product_search";
   }
+//  @PostMapping("/product_search")
+//  public String searchResult(ModelMap modelMap,
+//                            @RequestParam(value = "productName") String product,
+//                            @RequestParam(value = "page", defaultValue = "0") int start) {
+//
+//    Pageable pageable = PageRequest.of(start, start + 5);
+//
+//    // 제품명으로 검색하기
+//    Page<Product> products = productService.findByProductNameContaining(product, pageable);
+//    modelMap.addAttribute("productName", products);
+//    modelMap.addAttribute("totalPages", products.getTotalPages());
+//    modelMap.addAttribute("presentPage", products.getNumber());
+//
+//    return "/admin/product/product_search_result";
+//  }
 
   /* 옵션 등록 */
   @GetMapping("/product_detail_add_option")

@@ -5,6 +5,7 @@
 <div layout:fragment="content">
   <h1>상품검색 페이지</h1>
 
+  <!-- 상품 검색 모듈 -->
   <div>
     <table border="1">
       <form method="post" action="/admin/product/product_search">
@@ -12,14 +13,17 @@
         <tr>
           <th scope="row">검색분류</th>
           <td>
-            <select>
+            <select name="productSearchClassification">
               <option disabled selected>검색 옵션 선택</option>
-              <option value="product_name">상품명</option>
-              <option value="item_name">상품명(관리자)</option>
-              <option value="product_code">상품명(관리자)</option>
+              <option value="productName">상품명</option>
+              <option value="productCode">상품코드</option>
+              <option value="productSellingPrice">판매가</option>
+              <option value="productManufacturer">제조공장</option>
+              <option value="productOptionalPriceText">가격대체문구</option>
+              <option value="productShippingPrice">배송비</option>
             </select>
             <span>
-              <input type="text" name="productName">
+              <input type="text" name="productSearchClassificationInput">
             </span>
           </td>
         </tr>
@@ -41,22 +45,26 @@
         <tr>
           <th scope="row">상품등록일</th>
           <td>
-            <select>
-              <option value="regdate">상품등록일</option>
-              <option value="showdate">상품게시일</option>
+            <select name="productSearchDate">
+              <option value="regDate">상품 등록일</option>
+              <option value="releaseDate">상품 출시일</option>
             </select>
-            <a href="#" id="start-date"><span>달력보기</span></a>
+            <input type="date" name="productSearchDateInput" data-date-inline-picker="true" />
+            <!--<a href="#" id="start-date"><span>달력보기</span></a>-->
           </td>
         </tr>
         <tr>
-          <input type="submit"/>
+          <th scope="row">제출</th>
+          <td>
+            <input type="submit"/>
+          </td>
         </tr>
         </tbody>
       </form>
     </table>
   </div>
 
-  <!-- (검색 전)모든 제품 리스트 / (검색 후)제품검색 결과 -->
+  <!-- (검색 전)모든 상품 리스트 | (검색 후)상품 검색 결과 -->
   <div>
     <table>
       <thead>
@@ -76,7 +84,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="product : ${allProductList != null ? allProductList : productOptionsSearchResult}" class="productOptionTr">
+      <tr th:each="product : ${allProductList != null ? allProductList : allProductListSearchResult}">
         <td th:text="${product.id}">###</td>
         <td th:text="${product.code}">###</td>
         <td th:text="${product.name}">###</td>
@@ -93,6 +101,7 @@
       </tbody>
     </table>
 
+    <!-- 모든 상품 리스트 페이지 번호 -->
     <div id="page-numbers">
       <th:block th:each="item : ${#numbers.sequence(1, productPageCount)}">
         <a th:href="@{'/admin/product/product_search/' + ${item}}">
