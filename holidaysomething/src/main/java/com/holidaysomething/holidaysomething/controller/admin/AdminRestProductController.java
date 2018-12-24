@@ -31,10 +31,6 @@ public class AdminRestProductController {
     log.info("getSubCategories 진입, largerId: " + largerId);
     List<ProductCategory> categories = adminProductService.productCategoryList(largerId);
     log.info("========================================================");
-    for (ProductCategory category : categories) {
-      log.info("하위 카테고리: " + category.getName());
-    }
-    log.info("========================================================");
 
     return categories;
   }

@@ -49,6 +49,10 @@
   margin-top: 65px;
 }
 
+#container > aside {
+  flex: 0 0 auto;
+}
+
 .left-navbar {
   width: 250px;
   height: 900px;
