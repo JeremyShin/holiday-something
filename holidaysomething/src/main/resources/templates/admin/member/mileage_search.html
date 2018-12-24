@@ -18,7 +18,8 @@
                     <tr>
                         <th scope="row" style="width: 180px;">아이디</th>
                         <td>
-                            <input type="text" name="loginId" style="width: 300px;" placeholder="검색">
+                            <input type="hidden" name="searchType" value="loginId">
+                            <input type="text" name="keyword" style="width: 300px;" placeholder="검색">
                         </td>
                         <td style="width: 50px; font-size: small; border: 0px;"><input type="submit" value="검색"></td>
                     </tr>
@@ -45,14 +46,42 @@
             </table>
         </div>
 
-        <div>
-            <!-- 모든 리스트 페이징 처리 -->
+        <!-- 모든 상품 페이징 처리 -->
+        <div th:if="${search.getSearchType() == null}" id="page-numbers">
+            <!--이전 페이지가 있다면 보임-->
+            <td th:if="${members.hasPrevious()}">
+                <a th:href="@{'/admin/member/mileage/search?page=' + ${members.number - 1}}">&larr;</a>
+            </td>
+            <!-- 페이지 목록 -->
+            <th:block th:each="page : ${#numbers.sequence(1, members.getTotalPages())}">
+                <a th:href="@{'/admin/member/mileage/search?page=' + ${page - 1}}">
+                    <span th:text="${page}"></span>
+                </a>
+            </th:block>
+            <!--다음 페이지가 있다면 보임-->
+            <td th:if="${members.hasNext()}">
+                <a th:href="@{'/admin/member/mileage/search?page=' + ${members.number + 1} + '&searchType=' + ${search.getSearchType()} + '&keyword=' + ${search.getKeyword()}}">&rarr;</a>
+            </td>
         </div>
 
-        <div>
-            <!-- 검색된 리스트 페이징 처리 -->
+        <!-- 검색된 상품 페이징 처리 -->
+        <div th:if="${search.getSearchType() != null}" id="searchPage-numbers">
+            <!--이전 페이지가 있다면 보임-->
+            <td th:if="${members.hasPrevious()}">
+                <a th:href="@{'/admin/member/mileage/search?page=' + ${members.number - 1} + '&searchType=' + ${search.getSearchType()} + '&keyword=' + ${search.getKeyword()}}">&larr;</a>
+            </td>
+            <!-- 페이지 목록 -->
+            <th:block th:each="page : ${#numbers.sequence(1, members.getTotalPages())}">
+                <a th:href="@{'/admin/member/mileage/search?page=' + ${page - 1} + '&searchType=' + ${search.getSearchType()} + '&keyword=' + ${search.getKeyword()}}">
+                    <span th:text="${page}"></span>
+                </a>
+            </th:block>
+            <!--다음 페이지가 있다면 보임-->
+            <td th:if="${members.hasNext()}">
+                <a th:href="@{'/admin/member/mileage/search?page=' + ${members.number + 1}}">&rarr;</a>
+            </td>
         </div>
-
+        
     </div>
     <!-- 사용자 스크립트 추가 -->
     <script></script>
