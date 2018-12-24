@@ -12,6 +12,7 @@
   <div id="dashboard">
     <h1>옵션 검색</h1>
     <h2>옵션 목록 <span>[총 <strong th:text="${productOptionListSize}"></strong>개]</span></h2>
+    <!--<h1>수정합시다. <span th:text="${modification}"></span> </h1>-->
 
     <form method="get" action="/admin/product/get/name" id="product-option-search-form">
       <!-- product_option 내 필드 선택 -->
@@ -64,20 +65,24 @@
             <th>옵션명<!--<button type="button">오름차순 정렬</button>--></th>
             <th>옵션값</th>
             <th>옵션설명</th>
-            <th>상품코드</th>
+            <th>상품코드<th>
             <th>상품명</th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
           <tr th:each="productOption : ${productOptions != null ? productOptions : productOptionsSearchResult}"
               class="productOptionTr">
-            <td><input type="checkbox" name="productOptionId" th:value="${productOption.id}"/></td>
-            <td th:text="${productOption.id}">###</td>
-            <td th:text="${productOption.name}">###</td>
-            <td th:text="${productOption.price}">###</td>
-            <td th:text="${productOption.description}">###</td>
-            <td th:text="${productOption.product.code}">###</td>
-            <td th:text="${productOption.product.name}">###</td>
+            <td id = "optionCheck" ><input type="checkbox" name="productOptionId" th:value="${productOption.id}"/></td>
+            <td id = "optionId" th:text="${productOption.id}">###</td>
+            <td id = "optionName" th:text="${productOption.name}">###</td>
+            <td id = "optionPrice" th:text="${productOption.price}">###</td>
+            <td id = "optionDesc" th:text="${productOption.description}">###</td>
+            <td id = "optionCode" th:text="${productOption.product.code}">###</td>
+            <td id = "optionProductName" th:text="${productOption.product.name}">###</td>
+            <!--<td><input type="button" value="수정" onclick="location.href='/admin/product/product_detail_modify_option'"></td>-->
+            <td><input type="button" class="modBtn" value="수정" onclick="modify(this);"/></td>
+
           </tr>
           </tbody>
         </table>

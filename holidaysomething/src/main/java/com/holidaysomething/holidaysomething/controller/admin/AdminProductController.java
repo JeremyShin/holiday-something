@@ -296,6 +296,30 @@ public class AdminProductController {
     return "/admin/product/product_search_result";
   }
 
+//  @GetMapping("/product_detail/option/modify")
+//  public String modifyOption(ProductOption productOption, Model model){
+//    String modification = "으아아아";
+//    //modelMap.addAttribute("productOptionMod", productOption);
+//    //model.addAttribute("modification", modification);
+//
+//    log.info("옵션수정버튼을 눌렀습니다.");
+//    log.info("modification : " + modification);
+//
+//    return "admin/product/product_detail";
+//  }
+
+//  @GetMapping("/product_detail/option/modify")
+//  public String modifyOption(){
+//
+//    log.info("옵션수정버튼을 눌렀습니다.");
+//
+//    return "redirect:/admin/product/product_detail";
+//  }
+
+
+
+
+
   /* 옵션 등록 */
   @GetMapping("/product_detail_add_option")
   public String addOption(Model model) {
