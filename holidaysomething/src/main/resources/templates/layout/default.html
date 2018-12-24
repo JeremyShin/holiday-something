@@ -5,8 +5,9 @@
   <head th:replace="fragments/config :: configFragment"></head>
 
   <header th:replace="fragments/header :: headerFragment"></header>
+
   <div id="container">
-    <div th:replace="fragments/leftNavbar :: leftNavbarFragment"></div>
+    <aside th:replace="fragments/leftNavbar :: leftNavbarFragment"></aside>
     <div layout:fragment="content" id="dashboard"></div>
   </div>
 
