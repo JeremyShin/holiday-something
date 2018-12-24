@@ -1,6 +1,7 @@
 package com.holidaysomething.holidaysomething.service;
 
 import com.holidaysomething.holidaysomething.domain.Product;
+import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import java.util.List;
 import org.springframework.data.domain.Page;
@@ -11,8 +12,8 @@ import org.springframework.stereotype.Service;
 public interface ProductService {
 
   Page<Product> findByProductNameContaining(String productName, Pageable pageable);
-//    List<ProductCategory> findByProductBigCategoryContaining();
-//    List<ProductCategory> findByProductMiddleCategoryContaining(Long bigId);
+//  List<ProductCategory> findByProductBigCategoryContaining();
+//  List<ProductCategory> findByProductMiddleCategoryContaining(Long bigId);
 
   Page<Product> findAll(Pageable pageable);
 

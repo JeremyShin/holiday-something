@@ -41,12 +41,11 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/admin/product")
 public class AdminProductController {
 
-  private static final Log log = LogFactory.getLog(AdminProductController.class);
   private ProductService productService;
   private ProductOptionService productOptionService;
-
   private AdminProductService adminProductService;
   private FileUtil fileUtil;
+  private static final Log log = LogFactory.getLog(AdminProductController.class);
 
   public AdminProductController(ProductOptionService productOptionService,
       ProductService productService, AdminProductService adminProductService, FileUtil fileUtil) {
@@ -73,7 +72,7 @@ public class AdminProductController {
     modelMap.addAttribute("productOptionList", productOptionList);
     modelMap.addAttribute("productOptionListSize", productOptionListSize);
 
-    Pageable pageable = PageRequest.of(pageStart.isPresent() ? pageStart.get() - 1 : 0, 10);
+    Pageable pageable = PageRequest.of(pageStart.isPresent() ? pageStart.get()-1 : 0, 10);
     Page<ProductOption> productOptions = productOptionService.getAllProductOptionsPage(pageable);
 
     int pageCount = productOptions.getTotalPages();
@@ -255,20 +254,20 @@ public class AdminProductController {
     return "/admin/product/product_detail";
   }
 
-  @GetMapping("/product_search")
-  public String productSearch(ModelMap modelMap) {
+  @GetMapping({"/product_search", "/product_search/{pageStart}"})
+  public String productSearch(ModelMap modelMap, @PathVariable Optional<Integer> pageStart) {
 
+    // 대분류를 불러온다
     List<ProductCategory> largeCategories = adminProductService.productCategoryList(0L);
     modelMap.addAttribute("largeCategories", largeCategories);
 
-//    List<ProductCategory> productBigCategories =  productService.findByProductBigCategoryContaining();
-//    modelMap.addAttribute("bigCategory", productBigCategories);
-//    if(bigId == null) {
-//
-//    }else {
-//        List<ProductCategory> productMiddleCategories = productService.findByProductMiddleCategoryContaining(bigId);
-//        modelMap.addAttribute("middleCategory", productMiddleCategories);
-//    }
+    // 모든 상품 리스트를 불러온다
+    Pageable pageable = PageRequest.of(pageStart.isPresent() ? pageStart.get()-1 : 0, 10);
+    Page<Product> allProductList = adminProductService.getAllProducts(pageable);
+
+    int productPageCount = allProductList.getTotalPages();
+    modelMap.addAttribute("productPageCount", productPageCount);
+    modelMap.addAttribute("allProductList", allProductList);
 
     return "admin/product/product_search";
   }

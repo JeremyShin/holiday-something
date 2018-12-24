@@ -1,6 +1,5 @@
 package com.holidaysomething.holidaysomething.service.admin;
 
-import com.holidaysomething.holidaysomething.controller.admin.AdminRestProductController;
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductDetail;
@@ -11,6 +10,8 @@ import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,13 +30,10 @@ public class AdminProductServiceImpl implements AdminProductService {
     this.productRepository = productRepository;
   }
 
-  //    @Override
-//    @Transactional
-//    public List<ProductCategory> productCategoryList() {
-//
-//        List<ProductCategory> categories = productCategoryRepository.findAll();
-//        return categories;
-//    }
+  @Override
+  public Page<Product> getAllProducts(Pageable pageable) {
+    return productRepository.findAll(pageable);
+  }
 
   @Override
   @Transactional

@@ -1,9 +1,10 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout/default">
+      layout:decorate="layout/default">
 
 <div layout:fragment="content">
   <h1>상품검색 페이지</h1>
+
   <div>
     <table border="1">
       <form method="post" action="/admin/product/product_search">
@@ -55,8 +56,51 @@
     </table>
   </div>
 
-  <!--제품검색결과페이지 추가-->
+  <!-- (검색 전)모든 제품 리스트 / (검색 후)제품검색 결과 -->
+  <div>
+    <table>
+      <thead>
+      <tr>
+        <th>id
+        <th>상품코드</th>
+        <th>이름</th>
+        <th>판매가</th>
+        <th>판매량</th>
+        <th>안전재고</th>
+        <th>제조 공장</th>
+        <th>제조일</th>
+        <th>원가</th>
+        <th>가격대체문구</th>
+        <th>출시일</th>
+        <th>배송비</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="product : ${allProductList != null ? allProductList : productOptionsSearchResult}" class="productOptionTr">
+        <td th:text="${product.id}">###</td>
+        <td th:text="${product.code}">###</td>
+        <td th:text="${product.name}">###</td>
+        <td th:text="${product.sellingPrice}">###</td>
+        <td th:text="${product.sellingQuantity}">###</td>
+        <td th:text="${product.safeQuantity}">###</td>
+        <td th:text="${product.manufacturer}">###</td>
+        <td th:text="${product.manufactureDate}">###</td>
+        <td th:text="${product.originalPrice}">###</td>
+        <td th:text="${product.optionalPriceText}">###</td>
+        <td th:text="${product.releaseDate}">###</td>
+        <td th:text="${product.shippingPrice}">###</td>
+      </tr>
+      </tbody>
+    </table>
 
+    <div id="page-numbers">
+      <th:block th:each="item : ${#numbers.sequence(1, productPageCount)}">
+        <a th:href="@{'/admin/product/product_search/' + ${item}}">
+          <span th:text="${item}"></span>
+        </a>
+      </th:block>
+    </div>
+  </div>
 
   <script th:src="@{/js/main.js}"></script>
 </div>
