@@ -7,31 +7,36 @@
     <h1>조회결과출력페이지!</h1>
     <div>
         <h2>제품검색결과</h2>
-        <!--<table border="1">-->
-            <!--<th>product name</th>-->
-            <!--<tr th:each="product : ${productName}">&lt;!&ndash;first line&ndash;&gt;-->
-                <!--<td th:text="${product.name}">${product.name}</td>-->
-            <!--</tr>-->
-        <!--</table>-->
-
-
-        <ul>
-            <li th:each="product : ${products}">
-                <span th:text="${product.name}"></span>
-            </li>
-        </ul>
-
     </div>
     <h4>등록일 별 날짜가 나와야함</h4>
-    <div>
-        <li th:each="product : ${regdateStart}">
-            <span th:text="${product.name}"></span>
-        </li>
-    </div>
 
-
-    <div>
-        
+    <div class="tbl-container">
+        <table id="product-list-tb1" border="1" style="width: 150%">
+            <colgroup>
+            </colgroup>
+            <thead>
+                <tr bgcolor="orange">
+                    <th>이름</th>
+                    <th>제품코드</th>
+                    <th>판매가</th>
+                    <th>재고</th>
+                    <th>안전재고</th>
+                    <th>판매량</th>
+                    <th>등록일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="product : ${regdate}">
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.code}"></td>
+                    <td th:text="${product.sellingPrice}"></td>
+                    <td th:text="${product.quantity}"></td>
+                    <td th:text="${product.safeQuantity}"></td>
+                    <td th:text="${product.sellingQuantity}"></td>
+                    <td th:text="${product.regDate}"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <br>
     <br>

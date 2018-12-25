@@ -275,15 +275,10 @@ public class AdminProductController {
     LocalDateTime castDateStart =  LocalDateTime.parse(productStartDateSelect);
     LocalDateTime castDateEnd =  LocalDateTime.parse(productEndDateSelect);
 
-    System.out.println("castDate : "+castDateStart + " ~ " +castDateEnd);
 
 
     //제품 등록일or게시일로 검색하기
     Page<Product> productDatepages = productService.findByProductRegdate(castDateStart, castDateEnd, pageable);
-
-    for(Product pro : productDatepages) {
-      System.out.println("============================ : "+pro.getName());
-    }
     modelMap.addAttribute("regdate", productDatepages);
 
     return "admin/product/product_search_result";
