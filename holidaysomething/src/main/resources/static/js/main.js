@@ -9,13 +9,20 @@ let toggle = function (source) {
   }
 };
 
+let nameInput = document.createElement("input");
+let priceInput = document.createElement("input");
+let descInput = document.createElement("input");
+let codeInput = document.createElement("input");
+let productNameInput = document.createElement("input");
+
 let modify = function (source) {
 
   let productOptionTrs = document.querySelector('.productOptionTr');
 
   for (let i = 0; i < source.parentElement.parentElement.children.length; i++) {
     if (source.parentElement.parentElement.children[i].id == "optionName") {
-      let nameInput = document.createElement("input");
+      console.log("zzz");
+      console.log(nameInput);
       nameInput.setAttribute('type', 'text');
       nameInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
@@ -23,7 +30,6 @@ let modify = function (source) {
     }
 
     if (source.parentElement.parentElement.children[i].id == "optionPrice") {
-      let priceInput = document.createElement("input");
       priceInput.setAttribute('type', 'text');
       priceInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
@@ -31,7 +37,6 @@ let modify = function (source) {
     }
 
     if (source.parentElement.parentElement.children[i].id == "optionDesc") {
-      let descInput = document.createElement("input");
       descInput.setAttribute('type', 'text');
       descInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
@@ -39,7 +44,6 @@ let modify = function (source) {
     }
 
     if (source.parentElement.parentElement.children[i].id == "optioCode") {
-      let codeInput = document.createElement("input");
       codeInput.setAttribute('type', 'text');
       codeInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
@@ -48,7 +52,6 @@ let modify = function (source) {
 
     if (source.parentElement.parentElement.children[i].id
         == "optionProductName") {
-      let productNameInput = document.createElement("input");
       productNameInput.setAttribute('type', 'text');
       productNameInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
