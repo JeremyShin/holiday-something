@@ -13,12 +13,8 @@ let nameInput = document.createElement("input");
 let priceInput = document.createElement("input");
 let descInput = document.createElement("input");
 let codeInput = document.createElement("input");
-let productNameInput = document.createElement("input");
 
 let modify = function (source) {
-
-  let productOptionTrs = document.querySelector('.productOptionTr');
-
   for (let i = 0; i < source.parentElement.parentElement.children.length; i++) {
     if (source.parentElement.parentElement.children[i].id == "optionName") {
       console.log("zzz");
@@ -50,19 +46,10 @@ let modify = function (source) {
       source.parentElement.parentElement.children[i].appendChild(codeInput);
     }
 
-    if (source.parentElement.parentElement.children[i].id
-        == "optionProductName") {
-      productNameInput.setAttribute('type', 'text');
-      productNameInput.setAttribute('value',
-          source.parentElement.parentElement.children[i].innerText);
-      source.parentElement.parentElement.children[i].appendChild(
-          productNameInput);
-    }
-
-    if (source.parentElement.parentElement.children[i].id == "modifyBtn") {
-      let btn = document.getElementById("modifyBtn");
+    if (source.parentElement.parentElement.children[i].childNodes[0].id == "modifyBtn") {
+      console.log("수정버튼입니다.");
+      let btn = source.parentElement.parentElement.children[i].childNodes[0]
       btn.setAttribute("value", "수정완료");
-      //source.parentElement.parentElement.children[i].appendChild(modInput);
     }
   }
 };
