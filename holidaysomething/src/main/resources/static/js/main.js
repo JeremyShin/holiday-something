@@ -9,66 +9,68 @@ let toggle = function (source) {
   }
 };
 
-let modify = function (source){
-  // let existingValue = {
-  //
-  //   id : source.getElementById('.optionId'),
-  //   name : source.getElementById('.optionName'),
-  //   price : source.getElementById('.optionPrice'),
-  //   description : source.getElementById('.optionDesc'),
-  //   code : source.getElementById('.optionCode'),
-  //   productName : source.getElementById('.optionProductName')
-  // };
-
-  //console.log("부모는");
-  //console.log(document.getElementsByClassName('#modBtn'));
-
+let modify = function (source) {
 
   let productOptionTrs = document.querySelector('.productOptionTr');
-  console.log(source.parentNode.parentNode.childNodes[0]);
-  console.log(source.parentNode.parentNode.childNodes[1]);
-  console.log(source.parentNode.parentNode.childNodes[2]);
-  console.log(source.parentNode.parentNode.childNodes[3]);
-  console.log(source.parentNode.parentNode.childNodes[4]);
 
-  console.log("16");
-  console.log(source.parentNode.parentNode.childNodes[16]);
+  for (let i = 0; i < source.parentElement.parentElement.children.length; i++) {
+    if (source.parentElement.parentElement.children[i].id == "optionName") {
+      let nameInput = document.createElement("input");
+      nameInput.setAttribute('type', 'text');
+      nameInput.setAttribute('value',
+          source.parentElement.parentElement.children[i].innerText);
+      source.parentElement.parentElement.children[i].appendChild(nameInput);
+    }
 
-  console.log("17");
-  console.log(source.parentNode.parentNode.childNodes[17]);
+    if (source.parentElement.parentElement.children[i].id == "optionPrice") {
+      let priceInput = document.createElement("input");
+      priceInput.setAttribute('type', 'text');
+      priceInput.setAttribute('value',
+          source.parentElement.parentElement.children[i].innerText);
+      source.parentElement.parentElement.children[i].appendChild(priceInput);
+    }
 
-  console.log("18");
-  console.log(source.parentNode.parentNode.childNodes[18]);
+    if (source.parentElement.parentElement.children[i].id == "optionDesc") {
+      let descInput = document.createElement("input");
+      descInput.setAttribute('type', 'text');
+      descInput.setAttribute('value',
+          source.parentElement.parentElement.children[i].innerText);
+      source.parentElement.parentElement.children[i].appendChild(descInput);
+    }
 
+    if (source.parentElement.parentElement.children[i].id == "optioCode") {
+      let codeInput = document.createElement("input");
+      codeInput.setAttribute('type', 'text');
+      codeInput.setAttribute('value',
+          source.parentElement.parentElement.children[i].innerText);
+      source.parentElement.parentElement.children[i].appendChild(codeInput);
+    }
 
-  console.log("length" +source.parentNode.parentNode.childNodes.length);
+    if (source.parentElement.parentElement.children[i].id
+        == "optionProductName") {
+      let productNameInput = document.createElement("input");
+      productNameInput.setAttribute('type', 'text');
+      productNameInput.setAttribute('value',
+          source.parentElement.parentElement.children[i].innerText);
+      source.parentElement.parentElement.children[i].appendChild(
+          productNameInput);
+    }
 
-
-
-  //console.log(source.parentNode.parentNode.childNodes[2].innerText);
-
-  //let ex = productOptionTrs.getElementsByTagName('td');
-  //console.log(ex.parentElement.innerText);
-
-  console.log('----------');
-
-  //productOptionTrs
-
-  //숫자로 짜기보다는, id가 무엇인 아이를 찾자 0부터 돌면
-  for ( let i = 5; i < source.parentNode.parentNode.childNodes.length - 4; i+=2 ){
-    let modInput = document.createElement('input');
-    modInput.setAttribute('type', 'text');
-    modInput.setAttribute('value', 'ㅋㅋㅋㅋ');
-    source.parentNode.parentNode.childNodes[i].appendChild(modInput);
+    if (source.parentElement.parentElement.children[i].id == "modifyBtn") {
+      let btn = document.getElementById("modifyBtn");
+      btn.setAttribute("value", "수정완료");
+      //source.parentElement.parentElement.children[i].appendChild(modInput);
+    }
   }
+};
 
 
 
-  for (let i = 0; i < productOptionTrs.length - 2; i++){
-    let tds = productOptionTrs[i].getElementsByTagName('td');
-    //console.log(tds.text);
-    console.log(tds[i].parentElement.innerText);
-    console.log(tds[i].innerHTML);
+  // for (let i = 0; i < productOptionTrs.length - 2; i++){
+  //   let tds = productOptionTrs[i].getElementsByTagName('td');
+  //   //console.log(tds.text);
+  //   console.log(tds[i].parentElement.innerText);
+  //   console.log(tds[i].innerHTML);
 
     // console.log("existingValue");
     // console.log(existingValue.name);
@@ -86,10 +88,6 @@ let modify = function (source){
     // modInput.setAttribute('value', )
     //
     // tds[i].appendChild(modInput);
-  }
-
-
-};
 
 let productOptionFormSubmitBtn = document.querySelector(
     '#productOptionForm').querySelector('#productOptionFormSubmit');

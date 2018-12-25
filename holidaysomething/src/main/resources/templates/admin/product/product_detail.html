@@ -73,7 +73,7 @@
           <tbody>
           <tr th:each="productOption : ${productOptions != null ? productOptions : productOptionsSearchResult}"
               class="productOptionTr">
-            <td id = "optionCheck" ><input type="checkbox" name="productOptionId" th:value="${productOption.id}"/></td>
+            <td id= "optionCheck" ><input type="checkbox" name="productOptionId" th:value="${productOption.id}"/></td>
             <td id = "optionId" th:text="${productOption.id}">###</td>
             <td id = "optionName" th:text="${productOption.name}">###</td>
             <td id = "optionPrice" th:text="${productOption.price}">###</td>
@@ -81,7 +81,7 @@
             <td id = "optionCode" th:text="${productOption.product.code}">###</td>
             <td id = "optionProductName" th:text="${productOption.product.name}">###</td>
             <!--<td><input type="button" value="수정" onclick="location.href='/admin/product/product_detail_modify_option'"></td>-->
-            <td><input type="button" class="modBtn" value="수정" onclick="modify(this);"/></td>
+            <td><input id="modifyBtn" type="button" class="modBtn" value="수정" onclick="modify(this);"/></td>
 
           </tr>
           </tbody>
