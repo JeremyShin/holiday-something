@@ -49,6 +49,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
   @Query(value = "select new com.holidaysomething.holidaysomething.dto.OrderMemberDto(me, count(me)) from Member as me left join ORDERS as o on (me.id=o.member) where o.member in (select me.id from Member as me where me.loginId=(:loginId)) group by me.id")
   List<OrderMemberDto> findMembersInOrders(@Param("loginId") String loginId);
 
+  // loginId 나 name 이나... 둘다 concat 으로 포함된 문자열을 검색하게끔 만들어야 했나...?
 
   @Query(value = "select new com.holidaysomething.holidaysomething.dto.OrderMemberDto(me, count(me)) from Member as me left join ORDERS as o on (me.id=o.member) where o.member in (select me.id from Member as me where me.name=(:name)) group by me.id")
   List<OrderMemberDto> findMembersByNameInOrders(@Param("name") String name);

@@ -64,6 +64,16 @@ public class MemberTest {
 
   }
 
+  @Test
+  public void 이름으로주문회원조회() {
+    List<OrderMemberDto> orderMemberDtos = memberRepository.findMembersByNameInOrders("김하늘");
+    OrderMemberDto orderMemberDto = orderMemberDtos.get(0);
+    System.out.println("==================== : " + orderMemberDto.getMember().getLoginId());
+    System.out.println("==================== : " + orderMemberDto.getMember().getName());
+    System.out.println("==================== : " + orderMemberDto.getCountOrder());
+
+  }
+
 //  @Test
 //  public void 기간으로주문회원조회() {
 //    List<Order> orders = memberRepository.getMembersByOrderPeriod(18l);
