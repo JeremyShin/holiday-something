@@ -2,6 +2,8 @@ package com.holidaysomething.holidaysomething.repository;
 
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +23,16 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
   @Query(value = "SELECT p FROM Product p WHERE p.code LIKE CONCAT('%', :productCode, '%')")
   public Page<Product> findbyProductCodeContaining(@Param("productCode") String productCode,
                                                    Pageable pageable);
+
+  //admin : product searching by date
+  @Query(value = "SELECT p FROM Product p WHERE p.regDate BETWEEN :regdateStart AND :regdateEnd")
+  public Page<Product> findByProductRegdate(@Param("regdateStart") LocalDateTime regdateStart, @Param("regdateEnd") LocalDateTime regdateEnd, Pageable pageable);
+
+  //admin : product searching by releaseDate
+  @Query(value = "SELECT p FROM Product p WHERE p.releaseDate = :releaseDate")
+  public Page<Product> findByProductReleaseDate(@Param("releaseDate") LocalDateTime releaseDate, Pageable pageable);
+
+  Page<Product> findAll(Pageable pageable);
 
   // 상품 이미지 저장하기
   ProductImage save(ProductImage productImage);

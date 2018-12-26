@@ -132,3 +132,19 @@
 #page-numbers a:visited {
   color: inherit;
 }
+
+
+#searchPage-numbers {
+  margin-top: 30px;
+  text-align: center;
+}
+
+#searchPage-numbers a {
+  margin-right: 10px;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+#searchPage-numbers a:visited {
+  color: inherit;
+}
