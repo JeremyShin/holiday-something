@@ -280,6 +280,10 @@ public class AdminProductController {
     // 모든 상품 리스트를 불러온다(페이지)
     Pageable pageable = PageRequest.of(pageStart.isPresent() ? pageStart.get()-1 : 0, 10);
     Page<Product> allProductList = adminProductService.getAllProducts(pageable);
+
+    int productPageCount = allProductList.getTotalPages();
+    modelMap.addAttribute("productPageCount", productPageCount);
+    modelMap.addAttribute("allProductList", allProductList);
     
     return "admin/product/product_search";
   }
