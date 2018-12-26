@@ -263,12 +263,12 @@ public class AdminProductController {
 //        }
 
     // 대분류를 불러온다
-    List<ProductCategory> largeCategories = adminProductService.productCategoryList(0L);
+    List<ProductCategory> largeCategories = adminProductRegisterService.productCategoryList(0L);
     modelMap.addAttribute("largeCategories", largeCategories);
 
     // 모든 상품 리스트를 불러온다(페이지)
     Pageable pageable = PageRequest.of(pageStart.isPresent() ? pageStart.get() - 1 : 0, 10);
-    Page<Product> allProductList = adminProductService.getAllProducts(pageable);
+    Page<Product> allProductList = adminProductRegisterService.getAllProducts(pageable);
 
     int productPageCount = allProductList.getTotalPages();
     modelMap.addAttribute("productPageCount", productPageCount);
@@ -302,7 +302,7 @@ public class AdminProductController {
     // 모든 상품 리스트를 불러온다(페이지)
     // TODO: 검색 결과도 페이징 처리 필요
     Pageable pageable = PageRequest.of(0, 10);
-    Page<Product> allProductList = adminProductService.getAllProducts(pageable);
+    Page<Product> allProductList = adminProductRegisterService.getAllProducts(pageable);
 
     int productPageCount = allProductList.getTotalPages();
     modelMap.addAttribute("productPageCount", productPageCount);

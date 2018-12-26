@@ -1,7 +1,7 @@
 package com.holidaysomething.holidaysomething.controller.admin;
 
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
-import com.holidaysomething.holidaysomething.service.admin.AdminProductService;
+import com.holidaysomething.holidaysomething.service.admin.AdminProductRegisterService;
 import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/admin/product")
 public class AdminRestProductController {
 
-  private AdminProductService adminProductService;
+  private AdminProductRegisterService adminProductService;
   private static final Log log = LogFactory.getLog(AdminRestProductController.class);
 
-  public AdminRestProductController(AdminProductService adminProductService) {
+  public AdminRestProductController(AdminProductRegisterService adminProductService) {
     this.adminProductService = adminProductService;
   }
 

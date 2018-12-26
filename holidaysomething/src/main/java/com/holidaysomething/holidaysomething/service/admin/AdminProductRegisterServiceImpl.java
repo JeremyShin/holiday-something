@@ -21,7 +21,7 @@ public class AdminProductRegisterServiceImpl implements AdminProductRegisterServ
   private ProductCategoryRepository productCategoryRepository;
   private ProductDetailRepository productDetailRepository;
   private ProductRepository productRepository;
-  private static final Log log = LogFactory.getLog(AdminProductServiceImpl.class);
+  private static final Log log = LogFactory.getLog(AdminProductRegisterServiceImpl.class);
 
   public AdminProductRegisterServiceImpl(ProductCategoryRepository productCategoryRepository,
       ProductDetailRepository productDetailRepository, ProductRepository productRepository) {
