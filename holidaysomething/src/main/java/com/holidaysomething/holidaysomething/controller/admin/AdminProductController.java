@@ -262,7 +262,7 @@ public class AdminProductController {
     List<ProductCategory> largeCategories = adminProductService.productCategoryList(0L);
     modelMap.addAttribute("largeCategories", largeCategories);
 
-    // 모든 상품 리스트를 불러온다
+    // 모든 상품 리스트를 불러온다(페이지)
     Pageable pageable = PageRequest.of(pageStart.isPresent() ? pageStart.get()-1 : 0, 10);
     Page<Product> allProductList = adminProductService.getAllProducts(pageable);
 
@@ -276,6 +276,7 @@ public class AdminProductController {
   @PostMapping("/product_search")
   public String searchResult(ModelMap modelMap,
       @RequestParam("productSearchClassification") String productSearchClassificationValue,
+      @RequestParam("productSearchClassificationInput") String productSearchClassificationInput,
       @RequestParam("productLargeCategoryId") Long largeId,
       @RequestParam("productMiddleCategoryId") Long middleId,
       @RequestParam("productSmallCategoryId") Long smallId,
@@ -285,12 +286,21 @@ public class AdminProductController {
 //    @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date2,
 
     log.info("productSearchClassificationValue: " + productSearchClassificationValue);
+    log.info("productSearchClassificationInput: " + productSearchClassificationInput);
     log.info("largeId: " + largeId);
     log.info("middleId: " + middleId);
     log.info("smallId: " + smallId);
     log.info("productSearchDateValue: " + productSearchDateValue);
 //    log.info("productSearchDateInput: " + productSearchDateInput);
 
+    // 모든 상품 리스트를 불러온다(페이지)
+    // TODO: 검색 결과도 페이징 처리 필요
+    Pageable pageable = PageRequest.of(0, 10);
+    Page<Product> allProductList = adminProductService.getAllProducts(pageable);
+
+    int productPageCount = allProductList.getTotalPages();
+    modelMap.addAttribute("productPageCount", productPageCount);
+    modelMap.addAttribute("allProductList", allProductList);
 
     return "admin/product/product_search";
   }
