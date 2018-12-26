@@ -1,39 +1,37 @@
 package com.holidaysomething.holidaysomething.controller.admin;
 
 
+import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.service.admin.AdminProductService;
+import java.util.List;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@RequestMapping("/admin/product")
 public class AdminRestProductController {
 
   private AdminProductService adminProductService;
+  private static final Log log = LogFactory.getLog(AdminRestProductController.class);
 
   public AdminRestProductController(AdminProductService adminProductService) {
     this.adminProductService = adminProductService;
   }
 
-  @GetMapping("/hello")
-  ResponseEntity<String> hello() {
-    return new ResponseEntity<>("Hello World!", HttpStatus.OK);
-  }
+  @GetMapping("/subCategory/{largerId}")
+  public List<ProductCategory> getSubCategories(@PathVariable("largerId") Long largerId) {
+    log.info("========================================================");
+    log.info("getSubCategories 진입, largerId: " + largerId);
+    List<ProductCategory> categories = adminProductService.productCategoryList(largerId);
+    log.info("========================================================");
 
-//    @RequestMapping(value = "/admin/product/product_detail/register/lowcategories/{parentId}",method = RequestMethod.GET)
-//    public ResponseEntity<List<ProductCategory>> getLowLevelCategories(@PathVariable("parentId") Long parentId){
-//
-//        ResponseEntity<List<ProductCategory>> entity = null;
-//
-//        try{
-//            entity = new ResponseEntity<>(adminProductService.productLowLevelCategoryList(parentId), HttpStatus.OK);
-//        } catch(Exception e) {
-//            e.printStackTrace();
-//            entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        }
-//        return entity;
-//
-//    }
+    return categories;
+  }
 }

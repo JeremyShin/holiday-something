@@ -1,6 +1,5 @@
 package com.holidaysomething.holidaysomething.repository;
 
-
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 
@@ -12,13 +11,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
   //admin : product searching by name
   @Query(value = "SELECT p FROM Product p WHERE p.name LIKE CONCAT('%', :productName, '%')")
-  public Page<Product> findbyProductNameContaining(@Param("productName") String productName,
-      Pageable pageable);
+  Page<Product> findByProductNameContaining(@Param("productName") String productName, Pageable pageable);
+
+  Page<Product> findAll(Pageable pageable);
 
   //admin : product searching by code
   @Query(value = "SELECT p FROM Product p WHERE p.code LIKE CONCAT('%', :productCode, '%')")

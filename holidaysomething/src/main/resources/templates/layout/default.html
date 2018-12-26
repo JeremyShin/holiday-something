@@ -6,12 +6,10 @@
 
   <header th:replace="fragments/header :: headerFragment"></header>
 
-  <div style="display: flex;">
-    <div th:replace="fragments/leftNavbar :: leftNavbarFragment"></div>
-
-    <div layout:fragment="content"></div>
+  <div id="container">
+    <aside th:replace="fragments/leftNavbar :: leftNavbarFragment"></aside>
+    <div layout:fragment="content" id="dashboard"></div>
   </div>
-
 
   <!--<footer th:replace="fragments/footer:: footerFragment"></footer>-->
 

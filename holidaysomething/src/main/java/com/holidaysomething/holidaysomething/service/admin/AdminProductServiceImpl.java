@@ -8,6 +8,10 @@ import com.holidaysomething.holidaysomething.repository.ProductCategoryRepositor
 import com.holidaysomething.holidaysomething.repository.ProductDetailRepository;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import java.util.List;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +21,7 @@ public class AdminProductServiceImpl implements AdminProductService {
   private ProductCategoryRepository productCategoryRepository;
   private ProductDetailRepository productDetailRepository;
   private ProductRepository productRepository;
+  private static final Log log = LogFactory.getLog(AdminProductServiceImpl.class);
 
   public AdminProductServiceImpl(ProductCategoryRepository productCategoryRepository,
       ProductDetailRepository productDetailRepository, ProductRepository productRepository) {
@@ -25,19 +30,20 @@ public class AdminProductServiceImpl implements AdminProductService {
     this.productRepository = productRepository;
   }
 
-  //    @Override
-//    @Transactional
-//    public List<ProductCategory> productCategoryList() {
-//
-//        List<ProductCategory> categories = productCategoryRepository.findAll();
-//        return categories;
-//    }
+  @Override
+  public Page<Product> getAllProducts(Pageable pageable) {
+    return productRepository.findAll(pageable);
+  }
 
   @Override
   @Transactional
   public List<ProductCategory> productCategoryList(Long parentId) {
     List<ProductCategory> categories = productCategoryRepository.findCategory(parentId);
-    System.out.println("========================================" + categories.size());
+    log.info("========================================================");
+    log.info("categoryId (" + parentId + ")의 자식 카테고리 " + categories.size() + "개 불러옴");
+    for (int i = 0; i < categories.size(); i++) {
+      log.info(i+1 + ". " + categories.get(i).getName());
+    }
 //        for(ProductCategory pc : categories) {
 //            System.out.println();
 //            System.out.println("id : " + pc.getId());
