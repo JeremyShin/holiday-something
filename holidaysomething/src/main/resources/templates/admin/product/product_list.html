@@ -12,10 +12,6 @@
   <div id="dashboard">
     <h1 align="center">상품 목록</h1>
 
-    <!-- 상품 검색 폼 -->
-    <!--<form method="get" action="/admin/product/product_list?${}" id="product-search-form">-->
-    <!-- 상품 검색 구현 하기 -->
-    <!--</form>-->
     <div>
     <form method="GET" action="/admin/product/product_list" id="product-search-form">
       <table width="200" boarder="0" align="center">
@@ -37,12 +33,18 @@
     </form>
     </div>
 
+    <!-- 값에 따른 정렬, 추후 구현 예정 -->
+    <!--<div align="right">-->
+      <!--<button type="button" name="sort" value="sellingQuantity" onclick="location.href='/admin/product/product_list?sort=#'">판매량순</button>-->
+      <!--<button type="button" name="sort" value="releaseDate" onclick="location.href='/admin/product/product_list?sort=#'">출시일순</button>-->
+    <!--</div>-->
+
     <div class="tbl-container">
       <table id="product-list-tbl" border="1" style="width: 150%">
         <colgroup>
         </colgroup>
         <thead>
-        <tr bgcolor="orange">
+        <tr bgcolor="#ffd700">
           <th>이름</th>
           <th>제품코드</th>
           <th>판매가</th>
@@ -67,7 +69,7 @@
     </div>
 
     <!-- 모든 상품 페이징 처리 -->
-    <div th:if="${productSearch.getSearchType() == null}" id="page-numbers">
+    <div th:if="${search.getSearchType() == null}" id="page-numbers">
       <!--이전 페이지가 있다면 보임-->
       <td th:if="${products.hasPrevious()}">
         <a th:href="@{'/admin/product/product_list?page=' + ${products.number - 1}}">&larr;</a>
@@ -80,18 +82,18 @@
       </th:block>
       <!--다음 페이지가 있다면 보임-->
       <td th:if="${products.hasNext()}">
-        <a th:href="@{'/admin/product/product_list?page=' + ${products.number + 1} + '&searchType=' + ${productSearch.getSearchType()} + '&keyword=' + ${productSearch.getKeyword()}}">&rarr;</a>
+        <a th:href="@{'/admin/product/product_list?page=' + ${products.number + 1} + '&searchType=' + ${search.getSearchType()} + '&keyword=' + ${search.getKeyword()}}">&rarr;</a>
       </td>
     </div>
     <!-- 검색된 상품 페이징 처리 -->
-    <div th:if="${productSearch.getSearchType() != null}" id="searchPage-numbers">
+    <div th:if="${search.getSearchType() != null}" id="searchPage-numbers">
       <!--이전 페이지가 있다면 보임-->
       <td th:if="${products.hasPrevious()}">
-        <a th:href="@{'/admin/product/product_list?page=' + ${products.number - 1} + '&searchType=' + ${productSearch.getSearchType()} + '&keyword=' + ${productSearch.getKeyword()}}">&larr;</a>
+        <a th:href="@{'/admin/product/product_list?page=' + ${products.number - 1} + '&searchType=' + ${search.getSearchType()} + '&keyword=' + ${search.getKeyword()}}">&larr;</a>
       </td>
       <!-- 페이지 목록 -->
       <th:block th:each="page : ${#numbers.sequence(1, products.getTotalPages())}">
-        <a th:href="@{'/admin/product/product_list?page=' + ${page - 1} + '&searchType=' + ${productSearch.getSearchType()} + '&keyword=' + ${productSearch.getKeyword()}}">
+        <a th:href="@{'/admin/product/product_list?page=' + ${page - 1} + '&searchType=' + ${search.getSearchType()} + '&keyword=' + ${search.getKeyword()}}">
           <span th:text="${page}"></span>
         </a>
       </th:block>

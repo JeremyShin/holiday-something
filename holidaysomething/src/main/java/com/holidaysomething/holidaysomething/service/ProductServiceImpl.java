@@ -1,9 +1,8 @@
 package com.holidaysomething.holidaysomething.service;
 
 import com.holidaysomething.holidaysomething.domain.Product;
-import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
-import com.holidaysomething.holidaysomething.dto.ProductSearch;
+import com.holidaysomething.holidaysomething.dto.Search;
 import com.holidaysomething.holidaysomething.repository.ProductCategoryRepository;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
 
@@ -69,13 +68,13 @@ public class ProductServiceImpl implements ProductService {
   
   @Transactional(readOnly = true)
   @Override
-  public Page<Product> findProductAllOrSearch(ProductSearch productSearch, Pageable pageable) {
+  public Page<Product> findProductAllOrSearch(Search search, Pageable pageable) {
       Page<Product> products = null;
-      if (productSearch.isSearched()) { // 검색된 상품 리스트
-          if (productSearch.getSearchType().equals("name")) {
-              products = productRepository.findbyProductNameContaining(productSearch.getKeyword(), pageable);
-          } else if (productSearch.getSearchType().equals("code")) {
-              products =  productRepository.findbyProductCodeContaining(productSearch.getKeyword(), pageable);
+      if (search.isSearched()) { // 검색된 상품 리스트
+          if (search.getSearchType().equals("name")) {
+              products = productRepository.findbyProductNameContaining(search.getKeyword(), pageable);
+          } else if (search.getSearchType().equals("code")) {
+              products =  productRepository.findbyProductCodeContaining(search.getKeyword(), pageable);
           }
       } else { // 모든 상품 리스트
           products =  productRepository.findAll(pageable);

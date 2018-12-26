@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ProductSearch {
+public class Search {
     private String searchType;
     private String keyword;
 

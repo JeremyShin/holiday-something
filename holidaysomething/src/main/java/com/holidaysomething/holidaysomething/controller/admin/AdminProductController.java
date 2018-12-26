@@ -5,7 +5,7 @@ import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.dto.ProductDto;
-import com.holidaysomething.holidaysomething.dto.ProductSearch;
+import com.holidaysomething.holidaysomething.dto.Search;
 import com.holidaysomething.holidaysomething.service.ProductOptionService;
 import com.holidaysomething.holidaysomething.service.ProductService;
 import com.holidaysomething.holidaysomething.service.admin.AdminProductService;
@@ -182,12 +182,12 @@ public class AdminProductController {
 
   @GetMapping("/product_list")
   public String productList(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 10) Pageable pageable,
-                            ModelMap modelMap, ProductSearch productSearch) {
+                            @ModelAttribute("search")Search search, ModelMap modelMap) {
+    // 커맨드 객체와 @ModelAttribute 같다. 다만 @ModelAttribute 뷰에서 사용할 모델의 이름을 변경할 때 사용
 
-    Page<Product> products = productService.findProductAllOrSearch(productSearch, pageable);
+    Page<Product> products = productService.findProductAllOrSearch(search, pageable);
 
     modelMap.addAttribute("products", products);
-    modelMap.addAttribute("productSearch", productSearch);
 
     return "admin/product/product_list";
   }
