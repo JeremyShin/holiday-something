@@ -20,7 +20,7 @@ public class ProductServiceTest {
   Pageable pageable = PageRequest.of(0, 5);
 
   @Test
-  public void productName검색() {
+  public void 이름포함된Product구하기() {
     Page<Product> products = productService.findByProductNameContaining("아이코닉", pageable);
     System.out.println("---");
     for (Product product : products) {

@@ -64,40 +64,57 @@
     </table>
   </div>
 
+    <!--<table border="1" summary="">-->
+      <!--<caption>상품검색</caption>-->
+      <!--<tbody>-->
+      <!--<tr>-->
+        <!--<th scope="row">검색분류</th>-->
+        <!--<td>-->
+          <!--<select>-->
+            <!--<option value="product_name">상품명</option>-->
+            <!--<option value="product_code">제품코드(관리자)</option>-->
+          <!--</select>-->
+          <!--<span>-->
+            <!--<form method="post" action="/admin/product/product_search/result">-->
+              <!--<input type="text" name="productName">-->
+              <!--<input type="submit">-->
+            <!--</form>-->
+          <!--</span>-->
+
   <!-- (검색 전)모든 상품 리스트 | (검색 후)상품 검색 결과 -->
   <div>
     <table>
       <thead>
-      <tr>
-        <th>id
-        <th>상품코드</th>
-        <th>이름</th>
-        <th>판매가</th>
-        <th>판매량</th>
-        <th>안전재고</th>
-        <th>제조 공장</th>
-        <th>제조일</th>
-        <th>원가</th>
-        <th>가격대체문구</th>
-        <th>출시일</th>
-        <th>배송비</th>
-      </tr>
+        <tr>
+          <th>id</th>
+          <th>상품코드</th>
+          <th>이름</th>
+          <th>판매가</th>
+          <th>판매량</th>
+          <th>안전재고</th>
+          <th>제조 공장</th>
+          <th>제조일</th>
+          <th>원가</th>
+          <th>가격대체문구</th>
+          <th>출시일</th>
+          <th>배송비</th>
+        </tr>
       </thead>
       <tbody>
-      <tr th:each="product : ${allProductList != null ? allProductList : allProductListSearchResult}">
-        <td th:text="${product.id}">###</td>
-        <td th:text="${product.code}">###</td>
-        <td th:text="${product.name}">###</td>
-        <td th:text="${product.sellingPrice}">###</td>
-        <td th:text="${product.sellingQuantity}">###</td>
-        <td th:text="${product.safeQuantity}">###</td>
-        <td th:text="${product.manufacturer}">###</td>
-        <td th:text="${product.manufactureDate}">###</td>
-        <td th:text="${product.originalPrice}">###</td>
-        <td th:text="${product.optionalPriceText}">###</td>
-        <td th:text="${product.releaseDate}">###</td>
-        <td th:text="${product.shippingPrice}">###</td>
-      </tr>
+        <tr th:each="product : ${allProductList != null ? allProductList : allProductListSearchResult}">
+          <td th:text="${product.id}">###</td>
+          <td th:text="${product.code}">###</td>
+          <td th:text="${product.name}">###</td>
+          <td th:text="${product.sellingPrice}">###</td>
+          <td th:text="${product.sellingQuantity}">###</td>
+          <td th:text="${product.safeQuantity}">###</td>
+          <td th:text="${product.manufacturer}">###</td>
+          <td th:text="${product.manufactureDate}">###</td>
+          <td th:text="${product.originalPrice}">###</td>
+          <td th:text="${product.optionalPriceText}">###</td>
+          <td th:text="${product.releaseDate}">###</td>
+          <td th:text="${product.shippingPrice}">###</td>
+        </tr>
       </tbody>
     </table>
 

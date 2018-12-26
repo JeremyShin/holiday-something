@@ -11,7 +11,6 @@ import com.holidaysomething.holidaysomething.service.admin.AdminProductService;
 import com.holidaysomething.holidaysomething.util.FileUtil;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
@@ -152,6 +151,7 @@ public class AdminProductController {
     // 문제가 생기는거같다. 그래서 일단은 날짜 받는부분은 따로 처리했다.
 
     String description = productDto.getProductDescription();
+
     Long parentId = productDto.getProductCategoryId();
 
     System.out.println("상품명 : " + productDto.getName());
@@ -258,6 +258,15 @@ public class AdminProductController {
   @GetMapping({"/product_search", "/product_search/{pageStart}"})
   public String productSearch(ModelMap modelMap, @PathVariable Optional<Integer> pageStart) {
 
+//        List<ProductCategory> productBigCategories =  productService.findByProductBigCategoryContaining();
+//        modelMap.addAttribute("bigCategory", productBigCategories);
+//        if(bigId == null) {
+//
+//        }else {
+//            List<ProductCategory> productMiddleCategories = productService.findByProductMiddleCategoryContaining(bigId);
+//            modelMap.addAttribute("middleCategory", productMiddleCategories);
+//        }
+
     // 대분류를 불러온다
     List<ProductCategory> largeCategories = adminProductService.productCategoryList(0L);
     modelMap.addAttribute("largeCategories", largeCategories);
@@ -304,21 +313,6 @@ public class AdminProductController {
 
     return "admin/product/product_search";
   }
-//  @PostMapping("/product_search")
-//  public String searchResult(ModelMap modelMap,
-//                            @RequestParam(value = "productName") String product,
-//                            @RequestParam(value = "page", defaultValue = "0") int start) {
-//
-//    Pageable pageable = PageRequest.of(start, start + 5);
-//
-//    // 제품명으로 검색하기
-//    Page<Product> products = productService.findByProductNameContaining(product, pageable);
-//    modelMap.addAttribute("productName", products);
-//    modelMap.addAttribute("totalPages", products.getTotalPages());
-//    modelMap.addAttribute("presentPage", products.getNumber());
-//
-//    return "/admin/product/product_search_result";
-//  }
 
   /* 옵션 등록 */
   @GetMapping("/product_detail_add_option")
