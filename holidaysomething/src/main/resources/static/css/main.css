@@ -86,7 +86,8 @@
 }
 
 .tbl-container {
-  width: 85%;
+  /*width: 85%;*/
+  width: 100%;
 }
 
 .above-tbl {

@@ -5,12 +5,10 @@ import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.domain.ProductOptionCommand;
-import com.holidaysomething.holidaysomething.dto.ProductDto;
 import com.holidaysomething.holidaysomething.service.ProductOptionService;
 import com.holidaysomething.holidaysomething.service.ProductService;
 import com.holidaysomething.holidaysomething.service.admin.AdminProductOptionService;
-import com.holidaysomething.holidaysomething.service.admin.AdminProductOptionServiceImpl;
-import com.holidaysomething.holidaysomething.service.admin.AdminProductService;
+import com.holidaysomething.holidaysomething.service.admin.AdminProductRegisterService;
 import com.holidaysomething.holidaysomething.util.FileUtil;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -48,16 +46,16 @@ public class AdminProductController {
   private ProductService productService;
   private ProductOptionService productOptionService;
 
-  private AdminProductService adminProductService;
+  private AdminProductRegisterService adminProductRegisterService;
   private AdminProductOptionService adminProductOptionService;
   private FileUtil fileUtil;
 
   public AdminProductController(ProductOptionService productOptionService,
-      ProductService productService, AdminProductService adminProductService,
+      ProductService productService, AdminProductRegisterService adminProductRegisterService,
       FileUtil fileUtil, AdminProductOptionService adminProductOptionService) {
     this.productOptionService = productOptionService;
     this.productService = productService;
-    this.adminProductService = adminProductService;
+    this.adminProductRegisterService = adminProductRegisterService;
     this.fileUtil = fileUtil;
     this.adminProductOptionService = adminProductOptionService;
   }
@@ -112,20 +110,10 @@ public class AdminProductController {
   // 대분류 불러오기.
   @GetMapping("/product_detail/register")
   public String productRegister(ModelMap model) {
-    List<ProductCategory> categories = adminProductService.productCategoryList(0l);
-
+    List<ProductCategory> categories = adminProductRegisterService.productCategoryList(0l);
     Product product = new Product();
-//    ProductDetail productDetail = new ProductDetail();
-//    ProductCategory productCategory = new ProductCategory();
-    ProductDto productDto = new ProductDto();
-
     model.addAttribute("categories", categories);
     model.addAttribute("product", product);
-//        model.addAttribute("productDetail",productDetail);
-//        model.addAttribute("productCategory",productCategory);
-//    model.addAttribute("productDto", productDto);
-
-    //model.put("categories", categories);
     return "admin/product/product_register";
   }
 
@@ -133,7 +121,7 @@ public class AdminProductController {
   @ResponseBody
   @GetMapping("/product_detail/register/lowcategories/{parentId}")
   public List<ProductCategory> getLowLevelCategories(@PathVariable("parentId") Long parentId) {
-    List<ProductCategory> categories = adminProductService.productCategoryList(parentId);
+    List<ProductCategory> categories = adminProductRegisterService.productCategoryList(parentId);
     System.out.println("===================  " + categories.size());
     return categories;
   }
@@ -158,12 +146,6 @@ public class AdminProductController {
     // 문제가 생기는거같다. 그래서 일단은 날짜 받는부분은 따로 처리했다.
     // 아니다. 계속 null 값만 받아와서. 그렇다.
 
-//    String description = productDto.getProductDescription();
-//    Long parentId = productDto.getProductCategoryId();
-
-//    System.out.println("상품명 : " + productDto.getName());
-//    System.out.println("체크박스 :  " + productDto.getDisplay());
-
     String description = product.getProductDetail().getDescription();
     System.out.println("================ description : " + description);
 
@@ -171,26 +153,9 @@ public class AdminProductController {
     product.setReleaseDate(date2);
     product.setRegDate(LocalDateTime.now());
 
-    System.out.println("등록일 : " + product.getRegDate());
-    System.out.println(
-        "============ product : " + product.getName() + " ++++++ " + product.getSellingPrice());
-    System.out.println("========= date1 : " + date1);
-    System.out.println("========= product.getManufactureDate() : " + product.getManufactureDate());
-    System.out.println("========= date2 : " + date2);
-    System.out.println("========= product.getReleaseDate() : " + product.getReleaseDate());
-    System.out.println("========= regdate : " + product.getRegDate());
-
-    System.out.println(
-        "================ product.getCategory() : " + product.getProductCategory().getId());
-
-//    date2 = date2.replace("T"," ");
-//    System.out.println("RequestParam , String : " + date2);
-//    LocalDateTime ldt = LocalDateTime.parse(date2, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-//    System.out.println("RequestParam , String : " + ldt.toString());
-
-//    Product product = adminProductService.productDtoToProduct(productDto);
+//    Product product = adminProductRegisterService.productDtoToProduct(productDto);
 //
-    product = adminProductService.productRegister(product);
+    product = adminProductRegisterService.productRegister(product);
 
     return "redirect:/admin/product/product_detail/register";
 
@@ -265,33 +230,24 @@ public class AdminProductController {
     return "/admin/product/product_detail";
   }
 
-//    @GetMapping("/product_search")
-//    public String productSearch(ModelMap modelMap) {
-//
-//        List<ProductCategory> productBigCategories =  productService.findByProductBigCategoryContaining();
-//        modelMap.addAttribute("bigCategory", productBigCategories);
-////        if(bigId == null) {
-////
-////        }else {
-////            List<ProductCategory> productMiddleCategories = productService.findByProductMiddleCategoryContaining(bigId);
-////            modelMap.addAttribute("middleCategory", productMiddleCategories);
-////        }
-//
-//        return "admin/product/product_search";
-//    }
+  @GetMapping("/product_search")
+  public String productSearch(ModelMap modelMap) {
+
+    return "admin/product/product_search";
+  }
 
   @PostMapping("/product_search/result")
   public String searchResult(ModelMap modelMap,
-      @RequestParam(value = "productName") String product,
+      @RequestParam(value = "productName") String productName,
       @RequestParam(value = "page", defaultValue = "1") int start) {
 
     Pageable pageable = PageRequest.of(start, start + 5);
 
     // 제품명으로 검색하기
-    Page<Product> products = productService.findByProductNameContaining(product, pageable);
-    modelMap.addAttribute("productName", products);
-    modelMap.addAttribute("totalPages", products.getTotalPages());
-    modelMap.addAttribute("presentPage", products.getNumber());
+    Product product = productService.findByProductNameContaining(productName);
+    modelMap.addAttribute("product", product);
+    //modelMap.addAttribute("totalPages", products.getTotalPages());
+    //modelMap.addAttribute("presentPage", products.getNumber());
 
     return "/admin/product/product_search_result";
   }
@@ -352,4 +308,45 @@ public class AdminProductController {
 
     return "redirect:/admin/product/product_detail_add_option";
   }
+
+  @GetMapping("/{productId}")
+  public String getProductDetail(@PathVariable("productId") Long productId,
+      @RequestParam(required = false, value = "optionPage") Optional<Integer> pageNum,
+      ModelMap model) {
+    // 상품id 로 상품 정보 가져오기.
+    Product product = productService.getProduct(productId);
+    model.addAttribute("product", product);
+
+    // html 파일에서 페이징 처리 한 부분은 1로 시작하고
+    // Pageable 에서 페이지는 0 부터 시작하므로 1을 빼줘야한다.
+    Pageable pageable;
+
+    if (pageNum.isPresent()) {
+      if (pageNum.get().equals(0)) {
+        // 주소창에 admin/product/1?optionPage=0 을 입력했을시
+        // 정상 처리하는 로직
+        pageable = PageRequest.of(0, 5);
+      } else {
+        pageable = PageRequest.of(pageNum.isPresent() ? pageNum.get() - 1 : 0, 5);
+      }
+    } else {
+      pageable = PageRequest.of(0, 5);
+    }
+
+    //Page<ProductOption> productOptions =
+    Page<ProductOption> productOptions = productOptionService
+        .getProductOptionsByProductId(productId, pageable);
+
+    model.addAttribute("productOptions", productOptions);
+
+    int pageCount = productOptions.getTotalPages();
+    model.addAttribute("pageCount", pageCount);
+    model.addAttribute("productId", productId);
+
+
+
+
+    return "admin/product/product_detail_view";
+  }
+
 }

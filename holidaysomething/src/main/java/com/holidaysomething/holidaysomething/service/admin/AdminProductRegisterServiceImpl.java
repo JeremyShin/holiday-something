@@ -12,13 +12,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class AdminProductServiceImpl implements AdminProductService {
+public class AdminProductRegisterServiceImpl implements AdminProductRegisterService {
 
   private ProductCategoryRepository productCategoryRepository;
   private ProductDetailRepository productDetailRepository;
   private ProductRepository productRepository;
 
-  public AdminProductServiceImpl(ProductCategoryRepository productCategoryRepository,
+  public AdminProductRegisterServiceImpl(ProductCategoryRepository productCategoryRepository,
       ProductDetailRepository productDetailRepository, ProductRepository productRepository) {
     this.productCategoryRepository = productCategoryRepository;
     this.productDetailRepository = productDetailRepository;

@@ -8,12 +8,7 @@
 <h1>조회결과출력페이지!</h1>
 <div>
   <h2>제품검색결과</h2>
-  <table border="1">
-    <th>product name</th>
-    <tr th:each="product : ${productName}"><!--first line-->
-      <td th:text="${product.name}">${product.name}</td>
-    </tr>
-  </table>
+  <label th:text="${product.name}"></label>
 
 </div>
 <br>

@@ -23,17 +23,17 @@ public class ProductRepositoryTest {
   ProductCategoryRepository productCategoryRepository;
 
   // admin : search by name test
-  @Test
-  public void 이름포함된Product구하기() throws Exception {
-    Pageable pageable = PageRequest.of(0, 5);
-    Page<Product> products = productRepository.findbyProductNameContaining("아이코닉", pageable);
-    System.out.println("-----");
-    System.out.println(products.getTotalElements());
-    System.out.println(products.getTotalPages());
-    System.out.println("-----");
-
-    for (Product product : products) {
-      System.out.println(product.getName());
-    }
-  }
+//  @Test
+//  public void 이름포함된Product구하기() throws Exception {
+//    Pageable pageable = PageRequest.of(0, 5);
+//    Page<Product> products = productRepository.findbyProductNameContaining("아이코닉", pageable);
+//    System.out.println("-----");
+//    System.out.println(products.getTotalElements());
+//    System.out.println(products.getTotalPages());
+//    System.out.println("-----");
+//
+//    for (Product product : products) {
+//      System.out.println(product.getName());
+//    }
+//  }
 }

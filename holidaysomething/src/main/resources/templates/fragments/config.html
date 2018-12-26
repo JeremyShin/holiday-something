@@ -7,6 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
 
+  <title th:include=":: #pageTitle">Layout Generic Title </title>
+  <!--<title th:text="${pageTitle}">Template title</title>-->
+
+
   <!-- 공통으로 쓰이는 css파일을넣는다.-->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
   <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/main.css}"/>
