@@ -15,10 +15,9 @@ let descInput = document.createElement("input");
 let codeInput = document.createElement("input");
 
 let modify = function (source) {
+  /* inputbox 생성 */
   for (let i = 0; i < source.parentElement.parentElement.children.length; i++) {
     if (source.parentElement.parentElement.children[i].id == "optionName") {
-      console.log("zzz");
-      console.log(nameInput);
       nameInput.setAttribute('type', 'text');
       nameInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
@@ -48,36 +47,23 @@ let modify = function (source) {
 
     if (source.parentElement.parentElement.children[i].childNodes[0].id == "modifyBtn") {
       console.log("수정버튼입니다.");
-      let btn = source.parentElement.parentElement.children[i].childNodes[0]
+      let btn = source.parentElement.parentElement.children[i].childNodes[0];
       btn.setAttribute("value", "수정완료");
     }
   }
+
+  let req = new XMLHttpRequest();
+  let name = document.getElementById("optionName").innerText;
+
+  console.log("포스트 매핑으로 보낼 옵션의 이름은 ");
+  console.log(name);
+
+  req.open("POST", "/admin/product/product_detail/option/modify", true);
+  req.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+  //req.send("name=" + encodeURIComponent(name));
+  req.send(encodeURIComponent(name));
 };
 
-
-
-  // for (let i = 0; i < productOptionTrs.length - 2; i++){
-  //   let tds = productOptionTrs[i].getElementsByTagName('td');
-  //   //console.log(tds.text);
-  //   console.log(tds[i].parentElement.innerText);
-  //   console.log(tds[i].innerHTML);
-
-    // console.log("existingValue");
-    // console.log(existingValue.name);
-    // console.log("/");
-    // console.log(existingValue[i]);
-
-    //tds[i] = existingValue[i];
-
-    //console.log("테이블 row의 text가져오기");
-    //console.log(tds[3].text());
-
-    //
-    // let modInput = document.createElement('input');
-    // modInput.setAttribute('type', 'text');
-    // modInput.setAttribute('value', )
-    //
-    // tds[i].appendChild(modInput);
 
 let productOptionFormSubmitBtn = document.querySelector(
     '#productOptionForm').querySelector('#productOptionFormSubmit');
