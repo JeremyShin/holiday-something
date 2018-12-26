@@ -26,7 +26,7 @@ public class ProductRepositoryTest {
   @Test
   public void 이름포함된Product구하기() throws Exception {
     Pageable pageable = PageRequest.of(0, 5);
-    Page<Product> products = productRepository.findbyProductNameContaining("아이코닉", pageable);
+    Page<Product> products = productRepository.findByProductNameContaining("아이코닉", pageable);
     System.out.println("-----");
     System.out.println(products.getTotalElements());
     System.out.println(products.getTotalPages());

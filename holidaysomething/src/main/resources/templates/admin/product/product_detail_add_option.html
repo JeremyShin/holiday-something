@@ -1,64 +1,8 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml" xml:th="http:/www.thymeleaf.org">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/main.css}"/>
-  <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Noto+Sans+KR:300,700"
-        rel="stylesheet">
-  <title>ADMIN &mdash; HolidaySomething</title>
-</head>
-<body>
-<div id="header" class="sticky">
-  <!--<a href="#"><div class="header-menu">상점관리</div></a>-->
-  <img src="/img/logo.png"/>
-  <a href="#">
-    <div class="header-menu">상품관리</div>
-  </a>
-  <a href="#">
-    <div class="header-menu">주문관리</div>
-  </a>
-  <a href="#">
-    <div class="header-menu">고객관리</div>
-  </a>
-  <a href="#">
-    <div class="header-menu">게시판관리</div>
-  </a>
-  <a href="#">
-    <div class="header-menu">프로모션</div>
-  </a>
-</div>
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default">
 
-<div id="container">
-  <div class="left-navbar">
-    <div class="navbar-menu">
-      <a href="#">상품분류관리</a>
-    </div>
-    <div class="navbar-menu">
-      <a href="#">상품옵션관리</a>
-    </div>
-    <div class="navbar-menu">
-      <a href="#">상품등록</a>
-    </div>
-    <div class="navbar-menu">
-      <a href="#">상품관리</a>
-    </div>
-    <div class="navbar-menu">
-      <a href="#">상품표시관리</a>
-    </div>
-    <div class="navbar-menu">
-      <a href="#">판매분류관리</a>
-    </div>
-    <div class="navbar-menu">
-      <a href="#">재고관리</a>
-    </div>
-    <div class="navbar-menu">
-      <a href="#">즐겨찾는 메뉴</a>
-    </div>
-  </div>
-
-  <div id="dashboard">
+  <div layout:fragment="content">
     <form name="option_value_form" action="/admin/product/product_detail_add_option" method="post">
       <table>
         <tbody>
@@ -127,9 +71,7 @@
       </table>
       <input type="submit" value="submit">
     </form>
-  </div>
-</div>
 
-<script th:src="@{/js/productOption.js}"></script>
-</body>
+    <script th:src="@{/js/productOption.js}"></script>
+  </div>
 </html>

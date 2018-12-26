@@ -27,15 +27,12 @@
   color: #444444;
   padding: 0 10px;
   font-family: 'Do Hyeon', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .header-menu:hover {
   background-color: #eaae1c;
-}
-
-.header-menu {
-  font-size: 20px;
-  font-weight: 500;
 }
 
 .header-menu a {
@@ -48,12 +45,19 @@
   display: flex;
 }
 
+#container > div, aside {
+  margin-top: 65px;
+}
+
+#container > aside {
+  flex: 0 0 auto;
+}
+
 .left-navbar {
   width: 250px;
   height: 900px;
   background-color: #efefef;
   padding-top: 40px;
-  margin-top: 65px;
 }
 
 .navbar-menu {
@@ -126,5 +130,21 @@
 }
 
 #page-numbers a:visited {
+  color: inherit;
+}
+
+
+#searchPage-numbers {
+  margin-top: 30px;
+  text-align: center;
+}
+
+#searchPage-numbers a {
+  margin-right: 10px;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+#searchPage-numbers a:visited {
   color: inherit;
 }
