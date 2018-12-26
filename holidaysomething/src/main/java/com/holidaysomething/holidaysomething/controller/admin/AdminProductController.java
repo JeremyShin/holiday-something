@@ -12,6 +12,7 @@ import com.holidaysomething.holidaysomething.service.admin.AdminProductService;
 import com.holidaysomething.holidaysomething.util.FileUtil;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
@@ -264,30 +265,26 @@ public class AdminProductController {
     @GetMapping("/product_search")
     public String productSearch(ModelMap modelMap) {
 
-//        List<ProductCategory> productBigCategories =  productService.findByProductBigCategoryContaining();
-//        modelMap.addAttribute("bigCategory", productBigCategories);
-//        if(bigId == null) {
-//
-//        }else {
-//            List<ProductCategory> productMiddleCategories = productService.findByProductMiddleCategoryContaining(bigId);
-//            modelMap.addAttribute("middleCategory", productMiddleCategories);
-//        }
-
         return "admin/product/product_search";
     }
 
   @PostMapping("/product_search/result")
   public String searchResult(ModelMap modelMap,
-      @RequestParam(value = "productName") String product,
+      @RequestParam(value = "regdateStart", defaultValue = "0000-00-00 00:00") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String productStartDateSelect,
+      @RequestParam(value = "regdateEnd", defaultValue = "0000-00-00 00:00") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String productEndDateSelect,
       @RequestParam(value = "page", defaultValue = "1") int start) {
 
     Pageable pageable = PageRequest.of(start, start + 5);
 
-    // 제품명으로 검색하기
-    Page<Product> products = productService.findByProductNameContaining(product, pageable);
-    modelMap.addAttribute("products", products);
-    modelMap.addAttribute("totalPages", products.getTotalPages());
-    modelMap.addAttribute("presentPage", products.getNumber());
+
+    LocalDateTime castDateStart =  LocalDateTime.parse(productStartDateSelect);
+    LocalDateTime castDateEnd =  LocalDateTime.parse(productEndDateSelect);
+
+
+
+    //제품 등록일or게시일로 검색하기
+    Page<Product> productDatepages = productService.findByProductRegdate(castDateStart, castDateEnd, pageable);
+    modelMap.addAttribute("regdate", productDatepages);
 
     return "admin/product/product_search_result";
   }

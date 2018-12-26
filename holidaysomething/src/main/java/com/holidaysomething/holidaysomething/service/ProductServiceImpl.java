@@ -6,6 +6,8 @@ import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.dto.ProductSearch;
 import com.holidaysomething.holidaysomething.repository.ProductCategoryRepository;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -56,7 +58,16 @@ public class ProductServiceImpl implements ProductService {
     return productRepository.save(productImage);
   }
 
-  @Transactional
+  @Transactional(readOnly = true)
+  @Override
+  public Page<Product> findByProductRegdate(LocalDateTime regdateStart, LocalDateTime regdateEnd, Pageable pageable) {
+
+    Page<Product> products = productRepository.findByProductRegdate(regdateStart, regdateEnd, pageable);
+
+    return products;
+  }
+  
+  @Transactional(readOnly = true)
   @Override
   public Page<Product> findProductAllOrSearch(ProductSearch productSearch, Pageable pageable) {
       Page<Product> products = null;

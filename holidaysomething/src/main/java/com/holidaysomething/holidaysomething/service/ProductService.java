@@ -3,6 +3,8 @@ package com.holidaysomething.holidaysomething.service;
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.holidaysomething.holidaysomething.dto.ProductSearch;
@@ -14,8 +16,7 @@ import org.springframework.stereotype.Service;
 public interface ProductService {
 
   Page<Product> findByProductNameContaining(String productName, Pageable pageable);
-//    List<ProductCategory> findByProductBigCategoryContaining();
-//    List<ProductCategory> findByProductMiddleCategoryContaining(Long bigId);
+  Page<Product> findByProductRegdate(LocalDateTime regdateStart, LocalDateTime regdateEnd, Pageable pageable);
 
   Page<Product> findAll(Pageable pageable);
 

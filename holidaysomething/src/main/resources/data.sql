@@ -332,7 +332,7 @@ INSERT INTO product_detail(id, description) VALUES (null, '덴스 로고 라벨�
 
 
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
-VALUES (1,'2177670','서울 공장','스밋코구라시 데일리다이어리',NULL,1000,40,4000,2500,1,1,1, 0, 3, 0, true, '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
+VALUES (1,'2177670','서울 공장','스밋코구라시 데일리다이어리',NULL,1000,40,4000,2500,1,1,1, 0, 3, 0, true, '2018-12-25 14:22:00',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
 VALUES (2,'2104689','경기도 공장','아이코닉 일상집 2019',NULL,1000,50,11800,2500,2,2,1, 0, 3, 0, false, '2018-12-25 14:22:05',  '2018-12-25 14:22:05',  '2018-12-25 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,reg_date,manufacture_date,release_date)
