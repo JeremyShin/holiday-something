@@ -82,7 +82,7 @@ public class ProductServiceImpl implements ProductService {
       Page<Product> products = null;
       if (search.isSearched()) { // 검색된 상품 리스트
           if (search.getSearchType().equals("name")) {
-              products = productRepository.findbyProductNameContaining(search.getKeyword(), pageable);
+              products = productRepository.findByProductNameContaining(search.getKeyword(), pageable);
           } else if (search.getSearchType().equals("code")) {
               products =  productRepository.findbyProductCodeContaining(search.getKeyword(), pageable);
           }
