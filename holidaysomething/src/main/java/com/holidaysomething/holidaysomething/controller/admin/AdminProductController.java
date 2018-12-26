@@ -5,6 +5,7 @@ import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.dto.ProductDto;
+import com.holidaysomething.holidaysomething.dto.ProductSearch;
 import com.holidaysomething.holidaysomething.service.ProductOptionService;
 import com.holidaysomething.holidaysomething.service.ProductService;
 import com.holidaysomething.holidaysomething.service.admin.AdminProductService;
@@ -180,10 +181,14 @@ public class AdminProductController {
   }
 
   @GetMapping("/product_list")
-  public String productList(ModelMap modelMap, @PageableDefault(sort = {
-      "id"}, direction = Sort.Direction.DESC, size = 10) Pageable pageable) {
-    Page<Product> products = productService.findAll(pageable);
+  public String productList(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 10) Pageable pageable,
+                            ModelMap modelMap, ProductSearch productSearch) {
+
+    Page<Product> products = productService.findProductAllOrSearch(productSearch, pageable);
+
     modelMap.addAttribute("products", products);
+    modelMap.addAttribute("productSearch", productSearch);
+
     return "admin/product/product_list";
   }
 
