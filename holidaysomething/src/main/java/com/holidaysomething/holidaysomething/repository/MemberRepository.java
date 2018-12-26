@@ -34,7 +34,7 @@ public interface MemberRepository extends JpaRepository<Member, String> {
   // member search all
   Page<Member> findAll(Pageable pageable);
   // member search by loginId
-//  @Query(value = "SELECT m FROM Member m WHERE m.loginId = (:loginId)")
   Page<Member> findMembersByLoginId(String loginId, Pageable pageable);
+  // mileage update
 
 }
