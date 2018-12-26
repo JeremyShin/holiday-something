@@ -6,6 +6,7 @@ import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -57,5 +58,12 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
 //  @Query(value="select me.orders from Member me, ORDERS o where o.member.id=(:memberId)")
 //  List<Order> getMembersByOrderPeriod(@Param("loginId") Long memberId);
+
+  // member search all
+  Page<Member> findAll(Pageable pageable);
+
+  // member search by loginId
+  Page<Member> findMembersByLoginId(String loginId, Pageable pageable);
+  // mileage update
 
 }

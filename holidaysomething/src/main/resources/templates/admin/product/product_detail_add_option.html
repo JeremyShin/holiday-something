@@ -1,22 +1,9 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xml:th="http:/www.thymeleaf.org"
-      layout:decorate="~{layout/default.html}">
-
-<head th:include="fragments/config :: configFragment">
-  <title id="pageTitle">Page title</title>
-  <!-- other elements you want to reference in your layout -->
-</head>
-
-<!-- 사용자 CSS 추가 -->
-<th:block layout:fragment="css">
-</th:block>
-
+      layout:decorate="layout/default">
 
 <div layout:fragment="content">
   <form name="option_value_form" action="/admin/product/product_detail_add_option" method="post">
-    <div id="dashboard">
       <table>
         <tbody>
         <tr>
@@ -74,13 +61,9 @@
         </tbody>
       </table>
       <input type="submit" value="submit">
-    </div>
+
   </form>
-  <!-- 사용자 스크립트 추가 -->
-  <th:block layout:fragment="script">
-    <script th:src="@{/js/productOption.js}"></script>
-  </th:block>
+
+  <script th:src="@{/js/productOption.js}"></script>
 </div>
-
-
 </html>
