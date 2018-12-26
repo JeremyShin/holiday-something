@@ -5,6 +5,7 @@ import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Order;
 import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.repository.MemberRepository;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -74,10 +75,26 @@ public class MemberTest {
 
   }
 
-//  @Test
-//  public void 기간으로주문회원조회() {
-//    List<Order> orders = memberRepository.getMembersByOrderPeriod(18l);
-//    System.out.println("============================= " + orders.size());
-//
-//  }
+  @Test
+  public void 기간으로주문회원조회() {
+    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
+    LocalDateTime ldt2 = LocalDateTime.of(2018, 12, 01, 00, 00, 00);
+    List<Member> members = memberRepository.getMembersByOrderPeriod(ldt1, ldt2);
+    for (Member member : members) {
+      System.out.println(
+          member.getId() + " ----- " + member.getName() + " ----- " + member.getNickname());
+    }
+  }
+
+  @Test
+  public void id로회원조회byDSL() {
+    Member member = memberRepository.getMemberByDsl(18L);
+    System.out.println("=====================================");
+    System.out.println(member.getId());
+    System.out.println(member.getEmail());
+    System.out.println(member.getName());
+    System.out.println(member.getBirthday());
+    System.out.println("=====================================");
+
+  }
 }
