@@ -3,7 +3,6 @@ package com.holidaysomething.holidaysomething.repository;
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Order;
 import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
-import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -55,7 +54,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
   @Query(value = "select new com.holidaysomething.holidaysomething.dto.OrderMemberDto(me, count(me)) from Member as me left join ORDERS as o on (me.id=o.member) where o.member in (select me.id from Member as me where me.name=(:name)) group by me.id")
   List<OrderMemberDto> findMembersByNameInOrders(@Param("name") String name);
 
-
+  // 주문일자로 회원 검색하기.
+  // select * from member as m where m.id in (select distinct o.member_id from orders as o where o.date between '2018-11-01' and '2018-11-25') order by m.id asc;
 //  @Query(value="select me.orders from Member me, ORDERS o where o.member.id=(:memberId)")
 //  List<Order> getMembersByOrderPeriod(@Param("loginId") Long memberId);
 
