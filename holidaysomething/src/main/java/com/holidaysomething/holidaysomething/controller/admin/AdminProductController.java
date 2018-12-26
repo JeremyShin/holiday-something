@@ -90,7 +90,7 @@ public class AdminProductController {
     return "admin/product/product_detail";
   }
 
-  @PostMapping("/product_detail/bundle")
+  @PostMapping("/product_detail")
   public String productDetailBundle(ModelMap modelMap,
       @RequestParam("productOptionBundleSize") int size) {
     List<ProductOption> productOptionList = productOptionService.getAllProductOptions();
@@ -179,8 +179,6 @@ public class AdminProductController {
   public String productList(
       @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 10) Pageable pageable,
       @ModelAttribute("search") Search search, ModelMap modelMap) {
-    // 커맨드 객체와 @ModelAttribute 같다. 다만 @ModelAttribute 뷰에서 사용할 모델의 이름을 변경할 때 사용
-
     Page<Product> products = productService.findProductAllOrSearch(search, pageable);
 
     modelMap.addAttribute("products", products);
@@ -251,15 +249,6 @@ public class AdminProductController {
   @GetMapping({"/product_search", "/product_search/{pageStart}"})
   public String productSearch(ModelMap modelMap, @PathVariable Optional<Integer> pageStart) {
 
-//        List<ProductCategory> productBigCategories =  productService.findByProductBigCategoryContaining();
-//        modelMap.addAttribute("bigCategory", productBigCategories);
-//        if(bigId == null) {
-//
-//        }else {
-//            List<ProductCategory> productMiddleCategories = productService.findByProductMiddleCategoryContaining(bigId);
-//            modelMap.addAttribute("middleCategory", productMiddleCategories);
-//        }
-
     // 대분류를 불러온다
     List<ProductCategory> largeCategories = adminProductRegisterService.productCategoryList(0L);
     modelMap.addAttribute("largeCategories", largeCategories);
@@ -276,13 +265,14 @@ public class AdminProductController {
   }
 
   @PostMapping("/product_search")
-  public String searchResult(ModelMap modelMap,
+  public String productSearchPost(ModelMap modelMap,
       @RequestParam("productSearchClassification") String productSearchClassificationValue,
       @RequestParam("productSearchClassificationInput") String productSearchClassificationInput,
       @RequestParam("productLargeCategoryId") Long largeId,
       @RequestParam("productMiddleCategoryId") Long middleId,
       @RequestParam("productSmallCategoryId") Long smallId,
       @RequestParam("productSearchDate") String productSearchDateValue,
+      //TODO: null 값으로 들어왔을 경우 페이지 에러가 나지 않는 방안 모색
       @RequestParam(value = "regdateStart", defaultValue = "0000-00-00 00:00") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String productStartDateSelect,
       @RequestParam(value = "regdateEnd", defaultValue = "0000-00-00 00:00") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String productEndDateSelect) {
 //    @RequestParam("productSearchDateInput") @DateTimeFormat(pattern="yyyy/MM/dd") Date productSearchDateInput) {
@@ -299,6 +289,7 @@ public class AdminProductController {
 
     // 모든 상품 리스트를 불러온다(페이지)
     // TODO: 검색 결과도 페이징 처리 필요
+    // TODO: QueryDSL 추후 적용
     Pageable pageable = PageRequest.of(0, 10);
     Page<Product> allProductList = adminProductRegisterService.getAllProducts(pageable);
 

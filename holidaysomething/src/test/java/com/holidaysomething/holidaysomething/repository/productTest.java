@@ -48,7 +48,7 @@ public class productTest {
   public void 상품code순으로_모든_상품가져오기() throws Exception {
 
     Pageable pageable = PageRequest.of(0, 5);
-    Page<Product> products = productRepository.findbyProductCodeContaining("210", pageable);
+    Page<Product> products = productRepository.findByProductCodeContaining("210", pageable);
 
     for (Product product : products) {
       System.out.println("상품명은" + product.getName() + "상품코드는 " + product.getCode());
