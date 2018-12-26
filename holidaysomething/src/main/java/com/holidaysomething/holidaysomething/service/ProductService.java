@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ProductService {
 
-  Product findByProductNameContaining(String productName);
+  //Product findByProductNameContaining(String productName);
 
   Page<Product> findByProductNameContaining(String productName, Pageable pageable);
 

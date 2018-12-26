@@ -1,6 +1,12 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="layout/default">
+      layout:decorate="~{layout/default.html}">
+
+<head th:include="fragments/config :: configFragment">
+  <title id="pageTitle">Page title</title>
+  <!-- other elements you want to reference in your layout -->
+</head>
+
 
 <div layout:fragment="content">
   <form name="option_value_form" action="/admin/product/product_detail_add_option" method="post">
