@@ -2,109 +2,28 @@
 <html xmlns:th="http://www.springframework.org/schema/data/jaxb"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns="http://www.w3.org/1999/xhtml"
-      layout:decorate="layout/default">
+      layout:decorate="~{layout/default.html}">
+
+<head th:include="fragments/config :: configFragment">
+  <title id="pageTitle">Page title</title>
+  <!-- other elements you want to reference in your layout -->
+</head>
+
+<!--<head th:replace="fragments/config :: configFragment (pageTitle='Product Register')">-->
+<!--<title>상품등록</title>-->
+<!--&lt;!&ndash; metas, link and scripts &ndash;&gt;-->
+<!--</head>-->
+
 
 <!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
 </th:block>
 
-<!-- 사용자 스크립트 추가 -->
-<th:block layout:fragment="script">
-
-  <script type="text/javascript">
-    function getCategoryList(parentId) {
-      let html = '';
-      let method = "onclick='getCategoryBrandList(";
-
-      // getJSON의 1번째 인자로 요청을 보내 받은 데이터가 2번째 인자인 함수의 매개변수(list)로 들어간다.
-      $.getJSON(`/admin/product/product_detail/register/lowcategories/${parentId}`,
-        function (list) {
-          $(list).each(
-            function () {
-              console.log('getCategoryList - $(list).each 진입');
-              html += `<li><span data-categoryid=${this.id} class="span" ${method}=${this.id}>${this.name}</span></li>`;
-              console.log(`getCategoryList - html: ${html}`);
-            }
-          );
-          $("#secondCategoryUl").html('');
-          $("#thirdCategoryUl").html('');
-          $("#secondCategoryUl").html(html);
-      });
-    }
-
-    function getCategoryBrandList(parentId) {
-      var html = '';
-      var method = "onclick='getCategoryList(";
-
-      $.getJSON("/admin/product/product_detail/register/lowcategories/" + parentId,
-          function (list) {
-            // $("#currentCategory").html("<label>"+ this.id + "</label>");
-            $(list).each(
-                function () {
-                  html += "<li><span data-categoryid=" + this.id + " class='span'> " + this.name
-                      + "</span></li> ";
-                }
-            );
-            $("#thirdCategoryUl").html('');
-            $("#thirdCategoryUl").html(html);
-          });
-    }
-  </script>
-
-  <script type="text/javascript">
-    $(document).ready(function () {
-      $(document).on('click', '.span', function () {
-        var name = $(this).text();
-        var id = $(this).attr("data-categoryid");
-        console.log(name);
-        console.log(id);
-        $("#categoryName").text(name);
-        $("#categoryId").text(id);
-        $("#categoryId2").val(id);
-      });
-    });
-  </script>
-
-  <script>
-    $(function () {
-      //모든 datepicker에 대한 공통 옵션 설정
-      $.datepicker.setDefaults({
-        dateFormat: 'yy-mm-dd' //Input Display Format 변경
-        , showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
-        , showMonthAfterYear: true //년도 먼저 나오고, 뒤에 월 표시
-        , changeYear: true //콤보박스에서 년 선택 가능
-        , changeMonth: true //콤보박스에서 월 선택 가능
-        , showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시
-        , buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
-        , buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
-        , buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트
-        , yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
-        , monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'] //달력의 월 부분 텍스트
-        , monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'] //달력의 월 부분 Tooltip 텍스트
-        , dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'] //달력의 요일 부분 텍스트
-        , dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'] //달력의 요일 부분 Tooltip 텍스트
-        , minDate: "-1M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-        , maxDate: "+1M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
-      });
-
-      //input을 datepicker로 선언
-      //$("#datepicker").datepicker();
-      // $("#datepicker2").datepicker();
-
-      //From의 초기값을 오늘 날짜로 설정
-      //$('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
-      //To의 초기값을 내일로 설정
-      // $('#datepicker2').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
-
-      var date1 = $('#datepicker').val();
-      console.log(date1);
-
-    });
-  </script>
-
-</th:block>
-
 <div layout:fragment="content">
+  <!-- 사용자 스크립트 추가 -->
+  <th:block layout:fragment="script">
+    <script th:src="@{/js/productRegister.js}"></script>
+  </th:block>
   <h1>Product Register</h1>
 
   <!--------------------------
@@ -148,14 +67,14 @@
 
     <!-- th:field="*{product.productDetail.description}" 이런식으로 해도 된다는데... 실패했었음.-->
     <form action="#" th:action="@{/admin/product/product_detail/register}" method="post"
-          th:object="${ProductDto}">
+          th:object="${Product}">
 
       <!-- Start(현재 선택한 카테고리가 무엇인지 보여주는 부분) -->
       <div style="display:inline-block;position:relative;left:50px;" id="currentCategory">
         <label>선택한 카테고리 : </label>
         <span id="categoryName"></span>
         <span name="productCategoryId" id="categoryId"></span>
-        <input id="categoryId2" type="hidden" name="productCategoryId" value="">
+        <input id="categoryId2" type="hidden" name="productCategory.id" value="">
         <!--<input th:field="*{productCategoryId}" type="text" value="" placeholder="">-->
       </div>
       <!-- End (현재 선택한 카테고리 보여주는 부분)-->
@@ -192,7 +111,7 @@
         </div>
         <div>
           <label>상품 설명 : </label>
-          <input name="productDescription" type="text" placeholder="Product Description">
+          <input name="productDetail.description" type="text" placeholder="Product Description">
         </div>
 
         <div>

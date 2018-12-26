@@ -23,6 +23,7 @@ public class ProductRepositoryTest {
   ProductCategoryRepository productCategoryRepository;
 
   // admin : search by name test
+
   @Test
   public void 이름포함된Product구하기() throws Exception {
     Pageable pageable = PageRequest.of(0, 5);

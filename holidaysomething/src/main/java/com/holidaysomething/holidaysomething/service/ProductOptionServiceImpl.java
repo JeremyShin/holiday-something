@@ -67,4 +67,10 @@ public class ProductOptionServiceImpl implements ProductOptionService {
   public void addProductOption(ProductOption productOption) {
     productOptionRepository.save(productOption);
   }
+
+  @Override
+  @Transactional
+  public Page<ProductOption> getProductOptionsByProductId(Long productId, Pageable pageable) {
+    return productOptionRepository.findByProductId(productId, pageable);
+  }
 }

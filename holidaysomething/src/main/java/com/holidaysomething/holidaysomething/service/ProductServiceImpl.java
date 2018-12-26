@@ -19,15 +19,22 @@ public class ProductServiceImpl implements ProductService {
   private ProductRepository productRepository;
   private ProductCategoryRepository productCategoryRepository;
 
-  public ProductServiceImpl(ProductRepository productRepository, ProductCategoryRepository productCategoryRepository) {
+  public ProductServiceImpl(ProductRepository productRepository,
+      ProductCategoryRepository productCategoryRepository) {
     this.productRepository = productRepository;
     this.productCategoryRepository = productCategoryRepository;
   }
 
   @Transactional(readOnly = true)
   @Override
+  public Product findByProductNameContaining(String productName) {
+    Product productByName = productRepository.findbyProductNameContaining(productName);
+    return productByName;
+  }
+
   public Page<Product> findByProductNameContaining(String productName, Pageable pageable) {
-    Page<Product> productByName = productRepository.findByProductNameContaining(productName, pageable);
+    Page<Product> productByName = productRepository
+        .findByProductNameContaining(productName, pageable);
     return productByName;
   }
 
@@ -69,26 +76,28 @@ public class ProductServiceImpl implements ProductService {
 
   @Transactional(readOnly = true)
   @Override
-  public Page<Product> findByProductRegdate(LocalDateTime regdateStart, LocalDateTime regdateEnd, Pageable pageable) {
+  public Page<Product> findByProductRegdate(LocalDateTime regdateStart, LocalDateTime regdateEnd,
+      Pageable pageable) {
 
-    Page<Product> products = productRepository.findByProductRegdate(regdateStart, regdateEnd, pageable);
+    Page<Product> products = productRepository
+        .findByProductRegdate(regdateStart, regdateEnd, pageable);
 
     return products;
   }
-  
+
   @Transactional(readOnly = true)
   @Override
   public Page<Product> findProductAllOrSearch(Search search, Pageable pageable) {
-      Page<Product> products = null;
-      if (search.isSearched()) { // 검색된 상품 리스트
-          if (search.getSearchType().equals("name")) {
-              products = productRepository.findByProductNameContaining(search.getKeyword(), pageable);
-          } else if (search.getSearchType().equals("code")) {
-              products =  productRepository.findbyProductCodeContaining(search.getKeyword(), pageable);
-          }
-      } else { // 모든 상품 리스트
-          products =  productRepository.findAll(pageable);
+    Page<Product> products = null;
+    if (search.isSearched()) { // 검색된 상품 리스트
+      if (search.getSearchType().equals("name")) {
+        products = productRepository.findByProductNameContaining(search.getKeyword(), pageable);
+      } else if (search.getSearchType().equals("code")) {
+        products = productRepository.findbyProductCodeContaining(search.getKeyword(), pageable);
       }
-      return products;
+    } else { // 모든 상품 리스트
+      products = productRepository.findAll(pageable);
+    }
+    return products;
   }
 }

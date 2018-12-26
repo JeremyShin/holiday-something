@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.util;
 
 // TODO : 블럭 단위 페이징처리를 위한 클래스, 추후 구현 예정
 public class Pagination {
+
     private int totalProductCount;  // 총 상품 수
     private int totalPageCount;     // 총 페이지 수
     private int productCount;       // 한 화면에 보여질 상품의 수

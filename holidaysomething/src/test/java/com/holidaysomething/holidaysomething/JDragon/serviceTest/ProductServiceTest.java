@@ -1,9 +1,9 @@
-package com.holidaysomething.holidaysomething.JDragon.repositoryTest;
+package com.holidaysomething.holidaysomething.JDragon.serviceTest;
 
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductDetail;
-import com.holidaysomething.holidaysomething.service.admin.AdminProductService;
+import com.holidaysomething.holidaysomething.service.admin.AdminProductRegisterService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +18,12 @@ public class ProductServiceTest {
 
 
   @Autowired
-  private AdminProductService adminProductService;
+  private AdminProductRegisterService adminProductRegisterService;
 
   @Test
   public void 상품서비스에서등록하기테스트() {
     Product p = new Product();
-    ProductDetail pd = new ProductDetail();
+    ProductDetail pd = new ProductDetail("이거 방탄유리야!!");
     ProductCategory pc = new ProductCategory();
     pc.setId(2l);
     pc.setName("하하");
@@ -35,11 +35,10 @@ public class ProductServiceTest {
     p.setSellingPrice(10000000);
     p.setManufacturingPrice(100);
     p.setShippingPrice(50000);
+    p.setProductDetail(pd);
     p.setProductCategory(pc);
 
-    String description = "이거 방탄유리야!!!!!!!!";
-
-    Product insertedProduct = adminProductService.productRegister(p, description, pc.getId());
+    Product insertedProduct = adminProductRegisterService.productRegister(p);
 
     System.out.println("================================");
     System.out.println("상품 id : " + insertedProduct.getId());

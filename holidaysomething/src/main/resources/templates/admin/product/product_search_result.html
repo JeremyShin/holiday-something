@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xml:th="http:/www.thymeleaf.org"
       layout:decorator="layout/default">
 <div layout:fragment="content">
@@ -15,26 +16,26 @@
             <colgroup>
             </colgroup>
             <thead>
-                <tr bgcolor="orange">
-                    <th>이름</th>
-                    <th>제품코드</th>
-                    <th>판매가</th>
-                    <th>재고</th>
-                    <th>안전재고</th>
-                    <th>판매량</th>
-                    <th>등록일</th>
-                </tr>
+            <tr bgcolor="orange">
+                <th>이름</th>
+                <th>제품코드</th>
+                <th>판매가</th>
+                <th>재고</th>
+                <th>안전재고</th>
+                <th>판매량</th>
+                <th>등록일</th>
+            </tr>
             </thead>
             <tbody>
-                <tr th:each="product : ${regdate}">
-                    <td th:text="${product.name}"></td>
-                    <td th:text="${product.code}"></td>
-                    <td th:text="${product.sellingPrice}"></td>
-                    <td th:text="${product.quantity}"></td>
-                    <td th:text="${product.safeQuantity}"></td>
-                    <td th:text="${product.sellingQuantity}"></td>
-                    <td th:text="${product.regDate}"></td>
-                </tr>
+            <tr th:each="product : ${regdate}">
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.code}"></td>
+                <td th:text="${product.sellingPrice}"></td>
+                <td th:text="${product.quantity}"></td>
+                <td th:text="${product.safeQuantity}"></td>
+                <td th:text="${product.sellingQuantity}"></td>
+                <td th:text="${product.regDate}"></td>
+            </tr>
             </tbody>
         </table>
     </div>
@@ -43,9 +44,9 @@
     <!--Pagenation-->
     <div>
         <h2>페이지네이션</h2>
-       <!--&lt;!&ndash; <span th:each="page : ${#numbers.sequence(1, pageCount}">
-        <span th:text="${presentPage}">${presentPage}</span>&ndash;&gt;
-        </span>-->
+        <!--&lt;!&ndash; <span th:each="page : ${#numbers.sequence(1, pageCount}">
+         <span th:text="${presentPage}">${presentPage}</span>&ndash;&gt;
+         </span>-->
     </div>
 
 </div>

@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ProductService {
 
+  Product findByProductNameContaining(String productName);
+
   Page<Product> findByProductNameContaining(String productName, Pageable pageable);
-  
-//  List<ProductCategory> findByProductBigCategoryContaining();
-//  List<ProductCategory> findByProductMiddleCategoryContaining(Long bigId);
-  
-  Page<Product> findByProductRegdate(LocalDateTime regdateStart, LocalDateTime regdateEnd, Pageable pageable);
+
+  Page<Product> findByProductRegdate(LocalDateTime regdateStart, LocalDateTime regdateEnd,
+      Pageable pageable);
 
   Page<Product> findAll(Pageable pageable);
 

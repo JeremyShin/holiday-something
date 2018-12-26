@@ -6,5 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface MemberService {
-    Page<Member> findAllOrSearch(Search search, Pageable pageable);
+
+  Page<Member> findAllOrSearch(Search search, Pageable pageable);
 }

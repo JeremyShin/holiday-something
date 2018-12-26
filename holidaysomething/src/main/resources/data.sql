@@ -1,5 +1,5 @@
 -- alter table product_image_category default character set utf8;
---
+
 -- INSERT INTO product_image_category (id, name) VALUES (1, '상세이미지');
 -- INSERT INTO product_image_category (id, name) VALUES (2, '목록이미지');
 -- INSERT INTO product_image_category (id, name) VALUES (3, '추가이미지');
@@ -223,9 +223,9 @@ VALUES (null, '제주특별자치도 제주시 첨단로 213-4', '102호', '배�
 
 
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110240057512', NOW(), 12000, '구매확정', 120, 2, 2, 2);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110230057613', NOW(), 12000, '구매확정', 120, 2, 3, 3);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110360057614', NOW(), 9000, '구매확정', 90, 2, 4, 4);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110350057415', NOW(), 6500, '구매확정', 60, 3, 5, 5);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110230057613', NOW(), 12000, '구매확정', 120, 18, 3, 3);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110360057614', NOW(), 9000, '구매확정', 90, 18, 4, 4);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110350057415', NOW(), 6500, '구매확정', 60, 18, 5, 5);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110350057516', NOW(), 6500, '구매확정', 60, 3, 6, 6);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111050067517', NOW(), 4500, '구매확정', 40, 4, 7, 7);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111060037518', NOW(), 10000, '구매확정', 100, 4, 8, 8);
@@ -233,11 +233,11 @@ INSERT INTO orders (id, order_number, date, total_price, status, mileage, member
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111050138510', NOW(), 4000, '구매확정', 40, 4, 10, 10);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111750147511', NOW(), 3000, '구매확정', 30, 5, 11, 11);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111750137512', NOW(), 3000, '구매확정', 30, 5, 12, 12);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111950137513', NOW(), 5500, '구매확정', 50, 6, 13, 13);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111950137513', NOW(), 5500, '구매확정', 50, 18, 13, 13);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111950137514', NOW(), 2500, '구매확정', 20, 6, 14, 14);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112250137515', NOW(), 2500, '구매확정', 20, 6, 15, 15);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137516', NOW(), 1100, '구매확정', 10, 6, 16, 16);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137517', NOW(), 2200, '구매확정', 20, 7, 17, 17);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137517', NOW(), 2200, '구매확정', 20, 18, 17, 17);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137518', NOW(), 5000, '구매확정', 50, 7, 18, 18);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137519', NOW(), 5000, '구매확정', 50, 9, 19, 19);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137520', NOW(), 3000, '구매확정', 30, 9, 20, 20);
@@ -417,6 +417,17 @@ INSERT INTO product_option (id,name,price,description,product_id) VALUES (27,'�
 INSERT INTO product_option (id,name,price,description,product_id) VALUES (28,'그레이',2500,NULL,12);
 INSERT INTO product_option (id,name,price,description,product_id) VALUES (29,'핑크',NULL,NULL,12);
 INSERT INTO product_option (id,name,price,description,product_id) VALUES (30,'바이올렛',NULL,NULL,12);
+
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (31,'스카이블루',200,NULL,1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (32,'그린',NULL,NULL,1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (33,'핑크',NULL,NULL,1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (34,'머스타드',NULL,'머스타드 ==> 겨자색',1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (35,'블루',NULL,NULL,1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (36,'레드',NULL,NULL,1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (37,'블랙',NULL,NULL,1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (38,'그레이',2500,NULL,1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (39,'검정',NULL,NULL,1);
+INSERT INTO product_option (id,name,price,description,product_id) VALUES (40,'바이올렛',NULL,NULL,1);
 
 
 INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(10000,1,100,NULL,NULL,1,1);

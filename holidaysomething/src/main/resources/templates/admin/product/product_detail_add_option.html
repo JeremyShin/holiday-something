@@ -2,8 +2,8 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout/default">
 
-  <div layout:fragment="content">
-    <form name="option_value_form" action="/admin/product/product_detail_add_option" method="post">
+<div layout:fragment="content">
+  <form name="option_value_form" action="/admin/product/product_detail_add_option" method="post">
       <table>
         <tbody>
         <tr>
@@ -11,19 +11,20 @@
             <p>옵션명과 옵션값에는 , (콤마), ; (세미콜론), " (쌍따옴표), \ (역슬래시), #$% (특수문자)는 등록할 수 없습니다.</p>
             <div>
               <div>
-                선택한 항목을 <span id="deleteRow">삭제</span>
+                <select name="productId" class="productId">
+                  <option value="--ALL--">상품선택</option>
+                  <option th:each="product : ${products}" th:value="${product.id}"
+                          th:text="${product.name}"></option>
+                </select>
               </div>
-              <div>
-                <span id="createRow">추가</span>
-              </div>
+
             </div>
             <div>
               <table border="1" id="optionValueTable">
                 <thead>
                 <tr>
-                  <th><input type="checkbox" id="selectAllCheckbox" onclick="toggle(this);"></th>
-                  <th>적용할 상품 선택</th>
-                  <th>옵션 명 및 가격 설정</th>
+                  <th> <input type="button" value="추가" id="createRow"></th>
+                  <th>옵션명 및 가격 설정</th>
                 </tr>
                 </thead>
 
@@ -31,32 +32,22 @@
                 <!---------- 추가 버튼 클릭 시 추가할 row ---------->
                 <tr id="optionCheckTr">
                   <td>
-                    <span class="delete">삭제</span>
-                    <input type="checkbox" class="optionCheckFrame">
+                    <input type="button" value="삭제" class="delete" onclick="delRow(this);">
+                    <!--<input type="checkbox" class="optionCheckFrame">-->
                   </td>
 
                   <td width="500">
-
-                    <select name="productId" class="productId">
-                      <option value="--ALL--">상품선택</option>
-                      <option th:each="product : ${products}" th:value="${product.id}"
-                              th:text="${product.name}"></option>
-                    </select>
-                  </td>
-
-                  <td width="500">
-                    <div>
-                      옵션명 :
-                      <input type="text" name="name" placeholder="예시) 옵션명을 입력하시오" maxlength="50"
+                    <div>옵션명 :
+                      <input type="text" name="productOptions[0].name" placeholder="예시) 옵션명을 입력하시오"
+                             maxlength="50"
                              size="70">
                     </div>
-                    <div>
-                      추가금액 :
-                      <input type="text" name="price" size="70">
+                    <div>추가금액 :
+                      <input type="text" name="productOptions[0].price" size="70">
                     </div>
-                    <div>
-                      옵션설명 :
-                      <input type="text" name="description" size="70" style="height:30px;">
+                    <div>옵션설명 :
+                      <input type="text" name="productOptions[0].description" size="70"
+                             style="height:30px;">
                     </div>
                   </td>
                 </tr>
@@ -70,8 +61,9 @@
         </tbody>
       </table>
       <input type="submit" value="submit">
-    </form>
 
-    <script th:src="@{/js/productOption.js}"></script>
-  </div>
+  </form>
+
+  <script th:src="@{/js/productOption.js}"></script>
+</div>
 </html>

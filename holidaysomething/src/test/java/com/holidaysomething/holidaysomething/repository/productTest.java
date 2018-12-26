@@ -51,18 +51,21 @@ public class productTest {
     Page<Product> products = productRepository.findbyProductCodeContaining("210", pageable);
 
     for (Product product : products) {
-      System.out.println("상품명은" + product.getName() + "상품코드는 " + product  .getCode());
+      System.out.println("상품명은" + product.getName() + "상품코드는 " + product.getCode());
     }
   }
 
   @Test
   public void 제품등록일로_상품가져오기() throws Exception {
     Pageable pageable = PageRequest.of(0, 5);
-    Page<Product> products = productRepository.findByProductRegdate(LocalDateTime.of(2018,12,20,14,22),LocalDateTime.of(2018,12,30,14,22),  pageable);
+    Page<Product> products = productRepository
+        .findByProductRegdate(LocalDateTime.of(2018, 12, 20, 14, 22),
+            LocalDateTime.of(2018, 12, 30, 14, 22), pageable);
 
     System.out.println("~~~~");
-    for(Product product : products) {
-      System.out.println(product.getName()+", "+product.getRegDate()+", "+product.getReleaseDate());
+    for (Product product : products) {
+      System.out.println(
+          product.getName() + ", " + product.getRegDate() + ", " + product.getReleaseDate());
     }
   }
 }

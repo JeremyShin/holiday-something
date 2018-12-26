@@ -18,19 +18,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin/member")
 public class AdminMemberController {
-    private static final Log log = LogFactory.getLog(AdminMemberController.class);
-    private MemberService memberService;
 
-    public AdminMemberController(MemberService memberService){
-        this.memberService = memberService;
-    }
+  private static final Log log = LogFactory.getLog(AdminMemberController.class);
+  private MemberService memberService;
 
-    @GetMapping("/mileage/search")
-    public String mileageSearch(@PageableDefault(sort = {"loginId"}, size = 10)Pageable pageable,
-                                @ModelAttribute("search") Search search, ModelMap modelMap){
-        Page<Member> members = memberService.findAllOrSearch(search, pageable);
-        modelMap.addAttribute("members", members);
+  public AdminMemberController(MemberService memberService) {
+    this.memberService = memberService;
+  }
 
-        return "/admin/member/mileage_search";
-    }
+  @GetMapping("/mileage/search")
+  public String mileageSearch(@PageableDefault(sort = {"loginId"}, size = 10) Pageable pageable,
+      @ModelAttribute("search") Search search, ModelMap modelMap) {
+    Page<Member> members = memberService.findAllOrSearch(search, pageable);
+    modelMap.addAttribute("members", members);
+
+    return "/admin/member/mileage_search";
+  }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface AdminProductService {
+public interface AdminProductRegisterService {
 
   // 모든 상품 리스트 가져오기
   Page<Product> getAllProducts(Pageable pageable);
@@ -19,5 +19,5 @@ public interface AdminProductService {
   Product productDtoToProduct(ProductDto productDto);
 
   // 상품 등록 하기야!! (상품, 상품_디테일 테이블 두개 insert)
-  Product productRegister(Product product, String description, Long parentCategoryId);
+  Product productRegister(Product product);
 }

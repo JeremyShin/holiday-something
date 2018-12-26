@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default.html}">
+
+<head th:include="fragments/config :: configFragment">
+  <title id="pageTitle">Page title</title>
+  <!-- other elements you want to reference in your layout -->
+</head>
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+</th:block>
+
+<!-- 사용자 스크립트 추가 -->
+<th:block layout:fragment="script">
+</th:block>
+
+
+<div layout:fragment="content">
+  <br>
+  <br>
+  <br>
+  <br>
+  <h1> 주문회원 조회 페이지 입니다.</h1>
+
+  <table>
+    <tr>
+      <td>이름</td>
+      <td><input type="text" placeholder="Name"></td>
+    </tr>
+    <tr>
+      <td>아이디</td>
+      <td><input type="text" placeholder="Id"></td>
+    </tr>
+    <tr>
+      <td>주문상품</td>
+      <td><input type="text" placeholder="Product Name"></td>
+    </tr>
+    <tr>
+      <td>주문번호</td>
+      <td><input type="text" placeholder="Order Number"></td>
+    </tr>
+    <tr>
+      <td>주문기간</td>
+      <td>
+        <input name="startDate" type="date"> ~
+        <input name="endDate" type="date">
+      </td>
+    </tr>
+  </table>
+
+  <input type="submit" value="조회">
+
+
+</div>
+
+</html>

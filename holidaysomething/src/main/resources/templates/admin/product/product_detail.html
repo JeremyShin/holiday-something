@@ -1,6 +1,11 @@
 <html xmlns:th="http://www.springframework.org/schema/data/jaxb"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="layout/default">
+      layout:decorate="~{layout/default.html}">
+
+<head th:include="fragments/config :: configFragment">
+  <title id="pageTitle">Page title</title>
+  <!-- other elements you want to reference in your layout -->
+</head>
 
 <!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
@@ -61,20 +66,24 @@
             <th>옵션명<!--<button type="button">오름차순 정렬</button>--></th>
             <th>옵션값</th>
             <th>옵션설명</th>
-            <th>상품코드</th>
+            <th>상품코드<th>
             <th>상품명</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <tr th:each="productOption : ${productOptions != null ? productOptions : productOptionsSearchResult}"
               class="productOptionTr">
-            <td><input type="checkbox" name="productOptionId" th:value="${productOption.id}"/></td>
-            <td th:text="${productOption.id}">###</td>
-            <td th:text="${productOption.name}">###</td>
-            <td th:text="${productOption.price}">###</td>
-            <td th:text="${productOption.description}">###</td>
-            <td th:text="${productOption.product.code}">###</td>
-            <td th:text="${productOption.product.name}">###</td>
+            <td id= "optionCheck" ><input type="checkbox" name="productOptionId" th:value="${productOption.id}"/></td>
+            <td id = "optionId" th:text="${productOption.id}">###</td>
+            <td id = "optionName" th:text="${productOption.name}">###</td>
+            <td id = "optionPrice" th:text="${productOption.price}">###</td>
+            <td id = "optionDesc" th:text="${productOption.description}">###</td>
+            <td id = "optionCode" th:text="${productOption.product.code}">###</td>
+            <td id = "optionProductName" th:text="${productOption.product.name}">###</td>
+            <!--<td><input type="button" value="수정" onclick="location.href='/admin/product/product_detail_modify_option'"></td>-->
+            <td><input id="modifyBtn" type="button" class="modBtn" value="수정" onclick="modify(this);"/></td>
+
           </tr>
         </tbody>
       </table>
@@ -98,4 +107,9 @@
   </th:block>
 
 </div>
+
+
+<!-- 사용자 스크립트 추가 -->
+
+
 </html>

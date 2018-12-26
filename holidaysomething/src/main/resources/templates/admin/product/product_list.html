@@ -13,30 +13,30 @@
     <h1 align="center">상품 목록</h1>
 
     <div>
-    <form method="GET" action="/admin/product/product_list" id="product-search-form">
-      <table width="200" boarder="0" align="center">
-        <tr>
-          <td align="center" valign="bottom">
-            <select name="searchType">
-              <option value="name" selected="selected">상품명</option>
-              <option value="code">제품코드</option>
-            </select>
-          </td>
-          <td>
-            <input type="search" size="16" name="keyword">
-          </td>
-          <td>
-            <input type="submit" value="검색">
-          </td>
-        </tr>
-      </table>
-    </form>
+      <form method="GET" action="/admin/product/product_list" id="product-search-form">
+        <table width="200" boarder="0" align="center">
+          <tr>
+            <td align="center" valign="bottom">
+              <select name="searchType">
+                <option value="name" selected="selected">상품명</option>
+                <option value="code">제품코드</option>
+              </select>
+            </td>
+            <td>
+              <input type="search" size="16" name="keyword">
+            </td>
+            <td>
+              <input type="submit" value="검색">
+            </td>
+          </tr>
+        </table>
+      </form>
     </div>
 
     <!-- 값에 따른 정렬, 추후 구현 예정 -->
     <!--<div align="right">-->
-      <!--<button type="button" name="sort" value="sellingQuantity" onclick="location.href='/admin/product/product_list?sort=#'">판매량순</button>-->
-      <!--<button type="button" name="sort" value="releaseDate" onclick="location.href='/admin/product/product_list?sort=#'">출시일순</button>-->
+    <!--<button type="button" name="sort" value="sellingQuantity" onclick="location.href='/admin/product/product_list?sort=#'">판매량순</button>-->
+    <!--<button type="button" name="sort" value="releaseDate" onclick="location.href='/admin/product/product_list?sort=#'">출시일순</button>-->
     <!--</div>-->
 
     <div class="tbl-container">

@@ -1,7 +1,40 @@
 ## holiday-something brand mall
 Holiday Something(홀리데이썸띵) 쇼핑몰 구축 repository입니다.
-A little info about your project and/ or overview that explains **what** the project is about.
 
+## Tech/framework used
+- Language: JDK 1.8
+- Application Framework: Spring Boot 2.0
+- Database: MySQL, JPA(Java Persistence API)
+- Deployment: Docker, AWS(EC2, RDS)
+- Front-End: React
+- IDE: IntelliJ
+- Build Automation Tool: Maven
+
+## Code style
+- Java 코딩 컨벤션 ([참조 링크](http://kwangshin.pe.kr/blog/java-code-conventions-%EC%9E%90%EB%B0%94-%EC%BD%94%EB%94%A9-%EA%B7%9C%EC%B9%99/))
+- HTML
+  - HTML element에 inline으로 CSS 속성을 주는 것은 지양하고, 외부 CSS 파일로 분리한다.
+  - HTML 파일 내에 긴 JS 코드를 두는 것은 지양하고, 외부 JS 파일로 분리한다.
+  
+### Layer별 접미어
+- Controller : **Controller.java*
+- Service Interface : **Service.java*
+- Service Implement : **ServiceImpl.java*
+- Repository : *(Domain이름)Repository.java*
+
+### Layer별 메소드 이름
+- Repository
+  - JPA를 따름
+- Service
+  - Create : `add`
+  - Retrieve : `get`
+  - Update : `modify`
+  - Destroy : `remove`
+- Controller
+  - TBD
+
+---
+ 
 ## Motivation
 A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
 
@@ -11,19 +44,8 @@ Build status of continus integration i.e. travis, appveyor etc. Ex. -
 [![Build Status](https://travis-ci.org/akashnimare/foco.svg?branch=master)](https://travis-ci.org/akashnimare/foco)
 [![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/akashnimare/foco?branch=master&svg=true)](https://ci.appveyor.com/project/akashnimare/foco/branch/master)
 
-## Code style
-If you're using any code style like xo, standard etc. That will help others while contributing to your project. Ex. -
-
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
-
 ## Screenshots
 Include logo/demo screenshot etc.
-
-## Tech/framework used
-Ex. -
-
-<b>Built with</b>
-- [Electron](https://electron.atom.io)
 
 ## Features
 What makes your project stand out?
@@ -35,7 +57,6 @@ Show what the library does as concisely as possible, developers should be able t
 Provide step by step series of examples and explanations about how to get a development env running.
 
 ## API Reference
-
 Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
 
 ## Tests
@@ -45,7 +66,6 @@ Describe and show how to run the tests with code examples.
 If people like your project they’ll want to learn how they can use it. To do so include step by step guide to use your project.
 
 ## Contribute
-
 Let people know how they can contribute into your project. A [contributing guideline](https://github.com/zulip/zulip-electron/blob/master/CONTRIBUTING.md) will be a big plus.
 
 ## Credits

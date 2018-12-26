@@ -11,21 +11,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-    private MemberRepository memberRepository;
 
-    public MemberServiceImpl(MemberRepository memberRepository){
-        this.memberRepository = memberRepository;
-    }
+  private MemberRepository memberRepository;
 
-    @Override
-    @Transactional
-    public Page<Member> findAllOrSearch(Search search, Pageable pageable) {
-        Page<Member> members = null;
-        if(search.isSearched()){
-            members = memberRepository.findMembersByLoginId(search.getKeyword(), pageable);
-        } else {
-            members = memberRepository.findAll(pageable);
-        }
-        return members;
+  public MemberServiceImpl(MemberRepository memberRepository) {
+    this.memberRepository = memberRepository;
+  }
+
+  @Override
+  @Transactional
+  public Page<Member> findAllOrSearch(Search search, Pageable pageable) {
+    Page<Member> members = null;
+    if (search.isSearched()) {
+      members = memberRepository.findMembersByLoginId(search.getKeyword(), pageable);
+    } else {
+      members = memberRepository.findAll(pageable);
     }
+    return members;
+  }
 }

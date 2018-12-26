@@ -66,4 +66,13 @@ public class ProductTest {
     System.out.println("======================= ldt : " + ldt);
   }
 
+
+  // 상품 한개 조회하기
+  @Test
+  public void 상품한개조회하기() {
+    Product product = productRepository.getOne(1L);
+    System.out.println("============= Id" + product.getId());
+    System.out.println("============= Name" + product.getName());
+  }
+
 }

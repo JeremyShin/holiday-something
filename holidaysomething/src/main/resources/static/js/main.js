@@ -9,6 +9,51 @@ let toggle = function (source) {
   }
 };
 
+let nameInput = document.createElement("input");
+let priceInput = document.createElement("input");
+let descInput = document.createElement("input");
+let codeInput = document.createElement("input");
+
+let modify = function (source) {
+  for (let i = 0; i < source.parentElement.parentElement.children.length; i++) {
+    if (source.parentElement.parentElement.children[i].id == "optionName") {
+      console.log("zzz");
+      console.log(nameInput);
+      nameInput.setAttribute('type', 'text');
+      nameInput.setAttribute('value',
+          source.parentElement.parentElement.children[i].innerText);
+      source.parentElement.parentElement.children[i].appendChild(nameInput);
+    }
+
+    if (source.parentElement.parentElement.children[i].id == "optionPrice") {
+      priceInput.setAttribute('type', 'text');
+      priceInput.setAttribute('value',
+          source.parentElement.parentElement.children[i].innerText);
+      source.parentElement.parentElement.children[i].appendChild(priceInput);
+    }
+
+    if (source.parentElement.parentElement.children[i].id == "optionDesc") {
+      descInput.setAttribute('type', 'text');
+      descInput.setAttribute('value',
+          source.parentElement.parentElement.children[i].innerText);
+      source.parentElement.parentElement.children[i].appendChild(descInput);
+    }
+
+    if (source.parentElement.parentElement.children[i].id == "optioCode") {
+      codeInput.setAttribute('type', 'text');
+      codeInput.setAttribute('value',
+          source.parentElement.parentElement.children[i].innerText);
+      source.parentElement.parentElement.children[i].appendChild(codeInput);
+    }
+
+    if (source.parentElement.parentElement.children[i].childNodes[0].id == "modifyBtn") {
+      console.log("수정버튼입니다.");
+      let btn = source.parentElement.parentElement.children[i].childNodes[0]
+      btn.setAttribute("value", "수정완료");
+    }
+  }
+};
+
 let productOptionForm = document.querySelector('#productOptionForm');
 if (productOptionForm !== null) {
   let productOptionFormSubmitBtn = productOptionForm.querySelector(
@@ -42,46 +87,52 @@ let validateProductOptionForm = function (form) {
   }
 };
 
-let updateMiddleCategory = function(option) {
+let updateMiddleCategory = function (option) {
   let largeId = option.value;
   console.log(`updateMiddleCategory(${largeId}) is triggered`);
 
   $.getJSON(`/admin/product/subCategory/${largeId}`,
-            function(category) {
-              let productMiddleCategorySelect = document.getElementsByName('productMiddleCategoryId')[0];
-              // 중분류에 남아있을지 모르는 option 태그 모두 삭제 ('중분류' selected option만 남기고)
-              while (productMiddleCategorySelect.length > 1) {
-                productMiddleCategorySelect.removeChild(productMiddleCategorySelect.lastChild);
-              }
+      function (category) {
+        let productMiddleCategorySelect = document.getElementsByName(
+            'productMiddleCategoryId')[0];
+        // 중분류에 남아있을지 모르는 option 태그 모두 삭제 ('중분류' selected option만 남기고)
+        while (productMiddleCategorySelect.length > 1) {
+          productMiddleCategorySelect.removeChild(
+              productMiddleCategorySelect.lastChild);
+        }
 
-              let productSmallCategorySelect = document.getElementsByName('productSmallCategoryId')[0];
-              // 소분류에 남아있을지 모르는 option 태그 모두 삭제 ('소분류' selected option만 남기고)
-              while (productSmallCategorySelect.length > 1) {
-                productSmallCategorySelect.removeChild(productSmallCategorySelect.lastChild);
-              }
+        let productSmallCategorySelect = document.getElementsByName(
+            'productSmallCategoryId')[0];
+        // 소분류에 남아있을지 모르는 option 태그 모두 삭제 ('소분류' selected option만 남기고)
+        while (productSmallCategorySelect.length > 1) {
+          productSmallCategorySelect.removeChild(
+              productSmallCategorySelect.lastChild);
+        }
 
-              $(category).each(function() {
-                let option = document.createElement('option');
-                option.text = this.name;
-                option.value = this.id;
-                productMiddleCategorySelect.appendChild(option);
-              });
-            });
+        $(category).each(function () {
+          let option = document.createElement('option');
+          option.text = this.name;
+          option.value = this.id;
+          productMiddleCategorySelect.appendChild(option);
+        });
+      });
 };
 
-let updateSmallCategory = function(option) {
+let updateSmallCategory = function (option) {
   let middleId = option.value;
   console.log(`updateMiddleCategory(${middleId}) is triggered`);
 
   $.getJSON(`/admin/product/subCategory/${middleId}`,
-      function(category) {
-        let productSmallCategorySelect = document.getElementsByName('productSmallCategoryId')[0];
+      function (category) {
+        let productSmallCategorySelect = document.getElementsByName(
+            'productSmallCategoryId')[0];
         // 소분류에 남아있을지 모르는 option 태그 모두 삭제 (selected option만 남기고)
         while (productSmallCategorySelect.length > 1) {
-          productSmallCategorySelect.removeChild(productSmallCategorySelect.lastChild);
+          productSmallCategorySelect.removeChild(
+              productSmallCategorySelect.lastChild);
         }
 
-        $(category).each(function() {
+        $(category).each(function () {
           let option = document.createElement('option');
           option.text = this.name;
           option.value = this.id;
