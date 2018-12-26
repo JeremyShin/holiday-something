@@ -19,17 +19,17 @@ public class ProductServiceTest {
 
   Pageable pageable = PageRequest.of(0, 5);
 
-  @Test
-  public void productName검색() {
-    Page<Product> products = productService.findByProductNameContaining("아이코닉", pageable);
-    System.out.println("---");
-    for (Product product : products) {
-      System.out.println(product.getName());
-    }
-
-    System.out.println(products.getTotalElements());
-    System.out.println(products.getTotalPages());
-  }
+//  @Test
+//  public void productName검색() {
+//    Page<Product> products = productService.findByProductNameContaining("아이코닉", pageable);
+//    System.out.println("---");
+//    for (Product product : products) {
+//      System.out.println(product.getName());
+//    }
+//
+//    System.out.println(products.getTotalElements());
+//    System.out.println(products.getTotalPages());
+//  }
 
 //    @Test
 //    public void 제품Big카테고리검색() {

@@ -4,10 +4,11 @@ import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
-import com.holidaysomething.holidaysomething.dto.ProductDto;
+import com.holidaysomething.holidaysomething.domain.ProductOptionCommand;
 import com.holidaysomething.holidaysomething.service.ProductOptionService;
 import com.holidaysomething.holidaysomething.service.ProductService;
-import com.holidaysomething.holidaysomething.service.admin.AdminProductService;
+import com.holidaysomething.holidaysomething.service.admin.AdminProductOptionService;
+import com.holidaysomething.holidaysomething.service.admin.AdminProductRegisterService;
 import com.holidaysomething.holidaysomething.util.FileUtil;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -45,15 +46,18 @@ public class AdminProductController {
   private ProductService productService;
   private ProductOptionService productOptionService;
 
-  private AdminProductService adminProductService;
+  private AdminProductRegisterService adminProductRegisterService;
+  private AdminProductOptionService adminProductOptionService;
   private FileUtil fileUtil;
 
   public AdminProductController(ProductOptionService productOptionService,
-      ProductService productService, AdminProductService adminProductService, FileUtil fileUtil) {
+      ProductService productService, AdminProductRegisterService adminProductRegisterService,
+      FileUtil fileUtil, AdminProductOptionService adminProductOptionService) {
     this.productOptionService = productOptionService;
     this.productService = productService;
-    this.adminProductService = adminProductService;
+    this.adminProductRegisterService = adminProductRegisterService;
     this.fileUtil = fileUtil;
+    this.adminProductOptionService = adminProductOptionService;
   }
 
   @GetMapping
@@ -106,20 +110,10 @@ public class AdminProductController {
   // 대분류 불러오기.
   @GetMapping("/product_detail/register")
   public String productRegister(ModelMap model) {
-    List<ProductCategory> categories = adminProductService.productCategoryList(0l);
-
-//    Product product = new Product();
-//    ProductDetail productDetail = new ProductDetail();
-//    ProductCategory productCategory = new ProductCategory();
-    ProductDto productDto = new ProductDto();
-
+    List<ProductCategory> categories = adminProductRegisterService.productCategoryList(0l);
+    Product product = new Product();
     model.addAttribute("categories", categories);
-//        model.addAttribute("product",product);
-//        model.addAttribute("productDetail",productDetail);
-//        model.addAttribute("productCategory",productCategory);
-    model.addAttribute("productDto", productDto);
-
-    //model.put("categories", categories);
+    model.addAttribute("product", product);
     return "admin/product/product_register";
   }
 
@@ -127,14 +121,14 @@ public class AdminProductController {
   @ResponseBody
   @GetMapping("/product_detail/register/lowcategories/{parentId}")
   public List<ProductCategory> getLowLevelCategories(@PathVariable("parentId") Long parentId) {
-    List<ProductCategory> categories = adminProductService.productCategoryList(parentId);
+    List<ProductCategory> categories = adminProductRegisterService.productCategoryList(parentId);
     System.out.println("===================  " + categories.size());
     return categories;
   }
 
   // 상품등록 , date1 : 제조일  ,  date2 : 출시일.
   @PostMapping("/product_detail/register")
-  public String registerProduct(@ModelAttribute(value = "productDto") ProductDto productDto,
+  public String registerProduct(@ModelAttribute(value = "product") Product product,
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date1,
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date2,
       BindingResult bindingResult) {
@@ -150,27 +144,18 @@ public class AdminProductController {
     // productDto 로 날짜들을 가져올때... 타입이 맞지 않는다고 오류가 난다
     // 뷰에서 input으로 데이터를 보낼때 String으로 보내고. 컨트롤러에선 LocalDateTime으로 받아야하니
     // 문제가 생기는거같다. 그래서 일단은 날짜 받는부분은 따로 처리했다.
+    // 아니다. 계속 null 값만 받아와서. 그렇다.
 
-    String description = productDto.getProductDescription();
-    Long parentId = productDto.getProductCategoryId();
+    String description = product.getProductDetail().getDescription();
+    System.out.println("================ description : " + description);
 
-    System.out.println("상품명 : " + productDto.getName());
-    System.out.println("체크박스 :  " + productDto.getDisplay());
+    product.setManufactureDate(date1);
+    product.setReleaseDate(date2);
+    product.setRegDate(LocalDateTime.now());
 
-    productDto.setManufactureDate(date1);
-    productDto.setReleaseDate(date2);
-    productDto.setRegDate(LocalDateTime.now());
-
-    System.out.println("등록일 : " + productDto.getRegDate());
-
-//    date2 = date2.replace("T"," ");
-//    System.out.println("RequestParam , String : " + date2);
-//    LocalDateTime ldt = LocalDateTime.parse(date2, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-//    System.out.println("RequestParam , String : " + ldt.toString());
-
-    Product product = adminProductService.productDtoToProduct(productDto);
-
-    product = adminProductService.productRegister(product, description, parentId);
+//    Product product = adminProductRegisterService.productDtoToProduct(productDto);
+//
+    product = adminProductRegisterService.productRegister(product);
 
     return "redirect:/admin/product/product_detail/register";
 
@@ -200,16 +185,6 @@ public class AdminProductController {
     productService.saveProductImage(productImage);
     return "redirect:/admin/product/product_list";
   }
-
-  // 오류난다~~~~~!
-//    @GetMapping("/product_detail")
-//    public String productDetail(ModelMap modelMap) {
-//        List<ProductOption> productOptionList = productOptionService.getAllProductOptions();
-//        modelMap.addAttribute("productOptionList", productOptionList);
-//        modelMap.addAttribute("productOptionListSize", productOptionList.size());
-//
-//        return "admin/product/product_detail";
-//    }
 
   @PostMapping("/delete/product_option")
   public String deleteProductOption(@RequestParam("productOptionId") String[] productOptionIds) {
@@ -255,36 +230,51 @@ public class AdminProductController {
     return "/admin/product/product_detail";
   }
 
-//    @GetMapping("/product_search")
-//    public String productSearch(ModelMap modelMap) {
-//
-//        List<ProductCategory> productBigCategories =  productService.findByProductBigCategoryContaining();
-//        modelMap.addAttribute("bigCategory", productBigCategories);
-////        if(bigId == null) {
-////
-////        }else {
-////            List<ProductCategory> productMiddleCategories = productService.findByProductMiddleCategoryContaining(bigId);
-////            modelMap.addAttribute("middleCategory", productMiddleCategories);
-////        }
-//
-//        return "admin/product/product_search";
-//    }
+  @GetMapping("/product_search")
+  public String productSearch(ModelMap modelMap) {
+
+    return "admin/product/product_search";
+  }
 
   @PostMapping("/product_search/result")
   public String searchResult(ModelMap modelMap,
-      @RequestParam(value = "productName") String product,
+      @RequestParam(value = "productName") String productName,
       @RequestParam(value = "page", defaultValue = "1") int start) {
 
     Pageable pageable = PageRequest.of(start, start + 5);
 
     // 제품명으로 검색하기
-    Page<Product> products = productService.findByProductNameContaining(product, pageable);
-    modelMap.addAttribute("productName", products);
-    modelMap.addAttribute("totalPages", products.getTotalPages());
-    modelMap.addAttribute("presentPage", products.getNumber());
+    Product product = productService.findByProductNameContaining(productName);
+    modelMap.addAttribute("product", product);
+    //modelMap.addAttribute("totalPages", products.getTotalPages());
+    //modelMap.addAttribute("presentPage", products.getNumber());
 
     return "/admin/product/product_search_result";
   }
+
+//  @GetMapping("/product_detail/option/modify")
+//  public String modifyOption(ProductOption productOption, Model model){
+//    String modification = "으아아아";
+//    //modelMap.addAttribute("productOptionMod", productOption);
+//    //model.addAttribute("modification", modification);
+//
+//    log.info("옵션수정버튼을 눌렀습니다.");
+//    log.info("modification : " + modification);
+//
+//    return "admin/product/product_detail";
+//  }
+
+//  @GetMapping("/product_detail/option/modify")
+//  public String modifyOption(){
+//
+//    log.info("옵션수정버튼을 눌렀습니다.");
+//
+//    return "redirect:/admin/product/product_detail";
+//  }
+
+
+
+
 
   /* 옵션 등록 */
   @GetMapping("/product_detail_add_option")
@@ -298,12 +288,65 @@ public class AdminProductController {
 
   /* 옵션 등록 */
   @PostMapping("/product_detail_add_option")
-  public String addProductOption(ProductOption productOption,
-      @RequestParam(value = "productId", defaultValue = "") Long productId) {
+  public String addProductOption(
+      @RequestParam(value = "productId", defaultValue = "") Long productId,
+      ProductOptionCommand productOptionCommand) {
+    System.out.println("================== productId : " + productId);
+    System.out.println(
+        "=======================product_option_list : " + productOptionCommand.getProductOptions()
+            .size());
+    System.out.println(
+        "============= proudctOptionCommand.name" + productOptionCommand.getProductOptions().get(0)
+            .getName());
 
-    productOption.setProduct(productService.getProduct(productId));
-    productOptionService.addProductOption(productOption);
+    List<ProductOption> productOptions = adminProductOptionService
+        .fromProductOptionCommandToProductOptionList(productOptionCommand);
+    adminProductOptionService.save(productOptions, productId);
 
-    return "admin/product/product_detail_add_option";
+//    productOption.setProduct(productService.getProduct(productId));
+//    productOptionService.addProductOption(productOption);
+
+    return "redirect:/admin/product/product_detail_add_option";
   }
+
+  @GetMapping("/{productId}")
+  public String getProductDetail(@PathVariable("productId") Long productId,
+      @RequestParam(required = false, value = "optionPage") Optional<Integer> pageNum,
+      ModelMap model) {
+    // 상품id 로 상품 정보 가져오기.
+    Product product = productService.getProduct(productId);
+    model.addAttribute("product", product);
+
+    // html 파일에서 페이징 처리 한 부분은 1로 시작하고
+    // Pageable 에서 페이지는 0 부터 시작하므로 1을 빼줘야한다.
+    Pageable pageable;
+
+    if (pageNum.isPresent()) {
+      if (pageNum.get().equals(0)) {
+        // 주소창에 admin/product/1?optionPage=0 을 입력했을시
+        // 정상 처리하는 로직
+        pageable = PageRequest.of(0, 5);
+      } else {
+        pageable = PageRequest.of(pageNum.isPresent() ? pageNum.get() - 1 : 0, 5);
+      }
+    } else {
+      pageable = PageRequest.of(0, 5);
+    }
+
+    //Page<ProductOption> productOptions =
+    Page<ProductOption> productOptions = productOptionService
+        .getProductOptionsByProductId(productId, pageable);
+
+    model.addAttribute("productOptions", productOptions);
+
+    int pageCount = productOptions.getTotalPages();
+    model.addAttribute("pageCount", pageCount);
+    model.addAttribute("productId", productId);
+
+
+
+
+    return "admin/product/product_detail_view";
+  }
+
 }

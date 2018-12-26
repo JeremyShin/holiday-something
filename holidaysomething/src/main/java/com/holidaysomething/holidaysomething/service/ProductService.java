@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ProductService {
 
-  Page<Product> findByProductNameContaining(String productName, Pageable pageable);
+  //  Page<Product> findByProductNameContaining(String productName, Pageable pageable);
+  Product findByProductNameContaining(String productName);
 //    List<ProductCategory> findByProductBigCategoryContaining();
 //    List<ProductCategory> findByProductMiddleCategoryContaining(Long bigId);
 

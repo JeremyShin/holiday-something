@@ -6,6 +6,7 @@
   padding: 0 15px 0 40px;
   position: fixed;
   top: 0;
+  z-index: 1;
 }
 
 #header a {
@@ -85,7 +86,8 @@
 }
 
 .tbl-container {
-  width: 85%;
+  /*width: 85%;*/
+  width: 100%;
 }
 
 .above-tbl {
