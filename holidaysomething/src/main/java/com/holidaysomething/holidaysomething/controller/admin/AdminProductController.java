@@ -5,6 +5,7 @@ import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.domain.ProductOptionCommand;
+import com.holidaysomething.holidaysomething.dto.productOptionDto;
 import com.holidaysomething.holidaysomething.dto.Search;
 import com.holidaysomething.holidaysomething.service.ProductOptionService;
 import com.holidaysomething.holidaysomething.service.ProductService;
@@ -26,6 +27,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -34,6 +36,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -306,6 +309,16 @@ public class AdminProductController {
 //    return "redirect:/admin/product/product_detail";
 //  }
 
+
+
+  /* 옵션 수정 */
+  @PostMapping("/product_detail/option/modify")
+  public String modifyOptionPost(@RequestBody productOptionDto productOptionDto){
+    log.info("POST 수정할 옵션의 이름은");
+    log.info(productOptionDto.getName());
+    return "redirect:/admin/product/product_detail";
+
+  }
 
   /* 옵션 등록 */
   @GetMapping("/product_detail_add_option")
