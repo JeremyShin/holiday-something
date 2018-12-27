@@ -2,7 +2,6 @@ package com.holidaysomething.holidaysomething.repository;
 
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.domain.Page;
@@ -23,7 +22,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
   //admin : product searching by code
   @Query(value = "SELECT p FROM Product p WHERE p.code LIKE CONCAT('%', :productCode, '%')")
   Page<Product> findByProductCodeContaining(@Param("productCode") String productCode,
-                                            Pageable pageable);
+      Pageable pageable);
 
   //admin : product searching by date
   @Query(value = "SELECT p FROM Product p WHERE p.regDate BETWEEN :regdateStart AND :regdateEnd")
