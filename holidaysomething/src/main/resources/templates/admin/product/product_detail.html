@@ -79,8 +79,8 @@
             <td id = "optionName" th:text="${productOption.name}">###</td>
             <td id = "optionPrice" th:text="${productOption.price}">###</td>
             <td id = "optionDesc" th:text="${productOption.description}">###</td>
-            <td id = "optionCode" th:text="${productOption.product.code}">###</td>
-            <td id = "optionProductName" th:text="${productOption.product.name}">###</td>
+            <td id = "productCode" th:text="${productOption.product.code}">###</td>
+            <td id = "productName" th:text="${productOption.product.name}">###</td>
             <!--<td><input type="button" value="수정" onclick="location.href='/admin/product/product_detail_modify_option'"></td>-->
             <td><input id="modifyBtn" type="button" class="modBtn" value="수정" onclick="modify(this);"/></td>
 

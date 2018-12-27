@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -312,6 +313,9 @@ public class AdminProductController {
 //    return "redirect:/admin/product/product_detail";
 //  }
 
+  /*  옵션 수정 : 수정완료 버튼을 누른 후 */
+//  @GetMapping("/product_detail/option/modify")
+//  public String modifyOption()
 
 
   /* 옵션 수정 */
@@ -319,6 +323,13 @@ public class AdminProductController {
   public String modifyOptionPost(@RequestBody productOptionDto productOptionDto){
     log.info("POST 수정할 옵션의 이름은");
     log.info(productOptionDto.getName());
+
+//    ProductOption productOption = productOptionService.getProductOption(productOptionDto.getId());
+//
+//    productOption.setName(productOptionDto.getName());
+//    productOption.setPrice(productOptionDto.getPrice());
+//    productOption.setDescription(productOptionDto.getDescription());
+
     return "redirect:/admin/product/product_detail";
 
   }
