@@ -16,6 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ProductServiceTest {
 
+  private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager
+      .getLogger(ProductServiceTest.class);
+
 
   @Autowired
   private AdminProductRegisterService adminProductRegisterService;
@@ -40,15 +43,12 @@ public class ProductServiceTest {
 
     Product insertedProduct = adminProductRegisterService.productRegister(p);
 
-    System.out.println("================================");
-    System.out.println("상품 id : " + insertedProduct.getId());
-    System.out.println("상품 name : " + insertedProduct.getName());
-    System.out
-        .println("상품 description : " + insertedProduct.getProductDetail().getDescription());
-    System.out.println("상품 category id : " + insertedProduct.getProductCategory().getId());
-    System.out.println("상품 category name : " + insertedProduct.getProductCategory().getName());
-
-
+    log.info("================================");
+    log.info("상품 id : " + insertedProduct.getId());
+    log.info("상품 name : " + insertedProduct.getName());
+    log.info("상품 description : " + insertedProduct.getProductDetail().getDescription());
+    log.info("상품 category id : " + insertedProduct.getProductCategory().getId());
+    log.info("상품 category name : " + insertedProduct.getProductCategory().getName());
   }
 
 

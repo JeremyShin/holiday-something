@@ -19,6 +19,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ProductOptionTest {
 
+  private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager
+      .getLogger(ProductOptionTest.class);
+
+
   @Autowired
   ProductOptionRepository productOptionRepository;
 
@@ -34,21 +38,20 @@ public class ProductOptionTest {
   public void 특정상품옵션들조회하기() {
 
     Page<ProductOption> productOptions = productOptionRepository.findByProductId(1l, pageable);
-    System.out.println("productOptions.getContent() : " + productOptions.getContent().size());
+    log.info("productOptions.getContent() : " + productOptions.getContent().size());
     for (ProductOption productOption : productOptions) {
-      System.out.println(productOption.getName());
+      log.info(productOption.getName());
     }
 
     productOptions = productOptionRepository.findByProductId(1l, pageable.next());
     for (ProductOption productOption : productOptions) {
-      System.out.println(productOption.getName());
+      log.info(productOption.getName());
     }
 
-    System.out.println("productOptions.getTotalPages() : " + productOptions.getTotalPages());
-    System.out.println("productOptions.getTotalElements() : " + productOptions.getTotalElements());
-    System.out.println("pageable.getPageNumber() : " + pageable.getPageNumber());
-    System.out.println("pageable.hasPrevious() : " + pageable.hasPrevious());
-
+    log.info("productOptions.getTotalPages() : " + productOptions.getTotalPages());
+    log.info("productOptions.getTotalElements() : " + productOptions.getTotalElements());
+    log.info("pageable.getPageNumber() : " + pageable.getPageNumber());
+    log.info("pageable.hasPrevious() : " + pageable.hasPrevious());
   }
 
 }
