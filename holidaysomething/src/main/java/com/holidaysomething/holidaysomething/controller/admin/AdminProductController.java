@@ -6,7 +6,6 @@ import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.domain.ProductOptionCommand;
 import com.holidaysomething.holidaysomething.dto.Search;
-
 import com.holidaysomething.holidaysomething.service.ProductOptionService;
 import com.holidaysomething.holidaysomething.service.ProductService;
 import com.holidaysomething.holidaysomething.service.admin.AdminProductOptionService;
@@ -109,7 +108,7 @@ public class AdminProductController {
     return "admin/product/product_detail";
   }
 
-  // 대분류 불러오기.
+  // 대분류 불러오기. 중소분류 읽어오기는 RestController
   @GetMapping("/product_detail/register")
   public String productRegister(ModelMap model) {
     List<ProductCategory> categories = adminProductRegisterService.productCategoryList(0l);
@@ -119,14 +118,7 @@ public class AdminProductController {
     return "admin/product/product_register";
   }
 
-  // 중소분류 읽어오기.
-  @ResponseBody
-  @GetMapping("/product_detail/register/lowcategories/{parentId}")
-  public List<ProductCategory> getLowLevelCategories(@PathVariable("parentId") Long parentId) {
-    List<ProductCategory> categories = adminProductRegisterService.productCategoryList(parentId);
-    System.out.println("===================  " + categories.size());
-    return categories;
-  }
+
 
   // 상품등록 , date1 : 제조일  ,  date2 : 출시일.
   @PostMapping("/product_detail/register")
@@ -149,25 +141,14 @@ public class AdminProductController {
     // 아니다. 계속 null 값만 받아와서. 그렇다.
 
     String description = product.getProductDetail().getDescription();
-    System.out.println("================ description : " + description);
-
-//    String description = productDto.getProductDescription();
-//
-//    Long parentId = productDto.getProductCategoryId();
-//
-//    System.out.println("상품명 : " + productDto.getName());
-//    System.out.println("체크박스 :  " + productDto.getDisplay());
-//
-//    productDto.setManufactureDate(date1);
-//    productDto.setReleaseDate(date2);
-//    productDto.setRegDate(LocalDateTime.now());
+    log.info("================ description : " + description);
 
     product.setManufactureDate(date1);
     product.setReleaseDate(date2);
     product.setRegDate(LocalDateTime.now());
 
 //    Product product = adminProductRegisterService.productDtoToProduct(productDto);
-//
+
     product = adminProductRegisterService.productRegister(product);
 
     return "redirect:/admin/product/product_detail/register";
@@ -347,20 +328,15 @@ public class AdminProductController {
   public String addProductOption(
       @RequestParam(value = "productId", defaultValue = "") Long productId,
       ProductOptionCommand productOptionCommand) {
-    System.out.println("================== productId : " + productId);
-    System.out.println(
-        "=======================product_option_list : " + productOptionCommand.getProductOptions()
-            .size());
-    System.out.println(
-        "============= proudctOptionCommand.name" + productOptionCommand.getProductOptions().get(0)
-            .getName());
+    log.info("================== productId : " + productId);
+    log.info("================== product_option_list : " +
+        productOptionCommand.getProductOptions().size());
+    log.info("============= proudctOptionCommand.name" +
+        productOptionCommand.getProductOptions().get(0).getName());
 
     List<ProductOption> productOptions = adminProductOptionService
         .fromProductOptionCommandToProductOptionList(productOptionCommand);
     adminProductOptionService.save(productOptions, productId);
-
-//    productOption.setProduct(productService.getProduct(productId));
-//    productOptionService.addProductOption(productOption);
 
     return "redirect:/admin/product/product_detail_add_option";
   }
@@ -369,6 +345,7 @@ public class AdminProductController {
   public String getProductDetail(@PathVariable("productId") Long productId,
       @RequestParam(required = false, value = "optionPage") Optional<Integer> pageNum,
       ModelMap model) {
+
     // 상품id 로 상품 정보 가져오기.
     Product product = productService.getProduct(productId);
     model.addAttribute("product", product);
@@ -398,9 +375,6 @@ public class AdminProductController {
     int pageCount = productOptions.getTotalPages();
     model.addAttribute("pageCount", pageCount);
     model.addAttribute("productId", productId);
-
-
-
 
     return "admin/product/product_detail_view";
   }

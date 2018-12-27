@@ -15,6 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ProductCategoryTest {
 
+  private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager
+      .getLogger(ProductCategoryTest.class);
+
   @Autowired
   ProductCategoryRepository productCategoryRepository;
 
@@ -22,7 +25,7 @@ public class ProductCategoryTest {
   public void 카테고리전체읽어와버리기() {
     List<ProductCategory> categories = productCategoryRepository.findAll();
     for (ProductCategory pc : categories) {
-      System.out.println(pc.getName());
+      log.info(pc.getName());
     }
 
   }
@@ -31,7 +34,7 @@ public class ProductCategoryTest {
   public void 대분류카테고리만읽어와버리기() {
     List<ProductCategory> categories = productCategoryRepository.findCategory(0l);
     for (ProductCategory pc : categories) {
-      System.out.println(pc.getName());
+      log.info(pc.getName());
     }
   }
 
@@ -39,7 +42,7 @@ public class ProductCategoryTest {
   public void 낮은분류카테고리읽어오기() {
     List<ProductCategory> categories = productCategoryRepository.findCategory(1l);
     for (ProductCategory pc : categories) {
-      System.out.println(pc.getName());
+      log.info(pc.getName());
     }
   }
 }

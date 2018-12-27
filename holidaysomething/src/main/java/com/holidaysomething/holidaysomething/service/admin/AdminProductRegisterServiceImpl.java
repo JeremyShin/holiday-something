@@ -44,23 +44,6 @@ public class AdminProductRegisterServiceImpl implements AdminProductRegisterServ
     for (int i = 0; i < categories.size(); i++) {
       log.info(i + 1 + ". " + categories.get(i).getName());
     }
-//        for(ProductCategory pc : categories) {
-//            System.out.println();
-//            System.out.println("id : " + pc.getId());
-//            System.out.println("id : " + pc.getName());
-//        }
-//        List<ProductCategoryDto> categoryDtos = new ArrayList<>();
-//        for(ProductCategory pc : categories) {
-//            ProductCategoryDto dto = new ProductCategoryDto();
-//
-//            dto.setId(pc.getId());
-//            dto.setName(pc.getName());
-//            dto.setOrders(pc.getOrders());
-//            dto.setParentId(pc.getParentId());
-//            categoryDtos.add(dto);
-//        }
-
-//        System.out.println("******************************* " + categoryDtos.size());
     return categories;
   }
 
@@ -85,10 +68,6 @@ public class AdminProductRegisterServiceImpl implements AdminProductRegisterServ
     product.setManufactureDate(productDto.getManufactureDate());
     product.setReleaseDate(productDto.getReleaseDate());
     product.setRegDate(productDto.getRegDate());
-
-    System.out.println("service==================  regDate : " + product.getRegDate());
-    System.out.println("service==================  manuDate : " + product.getManufactureDate());
-    System.out.println("service==================  relaseDate : " + product.getReleaseDate());
 
     // null 이면
     if (productDto.getDisplay() == null) {

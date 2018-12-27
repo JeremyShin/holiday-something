@@ -30,4 +30,12 @@ public class AdminRestProductController {
 
     return categories;
   }
+
+  // 중소분류 읽어오기.
+  @GetMapping("/product_detail/register/lowcategories/{parentId}")
+  public List<ProductCategory> getLowLevelCategories(@PathVariable("parentId") Long parentId) {
+    List<ProductCategory> categories = adminProductService.productCategoryList(parentId);
+    return categories;
+  }
+
 }

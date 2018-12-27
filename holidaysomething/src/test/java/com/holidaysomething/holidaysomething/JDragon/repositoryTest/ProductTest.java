@@ -18,6 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ProductTest {
 
+  private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager
+      .getLogger(ProductTest.class);
+
   @Autowired
   ProductRepository productRepository;
 
@@ -28,7 +31,7 @@ public class ProductTest {
   @Test
   public void 전체상품갯수조회하기() {
     int count = productRepository.countAll();
-    System.out.println("========================= " + count);
+    log.info("========================= " + count);
   }
 
 
@@ -51,19 +54,19 @@ public class ProductTest {
 
     Product pp = productRepository.save(p);
 
-    System.out.println("================================");
-    System.out.println("상품설명 id : " + pds.getId());
-    System.out.println("상품 id : " + pp.getId());
-    System.out.println("상품의 getProductDetail().getId() : " + pp.getProductDetail().getId());
+    log.info("================================");
+    log.info("상품설명 id : " + pds.getId());
+    log.info("상품 id : " + pp.getId());
+    log.info("상품의 getProductDetail().getId() : " + pp.getProductDetail().getId());
   }
 
   @Test
   public void 날짜테스트하기() {
     LocalDateTime ldt = LocalDateTime.now();
-    System.out.println("======================= ldt : " + ldt);
+    log.info("======================= ldt : " + ldt);
 
     ldt = LocalDateTime.now(ZoneId.systemDefault());
-    System.out.println("======================= ldt : " + ldt);
+    log.info("======================= ldt : " + ldt);
   }
 
 
@@ -71,8 +74,8 @@ public class ProductTest {
   @Test
   public void 상품한개조회하기() {
     Product product = productRepository.getOne(1L);
-    System.out.println("============= Id" + product.getId());
-    System.out.println("============= Name" + product.getName());
+    log.info("============= Id" + product.getId());
+    log.info("============= Name" + product.getName());
   }
 
 }
