@@ -60,31 +60,34 @@
           <col style="width:auto;"/>
         </colgroup>
         <thead>
-          <tr>
-            <th><input type="checkbox" id="checkbox-all" onclick="toggle(this);"/></th>
-            <th>No</th>
-            <th>옵션명<!--<button type="button">오름차순 정렬</button>--></th>
-            <th>옵션값</th>
-            <th>옵션설명</th>
-            <th>상품코드<th>
-            <th>상품명</th>
-            <th></th>
-          </tr>
+        <tr>
+          <th><input type="checkbox" id="checkbox-all" onclick="toggle(this);"/></th>
+          <th>No</th>
+          <th>옵션명<!--<button type="button">오름차순 정렬</button>--></th>
+          <th>옵션값</th>
+          <th>옵션설명</th>
+          <th>상품코드
+          <th>
+          <th>상품명</th>
+          <th></th>
+        </tr>
         </thead>
         <tbody>
-          <tr th:each="productOption : ${productOptions != null ? productOptions : productOptionsSearchResult}"
-              class="productOptionTr">
-            <td id= "optionCheck" ><input type="checkbox" name="productOptionId" th:value="${productOption.id}"/></td>
-            <td id = "optionId" th:text="${productOption.id}">###</td>
-            <td id = "optionName" th:text="${productOption.name}">###</td>
-            <td id = "optionPrice" th:text="${productOption.price}">###</td>
-            <td id = "optionDesc" th:text="${productOption.description}">###</td>
-            <td id = "optionCode" th:text="${productOption.product.code}">###</td>
-            <td id = "optionProductName" th:text="${productOption.product.name}">###</td>
-            <!--<td><input type="button" value="수정" onclick="location.href='/admin/product/product_detail_modify_option'"></td>-->
-            <td><input id="modifyBtn" type="button" class="modBtn" value="수정" onclick="modify(this);"/></td>
+        <tr th:each="productOption : ${productOptions != null ? productOptions : productOptionsSearchResult}"
+            class="productOptionTr">
+          <td id="optionCheck"><input type="checkbox" name="productOptionId"
+                                      th:value="${productOption.id}"/></td>
+          <td id="optionId" th:text="${productOption.id}">###</td>
+          <td id="optionName" th:text="${productOption.name}">###</td>
+          <td id="optionPrice" th:text="${productOption.price}">###</td>
+          <td id="optionDesc" th:text="${productOption.description}">###</td>
+          <td id="optionCode" th:text="${productOption.product.code}">###</td>
+          <td id="optionProductName" th:text="${productOption.product.name}">###</td>
+          <!--<td><input type="button" value="수정" onclick="location.href='/admin/product/product_detail_modify_option'"></td>-->
+          <td><input id="modifyBtn" type="button" class="modBtn" value="수정"
+                     onclick="modify(this);"/></td>
 
-          </tr>
+        </tr>
         </tbody>
       </table>
 

@@ -18,10 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class AdminProductRegisterServiceImpl implements AdminProductRegisterService {
 
+  private static final Log log = LogFactory.getLog(AdminProductRegisterServiceImpl.class);
   private ProductCategoryRepository productCategoryRepository;
   private ProductDetailRepository productDetailRepository;
   private ProductRepository productRepository;
-  private static final Log log = LogFactory.getLog(AdminProductRegisterServiceImpl.class);
 
   public AdminProductRegisterServiceImpl(ProductCategoryRepository productCategoryRepository,
       ProductDetailRepository productDetailRepository, ProductRepository productRepository) {

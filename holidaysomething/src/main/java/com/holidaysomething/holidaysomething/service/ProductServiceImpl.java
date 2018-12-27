@@ -5,7 +5,6 @@ import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.dto.Search;
 import com.holidaysomething.holidaysomething.repository.ProductCategoryRepository;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.domain.Page;
@@ -32,8 +31,6 @@ public class ProductServiceImpl implements ProductService {
         .findByProductNameContaining(productName, pageable);
     return productByName;
   }
-
-
 
 
   @Override

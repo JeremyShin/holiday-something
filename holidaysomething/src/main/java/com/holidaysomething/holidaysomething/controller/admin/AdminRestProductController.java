@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/admin/product")
 public class AdminRestProductController {
 
-  private AdminProductRegisterService adminProductService;
   private static final Log log = LogFactory.getLog(AdminRestProductController.class);
+  private AdminProductRegisterService adminProductService;
 
   public AdminRestProductController(AdminProductRegisterService adminProductService) {
     this.adminProductService = adminProductService;
