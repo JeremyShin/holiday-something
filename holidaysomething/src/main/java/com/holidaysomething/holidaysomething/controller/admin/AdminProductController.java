@@ -6,6 +6,7 @@ import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.domain.ProductOptionCommand;
 import com.holidaysomething.holidaysomething.dto.productOptionDto;
+import com.holidaysomething.holidaysomething.dto.Search;
 import com.holidaysomething.holidaysomething.service.ProductOptionService;
 import com.holidaysomething.holidaysomething.service.ProductService;
 import com.holidaysomething.holidaysomething.service.admin.AdminProductOptionService;
@@ -45,13 +46,13 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/admin/product")
 public class AdminProductController {
 
-  private static final Log log = LogFactory.getLog(AdminProductController.class);
   private ProductService productService;
   private ProductOptionService productOptionService;
-
   private AdminProductRegisterService adminProductRegisterService;
   private AdminProductOptionService adminProductOptionService;
   private FileUtil fileUtil;
+
+  private static final Log log = LogFactory.getLog(AdminProductController.class);
 
   public AdminProductController(ProductOptionService productOptionService,
       ProductService productService, AdminProductRegisterService adminProductRegisterService,
@@ -91,7 +92,7 @@ public class AdminProductController {
     return "admin/product/product_detail";
   }
 
-  @PostMapping("/product_detail/bundle")
+  @PostMapping("/product_detail")
   public String productDetailBundle(ModelMap modelMap,
       @RequestParam("productOptionBundleSize") int size) {
     List<ProductOption> productOptionList = productOptionService.getAllProductOptions();
@@ -110,7 +111,7 @@ public class AdminProductController {
     return "admin/product/product_detail";
   }
 
-  // 대분류 불러오기.
+  // 대분류 불러오기. 중소분류 읽어오기는 RestController
   @GetMapping("/product_detail/register")
   public String productRegister(ModelMap model) {
     List<ProductCategory> categories = adminProductRegisterService.productCategoryList(0l);
@@ -120,14 +121,7 @@ public class AdminProductController {
     return "admin/product/product_register";
   }
 
-  // 중소분류 읽어오기.
-  @ResponseBody
-  @GetMapping("/product_detail/register/lowcategories/{parentId}")
-  public List<ProductCategory> getLowLevelCategories(@PathVariable("parentId") Long parentId) {
-    List<ProductCategory> categories = adminProductRegisterService.productCategoryList(parentId);
-    System.out.println("===================  " + categories.size());
-    return categories;
-  }
+
 
   // 상품등록 , date1 : 제조일  ,  date2 : 출시일.
   @PostMapping("/product_detail/register")
@@ -150,14 +144,14 @@ public class AdminProductController {
     // 아니다. 계속 null 값만 받아와서. 그렇다.
 
     String description = product.getProductDetail().getDescription();
-    System.out.println("================ description : " + description);
+    log.info("================ description : " + description);
 
     product.setManufactureDate(date1);
     product.setReleaseDate(date2);
     product.setRegDate(LocalDateTime.now());
 
 //    Product product = adminProductRegisterService.productDtoToProduct(productDto);
-//
+
     product = adminProductRegisterService.productRegister(product);
 
     return "redirect:/admin/product/product_detail/register";
@@ -166,10 +160,13 @@ public class AdminProductController {
   }
 
   @GetMapping("/product_list")
-  public String productList(ModelMap modelMap, @PageableDefault(sort = {
-      "id"}, direction = Sort.Direction.DESC, size = 10) Pageable pageable) {
-    Page<Product> products = productService.findAll(pageable);
+  public String productList(
+      @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 10) Pageable pageable,
+      @ModelAttribute("search") Search search, ModelMap modelMap) {
+    Page<Product> products = productService.findProductAllOrSearch(search, pageable);
+
     modelMap.addAttribute("products", products);
+
     return "admin/product/product_list";
   }
 
@@ -233,26 +230,66 @@ public class AdminProductController {
     return "/admin/product/product_detail";
   }
 
-  @GetMapping("/product_search")
-  public String productSearch(ModelMap modelMap) {
+  @GetMapping({"/product_search", "/product_search/{pageStart}"})
+  public String productSearch(ModelMap modelMap, @PathVariable Optional<Integer> pageStart) {
+
+    // 대분류를 불러온다
+    List<ProductCategory> largeCategories = adminProductRegisterService.productCategoryList(0L);
+    modelMap.addAttribute("largeCategories", largeCategories);
+
+    // 모든 상품 리스트를 불러온다(페이지)
+    Pageable pageable = PageRequest.of(pageStart.isPresent() ? pageStart.get() - 1 : 0, 10);
+    Page<Product> allProductList = adminProductRegisterService.getAllProducts(pageable);
+
+    int productPageCount = allProductList.getTotalPages();
+    modelMap.addAttribute("productPageCount", productPageCount);
+    modelMap.addAttribute("allProductList", allProductList);
 
     return "admin/product/product_search";
   }
 
-  @PostMapping("/product_search/result")
-  public String searchResult(ModelMap modelMap,
-      @RequestParam(value = "productName") String productName,
-      @RequestParam(value = "page", defaultValue = "1") int start) {
+  @PostMapping("/product_search")
+  public String productSearchPost(ModelMap modelMap,
+      @RequestParam("productSearchClassification") String productSearchClassificationValue,
+      @RequestParam("productSearchClassificationInput") String productSearchClassificationInput,
+      @RequestParam("productLargeCategoryId") Long largeId,
+      @RequestParam("productMiddleCategoryId") Long middleId,
+      @RequestParam("productSmallCategoryId") Long smallId,
+      @RequestParam("productSearchDate") String productSearchDateValue,
+      //TODO: null 값으로 들어왔을 경우 페이지 에러가 나지 않는 방안 모색
+      @RequestParam(value = "regdateStart", defaultValue = "0000-00-00 00:00") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String productStartDateSelect,
+      @RequestParam(value = "regdateEnd", defaultValue = "0000-00-00 00:00") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String productEndDateSelect) {
+//    @RequestParam("productSearchDateInput") @DateTimeFormat(pattern="yyyy/MM/dd") Date productSearchDateInput) {
+//    @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date1,
+//    @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date2,
 
-    Pageable pageable = PageRequest.of(start, start + 5);
+    log.info("productSearchClassificationValue: " + productSearchClassificationValue);
+    log.info("productSearchClassificationInput: " + productSearchClassificationInput);
+    log.info("largeId: " + largeId);
+    log.info("middleId: " + middleId);
+    log.info("smallId: " + smallId);
+    log.info("productSearchDateValue: " + productSearchDateValue);
+//    log.info("productSearchDateInput: " + productSearchDateInput);
 
-    // 제품명으로 검색하기
-    Product product = productService.findByProductNameContaining(productName);
-    modelMap.addAttribute("product", product);
-    //modelMap.addAttribute("totalPages", products.getTotalPages());
-    //modelMap.addAttribute("presentPage", products.getNumber());
+    // 모든 상품 리스트를 불러온다(페이지)
+    // TODO: 검색 결과도 페이징 처리 필요
+    // TODO: QueryDSL 추후 적용
+    Pageable pageable = PageRequest.of(0, 10);
+    Page<Product> allProductList = adminProductRegisterService.getAllProducts(pageable);
 
-    return "/admin/product/product_search_result";
+    int productPageCount = allProductList.getTotalPages();
+    modelMap.addAttribute("productPageCount", productPageCount);
+    modelMap.addAttribute("allProductList", allProductList);
+
+    LocalDateTime castDateStart = LocalDateTime.parse(productStartDateSelect);
+    LocalDateTime castDateEnd = LocalDateTime.parse(productEndDateSelect);
+
+    //제품 등록일or게시일로 검색하기
+    Page<Product> productDatepages = productService
+        .findByProductRegdate(castDateStart, castDateEnd, pageable);
+    modelMap.addAttribute("regdate", productDatepages);
+
+    return "admin/product/product_search";
   }
 
 //  @GetMapping("/product_detail/option/modify")
@@ -301,20 +338,15 @@ public class AdminProductController {
   public String addProductOption(
       @RequestParam(value = "productId", defaultValue = "") Long productId,
       ProductOptionCommand productOptionCommand) {
-    System.out.println("================== productId : " + productId);
-    System.out.println(
-        "=======================product_option_list : " + productOptionCommand.getProductOptions()
-            .size());
-    System.out.println(
-        "============= proudctOptionCommand.name" + productOptionCommand.getProductOptions().get(0)
-            .getName());
+    log.info("================== productId : " + productId);
+    log.info("================== product_option_list : " +
+        productOptionCommand.getProductOptions().size());
+    log.info("============= proudctOptionCommand.name" +
+        productOptionCommand.getProductOptions().get(0).getName());
 
     List<ProductOption> productOptions = adminProductOptionService
         .fromProductOptionCommandToProductOptionList(productOptionCommand);
     adminProductOptionService.save(productOptions, productId);
-
-//    productOption.setProduct(productService.getProduct(productId));
-//    productOptionService.addProductOption(productOption);
 
     return "redirect:/admin/product/product_detail_add_option";
   }
@@ -323,6 +355,7 @@ public class AdminProductController {
   public String getProductDetail(@PathVariable("productId") Long productId,
       @RequestParam(required = false, value = "optionPage") Optional<Integer> pageNum,
       ModelMap model) {
+
     // 상품id 로 상품 정보 가져오기.
     Product product = productService.getProduct(productId);
     model.addAttribute("product", product);
@@ -352,9 +385,6 @@ public class AdminProductController {
     int pageCount = productOptions.getTotalPages();
     model.addAttribute("pageCount", pageCount);
     model.addAttribute("productId", productId);
-
-
-
 
     return "admin/product/product_detail_view";
   }

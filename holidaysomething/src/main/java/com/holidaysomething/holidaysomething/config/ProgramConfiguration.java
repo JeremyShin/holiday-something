@@ -6,6 +6,9 @@ import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 @Configuration
 public class ProgramConfiguration {
+  /*
+    Thymeleaf 에서 LocalDateTime 포맷 지정해주기 위해 필요한 config 파일.
+   */
 
   @Bean
   public Java8TimeDialect java8TimeDialect() {

@@ -20,6 +20,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ProductOptionServiceTest {
 
+  private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager
+      .getLogger(ProductOptionServiceTest.class);
+
+
   @Autowired
   ProductOptionService productOptionService;
 
@@ -40,7 +44,7 @@ public class ProductOptionServiceTest {
       pageable = PageRequest.of(i, 5);
       productOptions = productOptionService.getProductOptionsByProductId(1l, pageable);
       for (ProductOption productOption : productOptions) {
-        System.out.println(productOption.getName());
+        log.info(productOption.getName());
       }
     }
 

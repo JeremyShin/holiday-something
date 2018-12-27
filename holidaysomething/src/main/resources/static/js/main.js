@@ -17,35 +17,35 @@ let codeInput = document.createElement("input");
 let modify = function (source) {
   /* inputbox 생성 */
   for (let i = 0; i < source.parentElement.parentElement.children.length; i++) {
-    if (source.parentElement.parentElement.children[i].id == "optionName") {
+    if (source.parentElement.parentElement.children[i].id === "optionName") {
       nameInput.setAttribute('type', 'text');
       nameInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
       source.parentElement.parentElement.children[i].appendChild(nameInput);
     }
 
-    if (source.parentElement.parentElement.children[i].id == "optionPrice") {
+    if (source.parentElement.parentElement.children[i].id === "optionPrice") {
       priceInput.setAttribute('type', 'text');
       priceInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
       source.parentElement.parentElement.children[i].appendChild(priceInput);
     }
 
-    if (source.parentElement.parentElement.children[i].id == "optionDesc") {
+    if (source.parentElement.parentElement.children[i].id === "optionDesc") {
       descInput.setAttribute('type', 'text');
       descInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
       source.parentElement.parentElement.children[i].appendChild(descInput);
     }
 
-    if (source.parentElement.parentElement.children[i].id == "optioCode") {
+    if (source.parentElement.parentElement.children[i].id === "optioCode") {
       codeInput.setAttribute('type', 'text');
       codeInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
       source.parentElement.parentElement.children[i].appendChild(codeInput);
     }
 
-    if (source.parentElement.parentElement.children[i].childNodes[0].id == "modifyBtn") {
+    if (source.parentElement.parentElement.children[i].childNodes[0].id === "modifyBtn") {
       console.log("수정버튼입니다.");
       let btn = source.parentElement.parentElement.children[i].childNodes[0];
       btn.setAttribute("value", "수정완료");
