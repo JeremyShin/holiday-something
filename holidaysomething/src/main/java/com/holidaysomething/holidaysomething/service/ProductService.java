@@ -31,4 +31,8 @@ public interface ProductService {
 
   // 모든 상품 or 검색된 상품 by Jun
   Page<Product> findProductAllOrSearch(Search search, Pageable pageable);
+
+  Page<Product> findByProductCategory(Long categoryId, Pageable pageable);
+
+  Page<Product> findByProductClassification(String SearchClassificationValue, String productSearchClassificationInput, Pageable pageable);
 }

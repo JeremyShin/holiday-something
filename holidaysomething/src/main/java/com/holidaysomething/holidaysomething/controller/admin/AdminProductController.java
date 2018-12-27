@@ -247,15 +247,15 @@ public class AdminProductController {
 
   @PostMapping("/product_search")
   public String productSearchPost(ModelMap modelMap,
-      @RequestParam("productSearchClassification") String productSearchClassificationValue,
-      @RequestParam("productSearchClassificationInput") String productSearchClassificationInput,
-      @RequestParam("productLargeCategoryId") Long largeId,
-      @RequestParam("productMiddleCategoryId") Long middleId,
-      @RequestParam("productSmallCategoryId") Long smallId,
-      @RequestParam("productSearchDate") String productSearchDateValue,
+      @RequestParam(value = "productSearchClassification", required=false) String productSearchClassificationValue,
+      @RequestParam(value = "productSearchClassificationInput", required=false) String productSearchClassificationInput,
+      @RequestParam(value = "productLargeCategoryId", required=false) Long largeId,
+      @RequestParam(value = "productMiddleCategoryId", required=false) Long middleId,
+      @RequestParam(value = "productSmallCategoryId", required=false) Long smallId,
+      @RequestParam(value = "productSearchDate", required=false) String productSearchDateValue,
       //TODO: null 값으로 들어왔을 경우 페이지 에러가 나지 않는 방안 모색
-      @RequestParam(value = "regdateStart", defaultValue = "0000-00-00 00:00") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String productStartDateSelect,
-      @RequestParam(value = "regdateEnd", defaultValue = "0000-00-00 00:00") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String productEndDateSelect) {
+      @RequestParam(value = "regdateStart", required=false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String productStartDateSelect,
+      @RequestParam(value = "regdateEnd", required=false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String productEndDateSelect) {
 //    @RequestParam("productSearchDateInput") @DateTimeFormat(pattern="yyyy/MM/dd") Date productSearchDateInput) {
 //    @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date1,
 //    @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date2,
@@ -267,24 +267,55 @@ public class AdminProductController {
     log.info("smallId: " + smallId);
     log.info("productSearchDateValue: " + productSearchDateValue);
 //    log.info("productSearchDateInput: " + productSearchDateInput);
+    log.info("productStartDateSelect: " + productStartDateSelect);
+    log.info("productEndDateSelect: " + productEndDateSelect);
 
     // 모든 상품 리스트를 불러온다(페이지)
     // TODO: 검색 결과도 페이징 처리 필요
     // TODO: QueryDSL 추후 적용
     Pageable pageable = PageRequest.of(0, 10);
-    Page<Product> allProductList = adminProductRegisterService.getAllProducts(pageable);
+    Page<Product> productPage = new PageImpl<>(new ArrayList<>());
 
-    int productPageCount = allProductList.getTotalPages();
+    // '검색분류'로 검색
+    // 상품명 상품코드 판매가 제조공장 가격대체문구 배송비
+    if (productSearchClassificationInput != null) {
+      log.info("'검색분류'로 검색");
+      productPage = productService.findByProductClassification(productSearchClassificationValue,
+          productSearchClassificationInput, pageable);
+    }
+
+    // '상품분류'로 검색
+    //TODO: 대/중/소 하위까지 전부 찾아야 함
+    if (largeId != null) {
+      log.info("'상품분류'로 검색");
+      productPage = productService.findByProductCategory(largeId, pageable);
+    }
+
+    // '상품등록일'로 검색
+    if (!productStartDateSelect.equals("")) {
+      log.info("'상품등록일'로 검색");
+      LocalDateTime castDateStart = LocalDateTime.parse(productStartDateSelect);
+      LocalDateTime castDateEnd = LocalDateTime.parse(productEndDateSelect);
+      productPage = productService.findByProductRegdate(castDateStart, castDateEnd, pageable);
+      modelMap.addAttribute("productPage", productPage);
+    }
+
+//    Pageable pageable = PageRequest.of(0, 10);
+//    Page<Product> allProductList = adminProductRegisterService.getAllProducts(pageable);
+
+    int productPageCount = productPage.getTotalPages();
     modelMap.addAttribute("productPageCount", productPageCount);
-    modelMap.addAttribute("allProductList", allProductList);
+    modelMap.addAttribute("allProductList", productPage);
 
-    LocalDateTime castDateStart = LocalDateTime.parse(productStartDateSelect);
-    LocalDateTime castDateEnd = LocalDateTime.parse(productEndDateSelect);
-
-    //제품 등록일or게시일로 검색하기
-    Page<Product> productDatepages = productService
-        .findByProductRegdate(castDateStart, castDateEnd, pageable);
-    modelMap.addAttribute("regdate", productDatepages);
+//    if (!productStartDateSelect.equals("") && !productEndDateSelect.equals("")) {
+//      LocalDateTime castDateStart = LocalDateTime.parse(productStartDateSelect);
+//      LocalDateTime castDateEnd = LocalDateTime.parse(productEndDateSelect);
+//
+//      //제품 등록일 or 게시일로 검색하기
+//      Page<Product> productDatepages = productService
+//          .findByProductRegdate(castDateStart, castDateEnd, pageable);
+//      modelMap.addAttribute("regdate", productDatepages);
+//    }
 
     return "admin/product/product_search";
   }
