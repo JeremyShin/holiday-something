@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.dto;
 
 
 import com.holidaysomething.holidaysomething.domain.Member;
+import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
