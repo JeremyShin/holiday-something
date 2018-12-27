@@ -26,6 +26,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -274,12 +275,14 @@ public class AdminProductController {
 //    return "redirect:/admin/product/product_detail";
 //  }
 
+
+
   /* 옵션 수정 */
   @PostMapping("/product_detail/option/modify")
-  public String modifyOption(@RequestBody productOptionDto productOptionDto){
-    log.info("수정할 옵션의 이름은");
+  public String modifyOptionPost(@RequestBody productOptionDto productOptionDto){
+    log.info("POST 수정할 옵션의 이름은");
     log.info(productOptionDto.getName());
-    return "admin/product/product_detail";
+    return "redirect:/admin/product/product_detail";
 
   }
 

@@ -52,21 +52,7 @@ let modify = function (source) {
     }
   }
 
-  // let req = new XMLHttpRequest();
-  // let name = document.getElementById("optionName").innerText;
-  //
-  // console.log("포스트 매핑으로 보낼 옵션의 이름은 ");
-  // console.log(name);
-  //
-  // req.open("POST", "/admin/product/product_detail/option/modify", true);
-  // req.setRequestHeader("content-type", "application/json");
-  // //req.send("name=" + encodeURIComponent(name));
-  // req.send(dojo.toJson(name));
-
   let name = document.getElementById("optionName").innerText;
-
-  // let data = new FormData();
-  // data.append('name', name);
 
   let req = new XMLHttpRequest();
   console.log("포스트 매핑으로 보낼 옵션의 이름은 ");
@@ -74,8 +60,6 @@ let modify = function (source) {
 
   req.open('POST', '/admin/product/product_detail/option/modify', true);
   req.setRequestHeader('Content-type', 'application/json');
-  //req.setRequestHeader("content-type", "application/x-www-form-urlencoded; charset=UTF-8");
-  //req.send("name=" + encodeURIComponent(name));
   req.send(JSON.stringify({name: name}));
 
 };
