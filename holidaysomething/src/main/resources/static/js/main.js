@@ -70,6 +70,25 @@ let modify = function (source) {
   }
 };
 
+/* 수정완료 버튼 클릭 */
+let finMod = function (source) {
+  console.log("수정완료버튼이 눌렸습니다.");
+
+  let name = document.getElementById('modifiedName');
+  let id = document.getElementById('modifiedId');
+  let price = document.getElementById('modifiedPrice');
+  let desc = document.getElementById('modifiedDesc');
+
+  let req = new XMLHttpRequest();
+  req.open('POST', '/admin/product/product_detail/option/modify', true);
+  req.setRequestHeader('Content-type', 'application/json');
+  req.send(JSON.stringify({id: id.innerText, name: name.value, price: price.value, description: desc.value}));
+  req.onreadystatechange = function () {
+    let ok = 200;
+    window.location.href = '/admin/product/product_detail';
+  }
+};
+
 let productOptionFormSubmitBtn = document.querySelector(
     '#productOptionForm').querySelector('#productOptionFormSubmit');
 productOptionFormSubmitBtn.addEventListener('click', (event) => {
@@ -95,24 +114,5 @@ let validateProductOptionForm = function (form) {
     form.submit();
   } else {
     return false;
-  }
-};
-
-/* 수정완료 버튼 클릭 */
-let finMod = function (source) {
-  console.log("수정완료버튼이 눌렸습니다.");
-
-  let name = document.getElementById('modifiedName');
-  let id = document.getElementById('modifiedId');
-  let price = document.getElementById('modifiedPrice');
-  let desc = document.getElementById('modifiedDesc');
-
-  let req = new XMLHttpRequest();
-  req.open('POST', '/admin/product/product_detail/option/modify', true);
-  req.setRequestHeader('Content-type', 'application/json');
-  req.send(JSON.stringify({id: id.innerText, name: name.value, price: price.value, description: desc.value}));
-  req.onreadystatechange = function () {
-    let ok = 200;
-    window.location.href = '/admin/product/product_detail';
   }
 };
