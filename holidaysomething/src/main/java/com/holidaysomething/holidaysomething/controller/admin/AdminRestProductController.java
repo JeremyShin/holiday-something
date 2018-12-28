@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AdminRestProductController {
 
-  private AdminProductRegisterService adminProductService;
+  private final AdminProductRegisterService adminProductRegisterService;
 
   @GetMapping("/subCategory/{largerId}")
   public List<ProductCategory> getSubCategories(@PathVariable("largerId") Long largerId) {
     log.info("========================================================");
     log.info("getSubCategories 진입, largerId: " + largerId);
-    List<ProductCategory> categories = adminProductService.productCategoryList(largerId);
+    List<ProductCategory> categories = adminProductRegisterService.productCategoryList(largerId);
     log.info("========================================================");
 
     return categories;
@@ -31,7 +31,7 @@ public class AdminRestProductController {
   // 중소분류 읽어오기.
   @GetMapping("/product_detail/register/lowcategories/{parentId}")
   public List<ProductCategory> getLowLevelCategories(@PathVariable("parentId") Long parentId) {
-    List<ProductCategory> categories = adminProductService.productCategoryList(parentId);
+    List<ProductCategory> categories = adminProductRegisterService.productCategoryList(parentId);
     return categories;
   }
 
