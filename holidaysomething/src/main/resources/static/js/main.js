@@ -11,6 +11,10 @@ let toggle = function (source) {
 
 let modify = function (source) {
 
+  console.log("넘어온 아이디를 찍어보자~");
+  console.log(source.parentElement.parentElement.children[1].innerHTML);
+  source.parentElement.parentElement.children[1].setAttribute('id', 'modifiedId');
+
   let nameInput = document.createElement("input");
   let priceInput = document.createElement("input");
   let descInput = document.createElement("input");
@@ -33,6 +37,7 @@ let modify = function (source) {
       priceInput.setAttribute('type', 'text');
       priceInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
+      priceInput.setAttribute('id', 'modifiedPrice');
       source.parentElement.parentElement.children[i].appendChild(priceInput);
     }
 
@@ -40,6 +45,7 @@ let modify = function (source) {
       descInput.setAttribute('type', 'text');
       descInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
+      descInput.setAttribute('id', 'modifiedDesc');
       source.parentElement.parentElement.children[i].appendChild(descInput);
     }
 
@@ -55,22 +61,22 @@ let modify = function (source) {
     }
   }
 
-  let id = document.getElementById("optionId").innerText;
-  //let name = nameInput.value;
-  let price = document.getElementById("optionPrice").innerText;
-  let description = descInput.value;
+  // let id = document.getElementById("optionId").innerText;
+  // //let name = nameInput.value;
+  // let price = document.getElementById("optionPrice").innerText;
+  // let description = descInput.value;
 
-  let req = new XMLHttpRequest();
-
-  console.log("포스트 매핑으로 보낼 옵션의 아이디는 ");
-  console.log(id);
-
-  console.log("포스트 매핑으로 보낼 옵션의 이름은 ");
-  console.log(name);
-
-  req.open('POST', '/admin/product/product_detail/option/modify', true);
-  req.setRequestHeader('Content-type', 'application/json');
-  req.send(JSON.stringify({id: id, name: name, price: price, description: description}));
+  // let req = new XMLHttpRequest();
+  //
+  // // console.log("포스트 매핑으로 보낼 옵션의 아이디는 ");
+  // // console.log(id);
+  // //
+  // // console.log("포스트 매핑으로 보낼 옵션의 이름은 ");
+  // // console.log(name);
+  //
+  // req.open('POST', '/admin/product/product_detail/option/modify', true);
+  // req.setRequestHeader('Content-type', 'application/json');
+  // req.send(JSON.stringify({id: id, name: name, price: price, description: description}));
 
 };
 
@@ -109,10 +115,38 @@ let finMod = function (source) {
   //console.log(source.querySelector('modifiedName').innerHTML); -> 문법오류
   //console.log(source.name.toString()); //아무것도 없죠?
   //console.log(source.name);
-  let a  = document.getElementById('modifiedName');
 
-  console.log(a.value);
-  console.log(source.value);
+  //let a  = document.getElementById('modifiedName');
+  //let b = document.getElementById('modifiedId');
+
+  let nameElem = document.getElementById('modifiedName');
+  let idElem = document.getElementById('modifiedId');
+  let priceElem = document.getElementById('modifiedPrice');
+  let descElem = document.getElementById('modifiedDesc');
+
+
+  // console.log(a.value);
+  // console.log(b.innerText);
+  // console.log(source.value);
+
+  console.log(nameElem.value);
+  console.log(idElem.innerText);
+  console.log(priceElem.value);
+  console.log(descElem.value);
+
+
+
+  let req = new XMLHttpRequest();
+
+  // console.log("포스트 매핑으로 보낼 옵션의 아이디는 ");
+  // console.log(id);
+  //
+  // console.log("포스트 매핑으로 보낼 옵션의 이름은 ");
+  // console.log(name);
+
+  req.open('POST', '/admin/product/product_detail/option/modify', true);
+  req.setRequestHeader('Content-type', 'application/json');
+  req.send(JSON.stringify({id: idElem.innerText, name: nameElem.value, price: priceElem.value, description: descElem.value}));
 
 
 };

@@ -10,8 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.LocalDateTime;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ProductServiceTest {
@@ -20,7 +18,6 @@ public class ProductServiceTest {
   ProductService productService;
 
   Pageable pageable = PageRequest.of(0, 5);
-
 
 
   @Test

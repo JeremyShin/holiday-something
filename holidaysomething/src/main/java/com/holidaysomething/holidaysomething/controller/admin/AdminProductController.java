@@ -40,20 +40,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/admin/product")
 public class AdminProductController {
 
+  private static final Log log = LogFactory.getLog(AdminProductController.class);
   private ProductService productService;
   private ProductOptionService productOptionService;
   private AdminProductRegisterService adminProductRegisterService;
   private AdminProductOptionService adminProductOptionService;
   private FileUtil fileUtil;
-
-  private static final Log log = LogFactory.getLog(AdminProductController.class);
 
   public AdminProductController(ProductOptionService productOptionService,
       ProductService productService, AdminProductRegisterService adminProductRegisterService,
@@ -121,7 +119,6 @@ public class AdminProductController {
     model.addAttribute("product", product);
     return "admin/product/product_register";
   }
-
 
 
   // 상품등록 , date1 : 제조일  ,  date2 : 출시일.
@@ -285,7 +282,7 @@ public class AdminProductController {
     LocalDateTime castDateStart = LocalDateTime.parse(productStartDateSelect);
     LocalDateTime castDateEnd = LocalDateTime.parse(productEndDateSelect);
 
-    //제품 등록일or게시일로 검색하기
+    //제품 등록일 or 게시일로 검색하기
     Page<Product> productDatepages = productService
         .findByProductRegdate(castDateStart, castDateEnd, pageable);
     modelMap.addAttribute("regdate", productDatepages);
@@ -321,14 +318,17 @@ public class AdminProductController {
   /* 옵션 수정 */
   @PostMapping("/product_detail/option/modify")
   public String modifyOptionPost(@RequestBody productOptionDto productOptionDto){
-    log.info("POST 수정할 옵션의 이름은");
+    log.info("POST 로 받을거에요 ");
     log.info(productOptionDto.getName());
+    log.info(productOptionDto.getId());
+    log.info(productOptionDto.getDescription());
+    log.info(productOptionDto.getPrice());
 
-//    ProductOption productOption = productOptionService.getProductOption(productOptionDto.getId());
-//
-//    productOption.setName(productOptionDto.getName());
-//    productOption.setPrice(productOptionDto.getPrice());
-//    productOption.setDescription(productOptionDto.getDescription());
+    ProductOption productOption = productOptionService.getProductOption(productOptionDto.getId());
+
+    productOption.setName(productOptionDto.getName());
+    productOption.setPrice(productOptionDto.getPrice());
+    productOption.setDescription(productOptionDto.getDescription());
 
     return "redirect:/admin/product/product_detail";
 
