@@ -59,8 +59,8 @@ public class AdminMemberController {
     searchOrderMember.setOrderStartDate(LocalDateTime.parse(date1));
     searchOrderMember.setOrderEndDate(LocalDateTime.parse(date2));
 
-    System.out.println(searchOrderMember.getOrderStartDate());
-    System.out.println(searchOrderMember.getOrderEndDate());
+    log.info("TAG", searchOrderMember.getOrderStartDate());
+    log.info("TAG", searchOrderMember.getOrderEndDate());
 
     return "redirect:/admin/member/order/search";
   }

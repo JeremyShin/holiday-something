@@ -97,7 +97,7 @@
     <!-- Page 번호 -->
     <div id="page-numbers">
       <th:block th:each="item : ${#numbers.sequence(1, pageCount)}">
-        <a th:href="@{'/admin/product/product_detail/' + ${item}}">
+        <a th:href="@{'/admin/product/product_detail?page=' + ${item}}">
           <span th:text="${item}"></span>
         </a>
       </th:block>

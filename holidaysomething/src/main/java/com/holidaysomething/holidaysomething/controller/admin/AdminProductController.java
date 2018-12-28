@@ -70,14 +70,14 @@ public class AdminProductController {
     return "admin/product/product_category";
   }
 
-  @GetMapping({"/product_detail", "/product_detail/{pageStart}"})
-  public String productDetail(ModelMap modelMap, @PathVariable Optional<Integer> pageStart) {
-    List<ProductOption> productOptionList = productOptionService.getAllProductOptions();
-    int productOptionListSize = productOptionList.size();
-    modelMap.addAttribute("productOptionList", productOptionList);
+  @GetMapping("/product_detail")
+  public String productDetail(ModelMap modelMap,
+      @RequestParam(value = "page", defaultValue = "1") int page) {
+
+    int productOptionListSize = productOptionService.getAllProductOptions().size();
     modelMap.addAttribute("productOptionListSize", productOptionListSize);
 
-    Pageable pageable = PageRequest.of(pageStart.isPresent() ? pageStart.get() - 1 : 0, 10);
+    Pageable pageable = PageRequest.of(page-1, 10);
     Page<ProductOption> productOptions = productOptionService.getAllProductOptionsPage(pageable);
 
     int pageCount = productOptions.getTotalPages();
@@ -225,15 +225,16 @@ public class AdminProductController {
     return "/admin/product/product_detail";
   }
 
-  @GetMapping({"/product_search", "/product_search/{pageStart}"})
-  public String productSearch(ModelMap modelMap, @PathVariable Optional<Integer> pageStart) {
+  @GetMapping("/product_search")
+  public String productSearch(ModelMap modelMap,
+      @RequestParam(value = "page", defaultValue = "1") int page) {
 
     // 대분류를 불러온다
     List<ProductCategory> largeCategories = adminProductRegisterService.productCategoryList(0L);
     modelMap.addAttribute("largeCategories", largeCategories);
 
     // 모든 상품 리스트를 불러온다(페이지)
-    Pageable pageable = PageRequest.of(pageStart.isPresent() ? pageStart.get() - 1 : 0, 10);
+    Pageable pageable = PageRequest.of(page-1, 10);
     Page<Product> allProductList = adminProductRegisterService.getAllProducts(pageable);
 
     int productPageCount = allProductList.getTotalPages();
