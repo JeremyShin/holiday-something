@@ -7,6 +7,7 @@ import com.holidaysomething.holidaysomething.dto.SearchOrderMember;
 import com.holidaysomething.holidaysomething.service.MemberService;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,13 +25,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/admin/member")
 @Slf4j
+@RequiredArgsConstructor
 public class AdminMemberController {
 
-  private MemberService memberService;
-
-  public AdminMemberController(MemberService memberService) {
-    this.memberService = memberService;
-  }
+  private final MemberService memberService;
 
   @GetMapping("/order/search")
   public String memberOrderSearch() {

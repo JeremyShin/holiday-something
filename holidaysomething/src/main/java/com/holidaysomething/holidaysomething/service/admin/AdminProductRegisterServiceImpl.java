@@ -8,6 +8,7 @@ import com.holidaysomething.holidaysomething.repository.ProductCategoryRepositor
 import com.holidaysomething.holidaysomething.repository.ProductDetailRepository;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,18 +17,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class AdminProductRegisterServiceImpl implements AdminProductRegisterService {
 
-  private ProductCategoryRepository productCategoryRepository;
-  private ProductDetailRepository productDetailRepository;
-  private ProductRepository productRepository;
-
-  public AdminProductRegisterServiceImpl(ProductCategoryRepository productCategoryRepository,
-      ProductDetailRepository productDetailRepository, ProductRepository productRepository) {
-    this.productCategoryRepository = productCategoryRepository;
-    this.productDetailRepository = productDetailRepository;
-    this.productRepository = productRepository;
-  }
+  private final ProductCategoryRepository productCategoryRepository;
+  private final ProductDetailRepository productDetailRepository;
+  private final ProductRepository productRepository;
 
   @Override
   public Page<Product> getAllProducts(Pageable pageable) {

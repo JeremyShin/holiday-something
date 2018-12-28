@@ -4,19 +4,17 @@ import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.dto.Search;
 import com.holidaysomething.holidaysomething.repository.MemberRepository;
 import com.holidaysomething.holidaysomething.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
-  private MemberRepository memberRepository;
-
-  public MemberServiceImpl(MemberRepository memberRepository) {
-    this.memberRepository = memberRepository;
-  }
+  private final MemberRepository memberRepository;
 
   @Override
   @Transactional

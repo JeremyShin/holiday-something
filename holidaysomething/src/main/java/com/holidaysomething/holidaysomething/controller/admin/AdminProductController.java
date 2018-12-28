@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -42,23 +43,14 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/admin/product")
 @Slf4j
+@RequiredArgsConstructor
 public class AdminProductController {
 
-  private ProductService productService;
-  private ProductOptionService productOptionService;
-  private AdminProductRegisterService adminProductRegisterService;
-  private AdminProductOptionService adminProductOptionService;
-  private FileUtil fileUtil;
-
-  public AdminProductController(ProductOptionService productOptionService,
-      ProductService productService, AdminProductRegisterService adminProductRegisterService,
-      FileUtil fileUtil, AdminProductOptionService adminProductOptionService) {
-    this.productOptionService = productOptionService;
-    this.productService = productService;
-    this.adminProductRegisterService = adminProductRegisterService;
-    this.fileUtil = fileUtil;
-    this.adminProductOptionService = adminProductOptionService;
-  }
+  private final ProductService productService;
+  private final ProductOptionService productOptionService;
+  private final AdminProductRegisterService adminProductRegisterService;
+  private final AdminProductOptionService adminProductOptionService;
+  private final FileUtil fileUtil;
 
   @GetMapping
   public String product() {
@@ -77,7 +69,7 @@ public class AdminProductController {
     int productOptionListSize = productOptionService.getAllProductOptions().size();
     modelMap.addAttribute("productOptionListSize", productOptionListSize);
 
-    Pageable pageable = PageRequest.of(page-1, 10);
+    Pageable pageable = PageRequest.of(page - 1, 10);
     Page<ProductOption> productOptions = productOptionService.getAllProductOptionsPage(pageable);
 
     int pageCount = productOptions.getTotalPages();
@@ -173,9 +165,10 @@ public class AdminProductController {
 
   @PostMapping("/product_image")
   public String productImageUpload(@RequestParam("file") MultipartFile file,
-      ModelMap modelMpa,
+      ModelMap modelMap,
       HttpSession session,
       HttpServletRequest request) {
+
     ProductImage productImage = fileUtil.handleFileStream(request, session, file);
     productService.saveProductImage(productImage);
     return "redirect:/admin/product/product_list";
@@ -234,7 +227,7 @@ public class AdminProductController {
     modelMap.addAttribute("largeCategories", largeCategories);
 
     // 모든 상품 리스트를 불러온다(페이지)
-    Pageable pageable = PageRequest.of(page-1, 10);
+    Pageable pageable = PageRequest.of(page - 1, 10);
     Page<Product> allProductList = adminProductRegisterService.getAllProducts(pageable);
 
     int productPageCount = allProductList.getTotalPages();

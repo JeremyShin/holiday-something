@@ -5,19 +5,17 @@ import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.domain.ProductOptionCommand;
 import com.holidaysomething.holidaysomething.repository.ProductOptionRepository;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class AdminProductOptionServiceImpl implements AdminProductOptionService {
 
-  private ProductOptionRepository productOptionRepository;
-
-  public AdminProductOptionServiceImpl(ProductOptionRepository productOptionRepository) {
-    this.productOptionRepository = productOptionRepository;
-  }
+  private final ProductOptionRepository productOptionRepository;
 
   @Override
   @Transactional
