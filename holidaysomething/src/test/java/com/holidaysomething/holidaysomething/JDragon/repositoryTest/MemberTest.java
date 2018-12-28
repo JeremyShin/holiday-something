@@ -118,6 +118,19 @@ public class MemberTest {
 //    }
   }
 
+
+  @Test
+  public void 주문번호로회원조회() {
+    Member member = memberRepository.findMembersByOrderNumberInOrders("2018111950137514");
+    // member id가 6인 회원만 출력 되어야 한다!
+    log.info("====== member.id = " + member.getId());
+    log.info("====== member.id = " + member.getName());
+  }
+
+
+
+
+
   @Test
   public void id로회원조회byDSL() {
     Member member = memberRepository.getMemberByDsl(18L);

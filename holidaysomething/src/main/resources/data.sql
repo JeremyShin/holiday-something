@@ -232,8 +232,8 @@ INSERT INTO orders (id, order_number, date, total_price, status, mileage, member
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111050137519', NOW(), 14000, '구매확정', 140, 4, 9, 9);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111050138510', NOW(), 4000, '구매확정', 40, 4, 10, 10);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111750147511', '2018-11-30', 3000, '구매확정', 30, 5, 11, 11);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111750137512', NOW(), 3000, '구매확정', 30, 5, 12, 12);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111950137513', NOW(), 5500, '구매확정', 50, 18, 13, 13);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111750137512', '2018-10-22', 3000, '구매확정', 30, 5, 12, 12);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111950137513', '2017-11-11', 5500, '구매확정', 50, 18, 13, 13);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111950137514', NOW(), 2500, '구매확정', 20, 6, 14, 14);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112250137515', NOW(), 2500, '구매확정', 20, 6, 15, 15);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137516', NOW(), 1100, '구매확정', 10, 6, 16, 16);
@@ -241,9 +241,9 @@ INSERT INTO orders (id, order_number, date, total_price, status, mileage, member
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137518', '2018-11-21', 5000, '구매확정', 50, 7, 18, 18);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137519', NOW(), 5000, '구매확정', 50, 9, 19, 19);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137520', NOW(), 3000, '구매확정', 30, 9, 20, 20);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137521', NOW(), 2000, '구매확정', 20, 11, 21, 21);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137521', '2018-09-01', 2000, '구매확정', 20, 11, 21, 21);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018113060137522', '2018-11-04', 3000, '구매확정', 30, 11, 22, 22);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137523', NOW(), 3000, '구매확정', 30, 11, 23, 23);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137523', '2016-10-10', 3000, '구매확정', 30, 11, 23, 23);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112860137524', NOW(), 16000, '배송완료', 160, 15, 24, 24);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112960137525', NOW(), 8000, '배송완료', 80, 17, 25, 25);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112960137526', NOW(), 3000, '배송완료', 30, 20, 26, 26);
@@ -431,21 +431,21 @@ INSERT INTO product_option (id,name,price,description,product_id) VALUES (40,'�
 
 
 INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(10000,1,100,NULL,NULL,1,1);
-INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(111000,2,300,NULL,NULL,21,21);
-INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(131000,3,400,NULL,NULL,3,4);
-INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(121000,4,2100,NULL,NULL,21,3);
-INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(151000,5,2300,NULL,NULL,11,24);
-INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(151000,6,2300,NULL,NULL,1,12);
-INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(141000,7,2100,NULL,NULL,21,29);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(111000,2,300,NULL,NULL,21,1);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(131000,3,400,NULL,NULL,3,1);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(121000,4,2100,NULL,NULL,21,1);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(151000,5,2300,NULL,NULL,11,5);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(151000,6,2300,NULL,NULL,1,5);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(141000,7,2100,NULL,NULL,21,5);
 INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(121000,8,2200,NULL,NULL,24,11);
 INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(112000,11,2100,NULL,11,21,21);
 INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(111000,1,2090,NULL,NULL,4,11);
 INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(11000,1,2000,NULL,NULL,7,2);
-INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(131000,1,2100,NULL,NULL,5,1);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(131000,1,2100,NULL,NULL,5,23);
 INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(1000,3,1200,NULL,NULL,11,9);
 INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(3000,88,3200,NULL,NULL,15,8);
-INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(18000,12,3200,NULL,NULL,19,17);
-INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(17000,23,2300,NULL,NULL,20,11);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(18000,12,3200,NULL,NULL,19,1);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(17000,23,2300,NULL,NULL,20,5);
 INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(61000,1,2500,NULL,NULL,21,30);
 INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(51000,2,2500,NULL,NULL,22,20);
 INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(81000,2,2500,NULL,NULL,12,10);
@@ -454,12 +454,12 @@ INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, ex
 INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(81000,7,1200,NULL,NULL,3,21);
 INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(71000,2,2200,NULL,NULL,7,22);
 INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(18000,21,3200,NULL,NULL,9,19);
-INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(23000,7,2400,NULL,NULL,10,17);
-INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(123000,9,2010,NULL,NULL,16,13);
-INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(14000,12,2100,NULL,NULL,12,11);
-INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(111000,12,2200,NULL,NULL,11,8);
-INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(119000,2,2300,NULL,NULL,20,7);
-INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(1100000,200,2400,NULL,NULL,23,5);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(23000,7,2400,NULL,NULL,10,21);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(123000,9,2010,NULL,NULL,16,21);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(14000,12,2100,NULL,NULL,12,15);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(111000,12,2200,NULL,NULL,11,15);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(119000,2,2300,NULL,NULL,20,24);
+INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(1100000,200,2400,NULL,NULL,23,11);
 
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
 VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-3.jpg', 'https://contents.sixshop.com/thumbnails/uploadedFiles/30497/product/image_1537526126133_2500.jpg', '2018-12-03 09:23:35', 13900.0, 'holidaymemopad', '2018-12-03 09:33:35', 1);

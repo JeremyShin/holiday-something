@@ -54,7 +54,7 @@ public class AdminMemberController {
     System.out.println(searchOrderMember.getName());
     System.out.println(searchOrderMember.getLoginId());
     System.out.println(searchOrderMember.getProductName());
-    System.out.println(searchOrderMember.getProductCode());
+    System.out.println(searchOrderMember.getOrderNumber());
     System.out.println(date1);
     System.out.println(date2);
     date1.append("T00:00:00");

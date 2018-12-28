@@ -62,6 +62,15 @@ public interface MemberRepository extends JpaRepository<Member, Long>, MemberRep
   List<Member> findMembersByOrderPeriod(@Param("startDate") LocalDateTime startDate,
       @Param("endDate") LocalDateTime endDate);
 
+  // 주문번호로  주문한 회원 검색하기.
+  @Query(value = "select me from Member as me where me.id in (select distinct o.member from ORDERS as o where o.orderNumber = (:orderNumber)) order by me.id asc")
+  Member findMembersByOrderNumberInOrders(@Param("orderNumber") String orderNumber);
+
+
+
+
+
+
   // member search all
   Page<Member> findAll(Pageable pageable);
 
