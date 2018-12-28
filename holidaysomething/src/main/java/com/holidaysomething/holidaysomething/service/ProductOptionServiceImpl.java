@@ -35,6 +35,7 @@ public class ProductOptionServiceImpl implements ProductOptionService {
   }
 
   @Override
+  @Transactional
   public void save(ProductOption productOption) { productOptionRepository.save(productOption); }
 
   @Override
