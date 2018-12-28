@@ -1,51 +1,43 @@
 package com.holidaysomething.holidaysomething.repository;
 
 import com.holidaysomething.holidaysomething.domain.Product;
-import org.junit.Before;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(classes = { PersistenceConfig.class })
 @Transactional
 @Rollback
+@Slf4j
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class ProductDslTest {
 
-  private ProductRepository repo;
+  @Autowired
+  private ProductRepository productRepository;
 
-  public ProductDslTest(ProductRepository repo) {
-    this.repo = repo;
-  }
-
-  private Product productJohn;
-  private Product productTom;
-
-  @Before
-  public void init() {
-    productJohn = new Product();
-    productJohn.setCode("A123");
-    productJohn.setName("으엉");
-    productJohn.setSellingPrice(7400);
-    productJohn.setOptionalPriceText("공짜");
-    repo.save(productJohn);
-
-    productTom= new Product();
-    productTom.setCode("B451");
-    productTom.setName("아하");
-    productTom.setSellingPrice(3556);
-    productTom.setOptionalPriceText("매진");
-    repo.save(productTom);
+  public ProductDslTest() {
   }
 
   @Test
-  public void givenLast_whenGettingListOfUsers_thenCorrect() {
-    ProductPredicatesBuilder builder = new ProductPredicatesBuilder().with("code", ":", "B451");
+  public void queryDsl_검색분류_테스트() throws Exception {
+    Pageable pageable = PageRequest.of(0, 10);
 
-    Iterable<Product> results = repo.findAll(builder.build());
-//    assertThat(results, containsInAnyOrder(productJohn, productTom));
+    Page<Product> productPage = productRepository.findProducts("productName",
+        "다이어리", pageable);
+
+    for (Product product : productPage) {
+      log.info(product.getId().toString());
+      log.info(product.getName());
+      log.info(product.getCode());
+      log.info("==============================");
+    }
   }
 }

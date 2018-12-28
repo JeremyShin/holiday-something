@@ -2,41 +2,28 @@ package com.holidaysomething.holidaysomething.repository;
 
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
-import com.holidaysomething.holidaysomething.domain.QProduct;
-import com.querydsl.core.types.dsl.StringExpression;
-import com.querydsl.core.types.dsl.StringPath;
+import com.holidaysomething.holidaysomething.repository.custom.ProductRepositoryCustom;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
-import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
-import org.springframework.data.querydsl.binding.QuerydslBindings;
-import org.springframework.data.querydsl.binding.SingleValueBinding;
 import org.springframework.data.repository.query.Param;
 
-public interface ProductRepository extends JpaRepository<Product, Long>,
-    QuerydslPredicateExecutor<Product>,
-    QuerydslBinderCustomizer<QProduct> {
-
-  default public void customize(
-      QuerydslBindings bindings, QProduct root) {
-    bindings.bind(String.class)
-        .first((SingleValueBinding<StringPath, String>) StringExpression::containsIgnoreCase);
-    bindings.excluding(root.display);
-  }
+public interface ProductRepository extends JpaRepository<Product, Long>, ProductRepositoryCustom {
 
   //admin : product searching by name
   @Query(value = "SELECT p FROM Product p WHERE p.name LIKE CONCAT('%', :productName, '%')")
-  Page<Product> findByProductNameContaining(@Param("productName") String productName, Pageable pageable);
+  Page<Product> findByProductNameContaining(@Param("productName") String productName,
+      Pageable pageable);
 
   //Product findByProductNameContaining(@Param("productName") String productName);
 
   //admin : product searching by code
   @Query(value = "SELECT p FROM Product p WHERE p.code LIKE CONCAT('%', :productCode, '%')")
-  Page<Product> findByProductCodeContaining(@Param("productCode") String productCode, Pageable pageable);
+  Page<Product> findByProductCodeContaining(@Param("productCode") String productCode,
+      Pageable pageable);
 
   //admin : product searching by date
   @Query(value = "SELECT p FROM Product p WHERE p.regDate BETWEEN :regdateStart AND :regdateEnd")
@@ -45,7 +32,8 @@ public interface ProductRepository extends JpaRepository<Product, Long>,
 
   //admin : product searching by releaseDate
   @Query(value = "SELECT p FROM Product p WHERE p.releaseDate = :releaseDate")
-  Page<Product> findByProductReleaseDate(@Param("releaseDate") LocalDateTime releaseDate, Pageable pageable);
+  Page<Product> findByProductReleaseDate(@Param("releaseDate") LocalDateTime releaseDate,
+      Pageable pageable);
 
   // 상품 이미지 저장하기
   ProductImage save(ProductImage productImage);
@@ -67,16 +55,20 @@ public interface ProductRepository extends JpaRepository<Product, Long>,
   Page<Product> findProductByCode(@Param("code") String code, Pageable pageable);
 
   @Query(value = "SELECT p FROM Product p WHERE p.sellingPrice = :sellingPrice")
-  Page<Product> findProductBySellingPrice(@Param("sellingPrice") int sellingPrice, Pageable pageable);
+  Page<Product> findProductBySellingPrice(@Param("sellingPrice") int sellingPrice,
+      Pageable pageable);
 
   @Query(value = "SELECT p FROM Product p WHERE p.manufacturer LIKE CONCAT('%', :manufacturer, '%')")
-  Page<Product> findProductByManufacturer(@Param("manufacturer") String manufacturer, Pageable pageable);
+  Page<Product> findProductByManufacturer(@Param("manufacturer") String manufacturer,
+      Pageable pageable);
 
   @Query(value = "SELECT p FROM Product p WHERE p.optionalPriceText LIKE CONCAT('%', :optionalPriceText, '%')")
-  Page<Product> findProductByOptionalPriceText(@Param("optionalPriceText") String optionalPriceText, Pageable pageable);
+  Page<Product> findProductByOptionalPriceText(@Param("optionalPriceText") String optionalPriceText,
+      Pageable pageable);
 
   @Query(value = "SELECT p FROM Product p WHERE p.shippingPrice = :shippingPrice")
-  Page<Product> findProductByShippingPrice(@Param("shippingPrice") int shippingPrice, Pageable pageable);
+  Page<Product> findProductByShippingPrice(@Param("shippingPrice") int shippingPrice,
+      Pageable pageable);
   /************************************************************* '검색분류'로 검색하는 경우 *************/
 }
 
