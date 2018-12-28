@@ -3,13 +3,10 @@ package com.holidaysomething.holidaysomething.JDragon.repositoryTest;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Order;
-import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMember;
 import com.holidaysomething.holidaysomething.repository.MemberRepository;
 import java.time.LocalDateTime;
 import java.util.List;
-import lombok.extern.java.Log;
-import lombok.extern.log4j.Log4j;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -69,8 +66,6 @@ public class MemberTest {
       log.info("===================== member : " + member.getId());
       log.info("===================== member : " + member.getName());
     }
-
-
 
     //List<Object[]> members = memberRepository.findMembersInOrders("sky");
     //List<OrderMemberDto> members = memberRepository.findMembersInOrders("sky");

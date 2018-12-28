@@ -5,8 +5,8 @@ import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.domain.ProductOptionCommand;
-import com.holidaysomething.holidaysomething.dto.productOptionDto;
 import com.holidaysomething.holidaysomething.dto.Search;
+import com.holidaysomething.holidaysomething.dto.productOptionDto;
 import com.holidaysomething.holidaysomething.service.ProductOptionService;
 import com.holidaysomething.holidaysomething.service.ProductService;
 import com.holidaysomething.holidaysomething.service.admin.AdminProductOptionService;
@@ -18,8 +18,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -27,7 +26,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -43,9 +41,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/admin/product")
+@Slf4j
 public class AdminProductController {
 
-  private static final Log log = LogFactory.getLog(AdminProductController.class);
   private ProductService productService;
   private ProductOptionService productOptionService;
   private AdminProductRegisterService adminProductRegisterService;
@@ -310,10 +308,9 @@ public class AdminProductController {
 //  }
 
 
-
   /* 옵션 수정 */
   @PostMapping("/product_detail/option/modify")
-  public String modifyOptionPost(@RequestBody productOptionDto productOptionDto){
+  public String modifyOptionPost(@RequestBody productOptionDto productOptionDto) {
     log.info("POST 수정할 옵션의 이름은");
     log.info(productOptionDto.getName());
     return "redirect:/admin/product/product_detail";

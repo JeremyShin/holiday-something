@@ -45,7 +45,8 @@ let modify = function (source) {
       source.parentElement.parentElement.children[i].appendChild(codeInput);
     }
 
-    if (source.parentElement.parentElement.children[i].childNodes[0].id === "modifyBtn") {
+    if (source.parentElement.parentElement.children[i].childNodes[0].id
+        === "modifyBtn") {
       console.log("수정버튼입니다.");
       let btn = source.parentElement.parentElement.children[i].childNodes[0];
       btn.setAttribute("value", "수정완료");
