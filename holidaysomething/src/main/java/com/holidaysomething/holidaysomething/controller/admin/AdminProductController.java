@@ -80,9 +80,9 @@ public class AdminProductController {
     return "admin/product/product_detail";
   }
 
-  @PostMapping("/product_detail")
+  @GetMapping("/product_detail/bundle")
   public String productDetailBundle(ModelMap modelMap,
-      @RequestParam("productOptionBundleSize") int size) {
+      @RequestParam("size") int size) {
     List<ProductOption> productOptionList = productOptionService.getAllProductOptions();
     int productOptionListSize = productOptionList.size();
     modelMap.addAttribute("productOptionList", productOptionList);

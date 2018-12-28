@@ -36,8 +36,8 @@
 
   <div class="tbl-container">
     <div class="above-tbl">
-      <form method="post" action="/admin/product/product_detail/bundle">
-        <select onchange="this.form.submit()" name="productOptionBundleSize">
+      <form method="get" action="/admin/product/product_detail/bundle">
+        <select onchange="this.form.submit()" name="size">
           <option disabled selected>개수 선택</option>
           <option value="10">10개씩 보기</option>
           <option value="20">20개씩 보기</option>
