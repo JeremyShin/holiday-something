@@ -5,7 +5,7 @@ import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.domain.ProductOptionCommand;
-import com.holidaysomething.holidaysomething.dto.productOptionDto;
+import com.holidaysomething.holidaysomething.dto.ProductOptionDto;
 import com.holidaysomething.holidaysomething.dto.Search;
 import com.holidaysomething.holidaysomething.service.ProductOptionService;
 import com.holidaysomething.holidaysomething.service.ProductService;
@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -28,7 +27,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -40,6 +38,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -75,6 +74,9 @@ public class AdminProductController {
 
   @GetMapping({"/product_detail", "/product_detail/{pageStart}"})
   public String productDetail(ModelMap modelMap, @PathVariable Optional<Integer> pageStart) {
+
+    log.info("수정된 화면을 보여주고싶어요");
+
     List<ProductOption> productOptionList = productOptionService.getAllProductOptions();
     int productOptionListSize = productOptionList.size();
     modelMap.addAttribute("productOptionList", productOptionList);
@@ -88,6 +90,7 @@ public class AdminProductController {
     modelMap.addAttribute("pageCount", pageCount);
     modelMap.addAttribute("productOptions", productOptions);
 
+    log.info("안되나?");
     return "admin/product/product_detail";
   }
 
@@ -288,52 +291,6 @@ public class AdminProductController {
     modelMap.addAttribute("regdate", productDatepages);
 
     return "admin/product/product_search";
-  }
-
-//  @GetMapping("/product_detail/option/modify")
-//  public String modifyOption(ProductOption productOption, Model model){
-//    String modification = "으아아아";
-//    //modelMap.addAttribute("productOptionMod", productOption);
-//    //model.addAttribute("modification", modification);
-//
-//    log.info("옵션수정버튼을 눌렀습니다.");
-//    log.info("modification : " + modification);
-//
-//    return "admin/product/product_detail";
-//  }
-
-//  @GetMapping("/product_detail/option/modify")
-//  public String modifyOption(){
-//
-//    log.info("옵션수정버튼을 눌렀습니다.");
-//
-//    return "redirect:/admin/product/product_detail";
-//  }
-
-  /*  옵션 수정 : 수정완료 버튼을 누른 후 */
-//  @GetMapping("/product_detail/option/modify")
-//  public String modifyOption()
-
-
-  /* 옵션 수정 */
-  @PostMapping("/product_detail/option/modify")
-  public String modifyOptionPost(@RequestBody productOptionDto productOptionDto){
-    log.info("POST 로 받을거에요 ");
-    log.info(productOptionDto.getName());
-    log.info(productOptionDto.getId());
-    log.info(productOptionDto.getDescription());
-    log.info(productOptionDto.getPrice());
-
-    ProductOption productOption = productOptionService.getProductOption(productOptionDto.getId());
-
-    productOption.setName(productOptionDto.getName());
-    productOption.setPrice(productOptionDto.getPrice());
-    productOption.setDescription(productOptionDto.getDescription());
-
-    productOptionService.save(productOption);
-
-    return "redirect:/admin/product/product_detail";
-
   }
 
   /* 옵션 등록 */

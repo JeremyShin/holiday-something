@@ -27,10 +27,12 @@ let modify = function (source) {
       nameInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
       nameInput.setAttribute('id', 'modifiedName');
+
+      let a = source.parentElement.parentElement.children[i];
+      let b = a.childNodes[0];
+      a.removeChild(b);
+
       source.parentElement.parentElement.children[i].appendChild(nameInput);
-      name = nameInput.value;
-      console.log("으아아아아아아아");
-      console.log(name);
     }
 
     if (source.parentElement.parentElement.children[i].id === "optionPrice") {
@@ -38,6 +40,9 @@ let modify = function (source) {
       priceInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
       priceInput.setAttribute('id', 'modifiedPrice');
+
+
+
       source.parentElement.parentElement.children[i].appendChild(priceInput);
     }
 
@@ -46,6 +51,7 @@ let modify = function (source) {
       descInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
       descInput.setAttribute('id', 'modifiedDesc');
+
       source.parentElement.parentElement.children[i].appendChild(descInput);
     }
 
@@ -60,24 +66,6 @@ let modify = function (source) {
       btn.setAttribute('onclick', 'finMod(this);');
     }
   }
-
-  // let id = document.getElementById("optionId").innerText;
-  // //let name = nameInput.value;
-  // let price = document.getElementById("optionPrice").innerText;
-  // let description = descInput.value;
-
-  // let req = new XMLHttpRequest();
-  //
-  // // console.log("포스트 매핑으로 보낼 옵션의 아이디는 ");
-  // // console.log(id);
-  // //
-  // // console.log("포스트 매핑으로 보낼 옵션의 이름은 ");
-  // // console.log(name);
-  //
-  // req.open('POST', '/admin/product/product_detail/option/modify', true);
-  // req.setRequestHeader('Content-type', 'application/json');
-  // req.send(JSON.stringify({id: id, name: name, price: price, description: description}));
-
 };
 
 let productOptionFormSubmitBtn = document.querySelector(
@@ -136,17 +124,14 @@ let finMod = function (source) {
 
 
 
+
+
   let req = new XMLHttpRequest();
-
-  // console.log("포스트 매핑으로 보낼 옵션의 아이디는 ");
-  // console.log(id);
-  //
-  // console.log("포스트 매핑으로 보낼 옵션의 이름은 ");
-  // console.log(name);
-
   req.open('POST', '/admin/product/product_detail/option/modify', true);
   req.setRequestHeader('Content-type', 'application/json');
   req.send(JSON.stringify({id: idElem.innerText, name: nameElem.value, price: priceElem.value, description: descElem.value}));
-
-
+  req.onreadystatechange = function () {
+    let ok = 200;
+    window.location.href = '/admin/product/product_detail';
+  }
 };
