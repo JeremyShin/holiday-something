@@ -330,6 +330,8 @@ public class AdminProductController {
     productOption.setPrice(productOptionDto.getPrice());
     productOption.setDescription(productOptionDto.getDescription());
 
+    productOptionService.save(productOption);
+
     return "redirect:/admin/product/product_detail";
 
   }

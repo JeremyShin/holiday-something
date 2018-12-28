@@ -35,6 +35,9 @@ public class ProductOptionServiceImpl implements ProductOptionService {
   }
 
   @Override
+  public void save(ProductOption productOption) { productOptionRepository.save(productOption); }
+
+  @Override
   @Transactional(readOnly = true)
   public List<ProductOption> getAllProductOptionsByName(String name) {
     return productOptionRepository.findAllByNameContaining(name);
