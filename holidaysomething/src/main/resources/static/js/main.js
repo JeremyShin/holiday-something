@@ -28,9 +28,12 @@ let modify = function (source) {
           source.parentElement.parentElement.children[i].innerText);
       nameInput.setAttribute('id', 'modifiedName');
 
-      let a = source.parentElement.parentElement.children[i];
-      let b = a.childNodes[0];
-      a.removeChild(b);
+      /* 이미 존재하던 textNode 삭제 */
+      if(source.parentElement.parentElement.children[i].childNodes[0]) {
+        let a = source.parentElement.parentElement.children[i];
+        let b = a.childNodes[0];
+        a.removeChild(b);
+      }
 
       source.parentElement.parentElement.children[i].appendChild(nameInput);
     }
@@ -41,7 +44,11 @@ let modify = function (source) {
           source.parentElement.parentElement.children[i].innerText);
       priceInput.setAttribute('id', 'modifiedPrice');
 
-
+      if(source.parentElement.parentElement.children[i].childNodes[0]) {
+        let a = source.parentElement.parentElement.children[i];
+        let b = a.childNodes[0];
+        a.removeChild(b);
+      }
 
       source.parentElement.parentElement.children[i].appendChild(priceInput);
     }
@@ -51,6 +58,12 @@ let modify = function (source) {
       descInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
       descInput.setAttribute('id', 'modifiedDesc');
+
+      if(source.parentElement.parentElement.children[i].childNodes[0]) {
+        let a = source.parentElement.parentElement.children[i];
+        let b = a.childNodes[0];
+        a.removeChild(b);
+      }
 
       source.parentElement.parentElement.children[i].appendChild(descInput);
     }
@@ -97,34 +110,17 @@ let validateProductOptionForm = function (form) {
 };
 
 let finMod = function (source) {
-  console.log("수정완료버튼이 눌렸습니당.");
-  //console.log(source.getElementById('modifiedName')); -> 문법오류
-  //console.log(source.querySelector('modifiedName')); -> null
-  //console.log(source.querySelector('modifiedName').innerHTML); -> 문법오류
-  //console.log(source.name.toString()); //아무것도 없죠?
-  //console.log(source.name);
-
-  //let a  = document.getElementById('modifiedName');
-  //let b = document.getElementById('modifiedId');
+  console.log("수정완료버튼이 눌렸습니다.");
 
   let nameElem = document.getElementById('modifiedName');
   let idElem = document.getElementById('modifiedId');
   let priceElem = document.getElementById('modifiedPrice');
   let descElem = document.getElementById('modifiedDesc');
 
-
-  // console.log(a.value);
-  // console.log(b.innerText);
-  // console.log(source.value);
-
   console.log(nameElem.value);
   console.log(idElem.innerText);
   console.log(priceElem.value);
   console.log(descElem.value);
-
-
-
-
 
   let req = new XMLHttpRequest();
   req.open('POST', '/admin/product/product_detail/option/modify', true);
