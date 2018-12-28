@@ -15,68 +15,76 @@ let descInput = document.createElement("input");
 let codeInput = document.createElement("input");
 
 let modify = function (source) {
+  /* inputbox 생성 */
   for (let i = 0; i < source.parentElement.parentElement.children.length; i++) {
-    if (source.parentElement.parentElement.children[i].id == "optionName") {
-      console.log("zzz");
-      console.log(nameInput);
+    if (source.parentElement.parentElement.children[i].id === "optionName") {
       nameInput.setAttribute('type', 'text');
       nameInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
       source.parentElement.parentElement.children[i].appendChild(nameInput);
     }
 
-    if (source.parentElement.parentElement.children[i].id == "optionPrice") {
+    if (source.parentElement.parentElement.children[i].id === "optionPrice") {
       priceInput.setAttribute('type', 'text');
       priceInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
       source.parentElement.parentElement.children[i].appendChild(priceInput);
     }
 
-    if (source.parentElement.parentElement.children[i].id == "optionDesc") {
+    if (source.parentElement.parentElement.children[i].id === "optionDesc") {
       descInput.setAttribute('type', 'text');
       descInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
       source.parentElement.parentElement.children[i].appendChild(descInput);
     }
 
-    if (source.parentElement.parentElement.children[i].id == "optioCode") {
+    if (source.parentElement.parentElement.children[i].id === "optioCode") {
       codeInput.setAttribute('type', 'text');
       codeInput.setAttribute('value',
           source.parentElement.parentElement.children[i].innerText);
       source.parentElement.parentElement.children[i].appendChild(codeInput);
     }
 
-    if (source.parentElement.parentElement.children[i].childNodes[0].id == "modifyBtn") {
+    if (source.parentElement.parentElement.children[i].childNodes[0].id
+        === "modifyBtn") {
       console.log("수정버튼입니다.");
-      let btn = source.parentElement.parentElement.children[i].childNodes[0]
+      let btn = source.parentElement.parentElement.children[i].childNodes[0];
       btn.setAttribute("value", "수정완료");
     }
   }
+
+  let name = document.getElementById("optionName").innerText;
+
+  let req = new XMLHttpRequest();
+  console.log("포스트 매핑으로 보낼 옵션의 이름은 ");
+  console.log(name);
+
+  req.open('POST', '/admin/product/product_detail/option/modify', true);
+  req.setRequestHeader('Content-type', 'application/json');
+  req.send(JSON.stringify({name: name}));
+
 };
 
-let productOptionForm = document.querySelector('#productOptionForm');
-if (productOptionForm !== null) {
-  let productOptionFormSubmitBtn = productOptionForm.querySelector(
-      '#productOptionFormSubmit');
-  if (productOptionFormSubmitBtn !== null) {
-    productOptionFormSubmitBtn.addEventListener('click', (event) => {
-      let productOptionCheckboxInput = document.getElementsByName(
-          'productOptionId');
+let productOptionFormSubmit = document.querySelector('#productOptionForm');
+if (productOptionFormSubmit !== null) {
+  let productOptionFormSubmitBtn = productOptionFormSubmit.querySelector('#productOptionFormSubmit');
+  productOptionFormSubmitBtn.addEventListener('click', (event) => {
+    let productOptionCheckboxInput = document.getElementsByName(
+        'productOptionId');
 
-      // productOptionCheckboxInput이 하나도 체크되어 있지 않을 경우 submit 버튼 비활성화
-      let allBtnUnchecked = true;
-      for (let i = 0; i < productOptionCheckboxInput.length; i++) {
-        if (productOptionCheckboxInput[i].checked === true) {
-          allBtnUnchecked = false;
-          break;
-        }
+    // productOptionCheckboxInput이 하나도 체크되어 있지 않을 경우 submit 버튼 비활성화
+    let allBtnUnchecked = true;
+    for (let i = 0; i < productOptionCheckboxInput.length; i++) {
+      if (productOptionCheckboxInput[i].checked === true) {
+        allBtnUnchecked = false;
+        break;
       }
-      if (allBtnUnchecked === true) {
-        event.preventDefault();
-        alert('적용할 옵션이 없습니다.');
-      }
-    });
-  }
+    }
+    if (allBtnUnchecked === true) {
+      event.preventDefault();
+      alert('적용할 옵션이 없습니다.');
+    }
+  });
 }
 
 let validateProductOptionForm = function (form) {

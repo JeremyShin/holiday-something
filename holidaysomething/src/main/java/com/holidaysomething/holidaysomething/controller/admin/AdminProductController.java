@@ -6,6 +6,7 @@ import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.domain.ProductOptionCommand;
 import com.holidaysomething.holidaysomething.dto.Search;
+import com.holidaysomething.holidaysomething.dto.productOptionDto;
 import com.holidaysomething.holidaysomething.service.ProductOptionService;
 import com.holidaysomething.holidaysomething.service.ProductService;
 import com.holidaysomething.holidaysomething.service.admin.AdminProductOptionService;
@@ -17,8 +18,8 @@ import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -34,32 +35,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/admin/product")
+@Slf4j
+@RequiredArgsConstructor
 public class AdminProductController {
 
-  private ProductService productService;
-  private ProductOptionService productOptionService;
-  private AdminProductRegisterService adminProductRegisterService;
-  private AdminProductOptionService adminProductOptionService;
-  private FileUtil fileUtil;
-
-  private static final Log log = LogFactory.getLog(AdminProductController.class);
-
-  public AdminProductController(ProductOptionService productOptionService,
-      ProductService productService, AdminProductRegisterService adminProductRegisterService,
-      FileUtil fileUtil, AdminProductOptionService adminProductOptionService) {
-    this.productOptionService = productOptionService;
-    this.productService = productService;
-    this.adminProductRegisterService = adminProductRegisterService;
-    this.fileUtil = fileUtil;
-    this.adminProductOptionService = adminProductOptionService;
-  }
+  private final ProductService productService;
+  private final ProductOptionService productOptionService;
+  private final AdminProductRegisterService adminProductRegisterService;
+  private final AdminProductOptionService adminProductOptionService;
+  private final FileUtil fileUtil;
 
   @GetMapping
   public String product() {
@@ -71,14 +62,14 @@ public class AdminProductController {
     return "admin/product/product_category";
   }
 
-  @GetMapping({"/product_detail", "/product_detail/{pageStart}"})
-  public String productDetail(ModelMap modelMap, @PathVariable Optional<Integer> pageStart) {
-    List<ProductOption> productOptionList = productOptionService.getAllProductOptions();
-    int productOptionListSize = productOptionList.size();
-    modelMap.addAttribute("productOptionList", productOptionList);
+  @GetMapping("/product_detail")
+  public String productDetail(ModelMap modelMap,
+      @RequestParam(value = "page", defaultValue = "1") int page) {
+
+    int productOptionListSize = productOptionService.getAllProductOptions().size();
     modelMap.addAttribute("productOptionListSize", productOptionListSize);
 
-    Pageable pageable = PageRequest.of(pageStart.isPresent() ? pageStart.get() - 1 : 0, 10);
+    Pageable pageable = PageRequest.of(page - 1, 10);
     Page<ProductOption> productOptions = productOptionService.getAllProductOptionsPage(pageable);
 
     int pageCount = productOptions.getTotalPages();
@@ -89,9 +80,9 @@ public class AdminProductController {
     return "admin/product/product_detail";
   }
 
-  @PostMapping("/product_detail")
+  @GetMapping("/product_detail/bundle")
   public String productDetailBundle(ModelMap modelMap,
-      @RequestParam("productOptionBundleSize") int size) {
+      @RequestParam("size") int size) {
     List<ProductOption> productOptionList = productOptionService.getAllProductOptions();
     int productOptionListSize = productOptionList.size();
     modelMap.addAttribute("productOptionList", productOptionList);
@@ -117,7 +108,6 @@ public class AdminProductController {
     model.addAttribute("product", product);
     return "admin/product/product_register";
   }
-
 
 
   // 상품등록 , date1 : 제조일  ,  date2 : 출시일.
@@ -175,9 +165,10 @@ public class AdminProductController {
 
   @PostMapping("/product_image")
   public String productImageUpload(@RequestParam("file") MultipartFile file,
-      ModelMap modelMpa,
+      ModelMap modelMap,
       HttpSession session,
       HttpServletRequest request) {
+
     ProductImage productImage = fileUtil.handleFileStream(request, session, file);
     productService.saveProductImage(productImage);
     return "redirect:/admin/product/product_list";
@@ -227,15 +218,16 @@ public class AdminProductController {
     return "/admin/product/product_detail";
   }
 
-  @GetMapping({"/product_search", "/product_search/{pageStart}"})
-  public String productSearch(ModelMap modelMap, @PathVariable Optional<Integer> pageStart) {
+  @GetMapping("/product_search")
+  public String productSearch(ModelMap modelMap,
+      @RequestParam(value = "page", defaultValue = "1") int page) {
 
     // 대분류를 불러온다
     List<ProductCategory> largeCategories = adminProductRegisterService.productCategoryList(0L);
     modelMap.addAttribute("largeCategories", largeCategories);
 
     // 모든 상품 리스트를 불러온다(페이지)
-    Pageable pageable = PageRequest.of(pageStart.isPresent() ? pageStart.get() - 1 : 0, 10);
+    Pageable pageable = PageRequest.of(page - 1, 10);
     Page<Product> allProductList = adminProductRegisterService.getAllProducts(pageable);
 
     int productPageCount = allProductList.getTotalPages();
@@ -341,8 +333,14 @@ public class AdminProductController {
 //  }
 
 
+  /* 옵션 수정 */
+  @PostMapping("/product_detail/option/modify")
+  public String modifyOptionPost(@RequestBody productOptionDto productOptionDto) {
+    log.info("POST 수정할 옵션의 이름은");
+    log.info(productOptionDto.getName());
+    return "redirect:/admin/product/product_detail";
 
-
+  }
 
   /* 옵션 등록 */
   @GetMapping("/product_detail_add_option")

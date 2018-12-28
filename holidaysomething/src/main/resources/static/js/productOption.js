@@ -30,7 +30,7 @@ createRowBtn.addEventListener('click', () => {
   input2.setAttribute('type', 'text');
   input2.setAttribute('name', 'productOptions[' + num + '].name');
   input2.setAttribute('placeholder', '예시) 옵션명을 입력하시오');
- // input2.setAttribute('style', 'width:110px;');
+  // input2.setAttribute('style', 'width:110px;');
   input2.setAttribute('maxlength', '50');
   input2.setAttribute('size', '70');
   div1.appendChild(input2);

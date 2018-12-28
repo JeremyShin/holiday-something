@@ -2,7 +2,11 @@ package com.holidaysomething.holidaysomething.repository.custom;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.QMember;
+import com.holidaysomething.holidaysomething.domain.QOrder;
+import com.holidaysomething.holidaysomething.dto.SearchOrderMember;
 import com.querydsl.jpa.JPQLQuery;
+import java.util.List;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
 public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
@@ -25,4 +29,23 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     JPQLQuery<Member> jpqlQuery = from(qMember); // select m from Member m
     return jpqlQuery.where(qMember.id.eq(id)).fetchOne();
   }
+
+  @Override
+  public List<Member> getMembersByDsl(SearchOrderMember searchOrderMember, Pageable pageable) {
+    QMember member = QMember.member;
+    QOrder order = QOrder.order;
+
+    JPQLQuery query = from(member);
+
+    if (searchOrderMember.getLoginId() != null || !searchOrderMember.getLoginId().equals("")) {
+      query.where(member.loginId.eq(searchOrderMember.getLoginId()));
+    }
+
+    if (searchOrderMember.getName() != null || !searchOrderMember.getName().equals("")) {
+      query.where(member.name.eq(searchOrderMember.getName()));
+    }
+
+    return getQuerydsl().applyPagination(pageable, query).fetch();
+  }
+
 }

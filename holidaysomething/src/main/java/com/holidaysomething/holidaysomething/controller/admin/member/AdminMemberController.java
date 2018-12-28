@@ -3,36 +3,64 @@ package com.holidaysomething.holidaysomething.controller.admin.member;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.dto.Search;
+import com.holidaysomething.holidaysomething.dto.SearchOrderMember;
 import com.holidaysomething.holidaysomething.service.MemberService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/admin/member")
+@Slf4j
+@RequiredArgsConstructor
 public class AdminMemberController {
 
-  private static final Log log = LogFactory
-      .getLog(
-          com.holidaysomething.holidaysomething.controller.admin.member.AdminMemberController.class);
-
-  private MemberService memberService;
-
-  public AdminMemberController(MemberService memberService) {
-    this.memberService = memberService;
-  }
+  private final MemberService memberService;
 
   @GetMapping("/order/search")
   public String memberOrderSearch() {
 
     return "admin/member/member_order";
+  }
+
+  @PostMapping("/order/search")
+  public String memberOrderSearchPost(
+      @ModelAttribute(value = "SearchOrderMember") SearchOrderMember searchOrderMember,
+      @RequestParam(value = "date1") @DateTimeFormat(pattern = "MMddyyyy") StringBuffer date1,
+      @RequestParam(value = "date1") @DateTimeFormat(iso = ISO.DATE) StringBuffer date2) {
+
+    log.info(searchOrderMember.getName());
+    log.info(searchOrderMember.getLoginId());
+    log.info(searchOrderMember.getProductName());
+    log.info(searchOrderMember.getProductCode());
+    log.info("TAG", date1);
+    log.info("TAG", date2);
+    date1.append("T00:00:00");
+    date2.append("T23:59:59");
+    log.info("TAG", date1);
+    log.info("TAG", date2);
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    searchOrderMember.setOrderStartDate(LocalDateTime.parse(date1));
+    searchOrderMember.setOrderEndDate(LocalDateTime.parse(date2));
+
+    log.info("TAG", searchOrderMember.getOrderStartDate());
+    log.info("TAG", searchOrderMember.getOrderEndDate());
+
+    return "redirect:/admin/member/order/search";
   }
 
 
@@ -44,7 +72,6 @@ public class AdminMemberController {
 
     return "/admin/member/mileage_search";
   }
-
 
 
 }

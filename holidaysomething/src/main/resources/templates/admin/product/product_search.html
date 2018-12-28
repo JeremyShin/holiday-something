@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xml:th="http:/www.thymeleaf.org"
       layout:decorate="~{layout/default.html}">
 
@@ -136,7 +137,7 @@
     <!-- 모든 상품 리스트 페이지 번호 -->
     <div id="page-numbers">
       <th:block th:each="item : ${#numbers.sequence(1, productPageCount)}">
-        <a th:href="@{'/admin/product/product_search/' + ${item}}">
+        <a th:href="@{'/admin/product/product_search?page=' + ${item}}">
           <span th:text="${item}"></span>
         </a>
       </th:block>
