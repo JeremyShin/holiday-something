@@ -9,23 +9,20 @@ let toggle = function (source) {
   }
 };
 
+/* 수정버튼 클릭 */
 let modify = function (source) {
-
-  console.log("넘어온 아이디를 찍어보자~");
-  console.log(source.parentElement.parentElement.children[1].innerHTML);
-  source.parentElement.parentElement.children[1].setAttribute('id', 'modifiedId');
-
   let nameInput = document.createElement("input");
   let priceInput = document.createElement("input");
   let descInput = document.createElement("input");
-  let name;
+
+  /* 현재 클릭한 row의 옵션 id를 사용하기 위해, id갑 부여 */
+  source.parentElement.parentElement.children[1].setAttribute('id', 'modifiedId');
 
   /* inputbox 생성 */
   for (let i = 0; i < source.parentElement.parentElement.children.length; i++) {
     if (source.parentElement.parentElement.children[i].id === "optionName") {
       nameInput.setAttribute('type', 'text');
-      nameInput.setAttribute('value',
-          source.parentElement.parentElement.children[i].innerText);
+      nameInput.setAttribute('value', source.parentElement.parentElement.children[i].innerText);
       nameInput.setAttribute('id', 'modifiedName');
 
       /* 이미 존재하던 textNode 삭제 */
@@ -34,14 +31,12 @@ let modify = function (source) {
         let b = a.childNodes[0];
         a.removeChild(b);
       }
-
       source.parentElement.parentElement.children[i].appendChild(nameInput);
     }
 
     if (source.parentElement.parentElement.children[i].id === "optionPrice") {
       priceInput.setAttribute('type', 'text');
-      priceInput.setAttribute('value',
-          source.parentElement.parentElement.children[i].innerText);
+      priceInput.setAttribute('value', source.parentElement.parentElement.children[i].innerText);
       priceInput.setAttribute('id', 'modifiedPrice');
 
       if(source.parentElement.parentElement.children[i].childNodes[0]) {
@@ -49,14 +44,12 @@ let modify = function (source) {
         let b = a.childNodes[0];
         a.removeChild(b);
       }
-
       source.parentElement.parentElement.children[i].appendChild(priceInput);
     }
 
     if (source.parentElement.parentElement.children[i].id === "optionDesc") {
       descInput.setAttribute('type', 'text');
-      descInput.setAttribute('value',
-          source.parentElement.parentElement.children[i].innerText);
+      descInput.setAttribute('value', source.parentElement.parentElement.children[i].innerText);
       descInput.setAttribute('id', 'modifiedDesc');
 
       if(source.parentElement.parentElement.children[i].childNodes[0]) {
@@ -64,18 +57,14 @@ let modify = function (source) {
         let b = a.childNodes[0];
         a.removeChild(b);
       }
-
       source.parentElement.parentElement.children[i].appendChild(descInput);
     }
-
 
     if (source.parentElement.parentElement.children[i].childNodes[0].id === "modifyBtn") {
       console.log("수정버튼입니다.");
       let btn = source.parentElement.parentElement.children[i].childNodes[0];
       btn.setAttribute("id", "modifiedBtn");
       btn.setAttribute("value", "수정완료");
-      console.log("ㅁㅇㅁㄴㅇㅁㅇㅁㄴㅇㅁㄴㅇ");
-      console.log(name);
       btn.setAttribute('onclick', 'finMod(this);');
     }
   }
@@ -109,23 +98,19 @@ let validateProductOptionForm = function (form) {
   }
 };
 
+/* 수정완료 버튼 클릭 */
 let finMod = function (source) {
   console.log("수정완료버튼이 눌렸습니다.");
 
-  let nameElem = document.getElementById('modifiedName');
-  let idElem = document.getElementById('modifiedId');
-  let priceElem = document.getElementById('modifiedPrice');
-  let descElem = document.getElementById('modifiedDesc');
-
-  console.log(nameElem.value);
-  console.log(idElem.innerText);
-  console.log(priceElem.value);
-  console.log(descElem.value);
+  let name = document.getElementById('modifiedName');
+  let id = document.getElementById('modifiedId');
+  let price = document.getElementById('modifiedPrice');
+  let desc = document.getElementById('modifiedDesc');
 
   let req = new XMLHttpRequest();
   req.open('POST', '/admin/product/product_detail/option/modify', true);
   req.setRequestHeader('Content-type', 'application/json');
-  req.send(JSON.stringify({id: idElem.innerText, name: nameElem.value, price: priceElem.value, description: descElem.value}));
+  req.send(JSON.stringify({id: id.innerText, name: name.value, price: price.value, description: desc.value}));
   req.onreadystatechange = function () {
     let ok = 200;
     window.location.href = '/admin/product/product_detail';
