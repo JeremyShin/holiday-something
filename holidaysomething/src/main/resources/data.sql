@@ -227,16 +227,16 @@ INSERT INTO orders (id, order_number, date, total_price, status, mileage, member
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110360057614', NOW(), 9000, '구매확정', 90, 18, 4, 4);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110350057415', NOW(), 6500, '구매확정', 60, 18, 5, 5);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110350057516', '2018-11-01', 6500, '구매확정', 60, 3, 6, 6);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111050067517', NOW(), 4500, '구매확정', 40, 4, 7, 7);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111050067517', '2018-11-02', 4500, '구매확정', 40, 3, 7, 7);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111060037518', NOW(), 10000, '구매확정', 100, 4, 8, 8);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111050137519', NOW(), 14000, '구매확정', 140, 4, 9, 9);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111050138510', NOW(), 4000, '구매확정', 40, 4, 10, 10);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111750147511', '2018-11-30', 3000, '구매확정', 30, 5, 11, 11);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111750137512', '2018-10-22', 3000, '구매확정', 30, 5, 12, 12);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111950137513', '2017-11-11', 5500, '구매확정', 50, 18, 13, 13);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111950137513', '2018-11-11', 5500, '구매확정', 50, 18, 13, 13);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111950137514', NOW(), 2500, '구매확정', 20, 6, 14, 14);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112250137515', NOW(), 2500, '구매확정', 20, 6, 15, 15);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137516', NOW(), 1100, '구매확정', 10, 6, 16, 16);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137516', '2018-11-13', 1100, '구매확정', 10, 18, 16, 16);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137517', NOW(), 2200, '구매확정', 20, 18, 17, 17);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137518', '2018-11-21', 5000, '구매확정', 50, 7, 18, 18);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137519', NOW(), 5000, '구매확정', 50, 9, 19, 19);
@@ -246,9 +246,9 @@ INSERT INTO orders (id, order_number, date, total_price, status, mileage, member
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137523', '2016-10-10', 3000, '구매확정', 30, 11, 23, 23);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112860137524', NOW(), 16000, '배송완료', 160, 15, 24, 24);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112960137525', NOW(), 8000, '배송완료', 80, 17, 25, 25);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112960137526', NOW(), 3000, '배송완료', 30, 20, 26, 26);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112960137526', '2018-11-15', 3000, '배송완료', 30, 18, 26, 26);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112960137527', NOW(), 3000, '배송완료', 30, 20, 27, 27);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137528', NOW(), 3000, '배송준비중', 30, 24, 28, 28);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137528', '2018-11-11', 3000, '배송준비중', 30, 24, 28, 28);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137529', NOW(), 4500, '배송준비중', 40, 24, 29, 29);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137530', NOW(), 4500, '배송준비중', 40, 24, 30, 30);
 
