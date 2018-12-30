@@ -19,7 +19,7 @@
     <!-- cafe24는 적립금을 엑셀파일로 관리... -->
     <h4>회원 검색</h4>
     <div>
-      <form method="GET" action="/admin/member/mileage/search" id="member-mileage-search-form">
+      <form method="GET" action="/admin/member/mileage/modify" id="member-mileage-search-form">
         <table width="500px" border="1" align="center">
           <tr>
             <th scope="row" style="width: 180px;">아이디</th>
@@ -42,12 +42,20 @@
         <tr bgcolor="#ffd700">
           <th scope="col">아이디</th>
           <th scope="col">현재적립금</th>
+          <th scope="col" style="width: 5%;"></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="member : ${members}">
           <td th:text="${member.loginId}"></td>
           <td th:text="${member.mileage}"></td>
+          <!--<td><input type="button" id="modifyMileageBtn" value="수정" th:onclick="'modify(this, ' + ${member.id} + ')'"/></td>-->
+          <td>
+            <form method="GET" action="/admin/member/mileage/modify">
+              <input type="hidden" th:value="${member.loginId}" name="loginId">
+              <input type="submit" value="수정">
+            </form>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -94,6 +102,7 @@
   <script>
       <!-- 사용자 스크립트 추가 -->
   </script>
+
 </div>
 </html>
 

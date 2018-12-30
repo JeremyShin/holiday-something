@@ -64,8 +64,9 @@ public interface MemberRepository extends JpaRepository<Member, Long>, MemberRep
   // member search all
   Page<Member> findAll(Pageable pageable);
 
-  // member search by loginId
+  // Page<member> search by loginId
   Page<Member> findMembersByLoginId(String loginId, Pageable pageable);
-  // mileage update
 
+  // member search by loginId
+  Member findMemberByLoginId(String loginId);
 }

@@ -16,11 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin/member")
@@ -73,7 +69,21 @@ public class AdminMemberController {
     return "/admin/member/mileage_search";
   }
 
+  @GetMapping("/mileage/modify")
+  public String mileageModify(@RequestParam("loginId")String loginId, ModelMap modelMap){
 
+    log.info("안되나");
+    Member member = memberService.findMemberByLoginId(loginId);
+    log.info(member.getLoginId());
+    modelMap.addAttribute("member", member);
+
+    return "/admin/member/mileage_modify_form";
+  }
+
+  @PostMapping("/mileage/modify")
+  public String mileageModifyPost(){
+    return "redirect:/admin/member/mileage/modify";
+  }
 }
 
 

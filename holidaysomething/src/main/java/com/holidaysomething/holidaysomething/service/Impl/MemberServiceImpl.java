@@ -27,4 +27,10 @@ public class MemberServiceImpl implements MemberService {
     }
     return members;
   }
+
+  @Override
+  @Transactional
+  public Member findMemberByLoginId(String loginId){
+    return memberRepository.findMemberByLoginId(loginId);
+  }
 }
