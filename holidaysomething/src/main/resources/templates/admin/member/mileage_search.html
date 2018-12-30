@@ -1,6 +1,12 @@
-<html xmlns:th="http://www.springframework.org/schema/data/jaxb"
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="layout/default">
+      layout:decorate="~{layout/default.html}">
+
+<head th:include="fragments/config :: configFragment">
+  <title id="pageTitle">Page title</title>
+  <!-- other elements you want to reference in your layout -->
+</head>
 
 <!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
@@ -31,7 +37,7 @@
 
     <h4>회원 적립금 내역</h4>
     <div class="tbl-container">
-      <table id="member-mileage-search-tbl" border="1" style="width: 150%">
+      <table id="member-mileage-search-tbl" border="1" style="width: 100%">
         <thead>
         <tr bgcolor="#ffd700">
           <th scope="col">아이디</th>
@@ -84,8 +90,10 @@
     </div>
 
   </div>
-  <!-- 사용자 스크립트 추가 -->
-  <script></script>
+
+  <script>
+      <!-- 사용자 스크립트 추가 -->
+  </script>
 </div>
 </html>
 
