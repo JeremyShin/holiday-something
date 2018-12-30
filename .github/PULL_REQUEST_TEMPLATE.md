@@ -1,5 +1,5 @@
 ### Description
-*코드에 대한 설명을 써주세요.*
+(지금 Pull Request할 코드에 대해 설명해주세요.)
 
 ### Checklist
 - [ ] 코드가 제대로 컴파일 된다. (Code compiles correctly)
