@@ -40,11 +40,18 @@ public class MemberServiceImpl implements MemberService {
   public void updateMember(MemberMileageForm memberMileageForm){
     Member member = memberRepository.findMemberByLoginId(memberMileageForm.getLoginId());
 
+    int mileage = member.getMileage();
+
     if(memberMileageForm.getPlusOrMinus().equals("+")) {
-      member.setMileage(memberMileageForm.getMileage());
+      mileage += memberMileageForm.getMileage();
     } else if(memberMileageForm.getPlusOrMinus().equals("-")) {
-      member.setMileage(memberMileageForm.getMileage() * -1);
+      mileage += memberMileageForm.getMileage() * -1;
     }
+    // 적립금에 상한선이 있을까??
+    // 적립금이 (-)가 되지 않게 막자
+    // 애당초 마일리지가 0원인 사람은 음수 값을 입력할 수 없게 막아야 되겠지
+
+    member.setMileage(mileage);
 
     memberRepository.save(member);
   }
