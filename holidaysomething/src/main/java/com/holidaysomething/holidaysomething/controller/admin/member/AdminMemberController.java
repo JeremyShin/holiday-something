@@ -80,8 +80,15 @@ public class AdminMemberController {
 
   @PostMapping("/mileage/modify")
   public String mileageModifyPost(@ModelAttribute("mileageModify")MemberMileageForm memberMileageForm){
-    memberService.save(memberMileageForm);
-    return "redirect:/admin/member/mileage/modify";
+    log.info("잘넘어오나");
+    if(memberMileageForm.getMileage() < 0){
+      return "/";
+    }
+    log.info(memberMileageForm.getLoginId());
+
+    memberService.updateMember(memberMileageForm);
+
+    return "redirect:/admin/member/mileage/search";
   }
 }
 

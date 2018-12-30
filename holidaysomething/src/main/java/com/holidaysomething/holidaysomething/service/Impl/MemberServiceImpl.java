@@ -1,6 +1,7 @@
 package com.holidaysomething.holidaysomething.service.Impl;
 
 import com.holidaysomething.holidaysomething.domain.Member;
+import com.holidaysomething.holidaysomething.dto.MemberMileageForm;
 import com.holidaysomething.holidaysomething.dto.Search;
 import com.holidaysomething.holidaysomething.repository.MemberRepository;
 import com.holidaysomething.holidaysomething.service.MemberService;
@@ -34,4 +35,17 @@ public class MemberServiceImpl implements MemberService {
     return memberRepository.findMemberByLoginId(loginId);
   }
 
+  @Override
+  @Transactional
+  public void updateMember(MemberMileageForm memberMileageForm){
+    Member member = memberRepository.findMemberByLoginId(memberMileageForm.getLoginId());
+
+    if(memberMileageForm.getPlusOrMinus().equals("+")) {
+      member.setMileage(memberMileageForm.getMileage());
+    } else if(memberMileageForm.getPlusOrMinus().equals("-")) {
+      member.setMileage(memberMileageForm.getMileage() * -1);
+    }
+
+    memberRepository.save(member);
+  }
 }
