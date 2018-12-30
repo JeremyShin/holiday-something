@@ -29,8 +29,9 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  @Transactional
+  @Transactional(readOnly = true)
   public Member findMemberByLoginId(String loginId){
     return memberRepository.findMemberByLoginId(loginId);
   }
+
 }

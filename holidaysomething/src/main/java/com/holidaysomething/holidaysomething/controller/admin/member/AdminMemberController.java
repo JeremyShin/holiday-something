@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.controller.admin.member;
 
 
 import com.holidaysomething.holidaysomething.domain.Member;
+import com.holidaysomething.holidaysomething.dto.MemberMileageForm;
 import com.holidaysomething.holidaysomething.dto.Search;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMember;
 import com.holidaysomething.holidaysomething.service.MemberService;
@@ -72,16 +73,14 @@ public class AdminMemberController {
   @GetMapping("/mileage/modify")
   public String mileageModify(@RequestParam("loginId")String loginId, ModelMap modelMap){
 
-    log.info("안되나");
-    Member member = memberService.findMemberByLoginId(loginId);
-    log.info(member.getLoginId());
-    modelMap.addAttribute("member", member);
+    modelMap.addAttribute("member", memberService.findMemberByLoginId(loginId));
 
     return "/admin/member/mileage_modify_form";
   }
 
   @PostMapping("/mileage/modify")
-  public String mileageModifyPost(){
+  public String mileageModifyPost(@ModelAttribute("mileageModify")MemberMileageForm memberMileageForm){
+    memberService.save(memberMileageForm);
     return "redirect:/admin/member/mileage/modify";
   }
 }
