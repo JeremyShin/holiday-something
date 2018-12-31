@@ -106,7 +106,7 @@ select m.*, k.order_date,k.order_number from member as m inner join
 	(select o.member_id,o.date as order_date,o.order_number from orders as o inner join
 		(select max(o.date) as date,o.member_id from orders as o inner join
 			(select distinct op.order_id from ordered_product as op inner join
-				product as p on op.product_id in (select p.id from product as p where p.name like '%스밋코구라시%')) as op
+			product as p on op.product_id in (select p.id from product as p where p.name like '%스밋코구라시%')) as op
 		on op.order_id = o.id group by o.member_id) as k
 	on k.date=o.date and k.member_id=o.member_id) as k
 on k.member_id = m.id;
