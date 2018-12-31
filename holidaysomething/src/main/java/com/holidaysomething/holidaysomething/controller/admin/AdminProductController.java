@@ -247,15 +247,15 @@ public class AdminProductController {
 
   @PostMapping("/product_search")
   public String productSearchPost(ModelMap modelMap,
-      @RequestParam("productSearchClassification") String productSearchClassificationValue,
-      @RequestParam("productSearchClassificationInput") String productSearchClassificationInput,
-      @RequestParam("productLargeCategoryId") Long largeId,
-      @RequestParam("productMiddleCategoryId") Long middleId,
-      @RequestParam("productSmallCategoryId") Long smallId,
-      @RequestParam("productSearchDate") String productSearchDateValue,
+      @RequestParam(value = "productSearchClassification", required = false) String productSearchClassificationValue,
+      @RequestParam(value = "productSearchClassificationInput", required = false) String productSearchClassificationInput,
+      @RequestParam(value = "productLargeCategoryId", required = false) Long largeId,
+      @RequestParam(value = "productMiddleCategoryId", required = false) Long middleId,
+      @RequestParam(value = "productSmallCategoryId", required = false) Long smallId,
+      @RequestParam(value = "productSearchDate", required = false) String productSearchDateValue,
       //TODO: null 값으로 들어왔을 경우 페이지 에러가 나지 않는 방안 모색
-      @RequestParam(value = "regdateStart", defaultValue = "0000-00-00 00:00") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String productStartDateSelect,
-      @RequestParam(value = "regdateEnd", defaultValue = "0000-00-00 00:00") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String productEndDateSelect) {
+      @RequestParam(value = "regdateStart", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String productStartDateSelect,
+      @RequestParam(value = "regdateEnd", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String productEndDateSelect) {
 //    @RequestParam("productSearchDateInput") @DateTimeFormat(pattern="yyyy/MM/dd") Date productSearchDateInput) {
 //    @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date1,
 //    @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date2,
@@ -278,13 +278,16 @@ public class AdminProductController {
     modelMap.addAttribute("productPageCount", productPageCount);
     modelMap.addAttribute("allProductList", allProductList);
 
-    LocalDateTime castDateStart = LocalDateTime.parse(productStartDateSelect);
-    LocalDateTime castDateEnd = LocalDateTime.parse(productEndDateSelect);
+    if(!productStartDateSelect.equals("") && !productEndDateSelect.equals("")){
+      LocalDateTime castDateStart = LocalDateTime.parse(productStartDateSelect);
+      LocalDateTime castDateEnd = LocalDateTime.parse(productEndDateSelect);
 
-    //제품 등록일or게시일로 검색하기
-    Page<Product> productDatepages = productService
-        .findByProductRegdate(castDateStart, castDateEnd, pageable);
-    modelMap.addAttribute("regdate", productDatepages);
+      //제품 등록일or게시일로 검색하기
+      Page<Product> productDatepages = productService
+              .findByProductRegdate(castDateStart, castDateEnd, pageable);
+      modelMap.addAttribute("regdate", productDatepages);
+
+    }
 
     return "admin/product/product_search";
   }
