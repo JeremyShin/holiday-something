@@ -5,8 +5,8 @@ import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.domain.ProductOptionCommand;
-import com.holidaysomething.holidaysomething.dto.ProductOptionDto;
 import com.holidaysomething.holidaysomething.dto.Search;
+import com.holidaysomething.holidaysomething.dto.ProductOptionDto;
 import com.holidaysomething.holidaysomething.service.ProductOptionService;
 import com.holidaysomething.holidaysomething.service.ProductService;
 import com.holidaysomething.holidaysomething.service.admin.AdminProductOptionService;
@@ -14,12 +14,14 @@ import com.holidaysomething.holidaysomething.service.admin.AdminProductRegisterS
 import com.holidaysomething.holidaysomething.util.FileUtil;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -43,24 +45,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/admin/product")
+@Slf4j
+@RequiredArgsConstructor
 public class AdminProductController {
 
-  private static final Log log = LogFactory.getLog(AdminProductController.class);
-  private ProductService productService;
-  private ProductOptionService productOptionService;
-  private AdminProductRegisterService adminProductRegisterService;
-  private AdminProductOptionService adminProductOptionService;
-  private FileUtil fileUtil;
-
-  public AdminProductController(ProductOptionService productOptionService,
-      ProductService productService, AdminProductRegisterService adminProductRegisterService,
-      FileUtil fileUtil, AdminProductOptionService adminProductOptionService) {
-    this.productOptionService = productOptionService;
-    this.productService = productService;
-    this.adminProductRegisterService = adminProductRegisterService;
-    this.fileUtil = fileUtil;
-    this.adminProductOptionService = adminProductOptionService;
-  }
+  private final ProductService productService;
+  private final ProductOptionService productOptionService;
+  private final AdminProductRegisterService adminProductRegisterService;
+  private final AdminProductOptionService adminProductOptionService;
+  private final FileUtil fileUtil;
 
   @GetMapping
   public String product() {
@@ -72,17 +65,16 @@ public class AdminProductController {
     return "admin/product/product_category";
   }
 
-  @GetMapping({"/product_detail", "/product_detail/{pageStart}"})
-  public String productDetail(ModelMap modelMap, @PathVariable Optional<Integer> pageStart) {
+  @GetMapping("/product_detail")
+  public String productDetail(ModelMap modelMap,
+      @RequestParam(value = "page", defaultValue = "1") int page) {
 
     log.info("수정된 화면을 보여주고싶어요");
 
-    List<ProductOption> productOptionList = productOptionService.getAllProductOptions();
-    int productOptionListSize = productOptionList.size();
-    modelMap.addAttribute("productOptionList", productOptionList);
+    int productOptionListSize = productOptionService.getAllProductOptions().size();
     modelMap.addAttribute("productOptionListSize", productOptionListSize);
 
-    Pageable pageable = PageRequest.of(pageStart.isPresent() ? pageStart.get() - 1 : 0, 10);
+    Pageable pageable = PageRequest.of(page - 1, 10);
     Page<ProductOption> productOptions = productOptionService.getAllProductOptionsPage(pageable);
 
     int pageCount = productOptions.getTotalPages();
@@ -94,9 +86,9 @@ public class AdminProductController {
     return "admin/product/product_detail";
   }
 
-  @PostMapping("/product_detail")
+  @GetMapping("/product_detail/bundle")
   public String productDetailBundle(ModelMap modelMap,
-      @RequestParam("productOptionBundleSize") int size) {
+      @RequestParam("size") int size) {
     List<ProductOption> productOptionList = productOptionService.getAllProductOptions();
     int productOptionListSize = productOptionList.size();
     modelMap.addAttribute("productOptionList", productOptionList);
@@ -179,9 +171,10 @@ public class AdminProductController {
 
   @PostMapping("/product_image")
   public String productImageUpload(@RequestParam("file") MultipartFile file,
-      ModelMap modelMpa,
+      ModelMap modelMap,
       HttpSession session,
       HttpServletRequest request) {
+
     ProductImage productImage = fileUtil.handleFileStream(request, session, file);
     productService.saveProductImage(productImage);
     return "redirect:/admin/product/product_list";
@@ -231,15 +224,16 @@ public class AdminProductController {
     return "/admin/product/product_detail";
   }
 
-  @GetMapping({"/product_search", "/product_search/{pageStart}"})
-  public String productSearch(ModelMap modelMap, @PathVariable Optional<Integer> pageStart) {
+  @GetMapping("/product_search")
+  public String productSearch(ModelMap modelMap,
+      @RequestParam(value = "page", defaultValue = "1") int page) {
 
     // 대분류를 불러온다
     List<ProductCategory> largeCategories = adminProductRegisterService.productCategoryList(0L);
     modelMap.addAttribute("largeCategories", largeCategories);
 
     // 모든 상품 리스트를 불러온다(페이지)
-    Pageable pageable = PageRequest.of(pageStart.isPresent() ? pageStart.get() - 1 : 0, 10);
+    Pageable pageable = PageRequest.of(page - 1, 10);
     Page<Product> allProductList = adminProductRegisterService.getAllProducts(pageable);
 
     int productPageCount = allProductList.getTotalPages();
@@ -251,44 +245,65 @@ public class AdminProductController {
 
   @PostMapping("/product_search")
   public String productSearchPost(ModelMap modelMap,
-      @RequestParam("productSearchClassification") String productSearchClassificationValue,
-      @RequestParam("productSearchClassificationInput") String productSearchClassificationInput,
-      @RequestParam("productLargeCategoryId") Long largeId,
-      @RequestParam("productMiddleCategoryId") Long middleId,
-      @RequestParam("productSmallCategoryId") Long smallId,
-      @RequestParam("productSearchDate") String productSearchDateValue,
-      //TODO: null 값으로 들어왔을 경우 페이지 에러가 나지 않는 방안 모색
-      @RequestParam(value = "regdateStart", defaultValue = "0000-00-00 00:00") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String productStartDateSelect,
-      @RequestParam(value = "regdateEnd", defaultValue = "0000-00-00 00:00") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String productEndDateSelect) {
+      @RequestParam(value = "productSearchClassification", required=false) String searchClassificationValue,
+      @RequestParam(value = "productSearchClassificationInput", required=false) String searchClassificationInput,
+      @RequestParam(value = "productLargeCategoryId", required=false) Long largeId,
+      @RequestParam(value = "productMiddleCategoryId", required=false) Long middleId,
+      @RequestParam(value = "productSmallCategoryId", required=false) Long smallId,
+      @RequestParam(value = "productSearchDate", required=false) String searchDateValue,
+      @RequestParam(value = "productRegDateStart", required=false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String startDateSelect,
+      @RequestParam(value = "productRegDateEnd", required=false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String endDateSelect) {
 //    @RequestParam("productSearchDateInput") @DateTimeFormat(pattern="yyyy/MM/dd") Date productSearchDateInput) {
 //    @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date1,
 //    @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date2,
 
-    log.info("productSearchClassificationValue: " + productSearchClassificationValue);
-    log.info("productSearchClassificationInput: " + productSearchClassificationInput);
+    log.info("searchClassificationValue: " + searchClassificationValue);
+    log.info("searchClassificationInput: " + searchClassificationInput);
     log.info("largeId: " + largeId);
     log.info("middleId: " + middleId);
     log.info("smallId: " + smallId);
-    log.info("productSearchDateValue: " + productSearchDateValue);
+    log.info("searchDateValue: " + searchDateValue);
 //    log.info("productSearchDateInput: " + productSearchDateInput);
+    log.info("startDateSelect: " + startDateSelect);
+    log.info("endDateSelect: " + endDateSelect);
 
     // 모든 상품 리스트를 불러온다(페이지)
     // TODO: 검색 결과도 페이징 처리 필요
-    // TODO: QueryDSL 추후 적용
     Pageable pageable = PageRequest.of(0, 10);
-    Page<Product> allProductList = adminProductRegisterService.getAllProducts(pageable);
 
-    int productPageCount = allProductList.getTotalPages();
+    // QueryDSL 적용
+    Page<Product> productPage = productService.findProducts(searchClassificationValue, searchClassificationInput,
+        largeId, middleId, smallId, searchDateValue, startDateSelect, endDateSelect, pageable);
+
+//    Page<Product> productPage = new PageImpl<>(new ArrayList<>());
+//    // '검색분류'로 검색
+//    // 상품명 상품코드 판매가 제조공장 가격대체문구 배송비
+//    if (productSearchClassificationInput != null) {
+//      log.info("'검색분류'로 검색");
+//      productPage = productService.findByProductClassification(productSearchClassificationValue,
+//          productSearchClassificationInput, pageable);
+//    }
+//
+//    // '상품분류'로 검색
+//    //TODO: 대/중/소 하위까지 전부 찾아야 함
+//    if (largeId != null) {
+//      log.info("'상품분류'로 검색");
+//      productPage = productService.findByProductCategory(largeId, pageable);
+//    }
+//
+//    // '상품등록일'로 검색
+//    if (!productStartDateSelect.equals("")) {
+//      log.info("'상품등록일'로 검색");
+//      LocalDateTime castDateStart = LocalDateTime.parse(productStartDateSelect);
+//      LocalDateTime castDateEnd = LocalDateTime.parse(productEndDateSelect);
+//      productPage = productService.findByProductRegdate(castDateStart, castDateEnd, pageable);
+//    }
+
+    modelMap.addAttribute("productPage", productPage);
+
+    int productPageCount = productPage.getTotalPages();
     modelMap.addAttribute("productPageCount", productPageCount);
-    modelMap.addAttribute("allProductList", allProductList);
-
-    LocalDateTime castDateStart = LocalDateTime.parse(productStartDateSelect);
-    LocalDateTime castDateEnd = LocalDateTime.parse(productEndDateSelect);
-
-    //제품 등록일 or 게시일로 검색하기
-    Page<Product> productDatepages = productService
-        .findByProductRegdate(castDateStart, castDateEnd, pageable);
-    modelMap.addAttribute("regdate", productDatepages);
+    modelMap.addAttribute("allProductList", productPage);
 
     return "admin/product/product_search";
   }

@@ -2,7 +2,6 @@ package com.holidaysomething.holidaysomething.repository;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Order;
-import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.repository.custom.MemberRepositoryCustom;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -48,23 +47,35 @@ public interface MemberRepository extends JpaRepository<Member, Long>, MemberRep
    mysql workbench 에서는 count(*) 하면 주문 건수를 알수 있고 출력값도 제어할 수 있는데 여긴 뭐
    힘드네?
    */
-  @Query(value = "select new com.holidaysomething.holidaysomething.dto.OrderMemberDto(me, count(me)) from Member as me left join ORDERS as o on (me.id=o.member) where o.member in (select me.id from Member as me where me.loginId like concat('%', :loginId, '%')) group by me.id")
-  List<OrderMemberDto> findMembersInOrders(@Param("loginId") String loginId);
+  // @Query(value = "select new com.holidaysomething.holidaysomething.dto.OrderMemberDto(me, count(me)) from Member as me left join ORDERS as o on (me.id=o.member) where o.member in (select me.id from Member as me where me.loginId like concat('%', :loginId, '%')) group by me.id")
+  @Query(value = "select me from Member as me left join ORDERS as o on (me.id=o.member) where o.member in (select me.id from Member as me where me.loginId like concat('%', :loginId, '%')) group by me.id")
+  List<Member> findMembersByLoginIdInOrders(@Param("loginId") String loginId);
 
-  @Query(value = "select new com.holidaysomething.holidaysomething.dto.OrderMemberDto(me, count(me)) from Member as me left join ORDERS as o on (me.id=o.member) where o.member in (select me.id from Member as me where me.name like concat('%', :name, '%')) group by me.id")
-  List<OrderMemberDto> findMembersByNameInOrders(@Param("name") String name);
+  // @Query(value = "select new com.holidaysomething.holidaysomething.dto.OrderMemberDto(me, count(me)) from Member as me left join ORDERS as o on (me.id=o.member) where o.member in (select me.id from Member as me where me.name like concat('%', :name, '%')) group by me.id")
+  @Query(value = "select me from Member as me left join ORDERS as o on (me.id=o.member) where o.member in (select me.id from Member as me where me.name like concat('%', :name, '%')) group by me.id")
+  List<Member> findMembersByNameInOrders(@Param("name") String name);
 
   // 주문일자로 회원 검색하기.
   // select * from member as m where m.id in (select distinct o.member_id from orders as o where o.date between '2018-11-01' and '2018-11-25') order by m.id asc;
   @Query(value = "select me from Member as me where me.id in (select distinct o.member from ORDERS as o where o.date between :startDate and :endDate) order by me.id asc")
-  List<Member> getMembersByOrderPeriod(@Param("startDate") LocalDateTime startDate,
+  List<Member> findMembersByOrderPeriod(@Param("startDate") LocalDateTime startDate,
       @Param("endDate") LocalDateTime endDate);
+
+  // 주문번호로  주문한 회원 검색하기.
+  @Query(value = "select me from Member as me where me.id in (select distinct o.member from ORDERS as o where o.orderNumber = (:orderNumber)) order by me.id asc")
+  Member findMembersByOrderNumberInOrders(@Param("orderNumber") String orderNumber);
+
+
+
+
+
 
   // member search all
   Page<Member> findAll(Pageable pageable);
 
-  // member search by loginId
+  // Page<member> search by loginId
   Page<Member> findMembersByLoginId(String loginId, Pageable pageable);
-  // mileage update
 
+  // member search by loginId
+  Member findMemberByLoginId(String loginId);
 }

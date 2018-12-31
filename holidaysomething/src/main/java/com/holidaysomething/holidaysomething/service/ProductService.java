@@ -7,9 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
-@Service
 public interface ProductService {
 
   //Product findByProductNameContaining(String productName);
@@ -29,4 +27,10 @@ public interface ProductService {
 
   // 모든 상품 or 검색된 상품 by Jun
   Page<Product> findProductAllOrSearch(Search search, Pageable pageable);
+
+  Page<Product> findByProductCategory(Long categoryId, Pageable pageable);
+
+  Page<Product> findByProductClassification(String SearchClassificationValue, String productSearchClassificationInput, Pageable pageable);
+
+  Page<Product> findProducts(String productSearchClassificationValue, String productSearchClassificationInput, Long largeId, Long middleId, Long smallId, String productSearchDateValue, String productStartDateSelect, String productEndDateSelect, Pageable pageable);
 }

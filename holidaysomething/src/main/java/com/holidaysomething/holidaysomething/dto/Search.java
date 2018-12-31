@@ -1,10 +1,8 @@
 package com.holidaysomething.holidaysomething.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class Search {
 
   private String searchType;

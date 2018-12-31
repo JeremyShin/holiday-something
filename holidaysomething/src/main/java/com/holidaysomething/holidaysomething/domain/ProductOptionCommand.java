@@ -13,6 +13,4 @@ public class ProductOptionCommand {
   public void setProductOptions(List<ProductOption> productOptions) {
     this.productOptions = productOptions;
   }
-
-
 }
