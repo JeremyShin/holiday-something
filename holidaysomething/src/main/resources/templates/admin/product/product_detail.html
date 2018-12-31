@@ -82,7 +82,6 @@
           <td id="optionDesc" th:text="${productOption.description}">###</td>
           <td id="optionCode" th:text="${productOption.product.code}">###</td>
           <td id="optionProductName" th:text="${productOption.product.name}">###</td>
-          <!--<td><input type="button" value="수정" onclick="location.href='/admin/product/product_detail_modify_option'"></td>-->
           <td><input id="modifyBtn" type="button" class="modBtn" value="수정"
                      th:onclick="'modify(this,' + ${productOption.id} + ')'"/></td>
         </tr>
