@@ -135,7 +135,7 @@
     <!-- 모든 상품 리스트 페이지 번호 -->
     <div id="page-numbers">
       <th:block th:each="item : ${#numbers.sequence(1, productPageCount)}">
-        <a th:href="@{'/admin/product/product_search/' + ${item}}">
+        <a th:href="@{'/admin/product/product_search?page=' + ${item}}">
           <span th:text="${item}"></span>
         </a>
       </th:block>

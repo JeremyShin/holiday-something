@@ -7,31 +7,27 @@ import com.holidaysomething.holidaysomething.repository.ProductCategoryRepositor
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
-  private ProductRepository productRepository;
-  private ProductCategoryRepository productCategoryRepository;
+  private final ProductRepository productRepository;
 
-  public ProductServiceImpl(ProductRepository productRepository,
-      ProductCategoryRepository productCategoryRepository) {
-    this.productRepository = productRepository;
-    this.productCategoryRepository = productCategoryRepository;
-  }
-
-  @Transactional(readOnly = true)
   @Override
+  @Transactional(readOnly = true)
   public Page<Product> findByProductNameContaining(String productName, Pageable pageable) {
     Page<Product> productByName = productRepository
         .findByProductNameContaining(productName, pageable);
     return productByName;
   }
-
 
   @Override
   @Transactional(readOnly = true)
@@ -51,14 +47,14 @@ public class ProductServiceImpl implements ProductService {
     return productRepository.findAll(pageable);
   }
 
-  @Transactional
   @Override
+  @Transactional
   public ProductImage saveProductImage(ProductImage productImage) {
     return productRepository.save(productImage);
   }
 
-  @Transactional(readOnly = true)
   @Override
+  @Transactional(readOnly = true)
   public Page<Product> findByProductRegdate(LocalDateTime regdateStart, LocalDateTime regdateEnd,
       Pageable pageable) {
 
@@ -68,8 +64,8 @@ public class ProductServiceImpl implements ProductService {
     return products;
   }
 
-  @Transactional(readOnly = true)
   @Override
+  @Transactional(readOnly = true)
   public Page<Product> findProductAllOrSearch(Search search, Pageable pageable) {
     Page<Product> products = null;
     if (search.isSearched()) { // 검색된 상품 리스트

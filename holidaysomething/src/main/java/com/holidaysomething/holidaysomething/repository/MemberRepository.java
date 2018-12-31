@@ -2,7 +2,6 @@ package com.holidaysomething.holidaysomething.repository;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Order;
-import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.repository.custom.MemberRepositoryCustom;
 import java.time.LocalDateTime;
 import java.util.List;
