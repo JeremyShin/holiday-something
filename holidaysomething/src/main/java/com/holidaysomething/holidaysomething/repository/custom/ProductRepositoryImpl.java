@@ -3,6 +3,7 @@ package com.holidaysomething.holidaysomething.repository.custom;
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.QProduct;
 import com.holidaysomething.holidaysomething.domain.QProductCategory;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.JPQLQuery;
 import java.util.List;
 import org.springframework.data.domain.Page;
@@ -65,11 +66,11 @@ public class ProductRepositoryImpl extends QuerydslRepositorySupport implements 
             // id가 largeId인 category를 parent로 갖는 자식 카테고리(중분류까지)
             .or(qProduct.productCategory.parentId.eq(largeId).and(qProduct.productCategory.id.eq(qProductCategory.id)))
             // id가 largeId인 category를 parent로 갖는 자식 카테고리를 parent로 갖는 자식 카테고리(소분류까지)
-            /*
-            select * from product
-            where product_category_id IN (select id from product_category where parent_id IN (select id from product_category where parent_id = 1));
-             */
-            /**.or())**/)
+            /* SELECT * FROM product
+            WHERE product_category_id IN (SELECT id FROM product_category WHERE parent_id IN (SELECT id FROM product_category WHERE parent_id = 1)); */
+            .or(qProductCategory.id
+                .in(JPAExpressions.select(qProductCategory.id).from(qProductCategory).where(qProductCategory.parentId
+                .in(JPAExpressions.select(qProductCategory.id).from(qProductCategory).where(qProductCategory.parentId.eq(largeId)))))))
             // 결과를 product의 id의 오름차순으로 정렬
             .orderBy(qProduct.id.asc());
       }

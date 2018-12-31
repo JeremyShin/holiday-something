@@ -28,7 +28,7 @@ public class ProductDslTest {
     Pageable pageable = PageRequest.of(0, 30);
 
     Page<Product> productPage = productRepository.findProducts("","",
-        1L, 5L, 0L, "", "", "", pageable);
+        1L, 0L, 0L, "", "", "", pageable);
 
     for (Product product : productPage) {
       log.info(product.getId().toString());
