@@ -2,7 +2,7 @@ package com.holidaysomething.holidaysomething.JDragon.repositoryTest;
 
 
 import com.holidaysomething.holidaysomething.domain.ProductOption;
-import com.holidaysomething.holidaysomething.repository.ProductOptionRepository;
+import com.holidaysomething.holidaysomething.repository.product.ProductOptionRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
