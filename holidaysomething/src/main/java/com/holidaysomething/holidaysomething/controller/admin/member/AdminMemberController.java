@@ -82,7 +82,7 @@ public class AdminMemberController {
   public String mileageModifyPost(@ModelAttribute("mileageModify")MemberMileageForm memberMileageForm){
 
     if(memberMileageForm.getMileage() < 0){
-      return "/";
+      return "redirect:/";
     }
 
     memberService.updateMember(memberMileageForm);
