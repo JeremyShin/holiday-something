@@ -8,6 +8,7 @@ import com.querydsl.jpa.JPQLQuery;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
+import org.springframework.data.repository.query.Param;
 
 public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     MemberRepositoryCustom {
@@ -33,8 +34,6 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
   @Override
   public List<Member> getMembersByDsl(SearchOrderMember searchOrderMember, Pageable pageable) {
     QMember member = QMember.member;
-    QOrder order = QOrder.order;
-
     JPQLQuery query = from(member);
 
     if (searchOrderMember.getLoginId() != null || !searchOrderMember.getLoginId().equals("")) {
@@ -48,4 +47,69 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     return getQuerydsl().applyPagination(pageable, query).fetch();
   }
 
+  @Override
+  public List<Member> findMembersByLoginIdInOrdersByDsl(String loginId) {
+    QMember member = QMember.member;
+    QOrder order = QOrder.order;
+
+    return null;
+  }
+
+
 }
+
+
+
+
+/*
+
+28,29,30 일동안 만든 쿼리문인데... 개똥같다. 효율적인 코드는 아니라고 본다.
+(ERD 구조가 잘못 되었을 수도... 여튼 출력은 성공함)
+
+회원만 출력하는 거는 진~~즉에 끝났는데
+최근 주문 날짜, 최근 주문한 주문 코드? 를 출력하게 만드느라고 엄청 오래 걸렸다.
+이제 이걸 QueryDsl 로 만들면 되는데...........
+
+-- 회원 로그인 아이디로 검색하기.
+select m.*,k.order_date,k.order_number from member as m inner join
+	(select o.date as order_date, o.order_number, o.member_id from orders as o inner join
+		(select m.id as member_id, max(o.date) as date from orders o inner join
+			member as m on o.member_id=m.id  where m.login_id like '%sky%' group by m.id) as k
+				on k.member_id=o.member_id and k.date = o.date) as k on k.member_id=m.id;
+
+
+-- 회원 이름으로 검색하기.
+select m.*,k.order_date,k.order_number from member as m inner join
+	(select o.date as order_date, o.order_number, o.member_id from orders as o inner join
+		(select m.id as member_id, max(o.date) as date from orders o inner join
+			member as m on o.member_id=m.id where m.name like '%김하늘%' group by m.id) as k
+				on k.member_id=o.member_id and k.date = o.date) as k on k.member_id=m.id;
+
+-- 주문기간 사이에 주문한 회원 검색하기.
+select m.*,k.order_date,k.order_number from member as m inner join
+	(select o.member_id,o.date as order_date,o.order_number from orders as o inner join
+		(select o.member_id, max(o.date) as order_date from orders as o where o.date between '2018-11-01' and '2018-11-25' group by o.member_id) as k
+	on o.member_id=k.member_id and o.date=k.order_date) as k
+on k.member_id=m.id;
+
+
+-- 주문번호에 해당하는 주문회원 검색하기.
+select m.*,k.order_date,k.order_number from member as m inner join
+	(select o.member_id,o.date as order_date,o.order_number from orders as o inner join
+		(select o.member_id, max(o.date) as order_date from orders as o where o.order_number like '%2018111750147511%' group by o.member_id) as k
+	on o.member_id=k.member_id and o.date=k.order_date) as k
+on k.member_id=m.id;
+
+
+-- 상품이름으로 해당 상품을 주문한 회원 검색하기.
+select m.*, k.order_date,k.order_number from member as m inner join
+	(select o.member_id,o.date as order_date,o.order_number from orders as o inner join
+		(select max(o.date) as date,o.member_id from orders as o inner join
+			(select distinct op.order_id from ordered_product as op inner join
+			product as p on op.product_id in (select p.id from product as p where p.name like '%스밋코구라시%')) as op
+		on op.order_id = o.id group by o.member_id) as k
+	on k.date=o.date and k.member_id=o.member_id) as k
+on k.member_id = m.id;
+
+
+ */
