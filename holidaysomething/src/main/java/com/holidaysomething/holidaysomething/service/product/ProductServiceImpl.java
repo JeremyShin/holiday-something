@@ -4,7 +4,7 @@ package com.holidaysomething.holidaysomething.service.product;
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.dto.SearchDto;
-import com.holidaysomething.holidaysomething.repository.product.ProductRepository;
+import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
