@@ -5,6 +5,7 @@ import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.domain.ProductOptionCommand;
+import com.holidaysomething.holidaysomething.dto.ProductOptionDto;
 import com.holidaysomething.holidaysomething.dto.Search;
 import com.holidaysomething.holidaysomething.service.ProductOptionService;
 import com.holidaysomething.holidaysomething.service.ProductService;
@@ -34,6 +35,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,13 +45,12 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/admin/product")
 public class AdminProductController {
 
+  private static final Log log = LogFactory.getLog(AdminProductController.class);
   private ProductService productService;
   private ProductOptionService productOptionService;
   private AdminProductRegisterService adminProductRegisterService;
   private AdminProductOptionService adminProductOptionService;
   private FileUtil fileUtil;
-
-  private static final Log log = LogFactory.getLog(AdminProductController.class);
 
   public AdminProductController(ProductOptionService productOptionService,
       ProductService productService, AdminProductRegisterService adminProductRegisterService,
@@ -73,6 +74,9 @@ public class AdminProductController {
 
   @GetMapping({"/product_detail", "/product_detail/{pageStart}"})
   public String productDetail(ModelMap modelMap, @PathVariable Optional<Integer> pageStart) {
+
+    log.info("수정된 화면을 보여주고싶어요");
+
     List<ProductOption> productOptionList = productOptionService.getAllProductOptions();
     int productOptionListSize = productOptionList.size();
     modelMap.addAttribute("productOptionList", productOptionList);
@@ -86,6 +90,7 @@ public class AdminProductController {
     modelMap.addAttribute("pageCount", pageCount);
     modelMap.addAttribute("productOptions", productOptions);
 
+    log.info("안되나?");
     return "admin/product/product_detail";
   }
 
@@ -117,7 +122,6 @@ public class AdminProductController {
     model.addAttribute("product", product);
     return "admin/product/product_register";
   }
-
 
 
   // 상품등록 , date1 : 제조일  ,  date2 : 출시일.
@@ -281,37 +285,13 @@ public class AdminProductController {
     LocalDateTime castDateStart = LocalDateTime.parse(productStartDateSelect);
     LocalDateTime castDateEnd = LocalDateTime.parse(productEndDateSelect);
 
-    //제품 등록일or게시일로 검색하기
+    //제품 등록일 or 게시일로 검색하기
     Page<Product> productDatepages = productService
         .findByProductRegdate(castDateStart, castDateEnd, pageable);
     modelMap.addAttribute("regdate", productDatepages);
 
     return "admin/product/product_search";
   }
-
-//  @GetMapping("/product_detail/option/modify")
-//  public String modifyOption(ProductOption productOption, Model model){
-//    String modification = "으아아아";
-//    //modelMap.addAttribute("productOptionMod", productOption);
-//    //model.addAttribute("modification", modification);
-//
-//    log.info("옵션수정버튼을 눌렀습니다.");
-//    log.info("modification : " + modification);
-//
-//    return "admin/product/product_detail";
-//  }
-
-//  @GetMapping("/product_detail/option/modify")
-//  public String modifyOption(){
-//
-//    log.info("옵션수정버튼을 눌렀습니다.");
-//
-//    return "redirect:/admin/product/product_detail";
-//  }
-
-
-
-
 
   /* 옵션 등록 */
   @GetMapping("/product_detail_add_option")

@@ -15,6 +15,8 @@ public interface ProductOptionService {
 
   void deleteProductOption(Long id);
 
+  void save(ProductOption productOption);
+
   List<ProductOption> getAllProductOptionsByName(String name);
 
   Page<ProductOption> getAllProductOptionsPage(Pageable pageable);

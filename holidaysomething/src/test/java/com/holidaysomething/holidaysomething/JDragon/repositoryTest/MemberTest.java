@@ -7,8 +7,6 @@ import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.repository.MemberRepository;
 import java.time.LocalDateTime;
 import java.util.List;
-import lombok.extern.java.Log;
-import lombok.extern.log4j.Log4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
