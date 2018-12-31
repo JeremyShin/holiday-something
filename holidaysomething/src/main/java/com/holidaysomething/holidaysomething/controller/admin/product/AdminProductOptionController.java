@@ -30,7 +30,6 @@ public class AdminProductOptionController {
 
   private final ProductService productService;
   private final ProductOptionService productOptionService;
-  private final ProductAddService productAddService;
 
   @GetMapping
   public String productOptions(ModelMap modelMap,
@@ -131,7 +130,7 @@ public class AdminProductOptionController {
         .fromProductOptionCommandToProductOptionList(productOptionCommand);
     productOptionService.save(productOptions, productId);
 
-    return "redirect:/admin/product/option-add";
+    return "redirect:/admin/product/option";
   }
 
 }

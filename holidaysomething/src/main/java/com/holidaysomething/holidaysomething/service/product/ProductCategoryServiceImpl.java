@@ -1,7 +1,7 @@
 package com.holidaysomething.holidaysomething.service.product;
 
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
-import com.holidaysomething.holidaysomething.repository.product.ProductCategoryRepository;
+import com.holidaysomething.holidaysomething.repository.ProductCategoryRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

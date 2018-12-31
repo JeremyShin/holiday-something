@@ -15,7 +15,7 @@
   <!-- 상품 검색 모듈 -->
   <div>
     <table border="1">
-      <form method="post" action="/admin/product/searchDto">
+      <form method="post" action="/admin/product/search">
         <tbody>
         <tr>
           <th scope="row">검색분류</th>
@@ -139,7 +139,7 @@
     <!-- 모든 상품 리스트 페이지 번호 -->
     <div id="page-numbers">
       <th:block th:each="item : ${#numbers.sequence(1, productPageCount)}">
-        <a th:href="@{'/admin/product/searchDto?page=' + ${item}}">
+        <a th:href="@{'/admin/product/search?page=' + ${item}}">
           <span th:text="${item}"></span>
         </a>
       </th:block>
@@ -147,7 +147,7 @@
 
   </div>
 
-  <script th:src="@{/js/product-searchDto.js}"></script>
+  <script th:src="@{/js/product-search.js}"></script>
 </div>
 
 </html>
