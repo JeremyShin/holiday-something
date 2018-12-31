@@ -1,7 +1,6 @@
 package com.holidaysomething.holidaysomething.repository;
 
 import com.holidaysomething.holidaysomething.domain.Product;
-import com.holidaysomething.holidaysomething.repository.product.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +27,7 @@ public class ProductDslTest {
   public void queryDsl_검색분류_테스트() throws Exception {
     Pageable pageable = PageRequest.of(0, 30);
 
-    Page<Product> productPage = productRepository.findProducts("", "",
+    Page<Product> productPage = productRepository.findProducts("","",
         1L, 5L, 0L, "", "", "", pageable);
 
     for (Product product : productPage) {

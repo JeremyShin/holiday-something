@@ -3,7 +3,7 @@ package com.holidaysomething.holidaysomething.JDragon.serviceTest;
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductDetail;
-import com.holidaysomething.holidaysomething.service.product.ProductAddService;
+import com.holidaysomething.holidaysomething.service.admin.AdminProductRegisterService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class ProductServiceTest {
 
 
   @Autowired
-  private ProductAddService productAddService;
+  private AdminProductRegisterService adminProductRegisterService;
 
   @Test
   public void 상품서비스에서등록하기테스트() {
@@ -41,7 +41,7 @@ public class ProductServiceTest {
     p.setProductDetail(pd);
     p.setProductCategory(pc);
 
-    Product insertedProduct = productAddService.productRegister(p);
+    Product insertedProduct = adminProductRegisterService.productRegister(p);
 
     log.info("================================");
     log.info("상품 id : " + insertedProduct.getId());

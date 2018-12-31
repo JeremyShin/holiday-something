@@ -1,8 +1,6 @@
 package com.holidaysomething.holidaysomething.repository;
 
 import com.holidaysomething.holidaysomething.domain.Product;
-import com.holidaysomething.holidaysomething.repository.product.ProductCategoryRepository;
-import com.holidaysomething.holidaysomething.repository.product.ProductRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

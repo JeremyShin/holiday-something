@@ -1,7 +1,6 @@
 package com.holidaysomething.holidaysomething.service;
 
 import com.holidaysomething.holidaysomething.domain.Product;
-import com.holidaysomething.holidaysomething.service.product.ProductService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
