@@ -9,7 +9,7 @@ public class SearchOrderMember {
 
   private String loginId;
   private String name;
-  private String productCode;
+  private String orderNumber;
   private String productName;
   private LocalDateTime orderStartDate;
   private LocalDateTime orderEndDate;

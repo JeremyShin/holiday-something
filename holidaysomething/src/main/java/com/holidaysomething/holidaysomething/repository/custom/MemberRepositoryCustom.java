@@ -4,6 +4,7 @@ import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMember;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 
 public interface MemberRepositoryCustom {
 
@@ -11,5 +12,7 @@ public interface MemberRepositoryCustom {
   Member getMemberByDsl(Long id);
 
   List<Member> getMembersByDsl(SearchOrderMember searchOrderMember, Pageable pageable);
+
+  List<Member> findMembersByLoginIdInOrdersByDsl(String loginId);
 
 }
