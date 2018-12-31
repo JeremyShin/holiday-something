@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.controller.admin.member;
 
 
 import com.holidaysomething.holidaysomething.domain.Member;
+import com.holidaysomething.holidaysomething.dto.MemberMileageForm;
 import com.holidaysomething.holidaysomething.dto.Search;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMember;
 import com.holidaysomething.holidaysomething.service.MemberService;
@@ -16,11 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin/member")
@@ -74,7 +71,25 @@ public class AdminMemberController {
     return "/admin/member/mileage_search";
   }
 
+  @GetMapping("/mileage/modify")
+  public String mileageModify(@RequestParam("loginId")String loginId, ModelMap modelMap){
 
+    modelMap.addAttribute("member", memberService.findMemberByLoginId(loginId));
+
+    return "/admin/member/mileage_modify_form";
+  }
+
+  @PostMapping("/mileage/modify")
+  public String mileageModifyPost(@ModelAttribute("mileageModify")MemberMileageForm memberMileageForm){
+
+    if(memberMileageForm.getMileage() < 0){
+      return "redirect:/";
+    }
+
+    memberService.updateMember(memberMileageForm);
+
+    return "redirect:/admin/member/mileage/search";
+  }
 }
 
 
