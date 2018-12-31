@@ -1,13 +1,11 @@
 package com.holidaysomething.holidaysomething.controller.admin.member;
 
-
 import com.holidaysomething.holidaysomething.domain.Member;
-import com.holidaysomething.holidaysomething.dto.MemberMileageForm;
-import com.holidaysomething.holidaysomething.dto.Search;
-import com.holidaysomething.holidaysomething.dto.SearchOrderMember;
-import com.holidaysomething.holidaysomething.service.MemberService;
+import com.holidaysomething.holidaysomething.dto.MemberMileageDto;
+import com.holidaysomething.holidaysomething.dto.SearchDto;
+import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
+import com.holidaysomething.holidaysomething.service.member.MemberService;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -17,7 +15,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/admin/member")
@@ -29,20 +31,18 @@ public class AdminMemberController {
 
   @GetMapping("/order/search")
   public String memberOrderSearch() {
-
-    return "admin/member/member_order";
+    return "admin/member/order";
   }
 
   @PostMapping("/order/search")
   public String memberOrderSearchPost(
-      @ModelAttribute(value = "SearchOrderMember") SearchOrderMember searchOrderMember,
+      @ModelAttribute(value = "SearchOrderMember") SearchOrderMemberDto searchOrderMemberDto,
       @RequestParam(value = "date1") @DateTimeFormat(pattern = "MMddyyyy") StringBuffer date1,
       @RequestParam(value = "date1") @DateTimeFormat(iso = ISO.DATE) StringBuffer date2) {
 
-    log.info(searchOrderMember.getName());
-    log.info(searchOrderMember.getLoginId());
-    log.info(searchOrderMember.getProductName());
-//    /log.info(searchOrderMember.getProductCode());
+    log.info(searchOrderMemberDto.getName());
+    log.info(searchOrderMemberDto.getLoginId());
+    log.info(searchOrderMemberDto.getProductName());
     log.info("TAG", date1);
     log.info("TAG", date2);
 
@@ -51,51 +51,44 @@ public class AdminMemberController {
     log.info("TAG", date1);
     log.info("TAG", date2);
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    searchOrderMember.setOrderStartDate(LocalDateTime.parse(date1));
-    searchOrderMember.setOrderEndDate(LocalDateTime.parse(date2));
+//    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    searchOrderMemberDto.setOrderStartDate(LocalDateTime.parse(date1));
+    searchOrderMemberDto.setOrderEndDate(LocalDateTime.parse(date2));
 
-    log.info("TAG", searchOrderMember.getOrderStartDate());
-    log.info("TAG", searchOrderMember.getOrderEndDate());
+    log.info("TAG", searchOrderMemberDto.getOrderStartDate());
+    log.info("TAG", searchOrderMemberDto.getOrderEndDate());
 
     return "redirect:/admin/member/order/search";
   }
 
-
   @GetMapping("/mileage/search")
   public String mileageSearch(@PageableDefault(sort = {"loginId"}, size = 10) Pageable pageable,
-      @ModelAttribute("search") Search search, ModelMap modelMap) {
-    Page<Member> members = memberService.findAllOrSearch(search, pageable);
+      @ModelAttribute("search") SearchDto searchDto, ModelMap modelMap) {
+
+    Page<Member> members = memberService.findAllOrSearch(searchDto, pageable);
     modelMap.addAttribute("members", members);
 
-    return "/admin/member/mileage_search";
+    return "/admin/member/mileage-searchDto";
   }
 
   @GetMapping("/mileage/modify")
-  public String mileageModify(@RequestParam("loginId")String loginId, ModelMap modelMap){
+  public String mileageModify(@RequestParam("loginId") String loginId, ModelMap modelMap) {
 
     modelMap.addAttribute("member", memberService.findMemberByLoginId(loginId));
 
-    return "/admin/member/mileage_modify_form";
+    return "/admin/member/mileage-modify";
   }
 
   @PostMapping("/mileage/modify")
-  public String mileageModifyPost(@ModelAttribute("mileageModify")MemberMileageForm memberMileageForm){
+  public String mileageModifyPost(
+      @ModelAttribute("mileageModify") MemberMileageDto memberMileageDto) {
 
-    if(memberMileageForm.getMileage() < 0){
+    if (memberMileageDto.getMileage() < 0) {
       return "redirect:/";
     }
 
-    memberService.updateMember(memberMileageForm);
+    memberService.updateMember(memberMileageDto);
 
     return "redirect:/admin/member/mileage/search";
   }
 }
-
-
-/*
-
-181222
-
-주문회원 조회 : 주문기간, 주문번호, 이름/아이디 검색.
- */
