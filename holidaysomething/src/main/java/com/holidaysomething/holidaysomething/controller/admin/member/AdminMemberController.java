@@ -68,7 +68,7 @@ public class AdminMemberController {
     Page<Member> members = memberService.findAllOrSearch(searchDto, pageable);
     modelMap.addAttribute("members", members);
 
-    return "/admin/member/mileage-searchDto";
+    return "/admin/member/mileage-search";
   }
 
   @GetMapping("/mileage/modify")

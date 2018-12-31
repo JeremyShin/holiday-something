@@ -131,7 +131,7 @@ public class AdminProductOptionController {
         .fromProductOptionCommandToProductOptionList(productOptionCommand);
     productOptionService.save(productOptions, productId);
 
-    return "redirect:/admin/product/option-add";
+    return "redirect:/admin/product/option/add";
   }
 
 }

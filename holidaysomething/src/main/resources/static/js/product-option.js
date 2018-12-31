@@ -2,67 +2,69 @@ let createRowBtn = document.querySelector('#createRow');
 let num = 1;
 
 /* 옵션 추가 버튼 누를 시, 행 생성 */
-createRowBtn.addEventListener('click', () => {
-  let tr = document.createElement('tr');
-  tr.setAttribute('id', 'optionCheckTr');
+if (createRowBtn !== null) {
+  createRowBtn.addEventListener('click', () => {
+    let tr = document.createElement('tr');
+    tr.setAttribute('id', 'optionCheckTr');
 
-  let td1 = document.createElement('td');
+    let td1 = document.createElement('td');
 
-  let delInput = document.createElement('input');
-  delInput.setAttribute('type', 'button');
-  delInput.setAttribute('value', '삭제');
-  delInput.setAttribute('onclick', 'deleteRow(this);');
-  td1.appendChild(delInput);
+    let delInput = document.createElement('input');
+    delInput.setAttribute('type', 'button');
+    delInput.setAttribute('value', '삭제');
+    delInput.setAttribute('onclick', 'deleteRow(this);');
+    td1.appendChild(delInput);
 
-  tr.appendChild(td1);
+    tr.appendChild(td1);
 
-  let td2 = document.createElement('td');
-  let div1 = document.createElement('div');
-  let textNode1 = document.createTextNode('옵션명:   ');
-  div1.appendChild(textNode1);
-  let input2 = document.createElement('input');
-  input2.setAttribute('type', 'text');
-  input2.setAttribute('name', 'productOptions[' + num + '].name');
-  input2.setAttribute('placeholder', '예시) 옵션명을 입력하시오');
-  input2.setAttribute('maxlength', '50');
-  input2.setAttribute('size', '70');
-  div1.appendChild(input2);
-  let span1 = document.createElement('span');
-  div1.appendChild(span1);
-  td2.appendChild(div1);
-  tr.appendChild(td2);
+    let td2 = document.createElement('td');
+    let div1 = document.createElement('div');
+    let textNode1 = document.createTextNode('옵션명:   ');
+    div1.appendChild(textNode1);
+    let input2 = document.createElement('input');
+    input2.setAttribute('type', 'text');
+    input2.setAttribute('name', 'productOptions[' + num + '].name');
+    input2.setAttribute('placeholder', '예시) 옵션명을 입력하시오');
+    input2.setAttribute('maxlength', '50');
+    input2.setAttribute('size', '70');
+    div1.appendChild(input2);
+    let span1 = document.createElement('span');
+    div1.appendChild(span1);
+    td2.appendChild(div1);
+    tr.appendChild(td2);
 
-  let div2 = document.createElement('div');
-  let textNode2 = document.createTextNode('추가금액: ');
-  div2.appendChild(textNode2);
-  let input3 = document.createElement('input');
-  input3.setAttribute('type', 'text');
-  input3.setAttribute('name', 'productOptions[' + num + '].price');
-  input3.setAttribute('size', '70');
-  div2.appendChild(input3);
-  let span2 = document.createElement('span');
-  div2.appendChild(span2);
-  td2.appendChild(div2);
-  tr.appendChild(td2);
+    let div2 = document.createElement('div');
+    let textNode2 = document.createTextNode('추가금액: ');
+    div2.appendChild(textNode2);
+    let input3 = document.createElement('input');
+    input3.setAttribute('type', 'text');
+    input3.setAttribute('name', 'productOptions[' + num + '].price');
+    input3.setAttribute('size', '70');
+    div2.appendChild(input3);
+    let span2 = document.createElement('span');
+    div2.appendChild(span2);
+    td2.appendChild(div2);
+    tr.appendChild(td2);
 
-  let div3 = document.createElement('div');
-  let textNode4 = document.createTextNode('옵션설명: ');
-  div3.appendChild(textNode4);
-  let input4 = document.createElement('input');
-  input4.setAttribute('type', 'text');
-  input4.setAttribute('name', 'productOptions[' + num + '].description');
-  input4.setAttribute('size', '70');
-  input4.setAttribute('style', 'height:30px;');
+    let div3 = document.createElement('div');
+    let textNode4 = document.createTextNode('옵션설명: ');
+    div3.appendChild(textNode4);
+    let input4 = document.createElement('input');
+    input4.setAttribute('type', 'text');
+    input4.setAttribute('name', 'productOptions[' + num + '].description');
+    input4.setAttribute('size', '70');
+    input4.setAttribute('style', 'height:30px;');
 
-  div3.appendChild(input4);
-  td2.appendChild(div3);
+    div3.appendChild(input4);
+    td2.appendChild(div3);
 
-  tr.appendChild(td2);
+    tr.appendChild(td2);
 
-  let optionValueRows = document.querySelector('#option_value_rows');
-  optionValueRows.appendChild(tr);
-  num = num + 1;
-});
+    let optionValueRows = document.querySelector('#option_value_rows');
+    optionValueRows.appendChild(tr);
+    num = num + 1;
+  });
+}
 
 /* 선택한 row 삭제 */
 let deleteRow = function (source) {

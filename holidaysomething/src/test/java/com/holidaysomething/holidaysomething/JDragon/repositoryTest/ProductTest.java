@@ -2,8 +2,8 @@ package com.holidaysomething.holidaysomething.JDragon.repositoryTest;
 
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductDetail;
-import com.holidaysomething.holidaysomething.repository.product.ProductDetailRepository;
-import com.holidaysomething.holidaysomething.repository.product.ProductRepository;
+import com.holidaysomething.holidaysomething.repository.ProductDetailRepository;
+import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import org.junit.Test;
