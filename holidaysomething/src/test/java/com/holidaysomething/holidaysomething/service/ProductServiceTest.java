@@ -1,6 +1,7 @@
 package com.holidaysomething.holidaysomething.service;
 
 import com.holidaysomething.holidaysomething.domain.Product;
+import com.holidaysomething.holidaysomething.service.product.ProductService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.LocalDateTime;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ProductServiceTest {
@@ -20,7 +19,6 @@ public class ProductServiceTest {
   ProductService productService;
 
   Pageable pageable = PageRequest.of(0, 5);
-
 
 
   @Test

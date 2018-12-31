@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.springframework.org/schema/data/jaxb"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default.html}">
+
+<head th:include="fragments/config :: configFragment">
+  <title id="pageTitle">Page title</title>
+  <!-- other elements you want to reference in your layout -->
+</head>
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+</th:block>
+
+<div layout:fragment="content">
+  <h1>옵션 검색</h1>
+  <h2>옵션 목록 <span>[총 <strong th:text="${productOptionListSize}"></strong>개]</span></h2>
+
+  <form method="get" action="/admin/product/option/searchDto" id="product-option-searchDto-form">
+    <!-- product_option 내 필드 선택 -->
+    <label>
+      <select name="productOptionSearchField" required>
+        <option disabled>옵션을 선택하세요</option>
+        <option value="name">옵션명</option>
+        <option value="description">옵션설명</option>
+        <option value="price">옵션가격</option>
+      </select>
+    </label>
+
+    <!-- 옵션 검색어 -->
+    <label>
+      <input type="text" name="productOptionSearchValue" style="width:300px;" required>
+    </label>
+
+    <input type="submit" value="검색">
+  </form>
+
+  <div class="tbl-container">
+    <div class="above-tbl">
+      <form method="get" action="/admin/product/option/bundle">
+        <select onchange="this.form.submit()" name="size">
+          <option disabled selected>개수 선택</option>
+          <option value="10">10개씩 보기</option>
+          <option value="20">20개씩 보기</option>
+          <option value="30">30개씩 보기</option>
+          <option value="50">50개씩 보기</option>
+          <option value="100">100개씩 보기</option>
+        </select>
+      </form>
+      <a href="/admin/product/option/add"><span>옵션등록</span></a>
+    </div>
+
+    <form method="POST" action="/admin/product/option/delete" id="productOptionForm"
+          onsubmit="return validateProductOptionForm(this);">
+      <table id="product-option-list-tbl">
+        <colgroup>
+          <col class="chk"/>
+          <col style="width:50px;"/>
+          <col style="width:190px;"/>
+          <col style="width:auto;"/>
+          <col style="width:auto;"/>
+        </colgroup>
+        <thead>
+        <tr>
+          <th><input type="checkbox" id="checkbox-all" onclick="toggle(this);"/></th>
+          <th>No</th>
+          <th>옵션명<!--<button type="button">오름차순 정렬</button>--></th>
+          <th>옵션값</th>
+          <th>옵션설명</th>
+          <th>상품코드</th>
+          <th>상품명</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="productOption : ${productOptions != null ? productOptions : productOptionsSearchResult}"
+            class="productOptionTr">
+          <td id="optionCheck"><input type="checkbox" name="productOptionId"
+                                      th:value="${productOption.id}"/></td>
+          <td id="optionId" th:text="${productOption.id}">###</td>
+          <td id="optionName" th:text="${productOption.name}">###</td>
+          <td id="optionPrice" th:text="${productOption.price}">###</td>
+          <td id="optionDesc" th:text="${productOption.description}">###</td>
+          <td id="optionCode" th:text="${productOption.product.code}">###</td>
+          <td id="optionProductName" th:text="${productOption.product.name}">###</td>
+          <td><input id="modifyBtn" type="button" class="modBtn" value="수정"
+                     th:onclick="'modify(this,' + ${productOption.id} + ')'"/></td>
+        </tr>
+        </tbody>
+      </table>
+
+      <button type="submit" id="productOptionFormSubmit">삭제</button>
+    </form>
+
+    <!-- Page 번호 -->
+    <div id="page-numbers">
+      <th:block th:each="item : ${#numbers.sequence(1, pageCount)}">
+        <a th:href="@{'/admin/product/option?page=' + ${item}}">
+          <span th:text="${item}"></span>
+        </a>
+      </th:block>
+    </div>
+  </div>
+
+  <!-- 사용자 스크립트 추가 -->
+  <th:block layout:fragment="script">
+    <script th:src="@{/js/product-option.js}"></script>
+  </th:block>
+
+</div>
+</html>

@@ -1,7 +1,7 @@
 package com.holidaysomething.holidaysomething.repository;
 
 import com.holidaysomething.holidaysomething.domain.Product;
-
+import com.holidaysomething.holidaysomething.repository.product.ProductRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.Test;

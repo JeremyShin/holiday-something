@@ -11,6 +11,8 @@ Holiday Something(홀리데이썸띵) 쇼핑몰 구축 repository입니다.
 - Build Automation Tool: Maven
 
 ## Code style
+- IntelliJ Java Google Style을 적용
+  - commit하기 전 'IntelliJ 좌측 Explorer > 프로젝트 폴더 우클릭 > Reformat Code' 적용 하기
 - Java 코딩 컨벤션 ([참조 링크](http://kwangshin.pe.kr/blog/java-code-conventions-%EC%9E%90%EB%B0%94-%EC%BD%94%EB%94%A9-%EA%B7%9C%EC%B9%99/))
 - HTML
   - HTML element에 inline으로 CSS 속성을 주는 것은 지양하고, 외부 CSS 파일로 분리한다.

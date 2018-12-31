@@ -1,9 +1,8 @@
 package com.holidaysomething.holidaysomething.JDragon.serviceTest;
 
 
-import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
-import com.holidaysomething.holidaysomething.service.ProductOptionService;
+import com.holidaysomething.holidaysomething.service.product.ProductOptionService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
