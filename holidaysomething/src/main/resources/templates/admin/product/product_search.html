@@ -5,7 +5,7 @@
       layout:decorate="~{layout/default.html}">
 
 <head th:include="fragments/config :: configFragment">
-  <title id="pageTitle">Page title</title>
+  <title id="pageTitle">관리자 &mdash; 상품검색</title>
   <!-- other elements you want to reference in your layout -->
 </head>
 
@@ -53,17 +53,19 @@
           </td>
         </tr>
         <tr>
-          <th scope="row">상품등록일</th>
+          <th scope="row">등록일 / 출시일</th>
           <td>
             <!--        <select name="productSearchDate">
                           <option value="regDate">상품 등록일</option>
                           <option value="releaseDate">상품 출시일</option>
                         </select> -->
-            <option value="regDate">상품 등록일</option>
+            <select name="productSearchDate">
+              <option value="regDate">상품 등록일</option>
+            </select>
 
-            <input type="date" name="productSearchDateInput" data-date-inline-picker="true"/>
-            <input name="regdateStart" type="datetime-local" placeholder="Start Registration Date">시작일.
-            <input name="regdateEnd" type="datetime-local" placeholder="Ended Registration Date">종료일
+            <!--<input type="date" name="productSearchDateInput" data-date-inline-picker="true"/>-->
+            <input name="productRegDateStart" type="datetime-local" placeholder="Start Registration Date">시작일
+            <input name="productRegDateEnd" type="datetime-local" placeholder="Ended Registration Date">종료일
             <!--<a href="#" id="start-date"><span>달력보기</span></a>-->
           </td>
         </tr>

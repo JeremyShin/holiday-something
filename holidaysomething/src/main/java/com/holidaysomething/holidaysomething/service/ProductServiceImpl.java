@@ -6,10 +6,12 @@ import com.holidaysomething.holidaysomething.dto.Search;
 import com.holidaysomething.holidaysomething.repository.ProductCategoryRepository;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,5 +80,52 @@ public class ProductServiceImpl implements ProductService {
       products = productRepository.findAll(pageable);
     }
     return products;
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public Page<Product> findByProductCategory(Long categoryId, Pageable pageable) {
+    Page<Product> products = productRepository.findByProductCategory(categoryId, pageable);
+    return products;
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public Page<Product> findByProductClassification(String SearchClassificationValue, String productSearchClassificationInput, Pageable pageable) {
+    Page<Product> products = new PageImpl<>(new ArrayList<>());
+
+    switch (SearchClassificationValue) {
+      case "productName":
+        products = productRepository.findProductByName(productSearchClassificationInput, pageable);
+        break;
+      case "productCode":
+        products = productRepository.findProductByCode(productSearchClassificationInput, pageable);
+        break;
+      case "productSellingPrice":
+        products = productRepository.findProductBySellingPrice(Integer.parseInt(productSearchClassificationInput), pageable);
+        break;
+      case "productManufacturer":
+        products = productRepository.findProductByManufacturer(productSearchClassificationInput, pageable);
+        break;
+      case "productOptionalPriceText":
+        products = productRepository.findProductByOptionalPriceText(productSearchClassificationInput, pageable);
+        break;
+      case "productShippingPrice":
+        products = productRepository.findProductByShippingPrice(Integer.parseInt(productSearchClassificationInput), pageable);
+        break;
+    }
+
+    return products;
+  }
+
+  @Override
+  public Page<Product> findProducts(String searchClassificationValue,
+      String searchClassificationInput, Long largeId, Long middleId, Long smallId,
+      String searchDateValue, String startDateSelect, String endDateSelect, Pageable pageable) {
+
+    Page<Product> productPage = productRepository.findProducts(searchClassificationValue, searchClassificationInput,
+        largeId, middleId, smallId, searchDateValue, startDateSelect, endDateSelect, pageable);
+
+    return productPage;
   }
 }
