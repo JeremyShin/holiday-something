@@ -91,7 +91,7 @@ let modify = function (source) {
   let priceInput = document.createElement("input");
   let descInput = document.createElement("input");
 
-  /* 현재 클릭한 row의 옵션 id를 사용하기 위해, id갑 부여 */
+  /* 현재 클릭한 row의 옵션 id를 사용하기 위해, id값 부여 */
   source.parentElement.parentElement.children[1].setAttribute('id',
       'modifiedId');
 
