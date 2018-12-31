@@ -31,4 +31,6 @@ public interface ProductService {
   Page<Product> findByProductCategory(Long categoryId, Pageable pageable);
 
   Page<Product> findByProductClassification(String SearchClassificationValue, String productSearchClassificationInput, Pageable pageable);
+
+  Page<Product> findProducts(String productSearchClassificationValue, String productSearchClassificationInput, Long largeId, Long middleId, Long smallId, String productSearchDateValue, String productStartDateSelect, String productEndDateSelect, Pageable pageable);
 }
