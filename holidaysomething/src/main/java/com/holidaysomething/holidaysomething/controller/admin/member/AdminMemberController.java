@@ -17,7 +17,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/admin/member")
@@ -71,7 +75,7 @@ public class AdminMemberController {
   }
 
   @GetMapping("/mileage/modify")
-  public String mileageModify(@RequestParam("loginId")String loginId, ModelMap modelMap){
+  public String mileageModify(@RequestParam("loginId") String loginId, ModelMap modelMap) {
 
     modelMap.addAttribute("member", memberService.findMemberByLoginId(loginId));
 
@@ -79,9 +83,10 @@ public class AdminMemberController {
   }
 
   @PostMapping("/mileage/modify")
-  public String mileageModifyPost(@ModelAttribute("mileageModify")MemberMileageForm memberMileageForm){
+  public String mileageModifyPost(
+      @ModelAttribute("mileageModify") MemberMileageForm memberMileageForm) {
 
-    if(memberMileageForm.getMileage() < 0){
+    if (memberMileageForm.getMileage() < 0) {
       return "redirect:/";
     }
 

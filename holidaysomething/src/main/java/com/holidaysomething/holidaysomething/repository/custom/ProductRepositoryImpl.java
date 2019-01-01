@@ -100,6 +100,7 @@ public class ProductRepositoryImpl extends QuerydslRepositorySupport implements
       }
     }
 
+    // 최종 검색 결과
     List<Product> productList = getQuerydsl().applyPagination(pageable, jpqlQuery).fetch();
     long totalCount = jpqlQuery.fetchCount();
 

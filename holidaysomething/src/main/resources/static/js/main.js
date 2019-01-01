@@ -67,7 +67,8 @@ let modify = function (source) {
 
 let productOptionFormSubmit = document.querySelector('#productOptionForm');
 if (productOptionFormSubmit !== null) {
-  let productOptionFormSubmitBtn = productOptionFormSubmit.querySelector('#productOptionFormSubmit');
+  let productOptionFormSubmitBtn = productOptionFormSubmit.querySelector(
+      '#productOptionFormSubmit');
   productOptionFormSubmitBtn.addEventListener('click', (event) => {
     let productOptionCheckboxInput = document.getElementsByName(
         'productOptionId');

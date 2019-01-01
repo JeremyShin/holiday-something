@@ -123,9 +123,6 @@ public class MemberTest {
   }
 
 
-
-
-
   @Test
   public void id로회원조회byDSL() {
     Member member = memberRepository.getMemberByDsl(18L);

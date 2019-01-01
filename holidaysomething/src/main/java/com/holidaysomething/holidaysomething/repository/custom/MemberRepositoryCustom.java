@@ -4,7 +4,6 @@ import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMember;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 
 public interface MemberRepositoryCustom {
 

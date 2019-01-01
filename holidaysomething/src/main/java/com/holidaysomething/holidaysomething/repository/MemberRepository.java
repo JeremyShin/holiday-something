@@ -66,10 +66,6 @@ public interface MemberRepository extends JpaRepository<Member, Long>, MemberRep
   Member findMembersByOrderNumberInOrders(@Param("orderNumber") String orderNumber);
 
 
-
-
-
-
   // member search all
   Page<Member> findAll(Pageable pageable);
 

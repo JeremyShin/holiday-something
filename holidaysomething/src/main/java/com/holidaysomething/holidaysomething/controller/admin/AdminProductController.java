@@ -14,9 +14,7 @@ import com.holidaysomething.holidaysomething.service.admin.AdminProductRegisterS
 import com.holidaysomething.holidaysomething.util.FileUtil;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -241,14 +239,14 @@ public class AdminProductController {
 
   @PostMapping("/search")
   public String productSearchPost(ModelMap modelMap,
-      @RequestParam(value = "productSearchClassification", required=false) String searchClassificationValue,
-      @RequestParam(value = "productSearchClassificationInput", required=false) String searchClassificationInput,
-      @RequestParam(value = "productLargeCategoryId", required=false) Long largeId,
-      @RequestParam(value = "productMiddleCategoryId", required=false) Long middleId,
-      @RequestParam(value = "productSmallCategoryId", required=false) Long smallId,
-      @RequestParam(value = "productDate", required=false) String dateValue,
-      @RequestParam(value = "productRegDateStart", required=false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String startDateSelect,
-      @RequestParam(value = "productRegDateEnd", required=false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String endDateSelect) {
+      @RequestParam(value = "productSearchClassification", required = false) String searchClassificationValue,
+      @RequestParam(value = "productSearchClassificationInput", required = false) String searchClassificationInput,
+      @RequestParam(value = "productLargeCategoryId", required = false) Long largeId,
+      @RequestParam(value = "productMiddleCategoryId", required = false) Long middleId,
+      @RequestParam(value = "productSmallCategoryId", required = false) Long smallId,
+      @RequestParam(value = "productDate", required = false) String dateValue,
+      @RequestParam(value = "productRegDateStart", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String startDateSelect,
+      @RequestParam(value = "productRegDateEnd", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String endDateSelect) {
 
     log.info("searchClassificationValue: " + searchClassificationValue);
     log.info("searchClassificationInput: " + searchClassificationInput);
@@ -264,8 +262,9 @@ public class AdminProductController {
     Pageable pageable = PageRequest.of(0, 10);
 
     // QueryDSL 적용
-    Page<Product> productPage = productService.findProducts(searchClassificationValue, searchClassificationInput,
-        largeId, middleId, smallId, dateValue, startDateSelect, endDateSelect, pageable);
+    Page<Product> productPage = productService
+        .findProducts(searchClassificationValue, searchClassificationInput,
+            largeId, middleId, smallId, dateValue, startDateSelect, endDateSelect, pageable);
     int productPageCount = productPage.getTotalPages();
 
     modelMap.addAttribute("allProductList", productPage);

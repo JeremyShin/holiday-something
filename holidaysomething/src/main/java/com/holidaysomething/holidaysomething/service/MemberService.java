@@ -7,7 +7,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface MemberService {
+
   Member findMemberByLoginId(String loginId);
+
   void updateMember(MemberMileageForm memberMileageForm);
+
   Page<Member> findAllOrSearch(Search search, Pageable pageable);
 }

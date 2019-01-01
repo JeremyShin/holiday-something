@@ -8,7 +8,6 @@ import com.querydsl.jpa.JPQLQuery;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
-import org.springframework.data.repository.query.Param;
 
 public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     MemberRepositoryCustom {

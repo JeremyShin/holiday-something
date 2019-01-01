@@ -27,7 +27,7 @@ public class ProductDslTest {
   public void queryDsl_검색분류_테스트() throws Exception {
     Pageable pageable = PageRequest.of(0, 30);
 
-    Page<Product> productPage = productRepository.findProducts("productManufacturer","인천",
+    Page<Product> productPage = productRepository.findProducts("productManufacturer", "인천",
         1L, null, null, "manufactureDate", "2018-04-01", "2018-11-31", pageable);
   }
 }

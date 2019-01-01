@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class MemberMileageForm {
-    private String loginId;
-    private String plusOrMinus;
-    private int mileage;
+
+  private String loginId;
+  private String plusOrMinus;
+  private int mileage;
 }

@@ -90,7 +90,8 @@ public class ProductServiceImpl implements ProductService {
 
   @Override
   @Transactional(readOnly = true)
-  public Page<Product> findByProductClassification(String SearchClassificationValue, String productSearchClassificationInput, Pageable pageable) {
+  public Page<Product> findByProductClassification(String SearchClassificationValue,
+      String productSearchClassificationInput, Pageable pageable) {
     Page<Product> products = new PageImpl<>(new ArrayList<>());
 
     switch (SearchClassificationValue) {
@@ -101,16 +102,22 @@ public class ProductServiceImpl implements ProductService {
         products = productRepository.findProductByCode(productSearchClassificationInput, pageable);
         break;
       case "productSellingPrice":
-        products = productRepository.findProductBySellingPrice(Integer.parseInt(productSearchClassificationInput), pageable);
+        products = productRepository
+            .findProductBySellingPrice(Integer.parseInt(productSearchClassificationInput),
+                pageable);
         break;
       case "productManufacturer":
-        products = productRepository.findProductByManufacturer(productSearchClassificationInput, pageable);
+        products = productRepository
+            .findProductByManufacturer(productSearchClassificationInput, pageable);
         break;
       case "productOptionalPriceText":
-        products = productRepository.findProductByOptionalPriceText(productSearchClassificationInput, pageable);
+        products = productRepository
+            .findProductByOptionalPriceText(productSearchClassificationInput, pageable);
         break;
       case "productShippingPrice":
-        products = productRepository.findProductByShippingPrice(Integer.parseInt(productSearchClassificationInput), pageable);
+        products = productRepository
+            .findProductByShippingPrice(Integer.parseInt(productSearchClassificationInput),
+                pageable);
         break;
     }
 

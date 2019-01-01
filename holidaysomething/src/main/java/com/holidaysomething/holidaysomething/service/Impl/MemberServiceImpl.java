@@ -31,20 +31,20 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   @Transactional(readOnly = true)
-  public Member findMemberByLoginId(String loginId){
+  public Member findMemberByLoginId(String loginId) {
     return memberRepository.findMemberByLoginId(loginId);
   }
 
   @Override
   @Transactional
-  public void updateMember(MemberMileageForm memberMileageForm){
+  public void updateMember(MemberMileageForm memberMileageForm) {
     Member member = memberRepository.findMemberByLoginId(memberMileageForm.getLoginId());
 
     int mileage = member.getMileage();
 
-    if(memberMileageForm.getPlusOrMinus().equals("+")) {
+    if (memberMileageForm.getPlusOrMinus().equals("+")) {
       mileage += memberMileageForm.getMileage();
-    } else if(memberMileageForm.getPlusOrMinus().equals("-")) {
+    } else if (memberMileageForm.getPlusOrMinus().equals("-")) {
       mileage += memberMileageForm.getMileage() * -1;
     }
     // 적립금에 상한선이 있을까??
