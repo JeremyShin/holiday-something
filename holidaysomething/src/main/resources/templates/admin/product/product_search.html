@@ -15,10 +15,10 @@
   <!-- 상품 검색 모듈 -->
   <div>
     <table border="1">
-      <form method="post" action="/admin/product/product_search">
+      <form method="post" action="/admin/product/search">
         <tbody>
         <tr>
-          <th scope="row">검색분류</th>
+          <th scope="row">검색 분류</th>
           <td>
             <select name="productSearchClassification">
               <option disabled selected>검색 옵션 선택</option>
@@ -35,7 +35,7 @@
           </td>
         </tr>
         <tr>
-          <th scope="row">상품분류</th>
+          <th scope="row">상품 분류</th>
           <td>
             <select name="productLargeCategoryId" class="product-category-select"
                     onchange="updateMiddleCategory(this)">
@@ -53,20 +53,19 @@
           </td>
         </tr>
         <tr>
-          <th scope="row">등록일 / 출시일</th>
+          <th scope="row">날짜 분</th>
           <td>
-            <!--        <select name="productSearchDate">
-                          <option value="regDate">상품 등록일</option>
-                          <option value="releaseDate">상품 출시일</option>
-                        </select> -->
-            <select name="productSearchDate">
-              <option value="regDate">상품 등록일</option>
+            <select name="productDate">
+              <option disabled selected>옵션 선택</option>
+              <option value="manufactureDate">상품 제조일</option>
+              <option value="releaseDate">상품 출시일</option>
             </select>
 
-            <!--<input type="date" name="productSearchDateInput" data-date-inline-picker="true"/>-->
-            <input name="productRegDateStart" type="datetime-local" placeholder="Start Registration Date">시작일
-            <input name="productRegDateEnd" type="datetime-local" placeholder="Ended Registration Date">종료일
-            <!--<a href="#" id="start-date"><span>달력보기</span></a>-->
+            <div>
+              <input name="productRegDateStart" id="productRegDateStart" type="date" min="2017-01-01" max="2025-12-31">
+              <span> ~ </span>
+              <input name="productRegDateEnd" id="productRegDateEnd" type="date" min="2017-01-01" max="2025-12-31" >
+            </div>
           </td>
         </tr>
         <tr>
@@ -79,23 +78,6 @@
       </form>
     </table>
   </div>
-
-  <!--<table border="1" summary="">-->
-  <!--<caption>상품검색</caption>-->
-  <!--<tbody>-->
-  <!--<tr>-->
-  <!--<th scope="row">검색분류</th>-->
-  <!--<td>-->
-  <!--<select>-->
-  <!--<option value="product_name">상품명</option>-->
-  <!--<option value="product_code">제품코드(관리자)</option>-->
-  <!--</select>-->
-  <!--<span>-->
-  <!--<form method="post" action="/admin/product/product_search/result">-->
-  <!--<input type="text" name="productName">-->
-  <!--<input type="submit">-->
-  <!--</form>-->
-  <!--</span>-->
 
   <!-- (검색 전)모든 상품 리스트 | (검색 후)상품 검색 결과 -->
   <div>

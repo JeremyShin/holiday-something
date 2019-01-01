@@ -120,11 +120,9 @@ public class ProductServiceImpl implements ProductService {
   @Override
   public Page<Product> findProducts(String searchClassificationValue,
       String searchClassificationInput, Long largeId, Long middleId, Long smallId,
-      String searchDateValue, String startDateSelect, String endDateSelect, Pageable pageable) {
+      String dateValue, String startDateSelect, String endDateSelect, Pageable pageable) {
 
-    Page<Product> productPage = productRepository.findProducts(searchClassificationValue, searchClassificationInput,
-        largeId, middleId, smallId, searchDateValue, startDateSelect, endDateSelect, pageable);
-
-    return productPage;
+    return productRepository.findProducts(searchClassificationValue, searchClassificationInput,
+        largeId, middleId, smallId, dateValue, startDateSelect, endDateSelect, pageable);
   }
 }

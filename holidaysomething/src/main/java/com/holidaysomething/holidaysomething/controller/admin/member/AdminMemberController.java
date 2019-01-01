@@ -42,21 +42,20 @@ public class AdminMemberController {
     log.info(searchOrderMember.getName());
     log.info(searchOrderMember.getLoginId());
     log.info(searchOrderMember.getProductName());
-    log.info(searchOrderMember.getProductCode());
-    log.info("TAG", date1);
-    log.info("TAG", date2);
+    log.info(date1.toString());
+    log.info(date2.toString());
 
     date1.append("T00:00:00");
     date2.append("T23:59:59");
-    log.info("TAG", date1);
-    log.info("TAG", date2);
+    log.info(date1.toString());
+    log.info(date2.toString());
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     searchOrderMember.setOrderStartDate(LocalDateTime.parse(date1));
     searchOrderMember.setOrderEndDate(LocalDateTime.parse(date2));
 
-    log.info("TAG", searchOrderMember.getOrderStartDate());
-    log.info("TAG", searchOrderMember.getOrderEndDate());
+    log.info(searchOrderMember.getOrderStartDate().toString());
+    log.info(searchOrderMember.getOrderEndDate().toString());
 
     return "redirect:/admin/member/order/search";
   }

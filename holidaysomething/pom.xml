@@ -131,7 +131,7 @@
       <groupId>com.querydsl</groupId>
       <artifactId>querydsl-apt</artifactId>
       <version>4.1.4</version>
-      <!--<scope>provided</scope>-->
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
@@ -139,7 +139,6 @@
       <artifactId>querydsl-jpa</artifactId>
       <version>4.1.4</version>
     </dependency>
-
 
   </dependencies>
 
