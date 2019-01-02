@@ -64,7 +64,6 @@ public class AdminMemberController {
   @GetMapping("/mileage/search")
   public String mileageSearch(@PageableDefault(sort = {"loginId"}, size = 10) Pageable pageable,
       @ModelAttribute("search") SearchDto searchDto, ModelMap modelMap) {
-
     Page<Member> members = memberService.findAllOrSearch(searchDto, pageable);
     modelMap.addAttribute("members", members);
 
