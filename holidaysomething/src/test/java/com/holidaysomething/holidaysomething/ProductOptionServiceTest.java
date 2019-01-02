@@ -1,7 +1,7 @@
 package com.holidaysomething.holidaysomething;
 
 import com.holidaysomething.holidaysomething.domain.ProductOption;
-import com.holidaysomething.holidaysomething.service.ProductOptionService;
+import com.holidaysomething.holidaysomething.service.product.ProductOptionService;
 import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;

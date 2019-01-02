@@ -3,7 +3,7 @@ package com.holidaysomething.holidaysomething.JDragon.repositoryTest;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Order;
-import com.holidaysomething.holidaysomething.dto.SearchOrderMember;
+import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.holidaysomething.holidaysomething.repository.MemberRepository;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -136,12 +136,12 @@ public class MemberTest {
 
   @Test
   public void id와이름으로회원조회byDsl() {
-    SearchOrderMember searchOrderMember = new SearchOrderMember();
-    searchOrderMember.setLoginId("sky");
-    searchOrderMember.setName("김하늘");
-    //searchOrderMember.setName("오박사");
+    SearchOrderMemberDto searchOrderMemberDto = new SearchOrderMemberDto();
+    searchOrderMemberDto.setLoginId("sky");
+    searchOrderMemberDto.setName("김하늘");
+    //searchOrderMemberDto.setName("오박사");
 
-    List<Member> members = memberRepository.getMembersByDsl(searchOrderMember, pageable);
+    List<Member> members = memberRepository.getMembersByDsl(searchOrderMemberDto, pageable);
     System.out.println("========================= size : " + members.size());
     for (Member member : members) {
       System.out.println("============== : " + member.getId());
