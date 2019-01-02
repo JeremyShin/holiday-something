@@ -4,6 +4,7 @@ import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.QMember;
 import com.holidaysomething.holidaysomething.domain.QOrder;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
+import com.holidaysomething.holidaysomething.dto.SearchSexMemberDto;
 import com.querydsl.jpa.JPQLQuery;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
@@ -70,6 +71,18 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     return null;
   }
 
+
+  @Override
+  public List<Member> findMemberBySexInSearchByDsl(SearchSexMemberDto searchSexMemberDto, Pageable pageable) {
+    QMember member = QMember.member;
+    JPQLQuery query = from(member);
+
+    if(searchSexMemberDto.getSex() != null || !searchSexMemberDto.getSex().equals("")) {
+      query.where(member.sex.eq(searchSexMemberDto.getSex()));
+    }
+
+    return getQuerydsl().applyPagination(pageable, query).fetch();
+  }
 
 }
 
