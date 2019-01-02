@@ -6,7 +6,6 @@ import com.holidaysomething.holidaysomething.dto.SearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.holidaysomething.holidaysomething.service.member.MemberService;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -32,8 +31,7 @@ public class AdminMemberController {
 
   @GetMapping("/order/search")
   public String memberOrderSearch() {
-
-    return "order";
+    return "admin/member/order";
   }
 
   @PostMapping("/order/search")
@@ -53,7 +51,7 @@ public class AdminMemberController {
     log.info(date1.toString());
     log.info(date2.toString());
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+//    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     searchOrderMemberDto.setOrderStartDate(LocalDateTime.parse(date1));
     searchOrderMemberDto.setOrderEndDate(LocalDateTime.parse(date2));
 
@@ -63,14 +61,14 @@ public class AdminMemberController {
     return "redirect:/admin/member/order/search";
   }
 
-
   @GetMapping("/mileage/search")
   public String mileageSearch(@PageableDefault(sort = {"loginId"}, size = 10) Pageable pageable,
       @ModelAttribute("search") SearchDto searchDto, ModelMap modelMap) {
+
     Page<Member> members = memberService.findAllOrSearch(searchDto, pageable);
     modelMap.addAttribute("members", members);
 
-    return "/admin/member/mileage_search";
+    return "/admin/member/mileage-search";
   }
 
   @GetMapping("/mileage/modify")
@@ -78,7 +76,7 @@ public class AdminMemberController {
 
     modelMap.addAttribute("member", memberService.findMemberByLoginId(loginId));
 
-    return "/admin/member/mileage_modify_form";
+    return "/admin/member/mileage-modify";
   }
 
   @PostMapping("/mileage/modify")

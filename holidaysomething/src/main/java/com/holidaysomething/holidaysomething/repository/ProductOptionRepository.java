@@ -24,7 +24,7 @@ public interface ProductOptionRepository extends JpaRepository<ProductOption, Lo
   Page<ProductOption> findAllProductOptionByPriceContaining(
       @Param("productOptionPrice") String productOptionPrice, Pageable pageable);
 
-  // productOption 추가하기.
+  // productOptions 추가하기.
   ProductOption save(ProductOption productOption);
 
   // 전체 옵션 출력하기!

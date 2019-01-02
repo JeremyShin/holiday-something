@@ -57,7 +57,7 @@ public class ProductTest {
     log.info("================================");
     log.info("상품설명 id : " + pds.getId());
     log.info("상품 id : " + pp.getId());
-    log.info("상품의 getProductDetail().getId() : " + pp.getProductDetail().getId());
+    log.info("상품의 productDetail().getId() : " + pp.getProductDetail().getId());
   }
 
   @Test

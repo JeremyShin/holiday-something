@@ -13,6 +13,4 @@ public class SearchOrderMemberDto {
   private String productName;
   private LocalDateTime orderStartDate;
   private LocalDateTime orderEndDate;
-
-
 }

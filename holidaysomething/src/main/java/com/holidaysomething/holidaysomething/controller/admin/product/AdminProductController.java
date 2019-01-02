@@ -125,7 +125,7 @@ public class AdminProductController {
 
     modelMap.addAttribute("allProductList", allProductList);
     modelMap.addAttribute("productPageCount", productPageCount);
-
+    
     return "admin/product/search";
   }
 
@@ -161,7 +161,7 @@ public class AdminProductController {
 
     modelMap.addAttribute("allProductList", productPage);
     modelMap.addAttribute("productPageCount", productPageCount);
-
+    
     return "admin/product/search";
   }
 

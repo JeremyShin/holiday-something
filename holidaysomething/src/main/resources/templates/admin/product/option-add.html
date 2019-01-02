@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.springframework.org/schema/data/jaxb"
+<html xmlns:th="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layout/default.html}">
 
 <head th:include="fragments/config :: configFragment">
@@ -9,159 +8,68 @@
   <!-- other elements you want to reference in your layout -->
 </head>
 
-<!--<head th:replace="fragments/config :: configFragment (pageTitle='Product Register')">-->
-<!--<title>상품등록</title>-->
-<!--&lt;!&ndash; metas, link and scripts &ndash;&gt;-->
-<!--</head>-->
-
-
-<!-- 사용자 CSS 추가 -->
-<th:block layout:fragment="css">
-</th:block>
-
 <div layout:fragment="content">
-  <!-- 사용자 스크립트 추가 -->
-  <th:block layout:fragment="script">
-    <script th:src="@{/js/product-add.js}"></script>
-  </th:block>
-  <h1>Product Add</h1>
+  <form name="option_value_form" action="/admin/product/option/add" method="post">
+    <table>
+      <tbody>
+      <tr>
+        <td>
+          <p>옵션명과 옵션값에는 , (콤마), ; (세미콜론), " (쌍따옴표), \ (역슬래시), #$% (특수문자)는 등록할 수 없습니다.</p>
+          <div>
+            <div>
+              <select name="productId" class="productId">
+                <option value="--ALL--">상품선택</option>
+                <option th:each="product : ${products}" th:value="${product.id}"
+                        th:text="${product.name}"></option>
+              </select>
+            </div>
 
-  <!--------------------------
-          | Product Registration |
-          -------------------------->
-  <!--  block은 CSS로 크기조절이 가능하고 inline은 안 된다. -->
-  <!--  div 는 기본이 block! -->
+          </div>
+          <div>
+            <table border="1" id="optionValueTable">
+              <thead>
+              <tr>
+                <th><input type="button" value="추가" id="createRow"></th>
+                <th>옵션명 및 가격 설정</th>
+              </tr>
+              </thead>
 
-  <div style="display:block; ">
-    <!-- Start(카테코리 출력 부분) (3개의 div) -->
+              <tbody id="option_value_rows">
+              <!---------- 추가 버튼 클릭 시 추가할 row ---------->
+              <tr id="optionCheckTr">
+                <td>
+                  <input type="button" value="삭제" class="delete" onclick="deleteRow(this);">
+                  <!--<input type="checkbox" class="optionCheckFrame">-->
+                </td>
 
-    <div
-        style='display:inline-block;min-width:900px;position:relative;left:50px;border:1px solid gold;'>
+                <td width="500">
+                  <div>옵션명 :
+                    <input type="text" name="productOptions[0].name" placeholder="예시) 옵션명을 입력하시오"
+                           maxlength="50"
+                           size="70">
+                  </div>
+                  <div>추가금액 :
+                    <input type="text" name="productOptions[0].price" size="70">
+                  </div>
+                  <div>옵션설명 :
+                    <input type="text" name="productOptions[0].description" size="70"
+                           style="height:30px;">
+                  </div>
+                </td>
+              </tr>
+              <!---------- 추가 버튼 클릭 시 추가할 row ---------->
+              </tbody>
+            </table>
+          </div>
+        </td>
+      </tr>
 
-      <div id="firstCategory" style='display:inline;float:left;width:200px;'>
-        <ul>
-          <li th:each="category : ${categories}" th:if="${category.parentId == 0 }">
-            <span th:attr="data-categoryid=${category.id}" class="span"
-                  th:onclick="'getCategoryList(' + ${category.id} + ')'"
-                  th:text="${category.name}"></span>
-          </li>
-        </ul>
-      </div>
+      </tbody>
+    </table>
+    <input type="submit" value="submit">
 
-      <div id="secondCategory" style='display:inline;float:left;width:200px;'>
-        <ul id="secondCategoryUl">
+  </form>
 
-        </ul>
-
-      </div>
-
-      <div id="thirdCategory" style='display:inline;float:left;width:200px;'>
-        <ul id="thirdCategoryUl">
-
-        </ul>
-
-      </div>
-
-    </div>
-    <!-- End(카테고리)-->
-
-    <!-- th:field="*{product.productOptions.description}" 이런식으로 해도 된다는데... 실패했었음.-->
-    <form action="#" th:action="@{/admin/product/add}" method="post"
-          th:object="${Product}">
-
-      <!-- Start(현재 선택한 카테고리가 무엇인지 보여주는 부분) -->
-      <div style="display:inline-block;position:relative;left:50px;" id="currentCategory">
-        <label>선택한 카테고리 : </label>
-        <span id="categoryName"></span>
-        <span name="productCategoryId" id="categoryId"></span>
-        <input id="categoryId2" type="hidden" name="productCategory.id" value="">
-        <!--<input th:field="*{productCategoryId}" type="text" value="" placeholder="">-->
-      </div>
-      <!-- End (현재 선택한 카테고리 보여주는 부분)-->
-
-      <!-- Start (상품 기본정보 등록) -->
-      <div style="display: block; position:relative;left:50px;">
-        <div>
-          <label>상품명 : </label>
-          <input name="name" type="text" placeholder="Product Name">
-        </div>
-        <div>
-          <label>제조사 : </label>
-          <input name="manufacturer" type="text" placeholder="Manufacturer">
-        </div>
-        <div>
-          <label>상품코드 : </label>
-          <input name="code" type="text" placeholder="Product Code">
-        </div>
-        <div>
-          <label>원가 : </label>
-          <input name="originalPrice" type="text" placeholder="Original Price">
-        </div>
-        <div>
-          <label>판매가 : </label>
-          <input name="sellingPrice" type="text" placeholder="Selling Price">
-        </div>
-        <div>
-          <label>제조가 : </label>
-          <input name="manufacturingPrice" type="text" placeholder="Manufacturing Price">
-        </div>
-        <div>
-          <label>배송비 : </label>
-          <input name="shippingPrice" type="text" placeholder="Shipping Fee">
-        </div>
-        <div>
-          <label>상품 설명 : </label>
-          <input name="productDetail.description" type="text" placeholder="Product Description">
-        </div>
-
-        <div>
-          <label>제조일 : </label>
-          <input name="date1" type="datetime-local" placeholder="Manufacture Date">
-          <!--<input name="date1" type="datetime-local" id="datepicker">-->
-        </div>
-        <div>
-          <label>등록일 : 서비스에서 넣어주면 될듯!? </label>
-        </div>
-        <div>
-          <label>출시일 : </label> <!-- datetime-local -->
-          <input name="date2" type="datetime-local" placeholder="Release Date">
-          <!--<input name="releaseDate" type="text" id="datepicker2" placeholder="Release Date">-->
-        </div>
-
-        <div>
-          <label>적립금 : </label>
-          <input name="mileage" type="text" placeholder="Mileage">
-        </div>
-        <div>
-          <label>재고??? : </label>quantity
-          <input name="quantity" type="text" placeholder="Quantity">
-        </div>
-        <div>
-          <label>안전재고?? : </label>
-          <input name="safeQuantity" type="text" placeholder="Safe Quantity">
-        </div>
-        <div>
-          <label>화면에 바로 보여줄거에요? </label>
-          <!-- 체크박스 -->
-          <input name="display" type="checkbox">
-        </div>
-        <div>
-          <select name="optionId" class="">
-            <option value="--ALL--">옵션선택</option>
-            <option th:each="option : ${options}" th:value="${option.id}"
-                    th:text="${option.name}"></option>
-          </select>
-        </div>
-
-        <div>
-          <input type="submit" text="상품등록">
-        </div>
-
-      </div>
-
-
-    </form>
-  </div>
-
+  <script th:src="@{/js/product-option.js}"></script>
 </div>
 </html>

@@ -53,6 +53,20 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     QMember member = QMember.member;
     QOrder order = QOrder.order;
 
+    JPQLQuery query = from(member);
+
+    /*
+    select m.*,k.order_date,k.order_number from member as m inner join
+	(select o.date as order_date, o.order_number, o.member_id from orders as o inner join
+		(select m.id as member_id, max(o.date) as date from orders o inner join
+			member as m on o.member_id=m.id  where m.login_id like '%sky%' group by m.id) as k
+				on k.member_id=o.member_id and k.date = o.date) as k on k.member_id=m.id;
+     */
+
+
+
+
+
     return null;
   }
 

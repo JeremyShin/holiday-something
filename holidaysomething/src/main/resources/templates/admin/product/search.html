@@ -80,7 +80,7 @@
       </form>
     </table>
   </div>
-
+  
   <!-- (검색 전)모든 상품 리스트 | (검색 후)상품 검색 결과 -->
   <div>
     <table>
@@ -121,7 +121,7 @@
     <!-- 모든 상품 리스트 페이지 번호 -->
     <div id="page-numbers">
       <th:block th:each="item : ${#numbers.sequence(1, productPageCount)}">
-        <a th:href="@{'/admin/product/product_search?page=' + ${item}}">
+        <a th:href="@{'/admin/product/search?page=' + ${item}}">
           <span th:text="${item}"></span>
         </a>
       </th:block>

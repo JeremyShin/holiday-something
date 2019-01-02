@@ -18,11 +18,8 @@ public interface ProductCategoryRepository extends JpaRepository<ProductCategory
 
   List<ProductCategory> findByParentId(Long parentId);
 
-  List<ProductCategory> findAll();
-
   @Query(value = "select pc from ProductCategory pc where pc.parentId=(:parentId)")
   List<ProductCategory> findCategory(@Param("parentId") Long parentId);
-
 
   @Query(value = "select pc from ProductCategory pc where pc.id=(:id)")
   ProductCategory findByIdContaining(@Param("id") Long id);
