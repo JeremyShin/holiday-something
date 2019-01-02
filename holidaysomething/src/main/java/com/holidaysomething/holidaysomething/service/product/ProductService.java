@@ -28,11 +28,6 @@ public interface ProductService {
   // 모든 상품 or 검색된 상품 by Jun
   Page<Product> findProductAllOrSearch(SearchDto searchDto, Pageable pageable);
 
-  Page<Product> findByProductCategory(Long categoryId, Pageable pageable);
-
-  Page<Product> findByProductClassification(String SearchClassificationValue,
-      String productSearchClassificationInput, Pageable pageable);
-
   Page<Product> findProducts(String productSearchClassificationValue,
       String productSearchClassificationInput, Long largeId, Long middleId, Long smallId,
       String productSearchDateValue, String productStartDateSelect, String productEndDateSelect,

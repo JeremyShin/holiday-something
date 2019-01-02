@@ -110,7 +110,6 @@ public class AdminProductController {
     return "redirect:/admin/product/search";
   }
 
-
   @GetMapping("/search")
   public String productSearch(ModelMap modelMap,
       @RequestParam(value = "page", defaultValue = "1") int page) {
@@ -122,11 +121,11 @@ public class AdminProductController {
     // 모든 상품 리스트를 불러온다(페이지)
     Pageable pageable = PageRequest.of(page - 1, 10);
     Page<Product> allProductList = productAddService.getAllProducts(pageable);
-
     int productPageCount = allProductList.getTotalPages();
-    modelMap.addAttribute("productPageCount", productPageCount);
-    modelMap.addAttribute("allProductList", allProductList);
 
+    modelMap.addAttribute("allProductList", allProductList);
+    modelMap.addAttribute("productPageCount", productPageCount);
+    
     return "admin/product/search";
   }
 
@@ -137,20 +136,16 @@ public class AdminProductController {
       @RequestParam(value = "productLargeCategoryId", required = false) Long largeId,
       @RequestParam(value = "productMiddleCategoryId", required = false) Long middleId,
       @RequestParam(value = "productSmallCategoryId", required = false) Long smallId,
-      @RequestParam(value = "productSearchDate", required = false) String searchDateValue,
+      @RequestParam(value = "productDate", required = false) String dateValue,
       @RequestParam(value = "productRegDateStart", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String startDateSelect,
       @RequestParam(value = "productRegDateEnd", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String endDateSelect) {
-//    @RequestParam("productSearchDateInput") @DateTimeFormat(pattern="yyyy/MM/dd") Date productSearchDateInput) {
-//    @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date1,
-//    @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date2,
 
     log.info("searchClassificationValue: " + searchClassificationValue);
     log.info("searchClassificationInput: " + searchClassificationInput);
     log.info("largeId: " + largeId);
     log.info("middleId: " + middleId);
     log.info("smallId: " + smallId);
-    log.info("searchDateValue: " + searchDateValue);
-//    log.info("productSearchDateInput: " + productSearchDateInput);
+    log.info("dateValue: " + dateValue);
     log.info("startDateSelect: " + startDateSelect);
     log.info("endDateSelect: " + endDateSelect);
 
@@ -161,38 +156,12 @@ public class AdminProductController {
     // QueryDSL 적용
     Page<Product> productPage = productService
         .findProducts(searchClassificationValue, searchClassificationInput,
-            largeId, middleId, smallId, searchDateValue, startDateSelect, endDateSelect, pageable);
-
-//    Page<Product> productPage = new PageImpl<>(new ArrayList<>());
-//    // '검색분류'로 검색
-//    // 상품명 상품코드 판매가 제조공장 가격대체문구 배송비
-//    if (productSearchClassificationInput != null) {
-//      log.info("'검색분류'로 검색");
-//      productPage = productService.findByProductClassification(productSearchClassificationValue,
-//          productSearchClassificationInput, pageable);
-//    }
-//
-//    // '상품분류'로 검색
-//    //TODO: 대/중/소 하위까지 전부 찾아야 함
-//    if (largeId != null) {
-//      log.info("'상품분류'로 검색");
-//      productPage = productService.findByProductCategory(largeId, pageable);
-//    }
-//
-//    // '상품등록일'로 검색
-//    if (!productStartDateSelect.equals("")) {
-//      log.info("'상품등록일'로 검색");
-//      LocalDateTime castDateStart = LocalDateTime.parse(productStartDateSelect);
-//      LocalDateTime castDateEnd = LocalDateTime.parse(productEndDateSelect);
-//      productPage = productService.findByProductRegdate(castDateStart, castDateEnd, pageable);
-//    }
-
-    modelMap.addAttribute("productPage", productPage);
-
+            largeId, middleId, smallId, dateValue, startDateSelect, endDateSelect, pageable);
     int productPageCount = productPage.getTotalPages();
-    modelMap.addAttribute("productPageCount", productPageCount);
-    modelMap.addAttribute("allProductList", productPage);
 
+    modelMap.addAttribute("allProductList", productPage);
+    modelMap.addAttribute("productPageCount", productPageCount);
+    
     return "admin/product/search";
   }
 

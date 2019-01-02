@@ -44,9 +44,6 @@ public interface ProductRepository extends JpaRepository<Product, Long>, Product
   //모든 상품을 상풍명순으로 검색
   List<Product> findAlByOrderByName();
 
-  @Query(value = "SELECT p FROM Product p WHERE p.productCategory.id = :categoryId")
-  Page<Product> findByProductCategory(@Param("categoryId") Long categoryId, Pageable pageable);
-
   /************* '검색분류'로 검색하는 경우 *************************************************************/
   @Query(value = "SELECT p FROM Product p WHERE p.name LIKE CONCAT('%', :name, '%')")
   Page<Product> findProductByName(@Param("name") String name, Pageable pageable);
