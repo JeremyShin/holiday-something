@@ -36,66 +36,66 @@ INSERT INTO exchange_refund(apply_date, approve, approve_date, price, type) VALU
 INSERT INTO exchange_refund(apply_date, approve, approve_date, price, type) VALUES (now(), 1, now(), 3000, '환불');
 
 
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'root', '1234', 'root@naver.com', '김루트', 'rootnickname', '02-1111-1111', '1977-11-10', '04557', '서울특별시 중구 퇴계로', '211-5', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'holiday', '1234', 'holidaysomething@gmail.com', '김홀리', 'holidaysomething', '02-7622-7622', '1988-12-31', '04547', '서울특별시 중구 동호로', '361', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'larimar', '1234', 'larimar@gmail.com', '라리마', 'larimar', '010-3561-6124', '1990-01-28', '04757', '서울특별시 성동구 마장로 42길 16', '201호', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'crazy', '1234', 'jhkim4685@gmail.com', '김준형', 'CrAzy', '010-2925-4685', '1995-02-01', '04960', '서울특별시 광진구 자양로 48길 34', '301호', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'marin', '1111', 'marin24@gmail.com', '임요환', 'SlayersBoxeR', '010-1111-1111', '1980-09-04', '11111', '경기도 포천시 이동면 성장로', '111', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'yellow', '22', 'yellow22@gmail.com', '홍진호', '콩진호콩진호', '010-2222-2222', '1982-10-31', '22222', '인천광역시 미추홀구 학익소로 63', '22', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'faker', '1234', 'faker142@gmail.com', '이상혁', 'faker', '010-5671-6135', '1996-05-07', '12567', '경기도 양평군 개군면 양덕길 83', '', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'ambition', '1234', 'ambition48@gmail.com', '강찬용', 'ambition', '010-6167-6125', '1992-10-27', '15256', '경기도 안산시 상록구', '', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'blue', '1234', 'blue1528@gmail.com', '강블루', 'blue', '010-4125-4412', '1989-10-25', '14256', '경기도 광명시 오리로 801', '101', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'black', '1234', 'black1528@gmail.com', '강블랙', 'black', '010-1631-2455', '1992-05-24', '15234', '경기도 안산시 단원구 선부로 166', '101', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'white', '1234', 'blacka1528@gmail.com', '강하양', 'white', '010-5252-2245', '1992-07-14', '15234', '경기도 안산시 단원구 선부로 166', '201', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'pink', '1234', 'pink1524@gmail.com', '김분홍', 'pink', '010-1124-5521', '1994-05-14', '15234', '경기도 안산시 단원구 선부로 166', '202', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'red', '1234', 'red1524@gmail.com', '김빨강', 'red', '010-5512-4678', '1993-02-13', '15234', '경기도 안산시 단원구 선부로 166', '203', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'green', '1234', 'green1524@gmail.com', '박초록', 'green', '010-4567-1379', '1991-01-14', '15234', '경기도 안산시 단원구 선부로 166', '303', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'orange', '1234', 'orange2556@gmail.com', '나주황', 'orange', '010-5678-1251', '1991-11-14', '15234', '경기도 안산시 단원구 선부로 166', '302', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'violet', '1234', 'violet26@gmail.com', '최보라', 'violet', '010-5511-2567', '1991-11-24', '15212', '경기도 안산시 단원구 우목골길 3-7', '101호', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'navy', '1234', 'navy126@gmail.com', '최남색', 'navy', '010-5511-2252', '1989-09-29', '15212', '경기도 안산시 단원구 우목골길 3-7', '102호', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'sky', '1234', 'sky126@gmail.com', '김하늘', 'sky', '010-5722-2567', '1989-03-07', '15212', '경기도 안산시 단원구 우목골길 3-7', '202호', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'sea', '1234', 'sea126@gmail.com', '최바다', 'sea', '010-6661-2256', '1989-04-07', '15212', '경기도 안산시 단원구 우목골길 3-7', '201호', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'earth', '1234', 'ground16@gmail.com', '박대지', 'earth', '010-5555-5555', '1988-05-07', '15212', '경기도 안산시 단원구 우목골길 3-7', '302호', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'rlacjftn10', '1234', 'kcs1256@gmail.com', '김철수', 'kcs', '010-1257-2545', '1978-08-10', '11790', '경기도 의정부시 오목로35번길 49', '101호', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'sky1234', '1234', 'kyh1252@gmail.com', '김영희', 'kyh', '010-7764-6896', '1980-04-10', '11790', '경기도 의정부시 오목로35번길 49', '102호', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'monster', '1234', 'ryu99@gmail.com', '류현진', 'monster', '010-9999-9999', '1987-03-25', '06344', '서울시 강남구 일원동 689-1', '101', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'kimalias', '1234', 'alias52@gmail.com', '김태균', 'kimalias', '010-5252-5252', '1982-05-29', '06344', '서울시 강남구 일원동 689-1', '102', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'chuchutrain', '1234', 'train17@gmail.com', '추신수', 'chuchutrain', '010-1717-1717', '1982-07-13', '06344', '서울시 강남구 일원동 689-1', '103', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'bigboy', '1234', 'bigboy10@gmail.com', '이대호', 'bigboy', '010-1010-1010', '1982-06-21', '06344', '서울시 강남구 일원동 689-1', '104', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'kimtakgu', '1234', 'kimtakgu29@gmail.com', '김광현', 'kimtakgu', '010-2929-2929', '1988-07-22', '06344', '서울시 강남구 일원동 689-1', '201', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'devil', '1234', 'devil8@gmail.com', '정근우', 'devil', '010-8888-8888', '1982-10-02', '06344', '서울시 강남구 일원동 689-1', '202', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, '1234sky', '1234', 'whitetiger50@gmail.com', '강백호', 'whitetiger', '010-5050-5050', '1999-07-29', '06344', '서울시 강남구 일원동 689-1', '203', 1, 1, 1, 1, null);
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender)
-VALUES (null, 'TooMuchTalker', '1234', 'TooMuchTalker61@gmail.com', '박찬호', 'TooMuchTalker', '010-6161-6161', '1973-06-29', '06344', '서울시 강남구 일원동 689-1', '204', 1, 1, 1, 1, null);
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'root', '1234', 'root@naver.com', '김루트', 'rootnickname', '02-1111-1111', '1977-11-10', '04557', '서울특별시 중구 퇴계로', '211-5', 1, 1, 1, 1, null, '남자', '2015-01-31', '2018-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'holiday', '1234', 'holidaysomething@gmail.com', '김홀리', 'holidaysomething', '02-7622-7622', '1988-12-31', '04547', '서울특별시 중구 동호로', '361', 1, 1, 1, 1, null, '여자', '2015-01-31', '2018-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'larimar', '1234', 'larimar@gmail.com', '라리마', 'larimar', '010-3561-6124', '1990-01-28', '04757', '서울특별시 성동구 마장로 42길 16', '201호', 1, 1, 1, 1, null, '남자', '2015-01-31', '2018-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'crazy', '1234', 'jhkim4685@gmail.com', '김준형', 'CrAzy', '010-2925-4685', '1995-02-01', '04960', '서울특별시 광진구 자양로 48길 34', '301호', 1, 1, 1, 1, null, '여자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'marin', '1111', 'marin24@gmail.com', '임요환', 'SlayersBoxeR', '010-1111-1111', '1980-09-04', '11111', '경기도 포천시 이동면 성장로', '111', 1, 1, 1, 1, null, '남자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'yellow', '22', 'yellow22@gmail.com', '홍진호', '콩진호콩진호', '010-2222-2222', '1982-10-31', '22222', '인천광역시 미추홀구 학익소로 63', '22', 1, 1, 1, 1, null, '여자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'faker', '1234', 'faker142@gmail.com', '이상혁', 'faker', '010-5671-6135', '1996-05-07', '12567', '경기도 양평군 개군면 양덕길 83', '', 1, 1, 1, 1, null, '남자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'ambition', '1234', 'ambition48@gmail.com', '강찬용', 'ambition', '010-6167-6125', '1992-10-27', '15256', '경기도 안산시 상록구', '', 1, 1, 1, 1, null, '여자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'blue', '1234', 'blue1528@gmail.com', '강블루', 'blue', '010-4125-4412', '1989-10-25', '14256', '경기도 광명시 오리로 801', '101', 1, 1, 1, 1, null, '남자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'black', '1234', 'black1528@gmail.com', '강블랙', 'black', '010-1631-2455', '1992-05-24', '15234', '경기도 안산시 단원구 선부로 166', '101', 1, 1, 1, 1, null, '남자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'white', '1234', 'blacka1528@gmail.com', '강하양', 'white', '010-5252-2245', '1992-07-14', '15234', '경기도 안산시 단원구 선부로 166', '201', 1, 1, 1, 1, null, '남자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'pink', '1234', 'pink1524@gmail.com', '김분홍', 'pink', '010-1124-5521', '1994-05-14', '15234', '경기도 안산시 단원구 선부로 166', '202', 1, 1, 1, 1, null, '남자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'red', '1234', 'red1524@gmail.com', '김빨강', 'red', '010-5512-4678', '1993-02-13', '15234', '경기도 안산시 단원구 선부로 166', '203', 1, 1, 1, 1, null, '남자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'green', '1234', 'green1524@gmail.com', '박초록', 'green', '010-4567-1379', '1991-01-14', '15234', '경기도 안산시 단원구 선부로 166', '303', 1, 1, 1, 1, null, '남자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'orange', '1234', 'orange2556@gmail.com', '나주황', 'orange', '010-5678-1251', '1991-11-14', '15234', '경기도 안산시 단원구 선부로 166', '302', 1, 1, 1, 1, null, '남자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'violet', '1234', 'violet26@gmail.com', '최보라', 'violet', '010-5511-2567', '1991-11-24', '15212', '경기도 안산시 단원구 우목골길 3-7', '101호', 1, 1, 1, 1, null, '남자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'navy', '1234', 'navy126@gmail.com', '최남색', 'navy', '010-5511-2252', '1989-09-29', '15212', '경기도 안산시 단원구 우목골길 3-7', '102호', 1, 1, 1, 1, null, '여자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'sky', '1234', 'sky126@gmail.com', '김하늘', 'sky', '010-5722-2567', '1989-03-07', '15212', '경기도 안산시 단원구 우목골길 3-7', '202호', 1, 1, 1, 1, null, '여자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'sea', '1234', 'sea126@gmail.com', '최바다', 'sea', '010-6661-2256', '1989-04-07', '15212', '경기도 안산시 단원구 우목골길 3-7', '201호', 1, 1, 1, 1, null, '여자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'earth', '1234', 'ground16@gmail.com', '박대지', 'earth', '010-5555-5555', '1988-05-07', '15212', '경기도 안산시 단원구 우목골길 3-7', '302호', 1, 1, 1, 1, null, '여자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'rlacjftn10', '1234', 'kcs1256@gmail.com', '김철수', 'kcs', '010-1257-2545', '1978-08-10', '11790', '경기도 의정부시 오목로35번길 49', '101호', 1, 1, 1, 1, null, '여자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'sky1234', '1234', 'kyh1252@gmail.com', '김영희', 'kyh', '010-7764-6896', '1980-04-10', '11790', '경기도 의정부시 오목로35번길 49', '102호', 1, 1, 1, 1, null, '남자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'monster', '1234', 'ryu99@gmail.com', '류현진', 'monster', '010-9999-9999', '1987-03-25', '06344', '서울시 강남구 일원동 689-1', '101', 1, 1, 1, 1, null, '남자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'kimalias', '1234', 'alias52@gmail.com', '김태균', 'kimalias', '010-5252-5252', '1982-05-29', '06344', '서울시 강남구 일원동 689-1', '102', 1, 1, 1, 1, null, '남자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'chuchutrain', '1234', 'train17@gmail.com', '추신수', 'chuchutrain', '010-1717-1717', '1982-07-13', '06344', '서울시 강남구 일원동 689-1', '103', 1, 1, 1, 1, null, '남자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'bigboy', '1234', 'bigboy10@gmail.com', '이대호', 'bigboy', '010-1010-1010', '1982-06-21', '06344', '서울시 강남구 일원동 689-1', '104', 1, 1, 1, 1, null, '남자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'kimtakgu', '1234', 'kimtakgu29@gmail.com', '김광현', 'kimtakgu', '010-2929-2929', '1988-07-22', '06344', '서울시 강남구 일원동 689-1', '201', 1, 1, 1, 1, null, '남자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'devil', '1234', 'devil8@gmail.com', '정근우', 'devil', '010-8888-8888', '1982-10-02', '06344', '서울시 강남구 일원동 689-1', '202', 1, 1, 1, 1, null, '여자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, '1234sky', '1234', 'whitetiger50@gmail.com', '강백호', 'whitetiger', '010-5050-5050', '1999-07-29', '06344', '서울시 강남구 일원동 689-1', '203', 1, 1, 1, 1, null, '여자', '2015-01-02', '2017-12-01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, regdate, last_login)
+VALUES (null, 'TooMuchTalker', '1234', 'TooMuchTalker61@gmail.com', '박찬호', 'TooMuchTalker', '010-6161-6161', '1973-06-29', '06344', '서울시 강남구 일원동 689-1', '204', 1, 1, 1, 1, null, '여자', '2015-01-02', '2017-12-01');
 
 
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
