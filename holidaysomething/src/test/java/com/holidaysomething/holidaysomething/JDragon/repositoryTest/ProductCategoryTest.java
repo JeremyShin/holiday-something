@@ -1,7 +1,7 @@
 package com.holidaysomething.holidaysomething.JDragon.repositoryTest;
 
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
-import com.holidaysomething.holidaysomething.repository.product.ProductCategoryRepository;
+import com.holidaysomething.holidaysomething.repository.ProductCategoryRepository;
 import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;

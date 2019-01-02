@@ -3,7 +3,6 @@ package com.holidaysomething.holidaysomething.controller.admin.product;
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.dto.ProductOptionCommand;
-import com.holidaysomething.holidaysomething.service.product.ProductAddService;
 import com.holidaysomething.holidaysomething.service.product.ProductOptionService;
 import com.holidaysomething.holidaysomething.service.product.ProductService;
 import java.util.ArrayList;
@@ -30,7 +29,6 @@ public class AdminProductOptionController {
 
   private final ProductService productService;
   private final ProductOptionService productOptionService;
-  private final ProductAddService productAddService;
 
   @GetMapping
   public String productOptions(ModelMap modelMap,
@@ -131,7 +129,7 @@ public class AdminProductOptionController {
         .fromProductOptionCommandToProductOptionList(productOptionCommand);
     productOptionService.save(productOptions, productId);
 
-    return "redirect:/admin/product/option-add";
+    return "redirect:/admin/product/option";
   }
 
 }
