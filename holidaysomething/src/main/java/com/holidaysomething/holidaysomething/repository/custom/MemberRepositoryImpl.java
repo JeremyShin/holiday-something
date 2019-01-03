@@ -1,13 +1,29 @@
 package com.holidaysomething.holidaysomething.repository.custom;
 
 import com.holidaysomething.holidaysomething.domain.Member;
+import com.holidaysomething.holidaysomething.domain.Order;
 import com.holidaysomething.holidaysomething.domain.QMember;
 import com.holidaysomething.holidaysomething.domain.QOrder;
+import com.holidaysomething.holidaysomething.domain.QOrderedProduct;
+import com.holidaysomething.holidaysomething.domain.QProduct;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
+import com.querydsl.core.Tuple;
+import com.querydsl.core.types.dsl.Wildcard;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.JPQLQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import org.hibernate.criterion.AggregateProjection;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
+
+import static com.querydsl.core.alias.Alias.*;
+
+
+
 
 public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     MemberRepositoryCustom {
@@ -17,6 +33,9 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
   public MemberRepositoryImpl() {
     super(Member.class);
   }
+
+  @PersistenceContext
+  private EntityManager entityManager;
 
   // QMember 는 target/generated-sources 에 있음!
   // pom.xml 에 querydsl 관련 설정 해주고 mvn clean install 해줘야 생김.
@@ -49,25 +68,119 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
   }
 
   @Override
-  public List<Member> findMembersByLoginIdInOrdersByDsl(String loginId) {
+  public List<Tuple> findMembersByLoginIdInOrdersByDsl(String loginId) {
     QMember member = QMember.member;
+    //QMember member2 = QMember.member;
     QOrder order = QOrder.order;
+    //QOrder order2 = new QOrder("order2");
+
+    JPQLQuery query = from(member);
+    //JPQLQuery<Member> query = from(member1);
+
+    //JPAQueryFactory factory = new JPAQueryFactory(this.getEntityManager());
+
+    //JPAQuery<Tuple> query = factory.select()
+
+    /*
+    select m1.*,k1.order_date,k1.order_number from member as m1
+      inner join
+	      (select o1.date as order_date, o1.order_number, o1.member_id from orders as o1
+	        inner join
+		        (select m2.id as member_id, max(o2.date) as date from orders as o2 inner join
+			        member as m2 on o2.member_id=m2.id  where m2.login_id like '%sky%' group by m2.id) as k2
+				on k2.member_id=o1.member_id and k2.date = o1.date) as k1
+		on k1.member_id=m1.id;
+     */
+
+    //query.innerJoin(JPAExpressions.select(order1.date,order1.orderNumber,order1.member.id).from(order1)));
+//    query.innerJoin((JPAExpressions.select(order1.date,order1.orderNumber,order1.member.id).from(order1)),"k");
+    //query.innerJoin(order1,order1);
+    //query.where(member1.id.eq(JPAExpressions.select(order.id.max()).from(order)));
+
+//    1 단계 출력.
+//    query.select(member.id,order.date.max())
+//        .from(order)
+//        .innerJoin(order.member, member).groupBy(member.id).where(member.loginId.contains(loginId));
+
+    query.select(member.id, order.date, order.orderNumber)
+        .from(member)
+        .innerJoin(member.orders, order)
+        .where(
+            //member.loginId.contains(loginId),
+            order.date
+                .in(JPAExpressions.select(order.date.max())
+                    .from(order).innerJoin(order.member, member)
+                    .where(member.loginId.contains(loginId)).groupBy(member.id)));
+
+    return query.fetch();
+  }
+
+  @Override
+  public List<Tuple> findMembersByNameInOrdersByDsl(String name) {
+    QMember member = QMember.member;
+//    QMember member2 = new QMember("member2");
+    QOrder order = QOrder.order;
+//    QOrder order2 = new QOrder("order2");
+//    QOrder order3 = new QOrder("order3");
+//    Member qMember = alias(Member.class, "c");
 
     JPQLQuery query = from(member);
 
-    /*
-    select m.*,k.order_date,k.order_number from member as m inner join
-	(select o.date as order_date, o.order_number, o.member_id from orders as o inner join
-		(select m.id as member_id, max(o.date) as date from orders o inner join
-			member as m on o.member_id=m.id  where m.login_id like '%sky%' group by m.id) as k
-				on k.member_id=o.member_id and k.date = o.date) as k on k.member_id=m.id;
-     */
+//    -- 회원 이름으로 검색하기.
+//    select m1.*,k1.order_date,k1.order_number from member as m1 inner join
+//    (select o1.date as order_date, o1.order_number, o1.member_id from orders as o1 inner join
+//    (select m2.id as member_id, max(o2.date) as date from orders o2 inner join
+//    member as m2 on o2.member_id=m2.id where m2.name like '%김하늘%' group by m2.id) as k2
+//    on k2.member_id=o1.member_id and k2.date = o1.date) as k1 on k1.member_id=m1.id;
+
+//    query.select(member1.id,order1.date,order1.orderNumber).from(member1,order1)
+//        .innerJoin(member1.orders, order1)
+//          .select(order2.date,order2.orderNumber,order2.member.id).from(order2)
+//        .select(member2.id, order2.date.eq(JPAExpressions.select(order2.date.max()))).from(order3)
+//        .innerJoin(member2.orders,order3).groupBy(member2.id).where(member2.name.contains(name))
+//        .where(member1.loginId.contains(name));
+
+    JPAQueryFactory factory = new JPAQueryFactory(this.getEntityManager());
+
+//    JPQLQuery query = factory.select(member1.id,order1.id).from(member1,order1)
+//        .innerJoin(order1.member, member1).from(member1).where(member1.name.contains(name));
+
+    query.select(member.id, order.date, order.orderNumber)
+        .from(member)
+        .innerJoin(member.orders, order)
+        .where(
+            //member.loginId.contains(loginId),
+            order.date
+                .in(JPAExpressions.select(order.date.max())
+                    .from(order).innerJoin(order.member, member)
+                    .where(member.name.contains(name)).groupBy(member.id)));
+
+//    query.select(order1.date,order1.orderNumber,order1.member.id)
+//        .from(order1)
+//          .select(query2).on(order1.member.id.eq(query2.member_id),order1.date.eq(query2.date));
+//
+//    JPQLQuery query3 = factory.select(member1,query.order_date,query.orderNumber)
+//        .from(member1)
+//          .select(query).on(member1.id.eq(query.member.id));
+
+//    query.innerJoin(member.orders,order)
+//        .select(order.date,order.orderNumber,order.id).innerJoin(order.member,member)
+
+    //query.where(member.loginId.contains(loginId));
+    return query.fetch();
+  }
 
 
+  @Override
+  public List<Tuple> findMembersByProductNameInOrdersByDsl(String productName) {
+    QMember member = QMember.member;
+    QOrder order = QOrder.order;
+    QProduct product = QProduct.product;
+    QOrderedProduct orderedProduct = QOrderedProduct.orderedProduct;
 
+    JPQLQuery query = from(member);
 
-
-    return null;
+    return query.fetch();
   }
 
 

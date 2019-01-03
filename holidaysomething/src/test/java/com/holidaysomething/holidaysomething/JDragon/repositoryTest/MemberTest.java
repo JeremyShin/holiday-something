@@ -5,6 +5,7 @@ import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Order;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.holidaysomething.holidaysomething.repository.MemberRepository;
+import com.querydsl.core.Tuple;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.Before;
@@ -147,6 +148,34 @@ public class MemberTest {
       System.out.println("============== : " + member.getId());
       System.out.println("============== : " + member.getName());
       System.out.println("============== : " + member.getLoginId());
+    }
+  }
+
+
+  @Test
+  public void loginId로회원조회byDsl() {
+    List<Tuple> tuples = memberRepository.findMembersByLoginIdInOrdersByDsl("sky");
+    log.info("==================================" + tuples.size());
+    for (Tuple tuple : tuples) {
+      log.info(tuple);
+    }
+  }
+
+  @Test
+  public void name으로회원조회byDsl() {
+    List<Tuple> tuples = memberRepository.findMembersByNameInOrdersByDsl("김하늘");
+    log.info("==================================" + tuples.size());
+    for (Tuple tuple : tuples) {
+      log.info(tuple);
+    }
+  }
+
+  @Test
+  public void productName으로회원조회byDsl() {
+    List<Tuple> tuples = memberRepository.findMembersByProductNameInOrdersByDsl("스밋코구라시");
+    log.info("==================================" + tuples.size());
+    for (Tuple tuple : tuples) {
+      log.info(tuple);
     }
   }
 }
