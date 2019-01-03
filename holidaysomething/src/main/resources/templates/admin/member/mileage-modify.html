@@ -54,16 +54,18 @@
           <td>
             <select name="plusOrMinus">
               <option value="+">(+) 적립금 증액</option>
-              <option value="-">(-) 적립금 차감</option>
+              <option th:if="${member.mileage} <= 0" disabled>(-) 적립금 차감</option>
+              <option th:if="${member.mileage} > 0"value="-">(-) 적립금 차감</option>
             </select>
           </td>
           <td>
-            <input type="number" style="width: 60px;" name="mileage" id="mileageModify"/>
+            <input type="number" style="width: 60px;" name="addMileage" id="mileageModify"/>
           </td>
           </tr>
           </tbody>
         </table>
         <input type="hidden" name="loginId" th:value="${member.loginId}"/>
+        <input type="hidden" name="mileage" th:value="${member.mileage}"/>
         <input type="submit" value="수정">
       </form>
     </div>

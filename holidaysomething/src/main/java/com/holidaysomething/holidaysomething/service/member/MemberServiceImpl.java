@@ -17,7 +17,7 @@ public class MemberServiceImpl implements MemberService {
   private final MemberRepository memberRepository;
 
   @Override
-  @Transactional
+  @Transactional(readOnly = true)
   public Page<Member> findAllOrSearch(SearchDto searchDto, Pageable pageable) {
     Page<Member> members = null;
     if (searchDto.isSearched()) {
@@ -42,13 +42,11 @@ public class MemberServiceImpl implements MemberService {
     int mileage = member.getMileage();
 
     if (memberMileageDto.getPlusOrMinus().equals("+")) {
-      mileage += memberMileageDto.getMileage();
+      mileage += memberMileageDto.getAddMileage();
     } else if (memberMileageDto.getPlusOrMinus().equals("-")) {
-      mileage += memberMileageDto.getMileage() * -1;
+      mileage += memberMileageDto.getAddMileage() * -1;
     }
     // 적립금에 상한선이 있을까??
-    // 적립금이 (-)가 되지 않게 막자
-    // 애당초 마일리지가 0원인 사람은 음수 값을 입력할 수 없게 막아야 되겠지
 
     member.setMileage(mileage);
 
