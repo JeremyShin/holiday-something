@@ -13,4 +13,6 @@ public interface MemberService {
   void updateMember(MemberMileageDto memberMileageDto);
 
   Page<Member> findAllOrSearch(SearchDto searchDto, Pageable pageable);
+
+  Page<Member> searchMembers(String searchClassificationValue, String searchClassificationInput, Pageable pageable);
 }

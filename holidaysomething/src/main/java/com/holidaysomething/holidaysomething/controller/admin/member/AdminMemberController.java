@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -98,8 +99,17 @@ public class AdminMemberController {
   }
 
   @PostMapping("/search")
-  public String memberSearchPost(){
+  public String memberSearchPost(
+      @RequestParam(value = "memberSearchClassificationValue", required = false) String searchClassificationValue,
+      @RequestParam(value = "memberSearchClassificationInput", required = false) String searchClassificationInput){
+
+    log.info("searchClassificationValue" + searchClassificationValue);
+    log.info("memberSearchClassificationInput" + searchClassificationInput);
+
+    Pageable pageable = PageRequest.of(0, 5);
+
+    Page<Member> memberPageable = memberService.searchMembers(searchClassificationValue, searchClassificationInput, pageable);
+
     return "redirect:/admin/member/search";
   }
-
 }

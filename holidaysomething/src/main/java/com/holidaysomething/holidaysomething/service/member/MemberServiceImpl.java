@@ -54,4 +54,13 @@ public class MemberServiceImpl implements MemberService {
 
     memberRepository.save(member);
   }
+
+  @Override
+  public Page<Member> searchMembers(String searchClassificationValue,
+      String searchClassificationInput, Pageable pageable) {
+
+    Page<Member> memberPage = searchMembers(searchClassificationValue, searchClassificationInput, pageable);
+
+    return memberPage;
+  }
 }

@@ -57,6 +57,8 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     JPQLQuery<Member> jpqlQuery = from(qMember);
 
 
+
+
     return null;
   }
 
