@@ -46,8 +46,6 @@ public class MemberServiceImpl implements MemberService {
     } else if (memberMileageDto.getPlusOrMinus().equals("-")) {
       mileage += memberMileageDto.getAddMileage() * -1;
     }
-    // 적립금에 상한선이 있을까??
-
     member.setMileage(mileage);
 
     memberRepository.save(member);
