@@ -1,11 +1,14 @@
 package com.holidaysomething.holidaysomething.repository.custom;
 
 import com.holidaysomething.holidaysomething.domain.Member;
+import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.QMember;
 import com.holidaysomething.holidaysomething.domain.QOrder;
+import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.querydsl.jpa.JPQLQuery;
 import java.util.List;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
@@ -49,6 +52,15 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
   }
 
   @Override
+  public Page<Member> searchMembers(MemberSearchDto memberSearchDto, Pageable pageable) {
+    QMember qMember = QMember.member;
+    JPQLQuery<Member> jpqlQuery = from(qMember);
+
+
+    return null;
+  }
+
+  @Override
   public List<Member> findMembersByLoginIdInOrdersByDsl(String loginId) {
     QMember member = QMember.member;
     QOrder order = QOrder.order;
@@ -62,8 +74,6 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 			member as m on o.member_id=m.id  where m.login_id like '%sky%' group by m.id) as k
 				on k.member_id=o.member_id and k.date = o.date) as k on k.member_id=m.id;
      */
-
-
 
 
 
