@@ -8,10 +8,12 @@ import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.querydsl.jpa.JPQLQuery;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
+@Slf4j
 public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     MemberRepositoryCustom {
 
@@ -52,12 +54,31 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
   }
 
   @Override
-  public Page<Member> searchMembers(MemberSearchDto memberSearchDto, Pageable pageable) {
+  public Page<Member> searchMembers(String searchClassificationValue, String searchClassificationInput, Pageable pageable) {
     QMember qMember = QMember.member;
     JPQLQuery<Member> jpqlQuery = from(qMember);
 
+    // 검색 옵션 설정 : 아이디, 이메일, 전화번호, 닉네임, 주소
+    if(!searchClassificationValue.equals("memberNone")){
+      switch (searchClassificationValue){
+        case "" : log.info("입력된 input 값이 없습니다."); break;
+        case "memberId" : jpqlQuery.from(qMember).where(qMember.loginId.like("%" + searchClassificationInput + "%")); break;
+        case "memberName" : jpqlQuery.from(qMember).where(qMember.name.like("%" + searchClassificationInput + "%")); break;
+        case "memberEmail" : jpqlQuery.from(qMember).where(qMember.email.like("%" + searchClassificationInput + "%")); break;
+        case "memberPhone" : jpqlQuery.from(qMember).where(qMember.phone.like("%" + searchClassificationInput + "%")); break;
+        case "memberNickname" : jpqlQuery.from(qMember).where(qMember.nickname.like("%" + searchClassificationInput + "%")); break;
+        case "memberAddress" : jpqlQuery.from(qMember).where(qMember.address1.like("%" + searchClassificationInput + "%")
+            .or(qMember.address2.like("%" + searchClassificationInput + "%"))); break;
+      }
+    } else {
+      log.info("검색할 옵션을 선택하여주세요.");
+    }
 
+    // 성별
 
+    // 가입일/생일
+
+    // 주문일
 
     return null;
   }
