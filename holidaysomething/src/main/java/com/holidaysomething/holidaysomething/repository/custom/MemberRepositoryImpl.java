@@ -180,6 +180,64 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 
     JPQLQuery query = from(member);
 
+
+    /*
+    select m.*, k.order_date,k.order_number from member as m inner join
+	(select o.member_id,o.date as order_date,o.order_number from orders as o inner join
+		(select max(o.date) as date,o.member_id from orders as o inner join
+			(select distinct op.order_id from ordered_product as op inner join
+			product as p on op.product_id in (select p.id from product as p where p.name like '%스밋코구라시%')) as op
+		on op.order_id = o.id group by o.member_id) as k
+	on k.date=o.date and k.member_id=o.member_id) as k
+on k.member_id = m.id;
+     */
+
+    query.select(member.id, order.date, order.orderNumber).from(member)
+        .innerJoin(member.orders, order)
+        .where(
+            //member.loginId.contains(loginId),
+//            order.date
+//                .in(JPAExpressions.select(order.date.max())
+//                    .from(order).innerJoin(order.member, member)
+//                    .groupBy(member.id)),
+            order.date
+                .in(JPAExpressions.select(orderedProduct.order.date.max())
+                    .from(orderedProduct)
+                    .innerJoin(orderedProduct.product, product)
+                    .groupBy(orderedProduct.order.member.id)
+                    .where(orderedProduct.product.id
+                        .in(JPAExpressions.select(product.id)
+                            .from(product)
+                            .where(product.name.contains(productName))))),
+            order.id
+                .in(JPAExpressions.select(orderedProduct.order.id)
+                    .from(orderedProduct)
+                    .innerJoin(orderedProduct.product, product)
+                    .groupBy(orderedProduct.order.id)
+                    .where(orderedProduct.product.id
+                        .in(JPAExpressions.select(product.id)
+                            .from(product)
+                            .where(product.name.contains(productName)))))
+
+        );
+
+    /* QueryDsl 에서 서브쿼리 인라인뷰는 불가능하다
+      SELECT 문에 있는 서브쿼리 : 스칼라 서브쿼리
+      FROM 절에 있는 서브쿼리 :  인라인 뷰
+      WHERE 절에 있는 서브쿼리: 서브쿼리. 책에 나온 서브 쿼리 방식은 이제 사용 안한다.
+      JPAExpressions 로 서브쿼리 사용하는 거 같은데... in 메소드에서만 사용해봤다.
+      in 에서는 한가지 컬럼만 리턴 가능하다. 그래서 위 와 같은 개 똥 쿼리문이 나오는거다.
+      네이티브 였으면 order.id, order.date 을 한번의 select 구문으로 받아올텐데
+      in 으로 사용하다보니 위와같이 똑같은 구문을 두번 해줬다........
+    */
+
+//    query.select(orderedProduct.order.id).from(orderedProduct)
+//        .innerJoin(orderedProduct.product , product).groupBy(orderedProduct.order.id)
+//        .where(orderedProduct.product.id
+//            .in(JPAExpressions.select(product.id)
+//              .from(product)
+//                .where(product.name.contains(productName))));
+
     return query.fetch();
   }
 
