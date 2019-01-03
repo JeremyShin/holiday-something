@@ -35,39 +35,35 @@
           </td>
         </tr>
         <tr>
-          <th scope="row">상품분류</th>
+          <th scope="row">성별</th>
           <td>
-            <select name="productLargeCategoryId" class="product-category-select"
-                    onchange="updateMiddleCategory(this)">
-              <option disabled selected>대분류</option>
-              <option th:each="category : ${largeCategories}" th:value="${category.id}"
-                      th:text="${category.name}"></option>
-            </select>
-            <select name="productMiddleCategoryId" class="product-category-select"
-                    onchange="updateSmallCategory(this)">
-              <option disabled selected>중분류</option>
-            </select>
-            <select name="productSmallCategoryId" class="product-category-select">
-              <option disabled selected>소분류</option>
-            </select>
+            <input type="checkbox" name="memberMen" value="men">남자
+            <input type="checkbox" name="memberWomen" value="women">여자
+            <input type="checkbox" name="memberSexOther" value="other">기타
+            <input type="checkbox" name="memberSexNone" value="none">선택안함
           </td>
         </tr>
         <tr>
-          <th scope="row">가입일 / 생일</th>
+          <th scope="row">가입일/생일</th>
           <td>
-            <!--        <select name="productSearchDate">
-                          <option value="regDate">상품 등록일</option>
-                          <option value="releaseDate">상품 출시일</option>
-                        </select> -->
-            <select name="memberSearchDate">
+            <select name="memberEventDate">
               <option value="regDate">가입일</option>
               <option value="birthday">기념일</option>
             </select>
 
-            시작일<input name="memberDateStart" type="datetime-local"
-                   placeholder="Start Date">
-            종료일<input name="memberDateEnd" type="datetime-local"
-                   placeholder="Ended Date">
+            시작일 <input name="memberEventDateStart" type="datetime-local"
+                      placeholder="Start Date">
+            종료일 <input name="memberEventDateEnd" type="datetime-local"
+                      placeholder="Ended Date">
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">주문일</th>
+          <td>
+            시작일 <input name="memberOrderDateStart" type="datetime-local"
+                      placeholder="Start Date">
+            종료일 <input name="memberOrderDateEnd" type="datetime-local"
+                      placeholder="Ended Date">
           </td>
         </tr>
         <tr>
@@ -99,54 +95,54 @@
   <!--</span>-->
 
   <!-- (검색 전)모든 상품 리스트 | (검색 후)상품 검색 결과 -->
-  <div>
-    <table>
-      <thead>
-      <tr>
-        <th>id</th>
-        <th>상품코드</th>
-        <th>이름</th>
-        <th>판매가</th>
-        <th>판매량</th>
-        <th>안전재고</th>
-        <th>제조 공장</th>
-        <th>제조일</th>
-        <th>원가</th>
-        <th>가격대체문구</th>
-        <th>출시일</th>
-        <th>배송비</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="product : ${allProductList != null ? allProductList : allProductListSearchResult}">
-        <td th:text="${product.id}">###</td>
-        <td th:text="${product.code}">###</td>
-        <td th:text="${product.name}">###</td>
-        <td th:text="${product.sellingPrice}">###</td>
-        <td th:text="${product.sellingQuantity}">###</td>
-        <td th:text="${product.safeQuantity}">###</td>
-        <td th:text="${product.manufacturer}">###</td>
-        <td th:text="${product.manufactureDate}">###</td>
-        <td th:text="${product.originalPrice}">###</td>
-        <td th:text="${product.optionalPriceText}">###</td>
-        <td th:text="${product.releaseDate}">###</td>
-        <td th:text="${product.shippingPrice}">###</td>
-      </tr>
-      </tbody>
-    </table>
+  <!--<div>-->
+    <!--<table>-->
+      <!--<thead>-->
+      <!--<tr>-->
+        <!--<th>id</th>-->
+        <!--<th>상품코드</th>-->
+        <!--<th>이름</th>-->
+        <!--<th>판매가</th>-->
+        <!--<th>판매량</th>-->
+        <!--<th>안전재고</th>-->
+        <!--<th>제조 공장</th>-->
+        <!--<th>제조일</th>-->
+        <!--<th>원가</th>-->
+        <!--<th>가격대체문구</th>-->
+        <!--<th>출시일</th>-->
+        <!--<th>배송비</th>-->
+      <!--</tr>-->
+      <!--</thead>-->
+      <!--<tbody>-->
+      <!--<tr th:each="product : ${allProductList != null ? allProductList : allProductListSearchResult}">-->
+        <!--<td th:text="${product.id}">###</td>-->
+        <!--<td th:text="${product.code}">###</td>-->
+        <!--<td th:text="${product.name}">###</td>-->
+        <!--<td th:text="${product.sellingPrice}">###</td>-->
+        <!--<td th:text="${product.sellingQuantity}">###</td>-->
+        <!--<td th:text="${product.safeQuantity}">###</td>-->
+        <!--<td th:text="${product.manufacturer}">###</td>-->
+        <!--<td th:text="${product.manufactureDate}">###</td>-->
+        <!--<td th:text="${product.originalPrice}">###</td>-->
+        <!--<td th:text="${product.optionalPriceText}">###</td>-->
+        <!--<td th:text="${product.releaseDate}">###</td>-->
+        <!--<td th:text="${product.shippingPrice}">###</td>-->
+      <!--</tr>-->
+      <!--</tbody>-->
+    <!--</table>-->
 
     <!-- 모든 상품 리스트 페이지 번호 -->
-    <div id="page-numbers">
-      <th:block th:each="item : ${#numbers.sequence(1, productPageCount)}">
-        <a th:href="@{'/admin/product/search?page=' + ${item}}">
-          <span th:text="${item}"></span>
-        </a>
-      </th:block>
-    </div>
+    <!--<div id="page-numbers">-->
+      <!--<th:block th:each="item : ${#numbers.sequence(1, productPageCount)}">-->
+        <!--<a th:href="@{'/admin/product/search?page=' + ${item}}">-->
+          <!--<span th:text="${item}"></span>-->
+        <!--</a>-->
+      <!--</th:block>-->
+    <!--</div>-->
 
-  </div>
+  <!--</div>-->
 
-  <script th:src="@{/js/product-search.js}"></script>
+  <!--<script th:src="@{/js/product-search.js}"></script>-->
 </div>
 
 </html>

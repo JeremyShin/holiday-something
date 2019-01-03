@@ -94,7 +94,7 @@ public class AdminMemberController {
 
   @GetMapping("/search")
   public String memberSearch(){
-    return "/admin/member/search";
+    return "admin/member/search";
   }
 
   @PostMapping("/search")
