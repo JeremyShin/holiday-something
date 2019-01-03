@@ -91,4 +91,15 @@ public class AdminMemberController {
 
     return "redirect:/admin/member/mileage/search";
   }
+
+  @GetMapping("/search")
+  public String memberSearch(){
+    return "/admin/member/search";
+  }
+
+  @PostMapping("/search")
+  public String memberSearchPost(){
+    return "redirect:/admin/member/search";
+  }
+
 }
