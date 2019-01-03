@@ -14,6 +14,9 @@ public class MemberMileageDto {
   // 애당초 마일리지가 0원인 사람은 음수 값을 입력할 수 없게 막아야 되겠지?
   // true면 입력할 수 있다는 뜻! Controller에서는 !를 붙여서 사용하고 있음.
   public boolean isPossible(){
-    return (mileage - addMileage) >= 0 || ((getMileage() == 0) && plusOrMinus.equals("+"));
+    if(plusOrMinus.equals("-") && (getMileage() == 0 || mileage - addMileage < 0)){
+      return false;
+    }
+    return true;
   }
 }
