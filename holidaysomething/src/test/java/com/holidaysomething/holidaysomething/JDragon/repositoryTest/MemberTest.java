@@ -178,4 +178,16 @@ public class MemberTest {
       log.info(tuple);
     }
   }
+
+
+  @Test
+  public void 주문기간으로회원조회byDsl() {
+    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
+    LocalDateTime ldt2 = LocalDateTime.of(2018, 11, 25, 00, 00, 00);
+    List<Tuple> tuples = memberRepository.findMembersByProductPeriodInOrdersByDsl(ldt1, ldt2);
+    log.info("==================================" + tuples.size());
+    for (Tuple tuple : tuples) {
+      log.info(tuple);
+    }
+  }
 }

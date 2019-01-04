@@ -4,6 +4,7 @@ import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Order;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.querydsl.core.Tuple;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
@@ -20,5 +21,8 @@ public interface MemberRepositoryCustom {
   List<Tuple> findMembersByNameInOrdersByDsl(String loginId);
 
   List<Tuple> findMembersByProductNameInOrdersByDsl(String productName);
+
+  List<Tuple> findMembersByProductPeriodInOrdersByDsl(LocalDateTime startDate,
+      LocalDateTime endDate);
 
 }

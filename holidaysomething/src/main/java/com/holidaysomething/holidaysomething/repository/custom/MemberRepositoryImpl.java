@@ -12,6 +12,7 @@ import com.querydsl.core.types.dsl.Wildcard;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -237,6 +238,39 @@ on k.member_id = m.id;
 //            .in(JPAExpressions.select(product.id)
 //              .from(product)
 //                .where(product.name.contains(productName))));
+
+    return query.fetch();
+  }
+
+  @Override
+  public List<Tuple> findMembersByProductPeriodInOrdersByDsl(LocalDateTime startDate,
+      LocalDateTime endDate) {
+    QMember member = QMember.member;
+    QOrder order = QOrder.order;
+
+    JPQLQuery query = from(member);
+    JPAQueryFactory factory = new JPAQueryFactory(this.getEntityManager());
+
+
+    /*
+    select m.*,k.order_date,k.order_number from member as m inner join
+	(select o.member_id,o.date as order_date,o.order_number from orders as o inner join
+		(select o.member_id, max(o.date) as order_date from orders as o where o.date between '2018-11-01' and '2018-11-25' group by o.member_id) as k
+	on o.member_id=k.member_id and o.date=k.order_date) as k
+on k.member_id=m.id;
+     */
+    query.select(member.id, order.date, order.orderNumber)
+        .from(member)
+        .innerJoin(member.orders, order)
+        .where(
+            // in 안에 있는 select 만 하면 6개 로우가 나와야 하는데
+            // in 이라서 로우가 8개 나온다.
+            order.date
+                .in(JPAExpressions.select(order.date.max())
+                    .from(order)
+                    .where(order.date.between(startDate, endDate), order.member.id.eq(member.id))
+                    .groupBy(order.member.id)
+                ));
 
     return query.fetch();
   }
