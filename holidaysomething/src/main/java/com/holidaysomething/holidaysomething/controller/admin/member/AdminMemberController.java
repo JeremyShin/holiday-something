@@ -64,7 +64,6 @@ public class AdminMemberController {
   @GetMapping("/mileage/search")
   public String mileageSearch(@PageableDefault(sort = {"loginId"}, size = 10) Pageable pageable,
       @ModelAttribute("search") SearchDto searchDto, ModelMap modelMap) {
-
     Page<Member> members = memberService.findAllOrSearch(searchDto, pageable);
     modelMap.addAttribute("members", members);
 
@@ -80,12 +79,10 @@ public class AdminMemberController {
   }
 
   @PostMapping("/mileage/modify")
-  public String mileageModifyPost(
-      @ModelAttribute("mileageModify") MemberMileageDto memberMileageDto) {
+  public String mileageModifyPost(@ModelAttribute("mileageModify") MemberMileageDto memberMileageDto) {
 
-    if (memberMileageDto.getMileage() < 0) {
-      return "redirect:/";
-    }
+    if (memberMileageDto.getAddMileage() < 0 || !memberMileageDto.isPossible())
+      return "redirect:/admin";
 
     memberService.updateMember(memberMileageDto);
 
