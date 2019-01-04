@@ -196,6 +196,7 @@ public class AdminProductController {
     return "admin/product/search";
   }
 
+  // 기간검색시 앞 시각이 뒷 시각보다 미래면 안된다.?
   @GetMapping("/{productId}")
   public String productDetail(@PathVariable("productId") Long productId,
       @RequestParam(required = false, value = "optionPage") Optional<Integer> pageNum,

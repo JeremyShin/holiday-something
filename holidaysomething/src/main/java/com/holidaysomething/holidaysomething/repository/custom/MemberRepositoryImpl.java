@@ -50,23 +50,43 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     return jpqlQuery.where(qMember.id.eq(id)).fetchOne();
   }
 
-  @Override
-  public List<Member> getMembersByDsl(SearchOrderMemberDto searchOrderMemberDto,
-      Pageable pageable) {
-    QMember member = QMember.member;
-    JPQLQuery query = from(member);
-
-    if (searchOrderMemberDto.getLoginId() != null || !searchOrderMemberDto.getLoginId()
-        .equals("")) {
-      query.where(member.loginId.eq(searchOrderMemberDto.getLoginId()));
-    }
-
-    if (searchOrderMemberDto.getName() != null || !searchOrderMemberDto.getName().equals("")) {
-      query.where(member.name.eq(searchOrderMemberDto.getName()));
-    }
-
-    return getQuerydsl().applyPagination(pageable, query).fetch();
-  }
+//  @Override
+//  public List<Member> getMembersByDsl(SearchOrderMemberDto searchOrderMemberDto,
+//      Pageable pageable) {
+//    QMember member = QMember.member;
+//    JPQLQuery query = from(member);
+//
+//    if (searchOrderMemberDto.getLoginId() != null || !searchOrderMemberDto.getLoginId()
+//        .equals("")) {
+//      query.where(member.loginId.eq(searchOrderMemberDto.getLoginId()));
+//    }
+//
+//    if (searchOrderMemberDto.getName() != null || !searchOrderMemberDto.getName().equals("")) {
+//      query.where(member.name.eq(searchOrderMemberDto.getName()));
+//    }
+//
+//    if (searchOrderMemberDto.getOrderNumber() != null || !searchOrderMemberDto.getOrderNumber().equals("")) {
+//      query.where(member.name.eq(searchOrderMemberDto.getName()));
+//    }
+//
+//    if (searchOrderMemberDto.getName() != null || !searchOrderMemberDto.getName().equals("")) {
+//      query.where(member.name.eq(searchOrderMemberDto.getName()));
+//    }
+//
+//    if (searchOrderMemberDto.getName() != null || !searchOrderMemberDto.getName().equals("")) {
+//      query.where(member.name.eq(searchOrderMemberDto.getName()));
+//    }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//    return getQuerydsl().applyPagination(pageable, query).fetch();
+//  }
 
   @Override
   public List<Tuple> findMembersByLoginIdInOrdersByDsl(String loginId) {
@@ -209,16 +229,18 @@ on k.member_id = m.id;
                     .where(orderedProduct.product.id
                         .in(JPAExpressions.select(product.id)
                             .from(product)
-                            .where(product.name.contains(productName))))),
-            order.id
-                .in(JPAExpressions.select(orderedProduct.order.id)
-                    .from(orderedProduct)
-                    .innerJoin(orderedProduct.product, product)
-                    .groupBy(orderedProduct.order.id)
-                    .where(orderedProduct.product.id
-                        .in(JPAExpressions.select(product.id)
-                            .from(product)
-                            .where(product.name.contains(productName)))))
+                            .where(product.name.contains(productName))),
+                        orderedProduct.order.member.id.eq(member.id)))
+//            ,
+//            order.id
+//                .in(JPAExpressions.select(orderedProduct.order.id)
+//                    .from(orderedProduct)
+//                    .innerJoin(orderedProduct.product, product)
+//                    .groupBy(orderedProduct.order.id)
+//                    .where(orderedProduct.product.id
+//                        .in(JPAExpressions.select(product.id)
+//                            .from(product)
+//                            .where(product.name.contains(productName)))))
 
         );
 
@@ -298,6 +320,104 @@ on k.member_id=m.id;
 
     return query.fetch();
 
+  }
+
+
+  @Override
+  public List<Tuple> getMembersByDsl(SearchOrderMemberDto searchOrderMemberDto,
+      Pageable pageable) {
+    QMember member = QMember.member;
+    QOrder order = QOrder.order;
+    QProduct product = QProduct.product;
+    QOrderedProduct orderedProduct = QOrderedProduct.orderedProduct;
+
+    // 공통적으로 쓰이는 innerjoin을 여기에 써주니까
+    // 상품과, 기간 선택시 나타나는 1+n?? n+1?? 문제가 해결되었다...
+    JPQLQuery query = from(member).innerJoin(member.orders, order);
+
+    if (searchOrderMemberDto.getLoginId() != null) {
+
+      query.select(member.id, order.date, order.orderNumber)
+          .where(
+              //member.loginId.contains(loginId),
+              order.date
+                  .in(JPAExpressions.select(order.date.max())
+                      .from(order).innerJoin(order.member, member)
+                      .where(member.loginId.contains(searchOrderMemberDto.getLoginId()))
+                      .groupBy(member.id)));
+
+    }
+
+    if (searchOrderMemberDto.getName() != null) {
+      query.select(member.id, order.date, order.orderNumber)
+          .where(
+              //member.loginId.contains(loginId),
+              order.date
+                  .in(JPAExpressions.select(order.date.max())
+                      .from(order).innerJoin(order.member, member)
+                      .where(member.name.contains(searchOrderMemberDto.getName()))
+                      .groupBy(member.id)));
+    }
+
+    if (searchOrderMemberDto.getOrderNumber() != null) {
+
+      query.select(member.id, order.date, order.orderNumber)
+          .where(
+              // in 안에 있는 select 만 하면 6개 로우가 나와야 하는데
+              // in 이라서 로우가 8개 나온다.
+              order.date
+                  .in(JPAExpressions.select(order.date.max())
+                      .from(order)
+                      .where(order.orderNumber.contains(searchOrderMemberDto.getOrderNumber()),
+                          order.member.id.eq(member.id))
+                      .groupBy(order.member.id)
+                  ));
+
+
+    }
+
+    if (searchOrderMemberDto.getOrderStartDate() != null
+        && searchOrderMemberDto.getOrderEndDate() != null) {
+
+      query.select(member.id, order.date, order.orderNumber)
+          .where(
+              // in 안에 있는 select 만 하면 6개 로우가 나와야 하는데
+              // in 이라서 로우가 8개 나온다.
+              order.date
+                  .in(JPAExpressions.select(order.date.max())
+                      .from(order)
+                      .where(order.date.between(searchOrderMemberDto.getOrderStartDate(),
+                          searchOrderMemberDto.getOrderEndDate()), order.member.id.eq(member.id))
+                      .groupBy(order.member.id)
+                  ));
+
+
+    }
+
+    if (searchOrderMemberDto.getProductName() != null) {
+
+      query.select(member.id, order.date, order.orderNumber)
+          .where(
+              //member.loginId.contains(loginId),
+//            order.date
+//                .in(JPAExpressions.select(order.date.max())
+//                    .from(order).innerJoin(order.member, member)
+//                    .groupBy(member.id)),
+              order.date
+                  .in(JPAExpressions.select(orderedProduct.order.date.max())
+                      .from(orderedProduct)
+                      .innerJoin(orderedProduct.product, product)
+                      .groupBy(orderedProduct.order.member.id)
+                      .where(orderedProduct.product.id
+                              .in(JPAExpressions.select(product.id)
+                                  .from(product)
+                                  .where(product.name.contains(searchOrderMemberDto.getProductName())))
+                          , orderedProduct.order.member.id.eq(member.id)))
+
+          );
+    }
+
+    return getQuerydsl().applyPagination(pageable, query).fetch();
   }
 
 

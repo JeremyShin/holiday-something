@@ -34,6 +34,8 @@ public class AdminMemberController {
     return "admin/member/order";
   }
 
+
+  // 검색 조건 입력시 endDate가 더 미래여야 한다.
   @PostMapping("/order/search")
   public String memberOrderSearchPost(
       @ModelAttribute(value = "SearchOrderMember") SearchOrderMemberDto searchOrderMemberDto,
@@ -43,20 +45,20 @@ public class AdminMemberController {
     log.info(searchOrderMemberDto.getName());
     log.info(searchOrderMemberDto.getLoginId());
     log.info(searchOrderMemberDto.getProductName());
-    log.info("TAG", date1);
-    log.info("TAG", date2);
+    log.info("date1 : " + date1);
+    log.info("date2 : " + date2);
 
     date1.append("T00:00:00");
     date2.append("T23:59:59");
-    log.info("TAG", date1);
-    log.info("TAG", date2);
+    log.info("date1 : " + date1);
+    log.info("date2 : " + date2);
 
 //    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     searchOrderMemberDto.setOrderStartDate(LocalDateTime.parse(date1));
     searchOrderMemberDto.setOrderEndDate(LocalDateTime.parse(date2));
 
-    log.info("TAG", searchOrderMemberDto.getOrderStartDate());
-    log.info("TAG", searchOrderMemberDto.getOrderEndDate());
+    log.info("searchDto : " + searchOrderMemberDto.getOrderStartDate());
+    log.info("searchDto : " + searchOrderMemberDto.getOrderEndDate());
 
     return "redirect:/admin/member/order/search";
   }

@@ -14,7 +14,7 @@ public interface MemberRepositoryCustom {
   // test
   Member getMemberByDsl(Long id);
 
-  List<Member> getMembersByDsl(SearchOrderMemberDto searchOrderMemberDto, Pageable pageable);
+  List<Tuple> getMembersByDsl(SearchOrderMemberDto searchOrderMemberDto, Pageable pageable);
 
   List<Tuple> findMembersByLoginIdInOrdersByDsl(String loginId);
 

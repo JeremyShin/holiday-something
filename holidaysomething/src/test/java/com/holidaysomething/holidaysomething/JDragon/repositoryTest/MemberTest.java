@@ -135,22 +135,6 @@ public class MemberTest {
     log.info("=====================================");
   }
 
-  @Test
-  public void id와이름으로회원조회byDsl() {
-    SearchOrderMemberDto searchOrderMemberDto = new SearchOrderMemberDto();
-    searchOrderMemberDto.setLoginId("sky");
-    searchOrderMemberDto.setName("김하늘");
-    //searchOrderMemberDto.setName("오박사");
-
-    List<Member> members = memberRepository.getMembersByDsl(searchOrderMemberDto, pageable);
-    System.out.println("========================= size : " + members.size());
-    for (Member member : members) {
-      System.out.println("============== : " + member.getId());
-      System.out.println("============== : " + member.getName());
-      System.out.println("============== : " + member.getLoginId());
-    }
-  }
-
 
   @Test
   public void loginId로회원조회byDsl() {
@@ -198,6 +182,32 @@ public class MemberTest {
     log.info("==================================" + tuples.size());
     for (Tuple tuple : tuples) {
       log.info(tuple);
+    }
+  }
+
+  @Test
+  public void 검색조건여러개사용해서회원조회byDsl() {
+    SearchOrderMemberDto searchOrderMemberDto = new SearchOrderMemberDto();
+//    searchOrderMemberDto.setLoginId("sky");
+//    searchOrderMemberDto.setName("김하늘");
+    searchOrderMemberDto.setProductName("스밋코구라시");
+    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
+    LocalDateTime ldt2 = LocalDateTime.of(2018, 11, 25, 00, 00, 00);
+    searchOrderMemberDto.setOrderStartDate(ldt1);
+    searchOrderMemberDto.setOrderEndDate(ldt2);
+//    searchOrderMemberDto.setOrderNumber("2018111950137514");
+
+    //searchOrderMemberDto.setName("오박사");
+
+    log.info("=======================================" + searchOrderMemberDto.getLoginId());
+    log.info("=======================================" + searchOrderMemberDto.getName());
+
+    List<Tuple> tuples = memberRepository.getMembersByDsl(searchOrderMemberDto, pageable);
+    log.info("========================= size : " + tuples.size());
+    int count = 0;
+    for (Tuple tuple : tuples) {
+      log.info("======tuple : " + count + "     " + tuple);
+      count++;
     }
   }
 }
