@@ -190,4 +190,14 @@ public class MemberTest {
       log.info(tuple);
     }
   }
+
+
+  @Test
+  public void 주문코드으로회원조회byDsl() {
+    List<Tuple> tuples = memberRepository.findMembersByProductCodeInOrdersByDsl("2018111950137514");
+    log.info("==================================" + tuples.size());
+    for (Tuple tuple : tuples) {
+      log.info(tuple);
+    }
+  }
 }

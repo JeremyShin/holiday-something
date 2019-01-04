@@ -276,6 +276,31 @@ on k.member_id=m.id;
   }
 
 
+  @Override
+  public List<Tuple> findMembersByProductCodeInOrdersByDsl(String code) {
+    QMember member = QMember.member;
+    QOrder order = QOrder.order;
+
+    JPQLQuery query = from(member);
+
+    query.select(member.id, order.date, order.orderNumber)
+        .from(member)
+        .innerJoin(member.orders, order)
+        .where(
+            // in 안에 있는 select 만 하면 6개 로우가 나와야 하는데
+            // in 이라서 로우가 8개 나온다.
+            order.date
+                .in(JPAExpressions.select(order.date.max())
+                    .from(order)
+                    .where(order.orderNumber.contains(code), order.member.id.eq(member.id))
+                    .groupBy(order.member.id)
+                ));
+
+    return query.fetch();
+
+  }
+
+
 }
 
 

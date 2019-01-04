@@ -25,4 +25,6 @@ public interface MemberRepositoryCustom {
   List<Tuple> findMembersByProductPeriodInOrdersByDsl(LocalDateTime startDate,
       LocalDateTime endDate);
 
+  List<Tuple> findMembersByProductCodeInOrdersByDsl(String code);
+
 }
