@@ -15,6 +15,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -204,30 +206,40 @@ public class MemberTest {
     log.info("=======================================" + searchOrderMemberDto.getLoginId());
     log.info("=======================================" + searchOrderMemberDto.getName());
 
-    List<Tuple> tuples = memberRepository.getMembersByDsl(searchOrderMemberDto, pageable);
-    log.info("========================= size : " + tuples.size());
-    int size = tuples.size();
-//    OrderMemberDto[] orderMemberDtos = new OrderMemberDto[size];
-    List<OrderMemberDto> orderMemberDtos = new ArrayList<>(size);
+    Page<Tuple> tuples = memberRepository.getMembersByDsl(searchOrderMemberDto, pageable);
+    log.info("========================= tuples.getTotalElements() : " + tuples.getTotalElements());
 
-    for (int i = 0; i < size; i++) {
-      Tuple tuple = tuples.get(i);
-      log.info("======tuple.toArray() : " + tuple.toArray().length);
+//    OrderMemberDto[] orderMemberDtos = new OrderMemberDto[size];
+    List<Tuple> orderMemberDtos = tuples.getContent();
+    List<OrderMemberDto> orderMemberDtoList = new ArrayList<>();
+
+    for (int i = 0; i < orderMemberDtos.size(); i++) {
+      Tuple tuple = orderMemberDtos.get(i);
+      log.info("======tuple.toArray().length : " + tuple.toArray().length);
       Object[] objects = tuple.toArray();
       log.info("======tuple.toArray() : " + objects[0]);
       log.info("======tuple.toArray() : " + objects[1]);
       log.info("======tuple.toArray() : " + objects[2]);
       OrderMemberDto temp = new OrderMemberDto((Member) objects[0], (LocalDateTime) objects[1],
           (String) objects[2]);
-      orderMemberDtos.add(temp);
+      orderMemberDtoList.add(temp);
     }
 
-    for (OrderMemberDto orderMemberDto : orderMemberDtos) {
+    for (OrderMemberDto orderMemberDto : orderMemberDtoList) {
       log.info("============ orderMemberDto.getMember().getId() : " + orderMemberDto.getMember()
           .getId());
       log.info("============ orderMemberDto.getOrderNumber() : " + orderMemberDto.getOrderNumber());
       log.info("============ orderMemberDto.getDate() : " + orderMemberDto.getDate());
     }
+
+    //  최종적으로 Controller 로 보내야 하는 Page.
+    Page<OrderMemberDto> orderMemberDtoPages = new PageImpl<>(orderMemberDtoList, pageable,
+        orderMemberDtoList.size());
+    log.info("*************** orderMemberDtoPages.getTotalElements() : " + orderMemberDtoPages
+        .getTotalElements());
+    log.info("*************** orderMemberDtoPages.getTotalPages() : " + orderMemberDtoPages
+        .getTotalPages());
+    log.info("*************** orderMemberDtoPages.getSize() : " + orderMemberDtoPages.getSize());
 
   }
 }

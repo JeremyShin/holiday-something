@@ -1,6 +1,7 @@
 package com.holidaysomething.holidaysomething.repository.custom;
 
 import com.holidaysomething.holidaysomething.domain.Member;
+import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.QMember;
 import com.holidaysomething.holidaysomething.domain.QOrder;
 import com.holidaysomething.holidaysomething.domain.QOrderedProduct;
@@ -14,6 +15,8 @@ import java.util.List;
 import javax.annotation.Nullable;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
@@ -44,6 +47,7 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     return entityManager;
   }
 
+  /************* SearchOrderMemberDto 로 검색하는 경우 *************************************************************/
   @Override
   public Member getMemberByDsl(Long id) {
     QMember qMember = QMember.member;  // querydsl plugin exec
@@ -194,7 +198,7 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
    * method.
    */
   @Override
-  public List<Tuple> getMembersByDsl(SearchOrderMemberDto searchOrderMemberDto,
+  public Page<Tuple> getMembersByDsl(SearchOrderMemberDto searchOrderMemberDto,
       Pageable pageable) {
     QMember member = QMember.member;
     QOrder order = QOrder.order;
@@ -286,10 +290,13 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 
           );
     }
+    List<Tuple> tuples = getQuerydsl().applyPagination(pageable, query).fetch();
+    long totalCount = query.fetchCount();
 
-    return getQuerydsl().applyPagination(pageable, query).fetch();
+    return new PageImpl<>(tuples, pageable, totalCount);
   }
 
+  /************* SearchOrderMemberDto 로 검색하는 경우 *************************************************************/
 
 }
 

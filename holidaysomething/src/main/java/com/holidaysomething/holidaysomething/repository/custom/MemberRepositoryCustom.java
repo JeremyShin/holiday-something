@@ -7,14 +7,13 @@ import com.querydsl.core.Tuple;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface MemberRepositoryCustom {
 
   // test
   Member getMemberByDsl(Long id);
-
-  List<Tuple> getMembersByDsl(SearchOrderMemberDto searchOrderMemberDto, Pageable pageable);
 
   List<Tuple> findMembersByLoginIdInOrdersByDsl(String loginId);
 
@@ -26,5 +25,7 @@ public interface MemberRepositoryCustom {
       LocalDateTime endDate);
 
   List<Tuple> findMembersByProductCodeInOrdersByDsl(String code);
+
+  Page<Tuple> getMembersByDsl(SearchOrderMemberDto searchOrderMemberDto, Pageable pageable);
 
 }

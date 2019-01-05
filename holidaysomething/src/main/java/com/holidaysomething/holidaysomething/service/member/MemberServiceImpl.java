@@ -2,14 +2,23 @@ package com.holidaysomething.holidaysomething.service.member;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.dto.MemberMileageDto;
+import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.SearchDto;
+import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.holidaysomething.holidaysomething.repository.MemberRepository;
+import com.querydsl.core.Tuple;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
@@ -55,5 +64,37 @@ public class MemberServiceImpl implements MemberService {
     memberRepository.save(member);
   }
 
+
+  /**
+   * @author JDragon member/order.html 에서 입력한 폼 데이터를 이용해 검색하는 서비스.
+   */
+  @Override
+  @Transactional
+  public Page<OrderMemberDto> findMembersBySearchingInQuerydsl(
+      SearchOrderMemberDto searchOrderMemberDto, Pageable pageable) {
+
+    Page<Tuple> tuples = memberRepository.getMembersByDsl(searchOrderMemberDto, pageable);
+
+    List<Tuple> orderMemberDtos = tuples.getContent();
+    List<OrderMemberDto> orderMemberDtoList = new ArrayList<>();
+
+    for (int i = 0; i < orderMemberDtos.size(); i++) {
+      Tuple tuple = orderMemberDtos.get(i);
+      Object[] objects = tuple.toArray();
+      OrderMemberDto temp = new OrderMemberDto((Member) objects[0], (LocalDateTime) objects[1],
+          (String) objects[2]);
+      orderMemberDtoList.add(temp);
+    }
+
+    //  최종적으로 Controller 로 보내야 하는 Page.
+    Page<OrderMemberDto> orderMemberDtoPages = new PageImpl<>(orderMemberDtoList, pageable,
+        orderMemberDtoList.size());
+
+    // java 8 부터 가능
+    // int size = Math.toIntExact(tuples.getTotalElements());
+    // return new PageImpl<>(tuples.getContent(), pageable, size);
+
+    return orderMemberDtoPages;
+  }
 
 }
