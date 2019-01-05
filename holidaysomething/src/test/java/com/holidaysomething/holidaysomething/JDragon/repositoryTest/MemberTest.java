@@ -3,10 +3,12 @@ package com.holidaysomething.holidaysomething.JDragon.repositoryTest;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Order;
+import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.holidaysomething.holidaysomething.repository.MemberRepository;
 import com.querydsl.core.Tuple;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
@@ -204,10 +206,28 @@ public class MemberTest {
 
     List<Tuple> tuples = memberRepository.getMembersByDsl(searchOrderMemberDto, pageable);
     log.info("========================= size : " + tuples.size());
-    int count = 0;
-    for (Tuple tuple : tuples) {
-      log.info("======tuple : " + count + "     " + tuple);
-      count++;
+    int size = tuples.size();
+//    OrderMemberDto[] orderMemberDtos = new OrderMemberDto[size];
+    List<OrderMemberDto> orderMemberDtos = new ArrayList<>(size);
+
+    for (int i = 0; i < size; i++) {
+      Tuple tuple = tuples.get(i);
+      log.info("======tuple.toArray() : " + tuple.toArray().length);
+      Object[] objects = tuple.toArray();
+      log.info("======tuple.toArray() : " + objects[0]);
+      log.info("======tuple.toArray() : " + objects[1]);
+      log.info("======tuple.toArray() : " + objects[2]);
+      OrderMemberDto temp = new OrderMemberDto((Member) objects[0], (LocalDateTime) objects[1],
+          (String) objects[2]);
+      orderMemberDtos.add(temp);
     }
+
+    for (OrderMemberDto orderMemberDto : orderMemberDtos) {
+      log.info("============ orderMemberDto.getMember().getId() : " + orderMemberDto.getMember()
+          .getId());
+      log.info("============ orderMemberDto.getOrderNumber() : " + orderMemberDto.getOrderNumber());
+      log.info("============ orderMemberDto.getDate() : " + orderMemberDto.getDate());
+    }
+
   }
 }
