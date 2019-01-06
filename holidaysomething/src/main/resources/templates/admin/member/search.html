@@ -44,16 +44,18 @@
           </td>
         </tr>
         <tr>
-          <th scope="row">가입일/생일</th>
+          <th scope="row">생일</th>
           <td>
-            <select name="memberEventDate">
-              <option value="regDate">가입일</option>
-              <option value="birthday">기념일</option>
-            </select>
-
-            시작일 <input name="memberEventDateStart" type="datetime-local"
+            시작일 <input name="memberBirthday" type="date"
+                       placeholder="Birthday">
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">가입일</th>
+          <td>
+            시작일 <input name="memberRegDateStart" type="datetime-local"
                       placeholder="Start Date">
-            종료일 <input name="memberEventDateEnd" type="datetime-local"
+            종료일 <input name="memberRegDateEnd" type="datetime-local"
                       placeholder="Ended Date">
           </td>
         </tr>
