@@ -75,6 +75,20 @@ public class MemberServiceImpl implements MemberService {
 
     Page<Tuple> tuples = memberRepository.getMembersByDsl(searchOrderMemberDto, pageable);
 
+    log.info("==========tuples 의 길이 : " + tuples.getTotalElements());
+    // searchOrderMemberDto 넘어온 값좀 확인해보자...
+    log.info(
+        "************** searchOrderMemberDto.getLoginId() :" + searchOrderMemberDto.getLoginId());
+    log.info("************** searchOrderMemberDto.getName() :" + searchOrderMemberDto.getName());
+    log.info("************** searchOrderMemberDto.getProductName() :" + searchOrderMemberDto
+        .getProductName());
+    log.info("************** searchOrderMemberDto.getOrderNumber() :" + searchOrderMemberDto
+        .getOrderNumber());
+    log.info("************** searchOrderMemberDto.getOrderStartDate() :" + searchOrderMemberDto
+        .getOrderStartDate());
+    log.info("************** searchOrderMemberDto.getOrderEndDate() :" + searchOrderMemberDto
+        .getOrderEndDate());
+
     List<Tuple> orderMemberDtos = tuples.getContent();
     List<OrderMemberDto> orderMemberDtoList = new ArrayList<>();
 

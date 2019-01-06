@@ -1,5 +1,6 @@
 package com.holidaysomething.holidaysomething.domain;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -47,8 +48,7 @@ public class Member {
   private int mileage;
 
   @Column(nullable = false)
-  @Temporal(TemporalType.DATE)
-  private Date birthday;
+  private LocalDate birthday;
 
   @Column(length = 20, nullable = false)
   private String postcode;

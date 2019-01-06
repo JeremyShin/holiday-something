@@ -191,20 +191,30 @@ public class MemberTest {
 
   @Test
   public void 검색조건여러개사용해서회원조회byDsl() {
+
+    /*
+        SearchOrderMemberDto 를 테스트에서 쓸땐 필드에 null 값이 들어간다.
+        실제 데이터에선 "" 로 되기도 해서 실제 repo의 메소드에서는 "" 비교도 추가했다.
+     */
+
     SearchOrderMemberDto searchOrderMemberDto = new SearchOrderMemberDto();
 //    searchOrderMemberDto.setLoginId("sky");
 //    searchOrderMemberDto.setName("김하늘");
     searchOrderMemberDto.setProductName("스밋코구라시");
-    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
-    LocalDateTime ldt2 = LocalDateTime.of(2018, 11, 25, 00, 00, 00);
-    searchOrderMemberDto.setOrderStartDate(ldt1);
-    searchOrderMemberDto.setOrderEndDate(ldt2);
+//    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
+//    LocalDateTime ldt2 = LocalDateTime.of(2018, 11, 25, 00, 00, 00);
+//    searchOrderMemberDto.setOrderStartDate(ldt1);
+//    searchOrderMemberDto.setOrderEndDate(ldt2);
 //    searchOrderMemberDto.setOrderNumber("2018111950137514");
 
     //searchOrderMemberDto.setName("오박사");
 
     log.info("=======================================" + searchOrderMemberDto.getLoginId());
     log.info("=======================================" + searchOrderMemberDto.getName());
+    log.info("=======================================" + searchOrderMemberDto.getProductName());
+    log.info("=======================================" + searchOrderMemberDto.getOrderStartDate());
+    log.info("=======================================" + searchOrderMemberDto.getOrderEndDate());
+    log.info("=======================================" + searchOrderMemberDto.getOrderNumber());
 
     Page<Tuple> tuples = memberRepository.getMembersByDsl(searchOrderMemberDto, pageable);
     log.info("========================= tuples.getTotalElements() : " + tuples.getTotalElements());

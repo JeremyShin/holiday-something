@@ -15,13 +15,14 @@ import java.util.List;
 import javax.annotation.Nullable;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
 
-
+@Slf4j
 public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     MemberRepositoryCustom {
 
@@ -113,9 +114,9 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
                     .innerJoin(orderedProduct.product, product)
                     .groupBy(orderedProduct.order.member.id)
                     .where(orderedProduct.product.id
-                        .in(JPAExpressions.select(product.id)
-                            .from(product)
-                            .where(product.name.contains(productName))),
+                            .in(JPAExpressions.select(product.id)
+                                .from(product)
+                                .where(product.name.contains(productName))),
                         orderedProduct.order.member.id.eq(member.id)))
 //            ,
 //            order.id
@@ -205,12 +206,29 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     QProduct product = QProduct.product;
     QOrderedProduct orderedProduct = QOrderedProduct.orderedProduct;
 
+    log.info(
+        "************** searchOrderMemberDto.getLoginId() :" + searchOrderMemberDto.getLoginId()
+            + "   size : " + searchOrderMemberDto.getLoginId().length());
+    log.info("************** searchOrderMemberDto.getName() :" + searchOrderMemberDto.getName()
+        + " size : " + searchOrderMemberDto.getName().length());
+    log.info("************** searchOrderMemberDto.getProductName() :" + searchOrderMemberDto
+        .getProductName());
+    log.info("************** searchOrderMemberDto.getOrderNumber() :" + searchOrderMemberDto
+        .getOrderNumber());
+    log.info("************** searchOrderMemberDto.getOrderStartDate() :" + searchOrderMemberDto
+        .getOrderStartDate());
+    log.info("************** searchOrderMemberDto.getOrderEndDate() :" + searchOrderMemberDto
+        .getOrderEndDate());
+
     // 공통적으로 쓰이는 innerjoin을 여기에 써주니까
     // 상품과, 기간 선택시 나타나는 1+n?? n+1?? 문제가 해결되었다...
     JPQLQuery query = from(member).innerJoin(member.orders, order);
 
-    if (searchOrderMemberDto.getLoginId() != null) {
-
+    // || !searchOrderMemberDto.getLoginId().equals("")
+//    if (searchOrderMemberDto.getLoginId() != null || !searchOrderMemberDto.getLoginId().equals("")) {
+    if (searchOrderMemberDto.getLoginId() != null
+        && searchOrderMemberDto.getLoginId().length() != 0) {
+      log.info("%%%%%%%%%%%%%%%%%%%%%%%%% getLoginId() 속");
       query.select(member, order.date, order.orderNumber)
           .where(
               //member.loginId.contains(loginId),
@@ -222,7 +240,10 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 
     }
 
-    if (searchOrderMemberDto.getName() != null) {
+    // || !searchOrderMemberDto.getName().equals("")
+//    if (searchOrderMemberDto.getName() != null && !searchOrderMemberDto.getName().equals("")) {
+    if (searchOrderMemberDto.getName() != null && searchOrderMemberDto.getName().length() != 0) {
+      log.info("%%%%%%%%%%%%%%%%%%%%%%%%% getName() 속");
       query.select(member, order.date, order.orderNumber)
           .where(
               //member.loginId.contains(loginId),
@@ -233,8 +254,11 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
                       .groupBy(member.id)));
     }
 
-    if (searchOrderMemberDto.getOrderNumber() != null) {
-
+    //  || !searchOrderMemberDto.getOrderNumber().equals("")
+//    if (searchOrderMemberDto.getOrderNumber() != null || !searchOrderMemberDto.getOrderNumber().equals("")) {
+    if (searchOrderMemberDto.getOrderNumber() != null
+        && searchOrderMemberDto.getOrderNumber().length() != 0) {
+      log.info("%%%%%%%%%%%%%%%%%%%%%%%%% getOrderNumber() 속");
       query.select(member, order.date, order.orderNumber)
           .where(
               // in 안에 있는 select 만 하면 6개 로우가 나와야 하는데
@@ -250,9 +274,11 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 
     }
 
+//    if ( (searchOrderMemberDto.getOrderStartDate() != null || !searchOrderMemberDto.getOrderStartDate().equals(""))
+//            && (searchOrderMemberDto.getOrderEndDate() != null || !searchOrderMemberDto.getOrderEndDate().equals("")) ) {
     if (searchOrderMemberDto.getOrderStartDate() != null
         && searchOrderMemberDto.getOrderEndDate() != null) {
-
+      System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%% getDate() 속");
       query.select(member, order.date, order.orderNumber)
           .where(
               // in 안에 있는 select 만 하면 6개 로우가 나와야 하는데
@@ -268,8 +294,11 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 
     }
 
-    if (searchOrderMemberDto.getProductName() != null) {
-
+    // || !searchOrderMemberDto.getProductName().equals("")
+//    if (searchOrderMemberDto.getProductName() != null || !searchOrderMemberDto.getProductName().equals("")) {
+    if (searchOrderMemberDto.getProductName() != null
+        && searchOrderMemberDto.getProductName().length() != 0) {
+      log.info("%%%%%%%%%%%%%%%%%%%%%%%%% getProductName() 속");
       query.select(member, order.date, order.orderNumber)
           .where(
               //member.loginId.contains(loginId),
@@ -291,7 +320,8 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
           );
     }
     List<Tuple> tuples = getQuerydsl().applyPagination(pageable, query).fetch();
-    long totalCount = query.fetchCount();
+    //long totalCount = query.fetchCount();
+    long totalCount = Math.toIntExact(tuples.size());
 
     return new PageImpl<>(tuples, pageable, totalCount);
   }

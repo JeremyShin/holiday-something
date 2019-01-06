@@ -55,6 +55,64 @@
     <input type="submit" value="조회">
   </form>
 
+
+  <!-- search result -->
+  <div th:style="${orderMemberDtoPage == null ? 'display:none' : 'display:block'}"
+       style="margin-left: 50px;" id="memberList">
+
+    <div style="width: fit-content;" class="tbl-container">
+
+      <table id="product-option-list-tbl">
+        <colgroup>
+          <col style="width:50px;"/>
+          <col style="width:auto;"/>
+          <col style="width:auto;"/>
+          <col style="width:auto;"/>
+          <col style="width:auto;"/>
+          <col style="width:auto;"/>
+          <col style="width:auto;"/>
+          <col style="width:auto;"/>
+          <col style="width:auto;"/>
+        </colgroup>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>LoginId</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Nickname</th>
+          <th>Phone</th>
+          <th>Birthday</th>
+          <th>Recent OrderDate</th>
+          <th>Recent OrderNumber</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="orderMemberDto : ${orderMemberDtoPage != null ? orderMemberDtoPage : orderMemberDtoPage}"
+            class="orderMemberDtoPageTr">
+          <td th:text="${orderMemberDto.member.id}">###</td>
+          <td th:text="${orderMemberDto.member.loginId}">###</td>
+          <td th:text="${orderMemberDto.member.name}">###</td>
+          <td th:text="${orderMemberDto.member.email}">###</td>
+          <td th:text="${orderMemberDto.member.nickname}">###</td>
+          <td th:text="${orderMemberDto.member.phone}">###</td>
+          <!--<td th:text="${orderMemberDto.member.birthday}">###</td>-->
+          <td th:text="${#temporals.format(orderMemberDto.member.birthday , 'yyyy-MM-dd')}">###</td>
+          <!--<td th:text="${orderMemberDto.date}">###</td>-->
+          <td th:text="${#temporals.format(orderMemberDto.date , 'yyyy-MM-dd HH:mm:ss')}">###</td>
+          <td th:text="${orderMemberDto.orderNumber}">###</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <!-- Page 번호 -->
+      <div id="page-numbers">
+
+      </div>
+    </div>
+  </div>   <!-- end search result -->
+
+
 </div>
 
 </html>
