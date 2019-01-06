@@ -9,6 +9,7 @@ import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.querydsl.jpa.JPQLQuery;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
@@ -63,7 +64,7 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
   }
 
   @Override
-  public Page<Member> searchMembers(String searchClassificationValue, String searchClassificationInput, String birthdayStart, String birthdayEnd, Pageable pageable) {
+  public Page<Member> searchMembers(String searchClassificationValue, String searchClassificationInput, String birthdayStart, String birthdayEnd, String regDateStart, String regDateEnd, Pageable pageable) {
     QMember qMember = QMember.member;
     JPQLQuery<Member> jpqlQuery = from(qMember);
 
@@ -92,7 +93,7 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     log.info(birthdayEnd);
 
     // 생일
-    if (birthdayStart != null && birthdayEnd != null) {
+    if (!birthdayStart.equals("") && !birthdayEnd.equals("")) {
       log.info("안녕 난 이프문이야");
       SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
       formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -112,6 +113,20 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 
     }
     // 가입일
+    if (regDateStart != null && regDateEnd != null) {
+      log.info("안녕 난 이프문이야");
+      LocalDateTime startRegDateTime = LocalDateTime
+          .parse(regDateStart, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+      LocalDateTime endRegDateTime = LocalDateTime
+          .parse(regDateEnd, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+
+
+        log.info("트라이");
+        log.info("startRegDateTime: " + startRegDateTime);
+        log.info("endRegDateTime: " + endRegDateTime);
+
+        jpqlQuery.where(qMember.regDate.between(startRegDateTime, endRegDateTime));
+    }
 
     // 주문일
 
