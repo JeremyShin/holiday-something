@@ -5,11 +5,13 @@ import com.holidaysomething.holidaysomething.dto.MemberMileageDto;
 import com.holidaysomething.holidaysomething.dto.SearchDto;
 import com.holidaysomething.holidaysomething.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
@@ -58,6 +60,8 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public Page<Member> searchMembers(String searchClassificationValue,
       String searchClassificationInput, String birthdayStart, String birthdayEnd, Pageable pageable) {
+
+    log.info("안녕 난 서비스야");
 
     Page<Member> memberPage = memberRepository.searchMembers(searchClassificationValue, searchClassificationInput, birthdayStart, birthdayEnd, pageable);
 

@@ -107,12 +107,17 @@ public class AdminMemberController {
 
     log.info("searchClassificationValue" + searchClassificationValue);
     log.info("memberSearchClassificationInput" + searchClassificationInput);
-    log.info("memberBirthdayStart" + birthdayStart);
-    log.info("memberBirthdayStart" + birthdayEnd);
+    log.info("미선memberBirthdayStart" + birthdayStart);
+    log.info("미선memberBirthdayStart" + birthdayEnd);
 
     Pageable pageable = PageRequest.of(0, 5);
 
-    Page<Member> memberPageable = memberService.searchMembers(searchClassificationValue, searchClassificationInput, birthdayStart, birthdayEnd, pageable);
+    Page<Member> members = memberService.searchMembers(searchClassificationValue, searchClassificationInput, birthdayStart, birthdayEnd, pageable);
+
+    for (Member member : members){
+      log.info(member.getBirthday().toString());
+      log.info(member.getId().toString());
+    }
 
     return "redirect:/admin/member/search";
   }

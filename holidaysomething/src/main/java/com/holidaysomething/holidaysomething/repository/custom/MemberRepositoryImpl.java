@@ -7,11 +7,17 @@ import com.holidaysomething.holidaysomething.domain.QOrder;
 import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.querydsl.jpa.JPQLQuery;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
+import javax.swing.text.DateFormatter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import sun.util.calendar.CalendarUtils;
@@ -62,42 +68,57 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     JPQLQuery<Member> jpqlQuery = from(qMember);
 
     // 검색 옵션 설정 : 아이디, 이메일, 전화번호, 닉네임, 주소
-    if(!searchClassificationValue.equals("memberNone")){
-      switch (searchClassificationValue){
-        case "" : log.info("입력된 input 값이 없습니다."); break;
-        case "memberId" : jpqlQuery.from(qMember).where(qMember.loginId.like("%" + searchClassificationInput + "%")); break;
-        case "memberName" : jpqlQuery.from(qMember).where(qMember.name.like("%" + searchClassificationInput + "%")); break;
-        case "memberEmail" : jpqlQuery.from(qMember).where(qMember.email.like("%" + searchClassificationInput + "%")); break;
-        case "memberPhone" : jpqlQuery.from(qMember).where(qMember.phone.like("%" + searchClassificationInput + "%")); break;
-        case "memberNickname" : jpqlQuery.from(qMember).where(qMember.nickname.like("%" + searchClassificationInput + "%")); break;
-        case "memberAddress" : jpqlQuery.from(qMember).where(qMember.address1.like("%" + searchClassificationInput + "%")
-            .or(qMember.address2.like("%" + searchClassificationInput + "%"))); break;
-      }
-    } else {
-      log.info("검색할 옵션을 선택하여주세요.");
-    }
+//    if(!searchClassificationValue.equals("memberNone")){
+//      switch (searchClassificationValue){
+//        case "" : log.info("입력된 input 값이 없습니다."); break;
+//        case "memberId" : jpqlQuery.from(qMember).where(qMember.loginId.like("%" + searchClassificationInput + "%")); break;
+//        case "memberName" : jpqlQuery.from(qMember).where(qMember.name.like("%" + searchClassificationInput + "%")); break;
+//        case "memberEmail" : jpqlQuery.from(qMember).where(qMember.email.like("%" + searchClassificationInput + "%")); break;
+//        case "memberPhone" : jpqlQuery.from(qMember).where(qMember.phone.like("%" + searchClassificationInput + "%")); break;
+//        case "memberNickname" : jpqlQuery.from(qMember).where(qMember.nickname.like("%" + searchClassificationInput + "%")); break;
+//        case "memberAddress" : jpqlQuery.from(qMember).where(qMember.address1.like("%" + searchClassificationInput + "%")
+//            .or(qMember.address2.like("%" + searchClassificationInput + "%"))); break;
+//      }
+//    } else {
+//      log.info("검색할 옵션을 선택하여주세요.");
+//    }
 
     // 성별
 
+
+
+    log.info("안녕 난 레파지토리야");
+    log.info(birthdayStart);
+    log.info(birthdayEnd);
+
     // 생일
-
     if (birthdayStart != null && birthdayEnd != null) {
-      // 끝나는 날짜 입력하지 않았을 경우, 오늘 날짜까지인 것으로 처리
+      log.info("안녕 난 이프문이야");
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+      formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 
-      LocalDate startLocalDateTime = LocalDate
-          .parse(birthdayStart, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-      LocalDate endLocalDateTime = LocalDate
-          .parse(birthdayEnd, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-      log.info("startLocalDateTime: " + startLocalDateTime);
-      log.info("endLocalDateTime: " + endLocalDateTime);
+      try {
+        Date startDate = formatter.parse(birthdayStart);
+        Date endDate = formatter.parse(birthdayEnd);
 
-      jpqlQuery.where(qMember.birthday.between(startLocalDateTime, endLocalDateTime));
+        log.info("트라이");
+        log.info("startBirthday: " + startDate);
+        log.info("endBirthday: " + endDate);
+
+        jpqlQuery.where(qMember.birthday.between(startDate, endDate));
+      }catch (Exception e){
+        e.printStackTrace();
+      }
+
     }
     // 가입일
 
     // 주문일
 
-    return null;
+    List<Member> members = getQuerydsl().applyPagination(pageable, jpqlQuery).fetch();
+    long totalCount = jpqlQuery.fetchCount();
+
+    return new PageImpl<>(members, pageable, totalCount);
   }
 
   @Override
