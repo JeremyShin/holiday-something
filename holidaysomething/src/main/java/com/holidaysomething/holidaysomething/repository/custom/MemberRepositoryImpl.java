@@ -7,11 +7,14 @@ import com.holidaysomething.holidaysomething.domain.QOrder;
 import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.querydsl.jpa.JPQLQuery;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
+import sun.util.calendar.CalendarUtils;
 
 @Slf4j
 public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
@@ -54,7 +57,7 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
   }
 
   @Override
-  public Page<Member> searchMembers(String searchClassificationValue, String searchClassificationInput, Pageable pageable) {
+  public Page<Member> searchMembers(String searchClassificationValue, String searchClassificationInput, String birthdayStart, String birthdayEnd, Pageable pageable) {
     QMember qMember = QMember.member;
     JPQLQuery<Member> jpqlQuery = from(qMember);
 
@@ -76,7 +79,21 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 
     // 성별
 
-    // 가입일/생일
+    // 생일
+
+    if (birthdayStart != null && birthdayEnd != null) {
+      // 끝나는 날짜 입력하지 않았을 경우, 오늘 날짜까지인 것으로 처리
+
+      LocalDate startLocalDateTime = LocalDate
+          .parse(birthdayStart, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+      LocalDate endLocalDateTime = LocalDate
+          .parse(birthdayEnd, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+      log.info("startLocalDateTime: " + startLocalDateTime);
+      log.info("endLocalDateTime: " + endLocalDateTime);
+
+      jpqlQuery.where(qMember.birthday.between(startLocalDateTime, endLocalDateTime));
+    }
+    // 가입일
 
     // 주문일
 

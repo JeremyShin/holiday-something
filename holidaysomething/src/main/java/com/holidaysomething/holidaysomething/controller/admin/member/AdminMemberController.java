@@ -101,14 +101,18 @@ public class AdminMemberController {
   @PostMapping("/search")
   public String memberSearchPost(
       @RequestParam(value = "memberSearchClassificationValue", required = false) String searchClassificationValue,
-      @RequestParam(value = "memberSearchClassificationInput", required = false) String searchClassificationInput){
+      @RequestParam(value = "memberSearchClassificationInput", required = false) String searchClassificationInput,
+      @RequestParam(value = "memberBirthdayStart", required = false) String birthdayStart,
+      @RequestParam(value = "memberBirthdayEnd", required = false) String birthdayEnd){
 
     log.info("searchClassificationValue" + searchClassificationValue);
     log.info("memberSearchClassificationInput" + searchClassificationInput);
+    log.info("memberBirthdayStart" + birthdayStart);
+    log.info("memberBirthdayStart" + birthdayEnd);
 
     Pageable pageable = PageRequest.of(0, 5);
 
-    Page<Member> memberPageable = memberService.searchMembers(searchClassificationValue, searchClassificationInput, pageable);
+    Page<Member> memberPageable = memberService.searchMembers(searchClassificationValue, searchClassificationInput, birthdayStart, birthdayEnd, pageable);
 
     return "redirect:/admin/member/search";
   }

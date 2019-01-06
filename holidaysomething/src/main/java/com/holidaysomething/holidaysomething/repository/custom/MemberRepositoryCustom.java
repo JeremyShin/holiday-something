@@ -17,5 +17,5 @@ public interface MemberRepositoryCustom {
 
   List<Member> findMembersByLoginIdInOrdersByDsl(String loginId);
 
-  Page<Member> searchMembers(String searchClassificationValue, String searchClassificationInput, Pageable pageable);
+  Page<Member> searchMembers(String searchClassificationValue, String searchClassificationInput, String birthdayStart, String birthdayEnd, Pageable pageable);
 }

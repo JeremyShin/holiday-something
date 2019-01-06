@@ -14,5 +14,5 @@ public interface MemberService {
 
   Page<Member> findAllOrSearch(SearchDto searchDto, Pageable pageable);
 
-  Page<Member> searchMembers(String searchClassificationValue, String searchClassificationInput, Pageable pageable);
+  Page<Member> searchMembers(String searchClassificationValue, String searchClassificationInput, String birthdayStart, String birthdayEnd, Pageable pageable);
 }
