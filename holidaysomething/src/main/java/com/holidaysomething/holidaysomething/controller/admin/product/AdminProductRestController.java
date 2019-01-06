@@ -40,7 +40,7 @@ public class AdminProductRestController {
 
   /*
    * @author : JDragon
-   * @description : 상품 등록시 중소분류 읽어오기
+   * @description : 상품 등록시 대중소 카테고리 읽어오기
    */
   @GetMapping("/add/subcategories/{parentId}")
   public List<ProductCategory> getLowLevelCategories(@PathVariable("parentId") Long parentId) {

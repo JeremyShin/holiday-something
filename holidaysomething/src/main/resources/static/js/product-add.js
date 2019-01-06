@@ -1,3 +1,22 @@
+// 대분류 불러오기.
+window.onload = function () {
+  var html = '';
+  var method = "onclick='getCategoryList(";
+  $.getJSON("/admin/product/add/subcategories/" + 0,
+      function (list) {
+        $(list).each(
+            function () {
+              html += "<li><span data-categoryid=" + this.id + " class='span' "
+                  + method
+                  + this.id
+                  + ")')>" + this.name + "</span></li> ";
+            }
+        );
+        $("#firstCategoryUl").html('');
+        $("#firstCategoryUl").html(html);
+      });
+}
+
 function getCategoryList(parentId) {
   var html = '';
   var method = "onclick='getCategoryBrandList(";

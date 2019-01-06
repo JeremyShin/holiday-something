@@ -12,6 +12,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,38 +29,48 @@ public class Product {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+
+  // String은 form 태그 안에 input 에서 아무것도 입력하지 않으면 null 로 처리되는게 안리ㅏ
+  // "" 로 처리된다.
   @Column(length = 100, nullable = false)
+  @NotEmpty(message = "name must be not null")
   private String name;
 
   @Column(nullable = false)
-  private int originalPrice;
+  @NotNull(message = "originalPrice must be not null")
+  private Integer originalPrice;
 
   @Column(nullable = false)
-  private int sellingPrice;
+  @NotNull
+  @Min(value = 0, message = "sellingPrice must be not null")
+  private Integer sellingPrice;
 
   @Column(nullable = false)
-  private int manufacturingPrice;
+  @NotNull(message = "manufacturingPrice must be not null")
+  private Integer manufacturingPrice;
 
   @Column(nullable = false)
+  @NotEmpty(message = "code must be not null")
   private String code;
 
   @Column(nullable = false)
+  @NotEmpty(message = "manufacturer must be not null")
   private String manufacturer;
 
-  @Column(nullable = false)
-  private int shippingPrice;
+  @Column(nullable = false, columnDefinition = "integer default 0")
+  private Integer shippingPrice;
 
-  @Column(nullable = false)
-  private int quantity;
-
-  @Column(columnDefinition = "integer default 0")
-  private int sellingQuantity;
+  @Column(nullable = false, columnDefinition = "integer default 0")
+  private Integer quantity;
 
   @Column(columnDefinition = "integer default 0")
-  private int safeQuantity;
+  private Integer sellingQuantity;
 
   @Column(columnDefinition = "integer default 0")
-  private int mileage;
+  private Integer safeQuantity;
+
+  @Column(columnDefinition = "integer default 0")
+  private Integer mileage;
 
   private Boolean display;
   private String optionalPriceText;
