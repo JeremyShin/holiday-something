@@ -37,14 +37,14 @@
 
     <div
         style='display:inline-block;min-width:900px;position:relative;left:50px;border:1px solid gold;'>
+      <!--<li th:each="category : ${categories}" th:if="${category.parentId == 0 }">-->
+      <!--<span th:attr="data-categoryid=${category.id}" class="span"-->
+      <!--th:onclick="'getCategoryList(' + ${category.id} + ')'"-->
+      <!--th:text="${category.name}"></span>-->
+      <!--</li>-->
 
       <div id="firstCategory" style='display:inline;float:left;width:200px;'>
-        <ul>
-          <li th:each="category : ${categories}" th:if="${category.parentId == 0 }">
-            <span th:attr="data-categoryid=${category.id}" class="span"
-                  th:onclick="'getCategoryList(' + ${category.id} + ')'"
-                  th:text="${category.name}"></span>
-          </li>
+        <ul id="firstCategoryUl">
         </ul>
       </div>
 
@@ -67,7 +67,7 @@
 
     <!-- th:field="*{product.productOptions.description}" 이런식으로 해도 된다는데... 실패했었음.-->
     <form action="#" th:action="@{/admin/product/add}" method="post"
-          th:object="${Product}">
+          th:object="${product}">
 
       <!-- Start(현재 선택한 카테고리가 무엇인지 보여주는 부분) -->
       <div style="display:inline-block;position:relative;left:50px;" id="currentCategory">
@@ -81,37 +81,74 @@
 
       <!-- Start (상품 기본정보 등록) -->
       <div style="display: block; position:relative;left:50px;">
+
+        <!--<div th:if="${#fields.hasErrors('*')}" >-->
+        <!--<ul>-->
+        <!--<li th:each="err : ${#fields.errors('*')}" th:text="${err}">input is incorrect</li>-->
+        <!--</ul>-->
+        <!--</div>-->
+
         <div>
-          <label>상품명 : </label>
-          <input name="name" type="text" placeholder="Product Name">
+          <label th:class="${#fields.hasErrors('name')} ? 'fieldError'">상품명 : </label>
+          <input name="name" th:field="*{name}"
+                 th:class="${#fields.hasErrors('name')} ? 'fieldError'" type="text"
+                 placeholder="Product Name">
+          <label th:if="${#fields.errors('name')}" th:errors="*{name}">input is incorrect</label>
         </div>
         <div>
-          <label>제조사 : </label>
-          <input name="manufacturer" type="text" placeholder="Manufacturer">
+          <label th:class="${#fields.hasErrors('manufacturer')} ? 'fieldError'">제조사 : </label>
+          <input name="manufacturer" th:field="*{manufacturer}"
+                 th:class="${#fields.hasErrors('manufacturer')} ? 'fieldError'" type="text"
+                 placeholder="Manufacturer">
+          <label th:if="${#fields.errors('manufacturer')}" th:errors="*{manufacturer}">input is
+            incorrect</label>
         </div>
         <div>
-          <label>상품코드 : </label>
-          <input name="code" type="text" placeholder="Product Code">
+          <label th:class="${#fields.hasErrors('code')} ? 'fieldError'">상품코드 : </label>
+          <input name="code" th:field="*{code}" type="text"
+                 th:class="${#fields.hasErrors('code')} ? 'fieldError'" placeholder="Product Code">
+          <label th:if="${#fields.errors('code')}" th:errors="*{code}">input is incorrect</label>
         </div>
         <div>
-          <label>원가 : </label>
-          <input name="originalPrice" type="text" placeholder="Original Price">
+          <label th:class="${#fields.hasErrors('originalPrice')} ? 'fieldError'">원가 : </label>
+          <input name="originalPrice" th:field="*{originalPrice}"
+                 th:class="${#fields.hasErrors('originalPrice')} ? 'fieldError'" type="text"
+                 placeholder="Original Price">
+          <label th:if="${#fields.errors('originalPrice')}" th:errors="*{originalPrice}">input is
+            incorrect</label>
         </div>
         <div>
-          <label>판매가 : </label>
-          <input name="sellingPrice" type="text" placeholder="Selling Price">
+          <label th:class="${#fields.hasErrors('sellingPrice')} ? 'fieldError'">판매가 : </label>
+          <input name="sellingPrice" th:field="*{sellingPrice}"
+                 th:class="${#fields.hasErrors('sellingPrice')} ? 'fieldError'" type="text"
+                 placeholder="Selling Price">
+          <label th:if="${#fields.errors('sellingPrice')}" th:errors="*{sellingPrice}">input is
+            incorrect</label>
         </div>
         <div>
-          <label>제조가 : </label>
-          <input name="manufacturingPrice" type="text" placeholder="Manufacturing Price">
+          <label th:class="${#fields.hasErrors('manufacturingPrice')} ? 'fieldError'">제조가 : </label>
+          <input name="manufacturingPrice" th:field="*{manufacturingPrice}"
+                 th:class="${#fields.hasErrors('manufacturingPrice')} ? 'fieldError'" type="text"
+                 placeholder="Manufacturing Price">
+          <label th:if="${#fields.errors('manufacturingPrice')}" th:errors="*{manufacturingPrice}">input
+            is incorrect</label>
         </div>
         <div>
-          <label>배송비 : </label>
-          <input name="shippingPrice" type="text" placeholder="Shipping Fee">
+          <label th:class="${#fields.hasErrors('shippingPrice')} ? 'fieldError'">배송비 : </label>
+          <input name="shippingPrice" th:field="*{shippingPrice}"
+                 th:class="${#fields.hasErrors('shippingPrice')} ? 'fieldError'" type="text"
+                 placeholder="Shipping Fee">
+          <label th:if="${#fields.errors('shippingPrice')}" th:errors="*{shippingPrice}">input is
+            incorrect</label>
         </div>
         <div>
-          <label>상품 설명 : </label>
-          <input name="productDetail.description" type="text" placeholder="Product Description">
+          <label th:class="${#fields.hasErrors('productDetail.description')} ? 'fieldError'">상품 설명
+            : </label>
+          <input name="productDetail.description" th:field="*{productDetail.description}"
+                 th:class="${#fields.hasErrors('productDetail.description')} ? 'fieldError'"
+                 type="text" placeholder="Product Description">
+          <label th:if="${#fields.errors('productDetail.description')}"
+                 th:errors="*{productDetail.description}">input is incorrect</label>
         </div>
 
         <div>
@@ -145,14 +182,6 @@
           <!-- 체크박스 -->
           <input name="display" type="checkbox">
         </div>
-        <div>
-          <select name="optionId" class="">
-            <option value="--ALL--">옵션선택</option>
-            <option th:each="option : ${options}" th:value="${option.id}"
-                    th:text="${option.name}"></option>
-          </select>
-        </div>
-
         <div>
           <input type="submit" text="상품등록">
         </div>

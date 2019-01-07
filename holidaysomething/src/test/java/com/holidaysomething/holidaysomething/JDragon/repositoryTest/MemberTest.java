@@ -3,15 +3,20 @@ package com.holidaysomething.holidaysomething.JDragon.repositoryTest;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Order;
+import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.holidaysomething.holidaysomething.repository.MemberRepository;
+import com.querydsl.core.Tuple;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -134,19 +139,117 @@ public class MemberTest {
     log.info("=====================================");
   }
 
+
   @Test
-  public void id와이름으로회원조회byDsl() {
+  public void loginId로회원조회byDsl() {
+    List<Tuple> tuples = memberRepository.findMembersByLoginIdInOrdersByDsl("sky");
+    log.info("==================================" + tuples.size());
+    for (Tuple tuple : tuples) {
+      log.info(tuple);
+    }
+  }
+
+  @Test
+  public void name으로회원조회byDsl() {
+    List<Tuple> tuples = memberRepository.findMembersByNameInOrdersByDsl("김하늘");
+    log.info("==================================" + tuples.size());
+    for (Tuple tuple : tuples) {
+      log.info(tuple);
+    }
+  }
+
+  @Test
+  public void productName으로회원조회byDsl() {
+    List<Tuple> tuples = memberRepository.findMembersByProductNameInOrdersByDsl("스밋코구라시");
+    log.info("==================================" + tuples.size());
+    for (Tuple tuple : tuples) {
+      log.info(tuple);
+    }
+  }
+
+
+  @Test
+  public void 주문기간으로회원조회byDsl() {
+    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
+    LocalDateTime ldt2 = LocalDateTime.of(2018, 11, 25, 00, 00, 00);
+    List<Tuple> tuples = memberRepository.findMembersByProductPeriodInOrdersByDsl(ldt1, ldt2);
+    log.info("==================================" + tuples.size());
+    for (Tuple tuple : tuples) {
+      log.info(tuple);
+    }
+  }
+
+
+  @Test
+  public void 주문코드으로회원조회byDsl() {
+    List<Tuple> tuples = memberRepository.findMembersByProductCodeInOrdersByDsl("2018111950137514");
+    log.info("==================================" + tuples.size());
+    for (Tuple tuple : tuples) {
+      log.info(tuple);
+    }
+  }
+
+  @Test
+  public void 검색조건여러개사용해서회원조회byDsl() {
+
+    /*
+        SearchOrderMemberDto 를 테스트에서 쓸땐 필드에 null 값이 들어간다.
+        실제 데이터에선 "" 로 되기도 해서 실제 repo의 메소드에서는 "" 비교도 추가했다.
+     */
+
     SearchOrderMemberDto searchOrderMemberDto = new SearchOrderMemberDto();
-    searchOrderMemberDto.setLoginId("sky");
-    searchOrderMemberDto.setName("김하늘");
+//    searchOrderMemberDto.setLoginId("sky");
+//    searchOrderMemberDto.setName("김하늘");
+    searchOrderMemberDto.setProductName("스밋코구라시");
+//    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
+//    LocalDateTime ldt2 = LocalDateTime.of(2018, 11, 25, 00, 00, 00);
+//    searchOrderMemberDto.setOrderStartDate(ldt1);
+//    searchOrderMemberDto.setOrderEndDate(ldt2);
+//    searchOrderMemberDto.setOrderNumber("2018111950137514");
+
     //searchOrderMemberDto.setName("오박사");
 
-    List<Member> members = memberRepository.getMembersByDsl(searchOrderMemberDto, pageable);
-    System.out.println("========================= size : " + members.size());
-    for (Member member : members) {
-      System.out.println("============== : " + member.getId());
-      System.out.println("============== : " + member.getName());
-      System.out.println("============== : " + member.getLoginId());
+    log.info("=======================================" + searchOrderMemberDto.getLoginId());
+    log.info("=======================================" + searchOrderMemberDto.getName());
+    log.info("=======================================" + searchOrderMemberDto.getProductName());
+    log.info("=======================================" + searchOrderMemberDto.getOrderStartDate());
+    log.info("=======================================" + searchOrderMemberDto.getOrderEndDate());
+    log.info("=======================================" + searchOrderMemberDto.getOrderNumber());
+
+    Page<Tuple> tuples = memberRepository.getMembersByDsl(searchOrderMemberDto, pageable);
+    log.info("========================= tuples.getTotalElements() : " + tuples.getTotalElements());
+
+//    OrderMemberDto[] orderMemberDtos = new OrderMemberDto[size];
+    List<Tuple> orderMemberDtos = tuples.getContent();
+    List<OrderMemberDto> orderMemberDtoList = new ArrayList<>();
+
+    for (int i = 0; i < orderMemberDtos.size(); i++) {
+      Tuple tuple = orderMemberDtos.get(i);
+      log.info("======tuple.toArray().length : " + tuple.toArray().length);
+      Object[] objects = tuple.toArray();
+      log.info("======tuple.toArray() : " + objects[0]);
+      log.info("======tuple.toArray() : " + objects[1]);
+      log.info("======tuple.toArray() : " + objects[2]);
+      OrderMemberDto temp = new OrderMemberDto((Member) objects[0], (LocalDateTime) objects[1],
+          (String) objects[2]);
+      orderMemberDtoList.add(temp);
     }
+
+    for (OrderMemberDto orderMemberDto : orderMemberDtoList) {
+      log.info("============ orderMemberDto.getMember().getId() : " + orderMemberDto.getMember()
+          .getId());
+      log.info("============ orderMemberDto.getOrderNumber() : " + orderMemberDto.getOrderNumber());
+      log.info("============ orderMemberDto.getDate() : " + orderMemberDto.getDate());
+    }
+
+    //  최종적으로 Controller 로 보내야 하는 Page.
+    Page<OrderMemberDto> orderMemberDtoPages = new PageImpl<>(orderMemberDtoList, pageable,
+        orderMemberDtoList.size());
+    log.info("*************** orderMemberDtoPages.getTotalElements() : " + orderMemberDtoPages
+        .getTotalElements());
+    log.info("*************** orderMemberDtoPages.getTotalPages() : " + orderMemberDtoPages
+        .getTotalPages());
+    log.info("*************** orderMemberDtoPages.getSize() : " + orderMemberDtoPages.getSize());
+
   }
 }

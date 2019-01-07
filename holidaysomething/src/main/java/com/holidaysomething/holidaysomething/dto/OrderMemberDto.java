@@ -2,17 +2,19 @@ package com.holidaysomething.holidaysomething.dto;
 
 
 import com.holidaysomething.holidaysomething.domain.Member;
+import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
 public class OrderMemberDto {
 
   private Member member;
-  private Long countOrder;
+  private String orderNumber;
+  private LocalDateTime date;
 
-  public OrderMemberDto(Member member, Long countOrder) {
+  public OrderMemberDto(Member member, LocalDateTime date, String orderNumber) {
     this.member = member;
-    this.countOrder = countOrder;
+    this.orderNumber = orderNumber;
+    this.date = date;
   }
-
 }
