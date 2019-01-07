@@ -6,8 +6,8 @@ import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.querydsl.core.Tuple;
 import java.time.LocalDateTime;
 import java.util.List;
-
 import org.springframework.data.domain.Page;
+import com.holidaysomething.holidaysomething.dto.SearchSexMemberDto;
 import org.springframework.data.domain.Pageable;
 
 public interface MemberRepositoryCustom {
@@ -27,5 +27,7 @@ public interface MemberRepositoryCustom {
   List<Tuple> findMembersByProductCodeInOrdersByDsl(String code);
 
   Page<Tuple> getMembersByDsl(SearchOrderMemberDto searchOrderMemberDto, Pageable pageable);
+
+  List<Member> findMemberBySexInSearchByDsl(SearchSexMemberDto searchSexMemberDto, Pageable pageable);
 
 }

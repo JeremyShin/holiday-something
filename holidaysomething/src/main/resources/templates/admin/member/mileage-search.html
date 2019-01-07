@@ -26,9 +26,9 @@
             <th scope="row" style="width: 180px;">아이디</th>
             <td>
               <input type="hidden" name="searchType" value="loginId">
-              <input type="text" name="keyword" style="width: 300px;" placeholder="검색">
+              <input type="text" name="keyword" style="width: 300px;" placeholder="검색" id="mileageSearchKeyword">
             </td>
-            <td style="width: 50px; font-size: small; border: 0px;"><input type="submit" value="검색">
+            <td style="width: 50px; font-size: small; border: 0px;"><input type="submit" value="검색" id="mileageSearch">
             </td>
           </tr>
         </table>
@@ -50,7 +50,6 @@
         <tr th:each="member : ${members}">
           <td th:text="${member.loginId}"></td>
           <td th:text="${member.mileage}"></td>
-          <!--<td><input type="button" id="modifyMileageBtn" value="수정" th:onclick="'modify(this, ' + ${member.id} + ')'"/></td>-->
           <td>
             <form method="GET" action="/admin/member/mileage/modify">
               <input type="hidden" th:value="${member.loginId}" name="loginId">
@@ -101,9 +100,13 @@
   </div>
 
   <script>
-    // 사용자 스크립트 추가
+      document.getElementById("mileageSearch").onclick = function (){
+          if(document.getElementById("mileageSearchKeyword").value === ""){
+              alert("값을 입력하세요");
+              return false;
+          }
+      };
   </script>
 
 </div>
 </html>
-

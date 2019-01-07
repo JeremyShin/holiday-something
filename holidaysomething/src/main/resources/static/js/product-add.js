@@ -118,5 +118,4 @@ $(function () {
 
   var date1 = $('#datepicker').val();
   console.log(date1);
-
 });

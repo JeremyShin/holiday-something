@@ -9,6 +9,7 @@ import com.holidaysomething.holidaysomething.domain.QProduct;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.JPAExpressions;
+import com.holidaysomething.holidaysomething.dto.SearchSexMemberDto;
 import com.querydsl.jpa.JPQLQuery;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -194,7 +195,8 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     */
 
   /**
-   * @author JDragon member/order.html 에서 입력받은 데이터들을 ( Member.loginId, Member.name, Order.startDate
+   * @author JDragon
+   * member/order.html 에서 입력받은 데이터들을 ( Member.loginId, Member.name, Order.startDate
    * ~ Order.endDate, Order.orderNumber, Product.name ) 을 검색조건으로 해서 회원객체,최근주문날짜,최근주문번호를 검색하는
    * method.
    */
@@ -327,6 +329,18 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
   }
 
   /************* SearchOrderMemberDto 로 검색하는 경우 *************************************************************/
+
+  @Override
+  public List<Member> findMemberBySexInSearchByDsl(SearchSexMemberDto searchSexMemberDto, Pageable pageable) {
+    QMember member = QMember.member;
+    JPQLQuery query = from(member);
+
+    if(searchSexMemberDto.getSex() != null || !searchSexMemberDto.getSex().equals("")) {
+      query.where(member.sex.eq(searchSexMemberDto.getSex()));
+    }
+
+    return getQuerydsl().applyPagination(pageable, query).fetch();
+  }
 
 }
 

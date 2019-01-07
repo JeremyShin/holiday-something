@@ -71,9 +71,8 @@ public class AdminMemberController {
       log.info("==================== 날짜 빈칸!");
     }
 
-
-
 //    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
 
     Pageable pageable = pageable = PageRequest.of(0, 5);
     ;
@@ -83,14 +82,12 @@ public class AdminMemberController {
     log.info("=============== orderMemberDtoPage : " + orderMemberDtoPage.getTotalElements());
 
     model.addAttribute("orderMemberDtoPage", orderMemberDtoPage);
-
     return "/admin/member/order";
   }
 
   @GetMapping("/mileage/search")
   public String mileageSearch(@PageableDefault(sort = {"loginId"}, size = 10) Pageable pageable,
       @ModelAttribute("search") SearchDto searchDto, ModelMap modelMap) {
-
     Page<Member> members = memberService.findAllOrSearch(searchDto, pageable);
     modelMap.addAttribute("members", members);
 
@@ -106,12 +103,10 @@ public class AdminMemberController {
   }
 
   @PostMapping("/mileage/modify")
-  public String mileageModifyPost(
-      @ModelAttribute("mileageModify") MemberMileageDto memberMileageDto) {
+  public String mileageModifyPost(@ModelAttribute("mileageModify") MemberMileageDto memberMileageDto) {
 
-    if (memberMileageDto.getMileage() < 0) {
-      return "redirect:/";
-    }
+    if (memberMileageDto.getAddMileage() < 0 || !memberMileageDto.isPossible())
+      return "redirect:/admin";
 
     memberService.updateMember(memberMileageDto);
 

@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xml:th="http:/www.thymeleaf.org"
       layout:decorate="~{layout/default.html}">
 
 <head th:include="fragments/config :: configFragment">
-  <title id="pageTitle">관리자 &mdash; 상품검색</title>
+  <title id="pageTitle">Page title</title>
   <!-- other elements you want to reference in your layout -->
 </head>
 
@@ -15,10 +14,10 @@
   <!-- 상품 검색 모듈 -->
   <div>
     <table border="1">
-      <form method="post" action="/admin/product/search">
+      <form method="post" action="/admin/product/product_search">
         <tbody>
         <tr>
-          <th scope="row">검색 분류</th>
+          <th scope="row">검색분류</th>
           <td>
             <select name="productSearchClassification">
               <option disabled selected>검색 옵션 선택</option>
@@ -35,7 +34,7 @@
           </td>
         </tr>
         <tr>
-          <th scope="row">상품 분류</th>
+          <th scope="row">상품분류</th>
           <td>
             <select name="productLargeCategoryId" class="product-category-select"
                     onchange="updateMiddleCategory(this)">
@@ -53,21 +52,18 @@
           </td>
         </tr>
         <tr>
-          <th scope="row">날짜 분류</th>
+          <th scope="row">상품등록일</th>
           <td>
-            <select name="productDate">
-              <option disabled selected>옵션 선택</option>
-              <option value="manufactureDate">상품 제조일</option>
-              <option value="releaseDate">상품 출시일</option>
-            </select>
+            <!--        <select name="productSearchDate">
+                          <option value="regDate">상품 등록일</option>
+                          <option value="releaseDate">상품 출시일</option>
+                        </select> -->
+            <option value="regDate">상품 등록일</option>
 
-            <div>
-              <input name="productRegDateStart" id="productRegDateStart" type="date"
-                     min="2017-01-01" max="2025-12-31">
-              <span> ~ </span>
-              <input name="productRegDateEnd" id="productRegDateEnd" type="date" min="2017-01-01"
-                     max="2025-12-31">
-            </div>
+            <!--<input type="date" name="productSearchDateInput" data-date-inline-picker="true"/>-->
+            <input name="regdateStart" type="datetime-local" placeholder="Start Registration Date">시작일
+            <input name="regdateEnd" type="datetime-local" placeholder="Ended Registration Date">종료일
+            <!--<a href="#" id="start-date"><span>달력보기</span></a>-->
           </td>
         </tr>
         <tr>
@@ -80,7 +76,24 @@
       </form>
     </table>
   </div>
-  
+
+  <!--<table border="1" summary="">-->
+  <!--<caption>상품검색</caption>-->
+  <!--<tbody>-->
+  <!--<tr>-->
+  <!--<th scope="row">검색분류</th>-->
+  <!--<td>-->
+  <!--<select>-->
+  <!--<option value="product_name">상품명</option>-->
+  <!--<option value="product_code">제품코드(관리자)</option>-->
+  <!--</select>-->
+  <!--<span>-->
+  <!--<form method="post" action="/admin/product/product_search/result">-->
+  <!--<input type="text" name="productName">-->
+  <!--<input type="submit">-->
+  <!--</form>-->
+  <!--</span>-->
+
   <!-- (검색 전)모든 상품 리스트 | (검색 후)상품 검색 결과 -->
   <div>
     <table>
@@ -121,7 +134,7 @@
     <!-- 모든 상품 리스트 페이지 번호 -->
     <div id="page-numbers">
       <th:block th:each="item : ${#numbers.sequence(1, productPageCount)}">
-        <a th:href="@{'/admin/product/search?page=' + ${item}}">
+        <a th:href="@{'/admin/product/product_search/' + ${item}}">
           <span th:text="${item}"></span>
         </a>
       </th:block>
