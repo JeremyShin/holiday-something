@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.controller.admin.member;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.dto.MemberMileageDto;
+import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.holidaysomething.holidaysomething.service.member.MemberService;
@@ -100,19 +101,10 @@ public class AdminMemberController {
   }
 
   @PostMapping("/search")
-  public String memberSearchPost(
-      @RequestParam(value = "memberSearchClassificationValue", required = false) String searchClassificationValue,
-      @RequestParam(value = "memberSearchClassificationInput", required = false) String searchClassificationInput,
-      @RequestParam(value = "memberBirthdayStart", required = false) String birthdayStart,
-      @RequestParam(value = "memberBirthdayEnd", required = false) String birthdayEnd,
-      @RequestParam(value = "memberRegDateStart", required = false) String regDateStart,
-      @RequestParam(value = "memberRegDateEnd", required = false) String regDateEnd,
-      @RequestParam(value = "memberOrderDateStart", required = false) String orderDateStart,
-      @RequestParam(value = "memberOrderDateEnd", required = false) String orderDateEnd,
-      @RequestParam(value = "memberSexCheck", required = false) List<String> sexCheck){
+  public String memberSearchPost(@ModelAttribute MemberSearchDto memberSearchDto){
 
     Pageable pageable = PageRequest.of(0, 5);
-    Page<Member> members = memberService.searchMembers(searchClassificationValue, searchClassificationInput, birthdayStart, birthdayEnd, regDateStart, regDateEnd, orderDateStart, orderDateEnd, sexCheck, pageable);
+    Page<Member> members = memberService.searchMembers(memberSearchDto, pageable);
 
     for (Member member : members){
       log.info(member.getBirthday().toString());

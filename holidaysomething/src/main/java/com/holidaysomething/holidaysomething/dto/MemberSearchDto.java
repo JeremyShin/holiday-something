@@ -1,23 +1,21 @@
 package com.holidaysomething.holidaysomething.dto;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 public class MemberSearchDto {
-  private final String loginId;
-  private final String name;
-  private final String email;
-  private final String phone;
-  private final String nickname;
-  private final String add;
-  private final Integer age;
-  private final String sex;
-
-  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm" )
-  private final String orderDate;
-  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-  private final String regDate;
-  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-  private final String lastLogin;
+  private String searchClassificationValue;
+  private String searchClassificationInput;
+  private String birthdayStart;
+  private String birthdayEnd;
+  private String regDateStart;
+  private String regDateEnd;
+  private String orderDateStart;
+  private String orderDateEnd;
+  private List<String> sexCheck = new ArrayList<>();
 }

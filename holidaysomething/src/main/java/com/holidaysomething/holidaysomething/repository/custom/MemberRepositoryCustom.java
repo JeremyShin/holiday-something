@@ -17,5 +17,5 @@ public interface MemberRepositoryCustom {
 
   List<Member> findMembersByLoginIdInOrdersByDsl(String loginId);
 
-  Page<Member> searchMembers(String searchClassificationValue, String searchClassificationInput, String birthdayStart, String birthdayEnd, String regDateStart, String regDateEnd, String orderDateStart, String orderDateEnd, List<String> sexCheck, Pageable pageable);
+  Page<Member> searchMembers(MemberSearchDto memberSearchDto, Pageable pageable);
 }

@@ -76,16 +76,18 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
   }
 
   @Override
-  public Page<Member> searchMembers(String searchClassificationValue, String searchClassificationInput, String birthdayStart, String birthdayEnd, String regDateStart, String regDateEnd, String orderDateStart, String orderDateEnd, List<String> sexCheck, Pageable pageable) {
+  public Page<Member> searchMembers(MemberSearchDto memberSearchDto, Pageable pageable) {
     QMember qMember = QMember.member;
     QOrder qOrder = QOrder.order;
 
     JPQLQuery<Member> jpqlQuery = from(qMember);
 
-    // 검색 옵션 설정 : 아이디, 이메일, 전화번호, 닉네임, 주소
-    if(!searchClassificationValue.equals("memberNone")){
+    /* 검색 옵션 설정 : 아이디, 이메일, 전화번호, 닉네임, 주소 */
+    String searchClassificationValue = memberSearchDto.getSearchClassificationValue();
+    String searchClassificationInput = memberSearchDto.getSearchClassificationInput();
+
+    if(searchClassificationValue != null){
       switch (searchClassificationValue){
-        case "" : log.info("입력된 input 값이 없습니다."); break;
         case "memberId" : jpqlQuery.from(qMember).where(qMember.loginId.like("%" + searchClassificationInput + "%")); break;
         case "memberName" : jpqlQuery.from(qMember).where(qMember.name.like("%" + searchClassificationInput + "%")); break;
         case "memberEmail" : jpqlQuery.from(qMember).where(qMember.email.like("%" + searchClassificationInput + "%")); break;
@@ -99,6 +101,8 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     }
 
     /* 성별 */
+    List<String> sexCheck = memberSearchDto.getSexCheck();
+
     if(sexCheck.size() != 0) {
       switch (sexCheck.size()) {
         case 1:
@@ -119,7 +123,11 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     }
 
     /* 생일 */
-    if (!birthdayStart.equals("") && !birthdayEnd.equals("")) {
+    String birthdayStart = memberSearchDto.getBirthdayStart();
+    String birthdayEnd = memberSearchDto.getBirthdayEnd();
+
+//    if (!birthdayStart.equals("") && !birthdayEnd.equals("")) {
+    if (birthdayStart != null && birthdayEnd != null) {
       SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
       formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 
@@ -134,7 +142,10 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     }
 
     /* 가입일 */
-    if (!regDateStart.equals("") && !regDateEnd.equals("")) {
+    String regDateStart = memberSearchDto.getRegDateStart();
+    String regDateEnd = memberSearchDto.getRegDateEnd();
+
+    if (regDateStart != null && regDateEnd != null) {
       LocalDateTime startRegDateTime = LocalDateTime
           .parse(regDateStart, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
       LocalDateTime endRegDateTime = LocalDateTime
@@ -144,7 +155,10 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     }
 
     /* 주문일 */
-    if (!orderDateStart.equals("") && !orderDateEnd.equals("")) {
+    String orderDateStart = memberSearchDto.getOrderDateStart();
+    String orderDateEnd = memberSearchDto.getOrderDateEnd();
+
+    if (orderDateStart != null && orderDateEnd != null) {
       LocalDateTime startOrderDateTime = LocalDateTime
           .parse(orderDateStart, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
       LocalDateTime endOrderDateTime = LocalDateTime
