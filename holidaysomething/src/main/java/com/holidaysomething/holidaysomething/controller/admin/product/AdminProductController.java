@@ -87,7 +87,7 @@ public class AdminProductController {
     if (bindingResult.hasErrors()) {
       for (ObjectError error : bindingResult.getAllErrors()) {
         log.info(error.getDefaultMessage());
-        model.addAttribute("product", product);
+        //model.addAttribute("product", product);
       }
       return "admin/product/add";
     } else {

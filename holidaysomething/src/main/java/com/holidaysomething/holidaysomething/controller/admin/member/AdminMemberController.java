@@ -31,19 +31,71 @@ public class AdminMemberController {
 
   private final MemberService memberService;
 
+//  @GetMapping("/order/search")
+//  public String memberOrderSearch() {
+//    return "admin/member/order";
+//  }
+
+  // 검색 조건 입력시 endDate가 더 미래여야 한다.  추가해야함.
   @GetMapping("/order/search")
-  public String memberOrderSearch() {
-    return "admin/member/order";
+  public String memberOrderSearch(
+      @ModelAttribute(value = "SearchOrderMember") SearchOrderMemberDto searchOrderMemberDto,
+      @RequestParam(value = "date1", required = false) @DateTimeFormat(pattern = "MMddyyyy") String date1,
+      @RequestParam(value = "date2", required = false) @DateTimeFormat(iso = ISO.DATE) String date2,
+      ModelMap model, @PageableDefault(size = 1) Pageable pageable) {
+
+    /*
+      - date1 , date2 가 stringbuffer 이면 null 도 아니고 "" 도 아니고.처음부터 capacity가 16이다...
+      뭐지????
+      - ModelAttribute 객체에 아무런 값을 넣지 않아도 null이 아니다.
+     */
+    boolean is = searchOrderMemberDto == null ? true : false;
+    log.info("searchOrderMemberDto 가 있냐?? " + is);
+
+    if (searchOrderMemberDto.isEmpty() == false) {
+
+      log.info("**************** method=GET memberOrderSearch");
+      log.info(
+          "************** searchOrderMemberDto.getLoginId() :" + searchOrderMemberDto.getLoginId());
+      log.info("************** searchOrderMemberDto.getName() :" + searchOrderMemberDto.getName());
+      log.info("************** searchOrderMemberDto.getProductName() :" + searchOrderMemberDto
+          .getProductName());
+      log.info("************** searchOrderMemberDto.getOrderNumber() :" + searchOrderMemberDto
+          .getOrderNumber());
+      log.info("************** searchOrderMemberDto.getOrderStartDate() :" + searchOrderMemberDto
+          .getOrderStartDate());
+      log.info("************** searchOrderMemberDto.getOrderEndDate() :" + searchOrderMemberDto
+          .getOrderEndDate());
+      log.info("************** date1 :" + date1);
+      log.info("************** date2 :" + date2);
+      searchOrderMemberDto.setOrderStartDate(LocalDateTime.parse(date1));
+      searchOrderMemberDto.setOrderEndDate(LocalDateTime.parse(date2));
+
+      log.info("************** searchOrderMemberDto.getOrderStartDate() :" + searchOrderMemberDto
+          .getOrderStartDate());
+      log.info("************** searchOrderMemberDto.getOrderEndDate() :" + searchOrderMemberDto
+          .getOrderEndDate());
+
+      log.info("****************END method=GET memberOrderSearch");
+
+      Page<OrderMemberDto> orderMemberDtoPage = memberService.findMembersBySearchingInQuerydsl(
+          searchOrderMemberDto, pageable);
+
+      log.info("=============== orderMemberDtoPage : " + orderMemberDtoPage.getTotalElements());
+
+      model.addAttribute("orderMemberDtoPage", orderMemberDtoPage);
+    }
+
+    return "/admin/member/order";
   }
 
 
-  // 검색 조건 입력시 endDate가 더 미래여야 한다.
   @PostMapping("/order/search")
   public String memberOrderSearchPost(
       @ModelAttribute(value = "SearchOrderMember") SearchOrderMemberDto searchOrderMemberDto,
       @RequestParam(value = "date1", required = false) @DateTimeFormat(pattern = "MMddyyyy") String date1,
       @RequestParam(value = "date2", required = false) @DateTimeFormat(iso = ISO.DATE) String date2,
-      ModelMap model) {
+      ModelMap model, @PageableDefault(size = 1) Pageable pageable) {
 
     /*
       date1 , date2 가 stringbuffer 이면 null 도 아니고 "" 도 아니고.처음부터 capacity가 16이다...
@@ -53,6 +105,7 @@ public class AdminMemberController {
     log.info(searchOrderMemberDto.getName());
     log.info(searchOrderMemberDto.getLoginId());
     log.info(searchOrderMemberDto.getProductName());
+
     log.info("date1 : " + date1 + "    date1.capacity = " + date1.length());
     log.info("date2 : " + date2 + "    date1.capacity = " + date2.length());
 
@@ -73,8 +126,7 @@ public class AdminMemberController {
 
 //    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-
-    Pageable pageable = pageable = PageRequest.of(0, 5);
+    //Pageable pageable = PageRequest.of(0, 3);
     ;
     Page<OrderMemberDto> orderMemberDtoPage = memberService.findMembersBySearchingInQuerydsl(
         searchOrderMemberDto, pageable);
@@ -82,6 +134,7 @@ public class AdminMemberController {
     log.info("=============== orderMemberDtoPage : " + orderMemberDtoPage.getTotalElements());
 
     model.addAttribute("orderMemberDtoPage", orderMemberDtoPage);
+
     return "/admin/member/order";
   }
 

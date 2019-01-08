@@ -208,19 +208,19 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     QProduct product = QProduct.product;
     QOrderedProduct orderedProduct = QOrderedProduct.orderedProduct;
 
-    log.info(
-        "************** searchOrderMemberDto.getLoginId() :" + searchOrderMemberDto.getLoginId()
-            + "   size : " + searchOrderMemberDto.getLoginId().length());
-    log.info("************** searchOrderMemberDto.getName() :" + searchOrderMemberDto.getName()
-        + " size : " + searchOrderMemberDto.getName().length());
-    log.info("************** searchOrderMemberDto.getProductName() :" + searchOrderMemberDto
-        .getProductName());
-    log.info("************** searchOrderMemberDto.getOrderNumber() :" + searchOrderMemberDto
-        .getOrderNumber());
-    log.info("************** searchOrderMemberDto.getOrderStartDate() :" + searchOrderMemberDto
-        .getOrderStartDate());
-    log.info("************** searchOrderMemberDto.getOrderEndDate() :" + searchOrderMemberDto
-        .getOrderEndDate());
+//    log.info(
+//        "************** searchOrderMemberDto.getLoginId() :" + searchOrderMemberDto.getLoginId()
+//            + "   size : " + searchOrderMemberDto.getLoginId().length());
+//    log.info("************** searchOrderMemberDto.getName() :" + searchOrderMemberDto.getName()
+//        + " size : " + searchOrderMemberDto.getName().length());
+//    log.info("************** searchOrderMemberDto.getProductName() :" + searchOrderMemberDto
+//        .getProductName());
+//    log.info("************** searchOrderMemberDto.getOrderNumber() :" + searchOrderMemberDto
+//        .getOrderNumber());
+//    log.info("************** searchOrderMemberDto.getOrderStartDate() :" + searchOrderMemberDto
+//        .getOrderStartDate());
+//    log.info("************** searchOrderMemberDto.getOrderEndDate() :" + searchOrderMemberDto
+//        .getOrderEndDate());
 
     // 공통적으로 쓰이는 innerjoin을 여기에 써주니까
     // 상품과, 기간 선택시 나타나는 1+n?? n+1?? 문제가 해결되었다...
@@ -328,7 +328,7 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     return new PageImpl<>(tuples, pageable, totalCount);
   }
 
-  /************* SearchOrderMemberDto 로 검색하는 경우 *************************************************************/
+  /************* End SearchOrderMemberDto 로 검색하는 경우 *************************************************************/
 
   @Override
   public List<Member> findMemberBySexInSearchByDsl(SearchSexMemberDto searchSexMemberDto, Pageable pageable) {

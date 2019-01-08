@@ -1,8 +1,10 @@
 package com.holidaysomething.holidaysomething.dto;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 /**
@@ -16,6 +18,19 @@ public class SearchOrderMemberDto {
   private String name;
   private String orderNumber;
   private String productName;
+
   private LocalDateTime orderStartDate;
+
+  //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+  //@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private LocalDateTime orderEndDate;
+
+
+  public boolean isEmpty() {
+    if (loginId == null && name == null && orderNumber == null && productName == null
+        && orderStartDate == null && orderEndDate == null) {
+      return true;
+    }
+    return false;
+  }
 }
