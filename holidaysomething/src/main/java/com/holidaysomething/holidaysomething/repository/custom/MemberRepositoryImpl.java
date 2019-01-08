@@ -98,21 +98,24 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 //    } else {
 //      log.info("검색할 옵션을 선택하여주세요.");
 //    }
-
+    
     /* 성별 */
-    if(sexCheck.size() != 0){
-      for(int i = 0; i < sexCheck.size(); i++){
-        if(sexCheck.get(i).equals("남성")){
-          jpqlQuery.where(qMember.sex.eq("남성"));
-        }
-
-        if(sexCheck.get(i).equals("여성")){
-          jpqlQuery.where(qMember.sex.eq("여성"));
-        }
-
-        if(sexCheck.get(i).equals("기타")){
-          jpqlQuery.where(qMember.sex.eq("기타"));
-        }
+    if(sexCheck.size() != 0) {
+      switch (sexCheck.size()) {
+        case 1:
+          jpqlQuery.where(qMember.sex.eq(sexCheck.get(0)));
+          break;
+        case 2:
+          jpqlQuery.where(qMember.sex.eq(sexCheck.get(0))
+              .or(qMember.sex.eq(sexCheck.get(1))));
+          break;
+        case 3:
+          jpqlQuery.where(qMember.sex.eq(sexCheck.get(0))
+              .or(qMember.sex.eq(sexCheck.get(1)))
+              .or(qMember.sex.eq(sexCheck.get(2))));
+          break;
+          default:
+            break;
       }
     }
 
