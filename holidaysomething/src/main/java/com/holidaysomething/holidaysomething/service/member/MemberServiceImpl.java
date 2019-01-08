@@ -4,6 +4,7 @@ import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.dto.MemberMileageDto;
 import com.holidaysomething.holidaysomething.dto.SearchDto;
 import com.holidaysomething.holidaysomething.repository.MemberRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -60,11 +61,11 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public Page<Member> searchMembers(String searchClassificationValue,
       String searchClassificationInput, String birthdayStart, String birthdayEnd,
-      String regDateStart, String regDateEnd, String orderDateStart, String orderDateEnd, Pageable pageable) {
+      String regDateStart, String regDateEnd, String orderDateStart, String orderDateEnd, List<String> sexCheck, Pageable pageable) {
 
     log.info("안녕 난 서비스야");
 
-    Page<Member> memberPage = memberRepository.searchMembers(searchClassificationValue, searchClassificationInput, birthdayStart, birthdayEnd, regDateStart, regDateEnd, orderDateStart, orderDateEnd, pageable);
+    Page<Member> memberPage = memberRepository.searchMembers(searchClassificationValue, searchClassificationInput, birthdayStart, birthdayEnd, regDateStart, regDateEnd, orderDateStart, orderDateEnd, sexCheck, pageable);
 
     return memberPage;
   }

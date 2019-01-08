@@ -6,6 +6,7 @@ import com.holidaysomething.holidaysomething.dto.SearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.holidaysomething.holidaysomething.service.member.MemberService;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -107,16 +108,20 @@ public class AdminMemberController {
       @RequestParam(value = "memberRegDateStart", required = false) String regDateStart,
       @RequestParam(value = "memberRegDateEnd", required = false) String regDateEnd,
       @RequestParam(value = "memberOrderDateStart", required = false) String orderDateStart,
-      @RequestParam(value = "memberOrderDateEnd", required = false) String orderDateEnd){
+      @RequestParam(value = "memberOrderDateEnd", required = false) String orderDateEnd,
+      @RequestParam(value = "memberSexCheck", required = false) List<String> sexCheck){
 
     log.info("searchClassificationValue" + searchClassificationValue);
     log.info("memberSearchClassificationInput" + searchClassificationInput);
     log.info("미선memberBirthdayStart" + birthdayStart);
     log.info("미선memberBirthdayStart" + birthdayEnd);
+//    log.info("미선memberSexCheck" + sexCheck.get(0));
+//    log.info("미선memberSexCheck" + sexCheck.get(1));
+    //log.info("미선memberSexCheck" + sexCheck.get(2));
 
     Pageable pageable = PageRequest.of(0, 5);
 
-    Page<Member> members = memberService.searchMembers(searchClassificationValue, searchClassificationInput, birthdayStart, birthdayEnd, regDateStart, regDateEnd, orderDateStart, orderDateEnd, pageable);
+    Page<Member> members = memberService.searchMembers(searchClassificationValue, searchClassificationInput, birthdayStart, birthdayEnd, regDateStart, regDateEnd, orderDateStart, orderDateEnd, sexCheck, pageable);
 
     for (Member member : members){
       log.info(member.getBirthday().toString());

@@ -76,7 +76,7 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
   }
 
   @Override
-  public Page<Member> searchMembers(String searchClassificationValue, String searchClassificationInput, String birthdayStart, String birthdayEnd, String regDateStart, String regDateEnd, String orderDateStart, String orderDateEnd, Pageable pageable) {
+  public Page<Member> searchMembers(String searchClassificationValue, String searchClassificationInput, String birthdayStart, String birthdayEnd, String regDateStart, String regDateEnd, String orderDateStart, String orderDateEnd, List<String> sexCheck, Pageable pageable) {
     QMember qMember = QMember.member;
     QOrder qOrder = QOrder.order;
 
@@ -99,27 +99,31 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 //      log.info("검색할 옵션을 선택하여주세요.");
 //    }
 
-    // 성별
+    /* 성별 */
+    if(sexCheck.size() != 0){
+      for(int i = 0; i < sexCheck.size(); i++){
+        if(sexCheck.get(i).equals("남성")){
+          jpqlQuery.where(qMember.sex.eq("남성"));
+        }
 
+        if(sexCheck.get(i).equals("여성")){
+          jpqlQuery.where(qMember.sex.eq("여성"));
+        }
 
-
-    log.info("안녕 난 레파지토리야");
-    log.info(birthdayStart);
-    log.info(birthdayEnd);
+        if(sexCheck.get(i).equals("기타")){
+          jpqlQuery.where(qMember.sex.eq("기타"));
+        }
+      }
+    }
 
     /* 생일 */
     if (!birthdayStart.equals("") && !birthdayEnd.equals("")) {
-      log.info("안녕 난 이프문이야");
       SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
       formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 
       try {
         Date startDate = formatter.parse(birthdayStart);
         Date endDate = formatter.parse(birthdayEnd);
-
-        log.info("트라이");
-        log.info("startBirthday: " + startDate);
-        log.info("endBirthday: " + endDate);
 
         jpqlQuery.where(qMember.birthday.between(startDate, endDate));
       }catch (Exception e){
@@ -129,31 +133,20 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 
     /* 가입일 */
     if (!regDateStart.equals("") && !regDateEnd.equals("")) {
-      log.info("안녕 난 이프문이야");
       LocalDateTime startRegDateTime = LocalDateTime
           .parse(regDateStart, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
       LocalDateTime endRegDateTime = LocalDateTime
           .parse(regDateEnd, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-
-
-        log.info("트라이");
-        log.info("startRegDateTime: " + startRegDateTime);
-        log.info("endRegDateTime: " + endRegDateTime);
 
         jpqlQuery.where(qMember.regDate.between(startRegDateTime, endRegDateTime));
     }
 
     // 주문일
     if (!orderDateStart.equals("") && !orderDateEnd.equals("")) {
-      log.info("안녕 난 이프문이야");
       LocalDateTime startOrderDateTime = LocalDateTime
           .parse(orderDateStart, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
       LocalDateTime endOrderDateTime = LocalDateTime
           .parse(orderDateEnd, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-
-      log.info("트라이");
-      log.info("startOrderDateTime: " + startOrderDateTime);
-      log.info("endOrderDateTime: " + endOrderDateTime);
 
       jpqlQuery
           .where(qMember.id.in(
