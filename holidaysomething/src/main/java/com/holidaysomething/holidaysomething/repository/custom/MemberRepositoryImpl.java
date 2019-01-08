@@ -81,24 +81,23 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     QOrder qOrder = QOrder.order;
 
     JPQLQuery<Member> jpqlQuery = from(qMember);
-   // JPQLQuery<Order> jpqlQueryOrder = from(qOrder);
 
     // 검색 옵션 설정 : 아이디, 이메일, 전화번호, 닉네임, 주소
-//    if(!searchClassificationValue.equals("memberNone")){
-//      switch (searchClassificationValue){
-//        case "" : log.info("입력된 input 값이 없습니다."); break;
-//        case "memberId" : jpqlQuery.from(qMember).where(qMember.loginId.like("%" + searchClassificationInput + "%")); break;
-//        case "memberName" : jpqlQuery.from(qMember).where(qMember.name.like("%" + searchClassificationInput + "%")); break;
-//        case "memberEmail" : jpqlQuery.from(qMember).where(qMember.email.like("%" + searchClassificationInput + "%")); break;
-//        case "memberPhone" : jpqlQuery.from(qMember).where(qMember.phone.like("%" + searchClassificationInput + "%")); break;
-//        case "memberNickname" : jpqlQuery.from(qMember).where(qMember.nickname.like("%" + searchClassificationInput + "%")); break;
-//        case "memberAddress" : jpqlQuery.from(qMember).where(qMember.address1.like("%" + searchClassificationInput + "%")
-//            .or(qMember.address2.like("%" + searchClassificationInput + "%"))); break;
-//      }
-//    } else {
-//      log.info("검색할 옵션을 선택하여주세요.");
-//    }
-    
+    if(!searchClassificationValue.equals("memberNone")){
+      switch (searchClassificationValue){
+        case "" : log.info("입력된 input 값이 없습니다."); break;
+        case "memberId" : jpqlQuery.from(qMember).where(qMember.loginId.like("%" + searchClassificationInput + "%")); break;
+        case "memberName" : jpqlQuery.from(qMember).where(qMember.name.like("%" + searchClassificationInput + "%")); break;
+        case "memberEmail" : jpqlQuery.from(qMember).where(qMember.email.like("%" + searchClassificationInput + "%")); break;
+        case "memberPhone" : jpqlQuery.from(qMember).where(qMember.phone.like("%" + searchClassificationInput + "%")); break;
+        case "memberNickname" : jpqlQuery.from(qMember).where(qMember.nickname.like("%" + searchClassificationInput + "%")); break;
+        case "memberAddress" : jpqlQuery.from(qMember).where(qMember.address1.like("%" + searchClassificationInput + "%")
+            .or(qMember.address2.like("%" + searchClassificationInput + "%"))); break;
+      }
+    } else {
+      log.info("검색할 옵션을 선택하여주세요.");
+    }
+
     /* 성별 */
     if(sexCheck.size() != 0) {
       switch (sexCheck.size()) {
@@ -107,12 +106,12 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
           break;
         case 2:
           jpqlQuery.where(qMember.sex.eq(sexCheck.get(0))
-              .or(qMember.sex.eq(sexCheck.get(1))));
+                    .or(qMember.sex.eq(sexCheck.get(1))));
           break;
         case 3:
           jpqlQuery.where(qMember.sex.eq(sexCheck.get(0))
-              .or(qMember.sex.eq(sexCheck.get(1)))
-              .or(qMember.sex.eq(sexCheck.get(2))));
+                    .or(qMember.sex.eq(sexCheck.get(1)))
+                    .or(qMember.sex.eq(sexCheck.get(2))));
           break;
           default:
             break;
@@ -144,7 +143,7 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
         jpqlQuery.where(qMember.regDate.between(startRegDateTime, endRegDateTime));
     }
 
-    // 주문일
+    /* 주문일 */
     if (!orderDateStart.equals("") && !orderDateEnd.equals("")) {
       LocalDateTime startOrderDateTime = LocalDateTime
           .parse(orderDateStart, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));

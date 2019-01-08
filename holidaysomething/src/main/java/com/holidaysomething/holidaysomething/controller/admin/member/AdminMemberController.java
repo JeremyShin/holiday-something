@@ -111,16 +111,7 @@ public class AdminMemberController {
       @RequestParam(value = "memberOrderDateEnd", required = false) String orderDateEnd,
       @RequestParam(value = "memberSexCheck", required = false) List<String> sexCheck){
 
-    log.info("searchClassificationValue" + searchClassificationValue);
-    log.info("memberSearchClassificationInput" + searchClassificationInput);
-    log.info("미선memberBirthdayStart" + birthdayStart);
-    log.info("미선memberBirthdayStart" + birthdayEnd);
-//    log.info("미선memberSexCheck" + sexCheck.get(0));
-//    log.info("미선memberSexCheck" + sexCheck.get(1));
-    //log.info("미선memberSexCheck" + sexCheck.get(2));
-
     Pageable pageable = PageRequest.of(0, 5);
-
     Page<Member> members = memberService.searchMembers(searchClassificationValue, searchClassificationInput, birthdayStart, birthdayEnd, regDateStart, regDateEnd, orderDateStart, orderDateEnd, sexCheck, pageable);
 
     for (Member member : members){
