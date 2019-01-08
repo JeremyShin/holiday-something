@@ -1,12 +1,17 @@
 package com.holidaysomething.holidaysomething.repository.custom;
 
 import com.holidaysomething.holidaysomething.domain.Member;
+import com.holidaysomething.holidaysomething.domain.Order;
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.QMember;
 import com.holidaysomething.holidaysomething.domain.QOrder;
 import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
+import com.querydsl.core.types.SubQueryExpressionImpl;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.JPQLQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,8 +20,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.swing.text.DateFormatter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +34,8 @@ import sun.util.calendar.CalendarUtils;
 @Slf4j
 public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     MemberRepositoryCustom {
+
+  JPAQueryFactory queryFactory;
 
   // 반드시 지정해줘야 하는 생성자! QuerydslRepositorySupport 는 기본 생성자가 없기에
   // 여기서 지정해줘야한다??
@@ -51,6 +61,8 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     QMember member = QMember.member;
     JPQLQuery query = from(member);
 
+
+
     if (searchOrderMemberDto.getLoginId() != null || !searchOrderMemberDto.getLoginId()
         .equals("")) {
       query.where(member.loginId.eq(searchOrderMemberDto.getLoginId()));
@@ -64,9 +76,12 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
   }
 
   @Override
-  public Page<Member> searchMembers(String searchClassificationValue, String searchClassificationInput, String birthdayStart, String birthdayEnd, String regDateStart, String regDateEnd, Pageable pageable) {
+  public Page<Member> searchMembers(String searchClassificationValue, String searchClassificationInput, String birthdayStart, String birthdayEnd, String regDateStart, String regDateEnd, String orderDateStart, String orderDateEnd, Pageable pageable) {
     QMember qMember = QMember.member;
+    QOrder qOrder = QOrder.order;
+
     JPQLQuery<Member> jpqlQuery = from(qMember);
+   // JPQLQuery<Order> jpqlQueryOrder = from(qOrder);
 
     // 검색 옵션 설정 : 아이디, 이메일, 전화번호, 닉네임, 주소
 //    if(!searchClassificationValue.equals("memberNone")){
@@ -92,7 +107,7 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     log.info(birthdayStart);
     log.info(birthdayEnd);
 
-    // 생일
+    /* 생일 */
     if (!birthdayStart.equals("") && !birthdayEnd.equals("")) {
       log.info("안녕 난 이프문이야");
       SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
@@ -112,8 +127,9 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
       }
 
     }
-    // 가입일
-    if (regDateStart != null && regDateEnd != null) {
+
+    /* 가입일 */
+    if (!regDateStart.equals("") && !regDateEnd.equals("")) {
       log.info("안녕 난 이프문이야");
       LocalDateTime startRegDateTime = LocalDateTime
           .parse(regDateStart, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
@@ -129,6 +145,58 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     }
 
     // 주문일
+    if (!orderDateStart.equals("") && !orderDateEnd.equals("")) {
+      log.info("안녕 난 이프문이야");
+      LocalDateTime startOrderDateTime = LocalDateTime
+          .parse(orderDateStart, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+      LocalDateTime endOrderDateTime = LocalDateTime
+          .parse(orderDateEnd, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+
+      log.info("트라이");
+      log.info("startOrderDateTime: " + startOrderDateTime);
+      log.info("endOrderDateTime: " + endOrderDateTime);
+
+
+      jpqlQuery
+          .where(qMember.id.in(
+              JPAExpressions.select(qOrder.member.id)
+                  .from(qOrder)
+              .where(qOrder.date.between(startOrderDateTime,endOrderDateTime))));
+      
+//      jpqlQuery.where(qMember.id.eq(JPAExpressions(qOrder.date.between(startOrderDateTime,endOrderDateTime))).from(qOrder)).fetchAll();
+//
+//      JPAExpressions.select(qOrder.date.between(startOrderDateTime,endOrderDateTime));
+//
+//      jpqlQuery.where(qMember.id.eq(
+//          JPAExpressions.select(qOrder.date.between(startOrderDateTime,endOrderDateTime)).from(qOrder)
+//      )).fetchAll();
+//
+//      //BooleanExpression memberSub = JPAExpressions.select(qMember).where(qOrder.date.between(startOrderDateTime,endOrderDateTime));
+//      jpqlQueryOrder.where(qOrder.date.between(startOrderDateTime,endOrderDateTime))
+//      jpqlQuery.where(qMember.id.eq())
+//
+//      (item.price.eq(
+//          new JPASubQuery().from(itemSub).unique(itemSub.price.max())
+//      ))
+//          .list(item);
+
+
+//      // 특정 기간 사이에 있는 주문의 정보를 검색한다.
+//      SELECT id, `date`, mileage, order_number, status, total_price, member_id
+//      FROM orders
+//      WHERE DATE(`date`) BETWEEN ‘2018-11-22 00:00:00’ AND ‘2018-12-31 00:00:00’
+//      ORDER BY member_id;
+//
+//// 특정 기간에 주문한 회원의 정보를 검색한다.
+//      SELECT id, address1, address2, birthday, email, login_id, marketing, mileage, name, nickname, password, personal_info, phone, post code, receive_email, receive_sms, recommender, reg_date, sex
+//      FROM member
+//      WHERE id = ANY(SELECT member_id FROM orders WHERE DATE(`date`) BETWEEN ‘2018-11-22 00:00:00’ AND ‘2018-12-31 00:00:00’);
+
+
+
+    }
+
+
 
     List<Member> members = getQuerydsl().applyPagination(pageable, jpqlQuery).fetch();
     long totalCount = jpqlQuery.fetchCount();

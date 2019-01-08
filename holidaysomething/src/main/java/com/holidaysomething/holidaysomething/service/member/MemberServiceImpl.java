@@ -60,11 +60,11 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public Page<Member> searchMembers(String searchClassificationValue,
       String searchClassificationInput, String birthdayStart, String birthdayEnd,
-      String regDateStart, String regDateEnd, Pageable pageable) {
+      String regDateStart, String regDateEnd, String orderDateStart, String orderDateEnd, Pageable pageable) {
 
     log.info("안녕 난 서비스야");
 
-    Page<Member> memberPage = memberRepository.searchMembers(searchClassificationValue, searchClassificationInput, birthdayStart, birthdayEnd, regDateStart, regDateEnd, pageable);
+    Page<Member> memberPage = memberRepository.searchMembers(searchClassificationValue, searchClassificationInput, birthdayStart, birthdayEnd, regDateStart, regDateEnd, orderDateStart, orderDateEnd, pageable);
 
     return memberPage;
   }

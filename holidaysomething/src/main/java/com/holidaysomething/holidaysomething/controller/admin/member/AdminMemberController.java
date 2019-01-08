@@ -105,7 +105,9 @@ public class AdminMemberController {
       @RequestParam(value = "memberBirthdayStart", required = false) String birthdayStart,
       @RequestParam(value = "memberBirthdayEnd", required = false) String birthdayEnd,
       @RequestParam(value = "memberRegDateStart", required = false) String regDateStart,
-      @RequestParam(value = "memberRegDateEnd", required = false) String regDateEnd){
+      @RequestParam(value = "memberRegDateEnd", required = false) String regDateEnd,
+      @RequestParam(value = "memberOrderDateStart", required = false) String orderDateStart,
+      @RequestParam(value = "memberOrderDateEnd", required = false) String orderDateEnd){
 
     log.info("searchClassificationValue" + searchClassificationValue);
     log.info("memberSearchClassificationInput" + searchClassificationInput);
@@ -114,7 +116,7 @@ public class AdminMemberController {
 
     Pageable pageable = PageRequest.of(0, 5);
 
-    Page<Member> members = memberService.searchMembers(searchClassificationValue, searchClassificationInput, birthdayStart, birthdayEnd, regDateStart, regDateEnd, pageable);
+    Page<Member> members = memberService.searchMembers(searchClassificationValue, searchClassificationInput, birthdayStart, birthdayEnd, regDateStart, regDateEnd, orderDateStart, orderDateEnd, pageable);
 
     for (Member member : members){
       log.info(member.getBirthday().toString());
