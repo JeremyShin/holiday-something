@@ -77,7 +77,7 @@ VALUES (null, 'sea', '1234', 'sea126@gmail.com', '최바다', 'sea', '010-6661-2
 INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, reg_date, last_login)
 VALUES (null, 'earth', '1234', 'ground16@gmail.com', '박대지', 'earth', '010-5555-5555', '1988-05-07', '15212', '경기도 안산시 단원구 우목골길 3-7', '302호', 1, 1, 1, 1, null, '여성', '2019-01-01 00:00:01', '2019-01-01 05:00:01');
 INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, reg_date, last_login)
-VALUES (null, 'rlacjftn10', '1234', 'kcs1256@gmail.com', '김철수', 'kcs', '010-1257-2545', '1978-08-10', '11790', '경기도 의정부시 오목로35번길 49', '101호', 1, 1, 1, 1, null, '선택안함', '2019-01-01 00:00:01', '2019-01-01 05:00:01');
+VALUES (null, 'rlacjftn10', '1234', 'kcs1256@gmail.com', '김철수', 'kcs', '010-1257-2545', '1978-08-10', '11790', '경기도 의정부시 오목로35번길 49', '101호', 1, 1, 1, 1, null, '기타', '2019-01-01 00:00:01', '2019-01-01 05:00:01');
 INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, reg_date, last_login)
 VALUES (null, 'sky1234', '1234', 'kyh1252@gmail.com', '김영희', 'kyh', '010-7764-6896', '1980-04-10', '11790', '경기도 의정부시 오목로35번길 49', '102호', 1, 1, 1, 1, null, '남성', '2019-01-01 00:00:01', '2019-01-01 05:00:01');
 INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, reg_date, last_login)

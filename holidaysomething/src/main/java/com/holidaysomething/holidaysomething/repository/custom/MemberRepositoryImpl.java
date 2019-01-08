@@ -125,7 +125,6 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
       }catch (Exception e){
         e.printStackTrace();
       }
-
     }
 
     /* 가입일 */
@@ -156,32 +155,21 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
       log.info("startOrderDateTime: " + startOrderDateTime);
       log.info("endOrderDateTime: " + endOrderDateTime);
 
-
       jpqlQuery
           .where(qMember.id.in(
               JPAExpressions.select(qOrder.member.id)
                   .from(qOrder)
-              .where(qOrder.date.between(startOrderDateTime,endOrderDateTime))));
-      
-//      jpqlQuery.where(qMember.id.eq(JPAExpressions(qOrder.date.between(startOrderDateTime,endOrderDateTime))).from(qOrder)).fetchAll();
-//
-//      JPAExpressions.select(qOrder.date.between(startOrderDateTime,endOrderDateTime));
-//
-//      jpqlQuery.where(qMember.id.eq(
-//          JPAExpressions.select(qOrder.date.between(startOrderDateTime,endOrderDateTime)).from(qOrder)
-//      )).fetchAll();
-//
-//      //BooleanExpression memberSub = JPAExpressions.select(qMember).where(qOrder.date.between(startOrderDateTime,endOrderDateTime));
-//      jpqlQueryOrder.where(qOrder.date.between(startOrderDateTime,endOrderDateTime))
-//      jpqlQuery.where(qMember.id.eq())
-//
-//      (item.price.eq(
-//          new JPASubQuery().from(itemSub).unique(itemSub.price.max())
-//      ))
-//          .list(item);
+                  .where(qOrder.date.between(startOrderDateTime, endOrderDateTime))));
+    }
+
+    List<Member> members = getQuerydsl().applyPagination(pageable, jpqlQuery).fetch();
+    long totalCount = jpqlQuery.fetchCount();
+
+    return new PageImpl<>(members, pageable, totalCount);
+  }
 
 
-//      // 특정 기간 사이에 있는 주문의 정보를 검색한다.
+  //      // 특정 기간 사이에 있는 주문의 정보를 검색한다.
 //      SELECT id, `date`, mileage, order_number, status, total_price, member_id
 //      FROM orders
 //      WHERE DATE(`date`) BETWEEN ‘2018-11-22 00:00:00’ AND ‘2018-12-31 00:00:00’
@@ -192,17 +180,6 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 //      FROM member
 //      WHERE id = ANY(SELECT member_id FROM orders WHERE DATE(`date`) BETWEEN ‘2018-11-22 00:00:00’ AND ‘2018-12-31 00:00:00’);
 
-
-
-    }
-
-
-
-    List<Member> members = getQuerydsl().applyPagination(pageable, jpqlQuery).fetch();
-    long totalCount = jpqlQuery.fetchCount();
-
-    return new PageImpl<>(members, pageable, totalCount);
-  }
 
   @Override
   public List<Member> findMembersByLoginIdInOrdersByDsl(String loginId) {
