@@ -9,13 +9,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 public class MemberSearchDto {
-  private String searchClassificationValue;
-  private String searchClassificationInput;
-  private String birthdayStart;
-  private String birthdayEnd;
-  private String regDateStart;
-  private String regDateEnd;
-  private String orderDateStart;
-  private String orderDateEnd;
-  private List<String> sexCheck = new ArrayList<>();
+  public String memberSearchClassificationValue;
+  public String memberSearchClassificationInput;
+  public String memberBirthdayStart;
+  public String memberBirthdayEnd;
+  public String memberRegDateStart;
+  public String memberRegDateEnd;
+  public String memberOrderDateStart;
+  public String memberOrderDateEnd;
+  public List<String> memberSexCheck;
 }

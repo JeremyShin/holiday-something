@@ -37,9 +37,9 @@
         <tr>
           <th scope="row">성별</th>
           <td>
-            <input type="checkbox" name="memberSexCheck" value="men">남자
-            <input type="checkbox" name="memberSexCheck" value="women">여자
-            <input type="checkbox" name="memberSexCheck" value="other">기타
+            <input type="checkbox" name="memberSexCheck" value="남성">남성
+            <input type="checkbox" name="memberSexCheck" value="여성">여성
+            <input type="checkbox" name="memberSexCheck" value="기타">기타
           </td>
         </tr>
         <tr>
@@ -65,6 +65,8 @@
           <td>
             시작일 <input name="memberOrderDateStart" type="datetime-local"
                       placeholder="Start Date">
+
+            <!--2018년을 입력하면 잘못된 데이터라고 뜨는 현상...말 안돼-->
             종료일 <input name="memberOrderDateEnd" type="datetime-local"
                       placeholder="Ended Date">
           </td>

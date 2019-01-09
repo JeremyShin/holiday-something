@@ -21,6 +21,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -103,8 +104,21 @@ public class AdminMemberController {
   @PostMapping("/search")
   public String memberSearchPost(@ModelAttribute MemberSearchDto memberSearchDto){
 
+
+    log.info("getSearchClassificationInput" + memberSearchDto.getMemberSearchClassificationInput());
+    log.info("getSearchClassificationValue" + memberSearchDto.getMemberSearchClassificationValue());
+    log.info("getBirthdayStart" + memberSearchDto.getMemberBirthdayStart());
+    log.info("getBirthdayEnd" + memberSearchDto.getMemberBirthdayEnd());
+    log.info("getOrderDateStart" + memberSearchDto.getMemberOrderDateStart());
+    log.info("getOrderDateEnd" + memberSearchDto.getMemberOrderDateEnd());
+    log.info("getRegDateStart" + memberSearchDto.getMemberRegDateStart());
+    log.info("getRegDateEnd" + memberSearchDto.getMemberRegDateEnd());
+
     Pageable pageable = PageRequest.of(0, 5);
     Page<Member> members = memberService.searchMembers(memberSearchDto, pageable);
+
+    log.info("으아아아아아아아아");
+    log.info("컨트롤러로 넘어온 Member의 개수는" + members.getTotalElements());
 
     for (Member member : members){
       log.info(member.getBirthday().toString());
