@@ -19,8 +19,10 @@ import javax.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
+import org.springframework.data.web.PageableDefault;
 
 
 @Slf4j
@@ -202,7 +204,9 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
    */
   @Override
   public Page<Tuple> getMembersByDsl(SearchOrderMemberDto searchOrderMemberDto,
-      Pageable pageable) {
+      @PageableDefault(size = 2) Pageable pageable) {
+    log.info("**************repoImpl pageable: " + pageable.getPageSize());
+
     QMember member = QMember.member;
     QOrder order = QOrder.order;
     QProduct product = QProduct.product;
@@ -280,7 +284,7 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 //            && (searchOrderMemberDto.getOrderEndDate() != null || !searchOrderMemberDto.getOrderEndDate().equals("")) ) {
     if (searchOrderMemberDto.getOrderStartDate() != null
         && searchOrderMemberDto.getOrderEndDate() != null) {
-      System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%% getDate() 속");
+      log.info("%%%%%%%%%%%%%%%%%%%%%%%%% getDate() 속");
       query.select(member, order.date, order.orderNumber)
           .where(
               // in 안에 있는 select 만 하면 6개 로우가 나와야 하는데
@@ -321,9 +325,30 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 
           );
     }
-    List<Tuple> tuples = getQuerydsl().applyPagination(pageable, query).fetch();
-    //long totalCount = query.fetchCount();
-    long totalCount = Math.toIntExact(tuples.size());
+
+    // applyPagination()... 제대로 작동 안하는 것 같은데...?
+    // size는 적용이 된다. pageable size가 2이면 size 만큼의 데이터만 select 한다.
+    // 근데 문제는 그 다음! 쿼리에 limit 가 붙어버려서. 딱 2개의 데이터만 가져온다.
+    // 2개의 데이터만 가져오니 totalPages() 는 늘 1 로 결과값이 나온다. 해서.
+    // applyPagination 을 빼준것!
+    //Pageable pageable = new PageRequest(0,2);
+    List<Tuple> tuples = super.getQuerydsl().applyPagination(pageable, query).fetch();
+    //List<Tuple> tuples = query.fetch();
+    log.info("***repoImpl, List<Tuple> tuples.size : " + tuples.size());
+
+
+    /*
+      query.fetchCount() 부분을 반드시 해줘야 한다.
+      이걸 안해주면. paging 처리가 안된다. Page객체.getTotalPages() 를 하면 무조건 1이 나온다.
+      아래 return 구문의 3번째 파라미터 값이 getTotalPages() 의 값으로 되나보다...
+      query.fetchCount() 를 쓰는게 왠지 비효율?적일 것 같아서 빼고 다른 코드를 넣었는데
+      그러면 안된다... 뭣도 모르면 괜히 남의 코드 수정하지 말고 있는대로 쓰자....ㅠㅠ?
+
+     */
+
+    long totalCount = query.fetchCount();
+    //long totalCount = Math.toIntExact(tuples.size());
+    log.info("***repoImpl, totalCount : " + totalCount);
 
     return new PageImpl<>(tuples, pageable, totalCount);
   }

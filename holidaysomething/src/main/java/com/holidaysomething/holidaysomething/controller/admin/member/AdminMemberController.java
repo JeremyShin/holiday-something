@@ -6,10 +6,14 @@ import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.SearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.holidaysomething.holidaysomething.service.member.MemberService;
+import com.querydsl.core.Tuple;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -40,8 +44,8 @@ public class AdminMemberController {
   @GetMapping("/order/search")
   public String memberOrderSearch(
       @ModelAttribute(value = "SearchOrderMember") SearchOrderMemberDto searchOrderMemberDto,
-      @RequestParam(value = "date1", required = false) @DateTimeFormat(pattern = "MMddyyyy") String date1,
-      @RequestParam(value = "date2", required = false) @DateTimeFormat(iso = ISO.DATE) String date2,
+      @RequestParam(defaultValue = "", value = "date1", required = false) @DateTimeFormat(pattern = "MMddyyyy") String date1,
+      @RequestParam(defaultValue = "", value = "date2", required = false) @DateTimeFormat(iso = ISO.DATE) String date2,
       ModelMap model, @PageableDefault(size = 1) Pageable pageable) {
 
     /*
@@ -62,14 +66,23 @@ public class AdminMemberController {
           .getProductName());
       log.info("************** searchOrderMemberDto.getOrderNumber() :" + searchOrderMemberDto
           .getOrderNumber());
+
+      // searchOrderMemberDto 에 날짜들은 ... 아...
       log.info("************** searchOrderMemberDto.getOrderStartDate() :" + searchOrderMemberDto
           .getOrderStartDate());
       log.info("************** searchOrderMemberDto.getOrderEndDate() :" + searchOrderMemberDto
           .getOrderEndDate());
       log.info("************** date1 :" + date1);
+      log.info("************** date1.length :" + date1.length());
       log.info("************** date2 :" + date2);
-      searchOrderMemberDto.setOrderStartDate(LocalDateTime.parse(date1));
-      searchOrderMemberDto.setOrderEndDate(LocalDateTime.parse(date2));
+      if (!date1.equals("null") && !date2.equals("null")) {
+        searchOrderMemberDto.setOrderStartDate(LocalDateTime.parse(date1));
+        searchOrderMemberDto.setOrderEndDate(LocalDateTime.parse(date2));
+//        searchOrderMemberDto.setOrderStartDate(date1);
+//        searchOrderMemberDto.setOrderEndDate(date2);
+      }
+
+
 
       log.info("************** searchOrderMemberDto.getOrderStartDate() :" + searchOrderMemberDto
           .getOrderStartDate());
@@ -78,10 +91,38 @@ public class AdminMemberController {
 
       log.info("****************END method=GET memberOrderSearch");
 
-      Page<OrderMemberDto> orderMemberDtoPage = memberService.findMembersBySearchingInQuerydsl(
+//      Page<OrderMemberDto> orderMemberDtoPage = memberService.findMembersBySearchingInQuerydsl(
+//          searchOrderMemberDto, pageable);
+      Page<Tuple> tuples = memberService.findMembersBySearchingInQuerydsl(
           searchOrderMemberDto, pageable);
 
-      log.info("=============== orderMemberDtoPage : " + orderMemberDtoPage.getTotalElements());
+      log.info("=============== tuples" + tuples.getTotalPages());
+      log.info("=============== tuples" + tuples.getTotalElements());
+
+      long totalElements = tuples.getTotalElements();
+
+      List<Tuple> orderMemberDtos = tuples.getContent();
+      log.info(
+          "**************List<Tuple> 형태. tuples.getContent().size : " + tuples.getContent().size());
+      List<OrderMemberDto> orderMemberDtoList = new ArrayList<>();
+      log.info("************** orderMemberDtos.size() : " + orderMemberDtos.size());
+
+      for (Tuple tuple : tuples) {
+        Object[] objects = tuple.toArray();
+        log.info("+++++++++++++++++++++++ objects.length : " + objects.length);
+        OrderMemberDto temp = new OrderMemberDto((Member) objects[0], (LocalDateTime) objects[1],
+            (String) objects[2]);
+        orderMemberDtoList.add(temp);
+      }
+
+      Page<OrderMemberDto> orderMemberDtoPage =
+          new PageImpl<>(orderMemberDtoList, pageable, totalElements);
+      log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getTotalPages() " + orderMemberDtoPage
+          .getTotalPages());
+      log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getTotalElements() " + orderMemberDtoPage
+          .getTotalElements());
+      log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getSize() " + orderMemberDtoPage.getSize());
+
 
       model.addAttribute("orderMemberDtoPage", orderMemberDtoPage);
     }
@@ -128,10 +169,37 @@ public class AdminMemberController {
 
     //Pageable pageable = PageRequest.of(0, 3);
     ;
-    Page<OrderMemberDto> orderMemberDtoPage = memberService.findMembersBySearchingInQuerydsl(
+//    Page<OrderMemberDto> orderMemberDtoPage = memberService.findMembersBySearchingInQuerydsl(
+//        searchOrderMemberDto, pageable);
+    Page<Tuple> tuples = memberService.findMembersBySearchingInQuerydsl(
         searchOrderMemberDto, pageable);
 
-    log.info("=============== orderMemberDtoPage : " + orderMemberDtoPage.getTotalElements());
+    log.info("=============== tuples" + tuples.getTotalPages());
+    log.info("=============== tuples" + tuples.getTotalElements());
+
+    long totalElements = tuples.getTotalElements();
+
+    List<Tuple> orderMemberDtos = tuples.getContent();
+    log.info(
+        "**************List<Tuple> 형태. tuples.getContent().size : " + tuples.getContent().size());
+    List<OrderMemberDto> orderMemberDtoList = new ArrayList<>();
+    log.info("************** orderMemberDtos.size() : " + orderMemberDtos.size());
+
+    for (Tuple tuple : tuples) {
+      Object[] objects = tuple.toArray();
+      log.info("+++++++++++++++++++++++ objects.length : " + objects.length);
+      OrderMemberDto temp = new OrderMemberDto((Member) objects[0], (LocalDateTime) objects[1],
+          (String) objects[2]);
+      orderMemberDtoList.add(temp);
+    }
+
+    Page<OrderMemberDto> orderMemberDtoPage =
+        new PageImpl<>(orderMemberDtoList, pageable, totalElements);
+    log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getTotalPages() " + orderMemberDtoPage
+        .getTotalPages());
+    log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getTotalElements() " + orderMemberDtoPage
+        .getTotalElements());
+    log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getSize() " + orderMemberDtoPage.getSize());
 
     model.addAttribute("orderMemberDtoPage", orderMemberDtoPage);
 

@@ -107,30 +107,49 @@
 
 
       <!-- 검색된 상품 페이징 처리 -->
-      <div th:if="${SearchOrderMember.isEmpty() == false }" id="searchPage-numbers">
-        <!--이전 페이지가 있다면 보임-->
-        <td th:if="${orderMemberDtoPage.hasPrevious()}">
-          <a th:href="@{'/admin/member/order/search?page=' + ${orderMemberDtoPage.number - 1}
+      <div th:if="${SearchOrderMember.isEmpty() == false || (date1 != null && date2 != null) }"
+           id="searchPage-numbers"
+           th:with="startPageNum=${T(Math).floor(orderMemberDtoPage.number/5)} * 5 + 1, endPageNum=(${orderMemberDtoPage.totalPages} > ${startPageNum} + 4) ? ${startPageNum} + 4 : ${orderMemberDtoPage.totalPages}">
+        <!-- 처음 페이지로 -->
+        <p th:if="(!${orderMemberDtoPage.first})">
+          <a th:href="@{'/admin/member/order/search?page=0'
            + '&name=' + ${SearchOrderMember.name} + '&loginId=' + ${SearchOrderMember.loginId}
            + '&productName=' + ${SearchOrderMember.productName} + '&orderNumber=' + ${SearchOrderMember.orderNumber}
-           + '&date1=' + ${SearchOrderMember.orderStartDate} + '&date2=' + ${SearchOrderMember.orderEndDate}}">&larr;</a>
-        </td>
+           + '&date1=' + ${date1} + '&date2=' + ${date2}}"> << </a>
+        </p>
+
+        <!-- 이전 블럭 페이지로 -->
+        <p th:if="${startPageNum} != 1">
+          <a th:href="@{'/admin/member/order/search?page=' + ${orderMemberDtoPage.number - 2}
+           + '&name=' + ${SearchOrderMember.name} + '&loginId=' + ${SearchOrderMember.loginId}
+           + '&productName=' + ${SearchOrderMember.productName} + '&orderNumber=' + ${SearchOrderMember.orderNumber}
+           + '&date1=' + ${date1} + '&date2=' + ${date2}}"> < </a>
+        </p>
         <!-- 페이지 목록 -->
-        <th:block th:each="page : ${#numbers.sequence(1, orderMemberDtoPage.getTotalPages())}">
+        <th:block th:each="page : ${#numbers.sequence(startPageNum, endPageNum)}">
           <a th:href="@{'/admin/member/order/search?page=' + ${page - 1}
            + '&name=' + ${SearchOrderMember.name} + '&loginId=' + ${SearchOrderMember.loginId}
            + '&productName=' + ${SearchOrderMember.productName} + '&orderNumber=' + ${SearchOrderMember.orderNumber}
-           + '&date1=' + ${SearchOrderMember.orderStartDate} + '&date2=' + ${SearchOrderMember.orderEndDate}}">&larr;</a>
-          <span th:text="${page}"></span>
+           + '&date1=' + ${date1} + '&date2=' + ${date2}}"><span th:text="${page}"></span></a>
+
           </a>
         </th:block>
-        <!--다음 페이지가 있다면 보임-->
-        <td th:if="${orderMemberDtoPage.hasNext()}">
-          <a th:href="@{'/admin/member/order/search?page=' + ${orderMemberDtoPage.number + 1}
+        <!-- 다음 블럭 페이지로 -->
+        <p th:if="${orderMemberDtoPage.totalPages} < 5 ? false : ${startPageNum} != ${orderMemberDtoPage.totalPages - 4}">
+          <a th:href="@{'/admin/member/order/search?page=' + ${endPageNum}
            + '&name=' + ${SearchOrderMember.name} + '&loginId=' + ${SearchOrderMember.loginId}
            + '&productName=' + ${SearchOrderMember.productName} + '&orderNumber=' + ${SearchOrderMember.orderNumber}
-           + '&date1=' + ${SearchOrderMember.orderStartDate} + '&date2=' + ${SearchOrderMember.orderEndDate}}">&larr;</a>
-        </td>
+           + '&date1=' + ${date1} + '&date2=' + ${date2}}"> > </a>
+        </p>
+
+        <!-- 마지막 페이지로 -->
+        <p th:if="!${orderMemberDtoPage.last}">
+          <a th:href="@{'/admin/member/order/search?page=' + ${orderMemberDtoPage.totalPages-1}
+           + '&name=' + ${SearchOrderMember.name} + '&loginId=' + ${SearchOrderMember.loginId}
+           + '&productName=' + ${SearchOrderMember.productName} + '&orderNumber=' + ${SearchOrderMember.orderNumber}
+           + '&date1=' + ${date1} + '&date2=' + ${date2}}"> >> </a>
+        </p>
+
       </div>
 
 

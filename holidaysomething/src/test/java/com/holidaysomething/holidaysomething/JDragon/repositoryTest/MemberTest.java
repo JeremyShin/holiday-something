@@ -37,7 +37,7 @@ public class MemberTest {
 
   @Before
   public void pageable생성하기() {
-    pageable = PageRequest.of(0, 10);
+    pageable = PageRequest.of(0, 2);
 
   }
 
@@ -200,11 +200,11 @@ public class MemberTest {
     SearchOrderMemberDto searchOrderMemberDto = new SearchOrderMemberDto();
 //    searchOrderMemberDto.setLoginId("sky");
 //    searchOrderMemberDto.setName("김하늘");
-    searchOrderMemberDto.setProductName("스밋코구라시");
-//    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
-//    LocalDateTime ldt2 = LocalDateTime.of(2018, 11, 25, 00, 00, 00);
-//    searchOrderMemberDto.setOrderStartDate(ldt1);
-//    searchOrderMemberDto.setOrderEndDate(ldt2);
+//    searchOrderMemberDto.setProductName("스밋코구라시");
+    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
+    LocalDateTime ldt2 = LocalDateTime.of(2018, 11, 25, 00, 00, 00);
+    searchOrderMemberDto.setOrderStartDate(ldt1);
+    searchOrderMemberDto.setOrderEndDate(ldt2);
 //    searchOrderMemberDto.setOrderNumber("2018111950137514");
 
     //searchOrderMemberDto.setName("오박사");
@@ -218,6 +218,12 @@ public class MemberTest {
 
     Page<Tuple> tuples = memberRepository.getMembersByDsl(searchOrderMemberDto, pageable);
     log.info("========================= tuples.getTotalElements() : " + tuples.getTotalElements());
+    log.info("========================= tuples.getSize() : " + tuples.getSize());
+    log.info("========================= tuples.getTotalPages() : " + tuples.getTotalPages());
+    log.info(
+        "========================= tuples.getNumberOfElements() : " + tuples.getNumberOfElements());
+    log.info("========================= pageable.getOffset : " + pageable.getOffset());
+    log.info("========================= pageable.getPageSize : " + pageable.getPageSize());
 
 //    OrderMemberDto[] orderMemberDtos = new OrderMemberDto[size];
     List<Tuple> orderMemberDtos = tuples.getContent();
