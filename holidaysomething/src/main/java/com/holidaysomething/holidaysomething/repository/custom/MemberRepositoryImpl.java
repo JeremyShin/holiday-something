@@ -103,10 +103,11 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     /* 성별 */
     List<String> sexCheck = memberSearchDto.getMemberSexCheck();
 
-    log.info("성별배열의 사이즈는" + sexCheck.size());
+
 
 //    if(sexCheck.size() != 0) {
     if(sexCheck != null) {
+      log.info("성별배열의 사이즈는" + sexCheck.size());
       switch (sexCheck.size()) {
         case 1:
           jpqlQuery.where(qMember.sex.eq(sexCheck.get(0)));

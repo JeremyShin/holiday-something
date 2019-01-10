@@ -15,7 +15,7 @@
   <!-- 고객 검색 모듈 -->
   <div>
     <table border="1">
-      <form method="post" action="/admin/member/search">
+      <form method="get" action="/admin/member/search">
         <tbody>
         <tr>
           <th scope="row">개인정보</th>
@@ -99,53 +99,65 @@
   <!--</form>-->
   <!--</span>-->
 
-  <!-- (검색 전)모든 상품 리스트 | (검색 후)상품 검색 결과 -->
-  <!--<div>-->
-    <!--<table>-->
-      <!--<thead>-->
-      <!--<tr>-->
-        <!--<th>id</th>-->
-        <!--<th>상품코드</th>-->
-        <!--<th>이름</th>-->
-        <!--<th>판매가</th>-->
-        <!--<th>판매량</th>-->
-        <!--<th>안전재고</th>-->
-        <!--<th>제조 공장</th>-->
-        <!--<th>제조일</th>-->
-        <!--<th>원가</th>-->
-        <!--<th>가격대체문구</th>-->
-        <!--<th>출시일</th>-->
-        <!--<th>배송비</th>-->
-      <!--</tr>-->
-      <!--</thead>-->
-      <!--<tbody>-->
-      <!--<tr th:each="product : ${allProductList != null ? allProductList : allProductListSearchResult}">-->
-        <!--<td th:text="${product.id}">###</td>-->
-        <!--<td th:text="${product.code}">###</td>-->
-        <!--<td th:text="${product.name}">###</td>-->
-        <!--<td th:text="${product.sellingPrice}">###</td>-->
-        <!--<td th:text="${product.sellingQuantity}">###</td>-->
-        <!--<td th:text="${product.safeQuantity}">###</td>-->
-        <!--<td th:text="${product.manufacturer}">###</td>-->
-        <!--<td th:text="${product.manufactureDate}">###</td>-->
-        <!--<td th:text="${product.originalPrice}">###</td>-->
-        <!--<td th:text="${product.optionalPriceText}">###</td>-->
-        <!--<td th:text="${product.releaseDate}">###</td>-->
-        <!--<td th:text="${product.shippingPrice}">###</td>-->
-      <!--</tr>-->
-      <!--</tbody>-->
-    <!--</table>-->
+  <!-- 멤버 검색 결과 -->
+  <div>
+    <table>
+      <thead>
+      <tr>
+        <th>id</th>
+        <th>로그인ID</th>
+        <th>이름</th>
+        <th>닉네임</th>
+        <th>이메일</th>
+        <th>전화번호</th>
+        <th>생일</th>
+        <th>성별</th>
+        <th>마일리지</th>
+        <th>우편번호</th>
+        <th>주소</th>
+        <th>상세주소</th>
+        <th>가입일</th>
+        <!--<th>개인정보제공동의</th>-->
+        <!--<th>마케팅활용동</th>-->
+        <!--<th>이메일수신</th>-->
+        <!--<th>SMS수신</th>-->
+        <!--<th>이메일수신</th>-->
+        <!--<th>추천인</th>-->
+      </tr>
+      </thead>
+      ㅇㅅㅇ
+      <tbody>
 
-    <!-- 모든 상품 리스트 페이지 번호 -->
-    <!--<div id="page-numbers">-->
-      <!--<th:block th:each="item : ${#numbers.sequence(1, productPageCount)}">-->
-        <!--<a th:href="@{'/admin/product/search?page=' + ${item}}">-->
-          <!--<span th:text="${item}"></span>-->
-        <!--</a>-->
-      <!--</th:block>-->
-    <!--</div>-->
 
-  <!--</div>-->
+      <tr  style=" font-size: 0.7em;" th:each="member : ${memberList}">
+        <td th:text="${member.id}">###</td>
+        <td th:text="${member.loginId}">###</td>
+        <td th:text="${member.name}">###</td>
+        <td th:text="${member.nickname}">###</td>
+        <td th:text="${member.email}">###</td>
+        <td th:text="${member.phone}">###</td>
+        <td th:text="${member.birthday}">###</td>
+        <td th:text="${member.sex}">###</td>
+        <td th:text="${member.mileage}">###</td>
+        <td th:text="${member.postcode}">###</td>
+        <td th:text="${member.address1}">###</td>
+        <td th:text="${member.address2}">###</td><p>1 </p>
+        <td th:text="${member.regDate}">###</td>
+      </tr>
+      </tbody>
+    </table>
+
+
+    <p></p>
+    <div id="page-numbers" th:if="${memberPageCount} != null" >
+      <th:block th:each="item : ${#numbers.sequence(1, memberPageCount)}">
+        <a th:href="@{'/admin/member/search?page=' + ${item}}">
+          <span th:text="${item}"></span>
+        </a>
+      </th:block>
+    </div>
+
+  </div>
 
   <!--<script th:src="@{/js/product-search.js}"></script>-->
 </div>
