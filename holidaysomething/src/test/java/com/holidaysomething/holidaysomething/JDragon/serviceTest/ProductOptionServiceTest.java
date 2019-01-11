@@ -18,35 +18,35 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 @Transactional
 public class ProductOptionServiceTest {
-
-  private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager
-      .getLogger(ProductOptionServiceTest.class);
-
-
-  @Autowired
-  ProductOptionService productOptionService;
-
-
-  private Pageable pageable;
-
-  @Before
-  public void pageable생성하기() {
-    pageable = PageRequest.of(0, 5);
-
-  }
-
-  @Test
-  public void 상품당옵션들조회하기() {
-    Page<ProductOption> productOptions;
-
-    for (int i = 0; i < 2; i++) {
-      pageable = PageRequest.of(i, 5);
-      productOptions = productOptionService.getProductOptionsByProductId(1l, pageable);
-      for (ProductOption productOption : productOptions) {
-        log.info(productOption.getName());
-      }
-    }
-
-  }
+//
+//  private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager
+//      .getLogger(ProductOptionServiceTest.class);
+//
+//
+//  @Autowired
+//  ProductOptionService productOptionService;
+//
+//
+//  private Pageable pageable;
+//
+//  @Before
+//  public void pageable생성하기() {
+//    pageable = PageRequest.of(0, 5);
+//
+//  }
+//
+//  @Test
+//  public void 상품당옵션들조회하기() {
+//    Page<ProductOption> productOptions;
+//
+//    for (int i = 0; i < 2; i++) {
+//      pageable = PageRequest.of(i, 5);
+//      productOptions = productOptionService.getProductOptionsByProductId(1l, pageable);
+//      for (ProductOption productOption : productOptions) {
+//        log.info(productOption.getName());
+//      }
+//    }
+//
+//  }
 
 }

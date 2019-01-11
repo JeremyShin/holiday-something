@@ -28,51 +28,51 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 @Transactional
 public class MemberTest {
-
-  private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager
-      .getLogger(MemberTest.class);
-
-  @Autowired
-  MemberRepository memberRepository;
-
-  @Autowired
-  MemberService memberService;
-
-  Pageable pageable;
-
-  @Before
-  public void pageable생성하기() {
-    pageable = PageRequest.of(0, 10);
-
-  }
-
-
-  @Test
-  public void 검색조건여러개사용해서회원조회서비스byDsl() {
-    SearchOrderMemberDto searchOrderMemberDto = new SearchOrderMemberDto();
-//    searchOrderMemberDto.setLoginId("sky");
-//    searchOrderMemberDto.setName("김하늘");
-    searchOrderMemberDto.setProductName("스밋코구라시");
-    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
-    LocalDateTime ldt2 = LocalDateTime.of(2018, 11, 25, 00, 00, 00);
-    searchOrderMemberDto.setOrderStartDate(ldt1);
-    searchOrderMemberDto.setOrderEndDate(ldt2);
-//    searchOrderMemberDto.setOrderNumber("2018111950137514");
-//    searchOrderMemberDto.setName("오박사");
-
-    Page<OrderMemberDto> orderMemberDtoPage = memberService
-        .findMembersBySearchingInQuerydsl(searchOrderMemberDto, pageable);
-
-    log.info("======== orderMemberDtoPage.getTotalElements() : " + orderMemberDtoPage
-        .getTotalElements());
-
-    List<OrderMemberDto> list = orderMemberDtoPage.getContent();
-
-    for (OrderMemberDto orderMemberDto : list) {
-      log.info(" id : " + orderMemberDto.getMember().getId());
-      log.info("date : " + orderMemberDto.getDate());
-      log.info("orderNumber : " + orderMemberDto.getOrderNumber());
-    }
-
-  }
+//
+//  private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager
+//      .getLogger(MemberTest.class);
+//
+//  @Autowired
+//  MemberRepository memberRepository;
+//
+//  @Autowired
+//  MemberService memberService;
+//
+//  Pageable pageable;
+//
+//  @Before
+//  public void pageable생성하기() {
+//    pageable = PageRequest.of(0, 10);
+//
+//  }
+//
+//
+//  @Test
+//  public void 검색조건여러개사용해서회원조회서비스byDsl() {
+//    SearchOrderMemberDto searchOrderMemberDto = new SearchOrderMemberDto();
+////    searchOrderMemberDto.setLoginId("sky");
+////    searchOrderMemberDto.setName("김하늘");
+//    searchOrderMemberDto.setProductName("스밋코구라시");
+//    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
+//    LocalDateTime ldt2 = LocalDateTime.of(2018, 11, 25, 00, 00, 00);
+//    searchOrderMemberDto.setOrderStartDate(ldt1);
+//    searchOrderMemberDto.setOrderEndDate(ldt2);
+////    searchOrderMemberDto.setOrderNumber("2018111950137514");
+////    searchOrderMemberDto.setName("오박사");
+//
+//    Page<OrderMemberDto> orderMemberDtoPage = memberService
+//        .findMembersBySearchingInQuerydsl(searchOrderMemberDto, pageable);
+//
+//    log.info("======== orderMemberDtoPage.getTotalElements() : " + orderMemberDtoPage
+//        .getTotalElements());
+//
+//    List<OrderMemberDto> list = orderMemberDtoPage.getContent();
+//
+//    for (OrderMemberDto orderMemberDto : list) {
+//      log.info(" id : " + orderMemberDto.getMember().getId());
+//      log.info("date : " + orderMemberDto.getDate());
+//      log.info("orderNumber : " + orderMemberDto.getOrderNumber());
+//    }
+//
+//  }
 }

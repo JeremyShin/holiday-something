@@ -15,26 +15,26 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 @Transactional
 public class ProductRepositoryTest {
-
-  @Autowired
-  ProductRepository productRepository;
-
-  @Autowired
-  ProductCategoryRepository productCategoryRepository;
-
-  // admin : search by name test
-
-  @Test
-  public void 이름포함된Product구하기() throws Exception {
-    Pageable pageable = PageRequest.of(0, 5);
-    Page<Product> products = productRepository.findByProductNameContaining("아이코닉", pageable);
-    System.out.println("-----");
-    System.out.println(products.getTotalElements());
-    System.out.println(products.getTotalPages());
-    System.out.println("-----");
-
-    for (Product product : products) {
-      System.out.println(product.getName());
-    }
-  }
+//
+//  @Autowired
+//  ProductRepository productRepository;
+//
+//  @Autowired
+//  ProductCategoryRepository productCategoryRepository;
+//
+//  // admin : search by name test
+//
+//  @Test
+//  public void 이름포함된Product구하기() throws Exception {
+//    Pageable pageable = PageRequest.of(0, 5);
+//    Page<Product> products = productRepository.findByProductNameContaining("아이코닉", pageable);
+//    System.out.println("-----");
+//    System.out.println(products.getTotalElements());
+//    System.out.println(products.getTotalPages());
+//    System.out.println("-----");
+//
+//    for (Product product : products) {
+//      System.out.println(product.getName());
+//    }
+//  }
 }

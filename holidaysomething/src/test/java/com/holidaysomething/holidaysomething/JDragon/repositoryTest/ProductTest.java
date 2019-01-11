@@ -17,65 +17,65 @@ import org.springframework.transaction.annotation.Transactional;
 @DataJpaTest
 @Transactional
 public class ProductTest {
-
-  private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager
-      .getLogger(ProductTest.class);
-
-  @Autowired
-  ProductRepository productRepository;
-
-  @Autowired
-  ProductDetailRepository productDetailRepository;
-
-
-  @Test
-  public void 전체상품갯수조회하기() {
-    int count = productRepository.countAll();
-    log.info("========================= " + count);
-  }
-
-
-  @Test
-  public void 상품등록하깃() {
-    ProductDetail pd = new ProductDetail("");
-    pd.setDescription("이거 방탄 펜슬이야!!");
-    ProductDetail pds = productDetailRepository.save(pd);
-    Product p = new Product();
-
-    p.setName("애플펜슬");
-    p.setManufacturer("삼성");
-    p.setCode("ajax1234");
-    p.setOriginalPrice(500);
-    p.setSellingPrice(10000000);
-    p.setManufacturingPrice(100);
-    p.setShippingPrice(50000);
-    p.setProductDetail(pds);
-    // 상품설명과 카테고리는 fk
-
-    Product pp = productRepository.save(p);
-
-    log.info("================================");
-    log.info("상품설명 id : " + pds.getId());
-    log.info("상품 id : " + pp.getId());
-    log.info("상품의 productDetail().getId() : " + pp.getProductDetail().getId());
-  }
-
-  @Test
-  public void 날짜테스트하기() {
-    LocalDateTime ldt = LocalDateTime.now();
-    log.info("======================= ldt : " + ldt);
-
-    ldt = LocalDateTime.now(ZoneId.systemDefault());
-    log.info("======================= ldt : " + ldt);
-  }
-
-
-  // 상품 한개 조회하기
-  @Test
-  public void 상품한개조회하기() {
-    Product product = productRepository.getOne(1L);
-    log.info("============= Id" + product.getId());
-    log.info("============= Name" + product.getName());
-  }
+//
+//  private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager
+//      .getLogger(ProductTest.class);
+//
+//  @Autowired
+//  ProductRepository productRepository;
+//
+//  @Autowired
+//  ProductDetailRepository productDetailRepository;
+//
+//
+//  @Test
+//  public void 전체상품갯수조회하기() {
+//    int count = productRepository.countAll();
+//    log.info("========================= " + count);
+//  }
+//
+//
+//  @Test
+//  public void 상품등록하깃() {
+//    ProductDetail pd = new ProductDetail("");
+//    pd.setDescription("이거 방탄 펜슬이야!!");
+//    ProductDetail pds = productDetailRepository.save(pd);
+//    Product p = new Product();
+//
+//    p.setName("애플펜슬");
+//    p.setManufacturer("삼성");
+//    p.setCode("ajax1234");
+//    p.setOriginalPrice(500);
+//    p.setSellingPrice(10000000);
+//    p.setManufacturingPrice(100);
+//    p.setShippingPrice(50000);
+//    p.setProductDetail(pds);
+//    // 상품설명과 카테고리는 fk
+//
+//    Product pp = productRepository.save(p);
+//
+//    log.info("================================");
+//    log.info("상품설명 id : " + pds.getId());
+//    log.info("상품 id : " + pp.getId());
+//    log.info("상품의 productDetail().getId() : " + pp.getProductDetail().getId());
+//  }
+//
+//  @Test
+//  public void 날짜테스트하기() {
+//    LocalDateTime ldt = LocalDateTime.now();
+//    log.info("======================= ldt : " + ldt);
+//
+//    ldt = LocalDateTime.now(ZoneId.systemDefault());
+//    log.info("======================= ldt : " + ldt);
+//  }
+//
+//
+//  // 상품 한개 조회하기
+//  @Test
+//  public void 상품한개조회하기() {
+//    Product product = productRepository.getOne(1L);
+//    log.info("============= Id" + product.getId());
+//    log.info("============= Name" + product.getName());
+//  }
 
 }
