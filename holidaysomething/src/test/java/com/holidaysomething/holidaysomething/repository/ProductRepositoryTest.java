@@ -1,20 +1,20 @@
-package com.holidaysomething.holidaysomething.repository;
-
-import com.holidaysomething.holidaysomething.domain.Product;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
-
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@Transactional
-public class ProductRepositoryTest {
+//package com.holidaysomething.holidaysomething.repository;
+//
+//import com.holidaysomething.holidaysomething.domain.Product;
+//import org.junit.Test;
+//import org.junit.runner.RunWith;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.test.context.SpringBootTest;
+//import org.springframework.data.domain.Page;
+//import org.springframework.data.domain.PageRequest;
+//import org.springframework.data.domain.Pageable;
+//import org.springframework.test.context.junit4.SpringRunner;
+//import org.springframework.transaction.annotation.Transactional;
+//
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
+//@Transactional
+//public class ProductRepositoryTest {
 //
 //  @Autowired
 //  ProductRepository productRepository;
@@ -37,4 +37,4 @@ public class ProductRepositoryTest {
 //      System.out.println(product.getName());
 //    }
 //  }
-}
+//}

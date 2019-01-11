@@ -1,22 +1,22 @@
-package com.holidaysomething.holidaysomething.JDragon.repositoryTest;
-
-import com.holidaysomething.holidaysomething.domain.Product;
-import com.holidaysomething.holidaysomething.domain.ProductDetail;
-import com.holidaysomething.holidaysomething.repository.ProductDetailRepository;
-import com.holidaysomething.holidaysomething.repository.ProductRepository;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
-
-@RunWith(SpringRunner.class)
-@DataJpaTest
-@Transactional
-public class ProductTest {
+//package com.holidaysomething.holidaysomething.JDragon.repositoryTest;
+//
+//import com.holidaysomething.holidaysomething.domain.Product;
+//import com.holidaysomething.holidaysomething.domain.ProductDetail;
+//import com.holidaysomething.holidaysomething.repository.ProductDetailRepository;
+//import com.holidaysomething.holidaysomething.repository.ProductRepository;
+//import java.time.LocalDateTime;
+//import java.time.ZoneId;
+//import org.junit.Test;
+//import org.junit.runner.RunWith;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+//import org.springframework.test.context.junit4.SpringRunner;
+//import org.springframework.transaction.annotation.Transactional;
+//
+//@RunWith(SpringRunner.class)
+//@DataJpaTest
+//@Transactional
+//public class ProductTest {
 //
 //  private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager
 //      .getLogger(ProductTest.class);
@@ -77,5 +77,5 @@ public class ProductTest {
 //    log.info("============= Id" + product.getId());
 //    log.info("============= Name" + product.getName());
 //  }
-
-}
+//
+//}

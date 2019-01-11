@@ -1,33 +1,33 @@
-package com.holidaysomething.holidaysomething.JDragon.serviceTest;
-
-
-import com.holidaysomething.holidaysomething.domain.Member;
-import com.holidaysomething.holidaysomething.domain.Order;
-import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
-import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
-import com.holidaysomething.holidaysomething.repository.MemberRepository;
-import com.holidaysomething.holidaysomething.service.member.MemberService;
-import com.querydsl.core.Tuple;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
-
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@Transactional
-public class MemberTest {
+//package com.holidaysomething.holidaysomething.JDragon.serviceTest;
+//
+//
+//import com.holidaysomething.holidaysomething.domain.Member;
+//import com.holidaysomething.holidaysomething.domain.Order;
+//import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
+//import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
+//import com.holidaysomething.holidaysomething.repository.MemberRepository;
+//import com.holidaysomething.holidaysomething.service.member.MemberService;
+//import com.querydsl.core.Tuple;
+//import java.time.LocalDateTime;
+//import java.util.ArrayList;
+//import java.util.List;
+//import org.junit.Before;
+//import org.junit.Test;
+//import org.junit.runner.RunWith;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+//import org.springframework.boot.test.context.SpringBootTest;
+//import org.springframework.data.domain.Page;
+//import org.springframework.data.domain.PageImpl;
+//import org.springframework.data.domain.PageRequest;
+//import org.springframework.data.domain.Pageable;
+//import org.springframework.test.context.junit4.SpringRunner;
+//import org.springframework.transaction.annotation.Transactional;
+//
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
+//@Transactional
+//public class MemberTest {
 //
 //  private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager
 //      .getLogger(MemberTest.class);
@@ -75,4 +75,4 @@ public class MemberTest {
 //    }
 //
 //  }
-}
+//}
