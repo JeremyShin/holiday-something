@@ -11,6 +11,7 @@ import com.querydsl.core.Tuple;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -131,10 +134,14 @@ public class AdminMemberController {
 //    return "/admin/member/order";
 //  }
 
-
+  /**
+   * @param searchOrderMemberDto : input 검색 데이터를 담기 위한 Dto
+   * @author JDragon
+   */
   @GetMapping("/order/search")
   public String memberOrderSearchPost(
-      @ModelAttribute(value = "SearchOrderMemberDto") SearchOrderMemberDto searchOrderMemberDto,
+      @Valid @ModelAttribute(value = "SearchOrderMemberDto") SearchOrderMemberDto searchOrderMemberDto,
+      BindingResult bindingResult,
 //      @RequestParam(value = "date1", required = false) @DateTimeFormat(pattern = "MMddyyyy") String date1,
 //      @RequestParam(value = "date2", required = false) @DateTimeFormat(iso = ISO.DATE) String date2,
       ModelMap model, @PageableDefault(size = 1) Pageable pageable) {
@@ -144,13 +151,24 @@ public class AdminMemberController {
       뭐지????
      */
 
-    if (searchOrderMemberDto.isEmpty() == false) {
 
-      log.info(searchOrderMemberDto.getName());
-      log.info(searchOrderMemberDto.getLoginId());
-      log.info(searchOrderMemberDto.getProductName());
-      log.info(searchOrderMemberDto.getOrderStartDate());
-      log.info(searchOrderMemberDto.getOrderEndDate());
+    // 유효성 검사... 체크는 되는데
+    // notnull?? 상태가 된다. null 허용?  "" 허용? 뭔가 해주긴 해야할텐데...
+    if (bindingResult.hasErrors()) {
+      for (ObjectError error : bindingResult.getAllErrors()) {
+        log.info(error.getDefaultMessage());
+        //model.addAttribute("product", product);
+      }
+      return "admin/member/order";
+    } else {
+
+      if (searchOrderMemberDto.isEmpty() == false) {
+
+        log.info(searchOrderMemberDto.getName());
+        log.info(searchOrderMemberDto.getLoginId());
+        log.info(searchOrderMemberDto.getProductName());
+        log.info(searchOrderMemberDto.getOrderStartDate());
+        log.info(searchOrderMemberDto.getOrderEndDate());
 
 //    log.info("date1 : " + date1 + "    date1.capacity = " + date1.length());
 //    log.info("date2 : " + date2 + "    date1.capacity = " + date2.length());
@@ -172,48 +190,49 @@ public class AdminMemberController {
 
 //    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-      //Pageable pageable = PageRequest.of(0, 3);
-      ;
+        //Pageable pageable = PageRequest.of(0, 3);
+        ;
 //    Page<OrderMemberDto> orderMemberDtoPage = memberService.findMembersBySearchingInQuerydsl(
 //        searchOrderMemberDto, pageable);
-      Page<Tuple> tuples = memberService.findMembersBySearchingInQuerydsl(
-          searchOrderMemberDto, pageable);
+        Page<Tuple> tuples = memberService.findMembersBySearchingInQuerydsl(
+            searchOrderMemberDto, pageable);
 
-      log.info("=============== tuples" + tuples.getTotalPages());
-      log.info("=============== tuples" + tuples.getTotalElements());
+        log.info("=============== tuples" + tuples.getTotalPages());
+        log.info("=============== tuples" + tuples.getTotalElements());
 
-      long totalElements = tuples.getTotalElements();
+        long totalElements = tuples.getTotalElements();
 
-      List<Tuple> orderMemberDtos = tuples.getContent();
-      log.info(
-          "**************List<Tuple> 형태. tuples.getContent().size : " + tuples.getContent().size());
-      List<OrderMemberDto> orderMemberDtoList = new ArrayList<>();
-      log.info("************** orderMemberDtos.size() : " + orderMemberDtos.size());
+        List<Tuple> orderMemberDtos = tuples.getContent();
+        log.info(
+            "**************List<Tuple> 형태. tuples.getContent().size : " + tuples.getContent()
+                .size());
+        List<OrderMemberDto> orderMemberDtoList = new ArrayList<>();
+        log.info("************** orderMemberDtos.size() : " + orderMemberDtos.size());
 
-      for (Tuple tuple : tuples) {
-        Object[] objects = tuple.toArray();
-        log.info("+++++++++++++++++++++++ objects.length : " + objects.length);
-        OrderMemberDto temp = new OrderMemberDto((Member) objects[0], (LocalDateTime) objects[1],
-            (String) objects[2]);
-        orderMemberDtoList.add(temp);
+        for (Tuple tuple : tuples) {
+          Object[] objects = tuple.toArray();
+          log.info("+++++++++++++++++++++++ objects.length : " + objects.length);
+          OrderMemberDto temp = new OrderMemberDto((Member) objects[0], (LocalDateTime) objects[1],
+              (String) objects[2]);
+          orderMemberDtoList.add(temp);
+        }
+
+        Page<OrderMemberDto> orderMemberDtoPage =
+            new PageImpl<>(orderMemberDtoList, pageable, totalElements);
+        log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getTotalPages() " + orderMemberDtoPage
+            .getTotalPages());
+        log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getTotalElements() " + orderMemberDtoPage
+            .getTotalElements());
+        log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getSize() " + orderMemberDtoPage.getSize());
+
+        model.addAttribute("orderMemberDtoPage", orderMemberDtoPage);
+
       }
-
-      Page<OrderMemberDto> orderMemberDtoPage =
-          new PageImpl<>(orderMemberDtoList, pageable, totalElements);
-      log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getTotalPages() " + orderMemberDtoPage
-          .getTotalPages());
-      log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getTotalElements() " + orderMemberDtoPage
-          .getTotalElements());
-      log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getSize() " + orderMemberDtoPage.getSize());
-
-      model.addAttribute("orderMemberDtoPage", orderMemberDtoPage);
-
+      return "/admin/member/order";
 
     }
 
 
-
-    return "/admin/member/order";
   }
 
   @GetMapping("/mileage/search")

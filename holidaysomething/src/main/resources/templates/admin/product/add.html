@@ -66,7 +66,7 @@
     <!-- End(카테고리)-->
 
     <!-- th:field="*{product.productOptions.description}" 이런식으로 해도 된다는데... 실패했었음.-->
-    <form action="#" th:action="@{/admin/product/add}" method="post"
+    <form onsubmit="return validate()" action="#" th:action="@{/admin/product/add}" method="post"
           th:object="${product}">
 
       <!-- Start(현재 선택한 카테고리가 무엇인지 보여주는 부분) -->
@@ -90,7 +90,7 @@
 
         <div>
           <label th:class="${#fields.hasErrors('name')} ? 'fieldError'">상품명 : </label>
-          <input name="name" th:field="*{name}"
+          <input name="name" th:field="*{name}" id="inputName"
                  th:class="${#fields.hasErrors('name')} ? 'fieldError'" type="text"
                  placeholder="Product Name">
           <label th:if="${#fields.errors('name')}" th:errors="*{name}">input is incorrect</label>

@@ -36,8 +36,15 @@
         <td><input name="loginId" type="text" placeholder="Id"></td>
       </tr>
       <tr>
-        <td>주문상품</td>
-        <td><input name="productName" type="text" placeholder="Product Name"></td>
+        <td th:class="${#fields.hasErrors('productName')} ? 'fieldError'">상품이름</td>
+        <td>
+          <!--<input name="productName" type="text" placeholder="Product Name">-->
+          <input name="productName" th:field="*{productName}"
+                 th:class="${#fields.hasErrors('productName')} ? 'fieldError'" type="text"
+                 placeholder="Product Name">
+          <label th:if="${#fields.errors('productName')}" th:errors="*{productName}">input is
+            incorrect</label>
+        </td>
       </tr>
       <tr>
         <td>주문번호</td>
@@ -106,8 +113,9 @@
       </table>
 
 
+
       <!-- 검색된 상품 페이징 처리 -->
-      <div th:if="${SearchOrderMemberDto.isEmpty() == false}"
+      <div th:if="${SearchOrderMemberDto.isEmpty() == false && orderMemberDtoPage != null}"
            id="searchPage-numbers"
            th:with="startPageNum=${T(Math).floor(orderMemberDtoPage.number/5)} * 5 + 1, endPageNum=(${orderMemberDtoPage.totalPages} > ${startPageNum} + 4) ? ${startPageNum} + 4 : ${orderMemberDtoPage.totalPages}">
         <!-- 처음 페이지로 -->

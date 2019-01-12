@@ -61,6 +61,7 @@ public class Product {
   private Integer shippingPrice;
 
   @Column(nullable = false, columnDefinition = "integer default 0")
+  @NotNull(message = "quantity must be not null")
   private Integer quantity;
 
   @Column(columnDefinition = "integer default 0")
