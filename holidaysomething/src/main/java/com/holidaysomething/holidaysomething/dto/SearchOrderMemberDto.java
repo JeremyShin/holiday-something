@@ -29,7 +29,7 @@ public class SearchOrderMemberDto {
 
 
   //@Pattern(regexp="\\S{2,6}", message="상품이름은 2~6자로 입력해주세요.")
-  @Size(min = 1, max = 10, message = "1~10자로 입력해주세요.")
+  //@Size(min = 2, max = 20, message = "1~10자로 입력해주세요.")
   private String productName;
 
   private String orderStartDate;

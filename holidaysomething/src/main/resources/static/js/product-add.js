@@ -1,10 +1,10 @@
 function validate() {
-  const re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
+  const re = /^[가-힣a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
   let name = document.getElementById("inputName");
 
   // ------------ 이메일 까지 -----------
 
-  if (!check(re, name, "아이디는 4~12자의 영문 대소문자와 숫자로만 입력")) {
+  if (!check(re, name, "상품이름은 4~12자의 영문 대소문자와 숫자로만 입력")) {
     return false;
   }
 
