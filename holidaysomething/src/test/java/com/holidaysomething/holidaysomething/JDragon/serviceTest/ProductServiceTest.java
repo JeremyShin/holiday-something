@@ -3,6 +3,7 @@ package com.holidaysomething.holidaysomething.JDragon.serviceTest;
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductDetail;
+import com.holidaysomething.holidaysomething.dto.ProductAddDto;
 import com.holidaysomething.holidaysomething.service.product.ProductAddService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,11 +26,12 @@ public class ProductServiceTest {
 
   @Test
   public void 상품서비스에서등록하기테스트() {
-    Product p = new Product();
+    ProductAddDto p = new ProductAddDto();
     ProductDetail pd = new ProductDetail("이거 방탄유리야!!");
     ProductCategory pc = new ProductCategory();
     pc.setId(2l);
     pc.setName("하하");
+
 
     p.setName("애플펜슬2");
     p.setManufacturer("애플2");
@@ -38,8 +40,12 @@ public class ProductServiceTest {
     p.setSellingPrice(10000000);
     p.setManufacturingPrice(100);
     p.setShippingPrice(50000);
-    p.setProductDetail(pd);
-    p.setProductCategory(pc);
+    p.setProductDetail("이거 방탄 연필이야!!");
+    p.setProductCategoryId(2l);
+    p.setQuantity(20);
+
+    p.setManufactureDate("2018-11-01T00:00:00");
+    p.setReleaseDate("2018-11-25T23:59:59");
 
     Product insertedProduct = productAddService.productRegister(p);
 

@@ -74,8 +74,9 @@
         <label>선택한 카테고리 : </label>
         <span id="categoryName"></span>
         <span name="productCategoryId" id="categoryId"></span>
-        <input id="categoryId2" type="hidden" name="productCategory.id" value="">
+        <input id="categoryId2" type="hidden" name="productCategoryId" value="">
         <!--<input th:field="*{productCategoryId}" type="text" value="" placeholder="">-->
+        <!--<label th:if="${#fields.errors('productCategoryId')}" th:errors="*{productCategoryId}">input is incorrect</label>-->
       </div>
       <!-- End (현재 선택한 카테고리 보여주는 부분)-->
 
@@ -97,7 +98,7 @@
         </div>
         <div>
           <label th:class="${#fields.hasErrors('manufacturer')} ? 'fieldError'">제조사 : </label>
-          <input name="manufacturer" th:field="*{manufacturer}"
+          <input name="manufacturer" th:field="*{manufacturer}" id="inputManufacturer"
                  th:class="${#fields.hasErrors('manufacturer')} ? 'fieldError'" type="text"
                  placeholder="Manufacturer">
           <label th:if="${#fields.errors('manufacturer')}" th:errors="*{manufacturer}">input is
@@ -105,13 +106,13 @@
         </div>
         <div>
           <label th:class="${#fields.hasErrors('code')} ? 'fieldError'">상품코드 : </label>
-          <input name="code" th:field="*{code}" type="text"
+          <input name="code" th:field="*{code}" type="text" id="inputCode"
                  th:class="${#fields.hasErrors('code')} ? 'fieldError'" placeholder="Product Code">
           <label th:if="${#fields.errors('code')}" th:errors="*{code}">input is incorrect</label>
         </div>
         <div>
           <label th:class="${#fields.hasErrors('originalPrice')} ? 'fieldError'">원가 : </label>
-          <input name="originalPrice" th:field="*{originalPrice}"
+          <input name="originalPrice" th:field="*{originalPrice}" id="inputOriginalPrice"
                  th:class="${#fields.hasErrors('originalPrice')} ? 'fieldError'" type="text"
                  placeholder="Original Price">
           <label th:if="${#fields.errors('originalPrice')}" th:errors="*{originalPrice}">input is
@@ -119,7 +120,7 @@
         </div>
         <div>
           <label th:class="${#fields.hasErrors('sellingPrice')} ? 'fieldError'">판매가 : </label>
-          <input name="sellingPrice" th:field="*{sellingPrice}"
+          <input name="sellingPrice" th:field="*{sellingPrice}" id="inputSellingPrice"
                  th:class="${#fields.hasErrors('sellingPrice')} ? 'fieldError'" type="text"
                  placeholder="Selling Price">
           <label th:if="${#fields.errors('sellingPrice')}" th:errors="*{sellingPrice}">input is
@@ -128,6 +129,7 @@
         <div>
           <label th:class="${#fields.hasErrors('manufacturingPrice')} ? 'fieldError'">제조가 : </label>
           <input name="manufacturingPrice" th:field="*{manufacturingPrice}"
+                 id="inputManufacturingPrice"
                  th:class="${#fields.hasErrors('manufacturingPrice')} ? 'fieldError'" type="text"
                  placeholder="Manufacturing Price">
           <label th:if="${#fields.errors('manufacturingPrice')}" th:errors="*{manufacturingPrice}">input
@@ -135,34 +137,40 @@
         </div>
         <div>
           <label th:class="${#fields.hasErrors('shippingPrice')} ? 'fieldError'">배송비 : </label>
-          <input name="shippingPrice" th:field="*{shippingPrice}"
+          <input name="shippingPrice" th:field="*{shippingPrice}" id="inputShippingPrice"
                  th:class="${#fields.hasErrors('shippingPrice')} ? 'fieldError'" type="text"
                  placeholder="Shipping Fee">
           <label th:if="${#fields.errors('shippingPrice')}" th:errors="*{shippingPrice}">input is
             incorrect</label>
         </div>
         <div>
-          <label th:class="${#fields.hasErrors('productDetail.description')} ? 'fieldError'">상품 설명
+          <label th:class="${#fields.hasErrors('productDetail')} ? 'fieldError'">상품 설명
             : </label>
-          <input name="productDetail.description" th:field="*{productDetail.description}"
-                 th:class="${#fields.hasErrors('productDetail.description')} ? 'fieldError'"
+          <input name="productDetail" th:field="*{productDetail}" id="inputDescription"
+                 th:class="${#fields.hasErrors('productDetail')} ? 'fieldError'"
                  type="text" placeholder="Product Description">
-          <label th:if="${#fields.errors('productDetail.description')}"
-                 th:errors="*{productDetail.description}">input is incorrect</label>
+          <label th:if="${#fields.errors('productDetail')}"
+                 th:errors="*{productDetail}">input is incorrect</label>
         </div>
 
         <div>
           <label>제조일 : </label>
-          <input name="date1" type="datetime-local" placeholder="Manufacture Date">
+          <input name="manufactureDate" type="datetime-local" placeholder="Manufacture Date"
+                 id="inputDate1">
           <!--<input name="date1" type="datetime-local" id="datepicker">-->
+          <!--<label th:if="${#fields.errors('manufactureDate')}"-->
+          <!--th:errors="*{manufactureDate}">input is incorrect</label>-->
         </div>
         <div>
           <label>등록일 : 서비스에서 넣어주면 될듯!? </label>
         </div>
         <div>
           <label>출시일 : </label> <!-- datetime-local -->
-          <input name="date2" type="datetime-local" placeholder="Release Date">
+          <input name="releaseDate" type="datetime-local" placeholder="Release Date"
+                 id="inputDate2">
           <!--<input name="releaseDate" type="text" id="datepicker2" placeholder="Release Date">-->
+          <!--<label th:if="${#fields.errors('releaseDate')}"-->
+          <!--th:errors="*{releaseDate}">input is incorrect</label>-->
         </div>
 
         <div>
@@ -170,8 +178,11 @@
           <input name="mileage" type="text" placeholder="Mileage">
         </div>
         <div>
-          <label>재고??? : </label>quantity
-          <input name="quantity" type="text" placeholder="Quantity">
+          <label th:class="${#fields.hasErrors('quantity')} ? 'fieldError'">재고??? : </label>quantity
+          <input name="quantity" type="text" placeholder="Quantity" id="inputQuantity"
+                 th:field="*{quantity}" th:class="${#fields.hasErrors('quantity')} ? 'fieldError'">
+          <label th:if="${#fields.errors('quantity')}" th:errors="*{quantity}">input is
+            incorrect</label>
         </div>
         <div>
           <label>안전재고?? : </label>
@@ -179,7 +190,6 @@
         </div>
         <div>
           <label>화면에 바로 보여줄거에요? </label>
-          <!-- 체크박스 -->
           <input name="display" type="checkbox">
         </div>
         <div>
