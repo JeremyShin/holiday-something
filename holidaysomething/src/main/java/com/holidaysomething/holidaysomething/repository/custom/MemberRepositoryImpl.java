@@ -1,17 +1,20 @@
 package com.holidaysomething.holidaysomething.repository.custom;
 
 import com.holidaysomething.holidaysomething.domain.Member;
+import com.holidaysomething.holidaysomething.domain.Order;
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.QMember;
 import com.holidaysomething.holidaysomething.domain.QOrder;
 import com.holidaysomething.holidaysomething.domain.QOrderedProduct;
 import com.holidaysomething.holidaysomething.domain.QProduct;
+import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.JPAExpressions;
 import com.holidaysomething.holidaysomething.dto.SearchSexMemberDto;
 import com.querydsl.jpa.JPQLQuery;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.annotation.Nullable;
 import javax.persistence.EntityManager;
@@ -60,22 +63,39 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
   }
 
   @Override
-  public List<Tuple> findMembersByLoginIdInOrdersByDsl(String loginId) {
+  public Page<Tuple> findMembersByLoginIdInOrdersByDsl(String loginId, Pageable pageable) {
     QMember member = QMember.member;
     QOrder order = QOrder.order;
 
-    JPQLQuery query = from(member);
+    JPQLQuery query = from(order);
 
-    query.select(member.id, order.date, order.orderNumber)
-        .from(member)
-        .innerJoin(member.orders, order)
+    query.select(order.member, order.date, order.orderNumber)
+//        .innerJoin(order.member , member)
+//        .innerJoin(member.orders, order)
         .where(
             order.date
                 .in(JPAExpressions.select(order.date.max())
-                    .from(order).innerJoin(order.member, member)
-                    .where(member.loginId.contains(loginId)).groupBy(member.id)));
+                    .from(order)
+                    .where(order.member.loginId.contains(loginId)).groupBy(order.member.id)));
 
-    return query.fetch();
+    List<Tuple> lists = getQuerydsl().applyPagination(pageable, query).fetch();
+    //List<Order> list = getQuerydsl().applyPagination(pageable, query).fetch();
+    log.info("========== lists.size :  " + lists.size());
+    for (Tuple tuple : lists) {
+      //Object[] objects = tuple.toArray();
+      log.info("====== tuple" + tuple);
+    }
+
+//    for(Order orderlist : lists) {
+//      log.info("============================= lists.size() : " + orderlist.getMember().getId());
+//      log.info("============================= lists.size() : " + orderlist.getMember().getName());
+//      log.info("============================= lists.size() : " + orderlist.getId());
+//      log.info("============================= lists.size() : " + orderlist.getOrderNumber());
+//      log.info("============================= lists.size() : " + orderlist.getDate());
+//    }
+    long totalCount = query.fetchCount();
+
+    return new PageImpl<>(lists, pageable, totalCount);
   }
 
   @Override
@@ -204,7 +224,7 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
    */
   @Override
   public Page<Tuple> getMembersByDsl(SearchOrderMemberDto searchOrderMemberDto,
-      @PageableDefault(size = 2) Pageable pageable) {
+      Pageable pageable) {
     log.info("**************repoImpl pageable: " + pageable.getPageSize());
 
     QMember member = QMember.member;
@@ -282,8 +302,20 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 
 //    if ( (searchOrderMemberDto.getOrderStartDate() != null || !searchOrderMemberDto.getOrderStartDate().equals(""))
 //            && (searchOrderMemberDto.getOrderEndDate() != null || !searchOrderMemberDto.getOrderEndDate().equals("")) ) {
-    if (searchOrderMemberDto.getOrderStartDate() != null
-        && searchOrderMemberDto.getOrderEndDate() != null) {
+
+    if ((searchOrderMemberDto.getOrderStartDate() != null
+        && searchOrderMemberDto.getOrderEndDate() != null) &&
+        (searchOrderMemberDto.getOrderStartDate().length() != 0
+            && searchOrderMemberDto.getOrderEndDate().length() != 0)) {
+
+      String startRegDateTimeString = searchOrderMemberDto.getOrderStartDate() + "T00:00:00";
+      String endRegDateTimeString = searchOrderMemberDto.getOrderEndDate() + "T23:59:59";
+
+      LocalDateTime startRegDateTime = LocalDateTime
+          .parse(startRegDateTimeString, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+      LocalDateTime endRegDateTime = LocalDateTime
+          .parse(endRegDateTimeString, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+
       log.info("%%%%%%%%%%%%%%%%%%%%%%%%% getDate() 속");
       query.select(member, order.date, order.orderNumber)
           .where(
@@ -292,8 +324,8 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
               order.date
                   .in(JPAExpressions.select(order.date.max())
                       .from(order)
-                      .where(order.date.between(searchOrderMemberDto.getOrderStartDate(),
-                          searchOrderMemberDto.getOrderEndDate()), order.member.id.eq(member.id))
+                      .where(order.date.between(startRegDateTime,
+                          endRegDateTime), order.member.id.eq(member.id))
                       .groupBy(order.member.id)
                   ));
 

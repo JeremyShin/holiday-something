@@ -19,11 +19,11 @@ public class SearchOrderMemberDto {
   private String orderNumber;
   private String productName;
 
-  private LocalDateTime orderStartDate;
+  private String orderStartDate;
 
   //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
   //@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-  private LocalDateTime orderEndDate;
+  private String orderEndDate;
 
 
   public boolean isEmpty() {

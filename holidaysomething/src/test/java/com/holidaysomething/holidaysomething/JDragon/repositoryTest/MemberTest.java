@@ -142,11 +142,27 @@ public class MemberTest {
 
   @Test
   public void loginId로회원조회byDsl() {
-    List<Tuple> tuples = memberRepository.findMembersByLoginIdInOrdersByDsl("sky");
-    log.info("==================================" + tuples.size());
-    for (Tuple tuple : tuples) {
-      log.info(tuple);
+    Page<Tuple> pages = memberRepository.findMembersByLoginIdInOrdersByDsl("sky", pageable);
+    log.info(
+        "============================= pages.getTotalElements() : " + pages.getTotalElements());
+    log.info("============================= pages.getTotalPages() : " + pages.getTotalPages());
+    List<Tuple> lists = pages.getContent();
+    log.info("============================= lists.size() : " + lists.size());
+    for (Tuple tuple : lists) {
+      log.info("=========== tuple : " + tuple);
+      Object[] objects = tuple.toArray();
+      log.info("=========== objects[0] : " + ((Member) objects[0]).getId() + "   "
+          + ((Member) objects[0]).getName());
+      log.info("=========== objects[1] : " + objects[1]);
+      log.info("=========== objects[2] : " + objects[2]);
+//    for(Order order : lists) {
+//      log.info("============================= lists.size() : " + order.getMember().getId());
+//      log.info("============================= lists.size() : " + order.getMember().getName());
+//      log.info("============================= lists.size() : " + order.getId());
+//      log.info("============================= lists.size() : " + order.getOrderNumber());
+//      log.info("============================= lists.size() : " + order.getDate());
     }
+
   }
 
   @Test
@@ -201,10 +217,12 @@ public class MemberTest {
 //    searchOrderMemberDto.setLoginId("sky");
 //    searchOrderMemberDto.setName("김하늘");
 //    searchOrderMemberDto.setProductName("스밋코구라시");
-    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
-    LocalDateTime ldt2 = LocalDateTime.of(2018, 11, 25, 00, 00, 00);
-    searchOrderMemberDto.setOrderStartDate(ldt1);
-    searchOrderMemberDto.setOrderEndDate(ldt2);
+//    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
+//    LocalDateTime ldt2 = LocalDateTime.of(2018, 11, 25, 00, 00, 00);
+    searchOrderMemberDto.setOrderStartDate("2018-11-01T00:00:00");
+    searchOrderMemberDto.setOrderEndDate("2018-11-25T23:59:59");
+//    searchOrderMemberDto.setOrderStartDate(ldt1);
+//    searchOrderMemberDto.setOrderEndDate(ldt2);
 //    searchOrderMemberDto.setOrderNumber("2018111950137514");
 
     //searchOrderMemberDto.setName("오박사");
