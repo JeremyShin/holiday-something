@@ -156,21 +156,20 @@
         <div>
           <label>제조일 : </label>
           <input name="manufactureDate" type="datetime-local" placeholder="Manufacture Date"
-                 id="inputDate1">
+                 id="inputDate1" th:field="*{manufactureDate}"
+                 th:class="${#fields.hasErrors('productDetail')} ? 'fieldError'">
           <!--<input name="date1" type="datetime-local" id="datepicker">-->
-          <!--<label th:if="${#fields.errors('manufactureDate')}"-->
-          <!--th:errors="*{manufactureDate}">input is incorrect</label>-->
-        </div>
-        <div>
-          <label>등록일 : 서비스에서 넣어주면 될듯!? </label>
+          <label th:if="${#fields.errors('manufactureDate')}"
+                 th:errors="*{manufactureDate}">input is incorrect</label>
         </div>
         <div>
           <label>출시일 : </label> <!-- datetime-local -->
           <input name="releaseDate" type="datetime-local" placeholder="Release Date"
-                 id="inputDate2">
+                 id="inputDate2" th:field="*{releaseDate}"
+                 th:class="${#fields.hasErrors('releaseDate')} ? 'fieldError'">
           <!--<input name="releaseDate" type="text" id="datepicker2" placeholder="Release Date">-->
-          <!--<label th:if="${#fields.errors('releaseDate')}"-->
-          <!--th:errors="*{releaseDate}">input is incorrect</label>-->
+          <label th:if="${#fields.errors('releaseDate')}"
+                 th:errors="*{releaseDate}">input is incorrect</label>
         </div>
 
         <div>

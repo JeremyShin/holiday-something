@@ -1,5 +1,6 @@
 function validate() {
-  const re = /^[가-힣a-zA-Z0-9]{2,20}$/ // 상품이름을 검사할 정규식
+  const re = /^[가-힣a-zA-Z0-9]{2,20}$/ // 문자열 검사할 정규식
+  const reInteger = /^[0-9]{1,20}$/ // 숫자를 검사할 정규식
 
   let name = document.getElementById("inputName");
   let categoryId = document.getElementById("categoryId2");
@@ -16,20 +17,67 @@ function validate() {
   let inputQuantity = document.getElementById("inputQuantity");
 
   // Product 도메인에서 notnull인 것은 필수로 입력해줘야 한다.
-  if (name.value === "") {
-    console.log("name size 0");
-
-  }
-
   if (!check(re, name, "상품이름은 2~20자  입력")) {
     return false;
   }
+  if (!check(re, inputManufacturer, "제조사 2~20자  입력")) {
+    return false;
+  }
+  if (!check(re, inputCode, "상품코드 2~20자  입력")) {
+    return false;
+  }
+  if (!check(re, inputDescription, "상품설명은 2~20자  입력")) {
+    return false;
+  }
+  if (!checkInteger(reInteger, inputOriginalPrice, "원가는 숫자로 입력")) {
+    return false;
+  }
+  if (!checkInteger(reInteger, inputSellingPrice, "판매가 숫자  입력")) {
+    return false;
+  }
+  if (!checkInteger(reInteger, inputManufacturingPrice, "제조가 숫자  입력")) {
+    return false;
+  }
+  if (!checkInteger(reInteger, inputShippingPrice, "배송비 숫자  입력")) {
+    return false;
+  }
+  if (!checkInteger(reInteger, inputQuantity, "재고 숫자 입력")) {
+    return false;
+  }
+  console.log("date1 : " + inputDate1.value);
 
-  //alert("상품등록이 완료되었습니다.");
+  if (inputDate1.value === "") {
+    alert("제조일 선택해주세요.");
+    inputDate1.value = "";
+    inputDate1.focus();
+    return false;
+  }
+  if (inputDate2.value === "") {
+    alert("출시일 선택해주세요.");
+    inputDate2.value = "";
+    inputDate2.focus();
+    return false;
+  }
+  if (categoryId.value === "") {
+    alert("카테고리를 선택해주세요.");
+    return false;
+  }
+
+
 }
 
 function check(re, what, message) {
   if (re.test(what.value)) {
+    return true;
+  }
+  alert(message);
+  what.value = "";
+  what.focus();
+  //return false;
+}
+
+function checkInteger(reInteger, what, message) {
+  if (reInteger.test(what.value)) {
     return true;
   }
   alert(message);
