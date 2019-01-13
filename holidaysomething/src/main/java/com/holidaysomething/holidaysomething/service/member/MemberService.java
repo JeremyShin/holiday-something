@@ -17,6 +17,6 @@ public interface MemberService {
 
   Page<Member> findAllOrSearch(SearchDto searchDto, Pageable pageable);
 
-  Page<Tuple> findMembersBySearchingInQuerydsl(
+  Page<OrderMemberDto> findMembersBySearchingInQuerydsl(
       SearchOrderMemberDto searchOrderMemberDto, Pageable pageable);
 }

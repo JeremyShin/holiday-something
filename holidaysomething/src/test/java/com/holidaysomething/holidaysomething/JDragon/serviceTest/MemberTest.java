@@ -64,49 +64,9 @@ public class MemberTest {
 
 //    Page<OrderMemberDto> orderMemberDtoPage = memberService
 //        .findMembersBySearchingInQuerydsl(searchOrderMemberDto, pageable);
-    Page<Tuple> tuples = memberService
+    Page<OrderMemberDto> orderMemberDtoPages = memberService
         .findMembersBySearchingInQuerydsl(searchOrderMemberDto, pageable);
 
-    log.info("=============== tuples" + tuples.getTotalPages());
-    log.info("=============== tuples" + tuples.getTotalElements());
-
-    long totalElements = tuples.getTotalElements();
-
-    List<Tuple> orderMemberDtos = tuples.getContent();
-    log.info(
-        "**************List<Tuple> 형태. tuples.getContent().size : " + tuples.getContent().size());
-    List<OrderMemberDto> orderMemberDtoList = new ArrayList<>();
-    log.info("************** orderMemberDtos.size() : " + orderMemberDtos.size());
-
-    for (Tuple tuple : tuples) {
-      Object[] objects = tuple.toArray();
-      log.info("+++++++++++++++++++++++ objects.length : " + objects.length);
-      OrderMemberDto temp = new OrderMemberDto((Member) objects[0], (LocalDateTime) objects[1],
-          (String) objects[2]);
-      orderMemberDtoList.add(temp);
-    }
-
-//    for (int i = 0; i < orderMemberDtos.size(); i++) {
-//      Tuple tuple = orderMemberDtos.get(i);
-//      Object[] objects = tuple.toArray();
-//      log.info("+++++++++++++++++++++++ objects.length : " + objects.length);
-//      OrderMemberDto temp = new OrderMemberDto((Member) objects[0], (LocalDateTime) objects[1],
-//          (String) objects[2]);
-//      orderMemberDtoList.add(temp);
-//    }
-
-    log.info("==================== orderMemberDtoList.size() : " + orderMemberDtoList.size());
-
-//    Page<OrderMemberDto> orderMemberDtoPages = new PageImpl<>(orderMemberDtoList, pageable,
-//        orderMemberDtoList.size());
-
-    Page<OrderMemberDto> orderMemberDtoPages =
-        new PageImpl<>(orderMemberDtoList, pageable, totalElements);
-    log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getTotalPages() " + orderMemberDtoPages
-        .getTotalPages());
-    log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getTotalElements() " + orderMemberDtoPages
-        .getTotalElements());
-    log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getSize() " + orderMemberDtoPages.getSize());
 
     for (OrderMemberDto orderMemberDto : orderMemberDtoPages) {
       log.info(" id : " + orderMemberDto.getMember().getId());

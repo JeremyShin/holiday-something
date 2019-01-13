@@ -66,59 +66,29 @@ public class MemberServiceImpl implements MemberService {
    */
   @Override
   @Transactional
-  public Page<Tuple> findMembersBySearchingInQuerydsl(
+  public Page<OrderMemberDto> findMembersBySearchingInQuerydsl(
       SearchOrderMemberDto searchOrderMemberDto, Pageable pageable) {
 
     Page<Tuple> tuples = memberRepository.getMembersByDsl(searchOrderMemberDto, pageable);
     log.info("==========tuples getTotalPages : " + tuples.getTotalPages());
-    long totalCount = tuples.getTotalPages();
     log.info("==========tuples getSize : " + tuples.getSize());
 
+    long totalElements = tuples.getTotalElements();
 
+    //List<Tuple> orderMemberDtos = tuples.getContent();
+    List<OrderMemberDto> orderMemberDtoList = new ArrayList<>();
 
-    log.info("==========tuples 의 길이 : " + tuples.getTotalElements());
-    // searchOrderMemberDto 넘어온 값좀 확인해보자...
-    log.info(
-        "************** searchOrderMemberDto.getLoginId() :" + searchOrderMemberDto.getLoginId());
-    log.info("************** searchOrderMemberDto.getName() :" + searchOrderMemberDto.getName());
-    log.info("************** searchOrderMemberDto.getProductName() :" + searchOrderMemberDto
-        .getProductName());
-    log.info("************** searchOrderMemberDto.getOrderNumber() :" + searchOrderMemberDto
-        .getOrderNumber());
-    log.info("************** searchOrderMemberDto.getOrderStartDate() :" + searchOrderMemberDto
-        .getOrderStartDate());
-    log.info("************** searchOrderMemberDto.getOrderEndDate() :" + searchOrderMemberDto
-        .getOrderEndDate());
+    for (Tuple tuple : tuples) {
+      Object[] objects = tuple.toArray();
+      OrderMemberDto temp = new OrderMemberDto((Member) objects[0], (LocalDateTime) objects[1],
+          (String) objects[2]);
+      orderMemberDtoList.add(temp);
+    }
 
-//    List<Tuple> orderMemberDtos = tuples.getContent();
-//    log.info("**************List<Tuple> 형태. tuples.getContent().size : " + tuples.getContent().size());
-//    List<OrderMemberDto> orderMemberDtoList = new ArrayList<>();
+    Page<OrderMemberDto> orderMemberDtoPage =
+        new PageImpl<>(orderMemberDtoList, pageable, totalElements);
 
-    //
-
-//    for (int i = 0; i < orderMemberDtos.size(); i++) {
-//      Tuple tuple = orderMemberDtos.get(i);
-//      Object[] objects = tuple.toArray();
-//      OrderMemberDto temp = new OrderMemberDto((Member) objects[0], (LocalDateTime) objects[1],
-//          (String) objects[2]);
-//      orderMemberDtoList.add(temp);
-//    }
-//
-//    log.info("==================== orderMemberDtoList.size() : " + orderMemberDtoList.size());
-
-    //  최종적으로 Controller 로 보내야 하는 Page.
-//    Page<OrderMemberDto> orderMemberDtoPages = new PageImpl<>(orderMemberDtoList, pageable,
-//        orderMemberDtoList.size());
-//    log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getTotalPages() " + orderMemberDtoPages.getTotalPages());
-//    log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getTotalElements() " + orderMemberDtoPages.getTotalElements());
-//    log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getSize() " + orderMemberDtoPages.getSize());
-    // java 8 부터 가능
-    // int size = Math.toIntExact(tuples.getTotalElements());
-    // return new PageImpl<>(tuples.getContent(), pageable, size);
-
-    //return orderMemberDtoPages;
-    //return new PageImpl<>(orderMemberDtoList, pageable, totalCount);
-    return tuples;
+    return orderMemberDtoPage;
   }
 
 }

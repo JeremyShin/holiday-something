@@ -56,8 +56,6 @@ public class AdminMemberController {
       date1 , date2 가 stringbuffer 이면 null 도 아니고 "" 도 아니고.처음부터 capacity가 16이다...
       뭐지????
      */
-
-
     // 유효성 검사... 체크는 되는데
     // notnull?? 상태가 된다. null 허용?  "" 허용? 뭔가 해주긴 해야할텐데...
     if (bindingResult.hasErrors()) {
@@ -69,67 +67,14 @@ public class AdminMemberController {
     } else {
 
       if (searchOrderMemberDto.isEmpty() == false) {
-
-        log.info(searchOrderMemberDto.getName());
-        log.info(searchOrderMemberDto.getLoginId());
-        log.info(searchOrderMemberDto.getProductName());
-        log.info(searchOrderMemberDto.getOrderStartDate());
-        log.info(searchOrderMemberDto.getOrderEndDate());
-
-//    log.info("date1 : " + date1 + "    date1.capacity = " + date1.length());
-//    log.info("date2 : " + date2 + "    date1.capacity = " + date2.length());
-//
-//    if (!date1.equals("") && !date2.equals("")) {
-//      date1 += "T00:00:00";
-//      date2 += "T23:59:59";
-//      //date1.append("T00:00:00");
-//      //date2.append("T23:59:59");
-//      log.info("date1 : " + date1);
-//      log.info("date2 : " + date2);
-//      searchOrderMemberDto.setOrderStartDate(LocalDateTime.parse(date1));
-//      searchOrderMemberDto.setOrderEndDate(LocalDateTime.parse(date2));
-//      log.info("searchDto : " + searchOrderMemberDto.getOrderStartDate());
-//      log.info("searchDto : " + searchOrderMemberDto.getOrderEndDate());
-//    } else if (date1.equals("") && date2.equals("")) {
-//      log.info("==================== 날짜 빈칸!");
-//    }
-
 //    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         //Pageable pageable = PageRequest.of(0, 3);
-        ;
-//    Page<OrderMemberDto> orderMemberDtoPage = memberService.findMembersBySearchingInQuerydsl(
-//        searchOrderMemberDto, pageable);
-        Page<Tuple> tuples = memberService.findMembersBySearchingInQuerydsl(
+
+        Page<OrderMemberDto> orderMemberDtoPage = memberService.findMembersBySearchingInQuerydsl(
             searchOrderMemberDto, pageable);
 
-        log.info("=============== tuples" + tuples.getTotalPages());
-        log.info("=============== tuples" + tuples.getTotalElements());
 
-        long totalElements = tuples.getTotalElements();
-
-        List<Tuple> orderMemberDtos = tuples.getContent();
-        log.info(
-            "**************List<Tuple> 형태. tuples.getContent().size : " + tuples.getContent()
-                .size());
-        List<OrderMemberDto> orderMemberDtoList = new ArrayList<>();
-        log.info("************** orderMemberDtos.size() : " + orderMemberDtos.size());
-
-        for (Tuple tuple : tuples) {
-          Object[] objects = tuple.toArray();
-          log.info("+++++++++++++++++++++++ objects.length : " + objects.length);
-          OrderMemberDto temp = new OrderMemberDto((Member) objects[0], (LocalDateTime) objects[1],
-              (String) objects[2]);
-          orderMemberDtoList.add(temp);
-        }
-
-        Page<OrderMemberDto> orderMemberDtoPage =
-            new PageImpl<>(orderMemberDtoList, pageable, totalElements);
-        log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getTotalPages() " + orderMemberDtoPage
-            .getTotalPages());
-        log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getTotalElements() " + orderMemberDtoPage
-            .getTotalElements());
-        log.info("%%%%%%%%%%%%%%%% orderMemberDtoPages.getSize() " + orderMemberDtoPage.getSize());
 
         model.addAttribute("orderMemberDtoPage", orderMemberDtoPage);
 

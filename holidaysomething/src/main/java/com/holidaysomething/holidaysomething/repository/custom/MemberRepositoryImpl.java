@@ -85,14 +85,6 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
       //Object[] objects = tuple.toArray();
       log.info("====== tuple" + tuple);
     }
-
-//    for(Order orderlist : lists) {
-//      log.info("============================= lists.size() : " + orderlist.getMember().getId());
-//      log.info("============================= lists.size() : " + orderlist.getMember().getName());
-//      log.info("============================= lists.size() : " + orderlist.getId());
-//      log.info("============================= lists.size() : " + orderlist.getOrderNumber());
-//      log.info("============================= lists.size() : " + orderlist.getDate());
-//    }
     long totalCount = query.fetchCount();
 
     return new PageImpl<>(lists, pageable, totalCount);
@@ -232,20 +224,6 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     QProduct product = QProduct.product;
     QOrderedProduct orderedProduct = QOrderedProduct.orderedProduct;
 
-//    log.info(
-//        "************** searchOrderMemberDto.getLoginId() :" + searchOrderMemberDto.getLoginId()
-//            + "   size : " + searchOrderMemberDto.getLoginId().length());
-//    log.info("************** searchOrderMemberDto.getName() :" + searchOrderMemberDto.getName()
-//        + " size : " + searchOrderMemberDto.getName().length());
-//    log.info("************** searchOrderMemberDto.getProductName() :" + searchOrderMemberDto
-//        .getProductName());
-//    log.info("************** searchOrderMemberDto.getOrderNumber() :" + searchOrderMemberDto
-//        .getOrderNumber());
-//    log.info("************** searchOrderMemberDto.getOrderStartDate() :" + searchOrderMemberDto
-//        .getOrderStartDate());
-//    log.info("************** searchOrderMemberDto.getOrderEndDate() :" + searchOrderMemberDto
-//        .getOrderEndDate());
-
     // 공통적으로 쓰이는 innerjoin을 여기에 써주니까
     // 상품과, 기간 선택시 나타나는 1+n?? n+1?? 문제가 해결되었다...
     JPQLQuery query = from(member).innerJoin(member.orders, order);
@@ -358,29 +336,9 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
           );
     }
 
-    // applyPagination()... 제대로 작동 안하는 것 같은데...?
-    // size는 적용이 된다. pageable size가 2이면 size 만큼의 데이터만 select 한다.
-    // 근데 문제는 그 다음! 쿼리에 limit 가 붙어버려서. 딱 2개의 데이터만 가져온다.
-    // 2개의 데이터만 가져오니 totalPages() 는 늘 1 로 결과값이 나온다. 해서.
-    // applyPagination 을 빼준것!
-    //Pageable pageable = new PageRequest(0,2);
     List<Tuple> tuples = super.getQuerydsl().applyPagination(pageable, query).fetch();
-    //List<Tuple> tuples = query.fetch();
-    log.info("***repoImpl, List<Tuple> tuples.size : " + tuples.size());
-
-
-    /*
-      query.fetchCount() 부분을 반드시 해줘야 한다.
-      이걸 안해주면. paging 처리가 안된다. Page객체.getTotalPages() 를 하면 무조건 1이 나온다.
-      아래 return 구문의 3번째 파라미터 값이 getTotalPages() 의 값으로 되나보다...
-      query.fetchCount() 를 쓰는게 왠지 비효율?적일 것 같아서 빼고 다른 코드를 넣었는데
-      그러면 안된다... 뭣도 모르면 괜히 남의 코드 수정하지 말고 있는대로 쓰자....ㅠㅠ?
-
-     */
-
     long totalCount = query.fetchCount();
     //long totalCount = Math.toIntExact(tuples.size());
-    log.info("***repoImpl, totalCount : " + totalCount);
 
     return new PageImpl<>(tuples, pageable, totalCount);
   }
