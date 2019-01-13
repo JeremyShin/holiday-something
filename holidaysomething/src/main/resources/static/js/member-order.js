@@ -10,6 +10,8 @@ function validateSearch() {
 
   console.log("startDate.value = " + startDate.value);
 
+  console.log("endDate.value = " + endDate.value);
+
   // 하나라도 null 이 아니어야 한다.
   if (name.value === "" && loginId.value === "" && productName.value === "" &&
       orderNumber.value === "" && startDate.value === "" && endDate.value
@@ -18,11 +20,11 @@ function validateSearch() {
     return false;
   }
 
-  let diff = checkDate(startDate, endDate);
-  // 뒤에서 앞을 뺀다. 음수가 나오면 false!
-  console.log(diff);
-  if (diff < 0) {
-    alert("뒤에 input 값이 더 미래여야 합니다.");
+  if (!check(re, name, "회원 이름 2~20자 입력하셔야 합니다.")) {
+    return false;
+  }
+
+  if (!check(re, loginId, "회원 로그인 아이디 2~20자 입력하셔야 합니다.")) {
     return false;
   }
 
@@ -30,10 +32,37 @@ function validateSearch() {
     return false;
   }
 
+  if (!check(re, orderNumber, "주문번호 2~20자 입력하셔야 합니다.")) {
+    return false;
+  }
+
+  if (startDate.value !== "" && endDate.value === "") {
+    alert("start 입력했으면 end도 입력해야 합니다.");
+    endDate.focus();
+    return false;
+  }
+
+  if (startDate.value === "" && endDate.value !== "") {
+    alert("end 입력했으면 start도 입력해야 합니다.");
+    startDate.focus();
+    return false;
+  }
+
+  if (startDate.value !== "" && endDate.value !== "") {
+    let diff = checkDate(startDate, endDate);
+    // 뒤에서 앞을 뺀다. 음수가 나오면 false!
+    console.log(diff);
+    if (diff < 0) {
+      alert("뒤에 날짜가 더 미래여야 합니다.");
+      return false;
+    }
+  }
+
 }
 
 // 상품이름 validation
 function check(re, what, message) {
+  // 아무것도 입력안했을 경우.
   if (what.value.length == 0) {
     return true;
   }
