@@ -15,7 +15,7 @@
   <!-- 고객 검색 모듈 -->
   <div>
     <table border="1">
-      <form method="get" action="/admin/member/search" th:object="${MemberSearchDto}">
+      <form method="get" action="#" th:action="@{/admin/member/search}" th:object="${memberSearchDto}">
         <tbody>
         <tr>
           <th scope="row">개인정보</th>
@@ -125,7 +125,6 @@
         <!--<th>추천인</th>-->
       </tr>
       </thead>
-      ㅇㅅㅇ
       <tbody>
 
 
@@ -141,7 +140,7 @@
         <td th:text="${member.mileage}">###</td>
         <td th:text="${member.postcode}">###</td>
         <td th:text="${member.address1}">###</td>
-        <td th:text="${member.address2}">###</td><p>1 </p>
+        <td th:text="${member.address2}">###</td>
         <td th:text="${member.regDate}">###</td>
       </tr>
       </tbody>
@@ -150,10 +149,10 @@
     <p></p>
     <div id="page-numbers" th:if="${memberPageCount} != null" >
       <th:block th:each="item : ${#numbers.sequence(1, memberPageCount)}">
-        <a th:href="@{'/admin/member/search?page=' + ${item} +'&memberSearchClassificationValue=' + ${memberSearchClassificationValue}
-+'&memberSearchClassificationInput=' + ${memberSearchClassificationInput}+'&memberBirthdayStart=' + ${memberBirthdayStart}
-+'&memberBirthdayEnd=' + ${memberBirthdayEnd}+'&memberRegDateStart=' + ${memberRegDateStart} + '&memberRegDateEnd=' + ${memberRegDateEnd}
-+'&memberOrderDateStart=' + ${memberOrderDateStart}+'&memberOrderDateEnd=' + ${memberOrderDateEnd}}">
+        <a th:href="@{'/admin/member/search?page=' + ${item} +'&memberSearchClassificationValue=' + ${memberSearchDto.memberSearchClassificationValue}
++'&memberSearchClassificationInput=' + ${memberSearchDto.memberSearchClassificationInput}+'&memberBirthdayStart=' + ${memberSearchDto.memberBirthdayStart}
++'&memberBirthdayEnd=' + ${memberSearchDto.memberBirthdayEnd}+'&memberRegDateStart=' + ${memberSearchDto.memberRegDateStart} + '&memberRegDateEnd=' + ${memberSearchDto.memberRegDateEnd}
++'&memberOrderDateStart=' + ${memberSearchDto.memberOrderDateStart}+'&memberOrderDateEnd=' + ${memberSearchDto.memberOrderDateEnd}}">
           <span th:text="${item}"></span>
         </a>
       </th:block>

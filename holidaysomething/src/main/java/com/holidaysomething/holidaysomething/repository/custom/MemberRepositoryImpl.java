@@ -131,8 +131,8 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 //    String birthdayEnd = memberSearchDto.getMemberBirthdayEnd();
 
 //    if (!birthdayStart.equals("") && !birthdayEnd.equals("")) {
-    if ((memberSearchDto.getMemberBirthdayStart() != null && memberSearchDto.getMemberBirthdayEnd() != null) && (memberSearchDto.getMemberBirthdayStart().length() != 0 && memberSearchDto.getMemberBirthdayEnd().length() != 0
-    && !memberSearchDto.getMemberBirthdayStart().equals(""))) {
+    if ((memberSearchDto.getMemberBirthdayStart() != null && memberSearchDto.getMemberBirthdayEnd() != null) &&
+        (memberSearchDto.getMemberBirthdayStart().length() != 0 && memberSearchDto.getMemberBirthdayEnd().length() != 0 )) {
       SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
       formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 
