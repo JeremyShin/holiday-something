@@ -1,17 +1,20 @@
 package com.holidaysomething.holidaysomething.repository.custom;
 
 import com.holidaysomething.holidaysomething.domain.Member;
+import com.holidaysomething.holidaysomething.domain.Order;
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.QMember;
 import com.holidaysomething.holidaysomething.domain.QOrder;
 import com.holidaysomething.holidaysomething.domain.QOrderedProduct;
 import com.holidaysomething.holidaysomething.domain.QProduct;
+import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.JPAExpressions;
 import com.holidaysomething.holidaysomething.dto.SearchSexMemberDto;
 import com.querydsl.jpa.JPQLQuery;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.annotation.Nullable;
 import javax.persistence.EntityManager;
@@ -19,8 +22,10 @@ import javax.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
+import org.springframework.data.web.PageableDefault;
 
 
 @Slf4j
@@ -58,22 +63,31 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
   }
 
   @Override
-  public List<Tuple> findMembersByLoginIdInOrdersByDsl(String loginId) {
+  public Page<Tuple> findMembersByLoginIdInOrdersByDsl(String loginId, Pageable pageable) {
     QMember member = QMember.member;
     QOrder order = QOrder.order;
 
-    JPQLQuery query = from(member);
+    JPQLQuery query = from(order);
 
-    query.select(member.id, order.date, order.orderNumber)
-        .from(member)
-        .innerJoin(member.orders, order)
+    query.select(order.member, order.date, order.orderNumber)
+//        .innerJoin(order.member , member)
+//        .innerJoin(member.orders, order)
         .where(
             order.date
                 .in(JPAExpressions.select(order.date.max())
-                    .from(order).innerJoin(order.member, member)
-                    .where(member.loginId.contains(loginId)).groupBy(member.id)));
+                    .from(order)
+                    .where(order.member.loginId.contains(loginId)).groupBy(order.member.id)));
 
-    return query.fetch();
+    List<Tuple> lists = getQuerydsl().applyPagination(pageable, query).fetch();
+    //List<Order> list = getQuerydsl().applyPagination(pageable, query).fetch();
+    log.info("========== lists.size :  " + lists.size());
+    for (Tuple tuple : lists) {
+      //Object[] objects = tuple.toArray();
+      log.info("====== tuple" + tuple);
+    }
+    long totalCount = query.fetchCount();
+
+    return new PageImpl<>(lists, pageable, totalCount);
   }
 
   @Override
@@ -203,24 +217,12 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
   @Override
   public Page<Tuple> getMembersByDsl(SearchOrderMemberDto searchOrderMemberDto,
       Pageable pageable) {
+    log.info("**************repoImpl pageable: " + pageable.getPageSize());
+
     QMember member = QMember.member;
     QOrder order = QOrder.order;
     QProduct product = QProduct.product;
     QOrderedProduct orderedProduct = QOrderedProduct.orderedProduct;
-
-    log.info(
-        "************** searchOrderMemberDto.getLoginId() :" + searchOrderMemberDto.getLoginId()
-            + "   size : " + searchOrderMemberDto.getLoginId().length());
-    log.info("************** searchOrderMemberDto.getName() :" + searchOrderMemberDto.getName()
-        + " size : " + searchOrderMemberDto.getName().length());
-    log.info("************** searchOrderMemberDto.getProductName() :" + searchOrderMemberDto
-        .getProductName());
-    log.info("************** searchOrderMemberDto.getOrderNumber() :" + searchOrderMemberDto
-        .getOrderNumber());
-    log.info("************** searchOrderMemberDto.getOrderStartDate() :" + searchOrderMemberDto
-        .getOrderStartDate());
-    log.info("************** searchOrderMemberDto.getOrderEndDate() :" + searchOrderMemberDto
-        .getOrderEndDate());
 
     // 공통적으로 쓰이는 innerjoin을 여기에 써주니까
     // 상품과, 기간 선택시 나타나는 1+n?? n+1?? 문제가 해결되었다...
@@ -278,9 +280,21 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 
 //    if ( (searchOrderMemberDto.getOrderStartDate() != null || !searchOrderMemberDto.getOrderStartDate().equals(""))
 //            && (searchOrderMemberDto.getOrderEndDate() != null || !searchOrderMemberDto.getOrderEndDate().equals("")) ) {
-    if (searchOrderMemberDto.getOrderStartDate() != null
-        && searchOrderMemberDto.getOrderEndDate() != null) {
-      System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%% getDate() 속");
+
+    if ((searchOrderMemberDto.getOrderStartDate() != null
+        && searchOrderMemberDto.getOrderEndDate() != null) &&
+        (searchOrderMemberDto.getOrderStartDate().length() != 0
+            && searchOrderMemberDto.getOrderEndDate().length() != 0)) {
+
+      String startRegDateTimeString = searchOrderMemberDto.getOrderStartDate() + "T00:00:00";
+      String endRegDateTimeString = searchOrderMemberDto.getOrderEndDate() + "T23:59:59";
+
+      LocalDateTime startRegDateTime = LocalDateTime
+          .parse(startRegDateTimeString, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+      LocalDateTime endRegDateTime = LocalDateTime
+          .parse(endRegDateTimeString, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+
+      log.info("%%%%%%%%%%%%%%%%%%%%%%%%% getDate() 속");
       query.select(member, order.date, order.orderNumber)
           .where(
               // in 안에 있는 select 만 하면 6개 로우가 나와야 하는데
@@ -288,8 +302,8 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
               order.date
                   .in(JPAExpressions.select(order.date.max())
                       .from(order)
-                      .where(order.date.between(searchOrderMemberDto.getOrderStartDate(),
-                          searchOrderMemberDto.getOrderEndDate()), order.member.id.eq(member.id))
+                      .where(order.date.between(startRegDateTime,
+                          endRegDateTime), order.member.id.eq(member.id))
                       .groupBy(order.member.id)
                   ));
 
@@ -321,14 +335,15 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 
           );
     }
-    List<Tuple> tuples = getQuerydsl().applyPagination(pageable, query).fetch();
-    //long totalCount = query.fetchCount();
-    long totalCount = Math.toIntExact(tuples.size());
+
+    List<Tuple> tuples = super.getQuerydsl().applyPagination(pageable, query).fetch();
+    long totalCount = query.fetchCount();
+    //long totalCount = Math.toIntExact(tuples.size());
 
     return new PageImpl<>(tuples, pageable, totalCount);
   }
 
-  /************* SearchOrderMemberDto 로 검색하는 경우 *************************************************************/
+  /************* End SearchOrderMemberDto 로 검색하는 경우 *************************************************************/
 
   @Override
   public List<Member> findMemberBySexInSearchByDsl(SearchSexMemberDto searchSexMemberDto, Pageable pageable) {

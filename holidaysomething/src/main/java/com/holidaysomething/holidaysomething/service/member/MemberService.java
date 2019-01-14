@@ -5,6 +5,7 @@ import com.holidaysomething.holidaysomething.dto.MemberMileageDto;
 import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.SearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
+import com.querydsl.core.Tuple;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

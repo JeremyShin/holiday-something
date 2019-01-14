@@ -33,28 +33,21 @@ public class Product {
   // String은 form 태그 안에 input 에서 아무것도 입력하지 않으면 null 로 처리되는게 안리ㅏ
   // "" 로 처리된다.
   @Column(length = 100, nullable = false)
-  @NotEmpty(message = "name must be not null")
   private String name;
 
   @Column(nullable = false)
-  @NotNull(message = "originalPrice must be not null")
   private Integer originalPrice;
 
   @Column(nullable = false)
-  @NotNull
-  @Min(value = 0, message = "sellingPrice must be not null")
   private Integer sellingPrice;
 
   @Column(nullable = false)
-  @NotNull(message = "manufacturingPrice must be not null")
   private Integer manufacturingPrice;
 
   @Column(nullable = false)
-  @NotEmpty(message = "code must be not null")
   private String code;
 
   @Column(nullable = false)
-  @NotEmpty(message = "manufacturer must be not null")
   private String manufacturer;
 
   @Column(nullable = false, columnDefinition = "integer default 0")
@@ -75,11 +68,14 @@ public class Product {
   private Boolean display;
   private String optionalPriceText;
   private LocalDateTime regDate;
+
+
   private LocalDateTime manufactureDate;
+
+
   private LocalDateTime releaseDate;
 
   @ManyToOne
-  @JoinColumn(name = "product_category_id")
   private ProductCategory productCategory;
 
   @OneToOne

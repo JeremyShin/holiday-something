@@ -4,6 +4,7 @@ import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
+import com.holidaysomething.holidaysomething.dto.ProductAddDto;
 import com.holidaysomething.holidaysomething.service.product.ProductAddService;
 import com.holidaysomething.holidaysomething.service.product.ProductOptionService;
 import com.holidaysomething.holidaysomething.service.product.ProductService;
@@ -69,38 +70,27 @@ public class AdminProductController {
 
   /**
    * @author JDragon
-   * @param product
    * @param bindingResult  (반드시 @Valid 객체 뒤에 위치해야 한다.)
    *        The BindingResult must come right after the model object that is validated or
    *        else Spring will fail to validate the object and throw an exception.
-   * @param date1 : manufacturingDate
-   * @param date2 : releaseDate
    */
   @PostMapping("/add")
-  public String productAddPost(@Valid @ModelAttribute(value = "product") Product product,
-      BindingResult bindingResult,
-      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date1,
-      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date2,
-      ModelMap model
-  ) {
+  public String productAddPost(
+      @Valid @ModelAttribute(value = "product") ProductAddDto productAddDto,
+      BindingResult bindingResult, ModelMap model) {
 
     if (bindingResult.hasErrors()) {
       for (ObjectError error : bindingResult.getAllErrors()) {
         log.info(error.getDefaultMessage());
-        model.addAttribute("product", product);
+        //model.addAttribute("product", product);
       }
       return "admin/product/add";
     } else {
       //등록작업
 
-      String description = product.getProductDetail().getDescription();
-      log.info("================ description : " + description);
+      productAddDto.setRegDate(LocalDateTime.now());
 
-      product.setManufactureDate(date1);
-      product.setReleaseDate(date2);
-      product.setRegDate(LocalDateTime.now());
-
-      product = productAddService.productRegister(product);
+      productAddService.productRegister(productAddDto);
 
       return "redirect:/admin/product/add";
     }
