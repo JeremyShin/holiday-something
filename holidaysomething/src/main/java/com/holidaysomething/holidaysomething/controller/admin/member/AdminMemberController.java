@@ -113,8 +113,9 @@ public class AdminMemberController {
     log.info("getRegDateStart" + memberSearchDto.getMemberRegDateStart());
     log.info("getRegDateEnd" + memberSearchDto.getMemberRegDateEnd());
 
-    Pageable pageable = PageRequest.of(page - 1, 5);
+
     if (memberSearchDto.hasValue()) {
+      Pageable pageable = PageRequest.of(page - 1 , 5);
       Page<Member> memberList = memberService.searchMembers(memberSearchDto, pageable);
       int memberPageCount = memberList.getTotalPages();
 
@@ -127,6 +128,8 @@ public class AdminMemberController {
         log.info(member.getBirthday().toString());
         log.info(member.getId().toString());
       }
+
+
 
       log.info("멤버검색 총 개수는 : " + memberList.getTotalElements() + "개 이다.");
 

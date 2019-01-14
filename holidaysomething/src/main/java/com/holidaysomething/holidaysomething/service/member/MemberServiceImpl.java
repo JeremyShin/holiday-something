@@ -64,6 +64,7 @@ public class MemberServiceImpl implements MemberService {
 
     log.info("안녕 난 서비스야");
 
+
     Page<Member> memberPage = memberRepository.searchMembers(memberSearchDto, pageable);
 
     return memberPage;
