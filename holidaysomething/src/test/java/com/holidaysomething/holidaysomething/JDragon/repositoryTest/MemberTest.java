@@ -80,41 +80,17 @@ public class MemberTest {
 //    for(Object[] object : members) {
 //      System.out.println(object[0]);
 //      System.out.println(object[1]);
+
 //    }
-
-    // 2. DTO 객체를 만들어 받는 방법.
-//    OrderMemberDto orderMemberDto = members.get(0);
-//    log.info("==================== : " + orderMemberDto.getMember().getName());
-//    log.info("==================== : " + orderMemberDto.getCountOrder());
-  }
-
-  @Test
-  public void 이름으로주문회원조회() {
-//    List<OrderMemberDto> orderMemberDtos = memberRepository.findMembersByNameInOrders("김하늘");
-//    OrderMemberDto orderMemberDto = orderMemberDtos.get(0);
-
-    List<Member> members = memberRepository.findMembersByNameInOrders("김하늘");
-
-    for (Member member : members) {
-      log.info("====================== : " + member.getId() + "    " + member.getLoginId());
-    }
-
-//    log.info("==================== : " + orderMemberDto.getMember().getLoginId());
-//    log.info("==================== : " + orderMemberDto.getMember().getName());
-//    log.info("==================== : " + orderMemberDto.getCountOrder());
-  }
-
-  @Test
-  public void 기간으로주문회원조회() {
-    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
-    LocalDateTime ldt2 = LocalDateTime.of(2018, 12, 01, 00, 00, 00);
-    List<Member> members = memberRepository.findMembersByOrderPeriod(ldt1, ldt2);
-    log.info("==================== size : " + members.size());
-    for (Member member : members) {
-      log.info(member.getId() + "        " + member.getName());
-    }
+//  }
+//
+//  @Test
+//  public void 로그인아이디로주문회원조회() {
+//    // 최신 버전 방법. 아래 두 방법 다 필요없다. count 함수를 빼기로함.
+//    List<Member> members = memberRepository.findMembersByLoginIdInOrders("sky");
 //    for (Member member : members) {
-//      log.info(member.getId() + " ----- " + member.getName() + " ----- " + member.getNickname());
+//      log.info("===================== member : " + member.getId());
+//      log.info("===================== member : " + member.getName());
 //    }
   }
 
