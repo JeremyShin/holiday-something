@@ -15,7 +15,7 @@
   <!-- 고객 검색 모듈 -->
   <div>
     <table border="1">
-      <form method="get" action="/admin/member/search">
+      <form method="get" action="/admin/member/search" th:object="${MemberSearchDto}">
         <tbody>
         <tr>
           <th scope="row">개인정보</th>
@@ -147,11 +147,13 @@
       </tbody>
     </table>
 
-
     <p></p>
     <div id="page-numbers" th:if="${memberPageCount} != null" >
       <th:block th:each="item : ${#numbers.sequence(1, memberPageCount)}">
-        <a th:href="@{'/admin/member/search?page=' + ${item}}">
+        <a th:href="@{'/admin/member/search?page=' + ${item} +'&memberSearchClassificationValue=' + ${memberSearchClassificationValue}
++'&memberSearchClassificationInput=' + ${memberSearchClassificationInput}+'&memberBirthdayStart=' + ${memberBirthdayStart}
++'&memberBirthdayEnd=' + ${memberBirthdayEnd}+'&memberRegDateStart=' + ${memberRegDateStart} + '&memberRegDateEnd=' + ${memberRegDateEnd}
++'&memberOrderDateStart=' + ${memberOrderDateStart}+'&memberOrderDateEnd=' + ${memberOrderDateEnd}}">
           <span th:text="${item}"></span>
         </a>
       </th:block>

@@ -104,6 +104,7 @@ public class AdminMemberController {
   @GetMapping("/search")
   public String memberSearch(ModelMap modelMap, @ModelAttribute MemberSearchDto memberSearchDto,
       @RequestParam(value = "page", defaultValue = "1")int page){
+
     log.info("getSearchClassificationInput" + memberSearchDto.getMemberSearchClassificationInput());
     log.info("getSearchClassificationValue" + memberSearchDto.getMemberSearchClassificationValue());
     log.info("getBirthdayStart" + memberSearchDto.getMemberBirthdayStart());
