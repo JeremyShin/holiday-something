@@ -44,8 +44,8 @@ public class ProductServiceTest {
     p.setProductCategoryId(2l);
     p.setQuantity(20);
 
-    p.setManufactureDate("2018-11-01T00:00:00");
-    p.setReleaseDate("2018-11-25T23:59:59");
+    p.setManufactureDate("2018-11-01T00:00");
+    p.setReleaseDate("2018-11-25T23:59");
 
     Product insertedProduct = productAddService.productRegister(p);
 
