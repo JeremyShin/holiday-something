@@ -1,5 +1,6 @@
 package com.holidaysomething.holidaysomething.domain;
 
+import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Getter
 @Setter
@@ -58,6 +61,14 @@ public class Member {
   private String address2;
 
   @Column(nullable = false)
+  @CreationTimestamp
+  private LocalDateTime regDate;
+
+  @Column(nullable = false)
+  @UpdateTimestamp
+  private LocalDateTime lastLogin;
+
+  @Column(nullable = false)
   private boolean receiveEmail;
 
   @Column(nullable = false)
@@ -75,11 +86,8 @@ public class Member {
   @Column(length = 10, nullable = false)
   private String sex;
 
-  @Column(updatable = false, nullable = false)
-  private LocalDate regdate;
-
-  @Column
-  private LocalDate lastLogin;
+//  @Column(updatable = false, nullable = false)
+//  private LocalDate regdate;
 
   @OneToMany(mappedBy = "member")
   private Set<CartProduct> cartProducts;

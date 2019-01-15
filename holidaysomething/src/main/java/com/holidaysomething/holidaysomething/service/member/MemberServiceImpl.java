@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.service.member;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.dto.MemberMileageDto;
+import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.SearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
@@ -61,6 +62,26 @@ public class MemberServiceImpl implements MemberService {
   }
 
 
+  @Override
+  public Page<Member> searchMembers(MemberSearchDto memberSearchDto, Pageable pageable) {
+
+    log.info("안녕 난 서비스야");
+
+    log.info("getSearchClassificationInput" + memberSearchDto.getMemberSearchClassificationInput());
+    log.info("getSearchClassificationValue" + memberSearchDto.getMemberSearchClassificationValue());
+    log.info("getBirthdayStart" + memberSearchDto.getMemberBirthdayStart());
+    log.info("getBirthdayEnd" + memberSearchDto.getMemberBirthdayEnd());
+    log.info("getOrderDateStart" + memberSearchDto.getMemberOrderDateStart());
+    log.info("getOrderDateEnd" + memberSearchDto.getMemberOrderDateEnd());
+    log.info("getRegDateStart" + memberSearchDto.getMemberRegDateStart());
+    log.info("getRegDateEnd" + memberSearchDto.getMemberRegDateEnd());
+
+    Page<Member> memberPage = memberRepository.searchMembers(memberSearchDto, pageable);
+
+    return memberPage;
+  }
+
+
   /**
    * @author JDragon member/order.html 에서 입력한 폼 데이터를 이용해 검색하는 서비스.
    */
@@ -78,8 +99,20 @@ public class MemberServiceImpl implements MemberService {
     //List<Tuple> orderMemberDtos = tuples.getContent();
     List<OrderMemberDto> orderMemberDtoList = new ArrayList<>();
 
+    //Object[] objects = null;
+    //OrderMemberDto temp = new OrderMemberDto(null,null,null);
+
     for (Tuple tuple : tuples) {
       Object[] objects = tuple.toArray();
+//      objects = tuple.toArray();
+
+      // 새로운 객체를 계속 생성하는걸 피하려고 바꿨는데... 어떤게 더 좋을까!?
+
+//      temp.setMember((Member)objects[0]);
+//      temp.setDate((LocalDateTime)objects[1]);
+//      temp.setOrderNumber((String)objects[2]);
+//      temp = new OrderMemberDto((Member) objects[0], (LocalDateTime) objects[1],
+//          (String) objects[2]);
       OrderMemberDto temp = new OrderMemberDto((Member) objects[0], (LocalDateTime) objects[1],
           (String) objects[2]);
       orderMemberDtoList.add(temp);

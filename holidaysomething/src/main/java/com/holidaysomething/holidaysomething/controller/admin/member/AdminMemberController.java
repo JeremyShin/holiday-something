@@ -3,6 +3,7 @@ package com.holidaysomething.holidaysomething.controller.admin.member;
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Order;
 import com.holidaysomething.holidaysomething.dto.MemberMileageDto;
+import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.SearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
@@ -28,6 +29,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -113,20 +115,25 @@ public class AdminMemberController {
 
     return "redirect:/admin/member/mileage/search";
   }
+//
+//  @GetMapping("/search")
+//  public String memberSearch(){
+//    return "admin/member/search";
+//  }
+
+  @GetMapping("/search")
+  public String memberSearch(ModelMap modelMap, @ModelAttribute MemberSearchDto memberSearchDto,
+      @RequestParam(value = "page", defaultValue = "1")int page){
+    
+    if (memberSearchDto.hasValue()) {
+      Pageable pageable = PageRequest.of(page - 1 , 5);
+      Page<Member> memberList = memberService.searchMembers(memberSearchDto, pageable);
+      int memberPageCount = memberList.getTotalPages();
+
+      modelMap.addAttribute("memberList", memberList);
+      modelMap.addAttribute("memberPageCount", memberPageCount);
+    }
+    return "admin/member/search";
+  }
 }
 
-
-
-/*
-String regDateStart = memberSearchDto.getMemberRegDateStart();
-    String regDateEnd = memberSearchDto.getMemberRegDateEnd();
-
-    if (!regDateStart.equals("") && !regDateEnd.equals("")) {
-      LocalDateTime startRegDateTime = LocalDateTime
-          .parse(regDateStart, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-       LocalDateTime endRegDateTime = LocalDateTime
-          .parse(regDateEnd, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-
-        jpqlQuery.where(qMember.regDate.between(startRegDateTime, endRegDateTime));
-    }
- */

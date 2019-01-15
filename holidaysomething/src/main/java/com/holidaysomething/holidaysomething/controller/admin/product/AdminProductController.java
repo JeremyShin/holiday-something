@@ -128,6 +128,8 @@ public class AdminProductController {
 
     // 모든 상품 리스트를 불러온다(페이지)
     Pageable pageable = PageRequest.of(page - 1, 10);
+    log.info("page는" + page);
+    log.info("pageable" + pageable.toString());
     Page<Product> allProductList = productAddService.getAllProducts(pageable);
     int productPageCount = allProductList.getTotalPages();
 

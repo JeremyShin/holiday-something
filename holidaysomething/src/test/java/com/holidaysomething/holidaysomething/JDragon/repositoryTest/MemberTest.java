@@ -195,8 +195,8 @@ public class MemberTest {
 //    searchOrderMemberDto.setProductName("스밋코구라시");
 //    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
 //    LocalDateTime ldt2 = LocalDateTime.of(2018, 11, 25, 00, 00, 00);
-    searchOrderMemberDto.setOrderStartDate("2018-11-01T00:00:00");
-    searchOrderMemberDto.setOrderEndDate("2018-11-25T23:59:59");
+    searchOrderMemberDto.setOrderStartDate("2018-11-01");
+    searchOrderMemberDto.setOrderEndDate("2018-11-25");
 //    searchOrderMemberDto.setOrderStartDate(ldt1);
 //    searchOrderMemberDto.setOrderEndDate(ldt2);
 //    searchOrderMemberDto.setOrderNumber("2018111950137514");
