@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.service.product;
 
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
+import com.holidaysomething.holidaysomething.dto.ProductAddDto;
 import com.holidaysomething.holidaysomething.dto.ProductDto;
 import java.util.List;
 import org.springframework.data.domain.Page;
@@ -16,8 +17,8 @@ public interface ProductAddService {
   List<ProductCategory> productCategoryList(Long parentId);
 
   // 상품 등록하기 전에 DTO를 Domain 객체로 만들어주깅
-  Product productDtoToProduct(ProductDto productDto);
+  Product productDtoToProduct(ProductAddDto productDto);
 
   // 상품 등록 하기야!! (상품, 상품_디테일 테이블 두개 insert)
-  Product productRegister(Product product);
+  Product productRegister(ProductAddDto product);
 }

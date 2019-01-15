@@ -26,9 +26,9 @@
             <th scope="row" style="width: 180px;">아이디</th>
             <td>
               <input type="hidden" name="searchType" value="loginId">
-              <input type="text" name="keyword" style="width: 300px;" placeholder="검색">
+              <input type="text" name="keyword" style="width: 300px;" placeholder="검색" id="mileageSearchKeyword">
             </td>
-            <td style="width: 50px; font-size: small; border: 0px;"><input type="submit" value="검색">
+            <td style="width: 50px; font-size: small; border: 0px;"><input type="submit" value="검색" id="mileageSearch">
             </td>
           </tr>
         </table>
@@ -50,7 +50,6 @@
         <tr th:each="member : ${members}">
           <td th:text="${member.loginId}"></td>
           <td th:text="${member.mileage}"></td>
-          <!--<td><input type="button" id="modifyMileageBtn" value="수정" th:onclick="'modify(this, ' + ${member.id} + ')'"/></td>-->
           <td>
             <form method="GET" action="/admin/member/mileage/modify">
               <input type="hidden" th:value="${member.loginId}" name="loginId">
@@ -62,48 +61,45 @@
       </table>
     </div>
 
-    <!-- 모든 상품 페이징 처리 -->
-    <div th:if="${search.getSearchType() == null}" id="page-numbers">
-      <!--이전 페이지가 있다면 보임-->
-      <td th:if="${members.hasPrevious()}">
-        <a th:href="@{'/admin/member/mileage/search?page=' + ${members.number - 1}}">&larr;</a>
+    <!-- 모든 상품 페이징 처리, 검색했을 경우 페이징 처리 안 함(결과는 어차피 1개) -->
+    <div th:if="${search.getSearchType() == null}" id="page-numbers"
+         th:with="startPageNum=${T(Math).floor(members.number/5)} * 5 + 1, endPageNum=(${members.totalPages} > ${startPageNum} + 4) ? ${startPageNum} + 4 : ${members.totalPages}">
+      <!-- 처음 페이지로 -->
+      <td th:if="(!${members.first})">
+        <a th:href="@{'/admin/member/mileage/search?page=0'}"> << </a>
       </td>
+      <!-- 이전 블럭 페이지로 -->
+      <td th:if="${startPageNum} != 1">
+        <a th:href="@{'/admin/member/mileage/search?page=' + ${startPageNum - 2}}"> < </a>
+      </td>
+
       <!-- 페이지 목록 -->
-      <th:block th:each="page : ${#numbers.sequence(1, members.getTotalPages())}">
+      <th:block th:each="page : ${#numbers.sequence(startPageNum, endPageNum)}">
         <a th:href="@{'/admin/member/mileage/search?page=' + ${page - 1}}">
           <span th:text="${page}"></span>
         </a>
       </th:block>
-      <!--다음 페이지가 있다면 보임-->
-      <td th:if="${members.hasNext()}">
-        <a th:href="@{'/admin/member/mileage/search?page=' + ${members.number + 1} + '&searchType=' + ${search.getSearchType()} + '&keyword=' + ${search.getKeyword()}}">&rarr;</a>
-      </td>
-    </div>
 
-    <!-- 검색된 상품 페이징 처리 -->
-    <div th:if="${search.getSearchType() != null}" id="searchPage-numbers">
-      <!--이전 페이지가 있다면 보임-->
-      <td th:if="${members.hasPrevious()}">
-        <a th:href="@{'/admin/member/mileage/search?page=' + ${members.number - 1} + '&searchType=' + ${search.getSearchType()} + '&keyword=' + ${search.getKeyword()}}">&larr;</a>
+      <!-- 다음 블럭 페이지로 -->
+      <td th:if="${members.totalPages} < 5 ? false : ${startPageNum} != ${members.totalPages - 4}">
+        <a th:href="@{'/admin/member/mileage/search?page=' + ${endPageNum}}"> > </a>
       </td>
-      <!-- 페이지 목록 -->
-      <th:block th:each="page : ${#numbers.sequence(1, members.getTotalPages())}">
-        <a th:href="@{'/admin/member/mileage/search?page=' + ${page - 1} + '&searchType=' + ${search.getSearchType()} + '&keyword=' + ${search.getKeyword()}}">
-          <span th:text="${page}"></span>
-        </a>
-      </th:block>
-      <!--다음 페이지가 있다면 보임-->
-      <td th:if="${members.hasNext()}">
-        <a th:href="@{'/admin/member/mileage/search?page=' + ${members.number + 1}}">&rarr;</a>
+      <!-- 마지막 페이지로-->
+      <td th:if="!${members.last}">
+        <a th:href="@{'/admin/member/mileage/search?page=' + ${members.totalPages - 1}}"> >> </a>
       </td>
     </div>
 
   </div>
 
   <script>
-    // 사용자 스크립트 추가
+      document.getElementById("mileageSearch").onclick = function (){
+          if(document.getElementById("mileageSearchKeyword").value === ""){
+              alert("값을 입력하세요");
+              return false;
+          }
+      };
   </script>
 
 </div>
 </html>
-

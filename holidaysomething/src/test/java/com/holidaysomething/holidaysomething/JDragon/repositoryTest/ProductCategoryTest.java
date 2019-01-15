@@ -31,18 +31,11 @@ public class ProductCategoryTest {
   }
 
   @Test
-  public void 대분류카테고리만읽어와버리기() {
+  public void 카테고리읽어와버리기() {
     List<ProductCategory> categories = productCategoryRepository.findCategory(0l);
     for (ProductCategory pc : categories) {
       log.info(pc.getName());
     }
   }
 
-  @Test
-  public void 낮은분류카테고리읽어오기() {
-    List<ProductCategory> categories = productCategoryRepository.findCategory(1l);
-    for (ProductCategory pc : categories) {
-      log.info(pc.getName());
-    }
-  }
 }

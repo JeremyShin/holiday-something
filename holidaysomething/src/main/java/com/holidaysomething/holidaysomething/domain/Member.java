@@ -1,6 +1,7 @@
 package com.holidaysomething.holidaysomething.domain;
 
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -11,8 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -53,8 +52,7 @@ public class Member {
   private int mileage;
 
   @Column(nullable = false)
-  @Temporal(TemporalType.DATE)
-  private Date birthday;
+  private LocalDate birthday;
 
   @Column(length = 20, nullable = false)
   private String postcode;
@@ -87,6 +85,12 @@ public class Member {
 
   @Column(length = 20)
   private String recommender;
+
+  @Column(length = 10, nullable = false)
+  private String sex;
+
+  @Column(updatable = false, nullable = false)
+  private LocalDate regdate;
 
   @OneToMany(mappedBy = "member")
   private Set<CartProduct> cartProducts;
