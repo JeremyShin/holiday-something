@@ -1,6 +1,8 @@
 package com.holidaysomething.holidaysomething.repository.custom;
 
 import com.holidaysomething.holidaysomething.domain.Member;
+import com.holidaysomething.holidaysomething.domain.Product;
+import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.holidaysomething.holidaysomething.domain.Order;
 import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
@@ -8,7 +10,6 @@ import com.querydsl.core.Tuple;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.domain.Page;
-import com.holidaysomething.holidaysomething.dto.SearchSexMemberDto;
 import org.springframework.data.domain.Pageable;
 
 public interface MemberRepositoryCustom {
@@ -32,4 +33,5 @@ public interface MemberRepositoryCustom {
 
   List<Member> findMemberBySexInSearchByDsl(SearchSexMemberDto searchSexMemberDto, Pageable pageable);
 
+  Page<Member> searchMembers(MemberSearchDto memberSearchDto, Pageable pageable);
 }

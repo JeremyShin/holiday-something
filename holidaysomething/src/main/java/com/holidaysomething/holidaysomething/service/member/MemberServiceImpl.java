@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.service.member;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.dto.MemberMileageDto;
+import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.SearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
@@ -58,6 +59,17 @@ public class MemberServiceImpl implements MemberService {
     member.setMileage(mileage);
 
     memberRepository.save(member);
+  }
+
+
+  @Override
+  public Page<Member> searchMembers(MemberSearchDto memberSearchDto, Pageable pageable) {
+
+    log.info("안녕 난 서비스야");
+
+    Page<Member> memberPage = memberRepository.searchMembers(memberSearchDto, pageable);
+
+    return memberPage;
   }
 
 

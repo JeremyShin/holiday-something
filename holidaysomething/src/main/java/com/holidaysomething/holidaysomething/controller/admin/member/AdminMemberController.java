@@ -3,6 +3,7 @@ package com.holidaysomething.holidaysomething.controller.admin.member;
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Order;
 import com.holidaysomething.holidaysomething.dto.MemberMileageDto;
+import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.SearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
@@ -28,6 +29,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -113,20 +115,37 @@ public class AdminMemberController {
 
     return "redirect:/admin/member/mileage/search";
   }
+
+  @GetMapping("/search")
+  public String memberSearch(){
+    return "admin/member/search";
+  }
+
+  @PostMapping("/search")
+  public String memberSearchPost(@ModelAttribute MemberSearchDto memberSearchDto){
+
+
+    log.info("getSearchClassificationInput" + memberSearchDto.getMemberSearchClassificationInput());
+    log.info("getSearchClassificationValue" + memberSearchDto.getMemberSearchClassificationValue());
+    log.info("getBirthdayStart" + memberSearchDto.getMemberBirthdayStart());
+    log.info("getBirthdayEnd" + memberSearchDto.getMemberBirthdayEnd());
+    log.info("getOrderDateStart" + memberSearchDto.getMemberOrderDateStart());
+    log.info("getOrderDateEnd" + memberSearchDto.getMemberOrderDateEnd());
+    log.info("getRegDateStart" + memberSearchDto.getMemberRegDateStart());
+    log.info("getRegDateEnd" + memberSearchDto.getMemberRegDateEnd());
+
+    Pageable pageable = PageRequest.of(0, 5);
+    Page<Member> members = memberService.searchMembers(memberSearchDto, pageable);
+
+    log.info("으아아아아아아아아");
+    log.info("컨트롤러로 넘어온 Member의 개수는" + members.getTotalElements());
+
+    for (Member member : members){
+      log.info(member.getBirthday().toString());
+      log.info(member.getId().toString());
+    }
+
+    return "redirect:/admin/member/search";
+  }
 }
 
-
-
-/*
-String regDateStart = memberSearchDto.getMemberRegDateStart();
-    String regDateEnd = memberSearchDto.getMemberRegDateEnd();
-
-    if (!regDateStart.equals("") && !regDateEnd.equals("")) {
-      LocalDateTime startRegDateTime = LocalDateTime
-          .parse(regDateStart, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-       LocalDateTime endRegDateTime = LocalDateTime
-          .parse(regDateEnd, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-
-        jpqlQuery.where(qMember.regDate.between(startRegDateTime, endRegDateTime));
-    }
- */
