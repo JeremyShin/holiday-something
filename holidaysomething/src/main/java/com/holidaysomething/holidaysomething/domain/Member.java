@@ -49,7 +49,7 @@ public class Member {
   private int mileage;
 
   @Column(nullable = false)
-  private LocalDate birthday;
+  private Date birthday;
 
   @Column(length = 20, nullable = false)
   private String postcode;
