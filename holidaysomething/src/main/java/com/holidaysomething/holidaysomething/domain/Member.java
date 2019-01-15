@@ -42,9 +42,6 @@ public class Member {
   @Column(length = 50, nullable = false, unique = true)
   private String nickname;
 
-  @Column(length = 50)
-  private String sex;
-
   @Column(length = 50, nullable = false, unique = true)
   private String phone;
 
@@ -89,8 +86,8 @@ public class Member {
   @Column(length = 10, nullable = false)
   private String sex;
 
-  @Column(updatable = false, nullable = false)
-  private LocalDate regdate;
+//  @Column(updatable = false, nullable = false)
+//  private LocalDate regdate;
 
   @OneToMany(mappedBy = "member")
   private Set<CartProduct> cartProducts;

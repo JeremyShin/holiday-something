@@ -1,31 +1,22 @@
 package com.holidaysomething.holidaysomething.repository.custom;
 
 import com.holidaysomething.holidaysomething.domain.Member;
-import com.holidaysomething.holidaysomething.domain.Order;
-import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.QMember;
 import com.holidaysomething.holidaysomething.domain.QOrder;
 import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 
-import com.querydsl.core.types.SubQueryExpressionImpl;
-import com.querydsl.core.types.dsl.BooleanExpression;
-
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 
+import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-import javax.swing.text.DateFormatter;
-import org.springframework.beans.factory.annotation.Autowired;
-import sun.util.calendar.CalendarUtils;
 
 import com.holidaysomething.holidaysomething.domain.QOrderedProduct;
 import com.holidaysomething.holidaysomething.domain.QProduct;
-import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.JPAExpressions;
-import com.holidaysomething.holidaysomething.dto.SearchSexMemberDto;
 import com.querydsl.jpa.JPQLQuery;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -36,10 +27,8 @@ import javax.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
-import org.springframework.data.web.PageableDefault;
 
 @Slf4j
 public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
@@ -493,19 +482,6 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
   }
 
   /************* End SearchOrderMemberDto 로 검색하는 경우 *************************************************************/
-
-  @Override
-  public List<Member> findMemberBySexInSearchByDsl(SearchSexMemberDto searchSexMemberDto, Pageable pageable) {
-    QMember member = QMember.member;
-    JPQLQuery query = from(member);
-
-    if(searchSexMemberDto.getSex() != null || !searchSexMemberDto.getSex().equals("")) {
-      query.where(member.sex.eq(searchSexMemberDto.getSex()));
-    }
-
-    return getQuerydsl().applyPagination(pageable, query).fetch();
-  }
-
 }
 
 

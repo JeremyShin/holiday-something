@@ -31,7 +31,5 @@ public interface MemberRepositoryCustom {
 
   Page<Tuple> getMembersByDsl(SearchOrderMemberDto searchOrderMemberDto, Pageable pageable);
 
-  List<Member> findMemberBySexInSearchByDsl(SearchSexMemberDto searchSexMemberDto, Pageable pageable);
-
   Page<Member> searchMembers(MemberSearchDto memberSearchDto, Pageable pageable);
 }

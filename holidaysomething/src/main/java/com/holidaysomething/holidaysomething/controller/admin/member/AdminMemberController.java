@@ -124,41 +124,15 @@ public class AdminMemberController {
   @GetMapping("/search")
   public String memberSearch(ModelMap modelMap, @ModelAttribute MemberSearchDto memberSearchDto,
       @RequestParam(value = "page", defaultValue = "1")int page){
-
-    log.info("getSearchClassificationInput" + memberSearchDto.getMemberSearchClassificationInput());
-    log.info("getSearchClassificationValue" + memberSearchDto.getMemberSearchClassificationValue());
-    log.info("getBirthdayStart" + memberSearchDto.getMemberBirthdayStart());
-    log.info("getBirthdayEnd" + memberSearchDto.getMemberBirthdayEnd());
-    log.info("getOrderDateStart" + memberSearchDto.getMemberOrderDateStart());
-    log.info("getOrderDateEnd" + memberSearchDto.getMemberOrderDateEnd());
-    log.info("getRegDateStart" + memberSearchDto.getMemberRegDateStart());
-    log.info("getRegDateEnd" + memberSearchDto.getMemberRegDateEnd());
-
-
+    
     if (memberSearchDto.hasValue()) {
       Pageable pageable = PageRequest.of(page - 1 , 5);
       Page<Member> memberList = memberService.searchMembers(memberSearchDto, pageable);
       int memberPageCount = memberList.getTotalPages();
 
-      log.info("memberPageCountㅋㅋㅋ" + memberPageCount);
-
-      log.info("으아아아아아아아아");
-      log.info("컨트롤러로 넘어온 Member의 개수는" + memberList.getTotalElements());
-
-      for (Member member : memberList) {
-        log.info(member.getBirthday().toString());
-        log.info(member.getId().toString());
-      }
-
-
-
-      log.info("멤버검색 총 개수는 : " + memberList.getTotalElements() + "개 이다.");
-
       modelMap.addAttribute("memberList", memberList);
       modelMap.addAttribute("memberPageCount", memberPageCount);
     }
-
-
     return "admin/member/search";
   }
 }
