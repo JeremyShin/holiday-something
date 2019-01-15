@@ -124,7 +124,7 @@ public class AdminMemberController {
   @GetMapping("/search")
   public String memberSearch(ModelMap modelMap, @ModelAttribute MemberSearchDto memberSearchDto,
       @RequestParam(value = "page", defaultValue = "1")int page){
-    
+
     if (memberSearchDto.hasValue()) {
       Pageable pageable = PageRequest.of(page - 1 , 5);
       Page<Member> memberList = memberService.searchMembers(memberSearchDto, pageable);
