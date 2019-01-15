@@ -42,7 +42,7 @@ public class MemberTest {
 
   @Before
   public void pageable생성하기() {
-    pageable = PageRequest.of(0, 2);
+    pageable = PageRequest.of(0, 1);
 
   }
 
@@ -51,12 +51,12 @@ public class MemberTest {
   public void 검색조건여러개사용해서회원조회서비스byDsl() {
     SearchOrderMemberDto searchOrderMemberDto = new SearchOrderMemberDto();
 //    searchOrderMemberDto.setLoginId("sky");
-//    searchOrderMemberDto.setName("김하늘");
+    searchOrderMemberDto.setName("김준형");
 //    searchOrderMemberDto.setProductName("스밋코구라시");
-    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
-    LocalDateTime ldt2 = LocalDateTime.of(2018, 11, 25, 00, 00, 00);
-    searchOrderMemberDto.setOrderStartDate("2018-11-01");
-    searchOrderMemberDto.setOrderEndDate("2018-11-25");
+//    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
+//    LocalDateTime ldt2 = LocalDateTime.of(2018, 11, 25, 00, 00, 00);
+//    searchOrderMemberDto.setOrderStartDate("2018-11-01");
+//    searchOrderMemberDto.setOrderEndDate("2018-11-25");
 //    searchOrderMemberDto.setOrderStartDate(ldt1);
 //    searchOrderMemberDto.setOrderEndDate(ldt2);
 //    searchOrderMemberDto.setOrderNumber("2018111950137514");
@@ -64,12 +64,24 @@ public class MemberTest {
 
 //    Page<OrderMemberDto> orderMemberDtoPage = memberService
 //        .findMembersBySearchingInQuerydsl(searchOrderMemberDto, pageable);
+
+    log.info("==== searchOrderMemberDto.getName() : " + searchOrderMemberDto.getName());
+    log.info(
+        "==== searchOrderMemberDto.getProductName() : " + searchOrderMemberDto.getProductName());
+    log.info(
+        "==== searchOrderMemberDto.getOrderNumber() : " + searchOrderMemberDto.getOrderNumber());
+    log.info("==== searchOrderMemberDto.getOrderStartDate() : " + searchOrderMemberDto
+        .getOrderStartDate());
+    log.info(
+        "==== searchOrderMemberDto.getOrderEndDate() : " + searchOrderMemberDto.getOrderEndDate());
+    log.info("==== searchOrderMemberDto.getLoginId() : " + searchOrderMemberDto.getLoginId());
     Page<OrderMemberDto> orderMemberDtoPages = memberService
         .findMembersBySearchingInQuerydsl(searchOrderMemberDto, pageable);
 
 
     for (OrderMemberDto orderMemberDto : orderMemberDtoPages) {
       log.info(" id : " + orderMemberDto.getMember().getId());
+      log.info(" name : " + orderMemberDto.getMember().getName());
       log.info("date : " + orderMemberDto.getDate());
       log.info("orderNumber : " + orderMemberDto.getOrderNumber());
     }

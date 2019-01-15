@@ -246,9 +246,9 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     QMember member = QMember.member;
     QOrder order = QOrder.order;
 
-    JPQLQuery query = from(order);
+    JPQLQuery query = from(member).innerJoin(member.orders, order);
 
-    query.select(order.member.id, order.member.name, order.date, order.orderNumber)
+    query.select(member.id, member.name, order.date, order.orderNumber)
 //        .innerJoin(member.orders, order)
         .where(
             //member.loginId.contains(loginId),
@@ -400,16 +400,37 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 //    if (searchOrderMemberDto.getName() != null && !searchOrderMemberDto.getName().equals("")) {
     if (searchOrderMemberDto.getName() != null && searchOrderMemberDto.getName().length() != 0) {
       log.info("%%%%%%%%%%%%%%%%%%%%%%%%% getName() 속");
-      query.select(member, order.date, order.orderNumber)
+      query.select(order.member, order.date, order.orderNumber)
           .where(
               //member.loginId.contains(loginId),
               order.date
                   .in(JPAExpressions.select(order.date.max())
                       .from(order)
-                      .where(order.member.name.contains(searchOrderMemberDto.getName()),
-                          order.member.id.eq(member.id))
+                      .where(order.member.name.contains(searchOrderMemberDto.getName()))
                       .groupBy(order.member.id)));
     }
+    /*
+    JPQLQuery query = from(member).innerJoin(member.orders,order);
+
+    query.select(member.id, member.name, order.date, order.orderNumber)
+//        .innerJoin(member.orders, order)
+        .where(
+            //member.loginId.contains(loginId),
+            order.date
+                .in(JPAExpressions.select(order.date.max())
+                    .from(order)
+                    .where(order.member.name.contains(name)).groupBy(order.member.id)));
+
+    JPQLQuery query = from(order);
+
+    query.select(order.member.id, order.member.name, order.date, order.orderNumber)
+//        .innerJoin(member.orders, order)
+        .where(
+            order.date
+                .in(JPAExpressions.select(order.date.max())
+                    .from(order)
+                    .where(order.member.name.contains(name)).groupBy(order.member.id)));
+     */
 
     //  || !searchOrderMemberDto.getOrderNumber().equals("")
 //    if (searchOrderMemberDto.getOrderNumber() != null || !searchOrderMemberDto.getOrderNumber().equals("")) {
@@ -493,6 +514,9 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     long totalCount = query.fetchCount();
     //long totalCount = Math.toIntExact(tuples.size());
 
+    log.info("=========== tuples.size() " + tuples.size());
+    log.info("=========== pageable.getPageSize() : " + pageable.getPageSize());
+
     return new PageImpl<>(tuples, pageable, totalCount);
   }
 
@@ -553,4 +577,34 @@ select m.*, k.order_date,k.order_number from member as m inner join
 on k.member_id = m.id;
 
 
+ */
+
+
+
+
+/* name만 검색하는 메소드 결과.
+
+select
+        order0_.member_id as col_0_0_,
+        member1_.name as col_1_0_,
+        order0_.date as col_2_0_,
+        order0_.order_number as col_3_0_
+    from
+        orders order0_ cross
+    join
+        member member1_
+    where
+        order0_.member_id=member1_.id
+        and (
+            order0_.date in (
+                select
+                    max(order2_.date)
+                from
+                    orders order2_
+                where
+                    member1_.name like ? escape '!'
+                group by
+                    order2_.member_id
+            )
+        )
  */
