@@ -78,8 +78,20 @@ public class MemberServiceImpl implements MemberService {
     //List<Tuple> orderMemberDtos = tuples.getContent();
     List<OrderMemberDto> orderMemberDtoList = new ArrayList<>();
 
+    //Object[] objects = null;
+    //OrderMemberDto temp = new OrderMemberDto(null,null,null);
+
     for (Tuple tuple : tuples) {
       Object[] objects = tuple.toArray();
+//      objects = tuple.toArray();
+
+      // 새로운 객체를 계속 생성하는걸 피하려고 바꿨는데... 어떤게 더 좋을까!?
+
+//      temp.setMember((Member)objects[0]);
+//      temp.setDate((LocalDateTime)objects[1]);
+//      temp.setOrderNumber((String)objects[2]);
+//      temp = new OrderMemberDto((Member) objects[0], (LocalDateTime) objects[1],
+//          (String) objects[2]);
       OrderMemberDto temp = new OrderMemberDto((Member) objects[0], (LocalDateTime) objects[1],
           (String) objects[2]);
       orderMemberDtoList.add(temp);
