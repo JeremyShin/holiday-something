@@ -18,4 +18,15 @@ public class MemberSearchDto {
   public String memberOrderDateStart;
   public String memberOrderDateEnd;
   public List<String> memberSexCheck;
+
+  public boolean hasValue(){
+    if (memberSearchClassificationValue != null || memberSearchClassificationInput != null ||
+        memberBirthdayStart != null || memberBirthdayEnd != null ||
+        memberRegDateStart != null || memberRegDateEnd != null ||
+        memberOrderDateStart != null || memberOrderDateEnd != null){
+      return true;
+    }else{
+      return false;
+    }
+  }
 }

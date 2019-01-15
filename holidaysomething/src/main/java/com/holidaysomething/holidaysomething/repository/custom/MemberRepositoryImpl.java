@@ -154,10 +154,11 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     /* 성별 */
     List<String> sexCheck = memberSearchDto.getMemberSexCheck();
 
-    log.info("성별배열의 사이즈는" + sexCheck.size());
+
 
 //    if(sexCheck.size() != 0) {
     if(sexCheck != null) {
+      log.info("성별배열의 사이즈는" + sexCheck.size());
       switch (sexCheck.size()) {
         case 1:
           jpqlQuery.where(qMember.sex.eq(sexCheck.get(0)));
@@ -177,13 +178,27 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     }
 
     /* 생일 */
-    String birthdayStart = memberSearchDto.getMemberBirthdayStart();
-    String birthdayEnd = memberSearchDto.getMemberBirthdayEnd();
+//    String birthdayStart = memberSearchDto.getMemberBirthdayStart();
+//    String birthdayEnd = memberSearchDto.getMemberBirthdayEnd();
 
 //    if (!birthdayStart.equals("") && !birthdayEnd.equals("")) {
-    if (!birthdayStart.equals("") && !birthdayEnd.equals("")) {
+    if ((memberSearchDto.getMemberBirthdayStart() != null && memberSearchDto.getMemberBirthdayEnd() != null) &&
+        (memberSearchDto.getMemberBirthdayStart().length() != 0 && memberSearchDto.getMemberBirthdayEnd().length() != 0 )) {
       SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
       formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+          String birthdayStart = memberSearchDto.getMemberBirthdayStart();
+    String birthdayEnd = memberSearchDto.getMemberBirthdayEnd();
+
+    log.info("제발그만...생일은 어떤값?" + memberSearchDto.getMemberBirthdayStart());
+    log.info("String으로 받아준 후에는?" + birthdayStart);
+
+    if(memberSearchDto.getMemberBirthdayStart() != null){
+      log.info("널이아님");
+      log.info("그래서 값은" + memberSearchDto.getMemberBirthdayStart());
+    }else
+      log.info("널임");
+
 
       try {
         Date startDate = formatter.parse(birthdayStart);
@@ -199,7 +214,7 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     String regDateStart = memberSearchDto.getMemberRegDateStart();
     String regDateEnd = memberSearchDto.getMemberRegDateEnd();
 
-    if (!regDateStart.equals("") && !regDateEnd.equals("")) {
+    if ((regDateStart != null && regDateEnd != null) && (regDateStart.length() != 0  && regDateEnd.length() != 0)) {
       LocalDateTime startRegDateTime = LocalDateTime
           .parse(regDateStart, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
        LocalDateTime endRegDateTime = LocalDateTime
@@ -212,7 +227,7 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     String orderDateStart = memberSearchDto.getMemberOrderDateStart();
     String orderDateEnd = memberSearchDto.getMemberOrderDateEnd();
 
-    if (!orderDateStart.equals("") && !orderDateEnd.equals("")) {
+    if ((orderDateStart != null && orderDateEnd != null) && (orderDateStart.length() != 0 && orderDateEnd.length() != 0)) {
       LocalDateTime startOrderDateTime = LocalDateTime
           .parse(orderDateStart, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
       LocalDateTime endOrderDateTime = LocalDateTime

@@ -115,15 +115,15 @@ public class AdminMemberController {
 
     return "redirect:/admin/member/mileage/search";
   }
+//
+//  @GetMapping("/search")
+//  public String memberSearch(){
+//    return "admin/member/search";
+//  }
 
   @GetMapping("/search")
-  public String memberSearch(){
-    return "admin/member/search";
-  }
-
-  @PostMapping("/search")
-  public String memberSearchPost(@ModelAttribute MemberSearchDto memberSearchDto){
-
+  public String memberSearch(ModelMap modelMap, @ModelAttribute MemberSearchDto memberSearchDto,
+      @RequestParam(value = "page", defaultValue = "1")int page){
 
     log.info("getSearchClassificationInput" + memberSearchDto.getMemberSearchClassificationInput());
     log.info("getSearchClassificationValue" + memberSearchDto.getMemberSearchClassificationValue());
@@ -134,18 +134,32 @@ public class AdminMemberController {
     log.info("getRegDateStart" + memberSearchDto.getMemberRegDateStart());
     log.info("getRegDateEnd" + memberSearchDto.getMemberRegDateEnd());
 
-    Pageable pageable = PageRequest.of(0, 5);
-    Page<Member> members = memberService.searchMembers(memberSearchDto, pageable);
 
-    log.info("으아아아아아아아아");
-    log.info("컨트롤러로 넘어온 Member의 개수는" + members.getTotalElements());
+    if (memberSearchDto.hasValue()) {
+      Pageable pageable = PageRequest.of(page - 1 , 5);
+      Page<Member> memberList = memberService.searchMembers(memberSearchDto, pageable);
+      int memberPageCount = memberList.getTotalPages();
 
-    for (Member member : members){
-      log.info(member.getBirthday().toString());
-      log.info(member.getId().toString());
+      log.info("memberPageCountㅋㅋㅋ" + memberPageCount);
+
+      log.info("으아아아아아아아아");
+      log.info("컨트롤러로 넘어온 Member의 개수는" + memberList.getTotalElements());
+
+      for (Member member : memberList) {
+        log.info(member.getBirthday().toString());
+        log.info(member.getId().toString());
+      }
+
+
+
+      log.info("멤버검색 총 개수는 : " + memberList.getTotalElements() + "개 이다.");
+
+      modelMap.addAttribute("memberList", memberList);
+      modelMap.addAttribute("memberPageCount", memberPageCount);
     }
 
-    return "redirect:/admin/member/search";
+
+    return "admin/member/search";
   }
 }
 
