@@ -60,7 +60,6 @@ function validateSearch() {
 
 }
 
-// 상품이름 validation
 function check(re, what, message) {
   // 아무것도 입력안했을 경우.
   if (what.value.length == 0) {

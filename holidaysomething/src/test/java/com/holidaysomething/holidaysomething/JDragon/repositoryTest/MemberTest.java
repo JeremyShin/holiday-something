@@ -143,7 +143,7 @@ public class MemberTest {
 
   @Test
   public void name으로회원조회byDsl() {
-    List<Tuple> tuples = memberRepository.findMembersByNameInOrdersByDsl("김하늘");
+    List<Tuple> tuples = memberRepository.findMembersByNameInOrdersByDsl("김준형");
     log.info("==================================" + tuples.size());
     for (Tuple tuple : tuples) {
       log.info(tuple);
@@ -191,12 +191,12 @@ public class MemberTest {
 
     SearchOrderMemberDto searchOrderMemberDto = new SearchOrderMemberDto();
 //    searchOrderMemberDto.setLoginId("sky");
-//    searchOrderMemberDto.setName("김하늘");
+    searchOrderMemberDto.setName("김준형");
 //    searchOrderMemberDto.setProductName("스밋코구라시");
 //    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
 //    LocalDateTime ldt2 = LocalDateTime.of(2018, 11, 25, 00, 00, 00);
-    searchOrderMemberDto.setOrderStartDate("2018-11-01");
-    searchOrderMemberDto.setOrderEndDate("2018-11-25");
+//    searchOrderMemberDto.setOrderStartDate("2018-11-01");
+//    searchOrderMemberDto.setOrderEndDate("2018-11-25");
 //    searchOrderMemberDto.setOrderStartDate(ldt1);
 //    searchOrderMemberDto.setOrderEndDate(ldt2);
 //    searchOrderMemberDto.setOrderNumber("2018111950137514");
@@ -238,6 +238,7 @@ public class MemberTest {
     for (OrderMemberDto orderMemberDto : orderMemberDtoList) {
       log.info("============ orderMemberDto.getMember().getId() : " + orderMemberDto.getMember()
           .getId());
+      log.info("============ orderMemberDto.getName() : " + orderMemberDto.getMember().getName());
       log.info("============ orderMemberDto.getOrderNumber() : " + orderMemberDto.getOrderNumber());
       log.info("============ orderMemberDto.getDate() : " + orderMemberDto.getDate());
     }

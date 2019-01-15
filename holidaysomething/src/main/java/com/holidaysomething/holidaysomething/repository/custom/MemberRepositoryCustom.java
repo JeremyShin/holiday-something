@@ -20,7 +20,7 @@ public interface MemberRepositoryCustom {
   Page<Tuple> findMembersByLoginIdInOrdersByDsl(String loginId, Pageable pageable);
 
 
-  List<Tuple> findMembersByNameInOrdersByDsl(String loginId);
+  List<Tuple> findMembersByNameInOrdersByDsl(String name);
 
   List<Tuple> findMembersByProductNameInOrdersByDsl(String productName);
 

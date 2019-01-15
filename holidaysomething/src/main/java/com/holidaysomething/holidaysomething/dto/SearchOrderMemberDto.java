@@ -1,6 +1,7 @@
 package com.holidaysomething.holidaysomething.dto;
 
 
+import com.holidaysomething.holidaysomething.config.SearchOrderMemberConstraint;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javax.annotation.Nullable;
@@ -23,13 +24,19 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Data
 public class SearchOrderMemberDto {
 
+  @SearchOrderMemberConstraint(regexp = "^[가-힣a-zA-Z0-9]{2,20}$")
   private String loginId;
+
+  @SearchOrderMemberConstraint(regexp = "^[가-힣a-zA-Z0-9]{2,20}$")
   private String name;
+
+  @SearchOrderMemberConstraint(regexp = "^[가-힣a-zA-Z0-9]{2,20}$")
   private String orderNumber;
 
 
   //@Pattern(regexp="\\S{2,6}", message="상품이름은 2~6자로 입력해주세요.")
   //@Size(min = 2, max = 20, message = "1~10자로 입력해주세요.")
+  @SearchOrderMemberConstraint(regexp = "^[가-힣a-zA-Z0-9]{2,20}$")
   private String productName;
 
   private String orderStartDate;
