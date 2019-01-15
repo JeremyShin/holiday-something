@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -49,7 +50,7 @@ public class Member {
   private int mileage;
 
   @Column(nullable = false)
-  private LocalDate birthday;
+  private Date birthday;
 
   @Column(length = 20, nullable = false)
   private String postcode;
