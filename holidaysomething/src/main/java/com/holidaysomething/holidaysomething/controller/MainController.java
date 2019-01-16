@@ -10,4 +10,12 @@ public class MainController {
   public String index() {
     return "index";
   }
+
+  /**
+   * 회원 마이페이지
+   */
+  @RequestMapping("/mypage")
+  public String main() {
+    return "public/index";
+  }
 }
