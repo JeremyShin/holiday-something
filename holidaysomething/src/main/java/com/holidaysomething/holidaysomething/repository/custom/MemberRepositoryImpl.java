@@ -34,16 +34,11 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     MemberRepositoryCustom {
 
-  JPAQueryFactory queryFactory;
-
   // 반드시 지정해줘야 하는 생성자! QuerydslRepositorySupport 는 기본 생성자가 없기에
   // 여기서 지정해줘야한다??
   public MemberRepositoryImpl() {
     super(Member.class);
   }
-
-  @PersistenceContext
-  private EntityManager entityManager;
 
   // QMember 는 target/generated-sources 에 있음!
   // pom.xml 에 querydsl 관련 설정 해주고 mvn clean install 해줘야 생김.
@@ -52,11 +47,6 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
   // if 문으로 경우에 따라 적용될 쿼리를 만들어주는건가...? 일단 자자.
 
 
-  @Nullable
-  @Override
-  public EntityManager getEntityManager() {
-    return entityManager;
-  }
 
   @Override
   public Page<Member> searchMembers(MemberSearchDto memberSearchDto, Pageable pageable) {
@@ -409,28 +399,6 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
                       .where(order.member.name.contains(searchOrderMemberDto.getName()))
                       .groupBy(order.member.id)));
     }
-    /*
-    JPQLQuery query = from(member).innerJoin(member.orders,order);
-
-    query.select(member.id, member.name, order.date, order.orderNumber)
-//        .innerJoin(member.orders, order)
-        .where(
-            //member.loginId.contains(loginId),
-            order.date
-                .in(JPAExpressions.select(order.date.max())
-                    .from(order)
-                    .where(order.member.name.contains(name)).groupBy(order.member.id)));
-
-    JPQLQuery query = from(order);
-
-    query.select(order.member.id, order.member.name, order.date, order.orderNumber)
-//        .innerJoin(member.orders, order)
-        .where(
-            order.date
-                .in(JPAExpressions.select(order.date.max())
-                    .from(order)
-                    .where(order.member.name.contains(name)).groupBy(order.member.id)));
-     */
 
     //  || !searchOrderMemberDto.getOrderNumber().equals("")
 //    if (searchOrderMemberDto.getOrderNumber() != null || !searchOrderMemberDto.getOrderNumber().equals("")) {

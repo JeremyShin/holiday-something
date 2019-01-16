@@ -44,6 +44,10 @@ public class ProductAddServiceImpl implements ProductAddService {
     return categories;
   }
 
+
+  /**
+   * @author JDragon DTO 객체를 Product(도메인) 객체로 바꿔주는 메소드.
+   */
   @Override
   @Transactional
   public Product productDtoToProduct(ProductAddDto productDto) {
@@ -103,6 +107,7 @@ public class ProductAddServiceImpl implements ProductAddService {
     ProductCategory productCategory = productCategoryRepository.findByIdContaining(
         productAddDto.getProductCategoryId());
 
+    // 상품 등록하기 위해 Dto 객체를 Product(Domain) 객체로 바꿔주기~
     Product product = productDtoToProduct(productAddDto);
 
     // 상품에 set 해줘버리기~
