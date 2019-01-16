@@ -64,18 +64,6 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   public Page<Member> searchMembers(MemberSearchDto memberSearchDto, Pageable pageable) {
-
-    log.info("안녕 난 서비스야");
-
-    log.info("getSearchClassificationInput" + memberSearchDto.getMemberSearchClassificationInput());
-    log.info("getSearchClassificationValue" + memberSearchDto.getMemberSearchClassificationValue());
-    log.info("getBirthdayStart" + memberSearchDto.getMemberBirthdayStart());
-    log.info("getBirthdayEnd" + memberSearchDto.getMemberBirthdayEnd());
-    log.info("getOrderDateStart" + memberSearchDto.getMemberOrderDateStart());
-    log.info("getOrderDateEnd" + memberSearchDto.getMemberOrderDateEnd());
-    log.info("getRegDateStart" + memberSearchDto.getMemberRegDateStart());
-    log.info("getRegDateEnd" + memberSearchDto.getMemberRegDateEnd());
-
     Page<Member> memberPage = memberRepository.searchMembers(memberSearchDto, pageable);
 
     return memberPage;
