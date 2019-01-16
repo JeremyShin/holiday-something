@@ -38,7 +38,7 @@ public class SearchOrderMemberValidator implements
     if (s != null) {
       // 검색조건에 아무것도 입력하지 않아도 null 상태는 아니다. 그냥 "" 상태??다.
       // 그래서 null 은 아니기에 해당 if 문으로 들어오게 된다.
-      // null은 아니지만 비어있는? 값이 객체에 있으면. 무시하게 한다.
+      // null은 아니지만 빈문자열이면. 무시하게 한다.
       if (s.length() == 0) {
         return true;
       }
