@@ -143,7 +143,7 @@ public class MemberTest {
 
   @Test
   public void name으로회원조회byDsl() {
-    List<Tuple> tuples = memberRepository.findMembersByNameInOrdersByDsl("김하늘");
+    List<Tuple> tuples = memberRepository.findMembersByNameInOrdersByDsl("김준형");
     log.info("==================================" + tuples.size());
     for (Tuple tuple : tuples) {
       log.info(tuple);
@@ -191,12 +191,12 @@ public class MemberTest {
 
     SearchOrderMemberDto searchOrderMemberDto = new SearchOrderMemberDto();
 //    searchOrderMemberDto.setLoginId("sky");
-//    searchOrderMemberDto.setName("김하늘");
+    searchOrderMemberDto.setName("김준형");
 //    searchOrderMemberDto.setProductName("스밋코구라시");
 //    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
 //    LocalDateTime ldt2 = LocalDateTime.of(2018, 11, 25, 00, 00, 00);
-    searchOrderMemberDto.setOrderStartDate("2018-11-01");
-    searchOrderMemberDto.setOrderEndDate("2018-11-25");
+//    searchOrderMemberDto.setOrderStartDate("2018-11-01");
+//    searchOrderMemberDto.setOrderEndDate("2018-11-25");
 //    searchOrderMemberDto.setOrderStartDate(ldt1);
 //    searchOrderMemberDto.setOrderEndDate(ldt2);
 //    searchOrderMemberDto.setOrderNumber("2018111950137514");
@@ -220,6 +220,8 @@ public class MemberTest {
     log.info("========================= pageable.getPageSize : " + pageable.getPageSize());
 
 //    OrderMemberDto[] orderMemberDtos = new OrderMemberDto[size];
+
+    // getContent 를 하면 pageable 의 size 만큼만 리스트화 한다.
     List<Tuple> orderMemberDtos = tuples.getContent();
     List<OrderMemberDto> orderMemberDtoList = new ArrayList<>();
 
@@ -238,6 +240,7 @@ public class MemberTest {
     for (OrderMemberDto orderMemberDto : orderMemberDtoList) {
       log.info("============ orderMemberDto.getMember().getId() : " + orderMemberDto.getMember()
           .getId());
+      log.info("============ orderMemberDto.getName() : " + orderMemberDto.getMember().getName());
       log.info("============ orderMemberDto.getOrderNumber() : " + orderMemberDto.getOrderNumber());
       log.info("============ orderMemberDto.getDate() : " + orderMemberDto.getDate());
     }
@@ -253,3 +256,53 @@ public class MemberTest {
 
   }
 }
+
+
+/*
+select
+        member0_.id as col_0_0_,
+        orders1_.date as col_1_0_,
+        orders1_.order_number as col_2_0_,
+        member0_.id as id1_2_,
+        member0_.address1 as address2_2_,
+        member0_.address2 as address3_2_,
+        member0_.birthday as birthday4_2_,
+        member0_.email as email5_2_,
+        member0_.last_login as last_log6_2_,
+        member0_.login_id as login_id7_2_,
+        member0_.marketing as marketin8_2_,
+        member0_.mileage as mileage9_2_,
+        member0_.name as name10_2_,
+        member0_.nickname as nicknam11_2_,
+        member0_.password as passwor12_2_,
+        member0_.personal_info as persona13_2_,
+        member0_.phone as phone14_2_,
+        member0_.postcode as postcod15_2_,
+        member0_.receive_email as receive16_2_,
+        member0_.receive_sms as receive17_2_,
+        member0_.recommender as recomme18_2_,
+        member0_.reg_date as reg_dat19_2_,
+        member0_.sex as sex20_2_
+    from
+        member member0_
+    inner join
+        orders orders1_
+            on member0_.id=orders1_.member_id
+    where
+        orders1_.date in (
+            select
+                max(order2_.date)
+            from
+                orders order2_ cross
+            join
+                member member3_
+            where
+                order2_.member_id=member3_.id
+                and (
+                    member3_.name like ? escape '!'
+                )
+                and order2_.member_id=member0_.id
+            group by
+                order2_.member_id
+        ) limit ?
+ */

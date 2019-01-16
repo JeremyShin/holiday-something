@@ -34,16 +34,11 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     MemberRepositoryCustom {
 
-  JPAQueryFactory queryFactory;
-
   // 반드시 지정해줘야 하는 생성자! QuerydslRepositorySupport 는 기본 생성자가 없기에
   // 여기서 지정해줘야한다??
   public MemberRepositoryImpl() {
     super(Member.class);
   }
-
-  @PersistenceContext
-  private EntityManager entityManager;
 
   // QMember 는 target/generated-sources 에 있음!
   // pom.xml 에 querydsl 관련 설정 해주고 mvn clean install 해줘야 생김.
@@ -52,11 +47,153 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
   // if 문으로 경우에 따라 적용될 쿼리를 만들어주는건가...? 일단 자자.
 
 
-  @Nullable
+
   @Override
-  public EntityManager getEntityManager() {
-    return entityManager;
+  public Page<Member> searchMembers(MemberSearchDto memberSearchDto, Pageable pageable) {
+    QMember qMember = QMember.member;
+    QOrder qOrder = QOrder.order;
+
+    JPQLQuery<Member> jpqlQuery = from(qMember);
+
+    /* 검색 옵션 설정 : 아이디, 이메일, 전화번호, 닉네임, 주소 */
+    String searchClassificationValue = memberSearchDto.getMemberSearchClassificationValue();
+    String searchClassificationInput = memberSearchDto.getMemberSearchClassificationInput();
+
+    if (searchClassificationValue != null) {
+      switch (searchClassificationValue) {
+        case "memberId":
+          jpqlQuery.from(qMember)
+              .where(qMember.loginId.like("%" + searchClassificationInput + "%"));
+          break;
+        case "memberName":
+          jpqlQuery.from(qMember).where(qMember.name.like("%" + searchClassificationInput + "%"));
+          break;
+        case "memberEmail":
+          jpqlQuery.from(qMember).where(qMember.email.like("%" + searchClassificationInput + "%"));
+          break;
+        case "memberPhone":
+          jpqlQuery.from(qMember).where(qMember.phone.like("%" + searchClassificationInput + "%"));
+          break;
+        case "memberNickname":
+          jpqlQuery.from(qMember)
+              .where(qMember.nickname.like("%" + searchClassificationInput + "%"));
+          break;
+        case "memberAddress":
+          jpqlQuery.from(qMember).where(qMember.address1.like("%" + searchClassificationInput + "%")
+              .or(qMember.address2.like("%" + searchClassificationInput + "%")));
+          break;
+      }
+    } else {
+      log.info("검색할 옵션을 선택하여주세요.");
+    }
+
+    /* 성별 */
+    List<String> sexCheck = memberSearchDto.getMemberSexCheck();
+
+//    if(sexCheck.size() != 0) {
+    if (sexCheck != null) {
+      log.info("성별배열의 사이즈는" + sexCheck.size());
+      switch (sexCheck.size()) {
+        case 1:
+          jpqlQuery.where(qMember.sex.eq(sexCheck.get(0)));
+          break;
+        case 2:
+          jpqlQuery.where(qMember.sex.eq(sexCheck.get(0))
+              .or(qMember.sex.eq(sexCheck.get(1))));
+          break;
+        case 3:
+          jpqlQuery.where(qMember.sex.eq(sexCheck.get(0))
+              .or(qMember.sex.eq(sexCheck.get(1)))
+              .or(qMember.sex.eq(sexCheck.get(2))));
+          break;
+        default:
+          break;
+      }
+    }
+
+    /* 생일 */
+//    String birthdayStart = memberSearchDto.getMemberBirthdayStart();
+//    String birthdayEnd = memberSearchDto.getMemberBirthdayEnd();
+
+//    if (!birthdayStart.equals("") && !birthdayEnd.equals("")) {
+    if ((memberSearchDto.getMemberBirthdayStart() != null
+        && memberSearchDto.getMemberBirthdayEnd() != null) &&
+        (memberSearchDto.getMemberBirthdayStart().length() != 0
+            && memberSearchDto.getMemberBirthdayEnd().length() != 0)) {
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+      formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+      String birthdayStart = memberSearchDto.getMemberBirthdayStart();
+      String birthdayEnd = memberSearchDto.getMemberBirthdayEnd();
+
+      log.info("제발그만...생일은 어떤값?" + memberSearchDto.getMemberBirthdayStart());
+      log.info("String으로 받아준 후에는?" + birthdayStart);
+
+      if (memberSearchDto.getMemberBirthdayStart() != null) {
+        log.info("널이아님");
+        log.info("그래서 값은" + memberSearchDto.getMemberBirthdayStart());
+      } else {
+        log.info("널임");
+      }
+
+      try {
+        Date startDate = formatter.parse(birthdayStart);
+        Date endDate = formatter.parse(birthdayEnd);
+
+        jpqlQuery.where(qMember.birthday.between(startDate, endDate));
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+
+    /* 가입일 */
+    String regDateStart = memberSearchDto.getMemberRegDateStart();
+    String regDateEnd = memberSearchDto.getMemberRegDateEnd();
+
+    if ((regDateStart != null && regDateEnd != null) && (regDateStart.length() != 0
+        && regDateEnd.length() != 0)) {
+      LocalDateTime startRegDateTime = LocalDateTime
+          .parse(regDateStart, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+      LocalDateTime endRegDateTime = LocalDateTime
+          .parse(regDateEnd, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+
+      jpqlQuery.where(qMember.regDate.between(startRegDateTime, endRegDateTime));
+    }
+
+    /* 주문일 */
+    String orderDateStart = memberSearchDto.getMemberOrderDateStart();
+    String orderDateEnd = memberSearchDto.getMemberOrderDateEnd();
+
+    if ((orderDateStart != null && orderDateEnd != null) && (orderDateStart.length() != 0
+        && orderDateEnd.length() != 0)) {
+      LocalDateTime startOrderDateTime = LocalDateTime
+          .parse(orderDateStart, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+      LocalDateTime endOrderDateTime = LocalDateTime
+          .parse(orderDateEnd, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+
+      jpqlQuery
+          .where(qMember.id.in(
+              JPAExpressions.select(qOrder.member.id)
+                  .from(qOrder)
+                  .where(qOrder.date.between(startOrderDateTime, endOrderDateTime))));
+    }
+
+    List<Member> members = getQuerydsl().applyPagination(pageable, jpqlQuery).fetch();
+    long totalCount = jpqlQuery.fetchCount();
+
+    return new PageImpl<>(members, pageable, totalCount);
   }
+
+  //      // 특정 기간 사이에 있는 주문의 정보를 검색한다.
+//      SELECT id, `date`, mileage, order_number, status, total_price, member_id
+//      FROM orders
+//      WHERE DATE(`date`) BETWEEN ‘2018-11-22 00:00:00’ AND ‘2018-12-31 00:00:00’
+//      ORDER BY member_id;
+//
+//// 특정 기간에 주문한 회원의 정보를 검색한다.
+//      SELECT id, address1, address2, birthday, email, login_id, marketing, mileage, name, nickname, password, personal_info, phone, post code, receive_email, receive_sms, recommender, reg_date, sex
+//      FROM member
+//      WHERE id = ANY(SELECT member_id FROM orders WHERE DATE(`date`) BETWEEN ‘2018-11-22 00:00:00’ AND ‘2018-12-31 00:00:00’);
 
   /************* SearchOrderMemberDto 로 검색하는 경우 *************************************************************/
   @Override
@@ -99,154 +236,19 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     QMember member = QMember.member;
     QOrder order = QOrder.order;
 
-    JPQLQuery query = from(member);
+    JPQLQuery query = from(member).innerJoin(member.orders, order);
 
-    query.select(member.id, order.date, order.orderNumber)
-        .from(member)
-        .innerJoin(member.orders, order)
+    query.select(member.id, member.name, order.date, order.orderNumber)
+//        .innerJoin(member.orders, order)
         .where(
             //member.loginId.contains(loginId),
             order.date
                 .in(JPAExpressions.select(order.date.max())
-                    .from(order).innerJoin(order.member, member)
-                    .where(member.name.contains(name)).groupBy(member.id)));
+                    .from(order)
+                    .where(order.member.name.contains(name)).groupBy(order.member.id)));
 
     return query.fetch();
   }
-
-
-  @Override
-  public Page<Member> searchMembers(MemberSearchDto memberSearchDto, Pageable pageable) {
-    QMember qMember = QMember.member;
-    QOrder qOrder = QOrder.order;
-
-    JPQLQuery<Member> jpqlQuery = from(qMember);
-
-    /* 검색 옵션 설정 : 아이디, 이메일, 전화번호, 닉네임, 주소 */
-    String searchClassificationValue = memberSearchDto.getMemberSearchClassificationValue();
-    String searchClassificationInput = memberSearchDto.getMemberSearchClassificationInput();
-
-    if(searchClassificationValue != null){
-      switch (searchClassificationValue){
-        case "memberId" : jpqlQuery.from(qMember).where(qMember.loginId.like("%" + searchClassificationInput + "%")); break;
-        case "memberName" : jpqlQuery.from(qMember).where(qMember.name.like("%" + searchClassificationInput + "%")); break;
-        case "memberEmail" : jpqlQuery.from(qMember).where(qMember.email.like("%" + searchClassificationInput + "%")); break;
-        case "memberPhone" : jpqlQuery.from(qMember).where(qMember.phone.like("%" + searchClassificationInput + "%")); break;
-        case "memberNickname" : jpqlQuery.from(qMember).where(qMember.nickname.like("%" + searchClassificationInput + "%")); break;
-        case "memberAddress" : jpqlQuery.from(qMember).where(qMember.address1.like("%" + searchClassificationInput + "%")
-            .or(qMember.address2.like("%" + searchClassificationInput + "%"))); break;
-      }
-    } else {
-      log.info("검색할 옵션을 선택하여주세요.");
-    }
-
-    /* 성별 */
-    List<String> sexCheck = memberSearchDto.getMemberSexCheck();
-
-
-
-//    if(sexCheck.size() != 0) {
-    if(sexCheck != null) {
-      log.info("성별배열의 사이즈는" + sexCheck.size());
-      switch (sexCheck.size()) {
-        case 1:
-          jpqlQuery.where(qMember.sex.eq(sexCheck.get(0)));
-          break;
-        case 2:
-          jpqlQuery.where(qMember.sex.eq(sexCheck.get(0))
-                    .or(qMember.sex.eq(sexCheck.get(1))));
-          break;
-        case 3:
-          jpqlQuery.where(qMember.sex.eq(sexCheck.get(0))
-                    .or(qMember.sex.eq(sexCheck.get(1)))
-                    .or(qMember.sex.eq(sexCheck.get(2))));
-          break;
-          default:
-            break;
-      }
-    }
-
-    /* 생일 */
-//    String birthdayStart = memberSearchDto.getMemberBirthdayStart();
-//    String birthdayEnd = memberSearchDto.getMemberBirthdayEnd();
-
-//    if (!birthdayStart.equals("") && !birthdayEnd.equals("")) {
-    if ((memberSearchDto.getMemberBirthdayStart() != null && memberSearchDto.getMemberBirthdayEnd() != null) &&
-        (memberSearchDto.getMemberBirthdayStart().length() != 0 && memberSearchDto.getMemberBirthdayEnd().length() != 0 )) {
-      SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
-      formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
-
-          String birthdayStart = memberSearchDto.getMemberBirthdayStart();
-    String birthdayEnd = memberSearchDto.getMemberBirthdayEnd();
-
-    log.info("제발그만...생일은 어떤값?" + memberSearchDto.getMemberBirthdayStart());
-    log.info("String으로 받아준 후에는?" + birthdayStart);
-
-    if(memberSearchDto.getMemberBirthdayStart() != null){
-      log.info("널이아님");
-      log.info("그래서 값은" + memberSearchDto.getMemberBirthdayStart());
-    }else
-      log.info("널임");
-
-
-      try {
-        Date startDate = formatter.parse(birthdayStart);
-        Date endDate = formatter.parse(birthdayEnd);
-
-        jpqlQuery.where(qMember.birthday.between(startDate, endDate));
-      }catch (Exception e){
-        e.printStackTrace();
-      }
-    }
-
-    /* 가입일 */
-    String regDateStart = memberSearchDto.getMemberRegDateStart();
-    String regDateEnd = memberSearchDto.getMemberRegDateEnd();
-
-    if ((regDateStart != null && regDateEnd != null) && (regDateStart.length() != 0  && regDateEnd.length() != 0)) {
-      LocalDateTime startRegDateTime = LocalDateTime
-          .parse(regDateStart, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-       LocalDateTime endRegDateTime = LocalDateTime
-          .parse(regDateEnd, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-
-        jpqlQuery.where(qMember.regDate.between(startRegDateTime, endRegDateTime));
-    }
-
-    /* 주문일 */
-    String orderDateStart = memberSearchDto.getMemberOrderDateStart();
-    String orderDateEnd = memberSearchDto.getMemberOrderDateEnd();
-
-    if ((orderDateStart != null && orderDateEnd != null) && (orderDateStart.length() != 0 && orderDateEnd.length() != 0)) {
-      LocalDateTime startOrderDateTime = LocalDateTime
-          .parse(orderDateStart, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-      LocalDateTime endOrderDateTime = LocalDateTime
-          .parse(orderDateEnd, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-
-      jpqlQuery
-          .where(qMember.id.in(
-              JPAExpressions.select(qOrder.member.id)
-                  .from(qOrder)
-                  .where(qOrder.date.between(startOrderDateTime, endOrderDateTime))));
-    }
-
-    List<Member> members = getQuerydsl().applyPagination(pageable, jpqlQuery).fetch();
-    long totalCount = jpqlQuery.fetchCount();
-
-    return new PageImpl<>(members, pageable, totalCount);
-  }
-
-
-  //      // 특정 기간 사이에 있는 주문의 정보를 검색한다.
-//      SELECT id, `date`, mileage, order_number, status, total_price, member_id
-//      FROM orders
-//      WHERE DATE(`date`) BETWEEN ‘2018-11-22 00:00:00’ AND ‘2018-12-31 00:00:00’
-//      ORDER BY member_id;
-//
-//// 특정 기간에 주문한 회원의 정보를 검색한다.
-//      SELECT id, address1, address2, birthday, email, login_id, marketing, mileage, name, nickname, password, personal_info, phone, post code, receive_email, receive_sms, recommender, reg_date, sex
-//      FROM member
-//      WHERE id = ANY(SELECT member_id FROM orders WHERE DATE(`date`) BETWEEN ‘2018-11-22 00:00:00’ AND ‘2018-12-31 00:00:00’);
-
 
 
   public List<Tuple> findMembersByProductNameInOrdersByDsl(String productName) {
@@ -376,9 +378,11 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
               //member.loginId.contains(loginId),
               order.date
                   .in(JPAExpressions.select(order.date.max())
-                      .from(order).innerJoin(order.member, member)
-                      .where(member.loginId.contains(searchOrderMemberDto.getLoginId()))
-                      .groupBy(member.id)));
+                      .from(order)
+//                      .innerJoin(order.member, member)
+                      .where(order.member.loginId.contains(searchOrderMemberDto.getLoginId()),
+                          order.member.id.eq(member.id))
+                      .groupBy(order.member.id)));
 
     }
 
@@ -386,14 +390,14 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
 //    if (searchOrderMemberDto.getName() != null && !searchOrderMemberDto.getName().equals("")) {
     if (searchOrderMemberDto.getName() != null && searchOrderMemberDto.getName().length() != 0) {
       log.info("%%%%%%%%%%%%%%%%%%%%%%%%% getName() 속");
-      query.select(member, order.date, order.orderNumber)
+      query.select(order.member, order.date, order.orderNumber)
           .where(
               //member.loginId.contains(loginId),
               order.date
                   .in(JPAExpressions.select(order.date.max())
-                      .from(order).innerJoin(order.member, member)
-                      .where(member.name.contains(searchOrderMemberDto.getName()))
-                      .groupBy(member.id)));
+                      .from(order)
+                      .where(order.member.name.contains(searchOrderMemberDto.getName()))
+                      .groupBy(order.member.id)));
     }
 
     //  || !searchOrderMemberDto.getOrderNumber().equals("")
@@ -478,6 +482,9 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     long totalCount = query.fetchCount();
     //long totalCount = Math.toIntExact(tuples.size());
 
+    log.info("=========== tuples.size() " + tuples.size());
+    log.info("=========== pageable.getPageSize() : " + pageable.getPageSize());
+
     return new PageImpl<>(tuples, pageable, totalCount);
   }
 
@@ -538,4 +545,34 @@ select m.*, k.order_date,k.order_number from member as m inner join
 on k.member_id = m.id;
 
 
+ */
+
+
+
+
+/* name만 검색하는 메소드 결과.
+
+select
+        order0_.member_id as col_0_0_,
+        member1_.name as col_1_0_,
+        order0_.date as col_2_0_,
+        order0_.order_number as col_3_0_
+    from
+        orders order0_ cross
+    join
+        member member1_
+    where
+        order0_.member_id=member1_.id
+        and (
+            order0_.date in (
+                select
+                    max(order2_.date)
+                from
+                    orders order2_
+                where
+                    member1_.name like ? escape '!'
+                group by
+                    order2_.member_id
+            )
+        )
  */

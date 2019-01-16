@@ -89,6 +89,18 @@ public class MemberServiceImpl implements MemberService {
   @Transactional
   public Page<OrderMemberDto> findMembersBySearchingInQuerydsl(
       SearchOrderMemberDto searchOrderMemberDto, Pageable pageable) {
+    log.info("==== searchOrderMemberDto.getName() : " + searchOrderMemberDto.getName());
+    log.info(
+        "==== searchOrderMemberDto.getProductName() : " + searchOrderMemberDto.getProductName());
+    log.info(
+        "==== searchOrderMemberDto.getOrderNumber() : " + searchOrderMemberDto.getOrderNumber());
+    log.info("==== searchOrderMemberDto.getOrderStartDate() : " + searchOrderMemberDto
+        .getOrderStartDate());
+    log.info(
+        "==== searchOrderMemberDto.getOrderEndDate() : " + searchOrderMemberDto.getOrderEndDate());
+    log.info("==== searchOrderMemberDto.getLoginId() : " + searchOrderMemberDto.getLoginId());
+
+
 
     Page<Tuple> tuples = memberRepository.getMembersByDsl(searchOrderMemberDto, pageable);
     log.info("==========tuples getTotalPages : " + tuples.getTotalPages());
@@ -104,15 +116,6 @@ public class MemberServiceImpl implements MemberService {
 
     for (Tuple tuple : tuples) {
       Object[] objects = tuple.toArray();
-//      objects = tuple.toArray();
-
-      // 새로운 객체를 계속 생성하는걸 피하려고 바꿨는데... 어떤게 더 좋을까!?
-
-//      temp.setMember((Member)objects[0]);
-//      temp.setDate((LocalDateTime)objects[1]);
-//      temp.setOrderNumber((String)objects[2]);
-//      temp = new OrderMemberDto((Member) objects[0], (LocalDateTime) objects[1],
-//          (String) objects[2]);
       OrderMemberDto temp = new OrderMemberDto((Member) objects[0], (LocalDateTime) objects[1],
           (String) objects[2]);
       orderMemberDtoList.add(temp);
