@@ -15,7 +15,7 @@ import static org.assertj.core.util.DateUtil.now;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-public class MemberJoinTest {
+public class MemberJoinRepositoryTest {
 
     @Autowired
     MemberRepository memberRepository;
