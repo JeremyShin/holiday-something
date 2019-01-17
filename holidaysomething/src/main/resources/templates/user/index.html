@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:text-align="http://www.w3.org/1999/xhtml"
+      xml:th="http:/www.thymeleaf.org">
+
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<style type="text/css">
+  .carousel-inner > .item {
+    height: 450px;
+    width: 914px;
+  }
+  .container {
+    display: table;
+    /*width:500px;*/
+    /*height:500px;*/
+    text-align:center;
+  }
+  .inner_container {
+    display: table-cell;
+    vertical-align: middle;]
+    margin: 0 auto;
+  }
+  .center {
+    position:absolute; top:50%; left:50%;
+    width:300px; height:200px;
+    overflow:hidden; background-color:#FC0;
+    margin-top:-150px; margin-left:-100px;
+  }
+
+</style>
+
+<head>
+  <title id="pageTitle">유저 &mdash; 주문</title>
+</head>
+
+<body>
+<header class="site-header" role="banner">
+  <div class="nav">
+    <!--메인페이지에서 상품명 검색-->
+    <div style="float: left; width: 33%; padding:10px;">
+      <div>
+        <form action="/search" method="get">
+          <input type="hidden" name="type" value="product">
+          <input type="search" name="q" value="" placeholder="Search" aria-label="Search" data-instant="attached" autocomplete="off">
+        </form>
+      </div>
+    </div>
+    <!--로고-->
+    <div style="float: left; width: 33%; padding:10px; text-align: center;">
+      <div>
+        <a href="/"><Img src="/img/logo.png" alt="앗!로고가 없네요." width="100px" height="100px"></a>
+      </div>
+    </div>
+
+    <!--<div style="float: left; width: 33%; padding:10px;">-->
+      <!--<div class="container">-->
+        <!--<div class="inner_container">-->
+           <!--<a href="/user/signup"> signup </a>-->
+        <!--</div>-->
+        <!---->
+        <!--<div class="inner_container">-->
+            <!--<a href="/user/signup"> signin </a>-->
+        <!--</div>-->
+        <!---->
+        <!--<div class="inner_container">-->
+            <!--<a href="/user/cart"> cart </a>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+      <div style="float: left; width: 33%; padding:10px;">
+        <div>
+          <div style="float: left; width: 33%; padding:10px; text-align: center;">
+            <a href="/user/signup"> signup </a>
+          </div>
+
+          <div style="float: left; width: 33%; padding:10px; text-align: center;">
+            <a href="/user/signup"> signin </a>
+          </div>
+
+          <div style="float: left; width: 33%; padding:10px; text-align: center;">
+            <a href="/user/cart"> cart </a>
+          </div>
+        </div>
+      </div>
+  </div>
+</header>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active ">
+      <img src="/img/cup.png" alt="공사중,,," >
+      <div class="carousel-caption">
+      </div>
+    </div>
+    <div class="item">
+      <img src="/img/rainbow2.jpg" alt="공사중,,," >
+      <div class="carousel-caption">
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</html>
