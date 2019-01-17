@@ -3,14 +3,16 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:text-align="http://www.w3.org/1999/xhtml"
       xml:th="http:/www.thymeleaf.org"
-      layout:decorate="~{layout/user-default.html}">>
+      layout:decorate="~{layout/user-default.html}">
 
-
-<head>
-  <title id="pageTitle">유저 &mdash; 주문</title>c
+<head th:include="fragments/header :: userHeaderFragment">
+  <title id="pageTitle">유저 &mdash; 주문</title>
 </head>
 
 <body>
+<div class="a">
+  ㅋㅋㅋ
+</div>
 
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
