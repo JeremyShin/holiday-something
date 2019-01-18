@@ -4,15 +4,9 @@
 
   <head th:replace="fragments/config :: configFragment"></head>
 
-  <header th:replace="fragments/header :: headerFragment"></header>
+  <header th:replace="fragments/header :: userHeaderFragment"></header>
 
-  <div id="container">
-    <aside th:replace="fragments/left-navbar :: leftNavbarFragment"></aside>
-    <div layout:fragment="content"
-        id="dashboard">
-    </div>
-  </div>
-
+  <!--<body th:replace="fragments/config :: configFragment"></body>-->
   <!--<footer th:replace="fragments/footer:: footerFragment"></footer>-->
 
 </html>

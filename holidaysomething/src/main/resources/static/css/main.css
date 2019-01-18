@@ -130,3 +130,12 @@
 #page-numbers a:visited {
   color: inherit;
 }
+
+.carousel-inner > .item > img {
+  width:640px;
+  height:360px;
+}
+
+.a {
+  background-color: red;
+}
