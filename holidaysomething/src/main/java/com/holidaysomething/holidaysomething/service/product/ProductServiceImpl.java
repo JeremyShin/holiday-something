@@ -47,12 +47,6 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
-  @Transactional
-  public ProductImage saveProductImage(ProductImage productImage) {
-    return productRepository.save(productImage);
-  }
-
-  @Override
   @Transactional(readOnly = true)
   public Page<Product> findByProductRegdate(LocalDateTime regdateStart, LocalDateTime regdateEnd,
       Pageable pageable) {

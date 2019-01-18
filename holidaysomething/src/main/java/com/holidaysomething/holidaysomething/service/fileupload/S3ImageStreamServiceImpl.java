@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.service.fileupload;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 // 개발 환경에서 S3와의 연동을 테스트할 때에도 사용할 수 있음, TODO ** S3 용량 5G 넘으면 과금입니다!!! **
@@ -21,7 +23,7 @@ import java.util.UUID;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class S3ImageStreamServiceImpl implements ImageStreamService{
+public class S3ImageStreamServiceImpl implements ImageStreamService {
 
     private final ProductRepository productRepository;
     private final AmazonS3Client amazonS3Client;
@@ -36,7 +38,7 @@ public class S3ImageStreamServiceImpl implements ImageStreamService{
 
     @Override
     public void save(MultipartFile[] multipartFiles) {
-        for(MultipartFile multipartFile : multipartFiles) {
+        for (MultipartFile multipartFile : multipartFiles) {
             // 멀티플 업로드를 설정하면 파일을 올리지 않아도 쓰레기 파일이 날라와서 걸러내기 위함...
             if (!multipartFile.getOriginalFilename().isEmpty()) {
                 ObjectMetadata objectMetadata = new ObjectMetadata();
@@ -55,7 +57,25 @@ public class S3ImageStreamServiceImpl implements ImageStreamService{
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                String s = amazonS3Client.getUrl(bucket, fileKey).toString();
+                String url = amazonS3Client.getUrl(bucket, fileKey).toString();
+                String urlPath = url.substring(0, url.length() - storedFileName.length());
+
+                ProductImage productImage = new ProductImage();
+                productImage.setOriginalFileName(multipartFile.getOriginalFilename());
+                productImage.setFileType(multipartFile.getContentType());
+                productImage.setPath(urlPath);
+                productImage.setStoredFileName(storedFileName);
+                productImage.setRegDate(LocalDateTime.now());
+                productImage.setSize(multipartFile.getSize());
+
+                // Category 1 = Main Image
+                // Category 2 = Description Image
+                if (multipartFile.getName().equals("mainImages")) {
+                    productImage.setCategory(1L);
+                } else
+                    productImage.setCategory(2L);
+
+                productRepository.save(productImage);
             }
         }
     }

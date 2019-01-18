@@ -32,7 +32,7 @@ public class DevImageStreamServiceImpl implements ImageStreamService {
 
 
         Calendar cal = Calendar.getInstance();
-        String path = fileUploadDir + cal.get(Calendar.YEAR) + cal.get(Calendar.MONTH) + cal.get(Calendar.DAY_OF_MONTH);
+        String path = fileUploadDir + cal.get(Calendar.YEAR) + cal.get(Calendar.MONTH) + cal.get(Calendar.DAY_OF_MONTH) + "/";
         File uploadDir = new File(path);
         uploadDir.mkdirs();
 
@@ -43,11 +43,11 @@ public class DevImageStreamServiceImpl implements ImageStreamService {
                 log.info(multipartFile.getName());
                 log.info("==========================");
 
-                String saveFileName = UUID.randomUUID().toString();
+                String storedFileName = UUID.randomUUID().toString();
 
                 try (
                         InputStream in = multipartFile.getInputStream();
-                        OutputStream out = new FileOutputStream(path + "/" + saveFileName)
+                        OutputStream out = new FileOutputStream(path + storedFileName)
                 ) {
                     byte[] buffer = new byte[1024];
                     int readCount = 0;
@@ -62,7 +62,7 @@ public class DevImageStreamServiceImpl implements ImageStreamService {
                 productImage.setOriginalFileName(multipartFile.getOriginalFilename());
                 productImage.setFileType(multipartFile.getContentType());
                 productImage.setPath(path);
-                productImage.setStoredFileName(saveFileName);
+                productImage.setStoredFileName(storedFileName);
                 productImage.setRegDate(LocalDateTime.now());
                 productImage.setSize(multipartFile.getSize());
 

@@ -1,6 +1,5 @@
 package com.holidaysomething.holidaysomething.service.fileupload;
 
-import com.holidaysomething.holidaysomething.domain.ProductImage;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface ImageStreamService {
