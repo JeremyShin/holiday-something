@@ -4,9 +4,11 @@ import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
@@ -20,12 +22,13 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class DevImageStreamServiceImpl implements ImageStreamService{
 
-    private static ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     @Value("${file.upload.dir}")
     private String fileUploadDir;
 
     @Override
+    @Transactional
     public void save(MultipartFile[] multipartFiles) {
 
 
