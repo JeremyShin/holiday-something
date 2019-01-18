@@ -26,53 +26,53 @@ public class DevImageStreamServiceImpl implements ImageStreamService{
     private String fileUploadDir;
 
     @Override
-    public void save(MultipartFile multipartFile) {
-        log.info("SAVE START!!!!!!!!!!!!!!!!!!!");
-        log.info(multipartFile.getName());
-        log.info("==========================");
-        log.info("==========================");
-        log.info("==========================");
-        log.info("==========================");
-        log.info("==========================");
+    public void save(MultipartFile[] multipartFiles) {
+
+
         Calendar cal = Calendar.getInstance();
         String path = fileUploadDir + cal.get(Calendar.YEAR) + cal.get(Calendar.MONTH) + cal.get(Calendar.DAY_OF_MONTH);
         File uploadDir = new File(path);
         uploadDir.mkdirs();
-        String saveFileName = UUID.randomUUID().toString();
 
+        for (MultipartFile multipartFile : multipartFiles) {
+            if (!multipartFile.getOriginalFilename().isEmpty()) {
 
-        try(
-                InputStream in = multipartFile.getInputStream();
-                OutputStream out = new FileOutputStream(path + "/" + saveFileName)
-        ){
-            byte[] buffer = new byte[1024];
-            int readCount = 0;
-            while((readCount = in.read(buffer)) != -1){
-                out.write(buffer, 0, readCount);
+                log.info("======Save Start!!========");
+                log.info(multipartFile.getName());
+                log.info("==========================");
+
+                String saveFileName = UUID.randomUUID().toString();
+
+                try (
+                        InputStream in = multipartFile.getInputStream();
+                        OutputStream out = new FileOutputStream(path + "/" + saveFileName)
+                ) {
+                    byte[] buffer = new byte[1024];
+                    int readCount = 0;
+                    while ((readCount = in.read(buffer)) != -1) {
+                        out.write(buffer, 0, readCount);
+                    }
+                } catch (IOException ioe) {
+                    throw new RuntimeException(ioe.getMessage());
+                }
+
+                ProductImage productImage = new ProductImage();
+                productImage.setOriginalFileName(multipartFile.getOriginalFilename());
+                productImage.setFileType(multipartFile.getContentType());
+                productImage.setPath(path);
+                productImage.setStoredFileName(saveFileName);
+                productImage.setRegDate(LocalDateTime.now());
+                productImage.setSize(multipartFile.getSize());
+
+                // Category 1 = Main Image
+                // Category 2 = Description Image
+                if (multipartFile.getName().equals("mainImages")) {
+                    productImage.setCategory(1L);
+                } else
+                    productImage.setCategory(2L);
+
+                productRepository.save(productImage);
             }
-        }catch(IOException ioe){
-            throw new RuntimeException(ioe.getMessage());
         }
-
-        ProductImage productImage = new ProductImage();
-        productImage.setOriginalFileName(multipartFile.getOriginalFilename());
-        productImage.setFileType(multipartFile.getContentType());
-        productImage.setPath(path);
-        productImage.setStoredFileName(saveFileName);
-        productImage.setRegDate(LocalDateTime.now());
-        productImage.setSize(multipartFile.getSize());
-
-        // Category 1 = Main Image
-        // Category 2 = Description Image
-        if(multipartFile.getName().equals("mainImages")) {
-            productImage.setCategory(1L);
-        } else
-            productImage.setCategory(2L);
-
-        log.info(productImage.getFileType());
-        log.info(productImage.getOriginalFileName());
-        log.info(productImage.getPath());
-        log.info(productImage.getStoredFileName());
-        log.info(path + "/" + saveFileName);
     }
 }

@@ -116,29 +116,8 @@ public class AdminProductController {
     @PostMapping("/image")
     public String productImagePost(MultipartFile[] mainImages,
                                    MultipartFile[] descriptionImages) {
-//    ProductImage productImage = fileUtil.handleFileStream(request, session, file);
-        log.info("--------------------------------");
-        log.info("--------------------------------");
-        log.info("--------------------------------");
-        log.info("--------------------------------");
-        log.info("--------------------------------");
-        log.info(String.valueOf(mainImages.length));
-        log.info(String.valueOf(descriptionImages.length));
-        log.info("--------------------------------");
-        log.info("--------------------------------");
-        log.info("--------------------------------");
-        log.info("--------------------------------");
-        log.info("--------------------------------");
-
-        for (MultipartFile mainImage : mainImages) {
-            if(!mainImage.getOriginalFilename().isEmpty())
-                imageStreamService.save(mainImage);
-        }
-
-        for (MultipartFile descriptionImage : descriptionImages) {
-            imageStreamService.save(descriptionImage);
-        }
-
+        imageStreamService.save(mainImages);
+        imageStreamService.save(descriptionImages);
 
         return "redirect:/admin/product/search";
     }
