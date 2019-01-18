@@ -6,7 +6,7 @@ Holiday Something(홀리데이썸띵) 쇼핑몰 구축 repository입니다.
 - Application Framework: Spring Boot 2.0
 - Database: MySQL, JPA(Java Persistence API)
 - Deployment: Docker, AWS(EC2, RDS)
-- Front-End: React
+- Front-End: React.js (향후 SEO를 위해 next.js 등을 적용하여 Server-Side Rendering 구현 예정. 현재는 모든 React component가 Client-Side Rendering)
 - IDE: IntelliJ
 - Build Automation Tool: Maven
 
