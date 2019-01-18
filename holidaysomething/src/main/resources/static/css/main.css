@@ -133,9 +133,10 @@
 
 .carousel-inner > .item > img {
   width:640px;
-  height:360px;
+  height:400px;
 }
 
-.a {
-  background-color: red;
+#user-dashboard {
+  margin: 90px 0 0 90px;
+  width: 80%;
 }
