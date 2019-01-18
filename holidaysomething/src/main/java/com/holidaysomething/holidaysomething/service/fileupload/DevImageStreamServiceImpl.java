@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.UUID;
 
-@Profile("dev")
+@Profile("local")
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -23,8 +23,8 @@ public class DevImageStreamServiceImpl implements ImageStreamService {
 
     private final ProductRepository productRepository;
 
-    @Value("${file.upload.dir}")
-    private String fileUploadDir;
+    // Linux: /home/{user}/test
+    private static String fileUploadDir = System.getProperty("user.home") + "/test/";
 
     @Override
     @Transactional
