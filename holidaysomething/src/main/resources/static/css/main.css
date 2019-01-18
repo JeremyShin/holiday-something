@@ -136,7 +136,23 @@
   height:400px;
 }
 
-#user-dashboard {
+.user-dashboard {
+  width: 100%;
+}
+
+.user-content {
   margin: 90px 0 0 90px;
   width: 80%;
+}
+
+.user-header{
+  float: left; width: 33%; padding:10px; text-align: center;
+}
+
+#user-header-search{
+  order: 1;
+}
+
+.user-header-category{
+  float:left; width: 20%; padding:10px; text-align: center;
 }
