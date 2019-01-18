@@ -6,17 +6,30 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class FileUtil {
+  @Value("${file.upload.dir}")
+  private String fileUploadDir;
 
-  public ProductImage handleFileStream(HttpServletRequest request, HttpSession session,
-      MultipartFile file) {
+  public ProductImage handleFileStream(HttpServletRequest request, HttpSession session, MultipartFile file) {
+
+    Calendar cal = Calendar.getInstance();
+    String dir = fileUploadDir + cal.get(Calendar.YEAR) + cal.get(Calendar.MONTH) + cal.get(Calendar.DAY_OF_MONTH);
+    File uploadDir = new File(dir);
+    uploadDir.mkdirs();
+    String saveFileName = UUID.randomUUID().toString();
+
+
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
     String dateStr = simpleDateFormat.format(new Date());
     String baseDir = request.getSession().getServletContext().getRealPath("/"); // 현재 경로로 파일 업로드
@@ -57,7 +70,7 @@ public class FileUtil {
     ProductImage productImage = new ProductImage();
     productImage.setOriginalFileName(file.getOriginalFilename());
     productImage.setStoredFileName(saveFile);
-    productImage.setSize((int) file.getSize());
+    productImage.setSize(file.getSize());
     productImage.setFileType(file.getContentType());
 
     return productImage;

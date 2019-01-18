@@ -5,10 +5,13 @@
   <title>이미지 업로드</title>
 </head>
 <body>
-<t1>이미지 업로드</t1>
+<h1>이미지 업로드</h1>
 
 <form method="post" action="/admin/product/image" enctype="multipart/form-data">
-  업로드 : <input type="file" name="file">
+  <h4>메인 이미지 업로드</h4>
+  <input type="file" name="mainImages" placeholder="파일 선택" multiple><br>
+  <h4>설명 이미지 업로드</h4>
+  <input type="file" name="descriptionImages" placeholder="파일 선택" multiple><br><br>
   <input type="submit">
 </form>
 

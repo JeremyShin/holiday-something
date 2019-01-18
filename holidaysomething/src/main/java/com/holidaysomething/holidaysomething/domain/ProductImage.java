@@ -26,6 +26,7 @@ public class ProductImage {
 
   private Long category;
 
+// TODO : storedFileName에 경로도 같이 저장하면 불러오기가 편한데 사용한 곳이 있는 것 같다...
   private String path;
 
   @Column(nullable = false)
@@ -36,7 +37,7 @@ public class ProductImage {
 
 
   @Column(nullable = false)
-  private int size;
+  private Long size;
 
   @Column(nullable = false)
   private String fileType;
@@ -45,6 +46,7 @@ public class ProductImage {
   @CreationTimestamp
   private LocalDateTime regDate;
 
+//  TODO : 필요없어보이는데... 샘플 SQL을 고칠까??
   @UpdateTimestamp
   private LocalDateTime updateDate;
 
