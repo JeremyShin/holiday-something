@@ -552,3 +552,23 @@ INSERT INTO cart_product(price, quantity, member_id, product_id) VALUES (1000, 1
 INSERT INTO cart_product(price, quantity, member_id, product_id) VALUES (1000, 2, 2, 1);
 INSERT INTO cart_product(price, quantity, member_id, product_id) VALUES (1000, 2, 1, 1);
 INSERT INTO cart_product(price, quantity, member_id, product_id) VALUES (1000, 1, 1, 1);
+
+
+-- INSERT INTO role(name) values('ADMIN');
+-- INSERT INTO role(name) values('USER');
+-- INSERT INTO role(name) values('NONE');
+--
+-- INSERT INTO member_role(member_id,role_id) values(1,1);
+-- INSERT INTO member_role(member_id,role_id) values(2,1);
+-- INSERT INTO member_role(member_id,role_id) values(3,1);
+-- INSERT INTO member_role(member_id,role_id) values(4,2);
+-- INSERT INTO member_role(member_id,role_id) values(5,2);
+-- INSERT INTO member_role(member_id,role_id) values(6,2);
+-- INSERT INTO member_role(member_id,role_id) values(7,2);
+-- INSERT INTO member_role(member_id,role_id) values(8,2);
+-- INSERT INTO member_role(member_id,role_id) values(9,2);
+-- INSERT INTO member_role(member_id,role_id) values(10,3);
+-- INSERT INTO member_role(member_id,role_id) values(11,3);
+-- INSERT INTO member_role(member_id,role_id) values(12,3);
+-- INSERT INTO member_role(member_id,role_id) values(13,3);
+-- INSERT INTO member_role(member_id,role_id) values(14,3);

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:text-align="http://www.w3.org/1999/xhtml"
+      xml:th="http:/www.thymeleaf.org"
+      layout:decorate="~{layout/user-default.html}">
+
+<head th:include="fragments/header :: userHeaderFragment">
+  <title id="pageTitle">Login</title>
+</head>
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+
+</th:block>
+
+
+<div layout:fragment="content">
+  <th:block layout:fragment="script">
+
+  </th:block>
+
+  <h1>Login</h1>
+  <div th:if="${param.error}">
+    Unable to login. Check your id and pw.
+  </div>
+
+  <form method='POST' th:action="@{/user/authenticate}">
+    <table>
+      <tr>
+        <td>LoginId:</td>
+        <td><input type='text' name='loginId'></td>
+      </tr>
+      <tr>
+        <td>Password:</td>
+        <td><input type='password' name='password'/></td>
+      </tr>
+      <tr>
+        <td><input type="submit"/></td>
+      </tr>
+    </table>
+  </form>
+
+
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+
+
+</div>
+
+
+</body>
+
+
+</html>
