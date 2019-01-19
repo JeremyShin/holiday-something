@@ -10,11 +10,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
@@ -52,6 +54,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   public AuthenticationSuccessHandler successHandler() {
     return new AuthSuccessHandler("/");  // default로 이동할 url
   }
+
+  // 세션 동시에 몇개 존재할 수 있게 할건지 정하는 빈?? baeldung
+  // 추가하니까 계속 403 에러 난다...
+//  @Bean
+//  public HttpSessionEventPublisher httpSessionEventPublisher() {
+//    return new HttpSessionEventPublisher();
+//  }
 
   /*
     인증에 대한 처리를 아예 무시할 경로를 설정.
@@ -102,6 +111,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        .defaultSuccessUrl("/user/after")
         .successHandler(successHandler()) // 로그인 이전 페이지로 이동할때 사용.
         .failureUrl("/user/login?error=true");
+
+    http.csrf().disable();
+
+//    http.sessionManagement()
+//        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
+//
+//    // 같은 유저가 만들 수 있는 세션의 수??
+//    http.sessionManagement().maximumSessions(5);
+//
+//    http.sessionManagement()
+//        .sessionFixation().migrateSession();
 
     http
         .logout()

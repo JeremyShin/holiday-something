@@ -36,17 +36,19 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
 
     MemberUserDetails principal = (MemberUserDetails) authentication.getPrincipal();
     log.info("principal.getName() : " + principal.getId());
-    log.info("principal.getName() : " + principal.getNickname());
-    log.info("principal.getName() : " + principal.getUsername());
+    log.info("principal.getNickname() : " + principal.getNickname());
+    log.info("principal.getUsername() : " + principal.getUsername());
 
     if (principal.getUsername().equals("root")) {
       log.info("root니까 이전페이지 말고 유저,백오피스 선택할 수 있는 페이지로 갈게!");
       session.setAttribute("LOGINUSER", principal);
+      log.info("======== session 추가 직후 :   " + session.getAttribute("LOGINUSER"));
       getRedirectStrategy().sendRedirect(request, response, "/user/after");
       return;
     } else {
       log.info("root 외의 유저.   / 로 가즈아.");
       session.setAttribute("LOGINUSER", principal);
+      log.info("======== session 추가 직후 :   " + session.getAttribute("LOGINUSER"));
       getRedirectStrategy().sendRedirect(request, response, "/");
       return;
     }
