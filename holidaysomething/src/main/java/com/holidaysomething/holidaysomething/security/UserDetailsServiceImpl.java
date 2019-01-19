@@ -55,10 +55,21 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     log.info("====== member.getPassword : " + member.getPassword());
-    String encodePassword = passwordEncoder.encode(member.getPassword());
-    log.info("====== encodePassword : " + encodePassword);
 
-    MemberUserDetails userDetails = new MemberUserDetails(loginId, encodePassword, authorities);
+    // root는 현재 기본으로 등록되어 있는 회원(관리자계정으로 쓸거)이다.
+    // db에 1234로 저장되어 있기 때문에 여기서 encode 해서 암호화 문자로 바꿔줘야 한다.
+    // 그리고 User 객체 생성.
+    if (loginId.equals("root")) {
+      String encodePassword = passwordEncoder.encode(member.getPassword());
+      log.info("====== root encodePassword : " + encodePassword);
+      member.setPassword(encodePassword);
+    }
+
+//    String encodePassword = passwordEncoder.encode(member.getPassword());
+//    log.info("====== encodePassword : " + encodePassword);
+
+    MemberUserDetails userDetails = new MemberUserDetails(loginId, member.getPassword(),
+        authorities);
     userDetails.setNickname(member.getNickname());
     userDetails.setId(member.getId());
 

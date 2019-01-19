@@ -10,9 +10,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
@@ -40,13 +42,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   public UserDetailsService userDetailsService() {
     return new UserDetailsServiceImpl();
   }
-
-  ;
-
   @Bean
   public BCryptPasswordEncoder passwordEncoder() {
     //BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
     return new BCryptPasswordEncoder();
+  }
+
+  @Bean
+  public AuthenticationSuccessHandler successHandler() {
+    return new AuthSuccessHandler("/");  // default로 이동할 url
   }
 
   /*
@@ -58,10 +62,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(WebSecurity web) throws Exception {
-    web.ignoring()
-        .antMatchers(
-            "/resoures/**",
-            "/static/**", "/css/**", "/js/**", "/img/**", "/webjars/**");
+//    web.ignoring()
+//        .antMatchers(
+//            "/resources/**",
+//            "/static/**", "/css/**", "/js/**", "/img/**", "/webjars/**");
   }
 
   /*
@@ -77,33 +81,41 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     log.info("=================== 성공 ");
 
-    http
-        .authorizeRequests()
-        .antMatchers("/**").permitAll()
-//        .antMatchers("/user/add").permitAll()
-//        .antMatchers("/user/login").permitAll()
-//        .antMatchers("/admin/**").hasRole("ADMIN")
-        .anyRequest().fullyAuthenticated();
-        //.antMatchers("/members/**").hasRole("USER") // 로그인시 마이페이지 같은거 접근할때
+    // .antMatchers("/admin/**").hasRole("ADMIN") 와 같은 특정 조건이 위로 와야되나보다...?
+    http.authorizeRequests()
+        .antMatchers("/admin/**").hasRole("ADMIN")
+//        .antMatchers("/user/after").hasRole("ADMIN")
+        .antMatchers("/**").permitAll();
+//          .antMatchers("/user/add").permitAll()
+//          .antMatchers("/user/login").permitAll()
+
+//        .access("hasRole('ADMIN')");
+//        .anyRequest().fullyAuthenticated();
+    //.antMatchers("/members/**").hasRole("USER")
+    // .authenticated() 로그인시에만 해당 페이지로 접근 가능하도록 막을때 사용.
 
     http
         .formLogin()
         .loginPage("/user/login")
         .loginProcessingUrl("/user/authenticate")
         .usernameParameter("loginId").passwordParameter("password")
-        .defaultSuccessUrl("/user/info");
-//        .failureUrl("/user/login.html?error=true");
+//        .defaultSuccessUrl("/user/after")
+        .successHandler(successHandler()) // 로그인 이전 페이지로 이동할때 사용.
+        .failureUrl("/user/login?error=true");
 
     http
         .logout()
         .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
         .logoutSuccessUrl("/")
+        .invalidateHttpSession(true) // logout 시 모든 세션을 없애주는건가?
         .permitAll();
 
     log.info("======= 끝");
 
   }
 
+
+  // auth 에 UserDetailsService를 등록하고 인코더를 등록.
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     log.info("======= AuthenticationManagerBuilder");

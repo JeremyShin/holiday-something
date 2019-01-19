@@ -10,9 +10,12 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,7 +41,11 @@ public class LoginController {
   private final BCryptPasswordEncoder passwordEncoder;
 
   @GetMapping("/login")
-  public String loginForm() {
+  public String loginForm(HttpServletRequest req) {
+    String referer = req.getHeader("Referer");
+    req.getSession().setAttribute("prevPage", referer);
+
+    log.info("========referer : " + referer);
 
     return "user/login/login-form";
   }
@@ -46,12 +53,15 @@ public class LoginController {
 
   @PostMapping("/add")
   public String addMember() {
+    // 운영자 아이디는 디비에 1234 로 저장되어 있고
+    // 실제 고객이 이용하는건 인코딩 해서 저장해야한다.
+
     Member member = new Member();
     member.setLoginId("koola97620");
     member.setPassword("1234");
-    //member.setPassword(passwordEncoder.encode("1234"));
-    //log.info("============== passwordEncoder.encode 후 : " + member.getPassword());
-    //log.info("======= 확인 : " + passwordEncoder.matches("1234",member.getPassword()));
+    member.setPassword(passwordEncoder.encode("1234"));
+    log.info("============== passwordEncoder.encode 후 : " + member.getPassword());
+    log.info("======= 확인 : " + passwordEncoder.matches("1234", member.getPassword()));
 
     member.setEmail("koola976@gmail.com");
     member.setName("최재용");
@@ -68,11 +78,11 @@ public class LoginController {
     member.setPersonalInfo(false);
     member.setSex("없음.");
 
-    Role role1 = new Role();
-    role1.setId(1l);
-    role1.setName("ADMIN");
-    memberService.addRole(role1);
-    log.info("======== role1  등록.");
+//    Role role1 = new Role();
+//    role1.setId(1l);
+//    role1.setName("ADMIN");
+//    memberService.addRole(role1);
+//    log.info("======== role1  등록.");
 
     Role role2 = new Role();
     role2.setId(2l);
@@ -81,7 +91,7 @@ public class LoginController {
     log.info("======== role2  등록.");
 
     Set<Role> roleSet = new HashSet<>();
-    roleSet.add(role1);
+    //roleSet.add(role1);
     roleSet.add(role2);
     member.setRoles(roleSet);
     Date today = new Date();
@@ -93,17 +103,68 @@ public class LoginController {
   }
 
 
-  @GetMapping("/info")
-  public String loginInfo(Principal principal) {
-    System.out.println(principal.getName());
+  /**
+   * @author JDragon 로그인 했을 때, 아이디가 root 이면 해당 url 호출.
+   */
+  @GetMapping("/after")
+  public String loginInfo(Principal principal, HttpSession httpSession,
+      @AuthenticationPrincipal Member member) {
+    log.info("======= loginInfo 메소드 안.");
+    // 로그인 이후에 나타나는 페이지.
+    // admin 권한이 있으면 back-or-user 페이지를 뜨게 하고
+    // admin 없으면 바로 메인 페이지 or 이전 페이지 뜨게 하고. 싶은데...
+    // 여기에서 설정하니 안된다. successHandler 에서 건드려봐야겠다.
+    log.info(" principal.getName() : " + principal.getName());
+//    if(principal.getName().equals("root")) {
+//      return "user/login/back-or-user";
+//    }
 
     MemberUserDetails loginUser =
         (MemberUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    System.out.println(loginUser.getNickname());
-    System.out.println(loginUser.getId());
-    System.out.println(loginUser.getUsername());
+    log.info("loginUser.getNickname() : " + loginUser.getNickname());
+    log.info("loginUser.getId() : " + loginUser.getId());
+    log.info("loginUser.getUsername() : " + loginUser.getUsername());
 
-    return "user/login/login-info";
+//    null 값 나온다.
+//    log.info("member.getId() : "+member.getId());
+//    log.info("member.getRoles() : "+member.getRoles());
+//    log.info("member.getNickname() : "+member.getNickname());
+
+    log.info("httpSession.getId() : " + httpSession.getId());
+    log.info("httpSession.getAttribute() : " + httpSession.getAttribute("LOGINUSER"));
+    log.info("httpSession.getMaxInactiveInterval() : " + httpSession.getMaxInactiveInterval());
+
+    return "user/login/back-or-user";
+  }
+
+
+  @GetMapping("/temp")
+  public String tempMethod(HttpSession httpSession) {
+    // 로그아웃하고 이 메소드가 실행되면
+    // httpSession.getAttribute("LOGINUSER")) 가 null값이 나온다.
+    log.info("====================tempMethod");
+    log.info("httpSession.getId() : " + httpSession.getId());
+    log.info("httpSession.getAttribute() : " + httpSession.getAttribute("LOGINUSER"));
+    log.info("httpSession.getMaxInactiveInterval() : " + httpSession.getMaxInactiveInterval());
+
+    // logout 상태에서 하면 오류난다. NullPointerException!
+    // getAttribute 할게 없어서 그런듯.
+    MemberUserDetails member = (MemberUserDetails) httpSession.getAttribute("LOGINUSER");
+    log.info("======= member.getId() :  " + member.getId());
+    log.info("======= member.getNickname() :  " + member.getNickname());
+    log.info("======= member.getUsername() :  " + member.getUsername());
+
+    // login 과정에서 session.setAttribute 해주면 여기에서도 자유롭게 꺼내 쓸 수 있다.
+
+    // 위에 HttpSession 을 쓰는 것과. 아래처럼 저렇게 값을 가져오는거랑. 출력값은 똑같다.
+    // 그럼 무슨 방법을 써야 하는거지?
+    MemberUserDetails loginUser =
+        (MemberUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    log.info("loginUser.getNickname() : " + loginUser.getNickname());
+    log.info("loginUser.getId() : " + loginUser.getId());
+    log.info("loginUser.getUsername() : " + loginUser.getUsername());
+
+    return "user/temp";
   }
 
 }
