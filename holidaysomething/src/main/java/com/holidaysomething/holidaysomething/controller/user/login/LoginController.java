@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.SessionFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -88,7 +89,7 @@ public class LoginController {
 
     memberService.addMember(member);
 
-    return "redirect:/user/login";
+    return "redirect:/";
   }
 
 
@@ -101,6 +102,7 @@ public class LoginController {
     System.out.println(loginUser.getNickname());
     System.out.println(loginUser.getId());
     System.out.println(loginUser.getUsername());
+
     return "user/login/login-info";
   }
 

@@ -25,12 +25,13 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Slf4j
 @Component
-@RequiredArgsConstructor
-public class HolidayUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
-  private final MemberService memberService;
+  @Autowired
+  private MemberService memberService;
 
-  private final BCryptPasswordEncoder passwordEncoder;
+  @Autowired
+  private BCryptPasswordEncoder passwordEncoder;
 
 
   @Override

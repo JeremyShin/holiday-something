@@ -1,22 +1,17 @@
 package com.holidaysomething.holidaysomething.security;
 
-import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -30,23 +25,29 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 @Configuration
 @Slf4j
-@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-  private final HolidayUserDetailsService userDetailsService;
+  //private final UserDetailsService userDetailsService;
 
-  private final PasswordEncoder passwordEncoder;
+//  private final BCryptPasswordEncoder passwordEncoder;
 
 //  @Bean
 //  public static PasswordEncoder passwordEncoder() {
 //    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 //  }
 
-//  @Bean
-//  public BCryptPasswordEncoder passwordEncoder() {
-//    //BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-//    return new BCryptPasswordEncoder();
-//  }
+  @Bean
+  public UserDetailsService userDetailsService() {
+    return new UserDetailsServiceImpl();
+  }
+
+  ;
+
+  @Bean
+  public BCryptPasswordEncoder passwordEncoder() {
+    //BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    return new BCryptPasswordEncoder();
+  }
 
   /*
     인증에 대한 처리를 아예 무시할 경로를 설정.
@@ -58,7 +59,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   public void configure(WebSecurity web) throws Exception {
     web.ignoring()
-        .antMatchers("/resoures/**", "/static/**", "/css/**", "/js/**", "/img/**");
+        .antMatchers(
+            "/resoures/**",
+            "/static/**", "/css/**", "/js/**", "/img/**", "/webjars/**");
   }
 
   /*
@@ -76,20 +79,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     http
         .authorizeRequests()
-        .antMatchers("/").permitAll()
-        .antMatchers("/user/add").permitAll()
-        .antMatchers("/user/login").permitAll()
-        .antMatchers("/admin/**").hasRole("ADMIN")
-        //.antMatchers("/members/**").hasRole("USER") // 로그인시 마이페이지 같은거 접근할때
+        .antMatchers("/**").permitAll()
+//        .antMatchers("/user/add").permitAll()
+//        .antMatchers("/user/login").permitAll()
+//        .antMatchers("/admin/**").hasRole("ADMIN")
         .anyRequest().fullyAuthenticated();
+        //.antMatchers("/members/**").hasRole("USER") // 로그인시 마이페이지 같은거 접근할때
 
     http
         .formLogin()
         .loginPage("/user/login")
-        .usernameParameter("loginId").passwordParameter("password")
         .loginProcessingUrl("/user/authenticate")
+        .usernameParameter("loginId").passwordParameter("password")
         .defaultSuccessUrl("/user/info");
-//            .failureUrl("/login.html?error=true")
+//        .failureUrl("/user/login.html?error=true");
 
     http
         .logout()
@@ -105,14 +108,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     log.info("======= AuthenticationManagerBuilder");
     auth
-        .userDetailsService(userDetailsService)
-        .passwordEncoder(passwordEncoder);
+        .userDetailsService(userDetailsService())
+        .passwordEncoder(passwordEncoder());
   }
 
 //  @Bean
 //  public DaoAuthenticationProvider authenticationProvider() {
 //    DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-//    authenticationProvider.setUserDetailsService(customUserDetailsService);
+//    authenticationProvider.setUserDetailsService(userDetailsService);
 //    authenticationProvider.setPasswordEncoder(passwordEncoder());
 //    return authenticationProvider;
 //  }
