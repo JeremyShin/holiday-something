@@ -4,7 +4,7 @@ import HeaderCategories from '../HeaderCategories/HeaderCategories';
 import styled from 'styled-components';
 
 const HeaderWrapper = styled.div`
-  background: rgba(255, 255, 255, 0);
+  // background: rgba(255, 255, 255, 0);
   z-index: 5;
   position: relative;
   left: 0;

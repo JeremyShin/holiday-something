@@ -1,7 +1,8 @@
 package com.holidaysomething.holidaysomething.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.time.LocalDateTime;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -12,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -87,12 +87,11 @@ public class Member {
   @Column(length = 10, nullable = false)
   private String sex;
 
-//  @Column(updatable = false, nullable = false)
-//  private LocalDate regdate;
-
   @OneToMany(mappedBy = "member")
+  @JsonIgnore // ignore하지 않을 경우 순환참조(무한 재귀; Infinite recursion) 발생
   private Set<CartProduct> cartProducts;
 
   @OneToMany(mappedBy = "member")
+  @JsonIgnore // ignore하지 않을 경우 순환참조(무한 재귀; Infinite recursion) 발생
   private List<Order> orders;
 }

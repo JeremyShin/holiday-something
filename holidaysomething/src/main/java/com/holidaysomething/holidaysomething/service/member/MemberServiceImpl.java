@@ -38,6 +38,16 @@ public class MemberServiceImpl implements MemberService {
     return members;
   }
 
+  /**
+   * 현재 로그인 된 userId로 유저의 모든 정보를 찾는다.
+   * https://stackoverflow.com/a/49317013/8962314
+   */
+  @Override
+  public Member getCurrentMemberInfo(Long userId) {
+    return memberRepository.findById(userId)
+                            .orElse(null);
+  }
+
   @Override
   @Transactional(readOnly = true)
   public Member findMemberByLoginId(String loginId) {
