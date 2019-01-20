@@ -1,4 +1,4 @@
-package com.holidaysomething.holidaysomething.controller;
+package com.holidaysomething.holidaysomething.config;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;

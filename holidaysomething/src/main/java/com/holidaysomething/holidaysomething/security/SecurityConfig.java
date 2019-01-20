@@ -110,7 +110,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .usernameParameter("loginId").passwordParameter("password")
 //        .defaultSuccessUrl("/user/after")
         .successHandler(successHandler()) // 로그인 이전 페이지로 이동할때 사용.
-        .failureUrl("/user/login?errors=true");
+        .failureUrl("/user/login?error=true");
 
 //    http.csrf().disable();
 
@@ -128,7 +128,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
         .logoutSuccessUrl("/")
         .invalidateHttpSession(true) // logout 시 모든 세션을 없애주는건가?
+        .deleteCookies("JSESSIONID") // remember me?? 쿠키 삭제하는것도 써줘야할듯.
         .permitAll();
+
+    http
+        .rememberMe()
+        .key("uniqueAndSecret")
+        .rememberMeParameter("remember-me")
+        .tokenValiditySeconds(70000);
+    // key 는 토큰의 내용을 생성할 때 사용한다는데....? 뭔말인지....?
+    // 기본값은 2주인데 여기서 바꿀 수 있다.
 
     log.info("======= 끝");
 
