@@ -20,10 +20,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 /**
  * @author choijaeyong on 18/01/2019.
@@ -137,7 +141,7 @@ public class LoginController {
 
 
   @GetMapping("/temp")
-  public String tempMethod(HttpSession httpSession) {
+  public String tempMethod(HttpSession httpSession, ModelMap model) {
     if (httpSession.getAttribute("LOGINUSER") == null) {
       log.info("======================== 세션 null");
     }
@@ -166,13 +170,16 @@ public class LoginController {
     log.info("loginUser.getId() : " + loginUser.getId());
     log.info("loginUser.getUsername() : " + loginUser.getUsername());
 
+    model.addAttribute("id", member.getId());
+    model.addAttribute("username", member.getUsername());
+    model.addAttribute("nickname", member.getNickname());
+    log.info("======= httpSession.getCreationTime() : " + httpSession.getCreationTime());
+    log.info("=======  httpSession.getLastAccessedTime() : " + httpSession.getLastAccessedTime());
+
     return "user/temp";
   }
 
-  @DeleteMapping
-  public String logout() {
-    log.info("==== 이 메소드 불러와지나??");
-    return null;
-  }
+//  @ExceptionHandler(NoHandlerFoundException.class)
+
 
 }
