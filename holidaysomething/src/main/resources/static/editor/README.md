@@ -1,1 +1,0 @@
-﻿# SmartEditor2

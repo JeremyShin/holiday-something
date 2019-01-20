@@ -5,52 +5,194 @@
   <title>이미지 업로드</title>
 </head>
 <body>
-<h1>이미지 업로드</h1>
+<!--<h1>이미지 업로드</h1>-->
 
-<form method="post" id="insertBoardFrm" action="/admin/product/image" enctype="multipart/form-data">
-  <h4>메인 이미지 업로드</h4>
-  <input type="file" name="mainImages" placeholder="파일 선택" multiple><br>
-  <h4>설명 이미지 업로드</h4>
-  <input type="file" name="descriptionImages" placeholder="파일 선택" multiple><br><br>
+<!--<form method="post" id="insertBoardFrm" action="/admin/product/image" enctype="multipart/form-data">-->
+  <!--<h4>메인 이미지 업로드</h4>-->
+  <!--<input type="file" name="mainImages" placeholder="파일 선택" multiple><br>-->
+  <!--<h4>설명 이미지 업로드</h4>-->
+  <!--<input type="file" name="descriptionImages" placeholder="파일 선택" multiple><br><br>-->
 
-  <h4>Naver Smart Editor 연동 테스트</h4>
-  <textarea name="editor" id="editor" style="width: 700px; height: 400px;"></textarea>
-  <input type="button" id="insertBoard" value="등록" /><br><br>
+  <!--<h4>Editor 연동 테스트</h4>-->
+  <!--<textarea name="editor" id="editor" style="width: 700px; height: 400px;"></textarea>-->
+  <!--<input type="button" id="insertBoard" value="등록" /><br><br>-->
 
-  <!-- TODO 버튼은 위와 아래 둘 중 하나만 남겨놔야 함!! ** 잊지 말자 ** -->
-  <input type="submit">
-</form>
+  <!--<input type="submit">-->
+<!--</form>-->
 
-<script src="/editor/js/HuskyEZCreator.js" type="text/javascript"></script>
-<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
 
-<script type="text/javascript">
-    $(function(){
-        //전역변수
-        var obj = [];
-        //스마트에디터 프레임생성
-        nhn.husky.EZCreator.createInIFrame({
-            oAppRef: obj,
-            elPlaceHolder: "editor",
-            sSkinURI: "editor/SmartEditor2Skin.html",
-            htParams : {
-                // 툴바 사용 여부
-                bUseToolbar : true,
-                // 입력창 크기 조절바 사용 여부
-                bUseVerticalResizer : true,
-                // 모드 탭(Editor | HTML | TEXT) 사용 여부
-                bUseModeChanger : true,
-            }
-        });
-        //전송버튼
-        $("#insertBoard").click(function(){
-            //id가 smarteditor인 textarea에 에디터에서 대입
-            obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
-            //폼 submit
-            $("#insertBoardFrm").submit();
-        });
-    });
-</script>
+  <div class="jumbotron">
+    <h1>상품 등록 폼</h1>
+  </div>
 
+  <div class="container">
+
+    <tbody>
+    <form>
+    <!--<tr>-->
+    <!--<th>작성자: </th>-->
+    <!--<td><label th:text="${user.name}" class="form-row"></label></td>-->
+    <!--</tr>-->
+    <tr>
+      <th>제목: </th>
+      <td><input type="text" size="100px" placeholder="제목을 입력하세요." id="inputTitle" class="form-control"/></td>
+    </tr>
+    <tr>
+      <div id="editSection">
+      </div>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <input type="button" id="saveBtn" value="등록" class="btn btn-primary btn-small"/>
+        <input type="reset" id="resetBtn" value="reset" class="btn btn-outline-dark btn-small"/>
+        <!--<a class="btn btn-outline-dark btn-small" th:href="@{/boards}">목록보기</a>-->
+      </td>
+    </tr>
+    </form>
+    </tbody>
+
+  </div>
+
+
+
+
+<!-- Editor JS -->
+<th:block layout:fragment="html_head">
+  <script src="/editor/jquery/dist/jquery.js"></script>
+  <script src="/editor/tui-code-snippet/dist/tui-code-snippet.js"></script>
+  <script src="/editor/markdown-it/dist/markdown-it.js"></script>
+  <script src="/editor/to-mark/dist/to-mark.js"></script>
+  <script src="/editor/codemirror/lib/codemirror.js"></script>
+  <script src="/editor/highlightjs/highlight.pack.js"></script>
+  <script src="/editor/squire-rte/build/squire-raw.js"></script>
+  <script src="/editor/tui-editor/dist/tui-editor-Editor-all.js"></script>
+  <link rel="stylesheet" href="/editor/codemirror/lib/codemirror.css">
+  <link rel="stylesheet" href="/editor/highlightjs/styles/github.css">
+  <link rel="stylesheet" href="/editor/tui-editor/dist/tui-editor.css">
+  <link rel="stylesheet" href="/editor/tui-editor/dist/tui-editor-contents.css">
+
+  <title>상품 등록 폼</title>
+
+  <style type="text/css">
+    .te-md-container .CodeMirror {
+      font-size: 14px;
+    }
+    .tui-editor-contents {
+      font-size: 14px;
+    }
+  </style>
+
+  <script>
+      (function(root, factory) {
+          if (typeof define === 'function' && define.amd) {
+              define(['tui-editor'], factory);
+          } else if (typeof exports === 'object') {
+              factory(require('tui-editor'));
+          } else {
+              factory(root['tui']['Editor']);
+          }
+      })(this, function(Editor) {
+          // define youtube extension
+          Editor.defineExtension('youtube', function() {
+              // runs while markdown-it transforms code block to HTML
+              Editor.codeBlockManager.setReplacer('youtube', function(youtubeId) {
+                  console.log('sadfasdfasfd' + youtubeId);
+                  // Indentify multiple code blocks
+                  var wrapperId = 'yt' + Math.random().toString(36).substr(2, 10);
+                  // avoid sanitizing iframe tag
+                  setTimeout(renderYoutube.bind(null, wrapperId, youtubeId), 0);
+                  return '<div id="' + wrapperId + '"></div>';
+              });
+          });
+          function renderYoutube(wrapperId, youtubeId) {
+              var el = document.querySelector('#' + wrapperId);
+              el.innerHTML = '<iframe width="820" height="630" src="https://www.youtube.com/embed/' + youtubeId + '"  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+          }
+      });
+
+      $(document).ready(function () {
+          $('#editSection').tuiEditor({
+              initialEditType: 'markdown',
+              previewStyle: 'vertical',
+              height: 500,
+              exts: ['youtube'],
+              // codeBlockLanguages: ['java', 'PHP', 'javascript'],
+              hooks: {
+                  'addImageBlobHook': function(blob, saveImage) {
+                      console.log(blob);
+                      console.log(blob.name);
+                      //이미지 블롭을 이용해 서버 연동 후 콜백실행
+                      //callback('이미지URL');
+                      var fd = new FormData();
+                      fd.append('fname', blob.name);
+                      fd.append('data', blob);
+                      $.ajax({
+                          type: 'POST',
+                          url: '/api/image-files',
+                          data: fd,
+                          processData: false,
+                          contentType: false
+                      }).done(function(data) {
+                          saveImage(data); // 저장된 실제 URL 을 넘긴다.
+                      });
+                  }
+              }
+          });
+
+          $('#saveBtn').click(function(){
+              if($("#inputTitle").val().trim() == ''){
+                  alert('제목을 입력하세요.');
+                  return;
+              }
+              if($("#editSection").tuiEditor("getValue").trim() == ''){
+                  alert('내용을 입력하세요.');
+                  return;
+              }
+              write($("#inputTitle").val(), $("#editSection").tuiEditor("getValue"));
+          });
+
+          $('#resetBtn').click(function () {
+              $("#inputTitle").val('');
+              $("#editSection").tuiEditor("setValue", "");
+              $("#inputTitle").focus();
+          });
+
+          $('#inputTitle').keydown(function(e) {
+              var code = e.keyCode || e.which;
+
+              if (code === 9) {
+                  e.preventDefault();
+                  $("#editSection").tuiEditor("focus");
+              }
+          });
+
+
+          function write(title, content){
+              var JSONObject= {
+                  "title" : title,
+                  "content" : content
+              };
+              var jsonData = JSON.stringify( JSONObject );
+              $.ajax({
+                  // url : '/api/boards/${categoryId}/write',
+                  url : '/api/boards',
+                  method : 'post',
+                  data : jsonData,
+                  dataType: "json",
+                  contentType: "application/json",
+                  success : function (data) {
+                      alert('등록되었습니다. OK');
+                      console.log(data);
+                      // $(location).attr('href','/boards/${categoryId}/list');
+                      $(location).attr('href','/boards');
+                  },
+                  error : function (err) {
+                      console.log(err.toString());
+                  }
+              });
+          }
+      });
+  </script>
+</th:block>
 </body>
 </html>
