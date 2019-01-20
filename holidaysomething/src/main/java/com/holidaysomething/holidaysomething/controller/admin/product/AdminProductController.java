@@ -2,10 +2,12 @@ package com.holidaysomething.holidaysomething.controller.admin.product;
 
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
+import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.dto.ProductAddDto;
 import com.holidaysomething.holidaysomething.service.fileupload.ImageStreamService;
 import com.holidaysomething.holidaysomething.service.product.ProductAddService;
+import com.holidaysomething.holidaysomething.service.product.ProductImageService;
 import com.holidaysomething.holidaysomething.service.product.ProductOptionService;
 import com.holidaysomething.holidaysomething.service.product.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +23,9 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +39,7 @@ public class AdminProductController {
     private final ProductService productService;
     private final ProductOptionService productOptionService;
     private final ProductAddService productAddService;
+    private final ProductImageService productImageService;
     private final ImageStreamService imageStreamService;
 
     @GetMapping
@@ -103,10 +108,27 @@ public class AdminProductController {
     @PostMapping("/image")
     public String productImagePost(MultipartFile[] mainImages,
                                    MultipartFile[] descriptionImages) {
-        imageStreamService.save(mainImages);
-        imageStreamService.save(descriptionImages);
+//        imageStreamService.save(mainImages);
+//        imageStreamService.save(descriptionImages);
 
         return "redirect:/admin/product/search";
+    }
+
+    @GetMapping("/image-files/{fileName}")
+    @ResponseBody
+    public void handleFileUpload(@PathVariable("fileName") String fileName,
+                                 HttpServletResponse response) {
+
+        ProductImage productImage = productImageService.getProductImage(fileName);
+
+        response.setContentLengthLong(productImage.getSize());
+        response.setContentType(productImage.getFileType());
+
+        try {
+            imageStreamService.readAndWrite(productImage.getPath() + productImage.getStoredFileName(), response.getOutputStream());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping("/search")

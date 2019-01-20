@@ -7,7 +7,7 @@
 <body>
 <!--<h1>이미지 업로드</h1>-->
 
-<!--<form method="post" id="insertBoardFrm" action="/admin/product/image" enctype="multipart/form-data">-->
+<!--<form method="post" action="/admin/product/image" enctype="multipart/form-data">-->
   <!--<h4>메인 이미지 업로드</h4>-->
   <!--<input type="file" name="mainImages" placeholder="파일 선택" multiple><br>-->
   <!--<h4>설명 이미지 업로드</h4>-->
@@ -128,7 +128,7 @@
                       fd.append('data', blob);
                       $.ajax({
                           type: 'POST',
-                          url: '/api/image-files',
+                          url: '/admin/product/image-files/api',
                           data: fd,
                           processData: false,
                           contentType: false

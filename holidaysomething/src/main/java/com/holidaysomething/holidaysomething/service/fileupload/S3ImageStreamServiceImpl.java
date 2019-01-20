@@ -11,7 +11,9 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -37,46 +39,78 @@ public class S3ImageStreamServiceImpl implements ImageStreamService {
     private String dirName;
 
     @Override
-    public void save(MultipartFile[] multipartFiles) {
-        for (MultipartFile multipartFile : multipartFiles) {
-            // 멀티플 업로드를 설정하면 파일을 올리지 않아도 쓰레기 파일이 날라와서 걸러내기 위함...
-            if (!multipartFile.getOriginalFilename().isEmpty()) {
-                ObjectMetadata objectMetadata = new ObjectMetadata();
-                objectMetadata.setContentType(multipartFile.getContentType());
-                objectMetadata.setContentLength(multipartFile.getSize());
+    public String save(MultipartFile multipartFile) {
+//        for (MultipartFile multipartFile : multipartFiles) {
+        // 멀티플 업로드를 설정하면 파일을 올리지 않아도 쓰레기 파일이 날라와서 걸러내기 위함...
+//        if (!multipartFile.getOriginalFilename().isEmpty()) {
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentType(multipartFile.getContentType());
+        objectMetadata.setContentLength(multipartFile.getSize());
 
-                // 일단 해당 폴더 이하에서만 파일을 읽을 수 있도록 있도록 권한을 설정하였음.(다른 곳에 올리면 못 읽어요!!)
-                // 근데 다른 곳에 올릴 수는 있어요...
-                String path = dirName + "/images";
-                String storedFileName = UUID.randomUUID().toString();
+        // 일단 해당 폴더 이하에서만 파일을 읽을 수 있도록 있도록 권한을 설정하였음.(다른 곳에 올리면 못 읽어요!!)
+        // 근데 다른 곳에 올릴 수는 있어요...
+        String path = dirName + "/images";
+        String storedFileName = UUID.randomUUID().toString();
 
-                String fileKey = path + "/" + storedFileName;
+        String fileKey = path + "/" + storedFileName;
 
+        try {
+            amazonS3Client.putObject(bucket, fileKey, multipartFile.getInputStream(), objectMetadata);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String url = amazonS3Client.getUrl(bucket, fileKey).toString();
+        String urlPath = url.substring(0, url.length() - storedFileName.length());
+
+        ProductImage productImage = new ProductImage();
+        productImage.setOriginalFileName(multipartFile.getOriginalFilename());
+        productImage.setFileType(multipartFile.getContentType());
+        productImage.setPath(urlPath);
+        productImage.setStoredFileName(storedFileName);
+        productImage.setRegDate(LocalDateTime.now());
+        productImage.setSize(multipartFile.getSize());
+
+        // Category 1 = Main Image
+        // Category 2 = Description Image
+        if (multipartFile.getName().equals("mainImages")) {
+            productImage.setCategory(1L);
+        } else
+            productImage.setCategory(2L);
+
+        productRepository.save(productImage);
+
+        return productImage.getStoredFileName();
+        }
+
+    @Override
+    public void readAndWrite(String saveFileName, OutputStream out) {
+        FileInputStream in = null;
+        int readCount = 0;
+        byte[] buffer = new byte[1024];
+        try{
+            in = new FileInputStream(saveFileName);
+            while((readCount = in.read(buffer)) != -1){
+                out.write(buffer, 0, readCount);
+            }
+        }catch(Exception ex){
+            throw new RuntimeException(ex.getMessage());
+        }finally {
+            if(in != null){
                 try {
-                    amazonS3Client.putObject(bucket, fileKey, multipartFile.getInputStream(), objectMetadata);
+                    in.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                String url = amazonS3Client.getUrl(bucket, fileKey).toString();
-                String urlPath = url.substring(0, url.length() - storedFileName.length());
-
-                ProductImage productImage = new ProductImage();
-                productImage.setOriginalFileName(multipartFile.getOriginalFilename());
-                productImage.setFileType(multipartFile.getContentType());
-                productImage.setPath(urlPath);
-                productImage.setStoredFileName(storedFileName);
-                productImage.setRegDate(LocalDateTime.now());
-                productImage.setSize(multipartFile.getSize());
-
-                // Category 1 = Main Image
-                // Category 2 = Description Image
-                if (multipartFile.getName().equals("mainImages")) {
-                    productImage.setCategory(1L);
-                } else
-                    productImage.setCategory(2L);
-
-                productRepository.save(productImage);
             }
-        }
+            if(out != null){
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } // finally
     }
+//    }
+//    }
 }

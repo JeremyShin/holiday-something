@@ -28,7 +28,7 @@ public class DevImageStreamServiceImpl implements ImageStreamService {
 
     @Override
     @Transactional
-    public void save(MultipartFile[] multipartFiles) {
+    public String save(MultipartFile multipartFile) {
 
 
         Calendar cal = Calendar.getInstance();
@@ -36,45 +36,77 @@ public class DevImageStreamServiceImpl implements ImageStreamService {
         File uploadDir = new File(path);
         uploadDir.mkdirs();
 
-        for (MultipartFile multipartFile : multipartFiles) {
-            if (!multipartFile.getOriginalFilename().isEmpty()) {
+//        for (MultipartFile multipartFile : multipartFiles) {
+//            if (!multipartFile.getOriginalFilename().isEmpty()) {
 
-                log.info("======Save Start!!========");
-                log.info(multipartFile.getName());
-                log.info("==========================");
+        log.info("======Save Start!!========");
+        log.info(multipartFile.getName());
+        log.info("==========================");
 
-                String storedFileName = UUID.randomUUID().toString();
+        String storedFileName = UUID.randomUUID().toString();
 
-                try (
-                        InputStream in = multipartFile.getInputStream();
-                        OutputStream out = new FileOutputStream(path + storedFileName)
-                ) {
-                    byte[] buffer = new byte[1024];
-                    int readCount = 0;
-                    while ((readCount = in.read(buffer)) != -1) {
-                        out.write(buffer, 0, readCount);
-                    }
-                } catch (IOException ioe) {
-                    throw new RuntimeException(ioe.getMessage());
-                }
-
-                ProductImage productImage = new ProductImage();
-                productImage.setOriginalFileName(multipartFile.getOriginalFilename());
-                productImage.setFileType(multipartFile.getContentType());
-                productImage.setPath(path);
-                productImage.setStoredFileName(storedFileName);
-                productImage.setRegDate(LocalDateTime.now());
-                productImage.setSize(multipartFile.getSize());
-
-                // Category 1 = Main Image
-                // Category 2 = Description Image
-                if (multipartFile.getName().equals("mainImages")) {
-                    productImage.setCategory(1L);
-                } else
-                    productImage.setCategory(2L);
-
-                productRepository.save(productImage);
+        try (
+                InputStream in = multipartFile.getInputStream();
+                OutputStream out = new FileOutputStream(path + storedFileName)
+        ) {
+            byte[] buffer = new byte[1024];
+            int readCount = 0;
+            while ((readCount = in.read(buffer)) != -1) {
+                out.write(buffer, 0, readCount);
             }
+        } catch (IOException ioe) {
+            throw new RuntimeException(ioe.getMessage());
         }
+
+        ProductImage productImage = new ProductImage();
+        productImage.setOriginalFileName(multipartFile.getOriginalFilename());
+        productImage.setFileType(multipartFile.getContentType());
+        productImage.setPath(path);
+        productImage.setStoredFileName(storedFileName);
+        productImage.setRegDate(LocalDateTime.now());
+        productImage.setSize(multipartFile.getSize());
+
+        // Category 1 = Main Image
+        // Category 2 = Description Image
+        if (multipartFile.getName().equals("mainImages")) {
+            productImage.setCategory(1L);
+        } else
+            productImage.setCategory(2L);
+
+        productRepository.save(productImage);
+
+        return productImage.getStoredFileName();
+    }
+
+    @Override
+    public void readAndWrite(String saveFileName, OutputStream out) {
+        FileInputStream in = null;
+        int readCount = 0;
+        byte[] buffer = new byte[1024];
+        try{
+            in = new FileInputStream(saveFileName);
+            while((readCount = in.read(buffer)) != -1){
+                out.write(buffer, 0, readCount);
+            }
+        }catch(Exception ex){
+            throw new RuntimeException(ex.getMessage());
+        }finally {
+            if(in != null){
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(out != null){
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } // finally
     }
 }
+//    }
+//}
