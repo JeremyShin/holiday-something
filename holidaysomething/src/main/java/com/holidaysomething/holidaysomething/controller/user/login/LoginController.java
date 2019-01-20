@@ -46,7 +46,11 @@ public class LoginController {
   private final BCryptPasswordEncoder passwordEncoder;
 
   @GetMapping("/login")
-  public String loginForm(HttpServletRequest req) {
+  public String loginForm(HttpSession httpSession) {
+    if (httpSession.getAttribute("LOGINUSER") != null) {
+      log.info("==== 이미 로그인유저 세션이 있으면(로그인되어 있는 상태라면)!?");
+      return "redirect:/";
+    }
 
     return "user/login/login-form";
   }
