@@ -28,6 +28,8 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
     HttpSession session = request.getSession();
     log.info("============ session : " + session);
     log.info("============ session : " + session.getId());
+    log.info(
+        "============ 세팅전 session.getMaxInactiveInterval() : " + session.getMaxInactiveInterval());
     log.info("authentication.getPrincipal() : " + authentication.getPrincipal());
     log.info("authentication.getAuthorities().size() : " + authentication.getAuthorities().size());
     // 아래 결과에도 세션이 포함되어 있는데 . 이 세션과 위에 세션 아이디가 다르다.
@@ -42,12 +44,18 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
     if (principal.getUsername().equals("root")) {
       log.info("root니까 이전페이지 말고 유저,백오피스 선택할 수 있는 페이지로 갈게!");
       session.setAttribute("LOGINUSER", principal);
+      session.setMaxInactiveInterval(1500);
+      log.info(
+          "====== session.setMaxInactiveInterval(1500) 추가직후 : " + session.getMaxInactiveInterval());
       log.info("======== session 추가 직후 :   " + session.getAttribute("LOGINUSER"));
       getRedirectStrategy().sendRedirect(request, response, "/user/after");
       return;
     } else {
       log.info("root 외의 유저.   / 로 가즈아.");
       session.setAttribute("LOGINUSER", principal);
+      session.setMaxInactiveInterval(1500);
+      log.info(
+          "====== session.setMaxInactiveInterval(1500) 추가직후 : " + session.getMaxInactiveInterval());
       log.info("======== session 추가 직후 :   " + session.getAttribute("LOGINUSER"));
       getRedirectStrategy().sendRedirect(request, response, "/");
       return;
