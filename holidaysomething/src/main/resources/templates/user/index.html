@@ -12,6 +12,12 @@
   <title id="pageTitle">Page title</title>
   <!-- other elements you want to reference in your layout -->
 </head>
+  
+  <form method='POST' th:action="@{/user/add}">
+  <input type="submit" value="임시회원등록">
+</form>
+
+<a href="/user/temp"><h1>temp</h1></a>
 
 
 <!--<th:block layout:fragment="css">-->

@@ -1,6 +1,7 @@
 package com.holidaysomething.holidaysomething.service.member;
 
 import com.holidaysomething.holidaysomething.domain.Member;
+import com.holidaysomething.holidaysomething.domain.Role;
 import com.holidaysomething.holidaysomething.dto.MemberMileageDto;
 import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchDto;
@@ -25,4 +26,11 @@ public interface MemberService {
   
   Page<OrderMemberDto> findMembersBySearchingInQuerydsl(
       SearchOrderMemberDto searchOrderMemberDto, Pageable pageable);
+
+  /************** User *************/
+  void addMember(Member member);
+
+  // 나중에 불필요.테스트용으로 만드는거.
+  void addRole(Role role);
+
 }

@@ -1,12 +1,14 @@
 package com.holidaysomething.holidaysomething.service.member;
 
 import com.holidaysomething.holidaysomething.domain.Member;
+import com.holidaysomething.holidaysomething.domain.Role;
 import com.holidaysomething.holidaysomething.dto.MemberMileageDto;
 import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.SearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.holidaysomething.holidaysomething.repository.MemberRepository;
+import com.holidaysomething.holidaysomething.repository.RoleRepository;
 import com.querydsl.core.Tuple;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ public class MemberServiceImpl implements MemberService {
 
   private final MemberRepository memberRepository;
 
+  private final RoleRepository roleRepository;
+
   @Override
   @Transactional(readOnly = true)
   public Page<Member> findAllOrSearch(SearchDto searchDto, Pageable pageable) {
@@ -41,6 +45,7 @@ public class MemberServiceImpl implements MemberService {
   @Override
   @Transactional(readOnly = true)
   public Member findMemberByLoginId(String loginId) {
+    log.info("============== loginId : " + loginId);
     return memberRepository.findMemberByLoginId(loginId);
   }
 
@@ -113,6 +118,20 @@ public class MemberServiceImpl implements MemberService {
         new PageImpl<>(orderMemberDtoList, pageable, totalElements);
 
     return orderMemberDtoPage;
+  }
+
+  /***************************** User *******************************/
+  @Override
+  @Transactional
+  public void addMember(Member member) {
+    memberRepository.save(member);
+  }
+
+  @Override
+  @Transactional
+  public void addRole(Role role) {
+    roleRepository.save(role);
+
   }
 
 }

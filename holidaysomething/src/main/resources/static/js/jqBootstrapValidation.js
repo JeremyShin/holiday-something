@@ -17,7 +17,7 @@
 			prependExistingHelpBlock: false,
 			sniffHtml: true, // sniff for 'required', 'maxlength', etc
 			preventSubmit: true, // stop the form submit event from firing if validation fails
-			submitError: false, // function called if there is an error when trying to submit
+      submitError: false, // function called if there is an errors when trying to submit
 			submitSuccess: false, // function called just before a successful submit event is sent to the server
             semanticallyStrict: false, // set to true to tidy up generated HTML output
 			autoAdd: {
@@ -55,7 +55,7 @@
             if (
               $controlGroup.hasClass("has-warning")
             ) {
-              $controlGroup.removeClass("has-warning").addClass("has-error");
+              $controlGroup.removeClass("has-warning").addClass("has-errors");
               warningsFound++;
             }
           });
@@ -66,12 +66,12 @@
             if (settings.options.preventSubmit) {
               e.preventDefault();
             }
-            $form.addClass("has-error");
+            $form.addClass("has-errors");
             if ($.isFunction(settings.options.submitError)) {
               settings.options.submitError($form, e, $inputs.jqBootstrapValidation("collectErrors", true));
             }
           } else {
-            $form.removeClass("has-error");
+            $form.removeClass("has-errors");
             if ($.isFunction(settings.options.submitSuccess)) {
               settings.options.submitSuccess($form, e);
             }
@@ -473,7 +473,8 @@
               // Were there any errors?
               if (errorsFound.length) {
                 // Better flag it up as a warning.
-                $controlGroup.removeClass("has-success has-error").addClass("has-warning");
+                $controlGroup.removeClass("has-success has-errors").addClass(
+                    "has-warning");
 
                 // How many errors did we find?
                 if (settings.options.semanticallyStrict && errorsFound.length === 1) {
@@ -486,7 +487,7 @@
                     ( settings.options.prependExistingHelpBlock ? $helpBlock.data("original-contents") : "" ));
                 }
               } else {
-                $controlGroup.removeClass("has-warning has-error has-success");
+                $controlGroup.removeClass("has-warning has-errors has-success");
                 if (value.length > 0) {
                   $controlGroup.addClass("has-success");
                 }
