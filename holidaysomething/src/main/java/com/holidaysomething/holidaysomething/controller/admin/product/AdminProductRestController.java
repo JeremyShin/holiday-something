@@ -96,7 +96,7 @@ public class AdminProductRestController {
   }
 
   @PostMapping("/add/api")
-  public ResponseEntity productAddPost(
+  public void productAddPost(
           @Valid @RequestBody ProductAddDto productAddDto,
           BindingResult bindingResult, ModelMap model) {
 
@@ -119,9 +119,6 @@ public class AdminProductRestController {
       productAddDto.setRegDate(LocalDateTime.now());
 
       productAddService.productRegister(productAddDto);
-
-
     }
-    return new ResponseEntity<>(HttpStatus.OK);
   }
 }

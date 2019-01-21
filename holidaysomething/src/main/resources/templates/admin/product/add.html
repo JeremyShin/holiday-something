@@ -344,12 +344,12 @@
                       "releaseDate" : releaseDate
                   };
                   let jsonData = JSON.stringify( JSONObject );
-                  let result = $.ajax({
+                  $.ajax({
                       // url : '/api/boards/${categoryId}/write',
                       url: '/admin/product/add/api',
                       method: 'post',
                       data: jsonData,
-                      dataType: "json",
+                      dataType: "text",
                       contentType: "application/json",
                       success: function (data) {
                           alert('등록되었습니다. OK');
