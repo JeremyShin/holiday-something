@@ -153,6 +153,10 @@
                  th:errors="*{productDetail}">input is incorrect</label>
         </div>
 
+        <!-- Editor -->
+          <div id="editSection">
+          </div>
+
         <div>
           <label>제조일 : </label>
           <input name="manufactureDate" type="datetime-local" placeholder="Manufacture Date"
@@ -199,6 +203,146 @@
 
 
     </form>
+
+    <!-- Editor JS -->
+    <th:block layout:fragment="html_head">
+      <script src="/editor/jquery/dist/jquery.js"></script>
+      <script src="/editor/tui-code-snippet/dist/tui-code-snippet.js"></script>
+      <script src="/editor/markdown-it/dist/markdown-it.js"></script>
+      <script src="/editor/to-mark/dist/to-mark.js"></script>
+      <script src="/editor/codemirror/lib/codemirror.js"></script>
+      <script src="/editor/highlightjs/highlight.pack.js"></script>
+      <script src="/editor/squire-rte/build/squire-raw.js"></script>
+      <script src="/editor/tui-editor/dist/tui-editor-Editor-all.js"></script>
+      <link rel="stylesheet" href="/editor/codemirror/lib/codemirror.css">
+      <link rel="stylesheet" href="/editor/highlightjs/styles/github.css">
+      <link rel="stylesheet" href="/editor/tui-editor/dist/tui-editor.css">
+      <link rel="stylesheet" href="/editor/tui-editor/dist/tui-editor-contents.css">
+
+      <title>상품 등록 폼</title>
+
+      <style type="text/css">
+        .te-md-container .CodeMirror {
+          font-size: 14px;
+        }
+        .tui-editor-contents {
+          font-size: 14px;
+        }
+      </style>
+
+      <script>
+          (function(root, factory) {
+              if (typeof define === 'function' && define.amd) {
+                  define(['tui-editor'], factory);
+              } else if (typeof exports === 'object') {
+                  factory(require('tui-editor'));
+              } else {
+                  factory(root['tui']['Editor']);
+              }
+          })(this, function(Editor) {
+              // define youtube extension
+              Editor.defineExtension('youtube', function() {
+                  // runs while markdown-it transforms code block to HTML
+                  Editor.codeBlockManager.setReplacer('youtube', function(youtubeId) {
+                      console.log('sadfasdfasfd' + youtubeId);
+                      // Indentify multiple code blocks
+                      var wrapperId = 'yt' + Math.random().toString(36).substr(2, 10);
+                      // avoid sanitizing iframe tag
+                      setTimeout(renderYoutube.bind(null, wrapperId, youtubeId), 0);
+                      return '<div id="' + wrapperId + '"></div>';
+                  });
+              });
+              function renderYoutube(wrapperId, youtubeId) {
+                  var el = document.querySelector('#' + wrapperId);
+                  el.innerHTML = '<iframe width="820" height="630" src="https://www.youtube.com/embed/' + youtubeId + '"  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+              }
+          });
+
+          $(document).ready(function () {
+              $('#editSection').tuiEditor({
+                  initialEditType: 'markdown',
+                  previewStyle: 'vertical',
+                  height: 500,
+                  exts: ['youtube'],
+                  // codeBlockLanguages: ['java', 'PHP', 'javascript'],
+                  hooks: {
+                      'addImageBlobHook': function(blob, saveImage) {
+                          console.log(blob);
+                          console.log(blob.name);
+                          //이미지 블롭을 이용해 서버 연동 후 콜백실행
+                          //callback('이미지URL');
+                          var fd = new FormData();
+                          fd.append('fname', blob.name);
+                          fd.append('data', blob);
+                          $.ajax({
+                              type: 'POST',
+                              url: '/admin/product/image-files/api',
+                              data: fd,
+                              processData: false,
+                              contentType: false
+                          }).done(function(data) {
+                              saveImage(data); // 저장된 실제 URL 을 넘긴다.
+                          });
+                      }
+                  }
+              });
+
+              $('#saveBtn').click(function(){
+                  if($("#inputTitle").val().trim() == ''){
+                      alert('제목을 입력하세요.');
+                      return;
+                  }
+                  if($("#editSection").tuiEditor("getValue").trim() == ''){
+                      alert('내용을 입력하세요.');
+                      return;
+                  }
+                  write($("#inputTitle").val(), $("#editSection").tuiEditor("getValue"));
+              });
+
+              $('#resetBtn').click(function () {
+                  $("#inputTitle").val('');
+                  $("#editSection").tuiEditor("setValue", "");
+                  $("#inputTitle").focus();
+              });
+
+              $('#inputTitle').keydown(function(e) {
+                  var code = e.keyCode || e.which;
+
+                  if (code === 9) {
+                      e.preventDefault();
+                      $("#editSection").tuiEditor("focus");
+                  }
+              });
+
+
+              function write(title, content){
+                  var JSONObject= {
+                      "title" : title,
+                      "content" : content
+                  };
+                  var jsonData = JSON.stringify( JSONObject );
+                  $.ajax({
+                      // url : '/api/boards/${categoryId}/write',
+                      url : '/api/boards',
+                      method : 'post',
+                      data : jsonData,
+                      dataType: "json",
+                      contentType: "application/json",
+                      success : function (data) {
+                          alert('등록되었습니다. OK');
+                          console.log(data);
+                          // $(location).attr('href','/boards/${categoryId}/list');
+                          $(location).attr('href','/boards');
+                      },
+                      error : function (err) {
+                          console.log(err.toString());
+                      }
+                  });
+              }
+          });
+      </script>
+    </th:block>
+
   </div>
 
 </div>
