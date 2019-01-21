@@ -1,5 +1,7 @@
 package com.holidaysomething.holidaysomething.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "CART_PRODUCT")
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id")
 public class CartProduct {
 
   @Id

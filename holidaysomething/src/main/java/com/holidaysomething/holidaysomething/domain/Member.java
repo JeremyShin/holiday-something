@@ -1,7 +1,9 @@
 package com.holidaysomething.holidaysomething.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.time.LocalDateTime;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -10,9 +12,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -22,6 +26,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Setter
 @Entity
 @Table(name = "MEMBER")
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id")
+// @JsonIdentityInfo: Bidirectional(양방향) 관계 무한 loop을 방지하기 위함. 반대편 Entity에도 써줘야 한다.
+// https://www.baeldung.com/jackson-bidirectional-relationships-and-infinite-recursion
 public class Member {
 
   @Id
@@ -87,12 +96,17 @@ public class Member {
   @Column(length = 10, nullable = false)
   private String sex;
 
-//  @Column(updatable = false, nullable = false)
-//  private LocalDate regdate;
-
   @OneToMany(mappedBy = "member")
+  @JsonIgnore // 마이페이지 메인에서는 일단 필요 없어서 ignore 처리
   private Set<CartProduct> cartProducts;
 
   @OneToMany(mappedBy = "member")
   private List<Order> orders;
+
+
+  @ManyToMany
+  @JoinTable(name = "member_role",
+      joinColumns = @JoinColumn(name = "member_id", referencedColumnName = "id"),
+      inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+  private Set<Role> roles;
 }
