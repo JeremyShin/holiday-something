@@ -1,7 +1,8 @@
 package com.holidaysomething.holidaysomething.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +23,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Setter
 @Entity
 @Table(name = "MEMBER")
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id")
+// @JsonIdentityInfo: Bidirectional(양방향) 관계 무한 loop을 방지하기 위함. 반대편 Entity에도 써줘야 한다.
+// https://www.baeldung.com/jackson-bidirectional-relationships-and-infinite-recursion
 public class Member {
 
   @Id
@@ -88,10 +94,9 @@ public class Member {
   private String sex;
 
   @OneToMany(mappedBy = "member")
-  @JsonIgnore // ignore하지 않을 경우 순환참조(무한 재귀; Infinite recursion) 발생
+  @JsonIgnore // 마이페이지 메인에서는 일단 필요 없어서 ignore 처리
   private Set<CartProduct> cartProducts;
 
   @OneToMany(mappedBy = "member")
-  @JsonIgnore // ignore하지 않을 경우 순환참조(무한 재귀; Infinite recursion) 발생
   private List<Order> orders;
 }

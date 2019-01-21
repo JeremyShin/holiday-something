@@ -16,7 +16,7 @@ class MainContent extends Component {
     return (
       <MainContentWrapper>
         <MainContentHeader user={user} />
-        <RecentOrder />
+        <RecentOrder user={user} />
       </MainContentWrapper>
     );
   }

@@ -5,6 +5,7 @@ const MainContentHeaderWrapper = styled.div`
   height: 135px;
   background-color: #303032;
   margin-bottom: 45px;
+  padding: 10px 20px;
   color: white;
 `;
 

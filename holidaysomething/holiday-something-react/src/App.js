@@ -7,7 +7,7 @@ import MainContent from './components/MainContent/MainContent';
 
 const MainWrapper = styled.div`
   display: flex;
-  margin-top: 30px;
+  margin-top: 40px;
 `;
 
 class App extends Component {
@@ -31,7 +31,7 @@ class App extends Component {
 
   _callApi = () => {
     // 현재 로그인 되어 있는 user의 id를 가져와서 사용하는 것으로 변경해야 한다.
-    return fetch('http://localhost:8080/api/user?id=2')
+    return fetch('http://localhost:8080/api/user?id=3')
     .then(response => response.json())
     .then(json => json)
     .catch(err => console.error(err))
