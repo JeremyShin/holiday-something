@@ -66,7 +66,7 @@
     <!-- End(카테고리)-->
 
     <!-- th:field="*{product.productOptions.description}" 이런식으로 해도 된다는데... 실패했었음.-->
-    <form onsubmit="return validate()" action="#" th:action="@{/admin/product/add}" method="post"
+    <form
           th:object="${product}">
 
       <!-- Start(현재 선택한 카테고리가 무엇인지 보여주는 부분) -->
@@ -96,6 +96,23 @@
                  placeholder="Product Name">
           <label th:if="${#fields.errors('name')}" th:errors="*{name}">input is incorrect</label>
         </div>
+
+        <!--<div>-->
+          <!--<label th:class="${#fields.hasErrors('productDetail')} ? 'fieldError'">상품 설명-->
+            <!--: </label>-->
+          <!--<input name="productDetail" th:field="*{productDetail}" id="inputDescription"-->
+                 <!--th:class="${#fields.hasErrors('productDetail')} ? 'fieldError'"-->
+                 <!--type="text" placeholder="Product Description">-->
+          <!--<label th:if="${#fields.errors('productDetail')}"-->
+                 <!--th:errors="*{productDetail}">input is incorrect</label>-->
+        <!--</div>-->
+        <!-- TODO Editor -->
+        <div id="editSection">
+          상품 설명 :
+        </div>
+
+        <br>
+        <br>
         <div>
           <label th:class="${#fields.hasErrors('manufacturer')} ? 'fieldError'">제조사 : </label>
           <input name="manufacturer" th:field="*{manufacturer}" id="inputManufacturer"
@@ -143,19 +160,6 @@
           <label th:if="${#fields.errors('shippingPrice')}" th:errors="*{shippingPrice}">input is
             incorrect</label>
         </div>
-        <div>
-          <label th:class="${#fields.hasErrors('productDetail')} ? 'fieldError'">상품 설명
-            : </label>
-          <input name="productDetail" th:field="*{productDetail}" id="inputDescription"
-                 th:class="${#fields.hasErrors('productDetail')} ? 'fieldError'"
-                 type="text" placeholder="Product Description">
-          <label th:if="${#fields.errors('productDetail')}"
-                 th:errors="*{productDetail}">input is incorrect</label>
-        </div>
-
-        <!-- Editor -->
-          <div id="editSection">
-          </div>
 
         <div>
           <label>제조일 : </label>
@@ -178,7 +182,7 @@
 
         <div>
           <label>적립금 : </label>
-          <input name="mileage" type="text" placeholder="Mileage">
+          <input name="mileage" type="text" placeholder="Mileage" id="inputMileage">
         </div>
         <div>
           <label th:class="${#fields.hasErrors('quantity')} ? 'fieldError'">재고??? : </label>quantity
@@ -189,14 +193,14 @@
         </div>
         <div>
           <label>안전재고?? : </label>
-          <input name="safeQuantity" type="text" placeholder="Safe Quantity">
+          <input name="safeQuantity" type="text" placeholder="Safe Quantity" id="inputSafeQuantity">
         </div>
         <div>
           <label>화면에 바로 보여줄거에요? </label>
-          <input name="display" type="checkbox">
+          <input name="display" type="checkbox" id="checkDisplay">
         </div>
         <div>
-          <input type="submit" text="상품등록">
+          <input type="button" id="saveBtn" value="상품등록">
         </div>
 
       </div>
@@ -287,55 +291,74 @@
                   }
               });
 
+              // $('#resetBtn').click(function () {
+              //     // $("#inputTitle").val('');
+              //     $("#editSection").tuiEditor("setValue", "");
+              //     $("#editSection").focus();
+              //     // $("#inputTitle").focus();
+              // });
+
+              // $('#inputTitle').keydown(function(e) {
+              //     var code = e.keyCode || e.which;
+              //
+              //     if (code === 9) {
+              //         e.preventDefault();
+              //         $("#editSection").tuiEditor("focus");
+              //     }
+              // });
+
               $('#saveBtn').click(function(){
-                  if($("#inputTitle").val().trim() == ''){
-                      alert('제목을 입력하세요.');
-                      return;
-                  }
+                  // if($("#inputTitle").val().trim() == ''){
+                  //     alert('제목을 입력하세요.');
+                  //     return;
+                  // }
                   if($("#editSection").tuiEditor("getValue").trim() == ''){
                       alert('내용을 입력하세요.');
                       return;
                   }
-                  write($("#inputTitle").val(), $("#editSection").tuiEditor("getValue"));
+                  // TODO write 함수 호출
+                  write($("#editSection").tuiEditor("getValue"), $("#categoryId2").val(), $("#inputName").val(), $("#inputCode").val(), $("#inputOriginalPrice").val(),
+                      $("#inputSellingPrice").val(), $("#inputManufacturingPrice").val(), $("#inputManufacturer").val(), $("#inputShippingPrice").val(),
+                      $("#inputQuantity").val(), $("#inputSafeQuantity").val(), $("#inputMileage").val(), $("#checkDisplay").prop('checked'),
+                      $("#inputDate1").val(), $("#inputDate2").val());
               });
 
-              $('#resetBtn').click(function () {
-                  $("#inputTitle").val('');
-                  $("#editSection").tuiEditor("setValue", "");
-                  $("#inputTitle").focus();
-              });
-
-              $('#inputTitle').keydown(function(e) {
-                  var code = e.keyCode || e.which;
-
-                  if (code === 9) {
-                      e.preventDefault();
-                      $("#editSection").tuiEditor("focus");
-                  }
-              });
-
-
-              function write(title, content){
-                  var JSONObject= {
-                      "title" : title,
-                      "content" : content
+              function write(content, productCategoryId, name, code, originalPrice, sellingPrice, manufacturingPrice, manufacturer, shippingPrice, quantity,
+                             safeQuantity, mileage, display, manufactureDate, releaseDate){
+                  let JSONObject= {
+                      // "title" : title,
+                      "productCategoryId" : productCategoryId,
+                      "name" : name,
+                      "productDetail" : content,
+                      "code" : code,
+                      "originalPrice" : originalPrice,
+                      "sellingPrice" : sellingPrice,
+                      "manufacturingPrice" : manufacturingPrice,
+                      "manufacturer" : manufacturer,
+                      "shippingPrice" : shippingPrice,
+                      "quantity": quantity,
+                      "safeQuantity" : safeQuantity,
+                      "mileage" : mileage,
+                      "display" : display,
+                      "manufactureDate" : manufactureDate,
+                      "releaseDate" : releaseDate
                   };
-                  var jsonData = JSON.stringify( JSONObject );
-                  $.ajax({
+                  let jsonData = JSON.stringify( JSONObject );
+                  let result = $.ajax({
                       // url : '/api/boards/${categoryId}/write',
-                      url : '/api/boards',
-                      method : 'post',
-                      data : jsonData,
+                      url: '/admin/product/add/api',
+                      method: 'post',
+                      data: jsonData,
                       dataType: "json",
                       contentType: "application/json",
-                      success : function (data) {
+                      success: function (data) {
                           alert('등록되었습니다. OK');
                           console.log(data);
                           // $(location).attr('href','/boards/${categoryId}/list');
-                          $(location).attr('href','/boards');
+                          $(location).attr('href','/admin/product/');
                       },
-                      error : function (err) {
-                          console.log(err.toString());
+                      error: function (err) {
+                          console.log(err);
                       }
                   });
               }
