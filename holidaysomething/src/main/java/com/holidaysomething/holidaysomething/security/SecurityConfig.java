@@ -2,6 +2,8 @@ package com.holidaysomething.holidaysomething.security;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -75,6 +77,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        .antMatchers(
 //            "/resources/**",
 //            "/static/**", "/css/**", "/js/**", "/img/**", "/webjars/**");
+
+    web.ignoring()
+        .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+        .requestMatchers(new AntPathRequestMatcher("/**.html"))
+        .requestMatchers(new AntPathRequestMatcher("/static/**"));
+
   }
 
   /*

@@ -5,19 +5,19 @@
       xml:th="http:/www.thymeleaf.org"
       layout:decorate="~{layout/user-default.html}">
 
-<head>
-  <title id="pageTitle">골라골라</title>
+<head th:include="fragments/config :: configFragment">
+  <title id="pageTitle">back or main</title>
+  <!-- other elements you want to reference in your layout -->
 </head>
 
-<body>
+<div layout:fragment="userTitle">
 
-<a href="/admin/product">백오피스로</a>
+  <a href="/admin/product">백오피스로</a>
 
-<br/>
+  <br/>
 
-<a href="/">메인화면으로</a>
+  <a href="/">메인화면으로</a>
 
-</body>
-
+</div>
 
 </html>

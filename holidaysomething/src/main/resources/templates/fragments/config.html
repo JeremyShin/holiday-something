@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
-  <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/main.css}"/>
+  <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/main.css}"/>
   <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Noto+Sans+KR:400,700"
         rel="stylesheet"/>
 
@@ -29,8 +29,8 @@
   <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
-  <script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
+  <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+  <script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
 
   <!-- 사용자 스크립트 영역이 들어감 -->
   <th:block layout:fragment="script"></th:block>
