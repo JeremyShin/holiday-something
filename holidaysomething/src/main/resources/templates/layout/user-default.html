@@ -3,17 +3,20 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
   <head th:replace="fragments/config :: configFragment"></head>
-
-  <header th:replace="fragments/header :: userHeaderFragment"></header>
-
-  <div id="container">
-    <div
-        layout:fragment="content"
-        id="dashboard">
-    </div>
+  <div>
+    <header th:replace="fragments/header :: userHeaderFragment"></header>
   </div>
 
-  <!--<body th:replace="fragments/config :: configFragment"></body>-->
-  <!--<footer th:replace="fragments/footer:: footerFragment"></footer>-->
+  <div>
+    <div layout:fragment="userTitle" class="user-dashboard"> <div>...</div> </div>
+  </div>
+
+  <div>
+    <div layout:fragment="userContents"></div>
+  </div>
+
+  <footer th:replace="fragments/footer:: userFooterFragment"></footer>
+
+<!--  <body th:replace="fragments/config :: configFragment"></body>-->
 
 </html>

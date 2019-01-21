@@ -21,9 +21,11 @@
 </header>
 
 <header th:fragment="userHeaderFragment" id="userHeader">
+
   <div class="nav">
+    <div id="container">
     <!--메인페이지에서 상품명 검색-->
-    <div style="float: left; width: 33%; padding:10px;">
+    <div class="user-header" style="order: 1;">
       <div>
         <form action="/search" method="get">
           <input type="hidden" name="type" value="product">
@@ -31,29 +33,51 @@
         </form>
       </div>
     </div>
+
     <!--로고-->
-    <div style="float: left; width: 33%; padding:10px; text-align: center;">
+    <div class="user-header" style="order: 2;">
       <div>
         <a href="/"><Img src="/img/logo.png" alt="앗!로고가 없네요." width="100px" height="100px"></a>
       </div>
     </div>
 
-    <div style="float: left; width: 33%; padding:10px;">
+    <!--회원가입, 로그인, 장바구니-->
+    <div class="user-header" style="order: 3;">
       <div>
-        <div style="float: left; width: 33%; padding:10px; text-align: center;">
+
+        <div class="user-header">
           <a href="/user/signup"> signup </a>
         </div>
 
-        <div style="float: left; width: 33%; padding:10px; text-align: center;">
-          <a href="/user/login"> signin </a>
+        <div class="user-header">
+          <a href="/user/login"> login </a>
         </div>
 
-        <div style="float: left; width: 33%; padding:10px; text-align: center;">
+        <div class="user-header">
           <a href="/user/cart"> cart </a>
         </div>
+
       </div>
     </div>
+    </div>
+
+    <!--카테고리-->
+    <div >
+      <div class="user-header-category"><a href="/">STATIONERY </a> </div>
+      <div class="user-header-category"><a href="/"> D.I.Y </a></div>
+      <div class="user-header-category"><a href="/"> FASHION </a></div>
+      <div class="user-header-category"><a href="/"> DESIGN </a></div>
+      <div class="user-header-category"><a href="/"> SOAP </a></div>
+    </div>
+
+
+
   </div>
+
+
+
+
+
 </header>
 
 

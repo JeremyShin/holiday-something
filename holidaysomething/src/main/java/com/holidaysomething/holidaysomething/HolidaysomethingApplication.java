@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /*
  * Member 도메인에서 LocalDateTime을 사용하기 위해서 삽입(Spring Data JPA 1.8 이상부터 사용 가능하다.
@@ -15,10 +17,16 @@ import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
         basePackages = {"com.holidaysomething.holidaysomething.domain"}) // basePackages도 추가로 반드시 지정해줘야 한다
 @SpringBootApplication
 //@EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class})
-public class HolidaysomethingApplication {
+public class HolidaysomethingApplication implements WebMvcConfigurer {
+
 
   public static void main(String[] args) {
-
     SpringApplication.run(HolidaysomethingApplication.class, args);
+  }
+
+  @Override
+  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    registry.addResourceHandler("/static/**") // resource handler를 추가, 이 url에 접근시 handler가 trigger됨
+        .addResourceLocations("classpath:/templates/public/static/");  // resource의 위치를 추가한다.
   }
 }
