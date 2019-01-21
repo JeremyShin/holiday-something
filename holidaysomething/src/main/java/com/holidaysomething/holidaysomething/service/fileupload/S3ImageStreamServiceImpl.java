@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.service.fileupload;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.S3Object;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -49,10 +51,10 @@ public class S3ImageStreamServiceImpl implements ImageStreamService {
 
         // 일단 해당 폴더 이하에서만 파일을 읽을 수 있도록 있도록 권한을 설정하였음.(다른 곳에 올리면 못 읽어요!!)
         // 근데 다른 곳에 올릴 수는 있어요...
-        String path = dirName + "/images";
+        String path = dirName + "/images/";
         String storedFileName = UUID.randomUUID().toString();
 
-        String fileKey = path + "/" + storedFileName;
+        String fileKey = path + storedFileName;
 
         try {
             amazonS3Client.putObject(bucket, fileKey, multipartFile.getInputStream(), objectMetadata);
@@ -80,21 +82,26 @@ public class S3ImageStreamServiceImpl implements ImageStreamService {
         productRepository.save(productImage);
 
         return productImage.getStoredFileName();
-        }
+    }
 
     @Override
     public void readAndWrite(String saveFileName, OutputStream out) {
-        FileInputStream in = null;
+        String filekey = saveFileName.substring(saveFileName.lastIndexOf(dirName));
+
+        S3Object s3Object = amazonS3Client.getObject(bucket, filekey);
+
+        InputStream in = s3Object.getObjectContent();
+
         int readCount = 0;
         byte[] buffer = new byte[1024];
-        try{
-            in = new FileInputStream(saveFileName);
-            while((readCount = in.read(buffer)) != -1){
+
+        try {
+            while ((readCount = in.read(buffer)) != -1) {
                 out.write(buffer, 0, readCount);
             }
-        }catch(Exception ex){
+        } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
-        }finally {
+        } finally {
             if(in != null){
                 try {
                     in.close();
@@ -109,7 +116,7 @@ public class S3ImageStreamServiceImpl implements ImageStreamService {
                     e.printStackTrace();
                 }
             }
-        } // finally
+        }
     }
 //    }
 //    }
