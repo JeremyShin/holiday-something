@@ -27,7 +27,7 @@ public class MemberAddServiceImpl implements MemberAddService{
         member.setPassword(memberAddDto.getPassword());
         member.setEmail(memberAddDto.getEmail());
         member.setName(memberAddDto.getName());
-        member.setNickname(memberAddDto.getNickName());
+        member.setNickname(memberAddDto.getNickname());
         member.setPhone(memberAddDto.getPhone());
         member.setBirthday(memberAddDto.getBirthday());
         member.setPostcode(memberAddDto.getPostcode());

@@ -13,7 +13,7 @@ public class MemberAddDto {
     private String password;
     private String email;
     private String name;
-    private String nickName;
+    private String nickname;
     private String phone;
     private int mileage;
     private Date birthday;

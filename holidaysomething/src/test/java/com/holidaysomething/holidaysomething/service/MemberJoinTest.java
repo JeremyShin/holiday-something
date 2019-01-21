@@ -39,7 +39,7 @@ public class MemberJoinTest {
         m.setMarketing(true);
         m.setMileage(0);
         m.setName("존맛탱");
-        m.setNickName("mattaeng-e");
+        m.setNickname("mattaeng-e");
         m.setPassword("1234");
         m.setPersonalInfo(false);
         m.setPhone("010-0011-0101");
