@@ -1,10 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.springframework.org/schema/data/jaxb"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout/default.html}">
+
 <head>
     <meta charset="UTF-8">
     <title>welcome</title>
 </head>
 <body>
-<h1>회원가입 화면입니다!</h1>
+<h1>SIGN UP</h1>
+<div>
+    <label>아이디 : </label>
+    <input name="loginId" th:field="*{loginId}" id="loginId"
+           placeholder="이름을 입력해주세요.">
+</div>
+<div>
+    <label>비밀번호 : </label>
+    <input name="password" th:field="*{password}" id="password"
+           placeholder="이름을 입력해주세요.">
+</div>
+<div>
+    <label>이메일 : </label>
+    <input name="email" th:field="*{email}" id="email"
+           placeholder="이메일을 입력해주세요.">
+</div>
+<div>
+    <label>이름 : </label>
+    <input name="name" th:field="*{name}" id="inputName"
+           placeholder="이름을 입력해주세요.">
+</div>
+<div>
+    <label>별명 : </label>
+    <input name="nickName" th:field="*{nickName}" id="nickName"
+           placeholder="별명을 입력해주세요.">
+</div>
+<div>
+    <label>전화번호 : </label>
+    <input name="phoneNumber" th:field="*{phoneNumber}" id="phoneNumber"
+           placeholder="전화번호를 입력해주세요.">
+</div>
+<div>
+    <label>생년월일 : </label>
+    <input name="birthDay" th:field="*{birthDay}" id="birthDay"
+           placeholder="생년월일을 입력해주세요.">
+</div>
+<div>
+    <label>우편번호 : </label>
+    <input name="postcode" th:field="*{postcode}" id="postcode"
+           placeholder="우편번호를 입력해주세요.">
+</div>
+<div>
+    <label>주소 : </label>
+    <input name="address1" th:field="*{address1}" id="address1"
+           placeholder="주소를 입력해주세요.">
+</div>
+<div>
+    <label>상세주소 : </label>
+    <input name="address2" th:field="*{address2}" id="address2"
+           placeholder="상세주소를 입력해주세요.">
+</div>
+<div>
+    <label>이메일 수신여부</label>
+    <input name="receiveEmail" type="checkbox">
+</div>
+<div>
+    <label>SMS 수신여부</label>
+    <input name="receiveSms" type="checkbox">
+</div>
+<div>
+    <label>마케팅 정보 제공 수신여부</label>
+    <input name="marketing" type="checkbox">
+</div>
+<div>
+    <label>개인정보 활용동의</label>
+    <input name="personalInfo" type="checkbox">
+</div>
+
+<div>
+    <label>추천인 : </label>
+    <input name="recommender" th:field="*{recommender}" id="recommender"
+           placeholder="추천인을 입력해주세요.">
+</div>
+<div>
+    <label>성별 : </label>
+    <input name="sex" th:field="*{sex}" id="sex"
+           placeholder="성별을 입력해주세요.">
+</div>
+
+<div>
+    <input type="submit" text="가입하기">
+</div>
+
 </body>
 </html>
