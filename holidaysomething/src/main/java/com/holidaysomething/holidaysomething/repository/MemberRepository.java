@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.repository;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Order;
+import com.holidaysomething.holidaysomething.dto.AddOrderMemberDto;
 import com.holidaysomething.holidaysomething.repository.custom.MemberRepositoryCustom;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -74,4 +75,7 @@ public interface MemberRepository extends JpaRepository<Member, Long>, MemberRep
 
   // member search by loginId
   Member findMemberByLoginId(String loginId);
+
+  // 주문 페이지에서 member search by id
+  Member findMemberById(Long id);
 }

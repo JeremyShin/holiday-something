@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.service.member;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Role;
+import com.holidaysomething.holidaysomething.dto.AddOrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.MemberMileageDto;
 import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
@@ -144,4 +145,16 @@ public class MemberServiceImpl implements MemberService {
 
   }
 
+  @Override
+  public AddOrderMemberDto findMemberById(Long id) {
+    AddOrderMemberDto addOrderMemberDto = new AddOrderMemberDto();
+
+    Member member = memberRepository.findMemberById(id);
+
+    addOrderMemberDto.setName(member.getName());
+    addOrderMemberDto.setPhone(member.getPhone());
+    addOrderMemberDto.setEmail(member.getEmail());
+
+    return addOrderMemberDto;
+  }
 }
