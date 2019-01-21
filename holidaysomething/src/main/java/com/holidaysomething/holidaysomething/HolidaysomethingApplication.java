@@ -23,6 +23,4 @@ public class HolidaysomethingApplication {
   public static void main(String[] args) {
     SpringApplication.run(HolidaysomethingApplication.class, args);
   }
-
-
 }
