@@ -17,10 +17,11 @@ public interface MemberService {
 
   Member findMemberByLoginId(String loginId);
 
+  Member getCurrentMemberInfo(Long userId);
+
   void updateMember(MemberMileageDto memberMileageDto);
 
   Page<Member> findAllOrSearch(SearchDto searchDto, Pageable pageable);
-
 
   Page<Member> searchMembers(MemberSearchDto memberSearchDto, Pageable pageable);
   

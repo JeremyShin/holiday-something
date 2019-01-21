@@ -1,5 +1,7 @@
 package com.holidaysomething.holidaysomething.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +20,9 @@ import org.hibernate.annotations.CreationTimestamp;
 @Table(name = "ORDERS")
 @Getter
 @Setter
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id")
 public class Order {
 
   @Id

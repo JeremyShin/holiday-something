@@ -27,6 +27,6 @@ public class HolidaysomethingApplication implements WebMvcConfigurer {
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
     registry.addResourceHandler("/static/**") // resource handler를 추가, 이 url에 접근시 handler가 trigger됨
-        .addResourceLocations("classpath:/templates/public/static/");  // resource의 위치를 추가한다.
+        .addResourceLocations("classpath:/static/", "classpath:/templates/public/static/");  // resource의 위치를 추가한다.
   }
 }
