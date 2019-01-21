@@ -100,20 +100,8 @@ public class AdminProductController {
 
     }
 
-    @GetMapping("/image")
-    public String productImage() {
-        return "admin/product/image";
-    }
 
-    @PostMapping("/image")
-    public String productImagePost(MultipartFile[] mainImages,
-                                   MultipartFile[] descriptionImages) {
-//        imageStreamService.save(mainImages);
-//        imageStreamService.save(descriptionImages);
-
-        return "redirect:/admin/product/search";
-    }
-
+     // Tui editor 사용 시 이미지 미리보기 기능
     @GetMapping("/image-files/{fileName}")
     @ResponseBody
     public void handleFileUpload(@PathVariable("fileName") String fileName,
