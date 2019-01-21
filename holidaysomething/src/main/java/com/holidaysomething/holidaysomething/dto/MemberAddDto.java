@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.dto;
 
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -16,7 +17,7 @@ public class MemberAddDto {
     private String nickname;
     private String phone;
     private int mileage;
-    private Date birthday;
+    private LocalDate birthday;
     private String postcode;
     private String address1;
     private String address2;

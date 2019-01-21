@@ -45,7 +45,7 @@ public class MemberAddController {
 
         memberAddDto.setRegDate(LocalDateTime.now());
         memberAddDto.setLastLogin(LocalDateTime.now());
-        memberAddDto.setBirthday(Date.from(Instant.now()));
+        memberAddDto.setBirthday(LocalDate.now());
         memberAddService.memberRegister(memberAddDto);
 
         return "redirect:/user/join";
