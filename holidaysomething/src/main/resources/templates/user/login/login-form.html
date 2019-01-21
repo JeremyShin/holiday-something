@@ -5,8 +5,8 @@
       xml:th="http:/www.thymeleaf.org"
       layout:decorate="~{layout/user-default.html}">
 
-<head th:include="fragments/header :: userHeaderFragment">
-  <title id="pageTitle">Login</title>
+<head th:include="fragments/config :: configFragment">
+  <title id="pageTitle">login form</title>
 </head>
 
 <!-- 사용자 CSS 추가 -->
@@ -15,7 +15,7 @@
 </th:block>
 
 
-<div layout:fragment="content">
+<div layout:fragment="userContents">
   <th:block layout:fragment="script">
 
   </th:block>
@@ -53,9 +53,6 @@
 
 
 </div>
-
-
-</body>
 
 
 </html>

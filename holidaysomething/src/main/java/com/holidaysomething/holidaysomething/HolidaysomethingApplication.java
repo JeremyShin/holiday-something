@@ -17,16 +17,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
         basePackages = {"com.holidaysomething.holidaysomething.domain"}) // basePackages도 추가로 반드시 지정해줘야 한다
 @SpringBootApplication
 //@EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class})
-public class HolidaysomethingApplication implements WebMvcConfigurer {
-
+public class HolidaysomethingApplication {
+// implements WebMvcConfigurer
 
   public static void main(String[] args) {
     SpringApplication.run(HolidaysomethingApplication.class, args);
-  }
-
-  @Override
-  public void addResourceHandlers(ResourceHandlerRegistry registry) {
-    registry.addResourceHandler("/static/**") // resource handler를 추가, 이 url에 접근시 handler가 trigger됨
-        .addResourceLocations("classpath:/static/", "classpath:/templates/public/static/");  // resource의 위치를 추가한다.
   }
 }

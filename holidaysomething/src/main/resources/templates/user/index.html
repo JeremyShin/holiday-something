@@ -12,17 +12,17 @@
   <title id="pageTitle">Page title</title>
   <!-- other elements you want to reference in your layout -->
 </head>
-  
-  <form method='POST' th:action="@{/user/add}">
-  <input type="submit" value="임시회원등록">
-</form>
-
-<a href="/user/temp"><h1>temp</h1></a>
 
 
 <!--<th:block layout:fragment="css">-->
 <!--</th:block>-->
 <div layout:fragment="userTitle">
+
+  <form method='POST' th:action="@{/user/add}">
+    <input type="submit" value="임시회원등록">
+  </form>
+
+  <a href="/user/temp"><h1>temp</h1></a>
 
   <!--Carousel-->
   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -35,12 +35,12 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active ">
-        <img src="/static/img/cup.png" alt="공사중,,," >
+        <img src="/static/img/cup.png" alt="공사중,,,">
         <div class="carousel-caption">
         </div>
       </div>
       <div class="item">
-        <img src="/static/img/rainbow2.jpg" alt="공사중,,," >
+        <img src="/static/img/rainbow2.jpg" alt="공사중,,,">
         <div class="carousel-caption">
         </div>
       </div>
