@@ -28,7 +28,7 @@ class RecentOrder extends Component {
               return (
                 <tr key={order.id}>
                   <td>{order.date}</td>
-                  <td></td>
+                  <td>{order.orderedProduct[0].product.name}</td>
                   <td>{order.orderNumber}</td>
                   <td>{order.totalPrice}</td>
                 </tr>

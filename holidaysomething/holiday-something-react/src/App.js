@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this._getUser()
+    this._getUser();
   }
 
   // await을 쓰려면 바깥에 async가 있어야 한다
@@ -25,8 +25,8 @@ class App extends Component {
     const user = await this._callApi();
     // await: 위 문장이 끝나기 전까지는(성공하든 실패하든) setState가 실행되지 않는다
     this.setState({
-      user: user,  // "user: user" 와 같은 결과. (이름이 같은 경우)
-    })
+      user: user,
+    });
   };
 
   _callApi = () => {
@@ -34,7 +34,7 @@ class App extends Component {
     return fetch('http://localhost:8080/api/user?id=3')
     .then(response => response.json())
     .then(json => json)
-    .catch(err => console.error(err))
+    .catch(err => console.error(err));
   };
 
   render() {
