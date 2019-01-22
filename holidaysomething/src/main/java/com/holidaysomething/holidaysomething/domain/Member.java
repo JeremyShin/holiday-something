@@ -3,6 +3,7 @@ package com.holidaysomething.holidaysomething.domain;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -59,7 +60,7 @@ public class Member {
   private int mileage;
 
   @Column(nullable = false)
-  private Date birthday;
+  private LocalDate birthday;
 
   @Column(length = 20, nullable = false)
   private String postcode;

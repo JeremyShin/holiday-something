@@ -6,6 +6,7 @@ import com.holidaysomething.holidaysomething.security.MemberUserDetails;
 import com.holidaysomething.holidaysomething.service.member.MemberService;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
@@ -100,8 +101,12 @@ public class LoginController {
     //roleSet.add(role1);
     roleSet.add(role2);
     member.setRoles(roleSet);
-    Date today = new Date();
-    member.setBirthday(today);
+    //LocalDate로 바꾸면서 안들어감 ㅠㅠ
+//    Date today = new Date();
+//    member.setBirthday(today);
+    LocalDate birthday = LocalDate.parse("1991-01-31");
+    member.setBirthday(birthday);
+
 
     memberService.addMember(member);
 
