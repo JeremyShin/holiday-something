@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,10 +40,19 @@ public class MemberAddController {
             @Valid @ModelAttribute(value = "member")MemberAddDto memberAddDto,
             BindingResult bindingResult, ModelMap model){
 
-        memberAddDto.setRegDate(LocalDateTime.now());
-        memberAddDto.setLastLogin(LocalDateTime.now());
-        memberAddService.memberRegister(memberAddDto);
+        if(bindingResult.hasErrors()) {
+            for(ObjectError error : bindingResult.getAllErrors()) {
+                log.info(error.getDefaultMessage());
+            }
+            return "/user/join";
+        } else {
+            memberAddDto.setRegDate(LocalDateTime.now());
+            memberAddDto.setLastLogin(LocalDateTime.now());
+            memberAddService.memberRegister(memberAddDto);
 
-        return "redirect:/user/join";
+            return "redirect:/user/join";
+        }
+
+
     }
 }
