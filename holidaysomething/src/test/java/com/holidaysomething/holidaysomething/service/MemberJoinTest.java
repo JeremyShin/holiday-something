@@ -14,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static org.assertj.core.util.DateUtil.now;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
@@ -33,7 +31,7 @@ public class MemberJoinTest {
 
         m.setAddress1("서울시 중구 퇴계로");
         m.setAddress2("12345");
-        m.setBirthday(LocalDate.now());
+//        m.setBirthday(LocalDate.of(2000, 01, 01));
         m.setEmail("jonmattang@gmail.com");
         m.setLastLogin(LocalDateTime.of(2018, 01, 01, 18, 00));
         m.setLoginId("joan");
@@ -53,6 +51,7 @@ public class MemberJoinTest {
         Member insertedMember = memberAddService.memberRegister(m);
 
         log.info("==============================");
+        log.info(insertedMember.getBirthday());
         log.info(insertedMember.getLoginId());
         log.info(insertedMember.getEmail());
 

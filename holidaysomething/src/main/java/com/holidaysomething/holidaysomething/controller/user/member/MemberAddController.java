@@ -3,7 +3,6 @@ package com.holidaysomething.holidaysomething.controller.user.member;
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.dto.MemberAddDto;
 import com.holidaysomething.holidaysomething.service.member.MemberAddService;
-import com.holidaysomething.holidaysomething.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -15,10 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Controller
 @RequestMapping("/user")
@@ -45,7 +41,6 @@ public class MemberAddController {
 
         memberAddDto.setRegDate(LocalDateTime.now());
         memberAddDto.setLastLogin(LocalDateTime.now());
-        memberAddDto.setBirthday(LocalDate.now());
         memberAddService.memberRegister(memberAddDto);
 
         return "redirect:/user/join";

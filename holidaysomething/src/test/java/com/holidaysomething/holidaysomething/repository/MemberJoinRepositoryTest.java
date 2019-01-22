@@ -27,7 +27,7 @@ public class MemberJoinRepositoryTest {
 
         m.setAddress1("서울시 중구 퇴계로");
         m.setAddress1("12345");
-        m.setBirthday(LocalDate.now());
+//        m.setBirthday(LocalDate.now());
         m.setEmail("jonmattang@gmail.com");
         m.setLastLogin(LocalDateTime.of(2018, 01, 01, 18, 00));
         m.setLoginId("joan");

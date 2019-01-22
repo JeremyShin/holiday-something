@@ -4,7 +4,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
+
 
 @Data
 public class MemberAddDto {
@@ -17,7 +17,7 @@ public class MemberAddDto {
     private String nickname;
     private String phone;
     private int mileage;
-    private LocalDate birthday;
+    private String birthday;
     private String postcode;
     private String address1;
     private String address2;

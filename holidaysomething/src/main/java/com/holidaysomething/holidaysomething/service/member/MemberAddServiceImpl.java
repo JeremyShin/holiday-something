@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
@@ -29,7 +30,7 @@ public class MemberAddServiceImpl implements MemberAddService{
         member.setName(memberAddDto.getName());
         member.setNickname(memberAddDto.getNickname());
         member.setPhone(memberAddDto.getPhone());
-        member.setBirthday(memberAddDto.getBirthday());
+        member.setBirthday(LocalDate.parse(memberAddDto.getBirthday()));
         member.setPostcode(memberAddDto.getPostcode());
         member.setAddress1(memberAddDto.getAddress1());
         member.setAddress2(memberAddDto.getAddress2());
