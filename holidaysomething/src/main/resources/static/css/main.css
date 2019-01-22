@@ -20,7 +20,7 @@
 }
 
 .header-menu {
-  width: 80px;
+  width: 100px;
   height: 100%;
   text-align: center;
   align-self: center;
@@ -35,7 +35,7 @@
 }
 
 .header-menu {
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 500;
 }
 
