@@ -12,6 +12,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,17 +29,20 @@ public class Product {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+
+  // String은 form 태그 안에 input 에서 아무것도 입력하지 않으면 null 로 처리되는게 안리ㅏ
+  // "" 로 처리된다.
   @Column(length = 100, nullable = false)
   private String name;
 
   @Column(nullable = false)
-  private int originalPrice;
+  private Integer originalPrice;
 
   @Column(nullable = false)
-  private int sellingPrice;
+  private Integer sellingPrice;
 
   @Column(nullable = false)
-  private int manufacturingPrice;
+  private Integer manufacturingPrice;
 
   @Column(nullable = false)
   private String code;
@@ -43,29 +50,32 @@ public class Product {
   @Column(nullable = false)
   private String manufacturer;
 
-  @Column(nullable = false)
-  private int shippingPrice;
+  @Column(nullable = false, columnDefinition = "integer default 0")
+  private Integer shippingPrice;
 
-  @Column(nullable = false)
-  private int quantity;
-
-  @Column(columnDefinition = "integer default 0")
-  private int sellingQuantity;
+  @Column(nullable = false, columnDefinition = "integer default 0")
+  private Integer quantity;
 
   @Column(columnDefinition = "integer default 0")
-  private int safeQuantity;
+  private Integer sellingQuantity;
 
   @Column(columnDefinition = "integer default 0")
-  private int mileage;
+  private Integer safeQuantity;
+
+  @Column(columnDefinition = "integer default 0")
+  private Integer mileage;
 
   private Boolean display;
   private String optionalPriceText;
   private LocalDateTime regDate;
+
+
   private LocalDateTime manufactureDate;
+
+
   private LocalDateTime releaseDate;
 
   @ManyToOne
-  @JoinColumn(name = "product_category_id")
   private ProductCategory productCategory;
 
   @OneToOne

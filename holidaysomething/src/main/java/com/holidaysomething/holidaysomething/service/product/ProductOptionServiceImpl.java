@@ -3,7 +3,7 @@ package com.holidaysomething.holidaysomething.service.product;
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.dto.ProductOptionCommand;
-import com.holidaysomething.holidaysomething.repository.product.ProductOptionRepository;
+import com.holidaysomething.holidaysomething.repository.ProductOptionRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

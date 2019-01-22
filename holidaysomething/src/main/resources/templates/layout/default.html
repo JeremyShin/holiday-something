@@ -7,12 +7,10 @@
   <header th:replace="fragments/header :: headerFragment"></header>
 
   <div id="container">
-    <aside th:replace="fragments/leftNavbar :: leftNavbarFragment"></aside>
-    <div
-        layout:fragment="content"
-        id="dashboard"></div>
+    <aside th:replace="fragments/left-navbar :: leftNavbarFragment"></aside>
+    <div layout:fragment="content"
+        id="dashboard">
+    </div>
   </div>
-
-  <!--<footer th:replace="fragments/footer:: footerFragment"></footer>-->
 
 </html>

@@ -1,4 +1,4 @@
-package com.holidaysomething.holidaysomething.repository.product;
+package com.holidaysomething.holidaysomething.repository;
 
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import java.util.List;

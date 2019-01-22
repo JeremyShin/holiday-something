@@ -2,10 +2,11 @@ package com.holidaysomething.holidaysomething.JDragon.repositoryTest;
 
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductDetail;
-import com.holidaysomething.holidaysomething.repository.product.ProductDetailRepository;
-import com.holidaysomething.holidaysomething.repository.product.ProductRepository;
+import com.holidaysomething.holidaysomething.repository.ProductDetailRepository;
+import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +50,14 @@ public class ProductTest {
     p.setSellingPrice(10000000);
     p.setManufacturingPrice(100);
     p.setShippingPrice(50000);
+    p.setQuantity(10);
     p.setProductDetail(pds);
     // 상품설명과 카테고리는 fk
+    LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
+    LocalDateTime ldt2 = LocalDateTime.of(2018, 11, 25, 00, 00, 00);
+
+    p.setManufactureDate(ldt1);
+    p.setReleaseDate(ldt2);
 
     Product pp = productRepository.save(p);
 
