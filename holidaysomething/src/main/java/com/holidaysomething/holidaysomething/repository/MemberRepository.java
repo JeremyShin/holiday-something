@@ -74,4 +74,7 @@ public interface MemberRepository extends JpaRepository<Member, Long>, MemberRep
 
   // member search by loginId
   Member findMemberByLoginId(String loginId);
+
+  // 멤버를 등록합시다.
+  Member save(Member member);
 }

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.holidaysomething.holidaysomething.JDragon.repositoryTest.MemberTest
+-------------------------------------------------------------------------------
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.196 s - in com.holidaysomething.holidaysomething.JDragon.repositoryTest.MemberTest
