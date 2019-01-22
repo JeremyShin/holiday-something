@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.holidaysomething.holidaysomething.JDragon.serviceTest.ProductOptionServiceTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.075 s - in com.holidaysomething.holidaysomething.JDragon.serviceTest.ProductOptionServiceTest

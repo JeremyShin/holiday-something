@@ -5,8 +5,8 @@
       layout:decorate="~{layout/default.html}">
 
 <head th:include="fragments/config :: configFragment">
-  <title id="pageTitle">Page title</title>
-  <!-- other elements you want to reference in your layout -->
+    <title id="pageTitle">Page title</title>
+    <!-- other elements you want to reference in your layout -->
 </head>
 
 <!--<head th:replace="fragments/config :: configFragment (pageTitle='Product Register')">-->
@@ -20,48 +20,48 @@
 </th:block>
 
 <div layout:fragment="content">
-  <!-- 사용자 스크립트 추가 -->
-  <th:block layout:fragment="script">
-    <script th:src="@{/js/product-add.js}"></script>
-  </th:block>
-  <h1>Product Add</h1>
+    <!-- 사용자 스크립트 추가 -->
+    <th:block layout:fragment="script">
+        <script th:src="@{/js/product-add.js}"></script>
+    </th:block>
+    <h1>Product Add</h1>
 
-  <!--------------------------
-          | Product Registration |
-          -------------------------->
-  <!--  block은 CSS로 크기조절이 가능하고 inline은 안 된다. -->
-  <!--  div 는 기본이 block! -->
+    <!--------------------------
+            | Product Registration |
+            -------------------------->
+    <!--  block은 CSS로 크기조절이 가능하고 inline은 안 된다. -->
+    <!--  div 는 기본이 block! -->
 
-  <div style="display:block; ">
-    <!-- Start(카테코리 출력 부분) (3개의 div) -->
+    <div style="display:block; ">
+        <!-- Start(카테코리 출력 부분) (3개의 div) -->
 
-    <div
-        style='display:inline-block;min-width:900px;position:relative;left:50px;border:1px solid gold;'>
-      <!--<li th:each="category : ${categories}" th:if="${category.parentId == 0 }">-->
-      <!--<span th:attr="data-categoryid=${category.id}" class="span"-->
-      <!--th:onclick="'getCategoryList(' + ${category.id} + ')'"-->
-      <!--th:text="${category.name}"></span>-->
-      <!--</li>-->
+        <div
+                style='display:inline-block;min-width:900px;position:relative;left:50px;border:1px solid gold;'>
+            <!--<li th:each="category : ${categories}" th:if="${category.parentId == 0 }">-->
+            <!--<span th:attr="data-categoryid=${category.id}" class="span"-->
+            <!--th:onclick="'getCategoryList(' + ${category.id} + ')'"-->
+            <!--th:text="${category.name}"></span>-->
+            <!--</li>-->
 
-      <div id="firstCategory" style='display:inline;float:left;width:200px;'>
-        <ul id="firstCategoryUl">
-        </ul>
-      </div>
+            <div id="firstCategory" style='display:inline;float:left;width:200px;'>
+                <ul id="firstCategoryUl">
+                </ul>
+            </div>
 
-      <div id="secondCategory" style='display:inline;float:left;width:200px;'>
-        <ul id="secondCategoryUl">
+            <div id="secondCategory" style='display:inline;float:left;width:200px;'>
+                <ul id="secondCategoryUl">
 
-        </ul>
+                </ul>
 
-      </div>
+            </div>
 
-      <div id="thirdCategory" style='display:inline;float:left;width:200px;'>
-        <ul id="thirdCategoryUl">
+            <div id="thirdCategory" style='display:inline;float:left;width:200px;'>
+                <ul id="thirdCategoryUl">
 
-        </ul>
+                </ul>
 
-      </div>
-
+            </div>
+          
     </div>
     <!-- End(카테고리)-->
 

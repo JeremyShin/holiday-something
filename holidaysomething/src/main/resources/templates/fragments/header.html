@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
 
 <header th:fragment="headerFragment" id="header">
-  <img src="/img/logo.png"/>
+  <img src="/static/img/logo.png"/>
   <a href="/admin/product/">
     <div class="header-menu">상품관리</div>
   </a>
@@ -20,4 +20,56 @@
   </a>
 </header>
 
+<header th:fragment="userHeaderFragment" id="userHeader">
+
+  <div class="nav">
+    <div id="container">
+    <!--메인페이지에서 상품명 검색-->
+    <div class="user-header" style="order: 1;">
+      <div>
+        <form action="/search" method="get">
+          <input type="hidden" name="type" value="product">
+          <input type="search" name="q" value="" placeholder="Search" aria-label="Search" data-instant="attached" autocomplete="off">
+        </form>
+      </div>
+    </div>
+
+    <!--로고-->
+    <div class="user-header" style="order: 2;">
+      <div>
+        <a href="/"><Img src="/static/img/logo.png" alt="앗!로고가 없네요." width="100px" height="100px"></a>
+      </div>
+    </div>
+
+    <!--회원가입, 로그인, 장바구니-->
+    <div class="user-header" style="order: 3;">
+      <div>
+
+        <div class="user-header">
+          <a href="/user/signup"> signup </a>
+        </div>
+
+        <div class="user-header">
+          <a href="/user/login"> login </a>
+        </div>
+
+        <div class="user-header">
+          <a href="/user/cart"> cart </a>
+        </div>
+
+      </div>
+    </div>
+    </div>
+
+    <!--카테고리-->
+    <div >
+      <div class="user-header-category"><a href="/">STATIONERY </a> </div>
+      <div class="user-header-category"><a href="/"> D.I.Y </a></div>
+      <div class="user-header-category"><a href="/"> FASHION </a></div>
+      <div class="user-header-category"><a href="/"> DESIGN </a></div>
+      <div class="user-header-category"><a href="/"> SOAP </a></div>
+    </div>
+
+  </div>
+</header>
 </html>

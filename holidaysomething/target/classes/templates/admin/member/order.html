@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default.html}">
+
+<head th:include="fragments/config :: configFragment">
+  <title id="pageTitle">Page title</title>
+  <!-- other elements you want to reference in your layout -->
+</head>
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+</th:block>
+
+
+<div layout:fragment="content">
+  <!-- 사용자 스크립트 추가 -->
+  <th:block layout:fragment="script">
+    <script th:src="@{/js/member-order.js}"></script>
+  </th:block>
+  <br>
+  <br>
+  <br>
+  <br>
+  <h1> 주문회원 조회 페이지 입니다.</h1>
+
+  <form onsubmit="return validateSearch()" action="#" th:action="@{/admin/member/order/search}"
+        method="get"
+        th:object="${SearchOrderMemberDto}">
+    <table>
+      <tr>
+        <td>이름</td>
+        <td><input id="name" name="name" type="text" placeholder="Name"></td>
+      </tr>
+      <tr>
+        <td>아이디</td>
+        <td><input id="loginId" name="loginId" type="text" placeholder="Id"></td>
+      </tr>
+      <tr>
+        <td th:class="${#fields.hasErrors('productName')} ? 'fieldError'">상품이름</td>
+        <td>
+          <!--<input name="productName" type="text" placeholder="Product Name">-->
+          <input name="productName" th:field="*{productName}" id="productName"
+                 th:class="${#fields.hasErrors('productName')} ? 'fieldError'" type="text"
+                 placeholder="Product Name">
+          <label th:if="${#fields.errors('productName')}" th:errors="*{productName}">input is
+            incorrect</label>
+        </td>
+      </tr>
+      <tr>
+        <td>주문번호</td>
+        <td><input id="orderNumber" name="orderNumber" type="text" placeholder="Order Number"></td>
+      </tr>
+      <tr>
+        <td>주문기간</td>
+        <td>
+          <input id="orderStartDate" name="orderStartDate" type="date"> ~
+          <input id="orderEndDate" name="orderEndDate" type="date">
+        </td>
+      </tr>
+    </table>
+
+    <input type="submit" value="조회">
+  </form>
+
+
+  <!-- search result -->
+  <div
+      th:style="${orderMemberDtoPage == null || orderMemberDtoPage.totalElements == 0 ? 'display:none' : 'display:block'}"
+      style="margin-left: 50px;" id="memberList">
+
+    <div style="width: fit-content;" class="tbl-container">
+
+      <table id="product-option-list-tbl">
+        <colgroup>
+          <col style="width:50px;"/>
+          <col style="width:auto;"/>
+          <col style="width:auto;"/>
+          <col style="width:auto;"/>
+          <col style="width:auto;"/>
+          <col style="width:auto;"/>
+          <col style="width:auto;"/>
+          <col style="width:auto;"/>
+          <col style="width:auto;"/>
+        </colgroup>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>LoginId</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Nickname</th>
+          <th>Phone</th>
+          <th>Birthday</th>
+          <th>Recent OrderDate</th>
+          <th>Recent OrderNumber</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="orderMemberDto : ${orderMemberDtoPage != null ? orderMemberDtoPage : orderMemberDtoPage}"
+            class="orderMemberDtoPageTr">
+          <td th:text="${orderMemberDto.member.id}">###</td>
+          <td th:text="${orderMemberDto.member.loginId}">###</td>
+          <td th:text="${orderMemberDto.member.name}">###</td>
+          <td th:text="${orderMemberDto.member.email}">###</td>
+          <td th:text="${orderMemberDto.member.nickname}">###</td>
+          <td th:text="${orderMemberDto.member.phone}">###</td>
+          <!--<td th:text="${orderMemberDto.member.birthday}">###</td>-->
+          <td th:text="${#dates.format(orderMemberDto.member.birthday,'yyyy-MM-dd')}">###</td>
+          <!--<td th:text="${orderMemberDto.date}">###</td>-->
+          <td th:text="${#temporals.format(orderMemberDto.date , 'yyyy-MM-dd HH:mm:ss')}">###</td>
+          <td th:text="${orderMemberDto.orderNumber}">###</td>
+        </tr>
+        </tbody>
+      </table>
+
+
+
+      <!-- 검색된 상품 페이징 처리 -->
+      <div
+          th:if="${SearchOrderMemberDto.isEmpty() == false && orderMemberDtoPage != null && orderMemberDtoPage.totalElements > 0}"
+          id="searchPage-numbers"
+          th:with="startPageNum=${T(Math).floor(orderMemberDtoPage.number/5)} * 5 + 1, endPageNum=(${orderMemberDtoPage.totalPages} > ${startPageNum} + 4) ? ${startPageNum} + 4 : ${orderMemberDtoPage.totalPages}">
+        <!-- 처음 페이지로 -->
+        <label th:if="(!${orderMemberDtoPage.first})">
+          <a th:href="@{'/admin/member/order/search?page=0'
+           + '&name=' + ${SearchOrderMemberDto.name} + '&loginId=' + ${SearchOrderMemberDto.loginId}
+           + '&productName=' + ${SearchOrderMemberDto.productName} + '&orderNumber=' + ${SearchOrderMemberDto.orderNumber}
+           + '&orderStartDate=' + ${SearchOrderMemberDto.orderStartDate} + '&orderEndDate=' + ${SearchOrderMemberDto.orderEndDate}}">
+            << </a>
+        </label>
+
+        <!-- 이전 블럭 페이지로 -->
+        <label th:if="${startPageNum} != 1">
+          <a th:href="@{'/admin/member/order/search?page=' + ${orderMemberDtoPage.number - 2}
+           + '&name=' + ${SearchOrderMemberDto.name} + '&loginId=' + ${SearchOrderMemberDto.loginId}
+           + '&productName=' + ${SearchOrderMemberDto.productName} + '&orderNumber=' + ${SearchOrderMemberDto.orderNumber}
+           + '&orderStartDate=' + ${SearchOrderMemberDto.orderStartDate} + '&orderEndDate=' + ${SearchOrderMemberDto.orderEndDate}}">
+            < </a>
+        </label>
+        <!-- 페이지 목록 -->
+        <th:block th:each="page : ${#numbers.sequence(startPageNum, endPageNum)}">
+          <a th:href="@{'/admin/member/order/search?page=' + ${page - 1}
+           + '&name=' + ${SearchOrderMemberDto.name} + '&loginId=' + ${SearchOrderMemberDto.loginId}
+           + '&productName=' + ${SearchOrderMemberDto.productName} + '&orderNumber=' + ${SearchOrderMemberDto.orderNumber}
+           + '&orderStartDate=' + ${SearchOrderMemberDto.orderStartDate} + '&orderEndDate=' + ${SearchOrderMemberDto.orderEndDate}}"><span
+              th:text="${page}"></span></a>
+
+          </a>
+        </th:block>
+        <!-- 다음 블럭 페이지로 -->
+        <label
+            th:if="${orderMemberDtoPage.totalPages} < 5 ? false : ${startPageNum} != ${orderMemberDtoPage.totalPages - 4}">
+          <a th:href="@{'/admin/member/order/search?page=' + ${endPageNum}
+           + '&name=' + ${SearchOrderMemberDto.name} + '&loginId=' + ${SearchOrderMemberDto.loginId}
+           + '&productName=' + ${SearchOrderMemberDto.productName} + '&orderNumber=' + ${SearchOrderMemberDto.orderNumber}
+           + '&orderStartDate=' + ${SearchOrderMemberDto.orderStartDate} + '&orderEndDate=' + ${SearchOrderMemberDto.orderEndDate}}">
+            > </a>
+        </label>
+
+        <!-- 마지막 페이지로 -->
+        <label th:if="!${orderMemberDtoPage.last}">
+          <a th:href="@{'/admin/member/order/search?page=' + ${orderMemberDtoPage.totalPages-1}
+           + '&name=' + ${SearchOrderMemberDto.name} + '&loginId=' + ${SearchOrderMemberDto.loginId}
+           + '&productName=' + ${SearchOrderMemberDto.productName} + '&orderNumber=' + ${SearchOrderMemberDto.orderNumber}
+           + '&orderStartDate=' + ${SearchOrderMemberDto.orderStartDate} + '&orderEndDate=' + ${SearchOrderMemberDto.orderEndDate}}">
+            >> </a>
+        </label>
+
+      </div>
+
+    </div>
+  </div>   <!-- end search result -->
+
+
+</div>
+
+</html>

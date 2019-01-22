@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xml:th="http:/www.thymeleaf.org"
+      layout:decorate="~{layout/default.html}">
+
+<head th:include="fragments/config :: configFragment">
+  <title id="pageTitle">관리자 &mdash; 고객검색</title>
+  <!-- other elements you want to reference in your layout -->
+</head>
+
+<div layout:fragment="content">
+  <h1>고객검색 페이지</h1>
+
+  <!-- 고객 검색 모듈 -->
+  <div>
+    <table border="1">
+      <form method="get" action="#" th:action="@{/admin/member/search}" th:object="${memberSearchDto}">
+        <tbody>
+        <tr>
+          <th scope="row">개인정보</th>
+          <td>
+            <select name="memberSearchClassificationValue">
+              <option disabled selected >검색 옵션 선택</option>
+              <option value="memberId">아이디</option>
+              <option value="memberName">이름</option>
+              <option value="memberEmail">이메일</option>
+              <option value="memberPhone">전화번호</option>
+              <option value="memberNickname">닉네임</option>
+              <option value="memberAddress">주소</option>
+            </select>
+            <span>
+              <input type="text" name="memberSearchClassificationInput">
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">성별</th>
+          <td>
+            <input type="checkbox" name="memberSexCheck" value="남성">남성
+            <input type="checkbox" name="memberSexCheck" value="여성">여성
+            <input type="checkbox" name="memberSexCheck" value="기타">기타
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">생일</th>
+          <td>
+            시작일 <input name="memberBirthdayStart" type="date"
+                       placeholder="Start Date">
+            종료일 <input name="memberBirthdayEnd" type="date"
+                       placeholder="Ended Date">
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">가입일</th>
+          <td>
+            시작일 <input name="memberRegDateStart" type="datetime-local"
+                      placeholder="Start Date">
+            종료일 <input name="memberRegDateEnd" type="datetime-local"
+                      placeholder="Ended Date">
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">주문일</th>
+          <td>
+            시작일 <input name="memberOrderDateStart" type="datetime-local"
+                      placeholder="Start Date">
+
+            <!--2018년을 입력하면 잘못된 데이터라고 뜨는 현상...말 안돼-->
+            종료일 <input name="memberOrderDateEnd" type="datetime-local"
+                      placeholder="Ended Date">
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">제출</th>
+          <td>
+            <input type="submit"/>
+          </td>
+        </tr>
+        </tbody>
+      </form>
+    </table>
+  </div>
+
+  <!--<table border="1" summary="">-->
+  <!--<caption>상품검색</caption>-->
+  <!--<tbody>-->
+  <!--<tr>-->
+  <!--<th scope="row">검색분류</th>-->
+  <!--<td>-->
+  <!--<select>-->
+  <!--<option value="product_name">상품명</option>-->
+  <!--<option value="product_code">제품코드(관리자)</option>-->
+  <!--</select>-->
+  <!--<span>-->
+  <!--<form method="post" action="/admin/product/product_search/result">-->
+  <!--<input type="text" name="productName">-->
+  <!--<input type="submit">-->
+  <!--</form>-->
+  <!--</span>-->
+
+  <!-- 멤버 검색 결과 -->
+  <div>
+    <table>
+      <thead>
+      <tr>
+        <th>id</th>
+        <th>로그인ID</th>
+        <th>이름</th>
+        <th>닉네임</th>
+        <th>이메일</th>
+        <th>전화번호</th>
+        <th>생일</th>
+        <th>성별</th>
+        <th>마일리지</th>
+        <th>우편번호</th>
+        <th>주소</th>
+        <th>상세주소</th>
+        <th>가입일</th>
+        <!--<th>개인정보제공동의</th>-->
+        <!--<th>마케팅활용동</th>-->
+        <!--<th>이메일수신</th>-->
+        <!--<th>SMS수신</th>-->
+        <!--<th>이메일수신</th>-->
+        <!--<th>추천인</th>-->
+      </tr>
+      </thead>
+      <tbody>
+
+
+      <tr  style=" font-size: 0.7em;" th:each="member : ${memberList}">
+        <td th:text="${member.id}">###</td>
+        <td th:text="${member.loginId}">###</td>
+        <td th:text="${member.name}">###</td>
+        <td th:text="${member.nickname}">###</td>
+        <td th:text="${member.email}">###</td>
+        <td th:text="${member.phone}">###</td>
+        <td th:text="${member.birthday}">###</td>
+        <td th:text="${member.sex}">###</td>
+        <td th:text="${member.mileage}">###</td>
+        <td th:text="${member.postcode}">###</td>
+        <td th:text="${member.address1}">###</td>
+        <td th:text="${member.address2}">###</td>
+        <td th:text="${member.regDate}">###</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <p></p>
+    <div id="page-numbers" th:if="${memberPageCount} != null" >
+      <th:block th:each="item : ${#numbers.sequence(1, memberPageCount)}">
+        <a th:href="@{'/admin/member/search?page=' + ${item} +'&memberSearchClassificationValue=' + ${memberSearchDto.memberSearchClassificationValue}
++'&memberSearchClassificationInput=' + ${memberSearchDto.memberSearchClassificationInput}+'&memberBirthdayStart=' + ${memberSearchDto.memberBirthdayStart}
++'&memberBirthdayEnd=' + ${memberSearchDto.memberBirthdayEnd}+'&memberRegDateStart=' + ${memberSearchDto.memberRegDateStart} + '&memberRegDateEnd=' + ${memberSearchDto.memberRegDateEnd}
++'&memberOrderDateStart=' + ${memberSearchDto.memberOrderDateStart}+'&memberOrderDateEnd=' + ${memberSearchDto.memberOrderDateEnd}}">
+          <span th:text="${item}"></span>
+        </a>
+      </th:block>
+    </div>
+
+  </div>
+
+  <!--<script th:src="@{/js/product-search.js}"></script>-->
+</div>
+
+</html>

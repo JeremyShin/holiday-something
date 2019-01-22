@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default.html}">
+
+<head th:include="fragments/config :: configFragment">
+  <title id="pageTitle">Page title</title>
+  <!-- other elements you want to reference in your layout -->
+</head>
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+</th:block>
+
+<div layout:fragment="content">
+
+  <div id="dashboard">
+    <h1 align="center">회원 적립금 변경</h1>
+    <!-- cafe24는 적립금을 엑셀파일로 관리... -->
+    <h4>회원 검색</h4>
+    <div>
+      <form method="GET" action="/admin/member/mileage/search"
+            id="member-mileage-search-form">
+        <table width="500px" border="1" align="center">
+          <tr>
+            <th scope="row" style="width: 180px;">아이디</th>
+            <td>
+              <input type="hidden" name="searchType" value="loginId">
+              <input type="text" name="keyword" style="width: 300px;" placeholder="검색" id="mileageSearchKeyword">
+            </td>
+            <td style="width: 50px; font-size: small; border: 0px;"><input type="submit" value="검색" id="mileageSearch">
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+    <br>
+
+    <h4>회원 적립금 변경</h4>
+    <div class="tbl-container">
+      <form method="POST" action="/admin/member/mileage/modify">
+        <table id="member-mileage-search-tbl" border="1" style="width: 100%">
+          <thead>
+          <tr bgcolor="#ffd700">
+            <th scope="col">아이디</th>
+            <th scope="col">현재적립금</th>
+            <th scope="col">증감여부</th>
+            <th scope="col">적립금 금액</th>
+          </tr>
+          </thead>
+          <tbody>
+          <td th:text="${member.loginId}"></td>
+          <td th:text="${member.mileage}" id="mileage"></td>
+          <td>
+            <select name="plusOrMinus" id="mileagePlusMinus">
+              <option value="+">(+) 적립금 증액</option>
+              <option th:if="${member.mileage} <= 0" disabled>(-) 적립금 차감</option>
+              <option th:if="${member.mileage} > 0"value="-">(-) 적립금 차감</option>
+            </select>
+          </td>
+          <td>
+            <input type="number" value="0" min="0" name="addMileage" id="mileageModify" style="width: 60px;"/>
+          </td>
+          </tr>
+          </tbody>
+        </table>
+        <input type="hidden" name="loginId" th:value="${member.loginId}"/>
+        <input type="hidden" name="mileage" th:value="${member.mileage}"/>
+        <input type="submit" value="수정" id="mileageModifyBtn">
+      </form>
+    </div>
+
+    <script>
+      document.getElementById("mileageSearch").onclick = function (){
+          if(document.getElementById("mileageSearchKeyword").value === ""){
+              alert("값을 입력하세요");
+              return false;
+          }
+      };
+
+      document.getElementById("mileageModifyBtn").onclick = function () {
+          let mileage = parseInt(document.getElementById("mileage").innerText);
+          let mileageModify = document.getElementById("mileageModify").value;
+          let mileagePlusMinus = document.getElementById("mileagePlusMinus").value;
+
+          if(mileageModify === ""){
+              alert("값을 입력하세요");
+              return false;
+          } else if(mileagePlusMinus === "-" && mileageModify > mileage){
+              alert("기존의 마일리지보다 값이 작습니다.");
+              return false;
+          } else {
+              return confirm("수정하시겠습니까?");
+          }
+      };
+    </script>
+
+  </div>
+</div>
+</html>
