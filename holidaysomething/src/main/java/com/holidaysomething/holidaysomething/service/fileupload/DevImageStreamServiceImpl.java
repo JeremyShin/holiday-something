@@ -1,5 +1,6 @@
 package com.holidaysomething.holidaysomething.service.fileupload;
 
+import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ public class DevImageStreamServiceImpl implements ImageStreamService {
 
     @Override
     @Transactional
-    public String save(MultipartFile multipartFile) {
+    public String save(MultipartFile multipartFile, Long productId) {
 
 
         Calendar cal = Calendar.getInstance();
@@ -65,6 +66,12 @@ public class DevImageStreamServiceImpl implements ImageStreamService {
         productImage.setStoredFileName(storedFileName);
         productImage.setRegDate(LocalDateTime.now());
         productImage.setSize(multipartFile.getSize());
+
+        if(productId != null) {
+            Product product = new Product();
+            product.setId(productId);
+            productImage.setProduct(product);
+        }
 
         // Category 1 = Main Image
         // Category 2 = Description Image

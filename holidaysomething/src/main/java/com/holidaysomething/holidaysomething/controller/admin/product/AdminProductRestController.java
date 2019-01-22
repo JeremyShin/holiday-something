@@ -1,15 +1,11 @@
 package com.holidaysomething.holidaysomething.controller.admin.product;
 
-import com.holidaysomething.holidaysomething.domain.Product;
-import com.holidaysomething.holidaysomething.domain.ProductCategory;
-import com.holidaysomething.holidaysomething.domain.ProductImage;
-import com.holidaysomething.holidaysomething.domain.ProductOption;
+import com.holidaysomething.holidaysomething.domain.*;
 import com.holidaysomething.holidaysomething.dto.ProductAddDto;
+import com.holidaysomething.holidaysomething.dto.ProductDetailDto;
 import com.holidaysomething.holidaysomething.dto.ProductOptionDto;
 import com.holidaysomething.holidaysomething.service.fileupload.ImageStreamService;
-import com.holidaysomething.holidaysomething.service.product.ProductAddService;
-import com.holidaysomething.holidaysomething.service.product.ProductImageService;
-import com.holidaysomething.holidaysomething.service.product.ProductOptionService;
+import com.holidaysomething.holidaysomething.service.product.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -17,7 +13,6 @@ import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.holidaysomething.holidaysomething.service.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -40,6 +35,7 @@ public class AdminProductRestController {
   private final ProductOptionService productOptionService;
   private final ProductAddService productAddService;
   private final ImageStreamService imageStreamService;
+  private final ProductDetailService productDetailService;
 
   /*
    * @author : Gyumin Kim
@@ -88,36 +84,29 @@ public class AdminProductRestController {
    * @description : 이미지 업로드
    */
   @PostMapping("/image-files/api")
-  public String handleFileUpload(@RequestParam("descriptionImage") MultipartFile multipartFile) {
-    String saveFileName = imageStreamService.save(multipartFile);
+  public String handleFileUpload(@RequestParam("descriptionImage") MultipartFile multipartFile,
+                                 Long productId) {
+    String saveFileName = imageStreamService.save(multipartFile, productId);
 
     return "/admin/product/image-files/" + saveFileName;
   }
 
   @PostMapping("/add/api")
-  public void productAddPost(
-          @Valid @RequestBody ProductAddDto productAddDto,
-          BindingResult bindingResult, ModelMap model) {
+  public Long productAddPost(
+          @RequestBody ProductDetailDto productDetail) {
 
-    if (bindingResult.hasErrors()) {
-      for (ObjectError error : bindingResult.getAllErrors()) {
-        log.info(error.getDefaultMessage());
-        //model.addAttribute("product", product);
-      }
-//      return "admin/product/add";
-    } else {
+//    if (bindingResult.hasErrors()) {
+//      for (ObjectError error : bindingResult.getAllErrors()) {
+//        log.info(error.getDefaultMessage());
+//        //model.addAttribute("product", product);
+//      }
+////      return "admin/product/add";
+//    } else {
       //등록작업
 
-      System.out.println("등록작업을 시작합니다");
-      System.out.println("등록작업을 시작합니다");
-      System.out.println("등록작업을 시작합니다");
-      System.out.println("등록작업을 시작합니다");
-      System.out.println("등록작업을 시작합니다");
-      System.out.println("등록작업을 시작합니다z");
+      ProductDetail detail = productDetailService.save(productDetail.getProductDetail());
 
-      productAddDto.setRegDate(LocalDateTime.now());
-
-      productAddService.productRegister(productAddDto);
-    }
+      return detail.getId();
+//    }
   }
 }

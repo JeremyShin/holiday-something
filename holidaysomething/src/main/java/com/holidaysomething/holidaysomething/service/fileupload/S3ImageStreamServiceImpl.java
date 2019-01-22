@@ -3,7 +3,10 @@ package com.holidaysomething.holidaysomething.service.fileupload;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
+import com.holidaysomething.holidaysomething.domain.Product;
+import com.holidaysomething.holidaysomething.domain.ProductDetail;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
+import com.holidaysomething.holidaysomething.repository.ProductDetailRepository;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +33,7 @@ import java.util.UUID;
 public class S3ImageStreamServiceImpl implements ImageStreamService {
 
     private final ProductRepository productRepository;
+    private final ProductDetailRepository productDetailRepository;
     private final AmazonS3Client amazonS3Client;
 
     // S3 버킷의 이름
@@ -41,7 +45,7 @@ public class S3ImageStreamServiceImpl implements ImageStreamService {
     private String dirName;
 
     @Override
-    public String save(MultipartFile multipartFile) {
+    public String save(MultipartFile multipartFile, Long productId) {
 //        for (MultipartFile multipartFile : multipartFiles) {
         // 멀티플 업로드를 설정하면 파일을 올리지 않아도 쓰레기 파일이 날라와서 걸러내기 위함...
 //        if (!multipartFile.getOriginalFilename().isEmpty()) {
@@ -71,6 +75,12 @@ public class S3ImageStreamServiceImpl implements ImageStreamService {
         productImage.setStoredFileName(storedFileName);
         productImage.setRegDate(LocalDateTime.now());
         productImage.setSize(multipartFile.getSize());
+
+        if(productId != null) {
+            Product product = new Product();
+            product.setId(productId);
+            productImage.setProduct(product);
+        }
 
         // Category 1 = Main Image
         // Category 2 = Description Image

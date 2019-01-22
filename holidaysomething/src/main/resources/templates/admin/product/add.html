@@ -66,8 +66,8 @@
     <!-- End(카테고리)-->
 
     <!-- th:field="*{product.productOptions.description}" 이런식으로 해도 된다는데... 실패했었음.-->
-    <form
-          th:object="${product}">
+    <form onsubmit="return validate()" action="#" th:action="@{/admin/product/add}" method="post"
+          enctype="multipart/form-data" th:object="${product}">
 
       <!-- Start(현재 선택한 카테고리가 무엇인지 보여주는 부분) -->
       <div style="display:inline-block;position:relative;left:50px;" id="currentCategory">
@@ -97,16 +97,8 @@
           <label th:if="${#fields.errors('name')}" th:errors="*{name}">input is incorrect</label>
         </div>
 
-        <!--<div>-->
-          <!--<label th:class="${#fields.hasErrors('productDetail')} ? 'fieldError'">상품 설명-->
-            <!--: </label>-->
-          <!--<input name="productDetail" th:field="*{productDetail}" id="inputDescription"-->
-                 <!--th:class="${#fields.hasErrors('productDetail')} ? 'fieldError'"-->
-                 <!--type="text" placeholder="Product Description">-->
-          <!--<label th:if="${#fields.errors('productDetail')}"-->
-                 <!--th:errors="*{productDetail}">input is incorrect</label>-->
-        <!--</div>-->
-        <!-- TODO Editor -->
+        <!-- Editor -->
+        <input type="hidden" id="hiddenProductDetailId" name="productDetailId">
         <div id="editSection">
           상품 설명 :
         </div>
@@ -165,7 +157,7 @@
           <label>제조일 : </label>
           <input name="manufactureDate" type="datetime-local" placeholder="Manufacture Date"
                  id="inputDate1" th:field="*{manufactureDate}"
-                 th:class="${#fields.hasErrors('productDetail')} ? 'fieldError'">
+                 th:class="${#fields.hasErrors('manufactureDate')} ? 'fieldError'">
           <!--<input name="date1" type="datetime-local" id="datepicker">-->
           <label th:if="${#fields.errors('manufactureDate')}"
                  th:errors="*{manufactureDate}">input is incorrect</label>
@@ -193,17 +185,21 @@
         </div>
         <div>
           <label>안전재고?? : </label>
-          <input name="safeQuantity" type="text" placeholder="Safe Quantity" id="inputSafeQuantity">
+          <input name="safeQuantity" placeholder="Safe Quantity" id="inputSafeQuantity">
         </div>
         <div>
           <label>화면에 바로 보여줄거에요? </label>
           <input name="display" type="checkbox" id="checkDisplay">
         </div>
         <div>
+          <label>메인 이미지 등록</label><br>
+          <input name="mainImages" type="file" multiple="multiple" id="inputMainImage">
+        </div>
+        <div>
           <input type="button" id="saveBtn" value="상품등록">
         </div>
         <div>
-          <input type="submit"
+          <input hidden type="submit" id="submitBtn">
         </div>
 
       </div>
@@ -310,7 +306,8 @@
               //     }
               // });
 
-              $('#saveBtn').click(function(){
+              $('#saveBtn').click(function(event){
+                  event.stopPropagation();
                   // if($("#inputTitle").val().trim() == ''){
                   //     alert('제목을 입력하세요.');
                   //     return;
@@ -319,32 +316,15 @@
                       alert('내용을 입력하세요.');
                       return;
                   }
-                  // TODO write 함수 호출
-                  write($("#editSection").tuiEditor("getValue"), $("#categoryId2").val(), $("#inputName").val(), $("#inputCode").val(), $("#inputOriginalPrice").val(),
-                      $("#inputSellingPrice").val(), $("#inputManufacturingPrice").val(), $("#inputManufacturer").val(), $("#inputShippingPrice").val(),
-                      $("#inputQuantity").val(), $("#inputSafeQuantity").val(), $("#inputMileage").val(), $("#checkDisplay").prop('checked'),
-                      $("#inputDate1").val(), $("#inputDate2").val());
+                  write($("#editSection").tuiEditor("getValue"));
               });
 
-              function write(content, productCategoryId, name, code, originalPrice, sellingPrice, manufacturingPrice, manufacturer, shippingPrice, quantity,
-                             safeQuantity, mileage, display, manufactureDate, releaseDate){
+              function write(content){
                   let JSONObject= {
                       // "title" : title,
-                      "productCategoryId" : productCategoryId,
-                      "name" : name,
+
                       "productDetail" : content,
-                      "code" : code,
-                      "originalPrice" : originalPrice,
-                      "sellingPrice" : sellingPrice,
-                      "manufacturingPrice" : manufacturingPrice,
-                      "manufacturer" : manufacturer,
-                      "shippingPrice" : shippingPrice,
-                      "quantity": quantity,
-                      "safeQuantity" : safeQuantity,
-                      "mileage" : mileage,
-                      "display" : display,
-                      "manufactureDate" : manufactureDate,
-                      "releaseDate" : releaseDate
+
                   };
                   let jsonData = JSON.stringify( JSONObject );
                   $.ajax({
@@ -355,10 +335,15 @@
                       dataType: "text",
                       contentType: "application/json",
                       success: function (data) {
-                          alert('등록되었습니다. OK');
-                          console.log(data);
-                          // $(location).attr('href','/boards/${categoryId}/list');
-                          $(location).attr('href','/admin/product/');
+                          // alert('등록되었습니다. OK');
+                          // console.log(data);
+                          // // $(location).attr('href','/boards/${categoryId}/list');
+                          // $(location).attr('href','/admin/product/');
+                          console.log("여기로 왔지?");
+                          console.log("받아온 값은?? : " + data);
+                          $("#hiddenProductDetailId").val(data);
+                          console.log($("#hiddenProductDetailId").val());
+                          $("#submitBtn").trigger('click');
                       },
                       error: function (err) {
                           console.log(err);
