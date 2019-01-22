@@ -202,6 +202,9 @@
         <div>
           <input type="button" id="saveBtn" value="상품등록">
         </div>
+        <div>
+          <input type="submit"
+        </div>
 
       </div>
 
@@ -272,12 +275,12 @@
                   hooks: {
                       'addImageBlobHook': function(blob, saveImage) {
                           console.log(blob);
-                          console.log(blob.name);
+                          // console.log(blob.name);
                           //이미지 블롭을 이용해 서버 연동 후 콜백실행
                           //callback('이미지URL');
                           var fd = new FormData();
-                          fd.append('fname', blob.name);
-                          fd.append('data', blob);
+                          // fd.append('fname', blob.name);
+                          fd.append('descriptionImage', blob);
                           $.ajax({
                               type: 'POST',
                               url: '/admin/product/image-files/api',

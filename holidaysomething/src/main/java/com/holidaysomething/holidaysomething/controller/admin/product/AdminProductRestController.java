@@ -88,8 +88,7 @@ public class AdminProductRestController {
    * @description : 이미지 업로드
    */
   @PostMapping("/image-files/api")
-  public String handleFileUpload(@RequestParam("fname") String fname,
-                                 @RequestParam("data") MultipartFile multipartFile) {
+  public String handleFileUpload(@RequestParam("descriptionImage") MultipartFile multipartFile) {
     String saveFileName = imageStreamService.save(multipartFile);
 
     return "/admin/product/image-files/" + saveFileName;
