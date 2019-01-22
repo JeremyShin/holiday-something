@@ -156,3 +156,11 @@
 .user-header-category{
   float:left; width: 25%; padding:10px; text-align: center;
 }
+
+.order-hr{
+  border: 0;
+  height: 3px;
+  background: #282c34;
+  width: 50%;
+  float: left;
+}

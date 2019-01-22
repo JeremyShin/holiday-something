@@ -35,12 +35,15 @@ public class Product {
   @Column(length = 100, nullable = false)
   private String name;
 
+  //할인 적용전 원가
   @Column(nullable = false)
   private Integer originalPrice;
 
+  //할인 및 마일리지 적용 후 판매가
   @Column(nullable = false)
   private Integer sellingPrice;
 
+  //제조가
   @Column(nullable = false)
   private Integer manufacturingPrice;
 

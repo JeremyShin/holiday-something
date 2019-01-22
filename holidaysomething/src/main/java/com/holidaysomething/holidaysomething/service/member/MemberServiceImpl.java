@@ -154,6 +154,10 @@ public class MemberServiceImpl implements MemberService {
     addOrderMemberDto.setName(member.getName());
     addOrderMemberDto.setPhone(member.getPhone());
     addOrderMemberDto.setEmail(member.getEmail());
+    addOrderMemberDto.setAddress1(member.getAddress1());
+    addOrderMemberDto.setAddress2(member.getAddress2());
+    addOrderMemberDto.setPostcode(member.getPostcode());
+    addOrderMemberDto.setMileage(member.getMileage());
 
     return addOrderMemberDto;
   }
