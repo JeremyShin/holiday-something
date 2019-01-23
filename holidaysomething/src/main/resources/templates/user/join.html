@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.springframework.org/schema/data/jaxb"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>welcome</title>
+</head>
+<body>
+<h1 style="border-bottom: black; text-align:center">SIGN UP</h1>
+<div class="container">
+    <form th:action="@{/user/join}" method="post" th:object="${member}">
+        <div style="display: block; position:relative;text-align:center; vertical-align: center; padding: 10px 0">
+            <div>
+                <label>아이디 : </label>
+                <input name="loginId" th:field="*{loginId}" id="loginId" type="text" style="width:15%"
+                       
+                       placeholder="아이디를 입력해주세요.">
+            </div>
+            <div>
+                <label>비밀번호 : </label>
+                <input name="password" th:field="*{password}" id="password" type="text" style="width:15%"
+                       placeholder="비밀번호를 입력해주세요.">
+            </div>
+            <div>
+                <label>이메일 : </label>
+                <input name="email" th:field="*{email}" id="email" type="text" style="width:15%"
+                       placeholder="이메일을 입력해주세요.">
+            </div>
+            <div>
+                <label>이름 : </label>
+                <input name="name" th:field="*{name}" id="inputName" type="text" style="width:15%"
+                       placeholder="이름을 입력해주세요.">
+            </div>
+            <div>
+                <label>별명 : </label>
+                <input name="nickname" th:field="*{nickname}" id="nickname" type="text" style="width:15%"
+                       placeholder="별명을 입력해주세요.">
+            </div>
+            <div>
+                <label>전화번호 : </label>
+                <input name="phone" th:field="*{phone}" id="phone" style="width:15%"
+                       placeholder="전화번호를 입력해주세요.">
+            </div>
+            <div>
+                <label>생년월일 : </label>
+                <input name="birthday" th:field="*{birthday}" id="birthday" style="width:15%"
+                       type="date"
+                       placeholder="생년월일을 입력해주세요.">
+            </div>
+            <div>
+                <label>우편번호 : </label>
+                <input name="postcode" th:field="*{postcode}" id="postcode" style="width:15%"
+                       placeholder="우편번호를 입력해주세요.">
+            </div>
+            <div>
+                <label>주소 : </label>
+                <input name="address1" th:field="*{address1}" id="address1" style="width:15%"
+                       placeholder="주소를 입력해주세요.">
+            </div>
+            <div>
+                <label>상세주소 : </label>
+                <input name="address2" th:field="*{address2}" id="address2" style="width:15%"
+                       placeholder="상세주소를 입력해주세요.">
+            </div>
+            <div>
+                <label>이메일 수신여부</label>
+                <input name="receiveEmail" type="checkbox">
+                <label>SMS 수신여부</label>
+                <input name="receiveSms" type="checkbox">
+            </div>
+
+            <div>
+                <label>마케팅 정보 제공 수신여부</label>
+                <input name="marketing" type="checkbox">
+                <label>개인정보 활용동의</label>
+                <input name="personalInfo" type="checkbox">
+            </div>
+
+            <div>
+                <label>추천인 : </label>
+                <input name="recommender" th:field="*{recommender}" id="recommender" style="width:15%"
+                       placeholder="추천인을 입력해주세요.">
+            </div>
+            <div>
+                <label>성별 : </label>
+                <input name="sex" th:field="*{sex}" id="sex" style="width:15%"
+                       placeholder="성별을 입력해주세요.">
+            </div>
+            <div>
+                <input type="submit" text="가입하기">
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

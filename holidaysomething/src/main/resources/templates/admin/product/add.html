@@ -5,8 +5,8 @@
       layout:decorate="~{layout/default.html}">
 
 <head th:include="fragments/config :: configFragment">
-  <title id="pageTitle">Page title</title>
-  <!-- other elements you want to reference in your layout -->
+    <title id="pageTitle">Page title</title>
+    <!-- other elements you want to reference in your layout -->
 </head>
 
 <!--<head th:replace="fragments/config :: configFragment (pageTitle='Product Register')">-->
@@ -26,48 +26,48 @@
   </th:block>
   <h1>Product Add</h1>
 
-  <!--------------------------
-          | Product Registration |
-          -------------------------->
-  <!--  block은 CSS로 크기조절이 가능하고 inline은 안 된다. -->
-  <!--  div 는 기본이 block! -->
+    <!--------------------------
+            | Product Registration |
+            -------------------------->
+    <!--  block은 CSS로 크기조절이 가능하고 inline은 안 된다. -->
+    <!--  div 는 기본이 block! -->
 
-  <div style="display:block; ">
-    <!-- Start(카테코리 출력 부분) (3개의 div) -->
+    <div style="display:block; ">
+        <!-- Start(카테코리 출력 부분) (3개의 div) -->
 
-    <div
-        style='display:inline-block;min-width:900px;position:relative;left:50px;border:1px solid gold;'>
-      <!--<li th:each="category : ${categories}" th:if="${category.parentId == 0 }">-->
-      <!--<span th:attr="data-categoryid=${category.id}" class="span"-->
-      <!--th:onclick="'getCategoryList(' + ${category.id} + ')'"-->
-      <!--th:text="${category.name}"></span>-->
-      <!--</li>-->
+        <div
+                style='display:inline-block;min-width:900px;position:relative;left:50px;border:1px solid gold;'>
+            <!--<li th:each="category : ${categories}" th:if="${category.parentId == 0 }">-->
+            <!--<span th:attr="data-categoryid=${category.id}" class="span"-->
+            <!--th:onclick="'getCategoryList(' + ${category.id} + ')'"-->
+            <!--th:text="${category.name}"></span>-->
+            <!--</li>-->
 
-      <div id="firstCategory" style='display:inline;float:left;width:200px;'>
-        <ul id="firstCategoryUl">
-        </ul>
-      </div>
+            <div id="firstCategory" style='display:inline;float:left;width:200px;'>
+                <ul id="firstCategoryUl">
+                </ul>
+            </div>
 
-      <div id="secondCategory" style='display:inline;float:left;width:200px;'>
-        <ul id="secondCategoryUl">
+            <div id="secondCategory" style='display:inline;float:left;width:200px;'>
+                <ul id="secondCategoryUl">
 
-        </ul>
+                </ul>
 
-      </div>
+            </div>
 
-      <div id="thirdCategory" style='display:inline;float:left;width:200px;'>
-        <ul id="thirdCategoryUl">
+            <div id="thirdCategory" style='display:inline;float:left;width:200px;'>
+                <ul id="thirdCategoryUl">
 
-        </ul>
+                </ul>
 
-      </div>
-
+            </div>
+          
     </div>
     <!-- End(카테고리)-->
 
     <!-- th:field="*{product.productOptions.description}" 이런식으로 해도 된다는데... 실패했었음.-->
     <form onsubmit="return validate()" action="#" th:action="@{/admin/product/add}" method="post"
-          th:object="${product}">
+          enctype="multipart/form-data" th:object="${product}">
 
       <!-- Start(현재 선택한 카테고리가 무엇인지 보여주는 부분) -->
       <div style="display:inline-block;position:relative;left:50px;" id="currentCategory">
@@ -96,6 +96,15 @@
                  placeholder="Product Name">
           <label th:if="${#fields.errors('name')}" th:errors="*{name}">input is incorrect</label>
         </div>
+
+        <!-- Editor -->
+        <input type="hidden" id="hiddenProductDetailId" name="productDetailId">
+        <div id="editSection">
+          상품 설명 :
+        </div>
+
+        <br>
+        <br>
         <div>
           <label th:class="${#fields.hasErrors('manufacturer')} ? 'fieldError'">제조사 : </label>
           <input name="manufacturer" th:field="*{manufacturer}" id="inputManufacturer"
@@ -143,21 +152,12 @@
           <label th:if="${#fields.errors('shippingPrice')}" th:errors="*{shippingPrice}">input is
             incorrect</label>
         </div>
-        <div>
-          <label th:class="${#fields.hasErrors('productDetail')} ? 'fieldError'">상품 설명
-            : </label>
-          <input name="productDetail" th:field="*{productDetail}" id="inputDescription"
-                 th:class="${#fields.hasErrors('productDetail')} ? 'fieldError'"
-                 type="text" placeholder="Product Description">
-          <label th:if="${#fields.errors('productDetail')}"
-                 th:errors="*{productDetail}">input is incorrect</label>
-        </div>
 
         <div>
           <label>제조일 : </label>
           <input name="manufactureDate" type="datetime-local" placeholder="Manufacture Date"
                  id="inputDate1" th:field="*{manufactureDate}"
-                 th:class="${#fields.hasErrors('productDetail')} ? 'fieldError'">
+                 th:class="${#fields.hasErrors('manufactureDate')} ? 'fieldError'">
           <!--<input name="date1" type="datetime-local" id="datepicker">-->
           <label th:if="${#fields.errors('manufactureDate')}"
                  th:errors="*{manufactureDate}">input is incorrect</label>
@@ -174,7 +174,7 @@
 
         <div>
           <label>적립금 : </label>
-          <input name="mileage" type="text" placeholder="Mileage">
+          <input name="mileage" type="text" placeholder="Mileage" id="inputMileage">
         </div>
         <div>
           <label th:class="${#fields.hasErrors('quantity')} ? 'fieldError'">재고??? : </label>quantity
@@ -185,20 +185,175 @@
         </div>
         <div>
           <label>안전재고?? : </label>
-          <input name="safeQuantity" type="text" placeholder="Safe Quantity">
+          <input name="safeQuantity" placeholder="Safe Quantity" id="inputSafeQuantity">
         </div>
         <div>
           <label>화면에 바로 보여줄거에요? </label>
-          <input name="display" type="checkbox">
+          <input name="display" type="checkbox" id="checkDisplay">
         </div>
         <div>
-          <input type="submit" text="상품등록">
+          <label>메인 이미지 등록</label><br>
+          <input name="mainImages" type="file" multiple="multiple" id="inputMainImage">
+        </div>
+        <div>
+          <input type="button" id="saveBtn" value="상품등록">
+        </div>
+        <div>
+          <input hidden type="submit" id="submitBtn">
         </div>
 
       </div>
 
 
     </form>
+
+    <!-- Editor JS -->
+    <th:block layout:fragment="html_head">
+      <script src="/editor/jquery/dist/jquery.js"></script>
+      <script src="/editor/tui-code-snippet/dist/tui-code-snippet.js"></script>
+      <script src="/editor/markdown-it/dist/markdown-it.js"></script>
+      <script src="/editor/to-mark/dist/to-mark.js"></script>
+      <script src="/editor/codemirror/lib/codemirror.js"></script>
+      <script src="/editor/highlightjs/highlight.pack.js"></script>
+      <script src="/editor/squire-rte/build/squire-raw.js"></script>
+      <script src="/editor/tui-editor/dist/tui-editor-Editor-all.js"></script>
+      <link rel="stylesheet" href="/editor/codemirror/lib/codemirror.css">
+      <link rel="stylesheet" href="/editor/highlightjs/styles/github.css">
+      <link rel="stylesheet" href="/editor/tui-editor/dist/tui-editor.css">
+      <link rel="stylesheet" href="/editor/tui-editor/dist/tui-editor-contents.css">
+
+      <title>상품 등록 폼</title>
+
+      <style type="text/css">
+        .te-md-container .CodeMirror {
+          font-size: 14px;
+        }
+        .tui-editor-contents {
+          font-size: 14px;
+        }
+      </style>
+
+      <script>
+          (function(root, factory) {
+              if (typeof define === 'function' && define.amd) {
+                  define(['tui-editor'], factory);
+              } else if (typeof exports === 'object') {
+                  factory(require('tui-editor'));
+              } else {
+                  factory(root['tui']['Editor']);
+              }
+          })(this, function(Editor) {
+              // define youtube extension
+              Editor.defineExtension('youtube', function() {
+                  // runs while markdown-it transforms code block to HTML
+                  Editor.codeBlockManager.setReplacer('youtube', function(youtubeId) {
+                      console.log('sadfasdfasfd' + youtubeId);
+                      // Indentify multiple code blocks
+                      var wrapperId = 'yt' + Math.random().toString(36).substr(2, 10);
+                      // avoid sanitizing iframe tag
+                      setTimeout(renderYoutube.bind(null, wrapperId, youtubeId), 0);
+                      return '<div id="' + wrapperId + '"></div>';
+                  });
+              });
+              function renderYoutube(wrapperId, youtubeId) {
+                  var el = document.querySelector('#' + wrapperId);
+                  el.innerHTML = '<iframe width="820" height="630" src="https://www.youtube.com/embed/' + youtubeId + '"  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+              }
+          });
+
+          $(document).ready(function () {
+              $('#editSection').tuiEditor({
+                  initialEditType: 'markdown',
+                  previewStyle: 'vertical',
+                  height: 500,
+                  exts: ['youtube'],
+                  // codeBlockLanguages: ['java', 'PHP', 'javascript'],
+                  hooks: {
+                      'addImageBlobHook': function(blob, saveImage) {
+                          console.log(blob);
+                          // console.log(blob.name);
+                          //이미지 블롭을 이용해 서버 연동 후 콜백실행
+                          //callback('이미지URL');
+                          var fd = new FormData();
+                          // fd.append('fname', blob.name);
+                          fd.append('descriptionImage', blob);
+                          $.ajax({
+                              type: 'POST',
+                              url: '/admin/product/image-files/api',
+                              data: fd,
+                              processData: false,
+                              contentType: false
+                          }).done(function(data) {
+                              saveImage(data); // 저장된 실제 URL 을 넘긴다.
+                          });
+                      }
+                  }
+              });
+
+              // $('#resetBtn').click(function () {
+              //     // $("#inputTitle").val('');
+              //     $("#editSection").tuiEditor("setValue", "");
+              //     $("#editSection").focus();
+              //     // $("#inputTitle").focus();
+              // });
+
+              // $('#inputTitle').keydown(function(e) {
+              //     var code = e.keyCode || e.which;
+              //
+              //     if (code === 9) {
+              //         e.preventDefault();
+              //         $("#editSection").tuiEditor("focus");
+              //     }
+              // });
+
+              $('#saveBtn').click(function(event){
+                  event.stopPropagation();
+                  // if($("#inputTitle").val().trim() == ''){
+                  //     alert('제목을 입력하세요.');
+                  //     return;
+                  // }
+                  if($("#editSection").tuiEditor("getValue").trim() == ''){
+                      alert('내용을 입력하세요.');
+                      return;
+                  }
+                  write($("#editSection").tuiEditor("getValue"));
+              });
+
+              function write(content){
+                  let JSONObject= {
+                      // "title" : title,
+
+                      "productDetail" : content,
+
+                  };
+                  let jsonData = JSON.stringify( JSONObject );
+                  $.ajax({
+                      // url : '/api/boards/${categoryId}/write',
+                      url: '/admin/product/add/api',
+                      method: 'post',
+                      data: jsonData,
+                      dataType: "text",
+                      contentType: "application/json",
+                      success: function (data) {
+                          // alert('등록되었습니다. OK');
+                          // console.log(data);
+                          // // $(location).attr('href','/boards/${categoryId}/list');
+                          // $(location).attr('href','/admin/product/');
+                          console.log("여기로 왔지?");
+                          console.log("받아온 값은?? : " + data);
+                          $("#hiddenProductDetailId").val(data);
+                          console.log($("#hiddenProductDetailId").val());
+                          $("#submitBtn").trigger('click');
+                      },
+                      error: function (err) {
+                          console.log(err);
+                      }
+                  });
+              }
+          });
+      </script>
+    </th:block>
+
   </div>
 
 </div>

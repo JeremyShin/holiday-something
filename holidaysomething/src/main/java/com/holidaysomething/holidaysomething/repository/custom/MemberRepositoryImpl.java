@@ -8,6 +8,7 @@ import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.text.SimpleDateFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -120,25 +121,26 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
         && memberSearchDto.getMemberBirthdayEnd() != null) &&
         (memberSearchDto.getMemberBirthdayStart().length() != 0
             && memberSearchDto.getMemberBirthdayEnd().length() != 0)) {
-      SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
-      formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+//      SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+//      formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 
       String birthdayStart = memberSearchDto.getMemberBirthdayStart();
       String birthdayEnd = memberSearchDto.getMemberBirthdayEnd();
 
       log.info("제발그만...생일은 어떤값?" + memberSearchDto.getMemberBirthdayStart());
       log.info("String으로 받아준 후에는?" + birthdayStart);
-
-      if (memberSearchDto.getMemberBirthdayStart() != null) {
-        log.info("널이아님");
-        log.info("그래서 값은" + memberSearchDto.getMemberBirthdayStart());
-      } else {
-        log.info("널임");
-      }
+//
+//      if (memberSearchDto.getMemberBirthdayStart() != null) {
+//        log.info("널이아님");
+//        log.info("그래서 값은" + memberSearchDto.getMemberBirthdayStart());
+//      } else {
+//        log.info("널임");
+//      }
 
       try {
-        Date startDate = formatter.parse(birthdayStart);
-        Date endDate = formatter.parse(birthdayEnd);
+        LocalDate startDate = LocalDate.parse(birthdayStart);
+        LocalDate endDate = LocalDate.parse(birthdayEnd);
 
         jpqlQuery.where(qMember.birthday.between(startDate, endDate));
       } catch (Exception e) {

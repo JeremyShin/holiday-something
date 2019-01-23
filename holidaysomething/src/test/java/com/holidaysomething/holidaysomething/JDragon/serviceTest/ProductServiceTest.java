@@ -40,7 +40,7 @@ public class ProductServiceTest {
     p.setSellingPrice(10000000);
     p.setManufacturingPrice(100);
     p.setShippingPrice(50000);
-    p.setProductDetail("이거 방탄 연필이야!!");
+    p.setProductDetailId(2L);
     p.setProductCategoryId(2l);
     p.setQuantity(20);
 
