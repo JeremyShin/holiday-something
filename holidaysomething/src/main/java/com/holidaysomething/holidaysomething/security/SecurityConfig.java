@@ -26,6 +26,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
  * @author choijaeyong on 18/01/2019.
  * @project holidaysomething
  * @description
+ * forbidden(403) 에러시 봐야할 곳.
+ * 1. Ajax 로 post 전송 할 때, forbidden 오류가 날 수 있다. 그때 ajax 메소드 안에
+ * headers: {'X-CSRF-Token': $('input[name="_csrf"]').val()}
+ * 추가해주면 된다.
+ *
+ * 2. root로 로그인을 하지 않고 /admin/** 로 접근하면 forbidden 에러가 난다.
  */
 
 //@EnableAutoConfiguration
