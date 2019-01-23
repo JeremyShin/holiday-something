@@ -11,7 +11,7 @@ function validate() {
   let inputManufacturingPrice = document.getElementById(
       "inputManufacturingPrice");
   let inputShippingPrice = document.getElementById("inputShippingPrice");
-  let inputDescription = document.getElementById("inputDescription");
+  // let inputDescription = document.getElementById("inputDescription");
   let inputDate1 = document.getElementById("inputDate1");
   let inputDate2 = document.getElementById("inputDate2");
   let inputQuantity = document.getElementById("inputQuantity");
@@ -26,9 +26,9 @@ function validate() {
   if (!check(re, inputCode, "상품코드 2~20자  입력")) {
     return false;
   }
-  if (!check(re, inputDescription, "상품설명은 2~20자  입력")) {
-    return false;
-  }
+  // if (!check(re, inputDescription, "상품설명은 2~20자  입력")) {
+  //   return false;
+  // }
   if (!checkInteger(reInteger, inputOriginalPrice, "원가는 숫자로 입력")) {
     return false;
   }

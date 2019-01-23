@@ -24,7 +24,7 @@ public class QMember extends EntityPathBase<Member> {
 
     public final StringPath address2 = createString("address2");
 
-    public final DateTimePath<java.util.Date> birthday = createDateTime("birthday", java.util.Date.class);
+    public final DatePath<java.time.LocalDate> birthday = createDate("birthday", java.time.LocalDate.class);
 
     public final SetPath<CartProduct, QCartProduct> cartProducts = this.<CartProduct, QCartProduct>createSet("cartProducts", CartProduct.class, QCartProduct.class, PathInits.DIRECT2);
 
@@ -61,6 +61,8 @@ public class QMember extends EntityPathBase<Member> {
     public final StringPath recommender = createString("recommender");
 
     public final DateTimePath<java.time.LocalDateTime> regDate = createDateTime("regDate", java.time.LocalDateTime.class);
+
+    public final SetPath<Role, QRole> roles = this.<Role, QRole>createSet("roles", Role.class, QRole.class, PathInits.DIRECT2);
 
     public final StringPath sex = createString("sex");
 

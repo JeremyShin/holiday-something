@@ -36,7 +36,7 @@ public class QProductImage extends EntityPathBase<ProductImage> {
 
     public final DateTimePath<java.time.LocalDateTime> regDate = createDateTime("regDate", java.time.LocalDateTime.class);
 
-    public final NumberPath<Integer> size = createNumber("size", Integer.class);
+    public final NumberPath<Long> size = createNumber("size", Long.class);
 
     public final StringPath storedFileName = createString("storedFileName");
 

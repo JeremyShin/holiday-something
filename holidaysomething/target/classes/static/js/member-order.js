@@ -20,19 +20,19 @@ function validateSearch() {
     return false;
   }
 
-  if (!check(re, name, "회원 이름 2~20자 입력하셔야 합니다.")) {
+  if (!check(re, name, "회원 이름 2~20자의 한(자음만 입력 불가),영,숫자로 입력하셔야 합니다.")) {
     return false;
   }
 
-  if (!check(re, loginId, "회원 로그인 아이디 2~20자 입력하셔야 합니다.")) {
+  if (!check(re, loginId, "회원 로그인 아이디 2~20자의 한(자음만 입력 불가),영,숫자로 입력하셔야 합니다.")) {
     return false;
   }
 
-  if (!check(re, productName, "상품이름은 2~20자 입력하셔야 합니다.")) {
+  if (!check(re, productName, "상품이름은 2~20자의 한(자음만 입력 불가),영,숫자로 입력하셔야 합니다.")) {
     return false;
   }
 
-  if (!check(re, orderNumber, "주문번호 2~20자 입력하셔야 합니다.")) {
+  if (!check(re, orderNumber, "주문번호 2~20자의 한(자음만 입력 불가),영,숫자로 입력하셔야 합니다.")) {
     return false;
   }
 
@@ -60,7 +60,6 @@ function validateSearch() {
 
 }
 
-// 상품이름 validation
 function check(re, what, message) {
   // 아무것도 입력안했을 경우.
   if (what.value.length == 0) {
