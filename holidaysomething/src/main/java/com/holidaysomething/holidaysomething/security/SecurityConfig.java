@@ -139,7 +139,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     3. failureUrl로 처리? /user/login 에 파라미터 추가해주고... 아 아닌듯.
      */
 
-    http.csrf().disable();
+//    http.csrf().disable();
 
 //    http.sessionManagement()
 //        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
