@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xml:th="http:/www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       layout:decorate="~{layout/user-default.html}">
 
 <!--<head th:include="fragments/header :: userHeaderFragment">-->
@@ -17,6 +18,15 @@
 <!--<th:block layout:fragment="css">-->
 <!--</th:block>-->
 <div layout:fragment="userTitle">
+  <!-- 로그인한 유저가 /admin 에 접근할 수 있는 권한이 있다면?? 아래 태그가 나타난다.-->
+  <span sec:authorize-url="/admin">
+    <a th:href="@{/admin}">Admin</a>
+  </span>
+
+  <!-- 사용자가 인증 되었을 때 보인다. -->
+  <div sec:authorize="isAuthenticated()">
+    Hello <span sec:authentication="name"></span>
+  </div>
 
   <form method='POST' th:action="@{/user/add}">
     <input type="submit" value="임시회원등록">

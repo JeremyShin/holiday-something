@@ -22,6 +22,8 @@
 
   <h1>Login</h1>
   <div th:if="${param.error}">
+    <!--<span th:if="${#session.getAttribute('errMsg')}" th:text="${#session.getAttribute('errMsg')}">test</span>-->
+    <!--<span th:if="${#session.getAttribute('errMsg')}" th:text="${#session.getAttribute('errMsg')}">test</span>-->
     Unable to login. Check your id and pw.
   </div>
 
