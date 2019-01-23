@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -20,7 +21,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class HolidaysomethingApplication {
 // implements WebMvcConfigurer
 
-  public static void main(String[] args) {
-    SpringApplication.run(HolidaysomethingApplication.class, args);
-  }
+    // AWS Properties 설정을 읽을 수 있도록 함.
+    public static final String APPLICATION_LOCATION = "spring.config.location=" +
+            "classpath:application.properties," +
+            "classpath:aws.properties";
+
+    public static void main(String[] args) {
+        new SpringApplicationBuilder(HolidaysomethingApplication.class)
+                .properties(APPLICATION_LOCATION)
+                .run(args);
+    }
 }

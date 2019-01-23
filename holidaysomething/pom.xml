@@ -157,6 +157,19 @@
       <version>4.1.4</version>
     </dependency>
 
+    <!-- AWS S3 Dependency -->
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-aws</artifactId>
+      <version>2.0.1.RELEASE</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>webjars-locator</artifactId>
+      <version>0.30</version>
+    </dependency>
+
   </dependencies>
 
   <build>

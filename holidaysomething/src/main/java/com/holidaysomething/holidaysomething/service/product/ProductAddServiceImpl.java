@@ -97,10 +97,8 @@ public class ProductAddServiceImpl implements ProductAddService {
   @Transactional
   public Product productRegister(ProductAddDto productAddDto) {
 
-    // 상품 등록하기 전에 상품내용먼저 등록한 후에 그 데이터를 상품에 set 해준다.
-    ProductDetail productDetail =
-        productDetailRepository
-            .save(new ProductDetail(productAddDto.getProductDetail()));
+    ProductDetail productDetail = new ProductDetail();
+    productDetail.setId(productAddDto.getProductDetailId());
 
     // id를 이용해서 상품에 넣어야 하는 카테고리 인스턴스를 생성해야해!
     // 왜? 카테고리가 fk 를 가지고 있어!. 근데 이 fk 를 등록하려면 카테고리 인스턴스가 필요해!
