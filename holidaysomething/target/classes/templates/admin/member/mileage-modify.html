@@ -67,6 +67,7 @@
         <input type="hidden" name="loginId" th:value="${member.loginId}"/>
         <input type="hidden" name="mileage" th:value="${member.mileage}"/>
         <input type="submit" value="수정" id="mileageModifyBtn">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
       </form>
     </div>
 
