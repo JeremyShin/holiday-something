@@ -1,4 +1,4 @@
-function sample4_execDaumPostcode() {
+function sample4_execDaumPostcode(source) {
   new daum.Postcode({
     oncomplete: function(data) {
       // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -43,6 +43,13 @@ function sample4_execDaumPostcode() {
         guideTextBox.innerHTML = '';
         guideTextBox.style.display = 'none';
       }
+
+      // 기존에 입력되어있던 address2 (상세주소) 를 지워준다.
+      let detailedAddress = document.querySelector('#sample4_detailAddress');
+      detailedAddress.setAttribute("value", "");
+      detailedAddress.setAttribute("placeholder", "상세주소를 입력해주세요.");
     }
-  }).open();
+  }
+
+  ).open();
 }

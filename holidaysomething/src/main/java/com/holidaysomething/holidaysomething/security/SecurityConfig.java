@@ -120,7 +120,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .successHandler(successHandler()) // 로그인 이전 페이지로 이동할때 사용.
         .failureUrl("/user/login?error=true");
 
-//    http.csrf().disable();
+    http.csrf().disable();
 
 //    http.sessionManagement()
 //        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
