@@ -67,6 +67,11 @@ public interface ProductRepository extends JpaRepository<Product, Long>, Product
   Page<Product> findProductByShippingPrice(@Param("shippingPrice") int shippingPrice,
       Pageable pageable);
   /************************************************************* '검색분류'로 검색하는 경우 *************/
+
+  /********** User *************/
+  // 카테고리 id 로 상품 조회하기.
+
+
 }
 
 
