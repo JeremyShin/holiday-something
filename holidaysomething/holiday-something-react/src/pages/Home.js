@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../App.css';
 import styled from 'styled-components';
-import Header from './components/Header/Header';
-import SideBar from './components/SideBar/SideBar';
-import MainContent from './components/MainContent/MainContent';
+import Header from '../components/Header/Header';
+import SideBar from '../components/SideBar/SideBar';
+import MainContent from '../components/MainContent/MainContent';
 
 const MainWrapper = styled.div`
   display: flex;
   margin-top: 40px;
 `;
 
-class App extends Component {
+class Home extends Component {
 
   state = {
-
+    
   }
 
   componentDidMount() {
@@ -50,4 +50,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Home;

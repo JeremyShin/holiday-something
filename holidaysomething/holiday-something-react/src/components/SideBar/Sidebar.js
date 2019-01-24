@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import './SideBar.css'
 
 const SideBarWrapper = styled.div`
@@ -8,17 +9,17 @@ const SideBarWrapper = styled.div`
   margin: 0 20px 0 50px;
 `;
 
-class Sidebar extends Component {
+class SideBar extends Component {
   render() {
     return (
       <SideBarWrapper>
         <h3 className="user-name">{this.props.user.name}님</h3>
-        <p><a href="">주문배송 조회</a></p>
-        <p><a href="">회원정보 수정</a></p>
-        <p><a href="">마일리지 현황</a></p>
+        <p><Link to="/orders">주문배송 조회</Link></p>
+        <p><Link to="/account">회원정보 수정</Link></p>
+        <p><Link to="/mileage">마일리지 현황</Link></p>
       </SideBarWrapper>
     );
   }
 }
 
-export default Sidebar;
+export default SideBar;
