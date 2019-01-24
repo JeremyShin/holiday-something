@@ -37,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
   @Override
   @Transactional(readOnly = true)
   public Product getProduct(Long id) {
-    return productRepository.getOne(id);
+    return productRepository.findProductById(id);
   }
 
   @Override
@@ -82,4 +82,5 @@ public class ProductServiceImpl implements ProductService {
     return productRepository.findProducts(searchClassificationValue, searchClassificationInput,
         largeId, middleId, smallId, dateValue, startDateSelect, endDateSelect, pageable);
   }
+
 }

@@ -66,7 +66,10 @@ public interface ProductRepository extends JpaRepository<Product, Long>, Product
   @Query(value = "SELECT p FROM Product p WHERE p.shippingPrice = :shippingPrice")
   Page<Product> findProductByShippingPrice(@Param("shippingPrice") int shippingPrice,
       Pageable pageable);
-  /************************************************************* '검색분류'로 검색하는 경우 *************/
+
+    /************************************************************* '검색분류'로 검색하는 경우 *************/
+
+    Product findProductById(Long id);
 }
 
 
