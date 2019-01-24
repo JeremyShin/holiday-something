@@ -1,4 +1,5 @@
-function sample4_execDaumPostcode(source) {
+/* kakao map 연동 API */
+function sample4_execDaumPostcode() {
   new daum.Postcode({
     oncomplete: function(data) {
       // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -24,9 +25,9 @@ function sample4_execDaumPostcode(source) {
 
 
       // 우편번호와 주소 정보를 해당 필드에 넣는다.
-      document.getElementById('sample4_postcode').value = data.zonecode;
-      document.getElementById("sample4_roadAddress").value = roadAddr;
-      document.getElementById("sample4_roadAddress").value = data.jibunAddress;
+      document.getElementById('orderRecipientPostcodeInput').value = data.zonecode;
+      document.getElementById("orderRecipientAddress1Input").value = roadAddr;
+      document.getElementById("orderRecipientAddress1Input").value = data.jibunAddress;
 
       var guideTextBox = document.getElementById("guide");
       // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
@@ -45,7 +46,7 @@ function sample4_execDaumPostcode(source) {
       }
 
       // 기존에 입력되어있던 address2 (상세주소) 를 지워준다.
-      let detailedAddress = document.querySelector('#sample4_detailAddress');
+      let detailedAddress = document.querySelector('#orderRecipientAddress2Input');
       detailedAddress.setAttribute("value", "");
       detailedAddress.setAttribute("placeholder", "상세주소를 입력해주세요.");
     }
@@ -53,3 +54,26 @@ function sample4_execDaumPostcode(source) {
 
   ).open();
 }
+
+/* 배송정보 Input에 이미 존재하던 text를 지워주는 API */
+let removeInputText = function () {
+  //수령인 삭제
+  let removeOrderRecipientNameInput = document.querySelector('#orderRecipientNameInput');
+  removeOrderRecipientNameInput.setAttribute("value","");
+
+  let removeOrderRecipientPostcode = document.querySelector('#orderRecipientPostcodeInput');
+  removeOrderRecipientPostcode.setAttribute("value","");
+
+  let removeOrderRecipientAddress1 = document.querySelector('#orderRecipientAddress1Input');
+  removeOrderRecipientAddress1.setAttribute("value","");
+
+  let removeOrderRecipientAddress2 = document.querySelector('#orderRecipientAddress2Input');
+  removeOrderRecipientAddress2.setAttribute("value","");
+
+  let removeOrderRecipientPhoneInput = document.querySelector('#orderRecipientPhoneInput');
+  removeOrderRecipientPhoneInput.setAttribute("value","");
+};
+
+// let useAllMileage = function(){
+//   let
+// };
