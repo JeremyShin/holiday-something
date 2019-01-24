@@ -17,11 +17,4 @@ public class ProgramConfiguration {
     return new Java8TimeDialect();
   }
 
-//  /*
-//  참조 : https://www.baeldung.com/spring-dataIntegrityviolationexception
-//   */
-//  @Bean
-//  public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
-//    return new PersistenceExceptionTranslationPostProcessor();
-//  }
 }

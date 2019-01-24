@@ -25,17 +25,17 @@ public class MemberAddController {
 
     private final MemberAddService memberAddService;
 
-    @GetMapping("/join")
+    @GetMapping("/signup")
     public String memberAdd(ModelMap model) {
 
         Member member = new Member();
         model.addAttribute("member", member);
 
 
-        return "/user/join";
+        return "/user/signup";
     }
 
-    @PostMapping("/join")
+    @PostMapping("/signup")
     public String memberAddPost(
             @Valid @ModelAttribute(value = "member")MemberAddDto memberAddDto,
             BindingResult bindingResult, ModelMap model){
@@ -44,13 +44,13 @@ public class MemberAddController {
             for(ObjectError error : bindingResult.getAllErrors()) {
                 log.info(error.getDefaultMessage());
             }
-            return "/user/join";
+            return "/user/signup";
         } else {
             memberAddDto.setRegDate(LocalDateTime.now());
             memberAddDto.setLastLogin(LocalDateTime.now());
             memberAddService.memberRegister(memberAddDto);
 
-            return "redirect:/user/join";
+            return "/user/index";
         }
 
 
