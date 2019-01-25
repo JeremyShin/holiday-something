@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.repository;
 
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
+import com.holidaysomething.holidaysomething.dto.ProductListImageDto;
 import com.holidaysomething.holidaysomething.repository.custom.ProductRepositoryCustom;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -70,6 +71,15 @@ public interface ProductRepository extends JpaRepository<Product, Long>, Product
 
   /********** User *************/
   // 카테고리 id 로 상품 조회하기.
+  @Query(value = "SELECT p FROM Product p WHERE p.productCategory.id = :categoryId")
+  Page<Product> findProductByCategoryId(@Param("categoryId") long categoryId, Pageable pageable);
+
+
+  //  @Query(value = "SELECT new com.holidaysomething.holidaysomething.dto.ProductListImageDto(p,pi.path,pi.storedFileName) FROM Product p join fetch ProductImage pi on p.id=pi.product.id join fetch ProductCategory pc on pc.id=p.productCategory.id where pi.category=1 and pc.id=:categoryId")
+  //  List<ProductListImageDto> findProductsImageByCategoryId(@Param("categoryId") long categoryId);
+  @Query(value = "SELECT new com.holidaysomething.holidaysomething.dto.ProductListImageDto(p.name,p.sellingPrice,p.originalPrice,p.quantity,p.safeQuantity,p.optionalPriceText,pi.path,pi.storedFileName,pc.id) FROM Product p join fetch ProductImage pi on p.id=pi.product.id join fetch ProductCategory pc on pc.id=p.productCategory.id where pi.category=1 and pc.id=:categoryId")
+  Page<ProductListImageDto> findProductsImageByCategoryId(@Param("categoryId") long categoryId,
+      Pageable pageable);
 
 
 }

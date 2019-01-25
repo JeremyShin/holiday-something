@@ -1,0 +1,18 @@
+package com.holidaysomething.holidaysomething.service.product;
+
+import com.holidaysomething.holidaysomething.dto.ProductListImageDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+/**
+ * @author choijaeyong on 25/01/2019.
+ * @project holidaysomething
+ * @description
+ */
+public interface ProductListService {
+
+  // 유저화면 카테고리 클릭 -> 상품리스트 화면.
+  Page<ProductListImageDto> productList(long categoryId, Pageable pageable);
+
+
+}
