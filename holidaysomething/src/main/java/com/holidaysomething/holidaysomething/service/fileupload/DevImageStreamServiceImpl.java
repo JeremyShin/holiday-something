@@ -74,12 +74,19 @@ public class DevImageStreamServiceImpl implements ImageStreamService {
         }
 
         // Category 1 = Main Image
-        // Category 2 = Description Image
-        if (multipartFile.getName().equals("mainImages")) {
-            productImage.setCategory(1L);
-        } else
-            productImage.setCategory(2L);
-
+        // Category 2 = Sub Image
+        // Category 3 = Description Image
+        switch (multipartFile.getName()) {
+            case "mainImage":
+                productImage.setCategory(1L);
+                break;
+            case "subImages":
+                productImage.setCategory(2L);
+                break;
+            default:
+                productImage.setCategory(3L);
+                break;
+        }
         productRepository.save(productImage);
 
         return productImage.getStoredFileName();
