@@ -77,9 +77,21 @@ public interface ProductRepository extends JpaRepository<Product, Long>, Product
 
   //  @Query(value = "SELECT new com.holidaysomething.holidaysomething.dto.ProductListImageDto(p,pi.path,pi.storedFileName) FROM Product p join fetch ProductImage pi on p.id=pi.product.id join fetch ProductCategory pc on pc.id=p.productCategory.id where pi.category=1 and pc.id=:categoryId")
   //  List<ProductListImageDto> findProductsImageByCategoryId(@Param("categoryId") long categoryId);
-  @Query(value = "SELECT new com.holidaysomething.holidaysomething.dto.ProductListImageDto(p.name,p.sellingPrice,p.originalPrice,p.quantity,p.safeQuantity,p.optionalPriceText,pi.path,pi.storedFileName,pc.id) FROM Product p join fetch ProductImage pi on p.id=pi.product.id join fetch ProductCategory pc on pc.id=p.productCategory.id where pi.category=1 and pc.id=:categoryId")
+  // 소분류 조회하기
+  @Query(value = "SELECT new com.holidaysomething.holidaysomething.dto.ProductListImageDto(p.name,p.sellingPrice,p.originalPrice,p.quantity,p.safeQuantity,p.optionalPriceText,pi.path,pi.storedFileName,pc.id) FROM Product p JOIN FETCH ProductImage pi ON p.id=pi.product.id JOIN FETCH ProductCategory pc ON pc.id=p.productCategory.id WHERE pi.category=1 AND pc.id=:categoryId")
   Page<ProductListImageDto> findProductsImageByCategoryId(@Param("categoryId") long categoryId,
       Pageable pageable);
+
+  // 중분류 조회하기
+  @Query(value = "SELECT new com.holidaysomething.holidaysomething.dto.ProductListImageDto(p.name,p.sellingPrice,p.originalPrice,p.quantity,p.safeQuantity,p.optionalPriceText,pi.path,pi.storedFileName,pc.id) FROM Product p JOIN FETCH ProductImage pi ON p.id=pi.product.id JOIN FETCH ProductCategory pc ON pc.id=p.productCategory.id WHERE pi.category=1 AND pc.parentId=:categoryId")
+  Page<ProductListImageDto> findProductsImageByCategoryId2(@Param("categoryId") long categoryId,
+      Pageable pageable);
+
+  // 대분류 조회하기
+  @Query(value = "SELECT new com.holidaysomething.holidaysomething.dto.ProductListImageDto(p.name,p.sellingPrice,p.originalPrice,p.quantity,p.safeQuantity,p.optionalPriceText,pi.path,pi.storedFileName,pc.id) FROM Product p JOIN FETCH ProductImage pi ON p.id=pi.product.id JOIN FETCH ProductCategory pc ON pc.id=p.productCategory.id WHERE pi.category=1 AND pc.id IN (SELECT pc2.id FROM ProductCategory pc2 WHERE pc2.parentId IN (SELECT pc3.id FROM ProductCategory pc3 WHERE pc3.parentId = :categoryId))")
+  Page<ProductListImageDto> findProductsImageByCategoryId3(@Param("categoryId") long categoryId,
+      Pageable pageable);
+
 
 
 }

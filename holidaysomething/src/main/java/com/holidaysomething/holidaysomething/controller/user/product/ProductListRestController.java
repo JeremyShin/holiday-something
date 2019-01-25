@@ -33,7 +33,6 @@ public class ProductListRestController {
   public ResponseEntity productList(@PathVariable("categoryId") Long categoryId,
       @PageableDefault(size = 5, sort = "name", direction = Direction.ASC) Pageable pageable) {
     ResponseEntity entity = null;
-
     try {
       entity = new ResponseEntity(productListService.productList(categoryId, pageable),
           HttpStatus.OK);

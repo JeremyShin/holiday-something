@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
  */
 public interface ProductListService {
 
-  // 유저화면 카테고리 클릭 -> 상품리스트 화면.
+  // 유저화면 소분류 카테고리 클릭 -> 상품리스트 화면.
   Page<ProductListImageDto> productList(long categoryId, Pageable pageable);
 
 

@@ -23,4 +23,10 @@ public interface ProductCategoryRepository extends JpaRepository<ProductCategory
 
   @Query(value = "select pc from ProductCategory pc where pc.id=(:id)")
   ProductCategory findByIdContaining(@Param("id") Long id);
+
+
+  /**********User**********/
+
+  @Query(value = "select pc from ProductCategory  pc where pc.id= :id")
+  ProductCategory findProductCategoryById(@Param("id") Long id);
 }

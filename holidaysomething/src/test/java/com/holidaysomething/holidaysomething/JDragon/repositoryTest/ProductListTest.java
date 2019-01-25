@@ -52,11 +52,32 @@ public class ProductListTest {
   }
 
   @Test
-  public void 카테고리별상품과이미지조회() {
+  public void 소분류카테고리별상품과이미지조회() {
     Page<ProductListImageDto> products = productRepository
         .findProductsImageByCategoryId(43l, pageable);
 
     //assertThat(products.getTotalElements(), is(3l));
     assertThat(products.getTotalElements(), is(3l));
+  }
+
+  @Test
+  public void 중분류카테고리별상품과이미지조회() {
+    Page<ProductListImageDto> products = productRepository
+        .findProductsImageByCategoryId2(37l, pageable);
+
+//    for(ProductListImageDto dto : products) {
+//      log.info("=== " + dto.getProductName() + "  " +dto.getImageName() + "  " + dto.getImagePath() + "  ");
+//    }
+    assertThat(products.getTotalElements(), is(9l));
+  }
+
+  @Test
+  public void 대분류카테고리별상품과이미지조회() {
+    Page<ProductListImageDto> products = productRepository
+        .findProductsImageByCategoryId3(4l, pageable);
+//    for(ProductListImageDto dto : products) {
+//      log.info("=== " + dto.getProductName() + "  " +dto.getImageName() + "  " + dto.getImagePath() + "  ");
+//    }
+    assertThat(products.getTotalElements(), is(15l));
   }
 }
