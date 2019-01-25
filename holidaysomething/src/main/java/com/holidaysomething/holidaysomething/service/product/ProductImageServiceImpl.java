@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @Slf4j
@@ -17,7 +19,11 @@ public class ProductImageServiceImpl implements ProductImageService {
 
     @Override
     public ProductImage getProductImage(String storedFileName) {
-
         return productImageRepository.findByStoredFileName(storedFileName);
+    }
+
+    @Override
+    public List<ProductImage> getProductImages(Long productId, Long category) {
+        return productImageRepository.findByProductIdAndCategory(productId, category);
     }
 }

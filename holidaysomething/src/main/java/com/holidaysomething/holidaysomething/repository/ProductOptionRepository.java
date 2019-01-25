@@ -33,4 +33,7 @@ public interface ProductOptionRepository extends JpaRepository<ProductOption, Lo
   // 특정 상품 옵션들 출력하기.
   @Query(value = "select po from ProductOption po where po.product.id = (:productId)")
   Page<ProductOption> findByProductId(@Param("productId") Long productId, Pageable pageable);
+
+
+  List<ProductOption> findByProductId(Long productId);
 }
