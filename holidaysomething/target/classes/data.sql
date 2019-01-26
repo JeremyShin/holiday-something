@@ -284,67 +284,67 @@ INSERT INTO orders (id, order_number, date, total_price, status, mileage, member
 -- INSERT INTO product_category (id,name,parent_id,orders) VALUES (29,'레이어 폴더/파일폴더',8,29);
 -- INSERT INTO product_category (id,name,parent_id,orders) VALUES (30,'먼슬리플래너',14,30);
 -- INSERT INTO product_category (id,name,parent_id,orders) VALUES (31,'위클리플래너',9,31);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'STATIONERY',0,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'D.I.Y',0,2);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'FASHION',0,3);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'FOOD',0,4);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'STATIONERY',0,1,1);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'D.I.Y',0,2,1);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'FASHION',0,3,1);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'FOOD',0,4,1);
 -- STATIONERY
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'PENCIL',1,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'POSTIT',1,2);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'NOTE',1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'PENCIL',1,1,2);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'POSTIT',1,2,2);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'NOTE',1,3,2);
 -- STATIONERY -> PENCIL
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'4B',5,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'Sharp',5,2);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'Highlighter',5,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'4B',5,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'Sharp',5,2,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'Highlighter',5,3,3);
 -- STATIONERY -> POSTIT
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'Colorful',6,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'Character',6,2);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'Big',6,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'Colorful',6,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'Character',6,2,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'Big',6,3,3);
 -- STATIONERY -> NOTE
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'Lined',7,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'Non-Lined',7,2);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'Diary',7,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'Lined',7,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'Non-Lined',7,2,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'Diary',7,3,3);
 -- DIY
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'TOY',2,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'FURNITURE',2,2);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'BAG',2,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'TOY',2,1,2);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'FURNITURE',2,2,2);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'BAG',2,3,2);
 -- DIY -> TOY
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'LEGO',17,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'DOLL',17,2);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'LEGO',17,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'DOLL',17,2,3);
 -- DIY -> FURNITURE
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'DESK',18,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'CHAIR',18,2);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'TABLE',18,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'DESK',18,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'CHAIR',18,2,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'TABLE',18,3,3);
 -- DIY -> BAG
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'BACKPACK',19,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'CROSSBAG',19,2);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'HANDBAG',19,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'BACKPACK',19,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'CROSSBAG',19,2,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'HANDBAG',19,3,3);
 -- FASHION
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'MAN',3,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'WOMAN',3,2);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'MAN',3,1,2);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'WOMAN',3,2,2);
 -- FASHION -> MAN
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'TOP',28,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'BOTTOM',28,2);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'SHOES',28,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'TOP',28,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'BOTTOM',28,2,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'SHOES',28,3,3);
 -- FASHION -> WOMAN
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'TOP',29,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'BOTTOM',29,2);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'SHOES',29,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'TOP',29,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'BOTTOM',29,2,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'SHOES',29,3,3);
 -- FOOD 36,37,38
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'SEAFOOD',4,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'MEAT',4,2);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'DESSERT',4,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'SEAFOOD',4,1,2);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'MEAT',4,2,2);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'DESSERT',4,3,2);
 -- FOOD -> SEAFOOD 39,40,41
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'SALMON',36,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'CLAM',36,2);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'OCTOPUS',36,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'SALMON',36,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'CLAM',36,2,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'OCTOPUS',36,3,3);
 -- FOOD -> MEAT 42,43,44
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'BEEF',37,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'PORK',37,2);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'CHICKEN',37,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'BEEF',37,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'PORK',37,2,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'CHICKEN',37,3,3);
 -- FOOD -> DESSERT 45,46
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'TEA',38,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'ICECREAM',38,2);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'TEA',38,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'ICECREAM',38,2,3);
 
 
 

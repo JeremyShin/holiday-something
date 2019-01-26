@@ -32,6 +32,9 @@
 
     The End~
   -->
+  <div class="bg-success">
+    <p> 카테고리 설명 배치 </p>
+  </div>
 
 
 </div>
@@ -39,7 +42,23 @@
 <div layout:fragment="userContents">
   <!-- 헤더에서 선택한 카테고리에 따라 다른 상품결과가 출력되어야 한다.-->
 
-  <div class="user-content"> 내용물이 들어갈 거예요</div>
+  <div>
+    <p> 정렬하기배치</p>
+  </div>
+
+  <div style="display: grid; margin-left: 100px; margin-right: 100px;
+    grid-template-columns: repeat(auto-fit, 25%);" id="productList" class=".col-xs-6 .col-md-4">
+    <!-- class=".col-xs-6 .col-md-4" -->
+    <div id="product" th:each="productListDto : ${productListImageDtos}">
+      <div style="padding:20px;">
+        <img class="img-responsive"
+             th:src="${productListDto.imagePath + productListDto.imageName}"/>
+        <p th:text="${productListDto.productName}"></p>
+        <p th:text="${productListDto.sellingPrice}"></p>
+      </div>
+    </div>
+
+  </div>
 
 </div>
 

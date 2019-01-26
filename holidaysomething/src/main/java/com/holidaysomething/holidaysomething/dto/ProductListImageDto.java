@@ -23,6 +23,7 @@ public class ProductListImageDto {
   private String imagePath;
   private String imageName;
   private long categoryId;
+  private String imageOutputName;
 
   public ProductListImageDto(String productName, Integer sellingPrice,
       Integer originalPrice, Integer quantity, Integer safeQuantity,

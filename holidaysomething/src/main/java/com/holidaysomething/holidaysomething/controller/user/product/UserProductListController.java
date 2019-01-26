@@ -11,6 +11,9 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,28 +23,26 @@ import org.springframework.web.bind.annotation.RestController;
  * @project holidaysomething
  * @description
  */
-@RestController
+@Controller
 @RequestMapping("/product")
 @RequiredArgsConstructor
 @Slf4j
-public class ProductListRestController {
+public class UserProductListController {
 
   private final ProductListService productListService;
 
   // 소분류 카테고리 눌렀을 때 조회돼야 하는 상품 리슷트!
-  @RequestMapping("/{categoryId}")
-  public ResponseEntity productList(@PathVariable("categoryId") Long categoryId,
-      @PageableDefault(size = 5, sort = "name", direction = Direction.ASC) Pageable pageable) {
-    ResponseEntity entity = null;
-    try {
-      entity = new ResponseEntity(productListService.productList(categoryId, pageable),
-          HttpStatus.OK);
-    } catch (Exception e) {
-      e.printStackTrace();
-      entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
+  @GetMapping("/{categoryId}")
+  public String productList(@PathVariable("categoryId") Long categoryId,
+      @PageableDefault(size = 10, sort = "name", direction = Direction.ASC) Pageable pageable
+      , ModelMap model) {
 
-    return entity;
+    Page<ProductListImageDto> productListImageDtos = productListService
+        .productList(categoryId, pageable);
+
+    model.addAttribute("productListImageDtos", productListImageDtos);
+
+    return "user/product/list";
   }
 
 

@@ -38,6 +38,7 @@ public class ProductListServiceImpl implements ProductListService {
       // 중분류.
       return productRepository.findProductsImageByCategoryId2(categoryId, pageable);
     } else {
+      // 소분류.
       return productRepository.findProductsImageByCategoryId(categoryId, pageable);
     }
   }
