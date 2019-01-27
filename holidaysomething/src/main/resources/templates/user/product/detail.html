@@ -60,21 +60,22 @@
         </div>
     </div>
     <div class='right-box'>
-        상품 이름 :
-        <br>
-        원가 (or 판매가) :
-        <br>
-        (할인율 :)
-        <br>
-        적립금 :
-        <br>
-        옵션 선택, 해당 옵션에 대한 상품의 수량
-        <br>
-        옵션 선택, 상품 수량 칸 추가하기 버튼
-        <br>
-        왼쪽 : cart에 담기 버튼 (선택한 옵션과 상품의 수량이 넘어감)
-        <br>
-        오른쪽 : 즉시 주문하기 버튼 (cart에 담기 버튼 바로 옆)
+        <form method="post" action="/user/product/order">
+            <br>
+            <p th:text="@{'원가 (or 판매가) : ' + ${product.originalPrice}} + '원'">원가와 판매가 중 어떤 것을 보여줄까?</p>
+
+            <p>할인율 : 컬럼이 없다.. 어떻게 하기로 했더라??</p>
+
+            <p th:text="@{'적립금 : ' + ${product.mileage}}">해당 상품을 구매할 시 적립될 적립금을 보여줍니다.</p>
+
+            옵션 선택, 해당 옵션에 대한 상품의 수량
+            <br>
+            옵션 선택, 상품 수량 칸 추가하기 버튼(이야기 해보고...결정하자)
+            <br>
+            왼쪽 : cart에 담기 버튼 (선택한 옵션과 상품의 수량, 상품 번호가 넘어감)
+            <br>
+            오른쪽 : 즉시 주문하기 버튼 (선택한 옵션과 상품의 수량, 상품 번호가 넘어감) (cart에 담기 버튼 바로 우측)
+        </form>
         <br>
         <br>
         <br>
@@ -98,12 +99,23 @@
         </div>
 
         <div>
-            이건 어디로 올까
+            상품 설명 밑에는 배송정보 같은 것을 보여줄거야
+        </div>
+
+        <div>
+            음...best 상품은 user-content 밖에 만드는 게 맞겠지?? cssCss
+            일단 best 상품을 잘 가져오는지 확인!
+            아;;;;;;;;; best 상품의 main 이미지를 가져와서 보여줘야 되는구나....
+            <br>
+            <tr th:each="bestProduct: ${bestProducts}">
+                <td th:text="${bestProduct.id}" /><br>
+                <td th:text="${bestProduct.name}" /><br><br>
+            </tr>
         </div>
 
 
-
     </div>
+
     <script src="/static/editor/jquery/dist/jquery.js"></script>
     <script src="/static/editor/tui-code-snippet/dist/tui-code-snippet.js"></script>
     <script src="/static/editor/markdown-it/dist/markdown-it.js"></script>

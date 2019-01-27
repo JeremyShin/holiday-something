@@ -91,4 +91,10 @@ public class ProductServiceImpl implements ProductService {
     PageRequest pageRequest = PageRequest.of(0, 5);
     return productRepository.findByProductCategoryIdAndIdIsNotOrderBySellingPrice(categoryId, productId, pageRequest);
   }
+
+  @Override
+  @Transactional(readOnly = true)
+  public Product getProduct(Long categoryId, Long id) {
+      return productRepository.findByProductCategoryIdAndId(categoryId, id);
+  }
 }

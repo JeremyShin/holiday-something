@@ -69,7 +69,9 @@ public interface ProductRepository extends JpaRepository<Product, Long>, Product
 
     /************************************************************* '검색분류'로 검색하는 경우 *************/
 
-    Product findProductById(Long id);
+  Product findProductById(Long id);
+
+  Product findByProductCategoryIdAndId(Long productCategoryId, Long id);
 
   // 해당 카테고리의 판매량이 높은 순서로 상품 검색(자기 자신은 제외)
   // SELECT * FROM product WHERE product_category_id = :categoryId AND id != :productId ORDER BY selling_quantity DESC limit 5;

@@ -30,14 +30,15 @@ public class UserProductController {
                                 @PathVariable("productId") Long productId,
                                 ModelMap modelMap) {
 
-        Product product = productService.getProduct(productId);
+        Product product = productService.getProduct(categoryId, productId);
 
+        // 상품 그 자체
+        modelMap.addAttribute("product", product);
         // 상품의 상세 설명 내용
         modelMap.addAttribute("productDescription", product.getProductDetail().getDescription());
         // 해당 상품에 포함되는 옵션들
         modelMap.addAttribute("productOptions", productOptionService.getProductOptionsByProductId(productId));
         // 해당 카테고리 판매량 Top 5
-        // SELECT * FROM product WHERE product_category_id = :categoryId AND id = :productId ORDER BY selling_quantity DESC limit 5;
         modelMap.addAttribute("bestProducts", productService.getBestFiveProduct(categoryId, productId));
         // 해당 상품의 MainImage(1L) & SubImage(2L)
         modelMap.addAttribute("mainImage", productImageService.getProductImages(productId, 1L));

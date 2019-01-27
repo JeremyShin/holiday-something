@@ -21,6 +21,7 @@ com/holidaysomething/holidaysomething/security/AuthFailureHandler.class
 com/holidaysomething/holidaysomething/controller/user/UserMainController.class
 com/holidaysomething/holidaysomething/dto/ProductDetailDto.class
 com/holidaysomething/holidaysomething/service/member/MemberAddServiceImpl.class
+com/holidaysomething/holidaysomething/controller/user/product/UserProductController.class
 com/holidaysomething/holidaysomething/domain/QProductDetail.class
 com/holidaysomething/holidaysomething/controller/admin/AdminMainController.class
 com/holidaysomething/holidaysomething/domain/QOrder.class
