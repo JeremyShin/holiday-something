@@ -730,7 +730,7 @@ INSERT INTO product_detail(id, description) VALUES (null, '시뻘건 사과를 �
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
 VALUES (45,'11231319','국내','사과즙',NULL,10000,10,29800,2500,45,45,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'appletea.jpg', 'https://img.29cm.co.kr/contents/itemDetail/201801/', '2018-12-03 09:23:35', 13900.0, 'cut4_120180126142433.jpg?width=700', '2018-12-03 09:33:35', 44);
+VALUES (null, 1, 'image/jpeg', 'appletea.jpg', 'https://img.29cm.co.kr/contents/itemDetail/201801/', '2018-12-03 09:23:35', 13900.0, 'cut4_120180126142433.jpg?width=700', '2018-12-03 09:33:35', 45);
 
 
 
