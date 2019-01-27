@@ -26,6 +26,8 @@ public class DevImageStreamServiceImpl implements ImageStreamService {
 
     // Linux: /home/{user}/test
     private static String fileUploadDir = System.getProperty("user.home") + "/test/";
+    // Local Server upload
+//    private static String fileUploadDir = "./localImageUpload/";
 
     @Override
     @Transactional

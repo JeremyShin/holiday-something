@@ -37,7 +37,8 @@ public class UserProductController {
         // 해당 상품에 포함되는 옵션들
         modelMap.addAttribute("productOptions", productOptionService.getProductOptionsByProductId(productId));
         // 해당 카테고리 판매량 Top 5
-        modelMap.addAttribute("bestProducts");
+        // SELECT * FROM product WHERE product_category_id = :categoryId AND id = :productId ORDER BY selling_quantity DESC limit 5;
+        modelMap.addAttribute("bestProducts", productService.getBestFiveProduct(categoryId, productId));
         // 해당 상품의 MainImage(1L) & SubImage(2L)
         modelMap.addAttribute("mainImage", productImageService.getProductImages(productId, 1L));
         modelMap.addAttribute("subImage", productImageService.getProductImages(productId, 2L));
