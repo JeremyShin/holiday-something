@@ -56,6 +56,7 @@ public class UserProductListController {
 
     List<ProductCategory> categoryList = productListCategoryDto.getCategoryList();
 
+    model.addAttribute("categoryId", categoryId);
     model.addAttribute("productListImageDtos", productListImageDtos);
     model.addAttribute("categoryList", categoryList);
 
