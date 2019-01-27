@@ -1,8 +1,11 @@
 package com.holidaysomething.holidaysomething.controller.user.product;
 
+import com.holidaysomething.holidaysomething.domain.ProductCategory;
+import com.holidaysomething.holidaysomething.dto.ProductListCategoryDto;
 import com.holidaysomething.holidaysomething.dto.ProductListImageDto;
 import com.holidaysomething.holidaysomething.service.product.ProductListService;
 import com.holidaysomething.holidaysomething.service.product.ProductService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -37,10 +40,24 @@ public class UserProductListController {
       @PageableDefault(size = 10, sort = "name", direction = Direction.ASC) Pageable pageable
       , ModelMap model) {
 
-    Page<ProductListImageDto> productListImageDtos = productListService
-        .productList(categoryId, pageable);
+    if (categoryId == 0l) {
+      log.info("================== categoryId 가 0이다.main 으로 간다.");
+      return "redirect:/";
+    }
+
+//    Page<ProductListImageDto> productListImageDtos = productListService
+//        .productList(categoryId, pageable);
+
+    ProductListCategoryDto productListCategoryDto
+        = productListService.productList(categoryId, pageable);
+
+    Page<ProductListImageDto> productListImageDtos
+        = productListCategoryDto.getProductListImageDtoPage();
+
+    List<ProductCategory> categoryList = productListCategoryDto.getCategoryList();
 
     model.addAttribute("productListImageDtos", productListImageDtos);
+    model.addAttribute("categoryList", categoryList);
 
     return "user/product/list";
   }

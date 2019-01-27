@@ -23,7 +23,7 @@
     <a th:href="@{/admin}">Admin</a>
   </span>
 
-  <!-- 사용자가 인증 되었을 때 보인다. -->
+  <!-- 사용자가 인증 되었을 때 보인다. name 은 principal 의 getName 인듯...?-->
   <div sec:authorize="isAuthenticated()">
     Hello <span sec:authentication="name"></span>
   </div>
