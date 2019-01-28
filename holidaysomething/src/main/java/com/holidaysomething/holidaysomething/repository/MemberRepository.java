@@ -85,6 +85,9 @@ public interface MemberRepository extends JpaRepository<Member, Long>, MemberRep
                 + "    INNER JOIN ProductImage as pi ON p.id = pi.product.id "
                 + "WHERE m.id = (:userId)")
   List<CurrentMemberDto> findCurrentMember(@Param("userId") Long userId);
+
+  // 멤버를 등록합시다.
+  Member save(Member member);
 }
 
 /*

@@ -19,13 +19,11 @@ public interface ProductService {
 
   Page<Product> findAll(Pageable pageable);
 
-  ProductImage saveProductImage(ProductImage productImage);
-
   List<Product> getAllProducts();
 
   Product getProduct(Long id);
 
-  // 모든 상품 or 검색된 상품 by Jun
+  // 모든 상품 or 검색된 상품
   Page<Product> findProductAllOrSearch(SearchDto searchDto, Pageable pageable);
 
   Page<Product> findProducts(String productSearchClassificationValue,

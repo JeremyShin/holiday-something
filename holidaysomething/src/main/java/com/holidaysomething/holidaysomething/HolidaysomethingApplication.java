@@ -1,8 +1,8 @@
 package com.holidaysomething.holidaysomething;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 /*
@@ -17,7 +17,14 @@ import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 public class HolidaysomethingApplication {
 // implements WebMvcConfigurer
 
+  // AWS Properties 설정을 읽을 수 있도록 함.
+  public static final String APPLICATION_LOCATION = "spring.config.location=" +
+      "classpath:application.properties," +
+      "classpath:aws.properties";
+
   public static void main(String[] args) {
-    SpringApplication.run(HolidaysomethingApplication.class, args);
+    new SpringApplicationBuilder(HolidaysomethingApplication.class)
+        .properties(APPLICATION_LOCATION)
+        .run(args);
   }
 }

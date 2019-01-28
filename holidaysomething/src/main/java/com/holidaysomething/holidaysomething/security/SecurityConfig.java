@@ -17,7 +17,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 /**
  * @author choijaeyong on 18/01/2019.
  * @project holidaysomething
- * @description
+ * @description forbidden(403) 에러시 봐야할 곳. 1. Ajax 로 post 전송 할 때, forbidden 오류가 날 수 있다. 그때 ajax 메소드
+ * 안에 headers: {'X-CSRF-Token': $('input[name="_csrf"]').val()} 추가해주면 된다.
+ *
+ * 2. root로 로그인을 하지 않고 /admin/** 로 접근하면 forbidden 에러가 난다.
  */
 
 //@EnableAutoConfiguration
@@ -49,6 +52,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Bean
   public AuthenticationSuccessHandler successHandler() {
     return new AuthSuccessHandler("/");  // default로 이동할 url
+  }
+
+  @Bean
+  public AuthFailureHandler failureHandler() {
+    return new AuthFailureHandler();
   }
 
   // 세션 동시에 몇개 존재할 수 있게 할건지 정하는 빈?? baeldung
@@ -112,7 +120,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .usernameParameter("loginId").passwordParameter("password")
 //        .defaultSuccessUrl("/user/after")
         .successHandler(successHandler()) // 로그인 이전 페이지로 이동할때 사용.
+//        .failureHandler(failureHandler());
         .failureUrl("/user/login?error=true");
+
+    /*
+    예외처리??? 로그인 id, password 입력 글자수 제한은 정규표현식 이용해서 프론트에서도
+    한번 막아줄거고. 백엔드에서 어떻게 해야할까?
+    로그인 아이디 형식은 맞는데 db에 회원이 없을 경우는 예외처리가 되어있다.
+    근데 입력된 로그인 아이디 형식이 범위에 어긋나면. 틀린 형식 입니다 메시지를 화면에 보여주고
+    싶은데....
+
+    1. successHandler 에서 throw 예외처리를 해주면?? 끝?
+    2. failureHandler() 에서 설정...? 근데 뭐가 오류인지 전달받는게 없으면 처리를 못하지 않나?
+    3. failureUrl로 처리? /user/login 에 파라미터 추가해주고... 아 아닌듯.
+     */
 
 //    http.csrf().disable();
 
