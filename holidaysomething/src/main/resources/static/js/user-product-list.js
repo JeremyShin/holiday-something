@@ -1,8 +1,10 @@
 window.onload = function () {
   let categoryId = document.getElementById("hiddenCategoryId").value;
+  let bigCategoryName = document.getElementById("hiddenBigCategoryName").value;
 
   // 카테고리 id에 따라 banner-title, banner-description 에 다르게 내용을 채워주면 된다.
   console.log("categoryId : " + categoryId);
+  console.log("대분류만 나와야함. bigCategoryName : " + bigCategoryName);
   if (categoryId == 4) {
     let bannerTitleDiv = document.getElementById("banner-title");
     let bannerDescriptionDiv = document.getElementById("banner-description");
