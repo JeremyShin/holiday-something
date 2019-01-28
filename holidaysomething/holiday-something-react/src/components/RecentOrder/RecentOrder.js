@@ -11,7 +11,7 @@ class RecentOrder extends Component {
 
     return (
       <RecentOrderWrapper>
-        <h2>최근 주문</h2>
+        <h3>최근 주문</h3>
         <table>
           <thead>
             <tr>

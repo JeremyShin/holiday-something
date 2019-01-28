@@ -6,7 +6,7 @@ class MyMileage extends Component {
 
     return (
       <div>
-        <h2>마일리지 현황</h2>
+        <h3>마일리지 현황</h3>
         <table>
           <thead>
             <tr>

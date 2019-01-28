@@ -7,7 +7,7 @@ class OrderDeliverySearch extends Component {
 
     return (
       <div>
-        <h2>주문배송 조회</h2>
+        <h3>주문배송 조회</h3>
         <table>
           <thead>
             <tr>

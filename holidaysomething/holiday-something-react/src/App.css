@@ -2,3 +2,65 @@
   width: 200px;
   height: auto;
 }
+
+.tbl-list {
+  list-style: none;
+}
+
+.tbl-list p {
+  margin: 0;
+}
+
+.tbl-tr {
+  display: flex;
+}
+
+.tbl-tr-email .tbl-td {
+  display: flex;
+}
+
+.btn-black {
+  width: 111px;
+  min-width: 82px;
+  text-align: center;
+  margin-left: 7px;
+  padding: 0 12px;
+  border-radius: 2px;
+  border: 1px solid #303033;
+  background: #303033;
+  color: #fff;
+  font-size: 13px;
+  line-height: 40px;
+}
+
+.btn-white {
+  width: 111px;
+  min-width: 82px;
+  text-align: center;
+  margin-left: 7px;
+  padding: 0 12px;
+  border-radius: 2px;
+  border: 1px solid #dfdfdf;
+  background: #fff;
+  color: #303033;
+  font-size: 13px;
+  line-height: 40px;
+}
+
+.dash {
+  width: 6%;
+  line-height: 40px;
+  text-align: center;
+}
+
+.hp-in {
+  display: flex;
+}
+
+.tel-field {
+  display: flex;
+}
+
+.btn-box {
+  display: flex;
+}

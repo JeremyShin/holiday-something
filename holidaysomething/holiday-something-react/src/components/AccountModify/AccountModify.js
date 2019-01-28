@@ -2,17 +2,154 @@ import React, { Component } from 'react';
 
 class AccountModify extends Component {
   render() {
-    // const { user } = this.props;
+    const { user } = this.props;
 
     return (
       <div>
-        <h2>회원정보 수정</h2>
-        
-        <table>
-          <tr>
-            
-          </tr>
-        </table>
+        <section className="my-modify">
+          <h3>회원정보 수정</h3>
+
+          <ul className="tbl-list">
+            <li className="tbl-tr tbl-tr-id">
+              <div className="tbl-th">
+                <strong>아이디</strong>
+              </div>
+              <div className="tbl-td">
+                <p>{user.loginId}</p>
+              </div>
+            </li>
+            <li className="tbl-tr tbl-tr-email">
+              <div className="tbl-th">
+                <strong>이메일</strong>
+              </div>
+              <div className="tbl-td">
+                <p>{user.email}</p>
+                <button className="btn-black">이메일 변경</button>
+              </div>
+            </li>
+            <li className="tbl-tr tbl-tr-password">
+              <div className="tbl-th">
+                <strong>비밀번호 변경</strong>
+              </div>
+              <div className="tbl-td">
+                <form>
+                  <div>
+                    <label for="user_password">현재 비밀번호</label>
+                    <input type="password" id="user_password" />
+                  </div>
+                  <div>
+                    <label for="new_password">신규 비밀번호</label>
+                    <input type="password" id="new_password" />
+                  </div>
+                  <div>
+                    <label for="confirm_password">신규 비밀번호 확인</label>
+                    <input type="password" id="confirm_password" />
+                  </div>
+                  <button className="btn-black">비밀번호 변경</button>
+                </form>
+              </div>
+            </li>
+            <li className="tbl-tr tbl-tr-name">
+              <div className="tbl-th">
+                <strong>이름</strong>
+              </div>
+              <div className="tbl-td">
+                <p>{user.name}</p>
+              </div>
+            </li>
+            <li className="tbl-tr tbl-tr-tel">
+              <div className="tbl-th">
+                <strong>휴대폰 번호</strong>
+              </div>
+              <div className="tbl-td">
+                {/* 기존 휴대폰 정보 보여주는 부분 */}
+                <div className="hp-in">
+                  <div className="tel-field">
+                    <div className="input-box">???</div>
+                    <div className="dash">-</div>
+                    <div className="input-box">???</div>
+                    <div className="dash">-</div>
+                    <div className="input-box">???</div>
+                  </div>
+                  <button className="btn-black" type="button">휴대폰번호 변경</button>
+                </div>
+
+                {/* 휴대폰 정보 수정 input */}
+                <div className="edit-box">
+                  <div className="hp-in">
+                    <form>
+                      <div className="tel-field">
+                        <div className="user-cell-first">
+                          <select>
+                            <option value="010">010</option>
+                            <option value="011">011</option>
+                            <option value="016">016</option>
+                            <option value="017">017</option>
+                            <option value="018">018</option>
+                            <option value="019">019</option>
+                          </select>
+                        </div>
+                        <div className="dash">-</div>
+                        <div className="input-box">???</div>
+                        <div className="dash">-</div>
+                        <div className="input-box">???</div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li className="tbl-tr tbl-tr-addr">
+              <div className="tbl-th">
+                <strong>주소</strong>
+              </div>
+              <div className="tbl-td">
+                <div className="in-row">
+                  <div className="zip-box">
+                    <div className="box">{user.postcode}</div>
+                  </div>
+                </div>
+                <div className="in-half">
+                  <div className="input-box">
+                    <input type="text" />
+                  </div>
+                  <div className="input-box">
+                    <input type="text" />
+                  </div>
+                  <p className="info">주소를 수정할 경우 '기본배송지정보' 도 추가됩니다.</p>
+                </div>
+              </div>
+            </li>
+            <li className="tbl-tr tbl-tr-birth">
+              <div className="tbl-th">
+                <strong>생일</strong>
+              </div>
+              <div className="tbl-td">
+                <form>
+                  <div className="in-row">
+                    <span className="input-box">
+                      <input name="birth-year" />
+                    </span>
+                    <span className="split">년</span>
+                    <span className="input-box">
+                      <input name="birth-year" />
+                    </span>
+                    <span className="split">월</span>
+                    <span className="input-box">
+                      <input name="birth-year" />
+                    </span>
+                    <span className="split">일</span>
+                  </div>
+                </form>
+              </div>
+            </li>
+          </ul>
+
+          <div className="btn-box">
+            <button className="btn-white" type="reset">취소</button>
+            <button className="btn-black" type="submit">저장</button>
+          </div>
+        </section>
       </div>
     );
   }
