@@ -18,6 +18,13 @@
 <!--<th:block layout:fragment="css">-->
 <!--</th:block>-->
 <div layout:fragment="userTitle">
+  <input type="hidden" id="hiddenCategoryId" th:value="${categoryId}"/>
+  <input type="hidden" id="hiddenBigCategoryName" th:value="${bigCategoryName}"/>
+
+  <!-- 사용자 스크립트 추가 -->
+  <th:block layout:fragment="script">
+    <script th:src="@{/static/js/user-product-list.js}"></script>
+  </th:block>
   <!--------------------------
             | Product List |
             -------------------------->
@@ -43,12 +50,22 @@
 
   <!-- class="bg-success" -->
   <div style="background-color: #dff0d8; padding: 20px;" class="jumbotron">
+    <div id="banner-title">
 
+    </div>
+
+    <div id="banner-description">
+
+    </div>
     <h2>Hello, world!</h2>
     <p> 카테고리 설명 배치 </p>
     <p> 여기 위치에 . 파스텔 톤으루다가~</p>
-
   </div>
+
+  <!--<div th:if="${categoryId == 4}"  style="display: block; background-color: #dff0d8; padding: 20px;" class="jumbotron">-->
+  <!--<h2>Hello, world!</h2>-->
+  <!--<p> none </p>-->
+  <!--</div>-->
 
 
 </div>

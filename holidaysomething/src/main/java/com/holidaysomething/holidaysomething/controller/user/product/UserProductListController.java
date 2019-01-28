@@ -56,9 +56,17 @@ public class UserProductListController {
 
     List<ProductCategory> categoryList = productListCategoryDto.getCategoryList();
 
+    // 현재 카테고리
     model.addAttribute("categoryId", categoryId);
+
+    // 상품 리스트
     model.addAttribute("productListImageDtos", productListImageDtos);
+
+    // 카테고리 경로 표현.
     model.addAttribute("categoryList", categoryList);
+
+    // 대분류 마다 다른 배너를 출력하기 위해.
+    model.addAttribute("bigCategoryName", categoryList.get(1).getName());
 
     return "user/product/list";
   }
