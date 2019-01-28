@@ -74,9 +74,9 @@
                     <select>
                         <option disabled selected>옵션을 선택하세요</option>
                         <option>없음</option>
-                        <option th:each="productOption : ${productOptions}"
-                                th:value="${productOption.id}" name="optionId"
-                                th:utext="${productOption.name}"/>
+                        <option name="optionId" th:each="productOption : ${productOptions}"
+                                th:value="${productOption.id}"
+                                th:utext="${productOption.name}"></option>
                     </select>
                 </th>
                 <th>
@@ -91,9 +91,9 @@
             <br><br>
             왼쪽 : cart에 담기 버튼 (선택한 옵션과 상품의 수량, 상품 번호가 넘어감)<br>
             오른쪽 : 즉시 주문하기 버튼 (선택한 옵션과 상품의 수량, 상품 번호가 넘어감)<br>
+            <input type="hidden" value="${product.id}" name="productId"/>
             <input type="submit" value="BUY NOW"/>
         </form>
-        머지를 위하여
         <br>
         <br>
         <br>
