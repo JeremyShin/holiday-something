@@ -14,7 +14,7 @@ class Home extends Component {
 
   state = {
     center: 'home',
-  }
+  };
 
   // await을 쓰려면 바깥에 async가 있어야 한다
   _getUser = async () => {

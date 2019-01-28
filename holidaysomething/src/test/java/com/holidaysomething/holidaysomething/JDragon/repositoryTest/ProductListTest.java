@@ -44,12 +44,12 @@ public class ProductListTest {
   }
 
 
-  @Test
-  public void 카테고리별상품리스트조회() {
-    Page<Product> products = productRepository.findProductByCategoryId(43l, pageable);
-
-    assertThat(products.getTotalElements(), is(3));
-  }
+//  @Test
+//  public void 카테고리별상품리스트조회() {
+//    Page<Product> products = productRepository.findProductByCategoryId(43l, pageable);
+//
+//    assertThat(products.getTotalElements(), is(3));
+//  }
 
   @Test
   public void 소분류카테고리별상품과이미지조회() {
