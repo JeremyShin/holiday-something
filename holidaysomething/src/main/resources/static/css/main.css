@@ -154,5 +154,24 @@
 }
 
 .user-header-category{
-  float:left; width: 20%; padding:10px; text-align: center;
+  float: left;
+  width: 25%;
+  padding: 20px;
+  text-align: center;
+}
+
+.user-header-category .middle-category {
+  display: none; /* 평상시에는 서브메뉴가 안보이게 하기 */
+  height: auto;
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  position: absolute;
+  width: 200px;
+  z-index: 200;
+  list-style: none; /* 리스트 쩜 없애기 */
+}
+
+.user-header-category:hover .middle-category {
+  display: block; /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
 }

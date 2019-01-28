@@ -284,19 +284,71 @@ INSERT INTO orders (id, order_number, date, total_price, status, mileage, member
 -- INSERT INTO product_category (id,name,parent_id,orders) VALUES (29,'레이어 폴더/파일폴더',8,29);
 -- INSERT INTO product_category (id,name,parent_id,orders) VALUES (30,'먼슬리플래너',14,30);
 -- INSERT INTO product_category (id,name,parent_id,orders) VALUES (31,'위클리플래너',9,31);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'STATIONERY',0,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'TOY',0,2);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'필통/필기류',1,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'노트/메모',1,2);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'다이어리/캘린더',1,3);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'카드,엽서',1,4);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'ETC',1,5);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'HolidaySomething',2,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'HolidaySomething',3,2);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'HolidaySomething',4,2);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'HolidaySomething',5,2);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'오롤리데이',2,1);
-INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'덴스',3,1);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'STATIONERY',0,1,1);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'D.I.Y',0,2,1);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'FASHION',0,3,1);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'FOOD',0,4,1);
+-- STATIONERY
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'PENCIL',1,1,2);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'POSTIT',1,2,2);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'NOTE',1,3,2);
+-- STATIONERY -> PENCIL
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'4B',5,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'Sharp',5,2,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'Highlighter',5,3,3);
+-- STATIONERY -> POSTIT
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'Colorful',6,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'Character',6,2,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'Big',6,3,3);
+-- STATIONERY -> NOTE
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'Lined',7,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'Non-Lined',7,2,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'Diary',7,3,3);
+-- DIY
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'TOY',2,1,2);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'FURNITURE',2,2,2);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'BAG',2,3,2);
+-- DIY -> TOY
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'LEGO',17,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'DOLL',17,2,3);
+-- DIY -> FURNITURE
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'DESK',18,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'CHAIR',18,2,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'TABLE',18,3,3);
+-- DIY -> BAG
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'BACKPACK',19,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'CROSSBAG',19,2,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'HANDBAG',19,3,3);
+-- FASHION
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'MAN',3,1,2);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'WOMAN',3,2,2);
+-- FASHION -> MAN
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'TOP',28,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'BOTTOM',28,2,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'SHOES',28,3,3);
+-- FASHION -> WOMAN
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'TOP',29,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'BOTTOM',29,2,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'SHOES',29,3,3);
+-- FOOD 36,37,38
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'SEAFOOD',4,1,2);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'MEAT',4,2,2);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'DESSERT',4,3,2);
+-- FOOD -> SEAFOOD 39,40,41
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'SALMON',36,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'CLAM',36,2,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'OCTOPUS',36,3,3);
+-- FOOD -> MEAT 42,43,44
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'BEEF',37,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'PORK',37,2,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'CHICKEN',37,3,3);
+-- FOOD -> DESSERT 45,46
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'TEA',38,1,3);
+INSERT INTO product_category (id,name,parent_id,orders,depth) VALUES (NULL,'ICECREAM',38,2,3);
+
+
+
+
 
 
 INSERT INTO product_detail(id, description) VALUES (null, 'May가 추천하는 상점 공식 굿즈');
@@ -572,3 +624,121 @@ INSERT INTO member_role(member_id,role_id) values(1,1);
 -- INSERT INTO member_role(member_id,role_id) values(12,3);
 -- INSERT INTO member_role(member_id,role_id) values(13,3);
 -- INSERT INTO member_role(member_id,role_id) values(14,3);
+
+-- FOOD 36,37,38
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'SEAFOOD',4,1);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'MEAT',4,2);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'DESSERT',4,3);
+-- -- FOOD -> SEAFOOD 39,40,41
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'SALMON',36,1);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'CLAM',36,2);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'OCTOPUS',36,3);
+-- -- FOOD -> MEAT 42,43,44
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'BEEF',37,1);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'PORK',37,2);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'CHICKEN',37,3);
+-- -- FOOD -> DESSERT 45,46
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'TEA',38,1);
+-- INSERT INTO product_category (id,name,parent_id,orders) VALUES (NULL,'ICECREAM',38,2);
+
+
+INSERT INTO product_detail(id, description) VALUES (null, '맛있는 함바그스테이크~');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
+VALUES (31,'211286','롯데리아','햄버거스테이크',NULL,10000,10,209800,2500,43,31,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', 'hamburger.jpg', 'https://img.29cm.co.kr/next-product/2019/01/14/', '2018-12-03 09:23:35', 13900.0, '8011ae05e3d74b34bf812d661d762ed1_20190114210829.png?width=700', '2018-12-03 09:33:35', 31);
+
+INSERT INTO product_detail(id, description) VALUES (null, '치킨 가라아게~~~~~~');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
+VALUES (32,'213986','일식가라아케','치킨가라아게',NULL,10000,10,3800,2500,44,32,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', 'chicken.jpg', 'https://img.29cm.co.kr/next-product/2019/01/14/', '2018-12-03 09:23:35', 13900.0, 'fe89c823d7394e6eac6c449a293fe542_20190114205858.png?width=700', '2018-12-03 09:33:35', 32);
+
+INSERT INTO product_detail(id, description) VALUES (null, '극 사실주의 베이컨~~');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
+VALUES (33,'2113186','사실주의 베이컨','베이컨',NULL,10000,10,5800,2500,43,33,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', 'bacon.jpg', 'https://img.29cm.co.kr/contents/itemDetail/201801/', '2018-12-03 09:23:35', 13900.0, 'cut4_720180118133643.jpg?width=700', '2018-12-03 09:33:35', 33);
+
+INSERT INTO product_detail(id, description) VALUES (null, '마늘향이 쫙! 갈릭 소세지!!~~');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
+VALUES (34,'2168313','소세지공장','갈릭소세지',NULL,10000,10,45800,2500,43,34,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', 'sososo.jpg', 'https://img.29cm.co.kr/next-product/2018/04/24/', '2018-12-03 09:23:35', 13900.0, '0ef71b1c159648b789c4937788a0b86c_20180424142703.jpg?width=700', '2018-12-03 09:33:35', 34);
+
+INSERT INTO product_detail(id, description) VALUES (null, '갈비맛 기사? 기사맛 갈비?');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
+VALUES (35,'2328313','원탁의갈비','갈비의기사',NULL,10000,10,90800,2500,42,35,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', 'galbi.jpg', 'https://img.29cm.co.kr/next-product/2019/01/09/', '2018-12-03 09:23:35', 13900.0, 'c91412a952d34d59ab186b0360db54b1_20190109111710.jpg?width=700', '2018-12-03 09:33:35', 35);
+
+INSERT INTO product_detail(id, description) VALUES (null, '춘천에서 만든 충전 닭갈비~!');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
+VALUES (36,'2312319','춘천공장','충전닭갈비',NULL,10000,10,301200,2500,44,36,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', 'chickengalbi.jpg', 'https://img.29cm.co.kr/contents/itemDetail/201712/', '2018-12-03 09:23:35', 13900.0, 'cut4_1120171204135145.jpg?width=700', '2018-12-03 09:33:35', 36);
+
+INSERT INTO product_detail(id, description) VALUES (null, '패스트캠퍼스에서 만든 간장 닭갈비!!');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
+VALUES (37,'2121319','패스트캠퍼스','방전닭갈비',NULL,10000,10,500,2500,44,37,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', 'chickengalbi2.jpg', 'https://img.29cm.co.kr/next-product/2018/11/02/', '2018-12-03 09:23:35', 13900.0, 'f9413d160821441d9a3476b0125dfe35_20181102160805.jpg?width=700', '2018-12-03 09:33:35', 37);
+
+INSERT INTO product_detail(id, description) VALUES (null, '돼지로 만든 소고기 미역국!!');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
+VALUES (38,'2981319','김가네','소고기미역국',NULL,10000,10,15800,2500,42,38,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', 'sogogisoup.jpg', 'https://img.29cm.co.kr/next-product/2018/09/11/', '2018-12-03 09:23:35', 13900.0, '9f2fa8c20ef44b25baf12eb62829d1ed_20180911123846.jpg?width=700', '2018-12-03 09:33:35', 38);
+
+INSERT INTO product_detail(id, description) VALUES (null, '인도 소고기야!!!! 인도 인도 인도 카레야~~~!');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
+VALUES (39,'1122319','인도뉴델리','비프카레',NULL,10000,10,78800,2500,42,39,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', 'beefcurry.jpg', 'https://img.29cm.co.kr/next-product/2018/12/18/', '2018-12-03 09:23:35', 13900.0, '116bc5d3f1e1441aabac176809ad8f46_20181218132458.JPG?width=700', '2018-12-03 09:33:35', 39);
+
+INSERT INTO product_detail(id, description) VALUES (null, '아보카도연어!');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
+VALUES (40,'1122319','노르웨이','아보카도연어',NULL,10000,10,156800,2500,39,40,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', 'salmon1.jpg', 'https://img.29cm.co.kr/next-product/2018/06/15/', '2018-12-03 09:23:35', 13900.0, 'b4da673d129042a097982a5122ec9f8e_20180615164147.jpg?width=700', '2018-12-03 09:33:35', 40);
+
+INSERT INTO product_detail(id, description) VALUES (null, '반려견 수제간식! 연어스틱!! 근데 사람이 먹어도 구웃구웃');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
+VALUES (41,'1452319','복슬이집','개먹이',NULL,10000,10,999800,2500,39,41,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', 'dog1.jpg', 'https://img.29cm.co.kr/contents/itemDetail/201607/', '2018-12-03 09:23:35', 13900.0, 'cut4_520160721163429.jpg?width=700', '2018-12-03 09:33:35', 41);
+
+INSERT INTO product_detail(id, description) VALUES (null, '피가 철철 나는 무너무너');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
+VALUES (42,'1112319','무너무너','피문어',NULL,10000,10,22800,2500,41,42,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', 'octo2.jpg', 'http://clami.co.kr/wp-content/uploads/2018/10/', '2018-12-03 09:23:35', 13900.0, '%ED%94%BC%EB%AC%B8%EC%96%B4_%EB%A9%94%EC%9D%B8.jpg', '2018-12-03 09:33:35', 42);
+
+INSERT INTO product_detail(id, description) VALUES (null, '아얏! 조개가 사람을 벤다~ 아이구 김가! 괜찮은가~?');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
+VALUES (43,'1112319','소드마스터','칼조개',NULL,10000,10,39800,2500,40,43,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', 'clam.jpg', 'http://clami.co.kr/wp-content/uploads/2017/11/', '2018-12-03 09:23:35', 13900.0, '%EC%B9%BC%EC%A1%B0%EA%B0%9C_%EB%A9%94%EC%9D%B8.jpg', '2018-12-03 09:33:35', 43);
+
+INSERT INTO product_detail(id, description) VALUES (null, '아이구 달다! 바뉠라 아스크림~');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
+VALUES (44,'1431319','북극','바닐라 아이스크림',NULL,10000,10,5800,2500,46,44,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', 'icecream.jpg', 'https://img.29cm.co.kr/next-product/2018/07/27/', '2018-12-03 09:23:35', 13900.0, '0933c30c5d3d414f9a1f0a0060ce79e4_20180727143233.jpg?width=700', '2018-12-03 09:33:35', 44);
+
+INSERT INTO product_detail(id, description) VALUES (null, '시뻘건 사과를 콱! 눌러서 짜낸 사과즙이야!');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
+VALUES (45,'11231319','국내','사과즙',NULL,10000,10,4800,2500,45,45,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', 'appletea.jpg', 'https://img.29cm.co.kr/contents/itemDetail/201801/', '2018-12-03 09:23:35', 13900.0, 'cut4_120180126142433.jpg?width=700', '2018-12-03 09:33:35', 45);
+
+
+
+
+
+
+
+
+
+
+

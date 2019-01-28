@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 /**
@@ -40,7 +43,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/user")
-public class LoginController {
+public class UserLoginController {
 
   private final MemberService memberService;
 
@@ -50,6 +53,7 @@ public class LoginController {
   public String loginForm(HttpSession httpSession) {
     if (httpSession.getAttribute("LOGINUSER") != null) {
       log.info("==== 이미 로그인유저 세션이 있으면(로그인되어 있는 상태라면)!?");
+      log.info("자바스크립트에서 alert 창 띄어서 로그인 중입니다. 라고 알려주는 것도 고려중.");
       return "redirect:/";
     }
 
@@ -57,11 +61,13 @@ public class LoginController {
   }
 
 
+  /**
+   * @author JDragon 회원 가입이 아직 미구현 상태라. 임시로 만들었음.
+   */
   @PostMapping("/add")
   public String addMember() {
     // 운영자 아이디는 디비에 1234 로 저장되어 있고
     // 실제 고객이 이용하는건 인코딩 해서 저장해야한다.
-
 
     Member member = new Member();
     member.setLoginId("koola97620");
@@ -189,6 +195,15 @@ public class LoginController {
   }
 
 //  @ExceptionHandler(NoHandlerFoundException.class)
+
+  /*@ExceptionHandler(UsernameNotFoundException.class)
+  public String LoginIdNotSuitedException() {
+    //@RequestParam(value = "msg") String msg
+
+
+
+    return "/user/login?error=true";
+  }*/
 
 
 }

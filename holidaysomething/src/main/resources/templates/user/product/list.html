@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xml:th="http:/www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{layout/user-default.html}">
+
+<!--<head th:include="fragments/header :: userHeaderFragment">-->
+<!--<title id="pageTitle">Page title</title>-->
+<!--</head>-->
+
+<head th:include="fragments/config :: configFragment">
+  <title id="pageTitle">Product List</title>
+  <!-- other elements you want to reference in your layout -->
+</head>
+
+
+<!--<th:block layout:fragment="css">-->
+<!--</th:block>-->
+<div layout:fragment="userTitle">
+  <!--------------------------
+            | Product List |
+            -------------------------->
+  <!--
+    헤더에서 선택한 카테고리 사진? 및 설명이 들어가야한다. (뭘 선택하냐에 따라 다르게 출력
+    해야 하는데... )
+    카테고리에 따라 상품 리스트를 출력 하는건 해봤는데. 그거에 따라 이미지를 다르게 출력하는건
+    안해봐서... 애매
+    1. 헤더에서 카테고리 클릭시 카테고리 id를 가져올 수 있어야 한다.
+    2. 그 카테고리 id를 이용해 그게 맞게 userTitle을 만들어준다.
+    3. 카테고리 id 를 이용해 상품을 검색하고 그 결과를 userContents div에 뿌려?준다.
+
+    The End~
+  -->
+
+  <div id="categoryList">
+    <ol class="breadcrumb">
+      <li th:each="category : ${categoryList}">
+        <a th:href="@{'/product/' + ${category.id}}" th:text="${category.name}"></a>
+      </li>
+    </ol>
+  </div>
+
+  <!-- class="bg-success" -->
+  <div style="background-color: #dff0d8; padding: 20px;" class="jumbotron">
+
+    <h2>Hello, world!</h2>
+    <p> 카테고리 설명 배치 </p>
+    <p> 여기 위치에 . 파스텔 톤으루다가~</p>
+
+  </div>
+
+
+</div>
+
+<div layout:fragment="userContents">
+  <!-- 헤더에서 선택한 카테고리에 따라 다른 상품결과가 출력되어야 한다.-->
+
+  <div>
+    <p> 정렬하기배치</p>
+  </div>
+
+  <div style="display: grid; margin-left: 100px; margin-right: 100px;
+    grid-template-columns: repeat(auto-fit, 25%);" id="productList" class=".col-xs-6 .col-md-4">
+    <!-- class=".col-xs-6 .col-md-4" -->
+    <div id="product" th:each="productListDto : ${productListImageDtos}">
+      <div style="padding:15px;">
+        <!-- class="img-responsive"빼고 이걸 넣어도 똑같다. style="width:100%; object-fit: contain;"
+        이미지 높이 차이? 이미지를 리사이징 하는게 빠를듯...-->
+        <img class="img-responsive"
+             th:src="${productListDto.imagePath + productListDto.imageName}"/>
+      </div>
+      <h4 th:text="${productListDto.productName}"></h4>
+      <span th:text="${productListDto.sellingPrice}"></span>
+    </div>
+
+  </div>
+
+</div>
+
+
+</html>
