@@ -60,7 +60,7 @@
         </div>
     </div>
     <div class='right-box'>
-        <form method="post" action="/user/product/order">
+        <form method="post" name="productOrder" action="/user/product/order">
             <br>
             <p th:text="@{'원가 (or 판매가) : ' + ${product.originalPrice}} + '원'">원가와 판매가 중 어떤 것을 보여줄까?</p>
 
@@ -68,13 +68,30 @@
 
             <p th:text="@{'적립금 : ' + ${product.mileage}}">해당 상품을 구매할 시 적립될 적립금을 보여줍니다.</p>
 
-            옵션 선택, 해당 옵션에 대한 상품의 수량
+            옵션 선택, 해당 옵션에 대한 상품의 수량<br>
+            <table>
+                <th>
+                    <select>
+                        <option disabled selected>옵션을 선택하세요</option>
+                        <option>없음</option>
+                        <option th:each="productOption : ${productOptions}"
+                                th:value="${productOption.id}" name="optionId"
+                                th:utext="${productOption.name}"/>
+                    </select>
+                </th>
+                <th>
+                    <select>
+                        <option disabled selected>구매할 해당 옵션의 상품 개수 이건 29cm 처럼 처리할 수 있도록 노력하자...</option>
+                        <option th:each="i : ${#numbers.sequence(0, 10)}" name="orderQuantity" th:text="${i}">
+                    </select>
+                </th>
+            </table>
             <br>
-            옵션 선택, 상품 수량 칸 추가하기 버튼(이야기 해보고...결정하자)
-            <br>
-            왼쪽 : cart에 담기 버튼 (선택한 옵션과 상품의 수량, 상품 번호가 넘어감)
-            <br>
-            오른쪽 : 즉시 주문하기 버튼 (선택한 옵션과 상품의 수량, 상품 번호가 넘어감) (cart에 담기 버튼 바로 우측)
+            <button>옵션 추가 버튼을 구현하자</button>
+            <br><br>
+            왼쪽 : cart에 담기 버튼 (선택한 옵션과 상품의 수량, 상품 번호가 넘어감)<br>
+            오른쪽 : 즉시 주문하기 버튼 (선택한 옵션과 상품의 수량, 상품 번호가 넘어감)<br>
+            <input type="submit" value="BUY NOW"/>
         </form>
         <br>
         <br>
