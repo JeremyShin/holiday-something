@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../../App.css';
 
 class OrderDeliverySearch extends Component {
   render() {
@@ -18,30 +19,37 @@ class OrderDeliverySearch extends Component {
           <tbody>
             {user.orders.map((order) => {
               return (
-                <div key={order.id}>
+                <React.Fragment key={order.id}>
                   <tr className="order-tbl-header">
-                    <div>
+                    <td>
                       <p>주문일자 {order.date}</p>
                       <p>주문번호 {order.orderNumber}</p>
-                      <p>{order.status}</p>
-                    </div>
+                    </td>
                   </tr>
 
                   {order.orderedProduct.map((product) => {
+                    let img;
+                    if (product.product.productImages !== undefined && product.product.productImages.length !== 0) {
+                      img = <img src={product.product.productImages[0].path} 
+                                alt={product.product.productImages[0].storedFileName}
+                                className="order-delivery-search-img" />
+                    }
                     return (
                       <tr key={product.id}>
                         <td>
-                        <img src={product.product.productImages[0].path} 
-                              alt={product.product.productImages[0].storedFileName}/>
-                        <h4>{product.product.name}</h4>
+                          {img}
+                          <h4>{product.product.name}</h4>
                         </td>
                         <td>
                           {order.shipping.shippingPrice}
                         </td>
+                        <td>
+                          {order.status}
+                        </td>
                       </tr>
                     )
                   })}
-                </div>
+                </React.Fragment>
               )
             })}
           </tbody>

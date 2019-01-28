@@ -14,9 +14,9 @@ class SideBar extends Component {
     return (
       <SideBarWrapper>
         <h3 className="user-name">{this.props.user.name}님</h3>
-        <p><Link to="/orders">주문배송 조회</Link></p>
-        <p><Link to="/account">회원정보 수정</Link></p>
-        <p><Link to="/mileage">마일리지 현황</Link></p>
+        <Link to="/orders"><p>주문배송 조회</p></Link>
+        <Link to="/account"><p>회원정보 수정</p></Link>
+        <Link to="/mileage"><p>마일리지 현황</p></Link>
       </SideBarWrapper>
     );
   }
