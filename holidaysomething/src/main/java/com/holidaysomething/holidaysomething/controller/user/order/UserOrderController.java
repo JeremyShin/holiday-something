@@ -32,7 +32,6 @@ public class UserOrderController {
   private final MemberService memberService;
   private final ProductOrderService productOrderService;
 
-
   //어떤 회원이 주문했는지 받아오기, 어떤 상품을 주문했는지 받아오기
   @GetMapping
   public String order(Model model,
@@ -46,23 +45,60 @@ public class UserOrderController {
     List<ProductOrderInfoDto> productOrderInfoDtos = productOrderService.fromProductOrderInfoCommandToProductOrderInfoList(poc);
 
 
-
-
     //model.addAttribute("productOrderInfoDto", productOrderInfoDto);
-
-
-
-
 
     return "user/order";
   }
 
   //주문 버튼을 누르면, orderd_product, order, shipping, payment에 데이터가 추가됨
+
+  /**
+   * @Author : Misun Joo
+   * 이전페이지(상품상세, 장바구니)로부터 ProductOrderInfoDto, 현재 주문하는 멤버의 정보를 받아와서 Order 페이지에 뿌려줌
+   * PostMapping으로 하는 이유는, GetMapping으로 받아오면 URL에 너무 많은 정보가 표시되며, 길이에 제한도 있기 때문임
+   */
+
+//  @PostMapping
+//  public String orderPost(Model model,
+//      @AuthenticationPrincipal MemberUserDetails userDetails,
+//      ProductOrderInfoCommand poc){
+//
+//    AddOrderMemberDto addOrderMemberDto = memberService.findMemberById(userDetails.getId());
+//    model.addAttribute("addOrderMemberDto",addOrderMemberDto);
+//
+//    // ProductOrderInfoCommand 를 ProductOrderInfo의 리스트로 바꾸어주는 메소드
+//    List<ProductOrderInfoDto> productOrderInfoDtos = productOrderService.fromProductOrderInfoCommandToProductOrderInfoList(poc);
+//
+//    for(ProductOrderInfoDto productOrderInfoDto : productOrderInfoDtos){
+//      log.info(productOrderInfoDto.getProductId().toString());
+//      log.info(Integer.toString(productOrderInfoDto.getOptionIds().size()));
+//      log.info(Integer.toString(productOrderInfoDto.getOrderQuantities().size()));
+//    }
+//
+//    //model.addAttribute("productOrderInfoDto", productOrderInfoDto);
+//
+//    return "/user/order";
+//
+//  }
+
   @PostMapping
-  public void orderPost(){
+  public String orderPost(Model model,
+      ProductOrderInfoCommand poc){
+
+    // ProductOrderInfoCommand 를 ProductOrderInfo의 리스트로 바꾸어주는 메소드
+    List<ProductOrderInfoDto> productOrderInfoDtos = productOrderService.fromProductOrderInfoCommandToProductOrderInfoList(poc);
+
+    for(ProductOrderInfoDto productOrderInfoDto : productOrderInfoDtos){
+      log.info(productOrderInfoDto.getProductId().toString());
+      log.info(Integer.toString(productOrderInfoDto.getOptionIds().size()));
+      log.info(Integer.toString(productOrderInfoDto.getOrderQuantities().size()));
+    }
+
+    //model.addAttribute("productOrderInfoDto", productOrderInfoDto);
+
+    return "/user/order";
 
   }
-
 
 
 

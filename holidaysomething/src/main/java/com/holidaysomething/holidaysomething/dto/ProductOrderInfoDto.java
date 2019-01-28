@@ -10,9 +10,9 @@ public class ProductOrderInfoDto {
   private Long productId;
 
   @NotNull
-  private Long optionId;
+  private List<Long> optionIds;
 
   //사용자가 제품 몇 개를 선택했는지에 대한 정보
   @NotNull
-  private Integer orderQuantity;
+  private List<Integer> orderQuantities;
 }
