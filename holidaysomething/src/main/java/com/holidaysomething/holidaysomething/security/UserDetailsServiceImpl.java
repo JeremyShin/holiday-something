@@ -88,6 +88,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         authorities);
     userDetails.setNickname(member.getNickname());
     userDetails.setId(member.getId());
+    userDetails.setMember(member);
 
     return userDetails;
   }
