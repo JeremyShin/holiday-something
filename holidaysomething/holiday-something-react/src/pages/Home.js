@@ -1,23 +1,19 @@
 import React, { Component } from 'react';
 import '../App.css';
-import styled from 'styled-components';
 import Header from '../components/Header/Header';
+import MainWrapper from '../components/MainWrapper/MainWrapper';
 import SideBar from '../components/SideBar/SideBar';
 import MainContent from '../components/MainContent/MainContent';
 
-const MainWrapper = styled.div`
-  display: flex;
-  margin-top: 40px;
-`;
+// const MainWrapper = styled.div`
+//   display: flex;
+//   margin-top: 40px;
+// `;
 
 class Home extends Component {
 
   state = {
-    
-  }
-
-  componentDidMount() {
-    this._getUser();
+    center: 'home',
   }
 
   // await을 쓰려면 바깥에 async가 있어야 한다
@@ -43,11 +39,23 @@ class Home extends Component {
         <Header />
         <MainWrapper>
           {this.state.user ? <SideBar user={this.state.user} /> : 'Loading ...'}
-          {this.state.user ? <MainContent user={this.state.user} /> : 'Loading ...'}
+
+          {/* MainContent에 매번 다른 props를 넣어준다(Home, Orders, Account, Mileage...) */}
+          {this.state.user ? 
+            <MainContent 
+              user={this.state.user} 
+              mainCenter={this.state.center}  
+            /> : 
+          'Loading ...'}
         </MainWrapper>
       </div>
     );
   }
+
+  componentDidMount() {
+    this._getUser();
+  }
+
 }
 
 export default Home;
