@@ -33,13 +33,48 @@
     The End~
   -->
 
+  <div id="categoryList">
+    <ol class="breadcrumb">
+      <li th:each="category : ${categoryList}">
+        <a th:href="@{'/product/' + ${category.id}}" th:text="${category.name}"></a>
+      </li>
+    </ol>
+  </div>
+
+  <!-- class="bg-success" -->
+  <div style="background-color: #dff0d8; padding: 20px;" class="jumbotron">
+
+    <h2>Hello, world!</h2>
+    <p> 카테고리 설명 배치 </p>
+    <p> 여기 위치에 . 파스텔 톤으루다가~</p>
+
+  </div>
+
 
 </div>
 
 <div layout:fragment="userContents">
   <!-- 헤더에서 선택한 카테고리에 따라 다른 상품결과가 출력되어야 한다.-->
 
-  <div class="user-content"> 내용물이 들어갈 거예요</div>
+  <div>
+    <p> 정렬하기배치</p>
+  </div>
+
+  <div style="display: grid; margin-left: 100px; margin-right: 100px;
+    grid-template-columns: repeat(auto-fit, 25%);" id="productList" class=".col-xs-6 .col-md-4">
+    <!-- class=".col-xs-6 .col-md-4" -->
+    <div id="product" th:each="productListDto : ${productListImageDtos}">
+      <div style="padding:15px;">
+        <!-- class="img-responsive"빼고 이걸 넣어도 똑같다. style="width:100%; object-fit: contain;"
+        이미지 높이 차이? 이미지를 리사이징 하는게 빠를듯...-->
+        <img class="img-responsive"
+             th:src="${productListDto.imagePath + productListDto.imageName}"/>
+      </div>
+      <h4 th:text="${productListDto.productName}"></h4>
+      <span th:text="${productListDto.sellingPrice}"></span>
+    </div>
+
+  </div>
 
 </div>
 

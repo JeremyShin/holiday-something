@@ -10,6 +10,8 @@ public interface ProductOptionService {
 
   List<ProductOption> getAllProductOptions();
 
+  List<ProductOption> getProductOptionsByProductId(Long productId);
+
   ProductOption getProductOption(Long id);
 
   void deleteProductOption(Long id);

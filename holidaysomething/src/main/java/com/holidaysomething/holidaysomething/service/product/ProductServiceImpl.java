@@ -9,6 +9,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +38,7 @@ public class ProductServiceImpl implements ProductService {
   @Override
   @Transactional(readOnly = true)
   public Product getProduct(Long id) {
-    return productRepository.getOne(id);
+    return productRepository.findProductById(id);
   }
 
   @Override
@@ -81,5 +82,19 @@ public class ProductServiceImpl implements ProductService {
 
     return productRepository.findProducts(searchClassificationValue, searchClassificationInput,
         largeId, middleId, smallId, dateValue, startDateSelect, endDateSelect, pageable);
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public Page<Product> getBestFiveProduct(Long categoryId, Long productId) {
+    // 상위 5개만 불러오기 위함
+    PageRequest pageRequest = PageRequest.of(0, 5);
+    return productRepository.findByProductCategoryIdAndIdIsNotOrderBySellingPrice(categoryId, productId, pageRequest);
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public Product getProduct(Long categoryId, Long id) {
+      return productRepository.findByProductCategoryIdAndId(categoryId, id);
   }
 }

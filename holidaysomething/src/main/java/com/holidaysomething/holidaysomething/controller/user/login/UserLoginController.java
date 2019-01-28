@@ -43,7 +43,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/user")
-public class LoginController {
+public class UserLoginController {
 
   private final MemberService memberService;
 
