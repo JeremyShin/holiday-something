@@ -20,11 +20,11 @@
 </th:block>
 
 <div layout:fragment="content">
-  <!-- 사용자 스크립트 추가 -->
-  <th:block layout:fragment="script">
-    <script th:src="@{/static/js/product-add.js}"></script>
-  </th:block>
-  <h1>Product Add</h1>
+    <!-- 사용자 스크립트 추가 -->
+    <th:block layout:fragment="script">
+        <script th:src="@{/static/js/product-add.js}"></script>
+    </th:block>
+    <h1>Product Add</h1>
 
     <!--------------------------
             | Product Registration |
@@ -193,7 +193,14 @@
         </div>
         <div>
           <label>메인 이미지 등록</label><br>
-          <input name="mainImages" type="file" multiple="multiple" id="inputMainImage">
+          <input name="mainImage" type="file" id="inputMainImage">
+        </div>
+        <div>
+          <label>서브 이미지 등록</label>
+          <input name="subImages" type="file">
+          <input name="subImages" type="file">
+          <input name="subImages" type="file">
+          <input name="subImages" type="file">
         </div>
         <div>
           <input type="button" id="saveBtn" value="상품등록">

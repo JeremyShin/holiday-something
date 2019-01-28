@@ -75,16 +75,8 @@ public class AdminProductController {
     @PostMapping("/add")
     public String productAddPost(
             @Valid @ModelAttribute(value = "product") ProductAddDto productAddDto,
-            BindingResult bindingResult, MultipartFile[] mainImages) {
-
-        System.out.println("여기로 왔어??");
-        System.out.println("여기로 왔어??");
-        System.out.println("여기로 왔어??");
-        System.out.println("여기로 왔어??");
-        System.out.println("여기로 왔어??");
-        System.out.println("여기로 왔어??");
-        System.out.println("여기로 왔어??");
-        System.out.println("여기로 왔어??");
+            BindingResult bindingResult,
+            MultipartFile mainImage, MultipartFile[] subImages) {
 
         if (bindingResult.hasErrors()) {
             for (ObjectError error : bindingResult.getAllErrors()) {
@@ -94,11 +86,11 @@ public class AdminProductController {
             return "admin/product/add";
         } else {
             //등록작업
-
             productAddDto.setRegDate(LocalDateTime.now());
             productAddService.productRegister(productAddDto);
 
-            for(MultipartFile multipartFile : mainImages) {
+            imageStreamService.save(mainImage, productAddDto.getProductDetailId());
+            for(MultipartFile multipartFile : subImages) {
                 imageStreamService.save(multipartFile, productAddDto.getProductDetailId());
             }
 

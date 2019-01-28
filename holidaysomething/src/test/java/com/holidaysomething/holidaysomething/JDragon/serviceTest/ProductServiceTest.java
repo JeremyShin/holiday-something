@@ -5,16 +5,21 @@ import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductDetail;
 import com.holidaysomething.holidaysomething.dto.ProductAddDto;
 import com.holidaysomething.holidaysomething.service.product.ProductAddService;
+import com.holidaysomething.holidaysomething.service.product.ProductService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
+@ActiveProfiles(profiles = "test")
 public class ProductServiceTest {
 
   private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager

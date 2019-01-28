@@ -90,4 +90,9 @@ public class ProductOptionServiceImpl implements ProductOptionService {
       productOptionRepository.save(productOption);
     }
   }
+
+  @Override
+  public List<ProductOption> getProductOptionsByProductId(Long productId) {
+    return productOptionRepository.findByProductId(productId);
+  }
 }

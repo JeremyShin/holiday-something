@@ -133,6 +133,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        .failureHandler(failureHandler());
         .failureUrl("/user/login?error=true");
 
+    http.csrf().disable();
+
     /*
     예외처리??? 로그인 id, password 입력 글자수 제한은 정규표현식 이용해서 프론트에서도
     한번 막아줄거고. 백엔드에서 어떻게 해야할까?
@@ -145,7 +147,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     3. failureUrl로 처리? /user/login 에 파라미터 추가해주고... 아 아닌듯.
      */
 
-//    http.csrf().disable();
+
 
 //    http.sessionManagement()
 //        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
