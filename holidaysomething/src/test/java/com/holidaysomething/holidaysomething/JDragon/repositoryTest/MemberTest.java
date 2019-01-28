@@ -1,6 +1,7 @@
 package com.holidaysomething.holidaysomething.JDragon.repositoryTest;
 
 
+import com.holidaysomething.holidaysomething.dto.CurrentMemberDto;
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Order;
 import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
@@ -39,6 +40,19 @@ public class MemberTest {
   public void pageable생성하기() {
     pageable = PageRequest.of(0, 2);
 
+  }
+
+  @Test
+  public void 현재_사용자_최근주문_가져오기() throws Exception {
+    List<CurrentMemberDto> currentMemberDtoList = memberRepository.findCurrentMember(3L);
+    for (CurrentMemberDto currentMemberDto : currentMemberDtoList) {
+      log.info(currentMemberDto.getMemberId());
+      log.info(currentMemberDto.getName());
+      log.info(currentMemberDto.getNickname());
+      log.info(currentMemberDto.getMileage());
+      log.info(currentMemberDto.getOrderNumber());
+      log.info(currentMemberDto.getTotalPrice());
+    }
   }
 
   @Test
@@ -148,6 +162,7 @@ public class MemberTest {
     for (Tuple tuple : tuples) {
       log.info(tuple);
     }
+    log.info("======TEST FINISHED========");
   }
 
   @Test

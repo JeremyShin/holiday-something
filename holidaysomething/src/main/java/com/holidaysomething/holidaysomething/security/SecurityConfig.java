@@ -1,35 +1,24 @@
 package com.holidaysomething.holidaysomething.security;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * @author choijaeyong on 18/01/2019.
  * @project holidaysomething
- * @description
- * forbidden(403) 에러시 봐야할 곳.
- * 1. Ajax 로 post 전송 할 때, forbidden 오류가 날 수 있다. 그때 ajax 메소드 안에
- * headers: {'X-CSRF-Token': $('input[name="_csrf"]').val()}
- * 추가해주면 된다.
+ * @description forbidden(403) 에러시 봐야할 곳. 1. Ajax 로 post 전송 할 때, forbidden 오류가 날 수 있다. 그때 ajax 메소드
+ * 안에 headers: {'X-CSRF-Token': $('input[name="_csrf"]').val()} 추가해주면 된다.
  *
  * 2. root로 로그인을 하지 않고 /admin/** 로 접근하면 forbidden 에러가 난다.
  */
@@ -53,6 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   public UserDetailsService userDetailsService() {
     return new UserDetailsServiceImpl();
   }
+
   @Bean
   public BCryptPasswordEncoder passwordEncoder() {
     //BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();

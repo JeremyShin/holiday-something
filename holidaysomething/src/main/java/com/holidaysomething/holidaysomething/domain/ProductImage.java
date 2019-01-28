@@ -35,7 +35,6 @@ public class ProductImage {
   @Column(nullable = false)
   private String storedFileName;
 
-
   @Column(nullable = false)
   private Long size;
 

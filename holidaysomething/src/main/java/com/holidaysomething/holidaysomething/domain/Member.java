@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
@@ -104,10 +103,10 @@ public class Member {
   @OneToMany(mappedBy = "member")
   private List<Order> orders;
 
-
   @ManyToMany
   @JoinTable(name = "member_role",
       joinColumns = @JoinColumn(name = "member_id", referencedColumnName = "id"),
       inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+  @JsonIgnore // 마이페이지 메인에서는 일단 필요 없어서 ignore 처리
   private Set<Role> roles;
 }

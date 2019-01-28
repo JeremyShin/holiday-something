@@ -5,15 +5,13 @@ const RecentOrderWrapper = styled.div`
 
 `;
 
-
-
 class RecentOrder extends Component {
   render() {
     const { user } = this.props;
 
     return (
       <RecentOrderWrapper>
-        <h2>최근 주문</h2>
+        <h3>최근 주문</h3>
         <table>
           <thead>
             <tr>
@@ -28,9 +26,9 @@ class RecentOrder extends Component {
               return (
                 <tr key={order.id}>
                   <td>{order.date}</td>
-                  <td></td>
+                  <td>{order.orderedProduct[0].product.name}</td>
                   <td>{order.orderNumber}</td>
-                  <td>{order.totalPrice}</td>
+                  <td>{order.totalPrice}원</td>
                 </tr>
               )
             })}

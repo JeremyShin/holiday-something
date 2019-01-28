@@ -3,28 +3,17 @@ package com.holidaysomething.holidaysomething.repository.custom;
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.QMember;
 import com.holidaysomething.holidaysomething.domain.QOrder;
-import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
-
-import com.querydsl.jpa.impl.JPAQueryFactory;
-import java.text.SimpleDateFormat;
-
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
-
 import com.holidaysomething.holidaysomething.domain.QOrderedProduct;
 import com.holidaysomething.holidaysomething.domain.QProduct;
+import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.JPQLQuery;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import javax.annotation.Nullable;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -46,8 +35,6 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
   // 지금 repository에 만들어 놓은 검색쿼리3개를 여기서 다시 만들어주는건가??
   // 가져다 쓰는건가?? 다시 만들어줘야하는거 같은데???
   // if 문으로 경우에 따라 적용될 쿼리를 만들어주는건가...? 일단 자자.
-
-
 
   @Override
   public Page<Member> searchMembers(MemberSearchDto memberSearchDto, Pageable pageable) {
@@ -227,6 +214,7 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     for (Tuple tuple : lists) {
       //Object[] objects = tuple.toArray();
       log.info("====== tuple" + tuple);
+//      tuple.get(order.date);
     }
     long totalCount = query.fetchCount();
 
@@ -252,7 +240,7 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     return query.fetch();
   }
 
-
+  @Override
   public List<Tuple> findMembersByProductNameInOrdersByDsl(String productName) {
 
     QMember member = QMember.member;
@@ -315,7 +303,6 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     return query.fetch();
   }
 
-
   @Override
   public List<Tuple> findMembersByProductCodeInOrdersByDsl(String code) {
     QMember member = QMember.member;
@@ -351,8 +338,7 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
     */
 
   /**
-   * @author JDragon
-   * member/order.html 에서 입력받은 데이터들을 ( Member.loginId, Member.name, Order.startDate
+   * @author JDragon member/order.html 에서 입력받은 데이터들을 ( Member.loginId, Member.name, Order.startDate
    * ~ Order.endDate, Order.orderNumber, Product.name ) 을 검색조건으로 해서 회원객체,최근주문날짜,최근주문번호를 검색하는
    * method.
    */
@@ -491,6 +477,30 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements
   }
 
   /************* End SearchOrderMemberDto 로 검색하는 경우 *************************************************************/
+
+//  @Override
+//  public List<Tuple> findCurrentMemberTuple(Long userId) {
+//    QMember member = QMember.member;
+//    QOrder order = QOrder.order;
+//    QOrderedProduct orderedProduct = QOrderedProduct.orderedProduct;
+//    QProduct product = QProduct.product;
+//    QProductImage productImage = QProductImage.productImage;
+//
+//    JPQLQuery query = from(member)
+//        .innerJoin(member.orders, order)
+//        .innerJoin(order.)
+//  }
+  /*
+      SELECT m.id as memberId, m.name, m.nickname, m.mileage, o.id as orderId,
+        o.order_number, o.date, o.total_price, p.id as productId,
+        p.name as productName, pi.path as imagePath
+        FROM member m
+          INNER JOIN orders o ON m.id = o.member_id
+          INNER JOIN ordered_product op ON o.id = op.order_id
+          INNER JOIN product p ON op.product_id = p.id
+          INNER JOIN product_image pi ON p.id = pi.product_id
+      WHERE m.id = :userId;
+   */
 }
 
 
