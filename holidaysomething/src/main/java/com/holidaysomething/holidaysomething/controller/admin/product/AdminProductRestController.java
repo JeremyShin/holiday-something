@@ -1,19 +1,30 @@
 package com.holidaysomething.holidaysomething.controller.admin.product;
 
-import com.holidaysomething.holidaysomething.domain.ProductCategory;
-import com.holidaysomething.holidaysomething.domain.ProductOption;
+import com.holidaysomething.holidaysomething.domain.*;
+import com.holidaysomething.holidaysomething.dto.ProductAddDto;
+import com.holidaysomething.holidaysomething.dto.ProductDetailDto;
 import com.holidaysomething.holidaysomething.dto.ProductOptionDto;
-import com.holidaysomething.holidaysomething.service.product.ProductAddService;
-import com.holidaysomething.holidaysomething.service.product.ProductOptionService;
+import com.holidaysomething.holidaysomething.service.fileupload.ImageStreamService;
+import com.holidaysomething.holidaysomething.service.product.*;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.time.LocalDateTime;
 import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/admin/product")
@@ -23,6 +34,8 @@ public class AdminProductRestController {
 
   private final ProductOptionService productOptionService;
   private final ProductAddService productAddService;
+  private final ImageStreamService imageStreamService;
+  private final ProductDetailService productDetailService;
 
   /*
    * @author : Gyumin Kim
@@ -64,5 +77,36 @@ public class AdminProductRestController {
 
     // 옵션 수정 후 현재 페이지로 redirect
 //    return "redirect:/admin/product/product_detail";
+  }
+
+  /**
+   * @author : Junhyeong Kim
+   * @description : 이미지 업로드
+   */
+  @PostMapping("/image-files/api")
+  public String handleFileUpload(@RequestParam("descriptionImage") MultipartFile multipartFile,
+                                 Long productId) {
+    String saveFileName = imageStreamService.save(multipartFile, productId);
+
+    return "/admin/product/image-files/" + saveFileName;
+  }
+
+  @PostMapping("/add/api")
+  public Long productAddPost(
+          @RequestBody ProductDetailDto productDetail) {
+
+//    if (bindingResult.hasErrors()) {
+//      for (ObjectError error : bindingResult.getAllErrors()) {
+//        log.info(error.getDefaultMessage());
+//        //model.addAttribute("product", product);
+//      }
+////      return "admin/product/add";
+//    } else {
+      //등록작업
+
+      ProductDetail detail = productDetailService.save(productDetail.getProductDetail());
+
+      return detail.getId();
+//    }
   }
 }

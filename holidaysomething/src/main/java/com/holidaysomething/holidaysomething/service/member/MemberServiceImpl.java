@@ -3,6 +3,7 @@ package com.holidaysomething.holidaysomething.service.member;
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Role;
 import com.holidaysomething.holidaysomething.dto.AddOrderMemberDto;
+import com.holidaysomething.holidaysomething.dto.CurrentMemberDto;
 import com.holidaysomething.holidaysomething.dto.MemberMileageDto;
 import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
@@ -28,7 +29,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberServiceImpl implements MemberService {
 
   private final MemberRepository memberRepository;
-
   private final RoleRepository roleRepository;
 
   @Override
@@ -48,9 +48,16 @@ public class MemberServiceImpl implements MemberService {
    * https://stackoverflow.com/a/49317013/8962314
    */
   @Override
+  @Transactional(readOnly = true)
   public Member getCurrentMemberInfo(Long userId) {
     return memberRepository.findById(userId)
                             .orElse(null);
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public List<CurrentMemberDto> getCurrentMemberInfoJPQL(Long userId) {
+    return memberRepository.findCurrentMember(userId);
   }
 
   @Override

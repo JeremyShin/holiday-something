@@ -1,5 +1,8 @@
 package com.holidaysomething.holidaysomething.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +19,9 @@ import lombok.Setter;
 @Table(name = "ORDERED_PRODUCT")
 @Getter
 @Setter
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id")
 public class OrderedProduct {
 
   @Id
@@ -44,5 +50,6 @@ public class OrderedProduct {
 
   @OneToOne
   @JoinColumn(name = "exchange_refund_id")
+  @JsonIgnore
   private ExchangeRefund exchangeRefund;
 }

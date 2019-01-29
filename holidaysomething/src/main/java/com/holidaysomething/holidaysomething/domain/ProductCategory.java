@@ -45,6 +45,8 @@ public class ProductCategory {
   @JsonIgnoreProperties
   private Set<Product> products;
 
+  private int depth;
+
 
 }
 

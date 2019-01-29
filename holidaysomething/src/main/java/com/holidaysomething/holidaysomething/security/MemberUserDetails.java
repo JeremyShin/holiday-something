@@ -18,6 +18,7 @@ public class MemberUserDetails extends User {
 
   private String nickname;
   private Long id;
+  private Member member;
 
   public MemberUserDetails(String loginId, String password,
       Collection<? extends GrantedAuthority> authorities) {

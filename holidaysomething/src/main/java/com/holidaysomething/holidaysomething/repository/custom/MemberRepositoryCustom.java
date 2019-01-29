@@ -1,10 +1,7 @@
 package com.holidaysomething.holidaysomething.repository.custom;
 
 import com.holidaysomething.holidaysomething.domain.Member;
-import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
-import com.holidaysomething.holidaysomething.domain.Order;
-import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
 import com.querydsl.core.Tuple;
 import java.time.LocalDateTime;
@@ -19,8 +16,7 @@ public interface MemberRepositoryCustom {
 
   Page<Tuple> findMembersByLoginIdInOrdersByDsl(String loginId, Pageable pageable);
 
-
-  List<Tuple> findMembersByNameInOrdersByDsl(String name);
+  List findMembersByNameInOrdersByDsl(String name);
 
   List<Tuple> findMembersByProductNameInOrdersByDsl(String productName);
 
@@ -32,4 +28,7 @@ public interface MemberRepositoryCustom {
   Page<Tuple> getMembersByDsl(SearchOrderMemberDto searchOrderMemberDto, Pageable pageable);
 
   Page<Member> searchMembers(MemberSearchDto memberSearchDto, Pageable pageable);
+
+//  List<CurrentMemberDto> findCurrentMember(long userId);
+//  List<Tuple> findCurrentMemberTuple(Long userId);
 }

@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -83,6 +84,12 @@ public class ProductTest {
     Product product = productRepository.getOne(1L);
     log.info("============= Id" + product.getId());
     log.info("============= Name" + product.getName());
+  }
+
+  @Test
+  public void 상품카테고리와이름으로조회하기() {
+    Product product = productRepository.findByProductCategoryIdAndId(2L, 3L);
+    System.out.println(product.getName());
   }
 
 }

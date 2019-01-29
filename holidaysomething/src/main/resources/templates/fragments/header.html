@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xml:th="http:/www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{layout/user-default.html}">
 
 <header th:fragment="headerFragment" id="header">
   <img src="/static/img/logo.png"/>
@@ -63,10 +67,107 @@
 
     <!--카테고리-->
     <div >
+<<<<<<< HEAD
       <div class="user-header-category"><a href="/">STATIONERY </a> </div>
       <div class="user-header-category"><a href="/"> D.I.Y </a></div>
       <div class="user-header-category"><a href="/"> FASHION </a></div>
       <div class="user-header-category"><a href="/"> DESIGN </a></div>
+=======
+      <div class="user-header-category"><a data-categoryid="1"
+                                           th:href="@{'/product/1'}">STATIONERY </a>
+        <ul class="middle-category">
+          <li><a href="#">PENCIL</a>
+            <ul class="small-category">
+              <li><a href="#">4B</a></li>
+              <li><a href="#">SHARP</a></li>
+              <li><a href="#">HIGHLIGHTER</a></li>
+            </ul>
+          </li>
+          <li><a href="#">POSTIT</a>
+            <ul class="small-category">
+              <li><a href="#">COLORFUL</a></li>
+              <li><a href="#">CHARACTER</a></li>
+              <li><a href="#">BIG</a></li>
+            </ul>
+          </li>
+          <li><a href="#">NOTE</a>
+            <ul class="small-category">
+              <li><a href="#">LINED</a></li>
+              <li><a href="#">NON-LINED</a></li>
+              <li><a href="#">DIARY</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="user-header-category"><a data-categoryid="2" th:href="@{'/product/2'}"> D.I.Y </a>
+        <ul class="middle-category">
+          <li><a href="#">TOY</a>
+            <ul class="small-category">
+              <li><a href="#">LEGO</a></li>
+              <li><a href="#">DOLL</a></li>
+            </ul>
+          </li>
+          <li><a href="#">FURNITURE</a>
+            <ul class="small-category">
+              <li><a href="#">DESK</a></li>
+              <li><a href="#">CHAIR</a></li>
+              <li><a href="#">TABLE</a></li>
+            </ul>
+          </li>
+          <li><a href="#">BAG</a>
+            <ul class="small-category">
+              <li><a href="#">BACKPACK</a></li>
+              <li><a href="#">CROSSBAG</a></li>
+              <li><a href="#">HANDBAG</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="user-header-category"><a data-categoryid="3" th:href="@{'/product/3'}">
+        FASHION </a>
+        <ul class="middle-category">
+          <li><a href="#">MAN</a>
+            <ul class="small-category">
+              <li><a href="#">TOP</a></li>
+              <li><a href="#">BOTTOM</a></li>
+              <li><a href="#">SHOES</a></li>
+            </ul>
+          </li>
+          <li><a href="#">WOMAN</a>
+            <ul class="small-category">
+              <li><a href="#">TOP</a></li>
+              <li><a href="#">BOTTOM</a></li>
+              <li><a href="#">SHOES</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="user-header-category"><a data-categoryid="4" th:href="@{'/product/4'}"> FOOD </a>
+        <ul class="middle-category">
+          <li><a th:href="@{'/product/36'}">SEAFOOD</a>
+            <ul class="small-category">
+              <li><a th:href="@{'/product/39'}">SALMON</a></li>
+              <li><a th:href="@{'/product/40'}">CLAM</a></li>
+              <li><a th:href="@{'/product/41'}">OCTOPUS</a></li>
+            </ul>
+          </li>
+          <li><a th:href="@{'/product/37'}">MEAT</a>
+            <ul class="small-category">
+              <li><a th:href="@{'/product/42'}">BEEF</a></li>
+              <li><a th:href="@{'/product/43'}">PORK</a></li>
+              <li><a th:href="@{'/product/44'}">CHICKEN</a></li>
+            </ul>
+          </li>
+          <li><a th:href="@{'/product/38'}">DESSERT</a>
+            <ul class="small-category">
+              <li><a th:href="@{'/product/45'}">TEA</a></li>
+              <li><a th:href="@{'/product/46'}">ICECREAM</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+>>>>>>> origin/develop
     </div>
 
   </div>

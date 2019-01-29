@@ -1,6 +1,7 @@
 package com.holidaysomething.holidaysomething.JDragon.repositoryTest;
 
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
+import com.holidaysomething.holidaysomething.dto.ProductListCategoryDto;
 import com.holidaysomething.holidaysomething.repository.ProductCategoryRepository;
 import java.util.List;
 import org.junit.Test;
@@ -36,6 +37,23 @@ public class ProductCategoryTest {
     for (ProductCategory pc : categories) {
       log.info(pc.getName());
     }
+  }
+
+
+  // 소분류 아이디를 이용해 대분류 중분류 구하기.
+  @Test
+  public void 대중분류카테고리읽어오기() {
+    ProductListCategoryDto category = productCategoryRepository.findProductCategories(42l);
+    log.info("====== parent_id : " + category.getParentId() + "   parent_name : " + category
+        .getParentName()
+        + "    child_id : " + category.getChildId() + "  child_name : " + category.getChildName());
+  }
+
+  // 중분류 아이디를 이용해 대분류 구하기
+  @Test
+  public void 대분류카테고리읽어오기() {
+    ProductCategory category = productCategoryRepository.findProductBigCategory(37l);
+    log.info("====== parent_id : " + category.getId() + "   parent_name : " + category.getName());
   }
 
 }

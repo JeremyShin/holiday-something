@@ -21,7 +21,7 @@ public class ProductDetail {
   private Long id;
 
   @Lob
-  @NotEmpty(message = "description must be not null")
+//  @NotEmpty(message = "description must be not null")
   private String description;
 
 

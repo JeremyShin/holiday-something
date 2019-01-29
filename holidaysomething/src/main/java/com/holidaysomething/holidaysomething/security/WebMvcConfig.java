@@ -7,7 +7,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * @author choijaeyong on 19/01/2019.
@@ -17,7 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-public class WebMvcConfig implements WebMvcConfigurer {
+public class WebMvcConfig extends WebMvcConfigurerAdapter implements WebMvcConfigurer {
 
 //  @Bean
 //  public BCryptPasswordEncoder passwordEncoder() {
@@ -30,6 +32,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
     registry.addResourceHandler("/static/**") // resource handler를 추가, 이 url에 접근시 handler가 trigger됨
         .addResourceLocations("classpath:/static/",
             "classpath:/templates/public/static/");  // resource의 위치를 추가한다.
+  }
+
+  @Override
+  public void addViewControllers(ViewControllerRegistry registry) {
+    registry.addViewController("/{spring:\\w+}")
+        .setViewName("forward:/");
+    registry.addViewController("/**/{spring:\\w+}")
+        .setViewName("forward:/");
+    registry.addViewController("/{spring:\\w+}/**{spring:?!(\\.js|\\.css)$}")
+        .setViewName("forward:/");
   }
 
 //  @Override

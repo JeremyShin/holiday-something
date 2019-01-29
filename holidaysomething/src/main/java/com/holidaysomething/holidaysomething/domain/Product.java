@@ -1,5 +1,8 @@
 package com.holidaysomething.holidaysomething.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.time.LocalDateTime;
 import java.util.Set;
 import javax.persistence.Column;
@@ -23,12 +26,14 @@ import lombok.Setter;
 @Table(name = "PRODUCT")
 @Getter
 @Setter
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id")
 public class Product {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
 
   // String은 form 태그 안에 input 에서 아무것도 입력하지 않으면 null 로 처리되는게 안리ㅏ
   // "" 로 처리된다.
@@ -71,11 +76,7 @@ public class Product {
   private Boolean display;
   private String optionalPriceText;
   private LocalDateTime regDate;
-
-
   private LocalDateTime manufactureDate;
-
-
   private LocalDateTime releaseDate;
 
   @ManyToOne
@@ -83,11 +84,13 @@ public class Product {
 
   @OneToOne
   @JoinColumn(name = "product_detail_id")
+  @JsonIgnore
   private ProductDetail productDetail;
 
   @OneToMany(mappedBy = "product")
   private Set<ProductImage> productImages;
 
   @OneToMany(mappedBy = "product")
+  @JsonIgnore
   private Set<ProductOption> productOptions;
 }
