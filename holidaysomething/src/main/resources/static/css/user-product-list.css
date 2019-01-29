@@ -1,0 +1,70 @@
+#categoryList {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  monospace;
+  font-size: 10px;
+}
+
+#banner {
+  height: 200px;
+}
+
+#banner-title {
+  /*font-family: -apple-system, BlinkMacSystemFont Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;*/
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+}
+
+#banner-description {
+  /*font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;*/
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  monospace;
+}
+
+/*-webkit-justify-content: flex-end;*/
+/*　justify-content: flex-end;*/
+#sorting {
+  background: #f6f6f6;
+  -webkit-display: flex;
+  display: flex;
+  height: 50px;
+}
+
+#sorting1 {
+  flex: 1;
+  margin-left: 100px;
+}
+
+#sorting2 {
+  flex: 2;
+  margin-right: 100px;
+}
+
+#totalItem {
+  color: #999;
+  /*align-items: center;*/
+  /*justify-content: center;*/
+  float: right;
+}
+
+#dropdown {
+  height: 42px;
+  /*align-self: flex-end;*/
+  float: right;
+}
+
+#product h5 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+}
+
+#product span {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  monospace;
+}
+
+#pagination {
+  font-size: 20px;
+  text-align: center;
+}

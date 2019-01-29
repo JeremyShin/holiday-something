@@ -17,9 +17,16 @@
 
 <!--<th:block layout:fragment="css">-->
 <!--</th:block>-->
+
+<!-- 사용자 CSS 영역이 들어감 -->
+<th:block layout:fragment="css">
+  <link rel="stylesheet" type="text/css" media="screen" href="/static/css/user-product-list.css"/>
+</th:block>
+
 <div layout:fragment="userTitle">
   <input type="hidden" id="hiddenCategoryId" th:value="${categoryId}"/>
   <input type="hidden" id="hiddenBigCategoryName" th:value="${bigCategoryName}"/>
+
 
   <!-- 사용자 스크립트 추가 -->
   <th:block layout:fragment="script">
@@ -41,7 +48,7 @@
   -->
 
   <div id="categoryList">
-    <ol class="breadcrumb">
+    <ol style="background: #ffffff" class="breadcrumb">
       <li th:each="category : ${categoryList}">
         <a th:href="@{'/product/' + ${category.id}}" th:text="${category.name}"></a>
       </li>
@@ -49,7 +56,7 @@
   </div>
 
   <!-- class="bg-success" -->
-  <div style="background-color: #dff0d8; padding: 20px;" class="jumbotron">
+  <div id="banner">
     <div id="banner-title">
 
     </div>
@@ -57,9 +64,9 @@
     <div id="banner-description">
 
     </div>
-    <h2>Hello, world!</h2>
-    <p> 카테고리 설명 배치 </p>
-    <p> 여기 위치에 . 파스텔 톤으루다가~</p>
+    <!--<h2>Hello, world!</h2>-->
+    <!--<p> 카테고리 설명 배치 </p>-->
+    <!--<p> 여기 위치에 . 파스텔 톤으루다가~</p>-->
   </div>
 
   <!--<div th:if="${categoryId == 4}"  style="display: block; background-color: #dff0d8; padding: 20px;" class="jumbotron">-->
@@ -73,8 +80,39 @@
 <div layout:fragment="userContents">
   <!-- 헤더에서 선택한 카테고리에 따라 다른 상품결과가 출력되어야 한다.-->
 
-  <div>
-    <p> 정렬하기배치</p>
+  <div id="sorting">
+
+    <div id="sorting1">
+      <div id="totalItem">
+        <label th:text="${productListImageDtos.totalElements}"></label>
+        <label> Items</label>
+      </div>
+    </div>
+
+    <div id="sorting2">
+      <div id="dropdown" class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                data-toggle="dropdown" aria-expanded="true">
+          Sort
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+          <li role="presentation"><a role="menuitem" tabindex="-1"
+                                     th:href="@{'/product/'+ ${categoryId} + '?sort=regDate,desc'}">New
+            Arrivals</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1"
+                                     th:href="@{'/product/'+ ${categoryId} + '?sort=name,asc'}">Name</a>
+          </li>
+          <li role="presentation"><a role="menuitem" tabindex="-1"
+                                     th:href="@{'/product/'+ ${categoryId} + '?sort=sellingPrice,desc'}">Price:
+            High to Low</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1"
+                                     th:href="@{'/product/'+ ${categoryId} + '?sort=sellingPrice,asc'}">Price:
+            Low to High</a></li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 
   <div style="display: grid; margin-left: 100px; margin-right: 100px;
@@ -84,14 +122,38 @@
       <div style="padding:15px;">
         <!-- class="img-responsive"빼고 이걸 넣어도 똑같다. style="width:100%; object-fit: contain;"
         이미지 높이 차이? 이미지를 리사이징 하는게 빠를듯...-->
-        <img class="img-responsive"
+        <img style="width: 100%; height:100%; object-fit: contain;"
              th:src="${productListDto.imagePath + productListDto.imageName}"/>
       </div>
-      <h4 th:text="${productListDto.productName}"></h4>
+      <h5 th:text="${productListDto.productName}"></h5>
       <span th:text="${productListDto.sellingPrice}"></span>
     </div>
 
   </div>
+
+  <br>
+
+  <!-- 페이징 처리 -->
+  <div id="pagination">
+    <label th:if="(!${productListImageDtos.first})">
+      <a th:href="@{'/product/' + ${categoryId} + '?page=' + ${productListImageDtos.number-1}}">
+        < </a>
+    </label>
+
+    <label>Page </label>
+    <a th:text="${productListImageDtos.number + 1}"
+       th:href="@{'/product/'+ ${categoryId} + '?page=' + ${productListImageDtos.number}}"></a>
+    <label> of </label>
+    <label th:text="${productListImageDtos.totalPages}"></label>
+
+    <label th:if="(!${productListImageDtos.last})">
+      <a th:href="@{'/product/' + ${categoryId} + '?page=' + ${productListImageDtos.number+1}}">
+        > </a>
+    </label>
+
+
+  </div>
+
 
 </div>
 

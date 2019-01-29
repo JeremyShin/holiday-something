@@ -121,7 +121,8 @@ public class UserLoginController {
 
 
   /**
-   * @author JDragon 로그인 했을 때, 아이디가 root 이면 해당 url 호출.
+   * @author JDragon
+   * 로그인 했을 때, 아이디가 root 이면 해당 url 호출.
    */
   @GetMapping("/after")
   public String loginInfo(Principal principal, HttpSession httpSession) {
@@ -204,6 +205,12 @@ public class UserLoginController {
 
     return "/user/login?error=true";
   }*/
+
+  @GetMapping("/info")
+  public String showInfo(@RequestParam("userId") String userId) {
+
+    return "user/login/login-info";
+  }
 
 
 }
