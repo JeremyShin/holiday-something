@@ -62,71 +62,26 @@ public class UserOrderController {
   @PostMapping
   public String orderPost(Model model,
       @AuthenticationPrincipal MemberUserDetails userDetails,
-      ProductOrderInfoCommand poc){
+      ProductOrderInfoCommand poc) {
 
     AddOrderMemberDto addOrderMemberDto = memberService.findMemberById(userDetails.getId());
-    model.addAttribute("addOrderMemberDto",addOrderMemberDto);
+    model.addAttribute("addOrderMemberDto", addOrderMemberDto);
 
     // ProductOrderInfoCommand 를 ProductOrderInfo의 리스트로 바꾸어주는 메소드
-    List<ProductOrderInfoDto> productOrderInfoDtos = productOrderService.fromProductOrderInfoCommandToProductOrderInfoList(poc);
+    List<ProductOrderInfoDto> productOrderInfoDtos = productOrderService
+        .fromProductOrderInfoCommandToProductOrderInfoList(poc);
 
-    for(ProductOrderInfoDto productOrderInfoDto : productOrderInfoDtos){
+    for (ProductOrderInfoDto productOrderInfoDto : productOrderInfoDtos) {
       log.info(productOrderInfoDto.getProductId().toString());
       log.info(Integer.toString(productOrderInfoDto.getOptionIds().size()));
       log.info(Integer.toString(productOrderInfoDto.getOrderQuantities().size()));
     }
 
-    //model.addAttribute("productOrderInfoDto", productOrderInfoDto);
+    //얻어온 DTO로 상품을 조회하여,
+
+
+    model.addAttribute("productOrderInfoDtos", productOrderInfoDtos);
 
     return "user/order";
-
   }
-
-//  @PostMapping
-//  public String orderPost(Model model,
-//      ProductOrderInfoCommand poc){
-//
-//    // ProductOrderInfoCommand 를 ProductOrderInfo의 리스트로 바꾸어주는 메소드
-//    List<ProductOrderInfoDto> productOrderInfoDto = productOrderService.fromProductOrderInfoCommandToProductOrderInfoList(poc);
-//
-//    log.info(Integer.toString(productOrderInfoDto.size()));
-//
-//    log.info("주문페이지로 넘어왔나?");
-//    log.info(productOrderInfoDto.get(0).getProductId().toString());
-//    log.info(productOrderInfoDto.get(0).getOptionIds().toString());
-//    log.info(productOrderInfoDto.get(0).getOrderQuantities().toString());
-//
-//    log.info(Integer.toString(productOrderInfoDto.get(0).getOptionIds().size()));
-//    log.info(Integer.toString(productOrderInfoDto.get(0).getOrderQuantities().size()));
-//
-//
-//    //model.addAttribute("productOrderInfoDto", productOrderInfoDto);
-//
-//    return "user/order";
-//
-//  }
-
-
-//  @PostMapping
-//  public String orderPost(Model model,
-//      ProductOrderInfoDto productOrderInfoDto){
-//
-//    // ProductOrderInfoCommand 를 ProductOrderInfo의 리스트로 바꾸어주는 메소드
-//
-//    log.info("주문페이지로 넘어왔나?");
-//      log.info(productOrderInfoDto.getProductId().toString());
-//      log.info(productOrderInfoDto.getOptionIds().toString());
-//      log.info(productOrderInfoDto.getOrderQuantities().toString());
-//
-//      log.info(Integer.toString(productOrderInfoDto.getOptionIds().size()));
-//      log.info(Integer.toString(productOrderInfoDto.getOrderQuantities().size()));
-//
-//    //model.addAttribute("productOrderInfoDto", productOrderInfoDto);
-//
-//    return "user/order";
-//
-//  }
-
-
-
 }
