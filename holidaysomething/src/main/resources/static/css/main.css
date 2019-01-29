@@ -175,3 +175,54 @@
 .user-header-category:hover .middle-category {
   display: block; /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
 }
+
+/* User Product-detail Page CSS */
+
+#root-info {
+  width: 100%;
+  height: 550px;
+}
+
+#top-info-left {
+  width: 50%;
+  height: auto;
+  position: relative;
+  float: left;
+}
+#top-info-right {
+  width: 50%;
+  height: auto;
+  position: relative;
+  float: right;
+}
+#top-info-left-abs {
+  position: absolute;
+  top: 0px;
+  left: 10%;
+  right: 2%;
+}
+
+#top-info-right-abs {
+  position: absolute;
+  top: 0px;
+  left: 3%;
+  right: 10%;
+}
+
+#product-detail-info {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+}
+
+.product-name {
+  font-size: 30px;
+  color: black;
+  font-weight: bold;
+}
+
+.product-price {
+  font-size: 24px;
+  color: red;
+  font-weight: bold;
+}

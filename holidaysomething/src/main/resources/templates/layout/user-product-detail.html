@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <head th:replace="fragments/config :: configFragment"></head>
+    <div>
+        <header th:replace="fragments/header :: userHeaderFragment"></header>
+    </div>
+
+    <div layout:fragment="productInfo" class="root-info"></div>
+
+    <div layout:fragment="productContent"></div>
+
+    <div layout:fragment="infomation"></div>
+
+    <div layout:fragment="bestProducts"></div>
+
+    <footer th:replace="fragments/footer:: userFooterFragment"></footer>
+
+    <!--  <body th:replace="fragments/config :: configFragment"></body>-->
+
+</html>

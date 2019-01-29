@@ -3,221 +3,221 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:text-align="http://www.w3.org/1999/xhtml"
       xml:th="http:/www.thymeleaf.org"
-      layout:decorate="~{layout/user-default.html}">
+      layout:decorate="~{layout/user-product-detail.html}">
 
 
 <head th:include="fragments/config :: configFragment">
-    <title id="pageTitle">TODO 상품 상세 설명</title>
+    <title id="pageTitle">TODO 상품 이름을 넣자</title>
     <!-- other elements you want to reference in your layout -->
 </head>
 
+<!-- 상품 판매 정보 -->
+<div layout:fragment="productInfo">
+    <div id='top-info-left'>
+        <div id="top-info-left-abs">
+            <!--Carousel-->
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                </ol>
 
-<div layout:fragment="userTitle">
-    <style>
-        .left-box {
-            float: left;
-            width: 50%;
-        }
-        .right-box {
-            float: right;
-            width: 50%;
-        }
-    </style>
-    <div class='left-box'>
-        <!--Carousel-->
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            </ol>
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
-                <div class="item active ">
-                    <img src="/static/img/cup.png" alt="공사중,,,">
-                    <div class="carousel-caption">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active ">
+                        <img src="/static/img/cup.png" alt="공사중,,,">
+                        <div class="carousel-caption">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="/static/img/rainbow2.jpg" alt="공사중,,,">
+                        <div class="carousel-caption">
+                        </div>
                     </div>
                 </div>
-                <div class="item">
-                    <img src="/static/img/rainbow2.jpg" alt="공사중,,,">
-                    <div class="carousel-caption">
-                    </div>
-                </div>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button"
+                   data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button"
+                   data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-
-            <!-- Controls -->
-            <a class="left carousel-control" href="#carousel-example-generic" role="button"
-               data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#carousel-example-generic" role="button"
-               data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
         </div>
     </div>
-    <div class='right-box'>
-        <form method="post" name="productOrder" action="/user/product/order" id="orderForm">
-            <br>
-            <p th:text="@{'원가 (or 판매가) : ' + ${product.originalPrice}} + '원'">원가와 판매가 중 어떤 것을 보여줄까?</p>
+    <div id='top-info-right'>
+        <div id="top-info-right-abs">
+            <div style="border-top:1px solid gold; border-bottom:1px solid gold;">
+                <br>
+                <span class="product-name" th:text="${product.name}">상품 이름</span>
+                <br><br>
+            </div>
 
-            <p>할인율 : 컬럼이 없다.. 어떻게 하기로 했더라??</p>
+            <div style="height: 20px;"></div>
 
-            <p th:text="@{'적립금 : ' + ${product.mileage}}">해당 상품을 구매할 시 적립될 적립금을 보여줍니다.</p>
+            <div style="height: 70px; border-bottom:0.5px solid #75787b;">
+                <span style="text-decoration:line-through; font-size:15px; color: grey;"
+                      th:text="${product.originalPrice}">원가</span><br>
+                <span class="product-price">x%</span> <!--TODO 할인율을 어떻게 할까 -->
+                <em class="product-price" th:text="@{'&nbsp;' + ${product.sellingPrice}}">판매가</em><br><br>
+            </div>
 
-            옵션 선택, 해당 옵션에 대한 상품의 수량<br>
-            <table>
-                <th>
-                    <select name="optionId" form="orderForm">
-                                    <option disabled selected>옵션을 선택하세요</option>
-                        <option value="0">없음</option>
-                                    <option name="optionId" th:each="productOption : ${productOptions}"
-                                            th:value="${productOption.id}"
-                                            th:utext="${productOption.name}"></option>
-                    </select>
-                </th>
+            <div style="height: 100px;">
+                <br>
+                <span style="font-weight: bold;">상품할인 &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span style="color: red;" th:text="@{'x%' + '&nbsp;' + ${product.sellingPrice}}">상품 가격</span><br>
+                <span style="font-weight: bold;">추가혜택 &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span th:text="'적립금 ' + @{${product.mileage} + 'p'}"></span><br>
+            </div>
+
+            <div id="option-box">
+                <select name="optionId" form="orderForm">
+                    <option disabled selected>옵션을 선택하세요</option>
+                    <option value="0">없음</option>
+                    <option name="optionId" th:each="productOption : ${productOptions}"
+                            th:value="${productOption.id}"
+                            th:utext="${productOption.name}"></option>
+                </select>
+            </div>
+
+            <form method="post" name="productOrder" action="/user/product/order" id="orderForm">
                 <th>
                     <select name="orderQuantity" form="orderForm">
                         <option disabled selected>구매할 해당 옵션의 상품 개수 이건 29cm 처럼 처리할 수 있도록 노력하자...</option>
                         <option th:each="i : ${#numbers.sequence(0, 10)}" th:text="${i}">
                     </select>
                 </th>
-            </table>
-            <br>
-            <button>옵션 추가 버튼을 구현하자</button>
-            <br><br>
-            왼쪽 : cart에 담기 버튼 (선택한 옵션과 상품의 수량, 상품 번호가 넘어감)<br>
-            오른쪽 : 즉시 주문하기 버튼 (선택한 옵션과 상품의 수량, 상품 번호가 넘어감)<br>
-            <input type="hidden" th:value="${product.id}" name="productId"/>
-            <input type="submit" value="BUY NOW"/>
-        </form>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+
+                <br>
+
+                <br><br>
+                왼쪽 : cart에 담기 버튼 (선택한 옵션과 상품의 수량, 상품 번호가 넘어감)<br>
+                오른쪽 : 즉시 주문하기 버튼 (선택한 옵션과 상품의 수량, 상품 번호가 넘어감)<br>
+                <input type="hidden" th:value="${product.id}" name="productId"/>
+                <input type="submit" value="BUY NOW"/>
+            </form>
+        </div>
     </div>
 </div>
+<!-- 상품 설명 editor -->
+<div layout:fragment="productContent">
+        <div id="editSection"></div>
 
-<div layout:fragment="userContents">
-    <div class="user-content">
+        <script src="/static/editor/jquery/dist/jquery.js"></script>
+        <script src="/static/editor/tui-code-snippet/dist/tui-code-snippet.js"></script>
+        <script src="/static/editor/markdown-it/dist/markdown-it.js"></script>
+        <script src="/static/editor/to-mark/dist/to-mark.js"></script>
+        <script src="/static/editor/codemirror/lib/codemirror.js"></script>
+        <script src="/static/editor/highlightjs/highlight.pack.js"></script>
+        <script src="/static/editor/squire-rte/build/squire-raw.js"></script>
+        <script src="/static/editor/tui-editor/dist/tui-editor-Editor-all.js"></script>
+        <link rel="stylesheet" href="/static/editor/codemirror/lib/codemirror.css">
+        <link rel="stylesheet" href="/static/editor/highlightjs/styles/github.css">
+        <link rel="stylesheet" href="/static/editor/tui-editor/dist/tui-editor.css">
+        <link rel="stylesheet" href="/static/editor/tui-editor/dist/tui-editor-contents.css">
 
-        <div id="editSection">
-        </div>
+        <!--<title th:text="상품 상세보기"></title>-->
 
-        <div>
-            상품 설명 밑에는 배송정보 같은 것을 보여줄거야
-        </div>
+        <style type="text/css">
+            .footer {
+                position: relative;
+                width: 100%;
+                height: 50px;
+                margin-top: 30px;
+                background-color: #f5f5f5;
+            }
 
+            #userNameP {
+                margin-top: 30px;
+            }
+
+            #deleteModalCallBtn {
+                margin-right: 10px;
+            }
+
+            .jb-right {
+                text-align: right;
+            }
+
+            .jb-center {
+                text-align: center;
+            }
+
+            .te-md-container .CodeMirror {
+                font-size: 14px;
+            }
+
+            .tui-editor-contents {
+                font-size: 14px;
+            }
+        </style>
+
+        <script th:inline="javascript">
+            (function (root, factory) {
+                if (typeof define === 'function' && define.amd) {
+                    define(['tui-editor'], factory);
+                } else if (typeof exports === 'object') {
+                    factory(require('tui-editor'));
+                } else {
+                    factory(root['tui']['Editor']);
+                }
+            })(this, function (Editor) {
+                // define youtube extension
+                Editor.defineExtension('youtube', function () {
+                    // runs while markdown-it transforms code block to HTML
+                    Editor.codeBlockManager.setReplacer('youtube', function (youtubeId) {
+                        // Indentify multiple code blocks
+                        var wrapperId = 'yt' + Math.random().toString(36).substr(2, 10);
+                        // avoid sanitizing iframe tag
+                        setTimeout(renderYoutube.bind(null, wrapperId, youtubeId), 0);
+                        return '<div id="' + wrapperId + '"></div>';
+                    });
+                });
+
+                function renderYoutube(wrapperId, youtubeId) {
+                    var el = document.querySelector('#' + wrapperId);
+                    el.innerHTML = '<iframe width="820" height="630" src="https://www.youtube.com/embed/' + youtubeId + '"  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+                }
+            });
+
+            $(document).ready(function () {
+                $('#editSection').tuiEditor({
+                    exts: ['youtube'],
+                    viewer: true,
+                    height: 'auto'
+                });
+                /*<![CDATA[*/
+                var content = /*[[${productDescription}]]*/ 'default';
+                $("#editSection").tuiEditor("setValue", content);
+                /*]]>*/
+            });
+        </script>
+    </div>
+
+    <!-- 배송 안내, 교환 안내-->
+    <div layout:fragment="infomation"></div>
+
+    <!-- 판매량 Top 5 상품 -->
+    <div layout:fragment="bestProducts">
         <div>
             음...best 상품은 user-content 밖에 만드는 게 맞겠지?? cssCss
             일단 best 상품을 잘 가져오는지 확인!
             아;;;;;;;;; best 상품의 main 이미지를 가져와서 보여줘야 되는구나....
             <br>
             <tr th:each="bestProduct: ${bestProducts}">
-                <td th:text="${bestProduct.id}" /><br>
-                <td th:text="${bestProduct.name}" /><br><br>
+                <td th:text="${bestProduct.id}"/>
+                <br>
+                <td th:text="${bestProduct.name}"/>
+                <br><br>
             </tr>
         </div>
-
-
     </div>
 
-    <script src="/static/editor/jquery/dist/jquery.js"></script>
-    <script src="/static/editor/tui-code-snippet/dist/tui-code-snippet.js"></script>
-    <script src="/static/editor/markdown-it/dist/markdown-it.js"></script>
-    <script src="/static/editor/to-mark/dist/to-mark.js"></script>
-    <script src="/static/editor/codemirror/lib/codemirror.js"></script>
-    <script src="/static/editor/highlightjs/highlight.pack.js"></script>
-    <script src="/static/editor/squire-rte/build/squire-raw.js"></script>
-    <script src="/static/editor/tui-editor/dist/tui-editor-Editor-all.js"></script>
-    <link rel="stylesheet" href="/static/editor/codemirror/lib/codemirror.css">
-    <link rel="stylesheet" href="/static/editor/highlightjs/styles/github.css">
-    <link rel="stylesheet" href="/static/editor/tui-editor/dist/tui-editor.css">
-    <link rel="stylesheet" href="/static/editor/tui-editor/dist/tui-editor-contents.css">
-
-    <!--<title th:text="상품 상세보기"></title>-->
-
-    <style type="text/css">
-        .footer {
-            position: relative;
-            width: 100%;
-            height: 50px;
-            margin-top: 30px;
-            background-color: #f5f5f5;
-        }
-        #userNameP{
-            margin-top: 30px;
-        }
-        #deleteModalCallBtn{
-            margin-right: 10px;
-        }
-        .jb-right {
-            text-align: right;
-        }
-        .jb-center {
-            text-align: center;
-        }
-
-        .te-md-container .CodeMirror {
-            font-size: 14px;
-        }
-        .tui-editor-contents {
-            font-size: 14px;
-        }
-    </style>
-
-    <script th:inline="javascript">
-        (function(root, factory) {
-            if (typeof define === 'function' && define.amd) {
-                define(['tui-editor'], factory);
-            } else if (typeof exports === 'object') {
-                factory(require('tui-editor'));
-            } else {
-                factory(root['tui']['Editor']);
-            }
-        })(this, function(Editor) {
-            // define youtube extension
-            Editor.defineExtension('youtube', function() {
-                // runs while markdown-it transforms code block to HTML
-                Editor.codeBlockManager.setReplacer('youtube', function(youtubeId) {
-                    // Indentify multiple code blocks
-                    var wrapperId = 'yt' + Math.random().toString(36).substr(2, 10);
-                    // avoid sanitizing iframe tag
-                    setTimeout(renderYoutube.bind(null, wrapperId, youtubeId), 0);
-                    return '<div id="' + wrapperId + '"></div>';
-                });
-            });
-            function renderYoutube(wrapperId, youtubeId) {
-                var el = document.querySelector('#' + wrapperId);
-                el.innerHTML = '<iframe width="820" height="630" src="https://www.youtube.com/embed/' + youtubeId + '"  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
-            }
-        });
-
-        $(document).ready(function () {
-            $('#editSection').tuiEditor({
-                exts: ['youtube'],
-                viewer: true,
-                height: 'auto'
-            });
-            /*<![CDATA[*/
-            var content = /*[[${productDescription}]]*/ 'default';
-            $("#editSection").tuiEditor("setValue", content);
-            /*]]>*/
-        });
-    </script>
 </div>
-
 </html>
