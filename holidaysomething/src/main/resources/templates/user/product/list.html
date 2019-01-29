@@ -17,9 +17,16 @@
 
 <!--<th:block layout:fragment="css">-->
 <!--</th:block>-->
+
+<!-- 사용자 CSS 영역이 들어감 -->
+<th:block layout:fragment="css">
+  <link rel="stylesheet" type="text/css" media="screen" href="/static/css/user-product-list.css"/>
+</th:block>
+
 <div layout:fragment="userTitle">
   <input type="hidden" id="hiddenCategoryId" th:value="${categoryId}"/>
   <input type="hidden" id="hiddenBigCategoryName" th:value="${bigCategoryName}"/>
+
 
   <!-- 사용자 스크립트 추가 -->
   <th:block layout:fragment="script">
@@ -49,7 +56,7 @@
   </div>
 
   <!-- class="bg-success" -->
-  <div style="background-color: #dff0d8; padding: 20px;" class="jumbotron">
+  <div id="banner">
     <div id="banner-title">
 
     </div>
@@ -57,9 +64,9 @@
     <div id="banner-description">
 
     </div>
-    <h2>Hello, world!</h2>
-    <p> 카테고리 설명 배치 </p>
-    <p> 여기 위치에 . 파스텔 톤으루다가~</p>
+    <!--<h2>Hello, world!</h2>-->
+    <!--<p> 카테고리 설명 배치 </p>-->
+    <!--<p> 여기 위치에 . 파스텔 톤으루다가~</p>-->
   </div>
 
   <!--<div th:if="${categoryId == 4}"  style="display: block; background-color: #dff0d8; padding: 20px;" class="jumbotron">-->
@@ -84,7 +91,7 @@
       <div style="padding:15px;">
         <!-- class="img-responsive"빼고 이걸 넣어도 똑같다. style="width:100%; object-fit: contain;"
         이미지 높이 차이? 이미지를 리사이징 하는게 빠를듯...-->
-        <img class="img-responsive"
+        <img style="width: 100%; height:100%; object-fit: contain;"
              th:src="${productListDto.imagePath + productListDto.imageName}"/>
       </div>
       <h4 th:text="${productListDto.productName}"></h4>
@@ -92,6 +99,7 @@
     </div>
 
   </div>
+
 
 </div>
 
