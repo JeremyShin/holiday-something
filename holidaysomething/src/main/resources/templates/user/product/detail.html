@@ -53,31 +53,37 @@
     </div>
     <div id='top-info-right'>
         <div id="top-info-right-abs">
-            <div style="border-top:1px solid gold; border-bottom:1px solid gold;">
-                <br>
+            <div style="border-top:1px solid gold; border-bottom:1px solid gold; padding-top: 20px; padding-bottom: 20px">
                 <span class="product-name" th:text="${product.name}">상품 이름</span>
-                <br><br>
             </div>
 
             <div style="height: 20px;"></div>
 
-            <div style="height: 70px; border-bottom:0.5px solid #75787b;">
+            <div style="height: 70px; border-bottom: 1px solid #d3d3d3;">
                 <span style="text-decoration:line-through; font-size:15px; color: grey;"
-                      th:text="${product.originalPrice}">원가</span><br>
+                      th:text="${#numbers.formatInteger(product.originalPrice, 0, 'COMMA')}">원가</span><br>
                 <span class="product-price">x%</span> <!--TODO 할인율을 어떻게 할까 -->
-                <em class="product-price" th:text="@{'&nbsp;' + ${product.sellingPrice}}">판매가</em><br><br>
+                <em class="product-price"
+                    th:text="@{'&nbsp;' + ${#numbers.formatInteger(product.sellingPrice, 0, 'COMMA')}}">판매가</em>
+                <span style="color: red; font-size: 15px; font-weight: bold;">원</span>
             </div>
 
-            <div style="height: 100px;">
-                <br>
-                <span style="font-weight: bold;">상품할인 &nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <span style="color: red;" th:text="@{'x%' + '&nbsp;' + ${product.sellingPrice}}">상품 가격</span><br>
-                <span style="font-weight: bold;">추가혜택 &nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <span th:text="'적립금 ' + @{${product.mileage} + 'p'}"></span><br>
+            <div style="height: 100px; padding-top: 10px; padding-bottom: 10px; line-height: 23px;">
+                <span style="font-weight: bold;">상품할인</span>
+                <span style="color: red; margin-left: 17px;"
+                      th:text="@{'x%' + '&nbsp;' + ${#numbers.formatInteger(product.sellingPrice, 0, 'COMMA')}}">상품 가격</span><br>
+
+                <span style="font-weight: bold;">배송비</span>
+                <span style="margin-left: 30px;"
+                      th:text=" @{${#numbers.formatInteger(product.shippingPrice, 0, 'COMMA')}}">배송비</span><br>
+
+                <span style="font-weight: bold;">추가혜택</span>
+                <span style="margin-left: 17px;"
+                      th:text="'적립금 ' + @{${#numbers.formatInteger(product.mileage, 0, 'COMMA')} + 'p'}">적립금</span>
             </div>
 
             <div id="option-box">
-                <select name="optionId" form="orderForm">
+                <select name="optionId" form="orderForm">   <!-- TODO `form`의 id를 변경해야 함-->
                     <option disabled selected>옵션을 선택하세요</option>
                     <option value="0">없음</option>
                     <option name="optionId" th:each="productOption : ${productOptions}"
@@ -86,27 +92,23 @@
                 </select>
             </div>
 
-            <form method="post" name="productOrder" action="/user/product/order" id="orderForm">
-                <th>
-                    <select name="orderQuantity" form="orderForm">
-                        <option disabled selected>구매할 해당 옵션의 상품 개수 이건 29cm 처럼 처리할 수 있도록 노력하자...</option>
-                        <option th:each="i : ${#numbers.sequence(0, 10)}" th:text="${i}">
-                    </select>
-                </th>
+            <div>이곳에 선택한 옵션이 나오고 상수량 up/down 버튼이 나오고 가격이 나옴, 취소 버튼도 있어야 함
 
-                <br>
+                <form method="post" name="productOrder" action="/user/product/order" id="orderForm">
 
-                <br><br>
-                왼쪽 : cart에 담기 버튼 (선택한 옵션과 상품의 수량, 상품 번호가 넘어감)<br>
-                오른쪽 : 즉시 주문하기 버튼 (선택한 옵션과 상품의 수량, 상품 번호가 넘어감)<br>
-                <input type="hidden" th:value="${product.id}" name="productId"/>
-                <input type="submit" value="BUY NOW"/>
-            </form>
+                    선택한 옵션과 상품의 수량, 상품 번호가 넘어감<br>
+                    <input type="hidden" th:value="${product.id}" name="productId"/>
+                    <input type="submit" value="SHOPPING BAG"/>
+                    <input type="submit" value="BUY NOW"/>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-<!-- 상품 설명 editor -->
+
 <div layout:fragment="productContent">
+    <!-- 상품 설명 editor -->
+    <div class="product-info" style="border-top:2px solid #d3d3d3;">
         <div id="editSection"></div>
 
         <script src="/static/editor/jquery/dist/jquery.js"></script>
@@ -199,17 +201,84 @@
             });
         </script>
     </div>
+</div>
 
-    <!-- 배송 안내, 교환 안내-->
-    <div layout:fragment="infomation"></div>
+<div layout:fragment="infomation">
+    <!-- 상품 정보, 배송정보, 교환/환불 안내-->
+    <div class="product-info">
+        <div class="product-info-margin">
+            <div class="product-info-name" style="border-bottom:4px solid black; line-height: 40px;">
+                <span style="font-size: 20px; font-weight: bold">PRODUCT</span>
+            </div>
+            <table width="100%">
+                <tbody>
+                <tr>
+                    <th class="product-table-th">제품명
+                    </td>
+                    <td class="product-table-td" th:text="${product.name}">테스트</td>
+                </tr>
+                <tr>
+                    <th class="product-table-th">제조사
+                    </td>
+                    <td class="product-table-td" th:text="${product.manufacturer}">테스트</td>
+                </tr>
+                <tr>
+                    <th class="product-table-th">제조연월
+                    </td>
+                    <td class="product-table-td" th:text="${#temporals.format(product.manufactureDate, 'yyyy-MM-dd')}">
+                        테스트
+                    </td>
+                </tr>
+                <tr>
+                    <th class="product-table-th">품질보증기준
+                    </td>
+                    <td class="product-table-td">상품 수령일로부터 7일 이내 교환 및 환불</td>
+                </tr>
+                <tr>
+                    <th class="product-table-th">AS 책임자와 전화번호
+                    </td>
+                    <td class="product-table-td">TODO 무엇을 적을까? 아니면 없앨까?</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <!-- 판매량 Top 5 상품 -->
-    <div layout:fragment="bestProducts">
-        <div>
-            음...best 상품은 user-content 밖에 만드는 게 맞겠지?? cssCss
-            일단 best 상품을 잘 가져오는지 확인!
-            아;;;;;;;;; best 상품의 main 이미지를 가져와서 보여줘야 되는구나....
+        <div class="product-info-margin">
+            <div class="product-info-name" style="border-bottom:4px solid black; line-height: 40px;">
+                <span style="font-size: 20px; font-weight: bold">NOTICE</span>
+            </div>
             <br>
+            <li class="li-line-height">제품 단면 측정 사이즈는 측정 방법에 따라 ±5cm의 오차가 있을 수 있습니다.</li>
+            <li class="li-line-height">색상과 질감은 사용하는 모니터의 사양 또는 해상도에 따라 실제 제품과 다소 차이가 있을 수 있습니다.</li>
+            <li class="li-line-height">이는 교환 환불의 사유가 되지 않으므로 신중한 구매 부탁드립니다.</li>
+            <li class="li-line-height">단순 변심/판단 착오 등의 교환은, 고객이 왕복 배송비를 부담해야 합니다.</li>
+            <li class="li-line-height">상품의 교환 시 패키지를 개봉하지 않은 상태여야 하며, 상품이 훼손된 경우에는 교환이 불가합니다.</li>
+            <li class="li-line-height">상품 불량/오 배송의 경우, Holiday Something에서 왕복 배송비를 부담하며 동일 상품으로 재발송 합니다.</li>
+            <li class="li-line-height">모든 상품은 배송일자 기준 7일 초과 시 교환/환불이 불가능합니다.</li>
+        </div>
+
+        <div class="product-info-margin">
+            <div class="product-info-name" style="border-bottom:4px solid black; line-height: 40px;">
+                <span style="font-size: 20px; font-weight: bold">DELIVERY</span>
+            </div>
+            <br>
+            <li class="li-line-height">홀리데이썸띵은 가장 빠르고 제품 손상이 적은 우체국 택배를 이용하고 있습니다. 제품 당 3,000원의 운송료가 청구 됩니다.</li>
+            <li class="li-line-height">도서지역 및 해외배송은 추가 운임 발생합니다.</li>
+            <li class="li-line-height">결제 완료일부터 공휴일 제외 7일 내 상품을 받으실 수 있습니다.</li>
+            <li class="li-line-height">배송지연 상품에 대해서는 개별 연락 해드립니다.</li>
+        </div>
+    </div>
+</div>
+
+<div layout:fragment="bestProducts">
+    <!-- 판매량 Top 5 상품 -->
+    <div class="product-info">
+        <div class="product-info-margin">
+            <div class="product-info-name" style="line-height: 40px; color: orange;">
+                <span style="font-size: 20px; font-weight: bold">Best Product</span>
+            </div>
+            best 상품을 잘 가져오는지 확인!<br>
+            아;;;;;;;;; best 상품의 main 이미지를 가져와서 보여줘야 되는구나....<br>
             <tr th:each="bestProduct: ${bestProducts}">
                 <td th:text="${bestProduct.id}"/>
                 <br>
@@ -218,6 +287,6 @@
             </tr>
         </div>
     </div>
-
 </div>
+
 </html>

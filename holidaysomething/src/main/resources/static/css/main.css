@@ -177,21 +177,24 @@
 }
 
 /* User Product-detail Page CSS */
-
 #root-info {
   width: 100%;
-  height: 550px;
+  height: auto;
+  min-height: 500px;
+  margin-top: 5%;
 }
 
 #top-info-left {
-  width: 50%;
+  width: 45%;
   height: auto;
+  min-height: 500px;
   position: relative;
   float: left;
 }
 #top-info-right {
-  width: 50%;
+  width: 55%;
   height: auto;
+  min-height: 500px;
   position: relative;
   float: right;
 }
@@ -209,14 +212,17 @@
   right: 10%;
 }
 
-#product-detail-info {
-  position: absolute;
-  left: 10%;
-  right: 10%;
+.product-info {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.product-info-margin {
+  margin-top: 5%;
 }
 
 .product-name {
-  font-size: 30px;
+  font-size: 25px;
   color: black;
   font-weight: bold;
 }
@@ -225,4 +231,20 @@
   font-size: 24px;
   color: red;
   font-weight: bold;
+}
+
+.li-line-height {
+  line-height: 25px;
+}
+
+.product-table-th {
+  width: 30%;
+  border: 1px solid #d3d3d3;
+  padding: 10px;
+}
+
+.product-table-td {
+  width: 70%;
+  border: 1px solid #d3d3d3;
+  padding: 23px;
 }
