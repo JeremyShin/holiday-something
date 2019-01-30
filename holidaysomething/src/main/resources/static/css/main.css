@@ -212,6 +212,33 @@
   right: 10%;
 }
 
+.order-index-total-price{
+  color: red;
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+.order-index-table-option {
+  width: 50%;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.order-index-table-price {
+  width: 25%;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.order-index-table-quantity {
+  width: 15%;
+}
+
+.order-index-table-delete {
+  width: 10%;
+}
+
 .product-info {
   margin-left: 5%;
   margin-right: 5%;

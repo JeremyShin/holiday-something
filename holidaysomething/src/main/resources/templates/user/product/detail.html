@@ -82,21 +82,56 @@
                       th:text="'적립금 ' + @{${#numbers.formatInteger(product.mileage, 0, 'COMMA')} + 'p'}">적립금</span>
             </div>
 
-            <div id="option-box">
-                <select name="optionId" form="orderForm">   <!-- TODO `form`의 id를 변경해야 함-->
+            <div id="option-box" style="margin-bottom: 30px;">
+                <select name="selectOption" onchange="selectOptionChange(this.value)">   <!-- TODO `form`의 id를 변경해야 함-->
                     <option disabled selected>옵션을 선택하세요</option>
                     <option value="0">없음</option>
                     <option name="optionId" th:each="productOption : ${productOptions}"
-                            th:value="${productOption.id}"
-                            th:utext="${productOption.name}"></option>
+                            th:value="${productOption}"
+                            th:utext="@{${productOption.name} + ' [+' + ${productOption.price} + ']'}"></option>
                 </select>
             </div>
 
-            <div>이곳에 선택한 옵션이 나오고 상수량 up/down 버튼이 나오고 가격이 나옴, 취소 버튼도 있어야 함
+            <div id="orderIndex">
+                <div style="margin-top: 10px; border-bottom: 2px solid black;">
+                    <table>
+                        <tbody>
+                        <td class="order-index-table-option">가나</td>
+                        <td class="order-index-table-quantity">다라</td>
+                        <td class="order-index-table-price">마바</td>
+                        <td class="order-index-table-delete">사아</td>
+                        </tbody>
+                        <tbody>
+                        <td class="order-index-table-option">가나</td>
+                        <td class="order-index-table-quantity">다라</td>
+                        <td class="order-index-table-price">마바</td>
+                        <td class="order-index-table-delete">사아</td>
+                        </tbody>
+                        <tbody>
+                        <td class="order-index-table-option">가나</td>
+                        <td class="order-index-table-quantity">다라</td>
+                        <td class="order-index-table-price">마바</td>
+                        <td class="order-index-table-delete">사아</td>
+                        </tbody>
+                        <tbody>
+                        <td class="order-index-table-option">가나</td>
+                        <td class="order-index-table-quantity">다라</td>
+                        <td class="order-index-table-price">마바</td>
+                        <td class="order-index-table-delete">사아</td>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="orderIndexResult" style="margin-top: 15px; margin-bottom: 15px; text-align: right;">
+                    <span style="font-size: 15px">총 상품 금액</span>
+                    <span class="order-index-total-price">28,000</span>
+                    <span style="font-size: 23px; color: red;">원</span>
+                </div>
+            </div>
 
+            <div id="orderRequestForm">
                 <form method="post" name="productOrder" action="/user/product/order" id="orderForm">
 
-                    선택한 옵션과 상품의 수량, 상품 번호가 넘어감<br>
+                    `orderIndex`에 선택된 옵션과 상품의 수량, 상품 번호가 넘어감
                     <input type="hidden" th:value="${product.id}" name="productId"/>
                     <input type="submit" value="SHOPPING BAG"/>
                     <input type="submit" value="BUY NOW"/>
@@ -104,6 +139,13 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function selectOptionChange(optionId, optionText) {
+
+        }
+    </script>
+
 </div>
 
 <div layout:fragment="productContent">
