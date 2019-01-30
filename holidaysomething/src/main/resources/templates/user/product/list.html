@@ -124,6 +124,7 @@
         이미지 높이 차이? 이미지를 리사이징 하는게 빠를듯...-->
         <img style="width: 100%; height:100%; object-fit: contain;"
              th:src="${productListDto.imagePath + productListDto.imageName}"/>
+        <!-- th:href="@{'/product/' + ${categoryId} + '/' + ${productListDto.productId}  }" -->
       </div>
       <h5 th:text="${productListDto.productName}"></h5>
       <span th:text="${productListDto.sellingPrice}"></span>
