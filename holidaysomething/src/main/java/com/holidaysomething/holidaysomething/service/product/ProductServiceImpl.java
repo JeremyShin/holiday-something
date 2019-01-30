@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.service.product;
 
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
+import com.holidaysomething.holidaysomething.dto.ProductOrderDetailDto;
 import com.holidaysomething.holidaysomething.dto.SearchDto;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import java.time.LocalDateTime;
@@ -96,5 +97,17 @@ public class ProductServiceImpl implements ProductService {
   @Transactional(readOnly = true)
   public Product getProduct(Long categoryId, Long id) {
       return productRepository.findByProductCategoryIdAndId(categoryId, id);
+  }
+
+  @Override
+  public ProductOrderDetailDto getProductForOrder(ProductOrderDetailDto productOrderDetailDto, Product product) {
+      productOrderDetailDto.setProductName(product.getName());
+      productOrderDetailDto.setManufacturer(product.getManufacturer());
+      productOrderDetailDto.setMileage(product.getMileage());
+      productOrderDetailDto.setOriginalPrice(product.getOriginalPrice());
+      productOrderDetailDto.setSellingPrice(product.getSellingPrice());
+      productOrderDetailDto.setShippingPrice(product.getShippingPrice());
+
+      return
   }
 }

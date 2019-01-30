@@ -3,6 +3,7 @@ package com.holidaysomething.holidaysomething.service.product;
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.dto.ProductOptionCommand;
+import com.holidaysomething.holidaysomething.dto.ProductOrderDetailDto;
 import com.holidaysomething.holidaysomething.repository.ProductOptionRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -94,5 +95,22 @@ public class ProductOptionServiceImpl implements ProductOptionService {
   @Override
   public List<ProductOption> getProductOptionsByProductId(Long productId) {
     return productOptionRepository.findByProductId(productId);
+  }
+
+  @Override
+  public ProductOrderDetailDto getProductOptionForOrder(Long id) {
+    ProductOrderDetailDto productOrderDetailDto = new ProductOrderDetailDto();
+    ProductOption productOption = productOptionRepository.findProductOptionById(id);
+
+    log.info("주문 서비스 입니다.");
+    log.info("넘어온 옵션의 아이디는 " + id);
+    log.info("검색한 옵션의 아이디는" + productOption.getId());
+
+
+
+    productOrderDetailDto.getOptionName().add(productOption.getName());
+    productOrderDetailDto.getOptionPrice().add(productOption.getPrice());
+
+    return  productOrderDetailDto;
   }
 }

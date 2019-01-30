@@ -10,6 +10,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface ProductOptionRepository extends JpaRepository<ProductOption, Long> {
 
+  ProductOption findProductOptionById(Long id);
+
   List<ProductOption> findAllByNameContaining(String name);
 
   @Query(value = "select po from ProductOption po where po.name LIKE CONCAT('%', :productOptionName, '%')")

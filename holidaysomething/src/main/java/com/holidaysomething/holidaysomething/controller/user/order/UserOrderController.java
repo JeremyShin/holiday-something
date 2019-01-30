@@ -1,15 +1,21 @@
 package com.holidaysomething.holidaysomething.controller.user.order;
 
 import com.holidaysomething.holidaysomething.domain.Member;
+import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.dto.AddOrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.ProductOptionCommand;
+import com.holidaysomething.holidaysomething.dto.ProductOptionDto;
+import com.holidaysomething.holidaysomething.dto.ProductOrderDetailDto;
 import com.holidaysomething.holidaysomething.dto.ProductOrderInfoCommand;
 import com.holidaysomething.holidaysomething.dto.ProductOrderInfoDto;
 import com.holidaysomething.holidaysomething.security.MemberUserDetails;
 import com.holidaysomething.holidaysomething.service.member.MemberService;
 import com.holidaysomething.holidaysomething.service.order.OrderService;
+import com.holidaysomething.holidaysomething.service.product.ProductOptionService;
 import com.holidaysomething.holidaysomething.service.product.ProductOrderService;
+import com.holidaysomething.holidaysomething.service.product.ProductService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +38,8 @@ public class UserOrderController {
   private final OrderService orderService;
   private final MemberService memberService;
   private final ProductOrderService productOrderService;
+  private final ProductOptionService productOptionService;
+  private final ProductService productService;
 
   //어떤 회원이 주문했는지 받아오기, 어떤 상품을 주문했는지 받아오기
   @GetMapping
@@ -64,21 +72,45 @@ public class UserOrderController {
       @AuthenticationPrincipal MemberUserDetails userDetails,
       ProductOrderInfoCommand poc) {
 
+    log.info("주문페이지입니다.");
+
     AddOrderMemberDto addOrderMemberDto = memberService.findMemberById(userDetails.getId());
     model.addAttribute("addOrderMemberDto", addOrderMemberDto);
 
     // ProductOrderInfoCommand 를 ProductOrderInfo의 리스트로 바꾸어주는 메소드
+    // 주문할 상품들의 목록
     List<ProductOrderInfoDto> productOrderInfoDtos = productOrderService
         .fromProductOrderInfoCommandToProductOrderInfoList(poc);
 
+    List<ProductOrderDetailDto> productOrderDetailDtos = new ArrayList<>();
+    ProductOrderDetailDto productOrderDetailDto = new ProductOrderDetailDto();
+    Product product;
+
+    //한 상품에 대한
     for (ProductOrderInfoDto productOrderInfoDto : productOrderInfoDtos) {
-      log.info(productOrderInfoDto.getProductId().toString());
-      log.info(Integer.toString(productOrderInfoDto.getOptionIds().size()));
-      log.info(Integer.toString(productOrderInfoDto.getOrderQuantities().size()));
+      product = productService.getProduct(productOrderInfoDto.getProductId());
+      productOrderDetailDto = productService.getProductForOrder(productOrderDetailDto, product);
+
+      log.info("productId" + product.getId());
+
+      for (int j = 0; j < productOrderInfoDto.getOptionIds().size(); j++) {
+        log.info("옵션의 개수" + productOrderInfoDto.getOptionIds().size());
+        log.info("현재 조회할 옵션의 id" + productOrderInfoDto.getOptionIds().get(j));
+        productOrderDetailDto = productOptionService
+            .getProductOptionForOrder(productOrderInfoDto.getOptionIds().get(j));
+      }
+
+
+
+
+//      productOrderDetailDto.setProductName(product.getName());
+//      productOrderDetailDto.setManufacturer(product.getManufacturer());
+//      productOrderDetailDto.setMileage(product.getMileage());
+//      productOrderDetailDto.setOriginalPrice(product.getOriginalPrice());
+//      productOrderDetailDto.setSellingPrice(product.getSellingPrice());
+//      productOrderDetailDto.setShippingPrice(product.getShippingPrice());
     }
-
-    //얻어온 DTO로 상품을 조회하여,
-
+    productOrderDetailDtos.add(productOrderDetailDto);
 
     model.addAttribute("productOrderInfoDtos", productOrderInfoDtos);
 
