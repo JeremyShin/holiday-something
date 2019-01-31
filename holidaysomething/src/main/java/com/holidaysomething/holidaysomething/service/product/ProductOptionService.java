@@ -15,7 +15,7 @@ public interface ProductOptionService {
 
   ProductOption getProductOption(Long id);
 
-  ProductOrderDetailDto getProductOptionForOrder(Long id);
+  ProductOrderDetailDto getProductOptionForOrder(ProductOrderDetailDto productOrderDetailDto, ProductOption productOption);
 
   void deleteProductOption(Long id);
 

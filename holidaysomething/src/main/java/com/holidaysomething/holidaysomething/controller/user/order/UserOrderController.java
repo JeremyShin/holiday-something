@@ -85,8 +85,10 @@ public class UserOrderController {
     List<ProductOrderDetailDto> productOrderDetailDtos = new ArrayList<>();
     ProductOrderDetailDto productOrderDetailDto = new ProductOrderDetailDto();
     Product product;
+    ProductOption productOption;
 
-    //한 상품에 대한
+
+
     for (ProductOrderInfoDto productOrderInfoDto : productOrderInfoDtos) {
       product = productService.getProduct(productOrderInfoDto.getProductId());
       log.info("productId" + product.getId());
@@ -94,15 +96,32 @@ public class UserOrderController {
       for (int j = 0; j < productOrderInfoDto.getOptionIds().size(); j++) {
         log.info("옵션의 개수" + productOrderInfoDto.getOptionIds().size());
         log.info("현재 조회할 옵션의 id" + productOrderInfoDto.getOptionIds().get(j));
+        productOption = productOptionService.getProductOption(productOrderInfoDto.getOptionIds().get(j));
         productOrderDetailDto = productOptionService
-            .getProductOptionForOrder(productOrderInfoDto.getOptionIds().get(j));
+            .getProductOptionForOrder(productOrderDetailDto, productOption);
       }
       productOrderDetailDto = productService.getProductForOrder(productOrderDetailDto, product);
     }
 
+
+//    //한 상품에 대한
+//    for (ProductOrderInfoDto productOrderInfoDto : productOrderInfoDtos) {
+//      product = productService.getProduct(productOrderInfoDto.getProductId());
+//      log.info("productId" + product.getId());
+//
+//      for (int j = 0; j < productOrderInfoDto.getOptionIds().size(); j++) {
+//        log.info("옵션의 개수" + productOrderInfoDto.getOptionIds().size());
+//        log.info("현재 조회할 옵션의 id" + productOrderInfoDto.getOptionIds().get(j));
+//        productOrderDetailDto = productOptionService
+//            .getProductOptionForOrder(productOrderInfoDto.getOptionIds().get(j));
+//      }
+//      productOrderDetailDto = productService.getProductForOrder(productOrderDetailDto, product);
+//    }
+
     log.info("주문페이지의 컨트롤러. 조회한 productOrderDetailDto의 정보를 읽어보자");
     log.info("주문 상품의 이름은" + productOrderDetailDto.getProductName());
-    log.info("주문 상품의 옵션이름은"  + productOrderDetailDto.getOptionName());
+    log.info("주문 상품의 옵션이름의 사이즈는"  + productOrderDetailDto.getOptionName().size());
+    log.info("주문 상품의 이미지는" + productOrderDetailDto.getImg());
 
     productOrderDetailDtos.add(productOrderDetailDto);
 

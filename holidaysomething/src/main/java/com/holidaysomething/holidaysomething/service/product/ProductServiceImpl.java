@@ -4,6 +4,7 @@ import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.dto.ProductOrderDetailDto;
 import com.holidaysomething.holidaysomething.dto.SearchDto;
+import com.holidaysomething.holidaysomething.repository.ProductImageRepository;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductServiceImpl implements ProductService {
 
   private final ProductRepository productRepository;
+  private final ProductImageRepository productImageRepository;
 
   @Override
   @Transactional(readOnly = true)
@@ -108,6 +110,11 @@ public class ProductServiceImpl implements ProductService {
       productOrderDetailDto.setSellingPrice(product.getSellingPrice());
       productOrderDetailDto.setShippingPrice(product.getShippingPrice());
 
+      //productId로 이미지 url 검색하여 set
+    List<ProductImage> productImages = productImageRepository.findByProductId(product.getId());
+    if (productImages != null){
+      productOrderDetailDto.setImg(productImages.get(0).getPath());
+    }
       return productOrderDetailDto;
   }
 }

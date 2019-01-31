@@ -29,6 +29,8 @@ public class ProductOrderDetailDto {
 
   private Integer shippingPrice;
 
+  private String img;
+
   private List<String> optionName;
 
   private List<Integer> optionPrice;

@@ -11,4 +11,6 @@ public interface ProductImageRepository extends JpaRepository<ProductImage, Long
     List<ProductImage> findByProductIdAndCategory(Long productId, Long category);
 
     ProductImage findByStoredFileName(String storedFileName);
+
+    List<ProductImage> findByProductId(Long productId);
 }
