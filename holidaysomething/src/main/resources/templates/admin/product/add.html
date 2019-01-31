@@ -210,7 +210,7 @@
         </div>
 
       </div>
-      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+      <!--<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
 
     </form>
 
@@ -287,6 +287,9 @@
                           $.ajax({
                               type: 'POST',
                               url: '/admin/product/image-files/api',
+                            headers: {
+                              'X-CSRF-Token': $('input[name="_csrf"]').val()
+                            },
                               data: fd,
                               processData: false,
                               contentType: false
