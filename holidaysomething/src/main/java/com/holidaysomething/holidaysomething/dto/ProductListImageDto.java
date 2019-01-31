@@ -16,6 +16,7 @@ import lombok.Setter;
 public class ProductListImageDto {
 
   //private Product product;
+  private Long productId;
   private String productName;
   private Integer sellingPrice;
   private Integer originalPrice;
@@ -26,9 +27,10 @@ public class ProductListImageDto {
   private String imageName;
   private long categoryId;
 
-  public ProductListImageDto(String productName, Integer sellingPrice,
+  public ProductListImageDto(Long productId, String productName, Integer sellingPrice,
       Integer originalPrice, Integer quantity, Integer safeQuantity,
       String optionalPriceText, String imagePath, String imageName, long categoryId) {
+    this.productId = productId;
     this.productName = productName;
     this.sellingPrice = sellingPrice;
     this.originalPrice = originalPrice;
