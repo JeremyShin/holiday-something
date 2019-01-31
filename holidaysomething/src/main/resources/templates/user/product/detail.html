@@ -18,20 +18,20 @@
             <!--Carousel-->
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
-                <ol class="carousel-indicators">
+                <ol class="carousel-indicators"> <!-- th:each="i : ${#numbers.sequence(0, #lists.size(subImages))}" -->
                     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                     <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                 </ol>
 
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
-                    <div class="item active ">
-                        <img src="/static/img/cup.png" alt="공사중,,,">
+                    <div class="item active" th:each="mainImage : ${mainImage}">
+                        <img th:src="${mainImage.path + mainImage.storedFileName}" alt="공사중,,,">
                         <div class="carousel-caption">
                         </div>
                     </div>
-                    <div class="item">
-                        <img src="/static/img/rainbow2.jpg" alt="공사중,,,">
+                    <div class="item" th:each="subImage : ${subImages}">
+                        <img th:src="${subImage.path + mainImage.storedFileName}" alt="공사중,,,">
                         <div class="carousel-caption">
                         </div>
                     </div>
@@ -51,6 +51,7 @@
             </div>
         </div>
     </div>
+
     <div id='top-info-right'>
         <div id="top-info-right-abs">
             <div style="border-top:1px solid gold; border-bottom:1px solid gold; padding-top: 20px; padding-bottom: 20px">
@@ -95,18 +96,6 @@
             <div id="orderIndex">
                 <div style="margin-top: 10px; border-bottom: 2px solid black;">
                     <table>
-                        <tbody>
-                        <td class="order-index-table-option">가나</td>
-                        <td class="order-index-table-quantity">다라</td>
-                        <td class="order-index-table-price">마바</td>
-                        <td class="order-index-table-delete">사아</td>
-                        </tbody>
-                        <tbody>
-                        <td class="order-index-table-option">가나</td>
-                        <td class="order-index-table-quantity">다라</td>
-                        <td class="order-index-table-price">마바</td>
-                        <td class="order-index-table-delete">사아</td>
-                        </tbody>
                         <tbody>
                         <td class="order-index-table-option">가나</td>
                         <td class="order-index-table-quantity">다라</td>

@@ -210,7 +210,8 @@
         </div>
 
       </div>
-      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+      <!-- TODO 일단 주석 처리, Ajax csrf 문제를 해결해야 함 -->
+      <!--<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
 
     </form>
 

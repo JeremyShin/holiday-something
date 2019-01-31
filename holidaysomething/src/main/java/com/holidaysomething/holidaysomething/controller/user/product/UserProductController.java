@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.controller.user.product;
 
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductDetail;
+import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.service.product.ProductDetailService;
 import com.holidaysomething.holidaysomething.service.product.ProductImageService;
@@ -14,6 +15,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -43,8 +46,20 @@ public class UserProductController {
         modelMap.addAttribute("bestProducts", productService.getBestFiveProduct(categoryId, productId));
         // 해당 상품의 MainImage(1L) & SubImage(2L)
         modelMap.addAttribute("mainImage", productImageService.getProductImages(productId, 1L));
-        modelMap.addAttribute("subImage", productImageService.getProductImages(productId, 2L));
 
+        List<ProductImage> productImages = productImageService.getProductImages(productId, 2L);
+        modelMap.addAttribute("subImages", productImageService.getProductImages(productId, 2L));
+        System.out.println("==========================");
+        System.out.println("==========================");
+        System.out.println("==========================");
+        System.out.println("==========================");
+        System.out.println("==========================");
+        System.out.println("==========================");
+        System.out.println("==========================");
+        System.out.println("==========================");
+        System.out.println("==========================");
+        System.out.println("==========================");
+        System.out.println(productImages.size());
         return "/user/product/detail";
     }
 }
