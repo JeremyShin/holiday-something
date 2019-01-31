@@ -17,6 +17,9 @@ public class ProductOrderDetailDto {
   private String productName;
 
   @NotNull
+  private String productImage;
+
+  @NotNull
   private Integer originalPrice;
 
   @NotNull

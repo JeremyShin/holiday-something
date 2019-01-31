@@ -89,8 +89,6 @@ public class UserOrderController {
     //한 상품에 대한
     for (ProductOrderInfoDto productOrderInfoDto : productOrderInfoDtos) {
       product = productService.getProduct(productOrderInfoDto.getProductId());
-      productOrderDetailDto = productService.getProductForOrder(productOrderDetailDto, product);
-
       log.info("productId" + product.getId());
 
       for (int j = 0; j < productOrderInfoDto.getOptionIds().size(); j++) {
@@ -99,20 +97,19 @@ public class UserOrderController {
         productOrderDetailDto = productOptionService
             .getProductOptionForOrder(productOrderInfoDto.getOptionIds().get(j));
       }
-
-
-
-
-//      productOrderDetailDto.setProductName(product.getName());
-//      productOrderDetailDto.setManufacturer(product.getManufacturer());
-//      productOrderDetailDto.setMileage(product.getMileage());
-//      productOrderDetailDto.setOriginalPrice(product.getOriginalPrice());
-//      productOrderDetailDto.setSellingPrice(product.getSellingPrice());
-//      productOrderDetailDto.setShippingPrice(product.getShippingPrice());
+      productOrderDetailDto = productService.getProductForOrder(productOrderDetailDto, product);
     }
+
+    log.info("주문페이지의 컨트롤러. 조회한 productOrderDetailDto의 정보를 읽어보자");
+    log.info("주문 상품의 이름은" + productOrderDetailDto.getProductName());
+    log.info("주문 상품의 옵션이름은"  + productOrderDetailDto.getOptionName());
+
     productOrderDetailDtos.add(productOrderDetailDto);
 
+
+
     model.addAttribute("productOrderInfoDtos", productOrderInfoDtos);
+    model.addAttribute("productOrderDetailDtos", productOrderDetailDtos);
 
     return "user/order";
   }
