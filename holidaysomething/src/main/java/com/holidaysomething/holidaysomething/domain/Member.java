@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -100,7 +101,11 @@ public class Member {
   @JsonIgnore // 마이페이지 메인에서는 일단 필요 없어서 ignore 처리
   private Set<CartProduct> cartProducts;
 
-  @OneToMany(mappedBy = "member")
+  //TODO: JsonIgnore 안하면 "Could not write JSON: failed to lazily initialize a collection of role~" 에러 발생
+  //TODO: JsonIgnore 하면 위의 에러는 발생하지 않지만 orders에 데이터가 안들어감
+  
+  // Eager loading을 하면 member를 조회하는 순간 order 내부까지 다 조회해서 포함된다.
+  @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
   private List<Order> orders;
 
   @ManyToMany

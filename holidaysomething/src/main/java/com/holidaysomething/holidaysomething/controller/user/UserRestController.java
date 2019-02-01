@@ -1,10 +1,18 @@
 package com.holidaysomething.holidaysomething.controller.user;
 
 import com.holidaysomething.holidaysomething.domain.Member;
+import com.holidaysomething.holidaysomething.dto.AuthenticatedMemberDto;
 import com.holidaysomething.holidaysomething.dto.CurrentMemberDto;
+import com.holidaysomething.holidaysomething.security.MemberUserDetails;
 import com.holidaysomething.holidaysomething.service.member.MemberService;
+import java.security.Principal;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,13 +32,68 @@ public class UserRestController {
     this.memberService = memberService;
   }
 
-  @GetMapping("/user")
+  /**
+   * user의 id를 매개변수로 받아 해당 user(member)의 모든 정보를 가져온다.
+   */
+  @GetMapping("/userTmp")
   public Member getCurrentUserInfo(@RequestParam("id") long userId) {
     return memberService.getCurrentMemberInfo(userId);
   }
 
-  @GetMapping("/user/recent-order")
+  /**
+   * id를 통해 CurrentMemberDto 객체가 제대로 리턴되지만,
+   * order -> orderNumber -> ... 으로 계속 방향을 진행하는 것이 불가능해
+   * id로 Member 객체를 얻고 Q객체의 방향성을 이용하는 getCurrentUserInfo()를 사용하기로 했다.
+   */
+  @GetMapping("/user/recentOrder")
   public List<CurrentMemberDto> getCurrentUserInfo(@RequestParam("id") Long userId) {
     return memberService.getCurrentMemberInfoJPQL(userId);
   }
+
+  /**
+   * 현재 로그인 되어있는 user 정보를 받아온다.
+   */
+  @GetMapping("/user/authenticated")
+  public Member getAuthenticatedUser(Authentication authentication) {
+
+    if (authentication == null) {
+      log.info("No authenticated user.");
+      return null;
+    }
+    MemberUserDetails memberUserDetails = (MemberUserDetails) authentication.getPrincipal();
+
+    log.info("AuthenticatedUser - id: " + memberUserDetails.getId());
+    log.info("AuthenticatedUser - username: " + memberUserDetails.getUsername());
+    log.info("AuthenticatedUser - nickname: " + memberUserDetails.getNickname());
+    log.info("AuthenticatedUser - member-Id: " + memberUserDetails.getMember().getId());
+    log.info("AuthenticatedUser - member-LoginId: " + memberUserDetails.getMember().getLoginId());
+    log.info("AuthenticatedUser - member-Name: " + memberUserDetails.getMember().getName());
+    log.info("AuthenticatedUser - member-Password: " + memberUserDetails.getMember().getPassword());
+
+    // Member 객체 이외에 추가 정보를 포함한 DTO를 리턴하려 했었는데, 막상 구현하다보니 그 추가 정보가 무엇인지 잘 모르겠다.
+//    AuthenticatedMemberDto authenticatedMember = new AuthenticatedMemberDto();
+//    authenticatedMember.setMember(memberUserDetails.getMember());
+//    return authenticatedMember;
+
+    return memberUserDetails.getMember();
+  }
+
+//  @GetMapping("/user/authenticated")
+//  public AuthenticatedMemberDto getAuthenticatedUser(
+//      @AuthenticationPrincipal MemberUserDetails memberUserDetails) throws NullPointerException {
+//
+//    if (memberUserDetails.getUsername() == null) {
+//      log.info("There's no authenticated user.");
+//      return null;
+//    }
+//
+//    log.info("authenticatedUser - Id: " + memberUserDetails.getId().toString());
+//    log.info("authenticatedUser - userName: " + memberUserDetails.getUsername());
+//    log.info("authenticatedUser - nickName: " + memberUserDetails.getNickname());
+//
+//    AuthenticatedMemberDto authenticatedMember = new AuthenticatedMemberDto();
+//    authenticatedMember.setMember(memberUserDetails.getMember());
+//
+//    return authenticatedMember;
+//  }
 }

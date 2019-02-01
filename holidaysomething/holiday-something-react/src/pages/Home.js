@@ -20,6 +20,9 @@ class Home extends Component {
   _getUser = async () => {
     const user = await this._callApi();
     // await: 위 문장이 끝나기 전까지는(성공하든 실패하든) setState가 실행되지 않는다
+    if (user === null) {
+      console.log('user is null!');
+    }
     this.setState({
       user: user,
     });
@@ -27,7 +30,8 @@ class Home extends Component {
 
   _callApi = () => {
     // 현재 로그인 되어 있는 user의 id를 가져와서 사용하는 것으로 변경해야 한다.
-    return fetch('http://localhost:8080/api/user?id=11')
+    // return fetch('http://localhost:8080/api/userTmp?id=11')
+    return fetch('http://localhost:8080/api/user/authenticated')  // 현재 로그인된 유저
     .then(response => response.json())
     .then(json => json)
     .catch(err => console.error(err));
@@ -54,6 +58,9 @@ class Home extends Component {
 
   componentDidMount() {
     this._getUser();
+    if (this.state.user === null) {
+      window.location.href = '/';
+    }
   }
 
 }

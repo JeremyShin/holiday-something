@@ -43,6 +43,7 @@ class MyMileage extends Component {
           </thead>
           <tbody>
             {user.orders.map((order) => {
+            // {user.member.orders.map((order) => {
               return (
                 <tr>
                   <td>{order.date}</td>
