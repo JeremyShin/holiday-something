@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -100,6 +101,7 @@ public class Member {
   @JsonIgnore // 마이페이지 메인에서는 일단 필요 없어서 ignore 처리
   private Set<CartProduct> cartProducts;
 
+  //,fetch = FetchType.EAGER
   @OneToMany(mappedBy = "member")
   private List<Order> orders;
 

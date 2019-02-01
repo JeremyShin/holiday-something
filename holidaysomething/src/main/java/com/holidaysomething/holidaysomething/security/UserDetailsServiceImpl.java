@@ -51,6 +51,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 //    }
 
     Member member = memberService.findMemberByLoginId(loginId);
+
     log.info("==== member : " + member);
     if (member == null) {
       log.info("==== null");
@@ -89,6 +90,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     userDetails.setNickname(member.getNickname());
     userDetails.setId(member.getId());
     userDetails.setMember(member);
+
+    log.info("====== userDetails.getMember().getId() : " + userDetails.getMember().getId());
+    log.info(
+        "====== userDetails.getMember().getNickname() : " + userDetails.getMember().getNickname());
+    log.info(
+        "====== userDetails.getMember().getLoginId() : " + userDetails.getMember().getLoginId());
+    //log.info("====== userDetails.getMember().getOrders().size() : " + userDetails.getMember().getOrders().size());
+
 
     return userDetails;
   }

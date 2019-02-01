@@ -192,6 +192,8 @@ public class UserLoginController {
     log.info("======= httpSession.getCreationTime() : " + httpSession.getCreationTime());
     log.info("=======  httpSession.getLastAccessedTime() : " + httpSession.getLastAccessedTime());
 
+    //log.info("******** loginUser.getMember().getOrders().size() : "+ loginUser.getMember().getOrders().size());
+
     return "user/temp";
   }
 
