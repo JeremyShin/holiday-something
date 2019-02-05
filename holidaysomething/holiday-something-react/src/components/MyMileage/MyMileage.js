@@ -45,7 +45,7 @@ class MyMileage extends Component {
             {user.orders.map((order) => {
             // {user.member.orders.map((order) => {
               return (
-                <tr>
+                <tr key={order.id}>
                   <td>{order.date}</td>
                   <td>주문적립</td>
                   <td>{order.mileage}</td>

@@ -13,8 +13,9 @@ class RecentOrder extends Component {
     if (user.orders === null) {
       orders = '';
     } else {
-      orders = user.orders.map((order) => {
+      console.log(user);
       // orders = user.member.orders.map((order) => {
+      orders = user.orders.map((order) => {
         return (
           <tr key={order.id}>
             <td>{order.date}</td>

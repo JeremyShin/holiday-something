@@ -34,15 +34,15 @@ class AccountModify extends Component {
               <div className="tbl-td">
                 <form>
                   <div>
-                    <label for="user_password">현재 비밀번호</label>
+                    <label htmlFor="user_password">현재 비밀번호</label>
                     <input type="password" id="user_password" />
                   </div>
                   <div>
-                    <label for="new_password">신규 비밀번호</label>
+                    <label htmlFor="new_password">신규 비밀번호</label>
                     <input type="password" id="new_password" />
                   </div>
                   <div>
-                    <label for="confirm_password">신규 비밀번호 확인</label>
+                    <label htmlFor="confirm_password">신규 비밀번호 확인</label>
                     <input type="password" id="confirm_password" />
                   </div>
                   <button className="btn-black">비밀번호 변경</button>
