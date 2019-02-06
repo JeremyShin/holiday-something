@@ -16,16 +16,29 @@ a {
   margin: 0;
 }
 
-.tbl-tr {
-  display: flex;
+.tbl-th {
+  width: 100px;
+  margin: 15px 20px;
 }
 
-/* .tbl-td {
+.tbl-tr {
   display: flex;
-} */
+  margin: 14px 10px;
+  align-items: center;
+}
+
+.tbl-td {
+  width: 600px;
+  align-items: center;
+}
+
+.tbl-td > div {
+  margin: 14px 0;
+}
 
 .tbl-td-row {
   display: flex;
+  align-items: center;
 }
 
 .btn-black {

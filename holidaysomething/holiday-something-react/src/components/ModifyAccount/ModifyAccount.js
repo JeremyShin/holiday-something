@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Postcode from '../Postcode/Postcode';
+import DaumPostcode from 'react-daum-postcode';
+// import SearchMap from '../SearchMap/SearchMap';
 
 class ModifyAccount extends Component {
   constructor() {
@@ -70,19 +73,23 @@ class ModifyAccount extends Component {
               </div>
               <div className="tbl-td">
                 <form>
-                  <div className="input-box">
-                    <label htmlFor="user_password">현재 비밀번호</label>
-                    <input type="password" id="user_password" placeholder="현재 비밀번호" />
+                  <div className="tbl-td-row">
+                    <div>
+                      <div className="input-box">
+                        <label htmlFor="user_password">현재 비밀번호</label>
+                        <input type="password" id="user_password" placeholder="현재 비밀번호" />
+                      </div>
+                      <div className="input-box">
+                        <label htmlFor="new_password">신규 비밀번호</label>
+                        <input type="password" id="new_password" placeholder="신규 비밀번호" />
+                      </div>
+                      <div className="input-box">
+                        <label htmlFor="confirm_password">신규 비밀번호 확인</label>
+                        <input type="password" id="confirm_password" placeholder="신규 비밀번호 확인" />
+                      </div>
+                    </div>
+                    <button className="btn-black">비밀번호 변경</button>
                   </div>
-                  <div className="input-box">
-                    <label htmlFor="new_password">신규 비밀번호</label>
-                    <input type="password" id="new_password" placeholder="신규 비밀번호" />
-                  </div>
-                  <div className="input-box">
-                    <label htmlFor="confirm_password">신규 비밀번호 확인</label>
-                    <input type="password" id="confirm_password" placeholder="신규 비밀번호 확인" />
-                  </div>
-                  <button className="btn-black">비밀번호 변경</button>
                 </form>
               </div>
             </li>
@@ -131,8 +138,12 @@ class ModifyAccount extends Component {
                 <div className="in-row">
                   <div className="zip-box">
                     <div className="box">{user.postcode}</div>
+                    <button className="btn-white" type="button">우편번호 검색</button>
                   </div>
                 </div>
+                <DaumPostcode />
+                {/* <SearchMap /> */}
+
                 <div className="in-half">
                   <div className="input-box">
                     <input disabled type="text" placeholder={user.address1} />

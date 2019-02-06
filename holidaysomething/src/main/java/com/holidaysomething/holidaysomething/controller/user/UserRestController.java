@@ -89,7 +89,7 @@ public class UserRestController {
   }
 
   /**
-   * 현재 로그인 되어있는 member의 property 중 null이 아닌 것들을 실제 data에 반영
+   * 회원정보 수정: 현재 로그인 되어있는 member의 property 중 null이 아닌 것들을 실제 data에 반영
    */
 //  @PatchMapping(path = "/user", consumes = "application/json")
 //  public Member patchMember(Authentication authentication,
