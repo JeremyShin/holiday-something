@@ -607,7 +607,7 @@ INSERT INTO cart_product(price, quantity, member_id, product_id) VALUES (1000, 1
 
 
 INSERT INTO role(name) values('ADMIN');
--- INSERT INTO role(name) values('USER');
+INSERT INTO role(name) values('USER');
 -- INSERT INTO role(name) values('NONE');
 --
 INSERT INTO member_role(member_id,role_id) values(1,1);

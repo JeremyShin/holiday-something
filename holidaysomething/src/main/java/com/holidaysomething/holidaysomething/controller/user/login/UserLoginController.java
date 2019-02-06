@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.controller.user.login;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Role;
+import com.holidaysomething.holidaysomething.repository.RoleRepository;
 import com.holidaysomething.holidaysomething.security.MemberUserDetails;
 import com.holidaysomething.holidaysomething.service.member.MemberService;
 import java.security.Principal;
@@ -46,6 +47,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 public class UserLoginController {
 
   private final MemberService memberService;
+  private final RoleRepository roleRepository;
 
   private final BCryptPasswordEncoder passwordEncoder;
 
@@ -97,15 +99,16 @@ public class UserLoginController {
 //    memberService.addRole(role1);
 //    log.info("======== role1  등록.");
 
-    Role role2 = new Role();
-    role2.setId(2l);
-    role2.setName("USER");
-    memberService.addRole(role2);
-    log.info("======== role2  등록.");
+//    Role role2 = new Role();
+//    role2.setId(2l);
+//    role2.setName("USER");
+//    memberService.addRole(role2);
+//    log.info("======== role2  등록.");
 
+    Role userRole = roleRepository.getOne(2l);
     Set<Role> roleSet = new HashSet<>();
     //roleSet.add(role1);
-    roleSet.add(role2);
+    roleSet.add(userRole);
     member.setRoles(roleSet);
     //LocalDate로 바꾸면서 안들어감 ㅠㅠ
 //    Date today = new Date();
