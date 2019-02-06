@@ -6,6 +6,8 @@ class ModifyAccount extends Component {
     this.state = {
       modifyEmailBtnText: '이메일 변경',
       isModifyEmailHidden: true,
+      modifyPhoneBtnText: '휴대폰번호 변경',
+      isModifyPhoneHidden: true,
     };
   }
 
@@ -13,12 +15,24 @@ class ModifyAccount extends Component {
     this.setState(prevState => ({
       ...prevState,
       isModifyEmailHidden: !prevState.isModifyEmailHidden,
-      modifyEmailBtnText: (prevState.modifyEmailBtnText === '이메일 변경') ? '이메일 변경 취소' : '이메일 변경',
+      modifyEmailBtnText: (prevState.modifyEmailBtnText === '이메일 변경') ? '이메일변경 취소' : '이메일 변경',
+    }));
+  };
+
+  toggleModifyPhone = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      isModifyPhoneHidden: !prevState.isModifyPhoneHidden,
+      modifyPhoneBtnText: (prevState.modifyPhoneBtnText === '휴대폰번호 변경') ? '변경 취소' : '휴대폰번호 변경',
     }));
   };
 
   render() {
     const { user } = this.props;
+    
+    let phone = user.phone.split("-");
+    let phoneMiddle = phone[1];
+    let phoneEnd = phone[2];
 
     return (
       <div>
@@ -34,16 +48,19 @@ class ModifyAccount extends Component {
                 <p>{user.loginId}</p>
               </div>
             </li>
-            <li className="tbl-tr tbl-tr-email">
+            <li className="tbl-tr">
               <div className="tbl-th">
                 <strong>이메일</strong>
               </div>
               <div className="tbl-td">
-                <p>{user.email}</p>
-                <ModifyEmailBtn 
-                  handleClick={this.toggleModifyEmail}
-                  text={this.state.modifyEmailBtnText} 
-                />
+                <div className="tbl-td-row">
+                  <p>{user.email}</p>
+                  <ModifyEmailBtn 
+                    handleClick={this.toggleModifyEmail}
+                    text={this.state.modifyEmailBtnText} 
+                  />
+                </div>
+                {/* 이메일 변경 form */}
                 {!this.state.isModifyEmailHidden && <ModifyEmailDiv />}
               </div>
             </li>
@@ -55,15 +72,15 @@ class ModifyAccount extends Component {
                 <form>
                   <div>
                     <label htmlFor="user_password">현재 비밀번호</label>
-                    <input type="password" id="user_password" />
+                    <input type="password" id="user_password" placeholder="현재 비밀번호" />
                   </div>
                   <div>
                     <label htmlFor="new_password">신규 비밀번호</label>
-                    <input type="password" id="new_password" />
+                    <input type="password" id="new_password" placeholder="신규 비밀번호" />
                   </div>
                   <div>
                     <label htmlFor="confirm_password">신규 비밀번호 확인</label>
-                    <input type="password" id="confirm_password" />
+                    <input type="password" id="confirm_password" placeholder="신규 비밀번호 확인" />
                   </div>
                   <button className="btn-black">비밀번호 변경</button>
                 </form>
@@ -77,46 +94,33 @@ class ModifyAccount extends Component {
                 <p>{user.name}</p>
               </div>
             </li>
-            <li className="tbl-tr tbl-tr-tel">
+            <li className="tbl-tr tbl-tr-phone">
               <div className="tbl-th">
                 <strong>휴대폰 번호</strong>
               </div>
               <div className="tbl-td">
                 {/* 기존 휴대폰 정보 보여주는 부분 */}
                 <div className="hp-in">
-                  <div className="tel-field">
-                    <div className="input-box">???</div>
+                  <div className="phone-field">
+                    <div className="input-box">
+                      <input disabled placeholder="010" />
+                    </div>
                     <div className="dash">-</div>
-                    <div className="input-box">???</div>
+                    <div className="input-box">
+                      <input disabled maxLength="4" type="tel" placeholder={phoneMiddle} />
+                    </div>
                     <div className="dash">-</div>
-                    <div className="input-box">???</div>
+                    <div className="input-box">
+                      <input disabled maxLength="4" type="tel" placeholder={phoneEnd} />
+                    </div>
                   </div>
-                  <button className="btn-black" type="button">휴대폰번호 변경</button>
+                  <ModifyPhoneBtn
+                    handleClick={this.toggleModifyPhone}
+                    text={this.state.modifyPhoneBtnText} 
+                  />
                 </div>
-
-                {/* 휴대폰 정보 수정 input */}
-                <div className="edit-box">
-                  <div className="hp-in">
-                    <form>
-                      <div className="tel-field">
-                        <div className="user-cell-first">
-                          <select>
-                            <option value="010">010</option>
-                            <option value="011">011</option>
-                            <option value="016">016</option>
-                            <option value="017">017</option>
-                            <option value="018">018</option>
-                            <option value="019">019</option>
-                          </select>
-                        </div>
-                        <div className="dash">-</div>
-                        <div className="input-box">???</div>
-                        <div className="dash">-</div>
-                        <div className="input-box">???</div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
+                {/* 휴대폰 변경 form */}
+                {!this.state.isModifyPhoneHidden && <ModifyPhoneDiv />}
               </div>
             </li>
             <li className="tbl-tr tbl-tr-addr">
@@ -131,10 +135,11 @@ class ModifyAccount extends Component {
                 </div>
                 <div className="in-half">
                   <div className="input-box">
-                    <input type="text" />
+                    <input disabled type="text" placeholder={user.address1} />
+                    {/* '우편번호 검색' 버튼 */}
                   </div>
                   <div className="input-box">
-                    <input type="text" />
+                    <input type="text" defaultValue={user.address2} />
                   </div>
                   <p className="info">주소를 수정할 경우 '기본배송지정보' 도 추가됩니다.</p>
                 </div>
@@ -148,15 +153,15 @@ class ModifyAccount extends Component {
                 <form>
                   <div className="in-row">
                     <span className="input-box">
-                      <input name="birth-year" />
+                      <input name="birth-year" defaultValue={user.birthday[0]} />
                     </span>
                     <span className="split">년</span>
                     <span className="input-box">
-                      <input name="birth-year" />
+                      <input name="birth-year" defaultValue={user.birthday[1]} />
                     </span>
                     <span className="split">월</span>
                     <span className="input-box">
-                      <input name="birth-year" />
+                      <input name="birth-year" defaultValue={user.birthday[2]} />
                     </span>
                     <span className="split">일</span>
                   </div>
@@ -202,6 +207,49 @@ const ModifyEmailDiv = () => {
           <a className="btn-black" href="/">변경하기</a>
         </div>
       </form>
+    </div>
+  )
+};
+
+// '휴대폰번호변경' 버튼
+class ModifyPhoneBtn extends Component {
+  render() {
+    return (
+      <button className="btn-black" type="button" onClick={this.props.handleClick}>
+        {this.props.text}
+      </button>
+    );
+  }
+}
+
+// 휴대폰 변경 form (show/hide toggle)
+const ModifyPhoneDiv = () => {
+  return (
+    <div className="edit-box">
+      <div className="hp-in">
+        <form>
+          <div className="phone-field">
+            <div className="user-cell-first">
+              <select>
+                <option value="010">010</option>
+                <option value="011">011</option>
+                <option value="016">016</option>
+                <option value="017">017</option>
+                <option value="018">018</option>
+                <option value="019">019</option>
+              </select>
+            </div>
+            <div className="dash">-</div>
+            <div className="input-box">
+              <input type="tel" />
+            </div>
+            <div className="dash">-</div>
+            <div className="input-box">
+              <input type="tel" />
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   )
 };
