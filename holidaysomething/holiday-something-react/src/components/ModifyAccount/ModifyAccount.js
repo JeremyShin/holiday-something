@@ -70,15 +70,15 @@ class ModifyAccount extends Component {
               </div>
               <div className="tbl-td">
                 <form>
-                  <div>
+                  <div className="input-box">
                     <label htmlFor="user_password">현재 비밀번호</label>
                     <input type="password" id="user_password" placeholder="현재 비밀번호" />
                   </div>
-                  <div>
+                  <div className="input-box">
                     <label htmlFor="new_password">신규 비밀번호</label>
                     <input type="password" id="new_password" placeholder="신규 비밀번호" />
                   </div>
-                  <div>
+                  <div className="input-box">
                     <label htmlFor="confirm_password">신규 비밀번호 확인</label>
                     <input type="password" id="confirm_password" placeholder="신규 비밀번호 확인" />
                   </div>
@@ -192,23 +192,47 @@ class ModifyEmailBtn extends Component {
 }
 
 // 이메일 변경 form (show/hide toggle)
-const ModifyEmailDiv = () => {
-  return (
-    <div className="edit-box">
-      <form>
-        <div className="edit-in">
-          <span className="input-box">
-            <input type="email" />
-          </span>
-          <span className="input-box">@</span>
-          <span className="input-box">
-            <input type="email" />
-          </span>
-          <a className="btn-black" href="/">변경하기</a>
-        </div>
-      </form>
-    </div>
-  )
+class ModifyEmailDiv extends Component {
+  // 이메일 변경 '변경하기' 버튼 눌렀을 때
+  submitEmail = () => {
+    let email = document.querySelector('#email');
+    let emailVal = email.value;
+    console.log(`emailVal: ${emailVal}`);
+    if (emailVal === '') {
+      alert('이메일을 입력하세요.');
+      return;
+    }
+    
+    return fetch('http://localhost:8080/api/user/11', {
+      headers: { 
+        "Content-Type": "application/json",
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        email: emailVal,
+      }),
+    })
+    .then(response => console.log(response))
+    .then(alert("이메일이 변경되었습니다."))
+    .then(window.location.replace("/mypage"))
+    .catch(err => console.error(err));
+  }
+
+  render() {
+    return (
+      <div className="edit-box">
+        <form>
+          <div className="edit-in">
+            <span className="input-box">
+              <input type="email" id="email" name="email" required />
+            </span>
+
+            <input type="button" className="btn-black" value="변경하기" onClick={this.submitEmail.bind(this)}/>
+          </div>
+        </form>
+      </div>
+    )
+  }
 };
 
 // '휴대폰번호변경' 버튼

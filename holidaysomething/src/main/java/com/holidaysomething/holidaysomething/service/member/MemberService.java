@@ -17,9 +17,12 @@ public interface MemberService {
   Member findMemberByLoginId(String loginId);
 
   Member getCurrentMemberInfo(Long userId);
+
   List<CurrentMemberDto> getCurrentMemberInfoJPQL(Long userId);
 
   void updateMember(MemberMileageDto memberMileageDto);
+
+  Member patchMember(Member member);
 
   Page<Member> findAllOrSearch(SearchDto searchDto, Pageable pageable);
 

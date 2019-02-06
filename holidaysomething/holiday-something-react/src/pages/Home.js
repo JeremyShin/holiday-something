@@ -4,7 +4,6 @@ import Header from '../components/Header/Header';
 import MainWrapper from '../components/MainWrapper/MainWrapper';
 import SideBar from '../components/SideBar/SideBar';
 import MainContent from '../components/MainContent/MainContent';
-// import { AuthConsumer } from '../shared/AuthContext';
 
 // const MainWrapper = styled.div`
 //   display: flex;
@@ -48,7 +47,7 @@ class Home extends Component {
         <Header />
         <MainWrapper>
           {this.state.user ? <SideBar user={this.state.user} /> : ''}
-          
+
           {/* MainContent에 매번 다른 props를 넣어준다(Home, Orders, Account, Mileage...) */}
           {this.state.user ? 
             <MainContent 
