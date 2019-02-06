@@ -1,3 +1,8 @@
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
 .order-delivery-search-img {
   width: 200px;
   height: auto;

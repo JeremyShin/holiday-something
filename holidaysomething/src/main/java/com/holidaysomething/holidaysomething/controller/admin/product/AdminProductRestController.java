@@ -37,9 +37,9 @@ public class AdminProductRestController {
   private final ImageStreamService imageStreamService;
   private final ProductDetailService productDetailService;
 
-  /*
-   * @author : Gyumin Kim
-   * @description : 상품 등록시 대분류 읽어오기
+  /**
+   * @author Gyumin Kim
+   * 상품 등록시 대분류 읽어오기
    */
   @GetMapping("/subcategory/{largerId}")
   public List<ProductCategory> productSubCategories(@PathVariable("largerId") Long largerId) {
@@ -65,7 +65,8 @@ public class AdminProductRestController {
    * @author : Misun Joo
    * @description : 옵션 수정
    */
-  @PostMapping("/option/modify")
+  @PostMapping(path = "/option/modify",
+              consumes = "application/json")
   public void productOptionModifyPost(@RequestBody ProductOptionDto productOptionDto) {
     ProductOption productOption = productOptionService.getProductOption(productOptionDto.getId());
 

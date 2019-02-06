@@ -1,6 +1,22 @@
 import React, { Component } from 'react';
 
-class AccountModify extends Component {
+class ModifyAccount extends Component {
+  constructor() {
+    super();
+    this.state = {
+      modifyEmailBtnText: '이메일 변경',
+      isModifyEmailHidden: true,
+    };
+  }
+
+  toggleModifyEmail = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      isModifyEmailHidden: !prevState.isModifyEmailHidden,
+      modifyEmailBtnText: (prevState.modifyEmailBtnText === '이메일 변경') ? '이메일 변경 취소' : '이메일 변경',
+    }));
+  };
+
   render() {
     const { user } = this.props;
 
@@ -24,7 +40,11 @@ class AccountModify extends Component {
               </div>
               <div className="tbl-td">
                 <p>{user.email}</p>
-                <button className="btn-black">이메일 변경</button>
+                <ModifyEmailBtn 
+                  handleClick={this.toggleModifyEmail}
+                  text={this.state.modifyEmailBtnText} 
+                />
+                {!this.state.isModifyEmailHidden && <ModifyEmailDiv />}
               </div>
             </li>
             <li className="tbl-tr tbl-tr-password">
@@ -155,4 +175,35 @@ class AccountModify extends Component {
   }
 }
 
-export default AccountModify;
+// '이메일 변경' / '이메일 변경 취소' toggle 버튼
+class ModifyEmailBtn extends Component {
+  render() {
+    return (
+      <button className="btn-black" onClick={this.props.handleClick}>
+        {this.props.text}
+      </button>
+    );
+  }
+}
+
+// 이메일 변경 form (show/hide toggle)
+const ModifyEmailDiv = () => {
+  return (
+    <div className="edit-box">
+      <form>
+        <div className="edit-in">
+          <span className="input-box">
+            <input type="email" />
+          </span>
+          <span className="input-box">@</span>
+          <span className="input-box">
+            <input type="email" />
+          </span>
+          <a className="btn-black" href="/">변경하기</a>
+        </div>
+      </form>
+    </div>
+  )
+};
+
+export default ModifyAccount;

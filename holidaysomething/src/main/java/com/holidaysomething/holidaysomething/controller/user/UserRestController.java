@@ -7,7 +7,10 @@ import com.holidaysomething.holidaysomething.security.MemberUserDetails;
 import com.holidaysomething.holidaysomething.service.member.MemberService;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,14 +24,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping(path = "/api",
+                produces = "application/json")
+@CrossOrigin(origins = "*")
 public class UserRestController {
 
   private MemberService memberService;
 
-  public UserRestController(
-      MemberService memberService) {
+  public UserRestController(MemberService memberService) {
     this.memberService = memberService;
   }
 
@@ -36,8 +39,12 @@ public class UserRestController {
    * user의 id를 매개변수로 받아 해당 user(member)의 모든 정보를 가져온다.
    */
   @GetMapping("/userTmp")
-  public Member getCurrentUserInfo(@RequestParam("id") long userId) {
-    return memberService.getCurrentMemberInfo(userId);
+  public ResponseEntity<Member> getCurrentUserInfo(@RequestParam("id") long userId) {
+    Member member = memberService.getCurrentMemberInfo(userId);
+    if (member != null) {
+      return new ResponseEntity<>(member, HttpStatus.OK);
+    }
+    return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
   }
 
   /**
