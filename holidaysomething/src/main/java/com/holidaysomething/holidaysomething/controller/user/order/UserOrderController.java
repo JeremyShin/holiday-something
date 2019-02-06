@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/user/product/order")
@@ -77,6 +78,7 @@ public class UserOrderController {
     AddOrderMemberDto addOrderMemberDto = memberService.findMemberById(userDetails.getId());
     model.addAttribute("addOrderMemberDto", addOrderMemberDto);
 
+
     // ProductOrderInfoCommand 를 ProductOrderInfo의 리스트로 바꾸어주는 메소드
     // 주문할 상품들의 목록
     List<ProductOrderInfoDto> productOrderInfoDtos = productOrderService
@@ -87,21 +89,76 @@ public class UserOrderController {
     Product product;
     ProductOption productOption;
 
+    //ProductOrderInfoDto는 productId, optionId, quantity밖에 없다. 이들을 조회하여 productOrderDetailDto에 정보를 넣어준다.
+    //여러개의 productOrderDetailDto를 productOrderDetailDtos에 담아서 보낸다.
+    //하나의 상품에 대해, 당연히 하나의 productOrderDetail Dto를 갖겠지,,,
 
-
+   //List로 했을 때 돌아가는 코드
     for (ProductOrderInfoDto productOrderInfoDto : productOrderInfoDtos) {
       product = productService.getProduct(productOrderInfoDto.getProductId());
       log.info("productId" + product.getId());
-
-      for (int j = 0; j < productOrderInfoDto.getOptionIds().size(); j++) {
-        log.info("옵션의 개수" + productOrderInfoDto.getOptionIds().size());
-        log.info("현재 조회할 옵션의 id" + productOrderInfoDto.getOptionIds().get(j));
-        productOption = productOptionService.getProductOption(productOrderInfoDto.getOptionIds().get(j));
-        productOrderDetailDto = productOptionService
-            .getProductOptionForOrder(productOrderDetailDto, productOption);
-      }
       productOrderDetailDto = productService.getProductForOrder(productOrderDetailDto, product);
+
+      log.info("OptionId" + productOrderInfoDto.getOptionId());
+      productOption = productOptionService.getProductOption(productOrderInfoDto.getOptionId());
+      productOrderDetailDto = productOptionService.getProductOptionForOrder(productOrderDetailDto, productOption, productOrderInfoDto.getQuantity());
+
+      productOrderDetailDtos.add(productOrderDetailDto);
+
+      log.info("주문페이지의 컨트롤러. 조회한 productOrderDetailDto의 정보를 읽어보자");
+      log.info("주문 상품의 이름은" + productOrderDetailDto.getProductName());
+      log.info("주문 상품의 옵션이름의 사이즈는"  + productOrderDetailDto.getOptionName());
+      log.info("주문 상품의 개수는"  + productOrderDetailDto.getQuantity());
+      log.info("주문 상품의 이미지는" + productOrderDetailDto.getImg());
     }
+
+
+    log.info("뷰로 보낼 상품의 개수는" + productOrderDetailDtos.size());
+
+    for (ProductOrderDetailDto p : productOrderDetailDtos){
+      log.info("뷰로 보낼 옵션의 이름은 " + p.getOptionName());
+      log.info("뷰로 보낼 옵션의 개수은 " + p.getQuantity());
+    }
+
+
+//    model.addAttribute("productOrderInfoDtos", productOrderInfoDtos);
+    model.addAttribute("productOrderDetailDtos", productOrderDetailDtos);
+
+//    for (ProductOrderInfoDto productOrderInfoDto : productOrderInfoDtos) {
+//      product = productService.getProduct(productOrderInfoDto.getProductId());
+//      log.info("productId" + product.getId());
+//
+//      log.info("옵션의 개수" + productOrderInfoDto.getOptionInfo().size());
+//
+//      for (Long key : productOrderInfoDto.getOptionInfo().keySet()){
+//        log.info("키득");
+//        log.info("옵션의 개수" + productOrderInfoDto.getOptionInfo().size());
+//        log.info("옵션의 개수" + productOrderInfoDto.getOptionInfo().keySet().size());
+//        log.info("현재 조회할 옵션의 id" + key);
+//
+//        productOption = productOptionService.getProductOption(key);
+//        productOrderDetailDto = productOptionService
+//            .getProductOptionForOrder(productOrderDetailDto, productOption);
+//      }
+//      productOrderDetailDto = productService.getProductForOrder(productOrderDetailDto, product);
+//    }
+
+
+
+//    //List로 했을 때 돌아가는 코드
+//    for (ProductOrderInfoDto productOrderInfoDto : productOrderInfoDtos) {
+//      product = productService.getProduct(productOrderInfoDto.getProductId());
+//      log.info("productId" + product.getId());
+//
+//      for (int j = 0; j < productOrderInfoDto.getOptionIds().size(); j++) {
+//        log.info("옵션의 개수" + productOrderInfoDto.getOptionIds().size());
+//        log.info("현재 조회할 옵션의 id" + productOrderInfoDto.getOptionIds().get(j));
+//        productOption = productOptionService.getProductOption(productOrderInfoDto.getOptionIds().get(j));
+//        productOrderDetailDto = productOptionService
+//            .getProductOptionForOrder(productOrderDetailDto, productOption);
+//      }
+//      productOrderDetailDto = productService.getProductForOrder(productOrderDetailDto, product);
+//    }
 
 
 //    //한 상품에 대한
@@ -117,18 +174,6 @@ public class UserOrderController {
 //      }
 //      productOrderDetailDto = productService.getProductForOrder(productOrderDetailDto, product);
 //    }
-
-    log.info("주문페이지의 컨트롤러. 조회한 productOrderDetailDto의 정보를 읽어보자");
-    log.info("주문 상품의 이름은" + productOrderDetailDto.getProductName());
-    log.info("주문 상품의 옵션이름의 사이즈는"  + productOrderDetailDto.getOptionName().size());
-    log.info("주문 상품의 이미지는" + productOrderDetailDto.getImg());
-
-    productOrderDetailDtos.add(productOrderDetailDto);
-
-
-
-    model.addAttribute("productOrderInfoDtos", productOrderInfoDtos);
-    model.addAttribute("productOrderDetailDtos", productOrderDetailDtos);
 
     return "user/order";
   }

@@ -11,6 +11,9 @@ import lombok.ToString;
 @ToString
 public class ProductOrderDetailDto {
   @NotNull
+  private Long productId;
+
+  @NotNull
   private String manufacturer;
 
   @NotNull
@@ -31,12 +34,21 @@ public class ProductOrderDetailDto {
 
   private String img;
 
-  private List<String> optionName;
+  private Long optionid;
 
-  private List<Integer> optionPrice;
+  private String optionName;
 
-  public ProductOrderDetailDto() {
-    this.optionName = new ArrayList<>();
-    this.optionPrice = new ArrayList<>();
-  }
+  private Integer optionPrice;
+
+  @NotNull
+  private  Integer quantity;
+
+//  private List<String> optionName;
+//
+//  private List<Integer> optionPrice;
+
+//  public ProductOrderDetailDto() {
+//    this.optionName = new ArrayList<>();
+//    this.optionPrice = new ArrayList<>();
+//  }
 }

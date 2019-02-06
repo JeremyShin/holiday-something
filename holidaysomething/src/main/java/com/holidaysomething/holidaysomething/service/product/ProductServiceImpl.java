@@ -103,6 +103,7 @@ public class ProductServiceImpl implements ProductService {
 
   @Override
   public ProductOrderDetailDto getProductForOrder(ProductOrderDetailDto productOrderDetailDto, Product product) {
+    productOrderDetailDto.setProductId(product.getId());
       productOrderDetailDto.setProductName(product.getName());
       productOrderDetailDto.setManufacturer(product.getManufacturer());
       productOrderDetailDto.setMileage(product.getMileage());

@@ -98,13 +98,18 @@ public class ProductOptionServiceImpl implements ProductOptionService {
   }
 
   @Override
-  public ProductOrderDetailDto getProductOptionForOrder(ProductOrderDetailDto productOrderDetailDto, ProductOption productOption) {
+  public ProductOrderDetailDto getProductOptionForOrder(ProductOrderDetailDto productOrderDetailDto, ProductOption productOption, Integer quantity) {
     log.info("주문 서비스 입니다.");
     log.info("넘어온 옵션의 아이디는 " + productOption.getId());
     log.info("검색한 옵션의 아이디는" + productOption.getId());
 
-    productOrderDetailDto.getOptionName().add(productOption.getName());
-    productOrderDetailDto.getOptionPrice().add(productOption.getPrice());
+    productOrderDetailDto.setOptionid(productOption.getId());
+    productOrderDetailDto.setOptionName(productOption.getName());
+    productOrderDetailDto.setOptionPrice(productOption.getPrice());
+    productOrderDetailDto.setQuantity(quantity);
+
+//    productOrderDetailDto.getOptionName().add(productOption.getName());
+//    productOrderDetailDto.getOptionPrice().add(productOption.getPrice());
 
     return  productOrderDetailDto;
   }
