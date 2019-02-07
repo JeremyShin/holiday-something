@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import MainContentHeader from '../MainContentHeader/MainContentHeader';
 import RecentOrder from '../RecentOrder/RecentOrder';
 import OrderDeliverySearch from '../OrderDeliverySearch/OrderDeliverySearch';
-import AccountModify from '../AccountModify/AccountModify';
+import ModifyAccount from '../ModifyAccount/ModifyAccount';
 import MyMileage from '../MyMileage/MyMileage';
 
 const MainContentWrapper = styled.div`
@@ -24,7 +24,7 @@ class MainContent extends Component {
       mainContentCenter = <OrderDeliverySearch user={user} />
     }
     else if (mainCenter === 'account') {
-      mainContentCenter = <AccountModify user={user} />
+      mainContentCenter = <ModifyAccount user={user} />
     }
     else if (mainCenter === 'mileage') {
       mainContentCenter = <MyMileage user={user} />

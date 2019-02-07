@@ -85,6 +85,10 @@ public class MemberServiceImpl implements MemberService {
     memberRepository.save(member);
   }
 
+  @Override
+  public Member patchMember(Member member) {
+    return memberRepository.save(member);
+  }
 
   @Override
   public Page<Member> searchMembers(MemberSearchDto memberSearchDto, Pageable pageable) {
