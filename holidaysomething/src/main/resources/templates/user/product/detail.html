@@ -18,20 +18,21 @@
             <!--Carousel-->
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
-                <ol class="carousel-indicators"> <!-- th:each="i : ${#numbers.sequence(0, #lists.size(subImages))}" -->
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <ol class="carousel-indicators">
+                    <!--TODO MainImage와 SubImage의 크기가 0이면 어떻게 구현해야 될까...아 여기는 유저가 보는 상세페이지라 그럴 일이 없을려나??-->
+                    <!--<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>-->
+                    <li data-target="#carousel-example-generic" th:each="i : ${#numbers.sequence(0, #lists.size(subImages))}" th:data-slide-to="${i}"></li>
                 </ol>
 
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
-                    <div class="item active" th:each="mainImage : ${mainImage}">
+                    <div class="item active">
                         <img th:src="${mainImage.path + mainImage.storedFileName}" alt="공사중,,,">
                         <div class="carousel-caption">
                         </div>
                     </div>
                     <div class="item" th:each="subImage : ${subImages}">
-                        <img th:src="${subImage.path + mainImage.storedFileName}" alt="공사중,,,">
+                        <img th:src="${subImage.path + subImage.storedFileName}" alt="공사중,,,">
                         <div class="carousel-caption">
                         </div>
                     </div>
@@ -84,35 +85,47 @@
             </div>
 
             <div id="option-box" style="margin-bottom: 30px;">
-                <select name="selectOption" onchange="selectOptionChange(this.value)">   <!-- TODO `form`의 id를 변경해야 함-->
-                    <option disabled selected>옵션을 선택하세요</option>
-                    <option value="0">없음</option>
+                <select name="selectOption" id="option-selector" onchange="selectOptionChange(this.value)">   <!-- TODO `form`의 id를 변경해야 함-->
+                    <option disabled selected>옵션 선택</option>
+                    <option name="optionId" value="0">없음</option>
                     <option name="optionId" th:each="productOption : ${productOptions}"
                             th:value="${productOption}"
                             th:utext="@{${productOption.name} + ' [+' + ${productOption.price} + ']'}"></option>
                 </select>
             </div>
 
-            <div id="orderIndex">
-                <div style="margin-top: 10px; border-bottom: 2px solid black;">
-                    <table>
-                        <tbody>
-                        <td class="order-index-table-option">가나</td>
-                        <td class="order-index-table-quantity">다라</td>
-                        <td class="order-index-table-price">마바</td>
-                        <td class="order-index-table-delete">사아</td>
+            <div id="order-index">
+                <div style="margin-top: 10px;">
+                    <table id="order-index-table" width="100%">
+                        <tbody id="order-index-tbody" style="border-bottom: 1px solid #d3d3d3;">
+                        <td class="order-index-table-option">옵션이름1</td>
+                        <td class="order-index-table-quantity">
+                            <button type="button" style="width: 25px; text-align: center;">-</button>
+                            <input type="text" name="orderQuantity" value="1" class="option-order-quantity"
+                                   onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"/>
+                            <button type="button" style="width: 25px; text-align: center;">+</button>
+                        </td>
+                        <td class="order-index-table-price">28,000원</td>
+                        <td class="order-index-table-delete"><button type="button" class="order-option-delete-button" onclick="deleteOption(this)">x</button></td>
                         </tbody>
-                        <tbody>
-                        <td class="order-index-table-option">가나</td>
-                        <td class="order-index-table-quantity">다라</td>
-                        <td class="order-index-table-price">마바</td>
-                        <td class="order-index-table-delete">사아</td>
+
+                        <tbody style="border-bottom: 1px solid #d3d3d3;">
+                        <td class="order-index-table-option">옵션이름2</td>
+                        <td class="order-index-table-quantity">
+                            <button type="button" onclick="minusQuantity(this)" style="width: 25px; text-align: center;">-</button>
+                            <input type="text" name="orderQuantity" value="1" class="option-order-quantity"
+                                   onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"/>
+                            <button type="button" onclick="plusQuantity(this)" style="width: 25px; text-align: center;">+</button>
+                        </td>
+                        <td class="order-index-table-price">28,000원</td>
+                        <td class="order-index-table-delete"><button type="button" class="order-option-delete-button" onclick="deleteOption(this)">x</button></td>
                         </tbody>
                     </table>
                 </div>
-                <div id="orderIndexResult" style="margin-top: 15px; margin-bottom: 15px; text-align: right;">
+
+                <div id="order-index-result" style="margin-top: 15px; margin-bottom: 15px; text-align: right;">
                     <span style="font-size: 15px">총 상품 금액</span>
-                    <span class="order-index-total-price">28,000</span>
+                    <span id="order-index-total-price">28,000</span>
                     <span style="font-size: 23px; color: red;">원</span>
                 </div>
             </div>
@@ -120,19 +133,35 @@
             <div id="orderRequestForm">
                 <form method="post" name="productOrder" action="/user/product/order" id="orderForm">
 
-                    `orderIndex`에 선택된 옵션과 상품의 수량, 상품 번호가 넘어감
+                    <!--`orderIndex`에 선택된 옵션과 상품의 수량, 상품 번호가 넘어감-->
                     <input type="hidden" th:value="${product.id}" name="productId"/>
-                    <input type="submit" value="SHOPPING BAG"/>
-                    <input type="submit" value="BUY NOW"/>
+                    <input type="submit" class="shopping-bag-button" value="SHOPPING BAG"/>
+                    <input type="submit" class="buy-now-button" value="BUY NOW"/>
                 </form>
             </div>
         </div>
     </div>
 
     <script>
-        function selectOptionChange(optionId, optionText) {
-
+        // 옵션 변경 이벤트(order-index-tbody 에 값 저장, root-info min-height 50씩 증가, 총 금액 변경)
+        function selectOptionChange(option) {
+            let my_table = document.getElementById('order-index-table');
         }
+        // quantity 값 증가, 감소, 그에 따른 총 금액 변경
+        function minusQuantity(source) {
+            console.log(source);
+        }
+
+        function plusQuantity(source) {
+            console.log();
+        }
+        // 선택 옵션 삭제
+        let deleteOption = function (source) {
+            let my_tbody = document.getElementById('order-index-table');
+            console.log(
+                "Row index is: " + source.parentElement.parentElement.rowIndex);
+            my_tbody.deleteRow(source.parentElement.parentElement.rowIndex);
+        };
     </script>
 
 </div>
@@ -226,7 +255,7 @@
                     height: 'auto'
                 });
                 /*<![CDATA[*/
-                var content = /*[[${productDescription}]]*/ 'default';
+                var content = /*[[${product.getProductDetail().getDescription()}]]*/ 'default';
                 $("#editSection").tuiEditor("setValue", content);
                 /*]]>*/
             });
@@ -244,31 +273,24 @@
             <table width="100%">
                 <tbody>
                 <tr>
-                    <th class="product-table-th">제품명
-                    </td>
+                    <th class="product-table-th">제품명</th>
                     <td class="product-table-td" th:text="${product.name}">테스트</td>
                 </tr>
                 <tr>
-                    <th class="product-table-th">제조사
-                    </td>
+                    <th class="product-table-th">제조사</th>
                     <td class="product-table-td" th:text="${product.manufacturer}">테스트</td>
                 </tr>
                 <tr>
-                    <th class="product-table-th">제조연월
-                    </td>
-                    <td class="product-table-td" th:text="${#temporals.format(product.manufactureDate, 'yyyy-MM-dd')}">
-                        테스트
-                    </td>
+                    <th class="product-table-th">제조연월</th>
+                    <td class="product-table-td" th:text="${#temporals.format(product.manufactureDate, 'yyyy-MM-dd')}">테스트</td>
                 </tr>
                 <tr>
-                    <th class="product-table-th">품질보증기준
-                    </td>
+                    <th class="product-table-th">품질보증기준</th>
                     <td class="product-table-td">상품 수령일로부터 7일 이내 교환 및 환불</td>
                 </tr>
                 <tr>
-                    <th class="product-table-th">AS 책임자와 전화번호
-                    </td>
-                    <td class="product-table-td">TODO 무엇을 적을까? 아니면 없앨까?</td>
+                    <th class="product-table-th">AS 책임자와 전화번호</th>
+                    <td class="product-table-td">홀리데이센터 000-0000</td>
                 </tr>
                 </tbody>
             </table>
@@ -315,6 +337,10 @@
                 <br>
                 <td th:text="${bestProduct.name}"/>
                 <br><br>
+            </tr>
+            <tr th:each="bestProductImage: ${bestProductImages}">
+                <td th:text="${bestProductImage.path}"/>
+                <br>
             </tr>
         </div>
     </div>
