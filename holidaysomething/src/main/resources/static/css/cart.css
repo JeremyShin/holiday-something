@@ -1,3 +1,9 @@
+button {
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
 .cart-tbl {
   /*width: 600px;*/
   margin: 150px auto 40px auto;
@@ -10,6 +16,10 @@
 .cart-image {
   width: 90px;
   height: 90px;
+}
+
+.cart-tbl input[type='checkbox'] {
+
 }
 
 .cart-tbl-below {
@@ -31,4 +41,37 @@
 
 .cart-cal-total-price {
   margin-bottom: 80px;
+}
+
+.order-btn-wrap {
+  width: 600px;
+  margin: 10px auto;
+}
+
+.btn-shopping {
+  width: 275px;
+  border: 1px solid #a0a0a0;
+  border-radius: 0;
+  height: 60px;
+  color: #303033;
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 60px;
+  vertical-align: top;
+}
+
+.btn-checkout {
+  width: 275px;
+  height: 60px;
+  line-height: 60px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #000;
+  margin-left: 10px;
+  border: 0;
+}
+
+.order-btn-wrap button:hover {
+  color: #ff4800;
 }

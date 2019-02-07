@@ -25,14 +25,16 @@
     <!-- 카트 상품 리스트(표) -->
     <table class="cart-tbl">
       <tr>
-        <th>(체크박스)</th>
+        <th><input type="checkbox"/></th>
         <th>상품 정보</th>
         <th>수량</th>
         <th>주문금액</th>
         <th>배송비</th>
       </tr>
       <tr th:each="cartProduct : ${cartProducts}">
-        <td>(체크박스)</td>
+        <td>
+          <input type="checkbox" th:value="${cartProduct.productId}"/>
+        </td>
         <td class="cart-product-info-col">
           <div>
             <img class="cart-image" th:src="${cartProduct.imagePath}" alt="product_image_path" />
@@ -98,7 +100,10 @@
     </div>
 
     <!-- 쇼핑 계속 / 결제화면 버튼 -->
-
+    <div class="order-btn-wrap">
+      <button class="btn-shopping" type="button">CONTINUE SHOPPING</button>
+      <button class="btn-checkout" type="button">CHECK OUT</button>
+    </div>
   </div>
 
   <!-- 카트 -->
