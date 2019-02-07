@@ -87,8 +87,8 @@
             <div id="option-box" style="margin-bottom: 30px;">
                 <select name="selectOption" id="option-selector" onchange="selectOptionChange(this.value)">   <!-- TODO `form`의 id를 변경해야 함-->
                     <option disabled selected>옵션 선택</option>
-                    <option name="optionId" value="0">없음</option>
-                    <option name="optionId" th:each="productOption : ${productOptions}"
+                    <option value="0">없음</option>
+                    <option th:each="productOption : ${productOptions}"
                             th:value="${productOption}"
                             th:utext="@{${productOption.name} + ' [+' + ${productOption.price} + ']'}"></option>
                 </select>
@@ -157,16 +157,55 @@
         function plusQuantity(source) {
             console.log();
         }
-        // shopping bag & buy now 버튼 구분
+        // shopping bag 버튼 클릭 이벤트
         function shoppingBag() {
             let value = document.getElementById('orderForm');
-            value.action="/user/product/shoppingbag";
-            value.submit();
+            let check1 = document.getElementsByName('optionId');
+            let check2 = document.getElementsByName('orderQuantity');
+
+            let size = document.getElementsByName("orderQuantity").length;
+            for (let i = 0; i < size; i++) {
+                if (document.getElementsByName("orderQuantity")[i].value < 1) {
+                    return false;
+                }
+            }
+
+            if(check1.length === 0 || check2.length === 0) {
+                alert("상품 옵션을 선택해주세요.");
+                return false
+            }else {
+                alert("장바구니에 상품이 담겼습니다.");
+                value.action = "/user/product/shoppingbag";
+                value.submit();
+            }
         }
+
+        // buy now 버튼 클릭 이벤트
         function buyNow() {
             let value = document.getElementById('orderForm');
-            value.action="/user/product/order";
-            value.submit();
+            let check1 = document.getElementsByName('optionId');
+            let check2 = document.getElementsByName('orderQuantity');
+
+            let size = document.getElementsByName("orderQuantity").length;
+            for (let i = 0; i < size; i++) {
+                if (document.getElementsByName("orderQuantity")[i].value < 1) {
+                    return false;
+                }
+            }
+
+            if(check1.length === 0 || check2.length === 0) {
+                alert("상품 옵션을 선택해주세요.");
+                return false
+            }else {
+                let buy = confirm("구매하시겠습니까?");
+                if(buy == true){
+                    value.action = "/user/product/order";
+                    value.submit();
+                }
+                else if(buy == false){
+                    return false;
+                }
+            }
         }
 
         // 선택 옵션 삭제
