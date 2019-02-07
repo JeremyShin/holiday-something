@@ -101,3 +101,40 @@ let useAllMileage = function() {
   document.getElementById("orderTotalUseMileage").innerText = jsHasMileageValue;
   jsTotalPayment.innerText = jsTotalProductPriceValue + jsTotalShippingPriceValue - parseInt(jsUseMileageInput.value);
 };
+
+/* 마일리지 부분사용 api */
+let RecalcuSubTotal = function(source) {
+  let jsUseMileageInput = document.getElementById("orderMemberUseMileage");
+  //불변의 총 마일리지
+  let jsHiddenMileage = document.getElementById("hiddenMileage");
+  //변화하는 총 마일리지
+  let jsHasMileage = document.getElementById("orderMemberHasMileage");
+  let jsTotalUseMileage = document.getElementById("orderTotalUseMileage");
+
+  //불변의 총 계산금액
+  let jsHiddenTotalPayment = document.getElementById("hiddenTotalPayment");
+  //변화하는 총 계산금액
+  let jsTotalPayment = document.getElementById("orderTotalPayment");
+
+  //밸류값은 무조건 integer
+  let jsUseMileageInputValue = parseInt(jsUseMileageInput.value);
+  let jsOriginHasMileageValue = parseInt(jsHiddenMileage.innerText);
+  let jsHiddenTotalPaymentValue =  parseInt(jsHiddenTotalPayment.innerText);
+
+  if(isNaN(jsUseMileageInput.value)){
+    alert("nan이 싫어요 ㅠ");
+    jsUseMileageInput.setAttribute("value", "0");
+  }
+
+  if (jsUseMileageInputValue > jsOriginHasMileageValue){
+    jsUseMileageInput.value = jsOriginHasMileageValue;
+    jsTotalUseMileage.innerText = jsHiddenMileage.innerText;
+    jsTotalPayment.innerText = jsHiddenTotalPaymentValue - jsOriginHasMileageValue;
+  } else {
+    //변화하는 마일리지 = 불변의 마일리지 - 입력값을 뺀 것
+    jsHasMileage.innerText = (jsOriginHasMileageValue - jsUseMileageInputValue);
+    jsTotalUseMileage.innerText = jsUseMileageInputValue;
+    jsTotalPayment.innerText = jsHiddenTotalPaymentValue - jsUseMileageInputValue;
+
+  }
+};
