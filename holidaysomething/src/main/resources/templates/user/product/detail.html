@@ -96,12 +96,13 @@
 
             <div id="order-index">
                 <div style="margin-top: 10px;">
-                    <table id="order-index-table" width="100%">
+                    <table id="order-index-table" width="100%" >
                         <tbody id="order-index-tbody" style="border-bottom: 1px solid #d3d3d3;">
+                        <input type="hidden" name="optionId" value="0" form="orderForm"/>
                         <td class="order-index-table-option">옵션이름1</td>
                         <td class="order-index-table-quantity">
                             <button type="button" style="width: 25px; text-align: center;">-</button>
-                            <input type="text" name="orderQuantity" value="1" class="option-order-quantity"
+                            <input type="text" name="orderQuantity" value="1" class="option-order-quantity" form="orderForm"
                                    onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"/>
                             <button type="button" style="width: 25px; text-align: center;">+</button>
                         </td>
@@ -110,10 +111,11 @@
                         </tbody>
 
                         <tbody style="border-bottom: 1px solid #d3d3d3;">
+                        <input type="hidden" name="optionId" value="1" form="orderForm"/>
                         <td class="order-index-table-option">옵션이름2</td>
                         <td class="order-index-table-quantity">
                             <button type="button" onclick="minusQuantity(this)" style="width: 25px; text-align: center;">-</button>
-                            <input type="text" name="orderQuantity" value="1" class="option-order-quantity"
+                            <input type="text" name="orderQuantity" value="1" class="option-order-quantity" form="orderForm"
                                    onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"/>
                             <button type="button" onclick="plusQuantity(this)" style="width: 25px; text-align: center;">+</button>
                         </td>
