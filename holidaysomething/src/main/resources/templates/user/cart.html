@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.springframework.org/schema/data/jaxb"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout/user-default}">
+
+  <head th:include="fragments/config :: configFragment">
+    <!-- "configFragment" 전체가 여기로 들어오는데,
+         단 <title>은 th:include=":: #pageTitle"와 같이 하단의 내용을 참조(포함)한다 -->
+    <title id="pageTitle">Cart &mdash; Holiday Something</title>
+
+    <!-- 사용자 CSS 추가 -->
+    <!-- layout:fragment="xxx" => decorate 파일에 있는 xxx와 이름이 맞아야만 HTML에 포함된다 -->
+    <th:block layout:fragment="css">
+      <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/cart.css}"/>
+    </th:block>
+
+    <!-- 사용자 스크립트 추가 -->
+    <th:block layout:fragment="script">
+
+    </th:block>
+  </head>
+
+  <div layout:fragment="userTitle">
+    <!-- 카트 상품 리스트(표) -->
+    <table class="cart-tbl">
+      <tr>
+        <th><input type="checkbox"/></th>
+        <th>상품 정보</th>
+        <th>수량</th>
+        <th>주문금액</th>
+        <th>배송비</th>
+      </tr>
+      <tr th:each="cartProduct : ${cartProducts}">
+        <td>
+          <input type="checkbox" th:value="${cartProduct.productId}"/>
+        </td>
+        <td class="cart-product-info-col">
+          <div>
+            <img class="cart-image" th:src="${cartProduct.imagePath}" alt="product_image_path" />
+          </div>
+          <div>
+            <p th:text="${cartProduct.productName}">productName</p>
+            <p><span th:text="${#numbers.formatDecimal(cartProduct.originalPrice, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
+            <p><span th:text="${#numbers.formatDecimal(cartProduct.sellingPrice, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
+          </div>
+        </td>
+        <td>
+          <span th:text="${cartProduct.quantity}">수량</span>
+        </td>
+        <td th:with="result=${cartProduct.sellingPrice * cartProduct.quantity}">
+          <p><span th:text="${#numbers.formatDecimal(result, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
+        </td>
+        <td>
+          <p><span th:text="${#numbers.formatDecimal(cartProduct.shippingPrice, 0, 'COMMA', 0, 'POINT')}"></span> 원</p>
+        </td>
+      </tr>
+    </table>
+
+    <!-- 상품 삭제 버튼 / 상품 만료일 안내 -->
+    <div class="cart-tbl-below">
+      <div class="dlt-product-btn">
+        <button>선택상품 삭제</button>
+        <button>품절상품 삭제</button>
+      </div>
+      <div>
+        <p>장바구니는 접속 종료 후 60일 동안 보관됩니다.</p>
+      </div>
+    </div>
+
+    <!-- 총 결제금액 계산 결과(표) -->
+    <div class="cart-cal-total-price">
+      <ul class="tbl-list">
+        <li class="tbl-th">
+          <div class="tbl-td">
+            <span>총 주문금액</span>
+          </div>
+          <div class="tbl-td">
+            <span>총 배송비</span>
+          </div>
+          <div class="tbl-td">
+            <span>총 결제금액</span>
+          </div>
+        </li>
+        <li class="tbl-tr">
+          <div class="tbl-td">
+            <p><span th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
+            <p>총 <span th:text="${#numbers.formatDecimal(productCount, 0, 'COMMA', 0, 'POINT')}"></span> 개</p>
+          </div>
+          <span>+</span>
+          <div class="tbl-td">
+            <p><span th:text="${#numbers.formatDecimal(totalShippingPrice, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
+          </div>
+          <span>=</span>
+          <div class="tbl-td">
+            <p><span th:text="${#numbers.formatDecimal(totalPaymentPrice, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 쇼핑 계속 / 결제화면 버튼 -->
+    <div class="order-btn-wrap">
+      <button class="btn-shopping" type="button">CONTINUE SHOPPING</button>
+      <button class="btn-checkout" type="button">CHECK OUT</button>
+    </div>
+  </div>
+
+  <!-- 카트 -->
+  <div layout:fragment="userContents">
+
+  </div>
+
+</html>

@@ -2,36 +2,26 @@ package com.holidaysomething.holidaysomething.controller.user.login;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Role;
+import com.holidaysomething.holidaysomething.dto.UserCartProductDto;
 import com.holidaysomething.holidaysomething.security.MemberUserDetails;
 import com.holidaysomething.holidaysomething.service.member.MemberService;
 import java.security.Principal;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.SessionFactory;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
 /**
  * @author choijaeyong on 18/01/2019.
@@ -113,7 +103,6 @@ public class UserLoginController {
     LocalDate birthday = LocalDate.parse("1991-01-31");
     member.setBirthday(birthday);
 
-
     memberService.addMember(member);
 
     return "redirect:/";
@@ -121,8 +110,7 @@ public class UserLoginController {
 
 
   /**
-   * @author JDragon
-   * 로그인 했을 때, 아이디가 root 이면 해당 url 호출.
+   * @author JDragon 로그인 했을 때, 아이디가 root 이면 해당 url 호출.
    */
   @GetMapping("/after")
   public String loginInfo(Principal principal, HttpSession httpSession) {
@@ -212,5 +200,55 @@ public class UserLoginController {
     return "user/login/login-info";
   }
 
+  /**
+   * 현재 로그인된 유저가 갖고있는 cart_product 목록을 가져온다.
+   *
+   * @param userId 현재 로그인 되어 있는 유저의 id
+   * @return cart 페이지(cart.html)
+   *
+   * 상품-옵션 별 수량 --> 현재 table에 정의되어 있지 않음, 나중에 구현
+   *
+   * TODO: 현재는 url에 id를 입력해야 함. 향후 Authentication을 사용해 현재 로그인 되어 있는 유저의 cart를 가져오는 것으로 수정
+   */
+  @GetMapping("/cart")
+  public String cart(@RequestParam("id") Long userId, ModelMap modelMap) {
+    List<UserCartProductDto> cartProducts = memberService.getUserCartProduct(userId);
+    modelMap.addAttribute("cartProducts", cartProducts);
 
+    int totalPrice = 0;
+    int totalShippingPrice = 0;
+    for (UserCartProductDto cartProduct : cartProducts) {
+      totalPrice += (cartProduct.getSellingPrice() * cartProduct.getQuantity());
+      totalShippingPrice += cartProduct.getShippingPrice();
+    }
+    int totalPaymentPrice = totalPrice + totalShippingPrice;
+    modelMap.addAttribute("totalPrice", totalPrice);
+    modelMap.addAttribute("productCount", cartProducts.size());
+    modelMap.addAttribute("totalShippingPrice", totalShippingPrice);
+    modelMap.addAttribute("totalPaymentPrice", totalPaymentPrice);
+
+//    log.info("============= UserCartProductDto 반복문 =============");
+//    for (UserCartProductDto userCartProductDto : cartProducts) {
+//      log.info("cartProductId: " + userCartProductDto.getCartProductId());
+//      log.info("productId: " + userCartProductDto.getProductId());
+//      log.info("productName: " + userCartProductDto.getProductName());
+//      log.info("quantity: " + userCartProductDto.getQuantity());
+//      log.info("originalPrice: " + userCartProductDto.getOriginalPrice());
+//      log.info("sellingPrice: " + userCartProductDto.getSellingPrice());
+//      log.info("shippingPrice: " + userCartProductDto.getShippingPrice());
+//      log.info("imagePath: " + userCartProductDto.getImagePath());
+//      log.info("==================================================");
+//    }
+
+    return "user/cart";
+  }
 }
+
+
+
+
+
+
+
+
+
