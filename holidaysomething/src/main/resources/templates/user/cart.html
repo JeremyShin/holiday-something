@@ -39,18 +39,18 @@
           </div>
           <div>
             <p th:text="${cartProduct.productName}">productName</p>
-            <p><span th:text="${cartProduct.originalPrice}"></span>원</p>
-            <p><span th:text="${cartProduct.sellingPrice}"></span>원</p>
+            <p><span th:text="${#numbers.formatDecimal(cartProduct.originalPrice, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
+            <p><span th:text="${#numbers.formatDecimal(cartProduct.sellingPrice, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
           </div>
         </td>
         <td>
           <span th:text="${cartProduct.quantity}">수량</span>
         </td>
         <td th:with="result=${cartProduct.sellingPrice * cartProduct.quantity}">
-          <p><span th:text="${result}"></span>원</p>
+          <p><span th:text="${#numbers.formatDecimal(result, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
         </td>
         <td>
-          <p><span th:text="${cartProduct.shippingPrice}"></span> 원</p>
+          <p><span th:text="${#numbers.formatDecimal(cartProduct.shippingPrice, 0, 'COMMA', 0, 'POINT')}"></span> 원</p>
         </td>
       </tr>
     </table>
@@ -67,7 +67,35 @@
     </div>
 
     <!-- 총 결제금액 계산 결과(표) -->
-
+    <div class="cart-cal-total-price">
+      <ul class="tbl-list">
+        <li class="tbl-th">
+          <div class="tbl-td">
+            <span>총 주문금액</span>
+          </div>
+          <div class="tbl-td">
+            <span>총 배송비</span>
+          </div>
+          <div class="tbl-td">
+            <span>총 결제금액</span>
+          </div>
+        </li>
+        <li class="tbl-tr">
+          <div class="tbl-td">
+            <p><span th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
+            <p>총 <span th:text="${#numbers.formatDecimal(productCount, 0, 'COMMA', 0, 'POINT')}"></span> 개</p>
+          </div>
+          <span>+</span>
+          <div class="tbl-td">
+            <p><span th:text="${#numbers.formatDecimal(totalShippingPrice, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
+          </div>
+          <span>=</span>
+          <div class="tbl-td">
+            <p><span th:text="${#numbers.formatDecimal(totalPaymentPrice, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
+          </div>
+        </li>
+      </ul>
+    </div>
 
     <!-- 쇼핑 계속 / 결제화면 버튼 -->
 

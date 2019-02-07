@@ -215,18 +215,30 @@ public class UserLoginController {
     List<UserCartProductDto> cartProducts = memberService.getUserCartProduct(userId);
     modelMap.addAttribute("cartProducts", cartProducts);
 
-    log.info("============= UserCartProductDto 반복문 =============");
-    for (UserCartProductDto userCartProductDto : cartProducts) {
-      log.info("==================================================");
-      log.info("cartProductId: " + userCartProductDto.getCartProductId());
-      log.info("productId: " + userCartProductDto.getProductId());
-      log.info("productName: " + userCartProductDto.getProductName());
-      log.info("quantity: " + userCartProductDto.getQuantity());
-      log.info("originalPrice: " + userCartProductDto.getOriginalPrice());
-      log.info("sellingPrice: " + userCartProductDto.getSellingPrice());
-      log.info("shippingPrice: " + userCartProductDto.getShippingPrice());
-      log.info("imagePath: " + userCartProductDto.getImagePath());
+    int totalPrice = 0;
+    int totalShippingPrice = 0;
+    for (UserCartProductDto cartProduct : cartProducts) {
+      totalPrice += (cartProduct.getSellingPrice() * cartProduct.getQuantity());
+      totalShippingPrice += cartProduct.getShippingPrice();
     }
+    int totalPaymentPrice = totalPrice + totalShippingPrice;
+    modelMap.addAttribute("totalPrice", totalPrice);
+    modelMap.addAttribute("productCount", cartProducts.size());
+    modelMap.addAttribute("totalShippingPrice", totalShippingPrice);
+    modelMap.addAttribute("totalPaymentPrice", totalPaymentPrice);
+
+//    log.info("============= UserCartProductDto 반복문 =============");
+//    for (UserCartProductDto userCartProductDto : cartProducts) {
+//      log.info("cartProductId: " + userCartProductDto.getCartProductId());
+//      log.info("productId: " + userCartProductDto.getProductId());
+//      log.info("productName: " + userCartProductDto.getProductName());
+//      log.info("quantity: " + userCartProductDto.getQuantity());
+//      log.info("originalPrice: " + userCartProductDto.getOriginalPrice());
+//      log.info("sellingPrice: " + userCartProductDto.getSellingPrice());
+//      log.info("shippingPrice: " + userCartProductDto.getShippingPrice());
+//      log.info("imagePath: " + userCartProductDto.getImagePath());
+//      log.info("==================================================");
+//    }
 
     return "user/cart";
   }

@@ -16,3 +16,19 @@
   display: flex;
   justify-content: space-between;
 }
+
+.tbl-th {
+  display: flex;
+}
+
+.tbl-tr {
+  display: flex;
+}
+
+.tbl-list {
+  list-style: none;
+}
+
+.cart-cal-total-price {
+  margin-bottom: 80px;
+}
