@@ -1,0 +1,18 @@
+.cart-tbl {
+  /*width: 600px;*/
+  margin: 150px auto 40px auto;
+}
+
+.cart-product-info-col {
+  display: flex;
+}
+
+.cart-image {
+  width: 90px;
+  height: 90px;
+}
+
+.cart-tbl-below {
+  display: flex;
+  justify-content: space-between;
+}
