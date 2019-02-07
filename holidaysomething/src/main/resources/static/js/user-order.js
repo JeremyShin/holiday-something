@@ -74,6 +74,30 @@ let removeInputText = function () {
   removeOrderRecipientPhoneInput.setAttribute("value","");
 };
 
-// let useAllMileage = function(){
-//   let
-// };
+/* 모든 마일리지 사용 / 마일리지 사용 안함 api */
+let useAllMileage = function() {
+  let btnName = document.getElementById("btnUseAllMileage");
+
+  if (btnName.value === "모두사용"){
+    btnName.value = "사용안함";
+  } else {
+    btnName.value = "모두사용";
+  }
+
+  let jsUseMileageInput = document.getElementById("orderMemberUseMileage");
+  let jsHasMileage = document.getElementById("orderMemberHasMileage");
+  let jsTotalPayment = document.getElementById("orderTotalPayment");
+  let jsTotalProductPrice = document.getElementById("orderTotalProductPrice");
+  let jsTotalShippingPrice = document.getElementById("orderTotalShippingPrice");
+
+  let jsUseMileageInputValue = jsUseMileageInput.value;
+  let jsHasMileageValue = jsHasMileage.innerText;
+  let jsTotalProductPriceValue = parseInt(jsTotalProductPrice.innerText);
+  let jsTotalShippingPriceValue = parseInt(jsTotalShippingPrice.innerText);
+
+  jsUseMileageInput.value = jsHasMileageValue;
+  jsHasMileage.innerText = jsUseMileageInputValue;
+
+  document.getElementById("orderTotalUseMileage").innerText = jsHasMileageValue;
+  jsTotalPayment.innerText = jsTotalProductPriceValue + jsTotalShippingPriceValue - parseInt(jsUseMileageInput.value);
+};
