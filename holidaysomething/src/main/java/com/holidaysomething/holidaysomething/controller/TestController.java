@@ -10,6 +10,10 @@ import java.util.List;
 
 @Controller
 public class TestController {
+    @PostMapping("/user/product/shoppingbag")
+    public String shoppingBagForm(@ModelAttribute ProductOrderInfoDto productOrderInfoDto) {
+        return "/user/product/shoppingbag-test";
+    }
 
     @PostMapping("/user/product/order")
     public String orderForm(@ModelAttribute ProductOrderInfoDto productOrderInfoDto) {

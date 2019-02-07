@@ -98,10 +98,10 @@
                 <div style="margin-top: 10px;">
                     <table id="order-index-table" width="100%" >
                         <tbody id="order-index-tbody" style="border-bottom: 1px solid #d3d3d3;">
-                        <input type="hidden" name="optionId" value="0" form="orderForm"/>
                         <td class="order-index-table-option">옵션이름1</td>
                         <td class="order-index-table-quantity">
                             <button type="button" style="width: 25px; text-align: center;">-</button>
+                            <input type="hidden" name="optionId" value="0" form="orderForm"/>
                             <input type="text" name="orderQuantity" value="1" class="option-order-quantity" form="orderForm"
                                    onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"/>
                             <button type="button" style="width: 25px; text-align: center;">+</button>
@@ -111,10 +111,10 @@
                         </tbody>
 
                         <tbody style="border-bottom: 1px solid #d3d3d3;">
-                        <input type="hidden" name="optionId" value="1" form="orderForm"/>
                         <td class="order-index-table-option">옵션이름2</td>
                         <td class="order-index-table-quantity">
                             <button type="button" onclick="minusQuantity(this)" style="width: 25px; text-align: center;">-</button>
+                            <input type="hidden" name="optionId" value="1" form="orderForm"/>
                             <input type="text" name="orderQuantity" value="1" class="option-order-quantity" form="orderForm"
                                    onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"/>
                             <button type="button" onclick="plusQuantity(this)" style="width: 25px; text-align: center;">+</button>
@@ -133,12 +133,12 @@
             </div>
 
             <div id="orderRequestForm">
-                <form method="post" name="productOrder" action="/user/product/order" id="orderForm">
+                <form method="post" name="productOrder" id="orderForm">
 
                     <!--`orderIndex`에 선택된 옵션과 상품의 수량, 상품 번호가 넘어감-->
                     <input type="hidden" th:value="${product.id}" name="productId"/>
-                    <input type="submit" class="shopping-bag-button" value="SHOPPING BAG"/>
-                    <input type="submit" class="buy-now-button" value="BUY NOW"/>
+                    <input type="button" class="shopping-bag-button" value="SHOPPING BAG" onclick="shoppingBag();"/>
+                    <input type="button" class="buy-now-button" value="BUY NOW" onclick="buyNow();"/>
                 </form>
             </div>
         </div>
@@ -147,7 +147,7 @@
     <script>
         // 옵션 변경 이벤트(order-index-tbody 에 값 저장, root-info min-height 50씩 증가, 총 금액 변경)
         function selectOptionChange(option) {
-            let my_table = document.getElementById('order-index-table');
+            let my_table = document.productOrder;
         }
         // quantity 값 증가, 감소, 그에 따른 총 금액 변경
         function minusQuantity(source) {
@@ -157,6 +157,18 @@
         function plusQuantity(source) {
             console.log();
         }
+        // shopping bag & buy now 버튼 구분
+        function shoppingBag() {
+            let value = document.getElementById('orderForm');
+            value.action="/user/product/shoppingbag";
+            value.submit();
+        }
+        function buyNow() {
+            let value = document.getElementById('orderForm');
+            value.action="/user/product/order";
+            value.submit();
+        }
+
         // 선택 옵션 삭제
         let deleteOption = function (source) {
             let my_tbody = document.getElementById('order-index-table');
