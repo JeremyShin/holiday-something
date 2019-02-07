@@ -225,6 +225,11 @@
   margin-left: 15px;
 }
 
+.order-index-button {
+  width: 25px;
+  text-align: center;
+}
+
 .order-option-delete-button {
   width: 25px;
   text-align: center;
