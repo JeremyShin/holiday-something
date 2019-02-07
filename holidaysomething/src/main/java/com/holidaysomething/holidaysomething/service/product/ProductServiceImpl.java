@@ -2,9 +2,11 @@ package com.holidaysomething.holidaysomething.service.product;
 
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
+import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.dto.ProductOrderDetailDto;
 import com.holidaysomething.holidaysomething.dto.SearchDto;
 import com.holidaysomething.holidaysomething.repository.ProductImageRepository;
+import com.holidaysomething.holidaysomething.repository.ProductOptionRepository;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,6 +25,7 @@ public class ProductServiceImpl implements ProductService {
 
   private final ProductRepository productRepository;
   private final ProductImageRepository productImageRepository;
+  private final ProductOptionRepository productOptionRepository;
 
   @Override
   @Transactional(readOnly = true)
@@ -102,18 +105,26 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
-  public ProductOrderDetailDto getProductForOrder(Product product) {
+  public ProductOrderDetailDto getProductForOrder(Long productId, Long optionId, Integer quantity) {
     ProductOrderDetailDto productOrderDetailDto = new ProductOrderDetailDto();
+
+    Product product = productRepository.findProductById(productId);
     productOrderDetailDto.setProductId(product.getId());
-      productOrderDetailDto.setProductName(product.getName());
-      productOrderDetailDto.setManufacturer(product.getManufacturer());
-      productOrderDetailDto.setMileage(product.getMileage());
-      productOrderDetailDto.setOriginalPrice(product.getOriginalPrice());
-      productOrderDetailDto.setSellingPrice(product.getSellingPrice());
-      productOrderDetailDto.setShippingPrice(product.getShippingPrice());
+    productOrderDetailDto.setProductName(product.getName());
+    productOrderDetailDto.setManufacturer(product.getManufacturer());
+    productOrderDetailDto.setMileage(product.getMileage());
+    productOrderDetailDto.setOriginalPrice(product.getOriginalPrice());
+    productOrderDetailDto.setSellingPrice(product.getSellingPrice());
+    productOrderDetailDto.setShippingPrice(product.getShippingPrice());
+
+    ProductOption productOption = productOptionRepository.findProductOptionById(optionId);
+    productOrderDetailDto.setOptionId(productOption.getId());
+    productOrderDetailDto.setOptionName(productOption.getName());
+    productOrderDetailDto.setOptionPrice(productOption.getPrice());
+
 
       //productId로 이미지 url 검색하여 set
-    List<ProductImage> productImages = productImageRepository.findByProductId(product.getId());
+    List<ProductImage> productImages = productImageRepository.findByProductId(productId);
     if (productImages != null){
       productOrderDetailDto.setImg(productImages.get(0).getPath());
     }

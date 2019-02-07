@@ -13,7 +13,7 @@ public interface ProductService {
 
   //Product findByProductNameContaining(String productName);
 
-  ProductOrderDetailDto getProductForOrder(Product product);
+  ProductOrderDetailDto getProductForOrder(Long productId, Long optionId, Integer quantity);
 
   Page<Product> findByProductNameContaining(String productName, Pageable pageable);
 
