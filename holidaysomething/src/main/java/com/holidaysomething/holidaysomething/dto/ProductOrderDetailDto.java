@@ -34,7 +34,7 @@ public class ProductOrderDetailDto {
 
   private String img;
 
-  private Long optionid;
+  private Long optionId;
 
   private String optionName;
 

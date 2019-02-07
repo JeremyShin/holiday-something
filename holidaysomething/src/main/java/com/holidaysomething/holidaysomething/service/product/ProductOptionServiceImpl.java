@@ -103,7 +103,7 @@ public class ProductOptionServiceImpl implements ProductOptionService {
     log.info("넘어온 옵션의 아이디는 " + productOption.getId());
     log.info("검색한 옵션의 아이디는" + productOption.getId());
 
-    productOrderDetailDto.setOptionid(productOption.getId());
+    productOrderDetailDto.setOptionId(productOption.getId());
     productOrderDetailDto.setOptionName(productOption.getName());
     productOrderDetailDto.setOptionPrice(productOption.getPrice());
     productOrderDetailDto.setQuantity(quantity);
