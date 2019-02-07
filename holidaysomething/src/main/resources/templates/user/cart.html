@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.springframework.org/schema/data/jaxb"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout/user-default}">
+
+  <head layout:fragment="head">
+    <!-- "configFragment" 전체가 여기로 들어오는데,
+         단 <title>은 th:include=":: #pageTitle"와 같이 하단의 내용을 참조(포함)한다 -->
+    <title id="pageTitle">카트 &mdash; Holiday Something</title>
+
+    <!-- 사용자 CSS 추가 -->
+    <!-- layout:fragment="xxx" => decorate 파일에 있는 xxx와 이름이 맞아야만 HTML에 포함된다 -->
+    <th:block layout:fragment="css">
+
+    </th:block>
+
+    <!-- 사용자 스크립트 추가 -->
+    <th:block layout:fragment="script">
+
+    </th:block>
+  </head>
+
+  <div layout:fragment="userTitle">
+
+  </div>
+
+  <div layout:fragment="userContents">
+
+  </div>
+
+</html>

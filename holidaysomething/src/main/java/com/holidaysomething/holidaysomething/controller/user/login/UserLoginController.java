@@ -212,5 +212,9 @@ public class UserLoginController {
     return "user/login/login-info";
   }
 
-
+  @GetMapping("/cart")
+  public String cart() {
+    
+    return "user/cart";
+  }
 }
