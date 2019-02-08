@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml"
-      xml:th="http:/www.thymeleaf.org">
+      xml:th="http:/www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
   <header th:fragment="headerFragment" id="header">
     <img src="/static/img/logo.png"/>
@@ -60,7 +61,7 @@
             </div>
 
             <div class="user-header" sec:authorize="isAuthenticated()">
-             <a href="/user/login"> logout </a>
+              <a href="/user/logout"> logout </a>
             </div>
             
             <div class="user-header">
