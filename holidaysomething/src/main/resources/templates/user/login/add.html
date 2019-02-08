@@ -2,18 +2,12 @@
 <html xmlns:th="http://www.springframework.org/schema/data/jaxb"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{layout/default.html}">
+      layout:decorate="~{layout/admin-default}">
 
 <head th:include="fragments/config :: configFragment">
-  <title id="pageTitle">Page title</title>
+  <title id="pageTitle">관리자 &mdash; 사용자 등록</title>
   <!-- other elements you want to reference in your layout -->
 </head>
-
-<!--<head th:replace="fragments/config :: configFragment (pageTitle='Product Register')">-->
-<!--<title>상품등록</title>-->
-<!--&lt;!&ndash; metas, link and scripts &ndash;&gt;-->
-<!--</head>-->
-
 
 <!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
@@ -27,15 +21,12 @@
 
   <div style="display:block; ">
 
-
     <!-- th:field="*{product.productOptions.description}" 이런식으로 해도 된다는데... 실패했었음.-->
     <form onsubmit="" action="#" th:action="@{/user/add}" method="post"
           th:object="${}">
 
-
       <!-- Start (상품 기본정보 등록) -->
-      <div style="display: block; position:relative;left:50px;">
-
+      <div style="display: block; position:relative; left:50px;">
         <div>
           <label th:class="${#fields.hasErrors('name')} ? 'fieldError'">상품명 : </label>
           <input name="name" th:field="*{name}" id="inputName"

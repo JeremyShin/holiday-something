@@ -36,7 +36,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
   @Autowired
   private BCryptPasswordEncoder passwordEncoder;
 
-
   @Override
   @Transactional(readOnly = true)
   public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
@@ -85,8 +84,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 //    String encodePassword = passwordEncoder.encode(member.getPassword());
 //    log.info("====== encodePassword : " + encodePassword);
 
-    MemberUserDetails userDetails = new MemberUserDetails(loginId, member.getPassword(),
-        authorities);
+    MemberUserDetails userDetails = new MemberUserDetails(loginId, member.getPassword(), authorities);
     userDetails.setNickname(member.getNickname());
     userDetails.setId(member.getId());
     userDetails.setMember(member);
@@ -98,6 +96,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         "====== userDetails.getMember().getLoginId() : " + userDetails.getMember().getLoginId());
     //log.info("====== userDetails.getMember().getOrders().size() : " + userDetails.getMember().getOrders().size());
 
+    //TODO: 아래 문장을 실행하지 않으면, lazy loading이어서 member에 order 정보가 포함되지 않은 채로 MemberUserDetails 객체가 리턴된다.
+    //TODO: 그럼 eager loading(?)으로 바꿔서, 여기서 order 정보를 member에 포함한 채로 넘겨주면 해결되지 않을까?
+//    log.info(userDetails.getMember().getOrders().size() + "");
 
     return userDetails;
   }

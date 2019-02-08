@@ -4,12 +4,13 @@
 
 <head th:fragment="configFragment">
   <meta charset="UTF-8"/>
+  <link rel="shortcut icon" href="/static/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
 
   <title th:include=":: #pageTitle">Layout Generic Title </title>
 
-  <!-- 공통으로 쓰이는 css파일을넣는다.-->
+  <!-- 공통으로 쓰이는 css 파일을 넣는다.-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
@@ -18,14 +19,19 @@
         rel="stylesheet"/>
 
   <!-- 사용자 CSS 영역이 들어감 -->
-  <th:block layout:fragment="css"></th:block>
+  <!-- th:block 자체는 HTML에 렌더링되지 않는다. -->
+  <th:block layout:fragment="css">
+
+  </th:block>
 
   <!-- 공통으로 쓰이는 js 파일을 넣는다.-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <!-- 사용자 스크립트 영역이 들어감 -->
-  <th:block layout:fragment="script"></th:block>
+  <th:block layout:fragment="script">
+
+  </th:block>
 </head>
 
 </html>
