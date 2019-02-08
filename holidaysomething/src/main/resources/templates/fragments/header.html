@@ -45,12 +45,24 @@
         <!--회원가입, 로그인, 장바구니-->
         <div class="user-header" style="order: 3;">
           <div>
-            <div class="user-header">
-              <a href="/user/signup"> signup </a>
+            
+            <div class="user-header" sec:authorize="isAuthenticated()">
+              <span sec:authentication="name"></span>
+              <!--<a th:href="@{'/user/'+ ${#authentication.principal.id}}">memberInfo</a>-->
             </div>
-            <div class="user-header">
+            
+            <div class="user-header" sec:authorize="!isAuthenticated()">
+              <a href="/user/join"> signup </a>
+            </div>
+
+            <div class="user-header" sec:authorize="!isAuthenticated()">
               <a href="/user/login"> login </a>
             </div>
+
+            <div class="user-header" sec:authorize="isAuthenticated()">
+             <a href="/user/login"> logout </a>
+            </div>
+            
             <div class="user-header">
               <a href="/user/cart"> cart </a>
             </div>

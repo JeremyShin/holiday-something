@@ -31,8 +31,7 @@ public class MemberAddController {
         Member member = new Member();
         model.addAttribute("member", member);
 
-
-        return "/user/join";
+        return "/user/login/join";
     }
 
     @PostMapping("/join")
@@ -44,13 +43,13 @@ public class MemberAddController {
             for(ObjectError error : bindingResult.getAllErrors()) {
                 log.info(error.getDefaultMessage());
             }
-            return "/user/join";
+            return "/user/login/join";
         } else {
             memberAddDto.setRegDate(LocalDateTime.now());
             memberAddDto.setLastLogin(LocalDateTime.now());
             memberAddService.memberRegister(memberAddDto);
 
-            return "redirect:/user/join";
+            return "/user/login/joinSuccess";
         }
 
 

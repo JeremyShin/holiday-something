@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.controller.user.login;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Role;
+import com.holidaysomething.holidaysomething.repository.RoleRepository;
 import com.holidaysomething.holidaysomething.dto.UserCartProductDto;
 import com.holidaysomething.holidaysomething.security.MemberUserDetails;
 import com.holidaysomething.holidaysomething.service.member.MemberService;
@@ -36,6 +37,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserLoginController {
 
   private final MemberService memberService;
+  private final RoleRepository roleRepository;
 
   private final BCryptPasswordEncoder passwordEncoder;
 
@@ -87,15 +89,16 @@ public class UserLoginController {
 //    memberService.addRole(role1);
 //    log.info("======== role1  등록.");
 
-    Role role2 = new Role();
-    role2.setId(2l);
-    role2.setName("USER");
-    memberService.addRole(role2);
-    log.info("======== role2  등록.");
+//    Role role2 = new Role();
+//    role2.setId(2l);
+//    role2.setName("USER");
+//    memberService.addRole(role2);
+//    log.info("======== role2  등록.");
 
+    Role userRole = roleRepository.getOne(2l);
     Set<Role> roleSet = new HashSet<>();
     //roleSet.add(role1);
-    roleSet.add(role2);
+    roleSet.add(userRole);
     member.setRoles(roleSet);
     //LocalDate로 바꾸면서 안들어감 ㅠㅠ
 //    Date today = new Date();
@@ -179,6 +182,8 @@ public class UserLoginController {
     model.addAttribute("nickname", member.getNickname());
     log.info("======= httpSession.getCreationTime() : " + httpSession.getCreationTime());
     log.info("=======  httpSession.getLastAccessedTime() : " + httpSession.getLastAccessedTime());
+
+    //log.info("******** loginUser.getMember().getOrders().size() : "+ loginUser.getMember().getOrders().size());
 
     return "user/temp";
   }
