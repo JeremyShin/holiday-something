@@ -7,7 +7,7 @@
 
 
 <head th:include="fragments/config :: configFragment">
-    <title id="pageTitle">TODO 상품 이름을 넣자</title>
+    <title id="pageTitle">HolidaySomething</title>
     <!-- other elements you want to reference in your layout -->
 </head>
 
@@ -64,7 +64,7 @@
             <div style="height: 70px; border-bottom: 1px solid #d3d3d3;">
                 <span style="text-decoration:line-through; font-size:15px; color: grey;"
                       th:text="${#numbers.formatInteger(product.originalPrice, 0, 'COMMA')}">원가</span><br>
-                <span class="product-price">x%</span> <!--TODO 할인율을 어떻게 할까 -->
+                <span class="product-price" th:text="${(product.originalPrice - product.sellingPrice) * 100 / product.originalPrice} + '%'">할인율</span>
                 <em class="product-price"
                     th:text="@{'&nbsp;' + ${#numbers.formatInteger(product.sellingPrice, 0, 'COMMA')}}">판매가</em>
                 <span style="color: red; font-size: 15px; font-weight: bold;">원</span>
@@ -85,11 +85,11 @@
             </div>
 
             <div id="option-box" style="margin-bottom: 30px;">
-                <select name="selectOption" id="option-selector" onchange="selectOptionChange(this)">   <!-- TODO `form`의 id를 변경해야 함-->
+                <select name="selectOption" id="option-selector" onchange="selectOptionChange(this.value)">
                     <option disabled selected>옵션 선택</option>
                     <option value="0">없음</option>
                     <option th:each="productOption : ${productOptions}"
-                            th:value="${productOption}"
+                            th:value="'{&quot;id&quot;:&quot;' + ${productOption.id} + '&quot;, &quot;name&quot;:&quot;' + ${productOption.name} + '&quot;, &quot;price&quot;:' + ${productOption.price} + '}'"
                             th:utext="@{${productOption.name} + ' [+' + ${productOption.price} + ']'}"></option>
                 </select>
             </div>
@@ -101,6 +101,7 @@
                     </table>
                 </div>
 
+                <!-- TODO : 여기 해야됨 -->
                 <div id="order-index-result" style="margin-top: 15px; margin-bottom: 15px; text-align: right;">
                     <span style="font-size: 15px">총 상품 금액</span>
                     <span id="order-index-total-price">28,000</span>
@@ -118,90 +119,172 @@
         </div>
     </div>
 
-    <script>
+    <script th:inline="javascript">
         // 옵션 변경 이벤트(order-index-tbody 에 값 저장, root-info min-height 50씩 증가, 총 금액 변경)
         let num = 0;
         let root_info_min_height = 520;
 
-        function selectOptionChange(option) {
-            console.log(option.value);
-            optionAdd();
+        function selectOptionChange(optionValue) {
+            if(optionValue === 0) {
+                optionAdd(optionValue);
+            } else {
+                var optionJson = JSON.parse(optionValue);
+                optionAdd(optionJson);
+            }
             rootInfoMinHeight();
             document.getElementById('option-selector').selectedIndex = 0;
         }
 
+        // root-info 의 최소 크기를 증가시키는 함수
         function rootInfoMinHeight() {
             root_info_min_height += 50;
             document.getElementById('root-info').setAttribute('style', 'min-height: ' + root_info_min_height + 'px');
         }
 
-        function optionAdd() {
-            let my_table = document.getElementById('order-index-table');
+        function optionAdd(option) {
+            /*<![CDATA[*/
+            let productPrice = /*[[${product.getSellingPrice()}]]*/ 'default';
+            let productId = /*[[${product.getId()}]]*/ 'default';
+            /*]]>*/
+            if (option === 0) {
+                let my_table = document.getElementById('order-index-table');
 
-            // tbody를 얻어와 style을 설정한다.
-            let my_tbody = document.createElement('tbody');
-            my_tbody.setAttribute('style', 'border-bottom: 1px solid #d3d3d3;');
+                // tbody를 얻어와 style을 설정한다.
+                let my_tbody = document.createElement('tbody');
+                my_tbody.setAttribute('style', 'border-bottom: 1px solid #d3d3d3;');
 
-            let td1 = document.createElement('td');
-            td1.setAttribute('class', 'order-index-table-option');
-            td1.innerText = '추가된옵션이름';
+                let td1 = document.createElement('td');
+                td1.setAttribute('class', 'order-index-table-option');
+                td1.innerText = '선택안함';
 
-            // td2 에 추가해야 할 것 : button +, - , input hidden, text
-            let td2 = document.createElement('td');
-            td2.setAttribute('class', 'order-index-table-quantity');
-            let minusButton = document.createElement('button');
-            minusButton.setAttribute('type', 'button');
-            minusButton.setAttribute('class', 'order-index-button');
-            minusButton.innerText = '-';
-            let plusButton = document.createElement('button');
-            minusButton.setAttribute('type', 'button');
-            plusButton.setAttribute('class', 'order-index-button');
-            plusButton.innerText = '+';
-            let productIdInput = document.createElement('input');
-            productIdInput.setAttribute('type', 'hidden');
-            productIdInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].productId');
-            productIdInput.setAttribute('form', 'orderForm');
-            productIdInput.setAttribute('value', '1');  // TODO : productId 값을 지정해주자
-            let optionIdInput = document.createElement('input');
-            optionIdInput.setAttribute('type', 'hidden');
-            optionIdInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].optionId');
-            optionIdInput.setAttribute('form', 'orderForm');
-            optionIdInput.setAttribute('value', '1');    // TODO : 선택한 optionId 값이 들어가야 함
-            let orderQuantityInput = document.createElement('input');
-            orderQuantityInput.setAttribute('type', 'text');
-            orderQuantityInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].quantity');
-            orderQuantityInput.setAttribute('class', 'option-order-quantity');
-            orderQuantityInput.setAttribute('form', 'orderForm');
-            orderQuantityInput.setAttribute('value', '1');
-            orderQuantityInput.setAttribute('onKeypress', 'if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;');
+                // td2 에 추가해야 할 것 : button +, - , input hidden, text
+                let td2 = document.createElement('td');
+                td2.setAttribute('class', 'order-index-table-quantity');
+                let minusButton = document.createElement('button');
+                minusButton.setAttribute('type', 'button');
+                minusButton.setAttribute('class', 'order-index-button');
+                minusButton.innerText = '-';
+                let plusButton = document.createElement('button');
+                minusButton.setAttribute('type', 'button');
+                plusButton.setAttribute('class', 'order-index-button');
+                plusButton.innerText = '+';
+                // productId 값을 보내기 위한 hidden type 의 input
+                let productIdInput = document.createElement('input');
+                productIdInput.setAttribute('type', 'hidden');
+                productIdInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].productId');
+                productIdInput.setAttribute('form', 'orderForm');
+                productIdInput.setAttribute('value', productId);  // productId 를 설정
+                // optionId 값을 보내기 위한 hidden type 의 input
+                let optionIdInput = document.createElement('input');
+                optionIdInput.setAttribute('type', 'hidden');
+                optionIdInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].optionId');
+                optionIdInput.setAttribute('form', 'orderForm');
+                optionIdInput.setAttribute('value', '0');    // 해당 optionId 값을 설정
+                let orderQuantityInput = document.createElement('input');
+                orderQuantityInput.setAttribute('type', 'text');
+                orderQuantityInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].quantity');
+                orderQuantityInput.setAttribute('class', 'option-order-quantity');
+                orderQuantityInput.setAttribute('form', 'orderForm');
+                orderQuantityInput.setAttribute('value', '1');
+                orderQuantityInput.setAttribute('onKeypress', 'if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;');
 
-            td2.appendChild(minusButton);
-            td2.appendChild(productIdInput);
-            td2.appendChild(optionIdInput);
-            td2.appendChild(orderQuantityInput);
-            td2.appendChild(plusButton);
+                td2.appendChild(minusButton);
+                td2.appendChild(productIdInput);
+                td2.appendChild(optionIdInput);
+                td2.appendChild(orderQuantityInput);
+                td2.appendChild(plusButton);
 
-            let td3 = document.createElement('td');
-            td3.setAttribute('class', 'order-index-table-price');
-            td3.innerText = '추가된가격';    // TODO : 수량에 따라 가격이 변동되어야 한다. 초기값은 수량이 1일때를 기준
+                let td3 = document.createElement('td');
+                td3.setAttribute('class', 'order-index-table-price');
+                td3.innerText = productPrice + '원';    // TODO : 수량에 따라 가격이 변동되어야 한다. 초기값은 수량이 1일때를 기준
 
-            // td4에 추가해야 할 것 : button : x
-            let td4 = document.createElement('td');
-            td4.setAttribute('class', 'order-index-table-delete');
-            let deleteButton = document.createElement('button');
-            deleteButton.setAttribute('type', 'button');
-            deleteButton.setAttribute('class', 'order-option-delete-button');
-            deleteButton.setAttribute('onclick', 'deleteOption(this)');
-            deleteButton.innerText = 'x';
-            td4.appendChild(deleteButton);
+                // td4에 추가해야 할 것 : button : x
+                let td4 = document.createElement('td');
+                td4.setAttribute('class', 'order-index-table-delete');
+                let deleteButton = document.createElement('button');
+                deleteButton.setAttribute('type', 'button');
+                deleteButton.setAttribute('class', 'order-option-delete-button');
+                deleteButton.setAttribute('onclick', 'deleteOption(this)');
+                deleteButton.innerText = 'x';
+                td4.appendChild(deleteButton);
 
-            my_tbody.appendChild(td1);
-            my_tbody.appendChild(td2);
-            my_tbody.appendChild(td3);
-            my_tbody.appendChild(td4);
+                my_tbody.appendChild(td1);
+                my_tbody.appendChild(td2);
+                my_tbody.appendChild(td3);
+                my_tbody.appendChild(td4);
 
-            my_table.appendChild(my_tbody);
-            num += 1;
+                my_table.appendChild(my_tbody);
+                num += 1;
+            } else {
+                let my_table = document.getElementById('order-index-table');
+
+                // tbody를 얻어와 style을 설정한다.
+                let my_tbody = document.createElement('tbody');
+                my_tbody.setAttribute('style', 'border-bottom: 1px solid #d3d3d3;');
+
+                let td1 = document.createElement('td');
+                td1.setAttribute('class', 'order-index-table-option');
+                td1.innerText = option.name;
+
+                // td2 에 추가해야 할 것 : button +, - , input hidden, text
+                let td2 = document.createElement('td');
+                td2.setAttribute('class', 'order-index-table-quantity');
+                let minusButton = document.createElement('button');
+                minusButton.setAttribute('type', 'button');
+                minusButton.setAttribute('class', 'order-index-button');
+                minusButton.innerText = '-';
+                let plusButton = document.createElement('button');
+                minusButton.setAttribute('type', 'button');
+                plusButton.setAttribute('class', 'order-index-button');
+                plusButton.innerText = '+';
+                // productId 값을 보내기 위한 hidden type 의 input
+                let productIdInput = document.createElement('input');
+                productIdInput.setAttribute('type', 'hidden');
+                productIdInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].productId');
+                productIdInput.setAttribute('form', 'orderForm');
+                productIdInput.setAttribute('value', productId);  // productId 를 설정
+                // optionId 값을 보내기 위한 hidden type 의 input
+                let optionIdInput = document.createElement('input');
+                optionIdInput.setAttribute('type', 'hidden');
+                optionIdInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].optionId');
+                optionIdInput.setAttribute('form', 'orderForm');
+                optionIdInput.setAttribute('value', option.id);    // 해당 optionId 값을 설정
+                let orderQuantityInput = document.createElement('input');
+                orderQuantityInput.setAttribute('type', 'text');
+                orderQuantityInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].quantity');
+                orderQuantityInput.setAttribute('class', 'option-order-quantity');
+                orderQuantityInput.setAttribute('form', 'orderForm');
+                orderQuantityInput.setAttribute('value', '1');
+                orderQuantityInput.setAttribute('onKeypress', 'if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;');
+
+                td2.appendChild(minusButton);
+                td2.appendChild(productIdInput);
+                td2.appendChild(optionIdInput);
+                td2.appendChild(orderQuantityInput);
+                td2.appendChild(plusButton);
+
+                let td3 = document.createElement('td');
+                td3.setAttribute('class', 'order-index-table-price');
+                td3.innerText = productPrice + option.price + '원';    // TODO : 수량에 따라 가격이 변동되어야 한다. 초기값은 수량이 1일때를 기준
+
+                // td4에 추가해야 할 것 : button : x
+                let td4 = document.createElement('td');
+                td4.setAttribute('class', 'order-index-table-delete');
+                let deleteButton = document.createElement('button');
+                deleteButton.setAttribute('type', 'button');
+                deleteButton.setAttribute('class', 'order-option-delete-button');
+                deleteButton.setAttribute('onclick', 'deleteOption(this)');
+                deleteButton.innerText = 'x';
+                td4.appendChild(deleteButton);
+
+                my_tbody.appendChild(td1);
+                my_tbody.appendChild(td2);
+                my_tbody.appendChild(td3);
+                my_tbody.appendChild(td4);
+
+                my_table.appendChild(my_tbody);
+                num += 1;
+            }
         }
 
         // quantity 값 증가, 감소, 그에 따른 총 금액 변경
