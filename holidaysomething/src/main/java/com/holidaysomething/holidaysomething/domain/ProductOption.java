@@ -24,7 +24,7 @@ public class ProductOption {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false)
+  @Column(nullable = true)
   private String name;
 
   @Lob
@@ -35,5 +35,4 @@ public class ProductOption {
   private Product product;
 
   private Integer price;
-
 }

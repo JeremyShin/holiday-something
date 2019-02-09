@@ -32,9 +32,11 @@
         <th>배송비</th>
       </tr>
       <tr th:each="cartProduct : ${cartProducts}">
+        <!-- checkbox -->
         <td>
           <input type="checkbox" th:value="${cartProduct.productId}"/>
         </td>
+        <!-- 상품 정보 -->
         <td class="cart-product-info-col">
           <div>
             <img class="cart-image" th:src="${cartProduct.imagePath}" alt="product_image_path" />
@@ -43,14 +45,21 @@
             <p th:text="${cartProduct.productName}">productName</p>
             <p><span th:text="${#numbers.formatDecimal(cartProduct.originalPrice, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
             <p><span th:text="${#numbers.formatDecimal(cartProduct.sellingPrice, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
+            <p>
+              <span th:if="${cartProduct.productOptionName != null}">옵션: </span>
+              <span th:text="${cartProduct.productOptionName != null} ? ${cartProduct.productOptionName} : '&nbsp;'"></span>
+            </p>
           </div>
         </td>
+        <!-- 수량 -->
         <td>
           <span th:text="${cartProduct.quantity}">수량</span>
         </td>
+        <!-- 주문금액 -->
         <td th:with="result=${cartProduct.sellingPrice * cartProduct.quantity}">
           <p><span th:text="${#numbers.formatDecimal(result, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
         </td>
+        <!-- 배송비 -->
         <td>
           <p><span th:text="${#numbers.formatDecimal(cartProduct.shippingPrice, 0, 'COMMA', 0, 'POINT')}"></span> 원</p>
         </td>

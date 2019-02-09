@@ -44,8 +44,8 @@ public class Shipping {
   @Column(length = 50, nullable = false)
   private String shippingNumber;
 
-  @Column(length = 50, nullable = false)
-  private String status;
+//  @Column(length = 50, nullable = false)
+//  private String status;
 
   private LocalDateTime startDate;
   private LocalDateTime arrivalDate;
