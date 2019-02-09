@@ -218,7 +218,14 @@
   padding-left: 12px;
 }
 
-#order-index-total-price{
+#order-index-result {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  text-align: right;
+  display: none;
+}
+
+#order-index-total-price {
   color: red;
   font-size: 30px;
   font-weight: bold;
@@ -266,7 +273,7 @@
 }
 
 .order-index-table-option {
-  width: 50%;
+  width: 49%;
   height: 50px;
   font-size: 17px;
   font-weight: bold;
@@ -286,6 +293,10 @@
 
 .order-index-table-delete {
   width: 5%;
+}
+
+.order-index-hidden-price {
+  width : 1%;
 }
 
 .product-info {

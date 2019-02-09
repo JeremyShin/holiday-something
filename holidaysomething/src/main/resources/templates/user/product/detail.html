@@ -101,10 +101,9 @@
                     </table>
                 </div>
 
-                <!-- TODO : 여기 해야됨 -->
-                <div id="order-index-result" style="margin-top: 15px; margin-bottom: 15px; text-align: right;">
+                <div id="order-index-result">
                     <span style="font-size: 15px">총 상품 금액</span>
-                    <span id="order-index-total-price">28,000</span>
+                    <span id="order-index-total-price">0</span>    <!-- TODO 1. 옵션이 추가되면 값이 증가되면서 해당 div가 보여야 함, 2. 옵션의 수량이 변경되면 값 증감, 3. 모든 옵션이 삭제되면 disable -->
                     <span style="font-size: 23px; color: red;">원</span>
                 </div>
             </div>
@@ -125,12 +124,15 @@
         let root_info_min_height = 520;
 
         function selectOptionChange(optionValue) {
+            document.getElementById("order-index-result").setAttribute('style', 'display:block');
+
             if(optionValue === 0) {
                 optionAdd(optionValue);
             } else {
                 var optionJson = JSON.parse(optionValue);
                 optionAdd(optionJson);
             }
+            changeTotalPrice();
             rootInfoMinHeight();
             document.getElementById('option-selector').selectedIndex = 0;
         }
@@ -153,13 +155,20 @@
                 let my_tbody = document.createElement('tbody');
                 my_tbody.setAttribute('style', 'border-bottom: 1px solid #d3d3d3;');
 
+                // 선택한 옵션의 이름 td
                 let td1 = document.createElement('td');
                 td1.setAttribute('class', 'order-index-table-option');
                 td1.innerText = '선택안함';
 
-                // td2 에 추가해야 할 것 : button +, - , input hidden, text
-                let td2 = document.createElement('td');
-                td2.setAttribute('class', 'order-index-table-quantity');
+                // hidden td
+                let td2 = document.createElement('input');
+                td2.setAttribute('type', 'hidden');
+                td2.setAttribute('class', 'order-index-hidden-price');
+                td2.setAttribute('value', productPrice);
+
+                // quantity 를 위한 td
+                let td3 = document.createElement('td');
+                td3.setAttribute('class', 'order-index-table-quantity');
                 let minusButton = document.createElement('button');
                 minusButton.setAttribute('type', 'button');
                 minusButton.setAttribute('class', 'order-index-button');
@@ -180,38 +189,42 @@
                 optionIdInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].optionId');
                 optionIdInput.setAttribute('form', 'orderForm');
                 optionIdInput.setAttribute('value', '0');    // 해당 optionId 값을 설정
+                // quantity 값을 설정하는 input
                 let orderQuantityInput = document.createElement('input');
                 orderQuantityInput.setAttribute('type', 'text');
                 orderQuantityInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].quantity');
                 orderQuantityInput.setAttribute('class', 'option-order-quantity');
                 orderQuantityInput.setAttribute('form', 'orderForm');
-                orderQuantityInput.setAttribute('value', '1');
+                orderQuantityInput.setAttribute('value', '1');  // TODO : 여기가 변경되면 totalPrice 값이 변경돼야 함
+                orderQuantityInput.setAttribute('onkeyup', 'changeTotalPrice();');
                 orderQuantityInput.setAttribute('onKeypress', 'if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;');
 
-                td2.appendChild(minusButton);
-                td2.appendChild(productIdInput);
-                td2.appendChild(optionIdInput);
-                td2.appendChild(orderQuantityInput);
-                td2.appendChild(plusButton);
+                td3.appendChild(minusButton);
+                td3.appendChild(productIdInput);
+                td3.appendChild(optionIdInput);
+                td3.appendChild(orderQuantityInput);
+                td3.appendChild(plusButton);
 
-                let td3 = document.createElement('td');
-                td3.setAttribute('class', 'order-index-table-price');
-                td3.innerText = productPrice + '원';    // TODO : 수량에 따라 가격이 변동되어야 한다. 초기값은 수량이 1일때를 기준
-
-                // td4에 추가해야 할 것 : button : x
+                // 옵션 가격을 알려주는 td
                 let td4 = document.createElement('td');
-                td4.setAttribute('class', 'order-index-table-delete');
+                td4.setAttribute('class', 'order-index-table-price');
+                td4.innerText = productPrice.toLocaleString() + '원';
+
+                // 삭제 버튼을 위한 td
+                let td5 = document.createElement('td');
+                td5.setAttribute('class', 'order-index-table-delete');
                 let deleteButton = document.createElement('button');
                 deleteButton.setAttribute('type', 'button');
                 deleteButton.setAttribute('class', 'order-option-delete-button');
                 deleteButton.setAttribute('onclick', 'deleteOption(this)');
                 deleteButton.innerText = 'x';
-                td4.appendChild(deleteButton);
+                td5.appendChild(deleteButton);
 
                 my_tbody.appendChild(td1);
                 my_tbody.appendChild(td2);
                 my_tbody.appendChild(td3);
                 my_tbody.appendChild(td4);
+                my_tbody.appendChild(td5);
 
                 my_table.appendChild(my_tbody);
                 num += 1;
@@ -222,13 +235,20 @@
                 let my_tbody = document.createElement('tbody');
                 my_tbody.setAttribute('style', 'border-bottom: 1px solid #d3d3d3;');
 
+                // 선택한 옵션의 이름 td
                 let td1 = document.createElement('td');
                 td1.setAttribute('class', 'order-index-table-option');
                 td1.innerText = option.name;
 
-                // td2 에 추가해야 할 것 : button +, - , input hidden, text
-                let td2 = document.createElement('td');
-                td2.setAttribute('class', 'order-index-table-quantity');
+                // hidden td
+                let td2 = document.createElement('input');
+                td2.setAttribute('type', 'hidden');
+                td2.setAttribute('class', 'order-index-hidden-price');
+                td2.setAttribute('value', productPrice + option.price);
+
+                // quantity 를 위한 td
+                let td3 = document.createElement('td');
+                td3.setAttribute('class', 'order-index-table-quantity');
                 let minusButton = document.createElement('button');
                 minusButton.setAttribute('type', 'button');
                 minusButton.setAttribute('class', 'order-index-button');
@@ -249,45 +269,61 @@
                 optionIdInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].optionId');
                 optionIdInput.setAttribute('form', 'orderForm');
                 optionIdInput.setAttribute('value', option.id);    // 해당 optionId 값을 설정
+                // quantity 값을 설정하는 input
                 let orderQuantityInput = document.createElement('input');
                 orderQuantityInput.setAttribute('type', 'text');
                 orderQuantityInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].quantity');
                 orderQuantityInput.setAttribute('class', 'option-order-quantity');
                 orderQuantityInput.setAttribute('form', 'orderForm');
-                orderQuantityInput.setAttribute('value', '1');
+                orderQuantityInput.setAttribute('value', '1');      // TODO : 여기가 변경되면 totalPrice 값이 변경돼야 함
+                orderQuantityInput.setAttribute('onkeyup', 'changeTotalPrice();');
                 orderQuantityInput.setAttribute('onKeypress', 'if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;');
 
-                td2.appendChild(minusButton);
-                td2.appendChild(productIdInput);
-                td2.appendChild(optionIdInput);
-                td2.appendChild(orderQuantityInput);
-                td2.appendChild(plusButton);
+                td3.appendChild(minusButton);
+                td3.appendChild(productIdInput);
+                td3.appendChild(optionIdInput);
+                td3.appendChild(orderQuantityInput);
+                td3.appendChild(plusButton);
 
-                let td3 = document.createElement('td');
-                td3.setAttribute('class', 'order-index-table-price');
-                td3.innerText = productPrice + option.price + '원';    // TODO : 수량에 따라 가격이 변동되어야 한다. 초기값은 수량이 1일때를 기준
-
-                // td4에 추가해야 할 것 : button : x
+                // 옵션 가격을 알려주는 td
                 let td4 = document.createElement('td');
-                td4.setAttribute('class', 'order-index-table-delete');
+                td4.setAttribute('class', 'order-index-table-price');
+                td4.innerText = (productPrice + option.price).toLocaleString() + '원';
+
+                // 삭제 버튼을 위한 td
+                let td5 = document.createElement('td');
+                td5.setAttribute('class', 'order-index-table-delete');
                 let deleteButton = document.createElement('button');
                 deleteButton.setAttribute('type', 'button');
                 deleteButton.setAttribute('class', 'order-option-delete-button');
                 deleteButton.setAttribute('onclick', 'deleteOption(this)');
                 deleteButton.innerText = 'x';
-                td4.appendChild(deleteButton);
+                td5.appendChild(deleteButton);
 
                 my_tbody.appendChild(td1);
                 my_tbody.appendChild(td2);
                 my_tbody.appendChild(td3);
                 my_tbody.appendChild(td4);
+                my_tbody.appendChild(td5);
 
                 my_table.appendChild(my_tbody);
                 num += 1;
             }
         }
 
-        // quantity 값 증가, 감소, 그에 따른 총 금액 변경
+        // 총 금액이 변경돼야 하면 호출되는 함수
+        function changeTotalPrice() {
+            let size = document.getElementsByClassName('option-order-quantity').length;
+            let tmpPrice = 0;
+
+            for (let i = 0; i < size; i++) {
+                tmpPrice += document.getElementsByClassName('option-order-quantity')[i].value * document.getElementsByClassName('order-index-hidden-price')[i].value;
+            }
+
+            document.getElementById("order-index-total-price").innerText = tmpPrice.toLocaleString();
+        }
+
+        // quantity 값 증가, 감소
         function minusQuantity(source) {
             console.log(source);
         }
@@ -345,11 +381,23 @@
         }
 
         // 선택 옵션 삭제
-        let deleteOption = function (source) {
+        function deleteOption(source) {
             root_info_min_height -= 50;
             document.getElementById('root-info').setAttribute('style', 'min-height: ' + root_info_min_height + 'px');
             source.parentElement.parentElement.remove();
+
+            if(document.getElementById('order-index-table').firstElementChild === null) {
+                document.getElementById('order-index-result').setAttribute('style', 'display:none;');
+                document.getElementById('order-index-result').setAttribute('innerText', '0');
+            }
+
         };
+
+        // 콤마 제거
+        function removeComma(str) {
+            n = parseInt(str.replace(/,/g,""));
+            return n;
+        }
     </script>
 
 </div>
