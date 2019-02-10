@@ -397,7 +397,7 @@ INSERT INTO product_detail(id, description) VALUES (null, '시뻘건 사과를 �
 
 
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
-VALUES (1,'2177670','서울 공장','스밋코구라시 데일리다이어리',NULL,1000,40,4000,2500,1,1,1, 0, 3, 0, true, '2018-01-25 02:22:02',  '2018-06-25 14:22:05',  '2018-10-12 14:22:05');
+VALUES (1,'2177670','서울 공장','스밋코구라시 데일리 다이어리',NULL,4000,40,2000,2500,1,1,1, 0, 3, 0, true, '2018-01-25 02:22:02',  '2018-06-25 14:22:05',  '2018-10-12 14:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
 VALUES (2,'2104689','경기도 공장','아이코닉 일상집 2019',NULL,1000,50,11800,2500,2,2,1, 0, 3, 0, false, '2018-05-01 09:58:05',  '2018-05-02 10:45:05',  '2018-05-23 12:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
@@ -411,7 +411,7 @@ VALUES (6,'1846002','서울 공장','[디즈니] 빈티지 포스터 스티커 �
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
 VALUES (7,'279397','서울 공장','The Black-Photo album(ver.3.0)',NULL,2000,15,15800,3000,5,7,1, 0, 3, 0, true,  '2018-09-18 14:56:02',  '2018-09-18 15:05:02',  '2018-09-22 19:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
-VALUES (8,'1904263','서울 공장','아이코닉 마일드 젤펜',NULL,100,10,1800,2500,2,8,1, 0, 3, 0, true,  '2018-10-21 16:16:02',  '2018-10-26 17:22:05',  '2018-10-26 18:00:00');
+VALUES (8,'1904263','서울 공장','아이코닉 마일드 젤펜',NULL,1800,10,1800,2500,2,8,1, 0, 3, 0, true,  '2018-10-21 16:16:02',  '2018-10-26 17:22:05',  '2018-10-26 18:00:00');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
 VALUES (9,'974044','서울 공장','핸드메이드X-mas카드 (16종 중 택 1)',NULL,100,20,4000,2500,2,9,1, 0, 3, 0, true,  '2018-12-21 09:52:22',  '2018-12-22 19:22:05',  '2018-12-23 17:22:00');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
@@ -453,21 +453,21 @@ VALUES (27,'2171171','경기도 공장','GROOVY DAYS DIARY - Sky Blue',NULL,2000
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
 VALUES (28,'2170967','경기도 공장','정원 만년 다이어리',NULL,4000,20,15000,2500,6,28,1, 0, 3, 0, true,  '2018-03-25 06:22:02',  '2018-04-12 12:42:05',  '2018-04-15 15:08:22');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
-VALUES (29,'2170965','경기도 공장','어두운숲 만년 다이어리',NULL,8000,50,15000,2500,5,29,1, 0, 3, 0, true,  '2018-04-22 18:42:05',  '2018-04-28 22:22:05',  '2018-04-30 20:10:05');
+VALUES (29,'2170965','경기도 공장','어두운숲 만년 다이어리',NULL,15000,50,8000,2500,5,29,1, 0, 3, 0, true,  '2018-04-22 18:42:05',  '2018-04-28 22:22:05',  '2018-04-30 20:10:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
-VALUES (30,'2168986','경기도 공장','2019 럭스 Hologram 다이어리',NULL,10000,10,29800,2500,6,30,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+VALUES (30,'2168986','경기도 공장','2019 럭스 Hologram 다이어리',NULL,29800,10,10000,2500,6,30,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
-VALUES (31,'211286','롯데리아','햄버거스테이크',NULL,10000,10,209800,2500,43,31,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+VALUES (31,'211286','롯데리아','햄버거 스테이크',NULL,10000,10,209800,2500,43,31,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
-VALUES (32,'213986','일식가라아케','치킨가라아게',NULL,10000,10,3800,2500,44,32,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+VALUES (32,'213986','일식가라아케','치킨 가라아게',NULL,10000,10,3800,2500,44,32,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
 VALUES (33,'2113186','사실주의 베이컨','베이컨',NULL,10000,10,5800,2500,43,33,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
-VALUES (34,'2168313','소세지공장','갈릭소세지',NULL,10000,10,45800,2500,43,34,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+VALUES (34,'2168313','소세지공장','갈릭 소세지',NULL,10000,10,45800,2500,43,34,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
-VALUES (35,'2328313','원탁의갈비','갈비의기사',NULL,10000,10,90800,2500,42,35,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+VALUES (35,'2328313','원탁의갈비','갈비의 기사',NULL,10000,10,90800,2500,42,35,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
-VALUES (36,'2312319','춘천공장','충전닭갈비',NULL,10000,10,30120,2500,44,36,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+VALUES (36,'2312319','춘천공장','충전 닭갈비',NULL,30120,10,10000,0,44,36,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
 VALUES (37,'2121319','패스트캠퍼스','방전닭갈비',NULL,10000,10,500,2500,44,37,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
@@ -477,120 +477,94 @@ VALUES (39,'1122319','인도뉴델리','비프카레',NULL,10000,10,78800,2500,4
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
 VALUES (40,'1122319','노르웨이','아보카도연어',NULL,10000,10,156800,2500,39,40,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
-VALUES (41,'1452319','복슬이집','개먹이',NULL,10000,10,9800,2500,39,41,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+VALUES (41,'1452319','복슬이집','HOLISTIC SALMON 친환경 강아지 사료',NULL,10000,10,9800,2500,39,41,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
 VALUES (42,'1112319','무너무너','피문어',NULL,10000,10,22800,2500,41,42,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
-VALUES (43,'1112319','소드마스터','칼조개',NULL,10000,10,39800,2500,40,43,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+VALUES (43,'1112319','소드마스터','[현지직송] 칼조개',NULL,39800,10,39800,2500,40,43,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
 VALUES (44,'1431319','북극','바닐라 아이스크림',NULL,10000,10,5800,2500,46,44,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
 INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
-VALUES (45,'11231319','국내','사과즙',NULL,10000,10,4800,2500,45,45,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+VALUES (45,'11231319','국내','국산 사과즙',NULL,10000,10,4800,2500,45,45,1, 0, 3, 0, true,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
 
 
 
--- 'product_id' column을 제외한 모든 column이 NULL인 것은 --> 해당 product에서 옵션을 선택하지 않았을 경우에 해당
+-- 'product_id' column을 제외한 모든 column이 NULL인 것은 --> 해당 product 구매 시 옵션을 선택하지 않았을 경우에 해당
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 1);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, 'A타입', NULL, '뭐,,좋네요', 1);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, 'B타입', 2500, '떨이', 1);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 2);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '요가', NULL, '요가관련 상품', 2);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '세탁실', 2000, '세탁실 아이코닉', 2);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '꿈', 2900, NULL, 3);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '저녁', 3000, NULL, 3);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '카페', NULL, NULL, 3);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '친구', NULL, '친구선물 용도', 3);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 4);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '레드', 800, NULL, 4);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '블랙', 2000, NULL, 4);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 5);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '그린', 4000, NULL, 5);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '핑크', NULL, NULL, 5);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '머스타드', NULL, '머스타드 ==> 겨자색', 5);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '스카이블루', NULL, NULL, 5);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 6);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '옐로우', 5000, NULL, 6);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '블루', NULL, NULL, 6);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '그레이', 900, NULL, 6);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '스카이블루', 200, NULL, 6);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 7);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 7);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '레드', 19000, NULL, 7);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '블랙', 1500, NULL, 7);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 12);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '그레이', 2500, NULL, 12);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '핑크', NULL, NULL, 12);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '바이올렛', NULL, NULL, 12);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 13);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '스카이블루', 200, NULL, 13);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '그린', 2500, NULL, 13);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '핑크', NULL, NULL, 13);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 14);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '머스타드', NULL, '머스타드 ==> 겨자색', 14);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '블루', 21000, NULL, 14);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '레드', 12300, NULL, 14);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 15);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '블랙', NULL, NULL, 15);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '그레이', 2500, NULL, 15);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 20);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '검정', 25000, NULL, 20);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '바이올렛', 25000, NULL, 20);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 31);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '와규', 6000, '한우', 31);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '치킨', NULL, '브라질산', 31);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 32);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 33);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '매운양념', NULL, NULL, 33);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '훈제', 2000, NULL, 33);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 34);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '의성 마늘', 3000, '의성 마늘', 34);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 35);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '직배송', 5000, '특급 배송', 35);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 36);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '[+ 1kg]', 8000, NULL, 36);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '[+ 2kg]', 15000, NULL, 36);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 37);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '[+ 1kg]', 8000, NULL, 37);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '[+ 2kg]', 15000, NULL, 37);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 38);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '참기름 추가', 500, '고소한 참기름', 38);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 39);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '인도 현지 향신료 첨가', 12000, NULL, 39);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 40);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '샐러드 추가', 3500, NULL, 40);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 41);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '곱배기', 4000, NULL, 41);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '개껌 추가', 2400, NULL, 41);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 42);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '당일 배송', 6000, '퀵', 42);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 43);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 44);
-
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, NULL, NULL, NULL, 45);
 INSERT INTO product_option (id, name, price, description, product_id) VALUES (NULL, '당일 제조(12시 이전)', 7000, '당일 제조, 당일 배송', 45);
 
@@ -699,7 +673,7 @@ VALUES (null, 1, 'image/jpeg', 'sososo.jpg', 'https://img.29cm.co.kr/next-produc
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
 VALUES (null, 1, 'image/jpeg', 'galbi.jpg', 'https://img.29cm.co.kr/next-product/2019/01/09/', '2018-12-03 09:23:35', 13900.0, 'c91412a952d34d59ab186b0360db54b1_20190109111710.jpg?width=700', '2018-12-03 09:33:35', 35);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'chickengalbi.jpg', 'https://img.29cm.co.kr/contents/itemDetail/201712/', '2018-12-03 09:23:35', 13900.0, 'cut4_1120171204135145.jpg?width=700', '2018-12-03 09:33:35', 36);
+VALUES (null, 1, 'image/jpeg', 'chickengalbi.jpg', 'http://gwmart.kr/data/goods/201704/10164933large.jpg', '2018-12-03 09:23:35', 13900.0, 'cut4_1120171204135145.jpg?width=700', '2018-12-03 09:33:35', 36);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
 VALUES (null, 1, 'image/jpeg', 'chickengalbi2.jpg', 'https://img.29cm.co.kr/next-product/2018/11/02/', '2018-12-03 09:23:35', 13900.0, 'f9413d160821441d9a3476b0125dfe35_20181102160805.jpg?width=700', '2018-12-03 09:33:35', 37);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
@@ -709,11 +683,11 @@ VALUES (null, 1, 'image/jpeg', 'beefcurry.jpg', 'https://img.29cm.co.kr/next-pro
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
 VALUES (null, 1, 'image/jpeg', 'salmon1.jpg', 'https://img.29cm.co.kr/next-product/2018/06/15/', '2018-12-03 09:23:35', 13900.0, 'b4da673d129042a097982a5122ec9f8e_20180615164147.jpg?width=700', '2018-12-03 09:33:35', 40);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'dog1.jpg', 'https://img.29cm.co.kr/contents/itemDetail/201607/', '2018-12-03 09:23:35', 13900.0, 'cut4_520160721163429.jpg?width=700', '2018-12-03 09:33:35', 41);
+VALUES (null, 1, 'image/jpeg', 'dog1.jpg', 'https://seoul-p-studio.bunjang.net/product/53782482_1_1457518903_w640.jpg', '2018-12-03 09:23:35', 13900.0, 'cut4_520160721163429.jpg?width=700', '2018-12-03 09:33:35', 41);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
 VALUES (null, 1, 'image/jpeg', 'octo2.jpg', 'http://clami.co.kr/wp-content/uploads/2018/10/', '2018-12-03 09:23:35', 13900.0, '%ED%94%BC%EB%AC%B8%EC%96%B4_%EB%A9%94%EC%9D%B8.jpg', '2018-12-03 09:33:35', 42);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'clam.jpg', 'http://clami.co.kr/wp-content/uploads/2017/11/', '2018-12-03 09:23:35', 13900.0, '%EC%B9%BC%EC%A1%B0%EA%B0%9C_%EB%A9%94%EC%9D%B8.jpg', '2018-12-03 09:33:35', 43);
+VALUES (null, 1, 'image/jpeg', 'clam.jpg', 'http://clami.co.kr/wp-content/uploads/2017/11/%EC%B9%BC%EC%A1%B0%EA%B0%9C_%EC%83%81%EC%84%B81.jpg', '2018-12-03 09:23:35', 13900.0, '%EC%B9%BC%EC%A1%B0%EA%B0%9C_%EB%A9%94%EC%9D%B8.jpg', '2018-12-03 09:33:35', 43);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
 VALUES (null, 1, 'image/jpeg', 'icecream.jpg', 'https://img.29cm.co.kr/next-product/2018/07/27/', '2018-12-03 09:23:35', 13900.0, '0933c30c5d3d414f9a1f0a0060ce79e4_20180727143233.jpg?width=700', '2018-12-03 09:33:35', 44);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
@@ -726,9 +700,10 @@ INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id
 
 INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 2, 2, 1, 1);
 INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 1, 2, 1, 2);
-INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 1, 2, 36, 59);
+INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 2, 2, 36, 59);
 INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 1, 2, 41, 69);
 INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 1, 2, 41, 70);
+INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 1, 2, 43, 74);
 
 INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 5, 3, 40, 68);
 INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 4, 3, 13, 32);
