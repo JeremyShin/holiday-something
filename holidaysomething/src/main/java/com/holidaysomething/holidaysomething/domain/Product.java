@@ -54,14 +54,8 @@ public class Product {
   @Column(nullable = false, columnDefinition = "integer default 0")
   private Integer shippingPrice;
 
-  @Column(nullable = false, columnDefinition = "integer default 0")
-  private Integer quantity;
-
   @Column(columnDefinition = "integer default 0")
   private Integer sellingQuantity;
-
-  @Column(columnDefinition = "integer default 0")
-  private Integer safeQuantity;
 
   @Column(columnDefinition = "integer default 0")
   private Integer mileage;

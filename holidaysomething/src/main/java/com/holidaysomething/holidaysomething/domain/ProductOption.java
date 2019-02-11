@@ -30,6 +30,9 @@ public class ProductOption {
   @Lob
   private String description;
 
+  @Column(nullable = false)
+  private Integer quantity;
+
   @ManyToOne
   @JoinColumn(name = "product_id")
   private Product product;

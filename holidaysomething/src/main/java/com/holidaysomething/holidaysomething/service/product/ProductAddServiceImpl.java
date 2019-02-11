@@ -61,9 +61,7 @@ public class ProductAddServiceImpl implements ProductAddService {
     product.setCode(productDto.getCode());
     product.setManufacturer(productDto.getManufacturer());
     product.setShippingPrice(productDto.getShippingPrice());
-    product.setQuantity(productDto.getQuantity());
     product.setSellingQuantity(productDto.getSellingQuantity());
-    product.setSafeQuantity(productDto.getSafeQuantity());
     product.setMileage(productDto.getMileage());
     product.setOptionalPriceText(productDto.getOptionalPriceText());
     product.setRegDate(LocalDateTime.now());

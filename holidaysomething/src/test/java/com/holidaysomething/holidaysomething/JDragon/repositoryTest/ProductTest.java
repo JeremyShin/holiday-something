@@ -51,7 +51,6 @@ public class ProductTest {
     p.setSellingPrice(10000000);
     p.setManufacturingPrice(100);
     p.setShippingPrice(50000);
-    p.setQuantity(10);
     p.setProductDetail(pds);
     // 상품설명과 카테고리는 fk
     LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 01, 00, 00, 00);
