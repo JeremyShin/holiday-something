@@ -186,55 +186,78 @@
           </div>
 
         </div>
-      </form>
 
-      <!-- Editor JS -->
-      <th:block layout:fragment="html_head">
-        <script src="/static/editor/jquery/dist/jquery.js"></script>
-        <script src="/static/editor/tui-code-snippet/dist/tui-code-snippet.js"></script>
-        <script src="/static/editor/markdown-it/dist/markdown-it.js"></script>
-        <script src="/static/editor/to-mark/dist/to-mark.js"></script>
-        <script src="/static/editor/codemirror/lib/codemirror.js"></script>
-        <script src="/static/editor/highlightjs/highlight.pack.js"></script>
-        <script src="/static/editor/squire-rte/build/squire-raw.js"></script>
-        <script src="/static/editor/tui-editor/dist/tui-editor-Editor-all.js"></script>
-        <link rel="stylesheet" href="/static/editor/codemirror/lib/codemirror.css">
-        <link rel="stylesheet" href="/static/editor/highlightjs/styles/github.css">
-        <link rel="stylesheet" href="/static/editor/tui-editor/dist/tui-editor.css">
-        <link rel="stylesheet" href="/static/editor/tui-editor/dist/tui-editor-contents.css">
+        <div>
+          <label>메인 이미지 등록</label><br>
+          <input name="mainImage" type="file" id="inputMainImage">
+        </div>
+        <div>
+          <label>서브 이미지 등록</label>
+          <input name="subImages" type="file">
+          <input name="subImages" type="file">
+          <input name="subImages" type="file">
+          <input name="subImages" type="file">
+        </div>
+        <div>
+          <input type="button" id="saveBtn" value="상품등록">
+        </div>
+        <div>
+          <input hidden type="submit" id="submitBtn">
+        </div>
 
-        <title>상품 등록 폼</title>
+      </div>
+      <!-- TODO 일단 주석 처리, Ajax csrf 문제를 해결해야 함 -->
+      <!--<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
 
-        <style type="text/css">
-          .te-md-container .CodeMirror {
-            font-size: 14px;
-          }
+    </form>
 
-          .tui-editor-contents {
-            font-size: 14px;
-          }
-        </style>
+    <!-- Editor JS -->
+    <th:block layout:fragment="html_head">
+      <script src="/static/editor/jquery/dist/jquery.js"></script>
+      <script src="/static/editor/tui-code-snippet/dist/tui-code-snippet.js"></script>
+      <script src="/static/editor/markdown-it/dist/markdown-it.js"></script>
+      <script src="/static/editor/to-mark/dist/to-mark.js"></script>
+      <script src="/static/editor/codemirror/lib/codemirror.js"></script>
+      <script src="/static/editor/highlightjs/highlight.pack.js"></script>
+      <script src="/static/editor/squire-rte/build/squire-raw.js"></script>
+      <script src="/static/editor/tui-editor/dist/tui-editor-Editor-all.js"></script>
+      <link rel="stylesheet" href="/static/editor/codemirror/lib/codemirror.css">
+      <link rel="stylesheet" href="/static/editor/highlightjs/styles/github.css">
+      <link rel="stylesheet" href="/static/editor/tui-editor/dist/tui-editor.css">
+      <link rel="stylesheet" href="/static/editor/tui-editor/dist/tui-editor-contents.css">
 
-        <script>
-          (function (root, factory) {
-            if (typeof define === 'function' && define.amd) {
-              define(['tui-editor'], factory);
-            } else if (typeof exports === 'object') {
-              factory(require('tui-editor'));
-            } else {
-              factory(root['tui']['Editor']);
-            }
-          })(this, function (Editor) {
-            // define youtube extension
-            Editor.defineExtension('youtube', function () {
-              // runs while markdown-it transforms code block to HTML
-              Editor.codeBlockManager.setReplacer('youtube', function (youtubeId) {
-                console.log('sadfasdfasfd' + youtubeId);
-                // Indentify multiple code blocks
-                var wrapperId = 'yt' + Math.random().toString(36).substr(2, 10);
-                // avoid sanitizing iframe tag
-                setTimeout(renderYoutube.bind(null, wrapperId, youtubeId), 0);
-                return '<div id="' + wrapperId + '"></div>';
+      <title>상품 등록 폼</title>
+
+      <style type="text/css">
+        .te-md-container .CodeMirror {
+          font-size: 14px;
+        }
+        .tui-editor-contents {
+          font-size: 14px;
+        }
+      </style>
+
+      <script>
+          (function(root, factory) {
+              if (typeof define === 'function' && define.amd) {
+                  define(['tui-editor'], factory);
+              } else if (typeof exports === 'object') {
+                  factory(require('tui-editor'));
+              } else {
+                  factory(root['tui']['Editor']);
+              }
+          })(this, function(Editor) {
+              // define youtube extension
+              Editor.defineExtension('youtube', function() {
+                  // runs while markdown-it transforms code block to HTML
+                  Editor.codeBlockManager.setReplacer('youtube', function(youtubeId) {
+                      console.log('sadfasdfasfd' + youtubeId);
+                      // Indentify multiple code blocks
+                      var wrapperId = 'yt' + Math.random().toString(36).substr(2, 10);
+                      // avoid sanitizing iframe tag
+                      setTimeout(renderYoutube.bind(null, wrapperId, youtubeId), 0);
+                      return '<div id="' + wrapperId + '"></div>';
+                  });
               });
             });
 

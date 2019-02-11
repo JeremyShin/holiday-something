@@ -227,6 +227,7 @@ public class UserLoginController {
       totalShippingPrice += cartProduct.getShippingPrice();
     }
     int totalPaymentPrice = totalPrice + totalShippingPrice;
+
     modelMap.addAttribute("totalPrice", totalPrice);
     modelMap.addAttribute("productCount", cartProducts.size());
     modelMap.addAttribute("totalShippingPrice", totalShippingPrice);

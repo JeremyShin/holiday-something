@@ -14,10 +14,14 @@ public class UserCartProductDto {
   private Integer sellingPrice;
   private Integer shippingPrice;
   private String imagePath;
+  private String productOptionName;
+  private Integer productOptionPrice;
+  private String productOptionDescription;
 
   public UserCartProductDto(Long cartProductId, Long productId, String productName,
       Integer quantity, Integer originalPrice, Integer sellingPrice, Integer shippingPrice,
-      String imagePath) {
+      String imagePath, String productOptionName, Integer productOptionPrice,
+      String productOptionDescription) {
     this.cartProductId = cartProductId;
     this.productId = productId;
     this.productName = productName;
@@ -26,6 +30,9 @@ public class UserCartProductDto {
     this.sellingPrice = sellingPrice;
     this.shippingPrice = shippingPrice;
     this.imagePath = imagePath;
+    this.productOptionName = productOptionName;
+    this.productOptionPrice = productOptionPrice;
+    this.productOptionDescription = productOptionDescription;
   }
 
   public Long getCartProductId() {
@@ -90,5 +97,29 @@ public class UserCartProductDto {
 
   public void setImagePath(String imagePath) {
     this.imagePath = imagePath;
+  }
+
+  public String getProductOptionName() {
+    return productOptionName;
+  }
+
+  public void setProductOptionName(String productOptionName) {
+    this.productOptionName = productOptionName;
+  }
+
+  public Integer getProductOptionPrice() {
+    return productOptionPrice;
+  }
+
+  public void setProductOptionPrice(Integer productOptionPrice) {
+    this.productOptionPrice = productOptionPrice;
+  }
+
+  public String getProductOptionDescription() {
+    return productOptionDescription;
+  }
+
+  public void setProductOptionDescription(String productOptionDescription) {
+    this.productOptionDescription = productOptionDescription;
   }
 }
