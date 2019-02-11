@@ -21,7 +21,8 @@
                 <ol class="carousel-indicators">
                     <!--TODO MainImage와 SubImage의 크기가 0이면 어떻게 구현해야 될까...아 여기는 유저가 보는 상세페이지라 그럴 일이 없을려나??-->
                     <!--<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>-->
-                    <li data-target="#carousel-example-generic" th:each="i : ${#numbers.sequence(0, #lists.size(subImages))}" th:data-slide-to="${i}"></li>
+                    <li data-target="#carousel-example-generic"
+                        th:each="i : ${#numbers.sequence(0, #lists.size(subImages))}" th:data-slide-to="${i}"></li>
                 </ol>
 
                 <!-- Wrapper for slides -->
@@ -64,7 +65,8 @@
             <div style="height: 70px; border-bottom: 1px solid #d3d3d3;">
                 <span style="text-decoration:line-through; font-size:15px; color: grey;"
                       th:text="${#numbers.formatInteger(product.originalPrice, 0, 'COMMA')}">원가</span><br>
-                <span class="product-price" th:text="${(product.originalPrice - product.sellingPrice) * 100 / product.originalPrice} + '%'">할인율</span>
+                <span class="product-price"
+                      th:text="${(product.originalPrice - product.sellingPrice) * 100 / product.originalPrice} + '%'">할인율</span>
                 <em class="product-price"
                     th:text="@{'&nbsp;' + ${#numbers.formatInteger(product.sellingPrice, 0, 'COMMA')}}">판매가</em>
                 <span style="color: red; font-size: 15px; font-weight: bold;">원</span>
@@ -96,14 +98,15 @@
 
             <div id="order-index">
                 <div style="margin-top: 10px;">
-                    <table id="order-index-table" width="100%" >
-                       <!-- 옵션을 선택하면 생성될 공간 -->
+                    <table id="order-index-table" width="100%">
+                        <!-- 옵션을 선택하면 생성될 공간 -->
                     </table>
                 </div>
 
                 <div id="order-index-result">
                     <span style="font-size: 15px">총 상품 금액</span>
-                    <span id="order-index-total-price">0</span>    <!-- TODO 1. 옵션이 추가되면 값이 증가되면서 해당 div가 보여야 함, 2. 옵션의 수량이 변경되면 값 증감, 3. 모든 옵션이 삭제되면 disable -->
+                    <span id="order-index-total-price">0</span>
+                    <!-- TODO 1. 옵션이 추가되면 값이 증가되면서 해당 div가 보여야 함, 2. 옵션의 수량이 변경되면 값 증감, 3. 모든 옵션이 삭제되면 disable -->
                     <span style="font-size: 23px; color: red;">원</span>
                 </div>
             </div>
@@ -129,15 +132,41 @@
         function selectOptionChange(optionValue) {
             document.getElementById("order-index-result").setAttribute('style', 'display:block');
 
-            if(optionValue === 0) {
-                optionAdd(optionValue);
-            } else {
-                var optionJson = JSON.parse(optionValue);
-                optionAdd(optionJson);
+            let optionJson = JSON.parse(optionValue);
+
+            if (optionIdDuplicateCheck(optionJson) === false) {
+                return false;
             }
+
+            optionAdd(optionJson);
+
             changeTotalPrice();
             rootInfoMinHeight();
             document.getElementById('option-selector').selectedIndex = 0;
+        }
+
+        // 중복 옵션 체크
+        function optionIdDuplicateCheck(source) {
+            let size = document.getElementsByClassName('order-index-hidden-option-id').length;
+
+            if(source === 0){
+                for (let i = 0; i < size; i++) {
+                    if (document.getElementsByClassName('order-index-hidden-option-id')[i].value === '0') {
+                        alert("중복된 옵션은 선택할 수 없습니다.");
+                        document.getElementById('option-selector').selectedIndex = 0;
+                        return false;
+                    }
+                }
+
+            } else {
+                for (let i = 0; i < size; i++) {
+                    if (document.getElementsByClassName('order-index-hidden-option-id')[i].value === source.id) {
+                        alert("중복된 옵션은 선택할 수 없습니다.");
+                        document.getElementById('option-selector').selectedIndex = 0;
+                        return false;
+                    }
+                }
+            }
         }
 
         // root-info 의 최소 크기를 증가시키는 함수
@@ -152,6 +181,7 @@
             let productId = /*[[${product.getId()}]]*/ 'default';
             /*]]>*/
             if (option === 0) {
+                console.log('여기되나');
                 let my_table = document.getElementById('order-index-table');
 
                 // tbody를 얻어와 style을 설정한다.
@@ -163,7 +193,7 @@
                 td1.setAttribute('class', 'order-index-table-option');
                 td1.innerText = '선택안함';
 
-                // hidden td
+                // hidden price td
                 let td2 = document.createElement('input');
                 td2.setAttribute('type', 'hidden');
                 td2.setAttribute('class', 'order-index-hidden-price');
@@ -193,6 +223,7 @@
                 optionIdInput.setAttribute('type', 'hidden');
                 optionIdInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].optionId');
                 optionIdInput.setAttribute('form', 'orderForm');
+                optionIdInput.setAttribute('class', 'order-index-hidden-option-id');
                 optionIdInput.setAttribute('value', '0');    // 해당 optionId 값을 설정
                 // quantity 값을 설정하는 input
                 let orderQuantityInput = document.createElement('input');
@@ -275,6 +306,7 @@
                 optionIdInput.setAttribute('type', 'hidden');
                 optionIdInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].optionId');
                 optionIdInput.setAttribute('form', 'orderForm');
+                optionIdInput.setAttribute('class', 'order-index-hidden-option-id');
                 optionIdInput.setAttribute('value', option.id);    // 해당 optionId 값을 설정
                 // quantity 값을 설정하는 input
                 let orderQuantityInput = document.createElement('input');
@@ -335,7 +367,7 @@
         function minusQuantity(source) {
             let quantity = parseInt(source.nextElementSibling.value);
 
-            if(quantity <= 1) {
+            if (quantity <= 1) {
                 false;
             } else {
                 quantity = quantity - 1;
@@ -352,6 +384,7 @@
 
             changeTotalPrice()
         }
+
         // shopping bag 버튼 클릭 이벤트
         function shoppingBag() {
             let value = document.getElementById('orderForm');
@@ -364,10 +397,10 @@
                 }
             }
 
-            if(check.length === 0) {
+            if (check.length === 0) {
                 alert("상품 옵션을 선택해주세요.");
                 return false
-            }else {
+            } else {
                 alert("장바구니에 상품이 담겼습니다.");
                 value.action = "/user/product/shoppingbag";
                 value.submit();
@@ -386,16 +419,16 @@
                 }
             }
 
-            if(check.length === 0) {
+            if (check.length === 0) {
                 alert("상품 옵션을 선택해주세요.");
                 return false
-            }else {
+            } else {
                 let buy = confirm("구매하시겠습니까?");
-                if(buy === true){
+                if (buy === true) {
                     value.action = "/user/product/order";
                     value.submit();
                 }
-                else if(buy === false){
+                else if (buy === false) {
                     return false;
                 }
             }
@@ -407,7 +440,7 @@
             document.getElementById('root-info').setAttribute('style', 'min-height: ' + root_info_min_height + 'px');
             source.parentElement.parentElement.remove();
 
-            if(document.getElementById('order-index-table').firstElementChild === null) {
+            if (document.getElementById('order-index-table').firstElementChild === null) {
                 document.getElementById('order-index-result').setAttribute('style', 'display:none;');
                 document.getElementById('order-index-result').setAttribute('innerText', '0');
             }
@@ -417,7 +450,7 @@
 
         // 콤마 제거
         function removeComma(str) {
-            n = parseInt(str.replace(/,/g,""));
+            n = parseInt(str.replace(/,/g, ""));
             return n;
         }
     </script>
@@ -540,7 +573,9 @@
                 </tr>
                 <tr>
                     <th class="product-table-th">제조연월</th>
-                    <td class="product-table-td" th:text="${#temporals.format(product.manufactureDate, 'yyyy-MM-dd')}">테스트</td>
+                    <td class="product-table-td" th:text="${#temporals.format(product.manufactureDate, 'yyyy-MM-dd')}">
+                        테스트
+                    </td>
                 </tr>
                 <tr>
                     <th class="product-table-th">품질보증기준</th>
