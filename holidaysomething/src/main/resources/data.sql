@@ -249,8 +249,8 @@ INSERT INTO orders (id, order_number, date, total_price, status, mileage, member
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112960137526', '2018-11-15', 3000, '배송완료', 30, 18, 26, 26);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112960137527', NOW(), 3000, '배송완료', 30, 20, 27, 27);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137528', '2018-11-11', 3000, '배송준비중', 30, 24, 28, 28);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137529', '2018-09-11', 4500, '배송준비중', 40, 22, 29, 29);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137530', '2018-10-29', 4500, '배송준비중', 40, 29, 22, 30);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137529', '2018-09-11', 4500, '배송준비중', 40, 1, 29, 29);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137530', '2018-10-29', 4500, '배송준비중', 40, 1, 22, 30);
 
 
 -- INSERT INTO product_category (id,name,parent_id,orders) VALUES (1,'문구', 0 ,1);
@@ -789,7 +789,7 @@ INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id
 
 
 INSERT INTO role(name) values('ADMIN');
--- INSERT INTO role(name) values('USER');
+INSERT INTO role(name) values('USER');
 -- INSERT INTO role(name) values('NONE');
 --
 INSERT INTO member_role(member_id,role_id) values(1,1);

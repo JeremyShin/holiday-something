@@ -117,7 +117,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .formLogin()
         .loginPage("/user/login")
         .loginProcessingUrl("/user/authenticate")
-        .usernameParameter("loginId").passwordParameter("password")
+        .usernameParameter("loginId").passwordParameter("password") // login form의 name과 맞춰줘야 한다.
 //        .defaultSuccessUrl("/user/after")
         .successHandler(successHandler()) // 로그인 이전 페이지로 이동할때 사용.
 //        .failureHandler(failureHandler());

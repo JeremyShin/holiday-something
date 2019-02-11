@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml"
-      xml:th="http:/www.thymeleaf.org">
+      xml:th="http:/www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
   <header th:fragment="headerFragment" id="header">
     <img src="/static/img/logo.png"/>
@@ -45,12 +46,24 @@
         <!--회원가입, 로그인, 장바구니-->
         <div class="user-header" style="order: 3;">
           <div>
-            <div class="user-header">
-              <a href="/user/signup"> signup </a>
+            
+            <div class="user-header" sec:authorize="isAuthenticated()">
+              <span sec:authentication="name"></span>
+              <!--<a th:href="@{'/user/'+ ${#authentication.principal.id}}">memberInfo</a>-->
             </div>
-            <div class="user-header">
+            
+            <div class="user-header" sec:authorize="!isAuthenticated()">
+              <a href="/user/join"> signup </a>
+            </div>
+
+            <div class="user-header" sec:authorize="!isAuthenticated()">
               <a href="/user/login"> login </a>
             </div>
+
+            <div class="user-header" sec:authorize="isAuthenticated()">
+              <a href="/user/logout"> logout </a>
+            </div>
+            
             <div class="user-header">
               <a href="/user/cart"> cart </a>
             </div>
