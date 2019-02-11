@@ -698,11 +698,11 @@ VALUES (null, 1, 'image/jpeg', 'appletea.jpg', 'https://img.29cm.co.kr/contents/
 INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 1, 1, 1, 1);
 INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 1, 1, 37, 62);
 
-INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 2, 2, 1, 1);
-INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 1, 2, 1, 2);
 INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 2, 2, 36, 59);
 INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 1, 2, 41, 69);
 INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 1, 2, 41, 70);
+INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 2, 2, 1, 1);
+INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 1, 2, 1, 2);
 INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 1, 2, 43, 74);
 
 INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 5, 3, 40, 68);

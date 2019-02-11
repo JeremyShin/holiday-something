@@ -42,7 +42,7 @@
         <!-- checkbox -->
         <td class="tr-checkbox">
           <!--<input type="checkbox" th:value="${cartProduct.productId}"/>-->
-          <input type="checkbox" th:id="${cartProduct.cartProductId}"/>
+          <input type="checkbox" th:id="${cartProduct.cartProductId}" checked />
           <label th:for="${cartProduct.cartProductId}">
             <div><i class="fa fa-check"></i></div>
           </label>
@@ -72,8 +72,8 @@
               '옵션: ' + ${cartProduct.productOptionName} : '&nbsp;'"></span>
             </p>
           </div>
-          <div class="btn-remove">
-            <button></button>
+          <div class="btn-remove-div">  <!-- Cart에서 상품 삭제 -->
+            <button class="btn-remove" th:id="${cartProduct.cartProductId}"></button>
           </div>
         </td>
         <!-- 수량 -->
@@ -143,5 +143,9 @@
   <div layout:fragment="userContents">
 
   </div>
+
+  <th:block layout:fragment="script-body">
+    <script th:src="@{/static/js/cart.js}"></script>
+  </th:block>
 
 </html>
