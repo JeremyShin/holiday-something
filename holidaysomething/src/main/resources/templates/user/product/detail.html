@@ -118,6 +118,9 @@
         </div>
     </div>
 
+    <!-- inline 이 안먹혀서...-->
+    <!--<script th:src="@{/static/js/user-product-detail.js}" th:inline="javascript"></script>-->
+
     <script th:inline="javascript">
         // 옵션 변경 이벤트(order-index-tbody 에 값 저장, root-info min-height 50씩 증가, 총 금액 변경)
         let num = 0;
@@ -171,11 +174,13 @@
                 td3.setAttribute('class', 'order-index-table-quantity');
                 let minusButton = document.createElement('button');
                 minusButton.setAttribute('type', 'button');
-                minusButton.setAttribute('class', 'order-index-button');
+                minusButton.setAttribute('class', 'order-index-button');    // 해당 버튼을 클릭하면 option-order-quantity 숫자가 -1 됨
+                minusButton.setAttribute('onclick', 'minusQuantity(this)');
                 minusButton.innerText = '-';
                 let plusButton = document.createElement('button');
-                minusButton.setAttribute('type', 'button');
-                plusButton.setAttribute('class', 'order-index-button');
+                plusButton.setAttribute('type', 'button');
+                plusButton.setAttribute('class', 'order-index-button');     // 해당 버튼을 클릭하면 option-order-quantity 숫자가 +1 됨
+                plusButton.setAttribute('onclick', 'plusQuantity(this)');
                 plusButton.innerText = '+';
                 // productId 값을 보내기 위한 hidden type 의 input
                 let productIdInput = document.createElement('input');
@@ -195,15 +200,15 @@
                 orderQuantityInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].quantity');
                 orderQuantityInput.setAttribute('class', 'option-order-quantity');
                 orderQuantityInput.setAttribute('form', 'orderForm');
-                orderQuantityInput.setAttribute('value', '1');  // TODO : 여기가 변경되면 totalPrice 값이 변경돼야 함
+                orderQuantityInput.setAttribute('value', '1');  // 해당 값이 변경되면 총 금액이 변경됨
                 orderQuantityInput.setAttribute('onkeyup', 'changeTotalPrice();');
                 orderQuantityInput.setAttribute('onKeypress', 'if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;');
 
-                td3.appendChild(minusButton);
                 td3.appendChild(productIdInput);
                 td3.appendChild(optionIdInput);
-                td3.appendChild(orderQuantityInput);
-                td3.appendChild(plusButton);
+                td3.appendChild(minusButton);           // -1 버튼
+                td3.appendChild(orderQuantityInput);    // 숫자
+                td3.appendChild(plusButton);            // +1 버튼
 
                 // 옵션 가격을 알려주는 td
                 let td4 = document.createElement('td');
@@ -252,10 +257,12 @@
                 let minusButton = document.createElement('button');
                 minusButton.setAttribute('type', 'button');
                 minusButton.setAttribute('class', 'order-index-button');
+                minusButton.setAttribute('onclick', 'minusQuantity(this)');
                 minusButton.innerText = '-';
                 let plusButton = document.createElement('button');
-                minusButton.setAttribute('type', 'button');
+                plusButton.setAttribute('type', 'button');
                 plusButton.setAttribute('class', 'order-index-button');
+                plusButton.setAttribute('onclick', 'plusQuantity(this)');
                 plusButton.innerText = '+';
                 // productId 값을 보내기 위한 hidden type 의 input
                 let productIdInput = document.createElement('input');
@@ -275,13 +282,13 @@
                 orderQuantityInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].quantity');
                 orderQuantityInput.setAttribute('class', 'option-order-quantity');
                 orderQuantityInput.setAttribute('form', 'orderForm');
-                orderQuantityInput.setAttribute('value', '1');      // TODO : 여기가 변경되면 totalPrice 값이 변경돼야 함
+                orderQuantityInput.setAttribute('value', '1');      // 해당 값이 변경되면 총 금액이 변경됨
                 orderQuantityInput.setAttribute('onkeyup', 'changeTotalPrice();');
                 orderQuantityInput.setAttribute('onKeypress', 'if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;');
 
-                td3.appendChild(minusButton);
                 td3.appendChild(productIdInput);
                 td3.appendChild(optionIdInput);
+                td3.appendChild(minusButton);
                 td3.appendChild(orderQuantityInput);
                 td3.appendChild(plusButton);
 
@@ -313,23 +320,37 @@
 
         // 총 금액이 변경돼야 하면 호출되는 함수
         function changeTotalPrice() {
+            console.log('실행됩니다.');
             let size = document.getElementsByClassName('option-order-quantity').length;
-            let tmpPrice = 0;
+            let totalPrice = 0;
 
             for (let i = 0; i < size; i++) {
-                tmpPrice += document.getElementsByClassName('option-order-quantity')[i].value * document.getElementsByClassName('order-index-hidden-price')[i].value;
+                totalPrice += document.getElementsByClassName('option-order-quantity')[i].value * document.getElementsByClassName('order-index-hidden-price')[i].value;
             }
 
-            document.getElementById("order-index-total-price").innerText = tmpPrice.toLocaleString();
+            document.getElementById("order-index-total-price").innerText = totalPrice.toLocaleString();
         }
 
         // quantity 값 증가, 감소
         function minusQuantity(source) {
-            console.log(source);
+            let quantity = parseInt(source.nextElementSibling.value);
+
+            if(quantity <= 1) {
+                false;
+            } else {
+                quantity = quantity - 1;
+            }
+            source.nextElementSibling.setAttribute('value', quantity);
+
+            changeTotalPrice()
         }
 
         function plusQuantity(source) {
-            console.log();
+            let quantity = parseInt(source.previousElementSibling.value);
+            quantity = quantity + 1;
+            source.previousElementSibling.setAttribute('value', quantity);
+
+            changeTotalPrice()
         }
         // shopping bag 버튼 클릭 이벤트
         function shoppingBag() {
@@ -391,7 +412,8 @@
                 document.getElementById('order-index-result').setAttribute('innerText', '0');
             }
 
-        };
+            changeTotalPrice();
+        }
 
         // 콤마 제거
         function removeComma(str) {
