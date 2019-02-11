@@ -34,8 +34,9 @@ public class CartProduct {
   @JoinColumn(name = "product_id")
   private Product product;
 
-  @Column(nullable = false)
-  private int price;
+  @ManyToOne
+  @JoinColumn(name = "product_option_id")
+  private ProductOption productOption;
 
   @Column(nullable = false)
   private int quantity;

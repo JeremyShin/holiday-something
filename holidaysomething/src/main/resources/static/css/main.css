@@ -112,7 +112,7 @@
   background-color: rgba(214, 214, 214, 0.57);
 }
 
-#product-option-list-tbl th:nth-of-type(1), td:nth-of-type(1) {
+#product-option-list-tbl th:nth-of-type(1), #product-option-list-tbl td:nth-of-type(1) {
   text-align: left;
 }
 
