@@ -3,55 +3,359 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:text-align="http://www.w3.org/1999/xhtml"
       xml:th="http:/www.thymeleaf.org"
-      layout:decorate="~{layout/user-default.html}">
 
-<head>
-    <title id="pageTitle">유저 &mdash; 주문</title>
+      layout:decorate="~{layout/user-product-detail.html}">
+
+
+<!--<<<<<<< HEAD-->
+<!--<head>-->
+    <!--<title id="pageTitle">유저 &mdash; 주문</title>-->
+<!--</head>-->
+<!--<div layout:fragment="userTitle">-->
+    <!--<div class='right-box'>-->
+        <!--<form method="post" action="/user/product/order" id="orderForm">-->
+            <!--<table>-->
+                <!--<tr>-->
+                <!--</tr>-->
+
+                <!--<td>-->
+
+                    <!--&lt;!&ndash;옵션아이디1 <input name="productOrderInfoDtos[0].optionInfo.key" value="1">&ndash;&gt;-->
+                    <!--&lt;!&ndash;옵션아이디2 <input name="productOrderInfoDtos[0].optionInfo.key" value="2">&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;옵션아이디1 <input name="optionId" value="1">&ndash;&gt;-->
+                    <!--&lt;!&ndash;옵션아이디2 <input name="optionId" value="2">&ndash;&gt;-->
+
+                    <!--&lt;!&ndash; 옵션id의 개수에 따라서, productOrderInfoDto의 개수-1번째 행에 넣어주기 &ndash;&gt;-->
+
+
+                    <!--옵션아이디1 <input name="productOrderInfoDtos[0].optionId">-->
+                    <!--옵션아이디2 <input name="productOrderInfoDtos[1].optionId">-->
+
+
+                <!--</td>-->
+
+
+
+                <!--<td>-->
+                    <!--옵션1의개수 <input name="productOrderInfoDtos[0].quantity" value="1">-->
+                    <!--옵션2의개수<input name="productOrderInfoDtos[1].quantity" value="2">-->
+                    <!--&lt;!&ndash;옵션1의개수 <input name="optionQuantity" value="1">&ndash;&gt;-->
+                    <!--&lt;!&ndash;옵션2의개수<input name="optionQuantity" value="2">&ndash;&gt;-->
+                <!--</td>-->
+
+                <!--<td>-->
+                    <!--프로덕트1 <input name="productOrderInfoDtos[0].productId" value="1">-->
+                    <!--프로덕트2 <input name="productOrderInfoDtos[1].productId" value="1">-->
+                <!--</td>-->
+
+
+            <!--</table>-->
+
+            <!--<input type="submit" value="BUY NOW"/>-->
+        <!--</form>-->
+
+<!--=======-->
+
+<head th:include="fragments/config :: configFragment">
+    <title id="pageTitle">HolidaySomething</title>
+    <!-- other elements you want to reference in your layout -->
 </head>
-<div layout:fragment="userTitle">
-    <div class='right-box'>
-        <form method="post" action="/user/product/order" id="orderForm">
-            <table>
+
+<!-- 상품 판매 정보 -->
+<div layout:fragment="productInfo">
+    <div id='top-info-left'>
+        <div id="top-info-left-abs">
+            <!--Carousel-->
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <!--TODO MainImage와 SubImage의 크기가 0이면 어떻게 구현해야 될까...아 여기는 유저가 보는 상세페이지라 그럴 일이 없을려나??-->
+                    <!--<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>-->
+                    <li data-target="#carousel-example-generic"
+                        th:each="i : ${#numbers.sequence(0, #lists.size(subImages))}" th:data-slide-to="${i}"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img th:src="${mainImage.path + mainImage.storedFileName}" alt="공사중,,,">
+                        <div class="carousel-caption">
+                        </div>
+                    </div>
+                    <div class="item" th:each="subImage : ${subImages}">
+                        <img th:src="${subImage.path + subImage.storedFileName}" alt="공사중,,,">
+                        <div class="carousel-caption">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button"
+                   data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button"
+                   data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id='top-info-right'>
+        <div id="top-info-right-abs">
+            <div style="border-top:1px solid gold; border-bottom:1px solid gold; padding-top: 20px; padding-bottom: 20px">
+                <span class="product-name" th:text="${product.name}">상품 이름</span>
+            </div>
+
+            <div style="height: 20px;"></div>
+
+            <div style="height: 70px; border-bottom: 1px solid #d3d3d3;">
+                <span style="text-decoration:line-through; font-size:15px; color: grey;"
+                      th:text="${#numbers.formatInteger(product.originalPrice, 0, 'COMMA')}">원가</span><br>
+                <span class="product-price"
+                      th:text="${(product.originalPrice - product.sellingPrice) * 100 / product.originalPrice} + '%'">할인율</span>
+                <em class="product-price"
+                    th:text="@{'&nbsp;' + ${#numbers.formatInteger(product.sellingPrice, 0, 'COMMA')}}">판매가</em>
+                <span style="color: red; font-size: 15px; font-weight: bold;">원</span>
+            </div>
+
+            <div style="height: 100px; padding-top: 10px; padding-bottom: 10px; line-height: 23px;">
+                <span style="font-weight: bold;">상품할인</span>
+                <span style="color: red; margin-left: 17px;"
+                      th:text="@{'x%' + '&nbsp;' + ${#numbers.formatInteger(product.sellingPrice, 0, 'COMMA')}}">상품 가격</span><br>
+
+                <span style="font-weight: bold;">배송비</span>
+                <span style="margin-left: 30px;"
+                      th:text=" @{${#numbers.formatInteger(product.shippingPrice, 0, 'COMMA')}}">배송비</span><br>
+
+                <span style="font-weight: bold;">추가혜택</span>
+                <span style="margin-left: 17px;"
+                      th:text="'적립금 ' + @{${#numbers.formatInteger(product.mileage, 0, 'COMMA')} + 'p'}">적립금</span>
+            </div>
+
+            <div id="option-box" style="margin-bottom: 30px;">
+                <!-- th:onclick="'selectOptionChange(this.value, \'' +${product.id} +'\',\''+${product.sellingPrice}+'\')'" -->
+                <select name="selectOption" id="option-selector" th:onchange="'selectOptionChange(this.value, \'' +${product.id} +'\',\''+${product.sellingPrice}+'\')'">
+                    <option disabled selected>옵션 선택</option>
+                    <option value="0">없음</option>
+                    <option th:each="productOption : ${productOptions}"
+                            th:value="'{&quot;id&quot;:&quot;' + ${productOption.id} + '&quot;, &quot;name&quot;:&quot;' + ${productOption.name} + '&quot;, &quot;price&quot;:' + ${productOption.price} + '}'"
+                            th:utext="@{${productOption.name} + ' [+' + ${productOption.price} + ']'}"></option>
+                </select>
+            </div>
+
+            <div id="order-index">
+                <div style="margin-top: 10px;">
+                    <table id="order-index-table" width="100%">
+                        <!-- 옵션을 선택하면 생성될 공간 -->
+                    </table>
+                </div>
+
+                <div id="order-index-result">
+                    <span style="font-size: 15px">총 상품 금액</span>
+                    <span id="order-index-total-price">0</span>
+                    <!-- TODO 1. 옵션이 추가되면 값이 증가되면서 해당 div가 보여야 함, 2. 옵션의 수량이 변경되면 값 증감, 3. 모든 옵션이 삭제되면 disable -->
+                    <span style="font-size: 23px; color: red;">원</span>
+                </div>
+            </div>
+
+            <div id="orderRequestForm">
+                <!--`orderIndex`에 선택된 옵션과 상품의 수량, 상품 번호가 넘어감-->
+                <form method="post" name="productOrder" id="orderForm">
+                    <input type="button" class="shopping-bag-button" value="SHOPPING BAG" onclick="shoppingBag();"/>
+                    <input type="button" class="buy-now-button" value="BUY NOW" onclick="buyNow();"/>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/static/js/user-product-detail.js}"></script>
+
+</div>
+
+<div layout:fragment="productContent">
+    <!-- 상품 설명 editor -->
+    <div class="product-info" style="border-top:2px solid #d3d3d3;">
+        <div id="editSection"></div>
+
+        <script src="/static/editor/jquery/dist/jquery.js"></script>
+        <script src="/static/editor/tui-code-snippet/dist/tui-code-snippet.js"></script>
+        <script src="/static/editor/markdown-it/dist/markdown-it.js"></script>
+        <script src="/static/editor/to-mark/dist/to-mark.js"></script>
+        <script src="/static/editor/codemirror/lib/codemirror.js"></script>
+        <script src="/static/editor/highlightjs/highlight.pack.js"></script>
+        <script src="/static/editor/squire-rte/build/squire-raw.js"></script>
+        <script src="/static/editor/tui-editor/dist/tui-editor-Editor-all.js"></script>
+        <link rel="stylesheet" href="/static/editor/codemirror/lib/codemirror.css">
+        <link rel="stylesheet" href="/static/editor/highlightjs/styles/github.css">
+        <link rel="stylesheet" href="/static/editor/tui-editor/dist/tui-editor.css">
+        <link rel="stylesheet" href="/static/editor/tui-editor/dist/tui-editor-contents.css">
+
+        <!--<title th:text="상품 상세보기"></title>-->
+
+        <style type="text/css">
+            .footer {
+                position: relative;
+                width: 100%;
+                height: 50px;
+                margin-top: 30px;
+                background-color: #f5f5f5;
+            }
+
+            #userNameP {
+                margin-top: 30px;
+            }
+
+            #deleteModalCallBtn {
+                margin-right: 10px;
+            }
+
+            .jb-right {
+                text-align: right;
+            }
+
+            .jb-center {
+                text-align: center;
+            }
+
+            .te-md-container .CodeMirror {
+                font-size: 14px;
+            }
+
+            .tui-editor-contents {
+                font-size: 14px;
+            }
+        </style>
+
+        <script th:inline="javascript">
+            (function (root, factory) {
+                if (typeof define === 'function' && define.amd) {
+                    define(['tui-editor'], factory);
+                } else if (typeof exports === 'object') {
+                    factory(require('tui-editor'));
+                } else {
+                    factory(root['tui']['Editor']);
+                }
+            })(this, function (Editor) {
+                // define youtube extension
+                Editor.defineExtension('youtube', function () {
+                    // runs while markdown-it transforms code block to HTML
+                    Editor.codeBlockManager.setReplacer('youtube', function (youtubeId) {
+                        // Indentify multiple code blocks
+                        var wrapperId = 'yt' + Math.random().toString(36).substr(2, 10);
+                        // avoid sanitizing iframe tag
+                        setTimeout(renderYoutube.bind(null, wrapperId, youtubeId), 0);
+                        return '<div id="' + wrapperId + '"></div>';
+                    });
+                });
+
+                function renderYoutube(wrapperId, youtubeId) {
+                    var el = document.querySelector('#' + wrapperId);
+                    el.innerHTML = '<iframe width="820" height="630" src="https://www.youtube.com/embed/' + youtubeId + '"  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+                }
+            });
+
+            $(document).ready(function () {
+                $('#editSection').tuiEditor({
+                    exts: ['youtube'],
+                    viewer: true,
+                    height: 'auto'
+                });
+                /*<![CDATA[*/
+                var content = /*[[${product.getProductDetail().getDescription()}]]*/ 'default';
+                $("#editSection").tuiEditor("setValue", content);
+                /*]]>*/
+            });
+        </script>
+    </div>
+</div>
+
+<div layout:fragment="infomation">
+    <!-- 상품 정보, 배송정보, 교환/환불 안내-->
+    <div class="product-info">
+        <div class="product-info-margin">
+            <div class="product-info-name" style="border-bottom:4px solid black; line-height: 40px;">
+                <span style="font-size: 20px; font-weight: bold">PRODUCT</span>
+            </div>
+            <table width="100%">
+                <tbody>
                 <tr>
+                    <th class="product-table-th">제품명</th>
+                    <td class="product-table-td" th:text="${product.name}">테스트</td>
                 </tr>
-
-                <td>
-
-                    <!--옵션아이디1 <input name="productOrderInfoDtos[0].optionInfo.key" value="1">-->
-                    <!--옵션아이디2 <input name="productOrderInfoDtos[0].optionInfo.key" value="2">-->
-
-                    <!--옵션아이디1 <input name="optionId" value="1">-->
-                    <!--옵션아이디2 <input name="optionId" value="2">-->
-
-                    <!-- 옵션id의 개수에 따라서, productOrderInfoDto의 개수-1번째 행에 넣어주기 -->
-
-
-                    옵션아이디1 <input name="productOrderInfoDtos[0].optionId">
-                    옵션아이디2 <input name="productOrderInfoDtos[1].optionId">
-
-
-                </td>
-
-
-
-                <td>
-                    옵션1의개수 <input name="productOrderInfoDtos[0].quantity" value="1">
-                    옵션2의개수<input name="productOrderInfoDtos[1].quantity" value="2">
-                    <!--옵션1의개수 <input name="optionQuantity" value="1">-->
-                    <!--옵션2의개수<input name="optionQuantity" value="2">-->
-                </td>
-
-                <td>
-                    프로덕트1 <input name="productOrderInfoDtos[0].productId" value="1">
-                    프로덕트2 <input name="productOrderInfoDtos[1].productId" value="1">
-                </td>
-
-
+                <tr>
+                    <th class="product-table-th">제조사</th>
+                    <td class="product-table-td" th:text="${product.manufacturer}">테스트</td>
+                </tr>
+                <tr>
+                    <th class="product-table-th">제조연월</th>
+                    <td class="product-table-td" th:text="${#temporals.format(product.manufactureDate, 'yyyy-MM-dd')}">
+                        테스트
+                    </td>
+                </tr>
+                <tr>
+                    <th class="product-table-th">품질보증기준</th>
+                    <td class="product-table-td">상품 수령일로부터 7일 이내 교환 및 환불</td>
+                </tr>
+                <tr>
+                    <th class="product-table-th">AS 책임자와 전화번호</th>
+                    <td class="product-table-td">홀리데이센터 000-0000</td>
+                </tr>
+                </tbody>
             </table>
+        </div>
 
-            <input type="submit" value="BUY NOW"/>
-        </form>
+        <div class="product-info-margin">
+            <div class="product-info-name" style="border-bottom:4px solid black; line-height: 40px;">
+                <span style="font-size: 20px; font-weight: bold">NOTICE</span>
+            </div>
+            <br>
+            <li class="li-line-height">제품 단면 측정 사이즈는 측정 방법에 따라 ±5cm의 오차가 있을 수 있습니다.</li>
+            <li class="li-line-height">색상과 질감은 사용하는 모니터의 사양 또는 해상도에 따라 실제 제품과 다소 차이가 있을 수 있습니다.</li>
+            <li class="li-line-height">이는 교환 환불의 사유가 되지 않으므로 신중한 구매 부탁드립니다.</li>
+            <li class="li-line-height">단순 변심/판단 착오 등의 교환은, 고객이 왕복 배송비를 부담해야 합니다.</li>
+            <li class="li-line-height">상품의 교환 시 패키지를 개봉하지 않은 상태여야 하며, 상품이 훼손된 경우에는 교환이 불가합니다.</li>
+            <li class="li-line-height">상품 불량/오 배송의 경우, Holiday Something에서 왕복 배송비를 부담하며 동일 상품으로 재발송 합니다.</li>
+            <li class="li-line-height">모든 상품은 배송일자 기준 7일 초과 시 교환/환불이 불가능합니다.</li>
+        </div>
 
+        <div class="product-info-margin">
+            <div class="product-info-name" style="border-bottom:4px solid black; line-height: 40px;">
+                <span style="font-size: 20px; font-weight: bold">DELIVERY</span>
+            </div>
+            <br>
+            <li class="li-line-height">홀리데이썸띵은 가장 빠르고 제품 손상이 적은 우체국 택배를 이용하고 있습니다. 제품 당 3,000원의 운송료가 청구 됩니다.</li>
+            <li class="li-line-height">도서지역 및 해외배송은 추가 운임 발생합니다.</li>
+            <li class="li-line-height">결제 완료일부터 공휴일 제외 7일 내 상품을 받으실 수 있습니다.</li>
+            <li class="li-line-height">배송지연 상품에 대해서는 개별 연락 해드립니다.</li>
+        </div>
+    </div>
+</div>
+
+<div layout:fragment="bestProducts">
+    <!-- 판매량 Top 5 상품 -->
+    <div class="product-info">
+        <div class="product-info-margin">
+            <div class="product-info-name" style="line-height: 40px; color: orange;">
+                <span style="font-size: 20px; font-weight: bold">Best Product</span>
+            </div>
+            best 상품을 잘 가져오는지 확인!<br>
+            아;;;;;;;;; best 상품의 main 이미지를 가져와서 보여줘야 되는구나....<br>
+            <tr th:each="bestProduct: ${bestProducts}">
+                <td th:text="${bestProduct.id}"/>
+                <br>
+                <td th:text="${bestProduct.name}"/>
+                <br><br>
+            </tr>
+            <tr th:each="bestProductImage: ${bestProductImages}">
+                <td th:text="${bestProductImage.path}"/>
+                <br>
+            </tr>
+        </div>
     </div>
 </div>
 

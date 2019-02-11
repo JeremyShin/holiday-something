@@ -28,6 +28,7 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -92,7 +93,8 @@ AdminProductController {
 
             imageStreamService.save(mainImage, productAddDto.getProductDetailId());
             for(MultipartFile multipartFile : subImages) {
-                imageStreamService.save(multipartFile, productAddDto.getProductDetailId());
+                if (!multipartFile.isEmpty())
+                    imageStreamService.save(multipartFile, productAddDto.getProductDetailId());
             }
 
             return "redirect:/admin/product/add";

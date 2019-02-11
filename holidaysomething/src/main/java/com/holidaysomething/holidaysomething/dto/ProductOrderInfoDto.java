@@ -11,7 +11,6 @@ public class ProductOrderInfoDto {
   @NotNull
   private Long productId;
 
-  @NotNull
   private Long optionId;
 
   @NotNull

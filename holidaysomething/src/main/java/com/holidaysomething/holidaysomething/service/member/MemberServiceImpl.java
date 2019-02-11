@@ -9,6 +9,8 @@ import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.SearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
+import com.holidaysomething.holidaysomething.dto.UserCartProductDto;
+import com.holidaysomething.holidaysomething.repository.CartProductRepository;
 import com.holidaysomething.holidaysomething.repository.MemberRepository;
 import com.holidaysomething.holidaysomething.repository.RoleRepository;
 import com.querydsl.core.Tuple;
@@ -29,6 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberServiceImpl implements MemberService {
 
   private final MemberRepository memberRepository;
+  private final CartProductRepository cartProductRepository;
   private final RoleRepository roleRepository;
 
   @Override
@@ -44,14 +47,13 @@ public class MemberServiceImpl implements MemberService {
   }
 
   /**
-   * 현재 로그인 된 userId로 유저의 모든 정보를 찾는다.
-   * https://stackoverflow.com/a/49317013/8962314
+   * 현재 로그인 된 userId로 유저의 모든 정보를 찾는다. https://stackoverflow.com/a/49317013/8962314
    */
   @Override
   @Transactional(readOnly = true)
   public Member getCurrentMemberInfo(Long userId) {
     return memberRepository.findById(userId)
-                            .orElse(null);
+        .orElse(null);
   }
 
   @Override
@@ -84,6 +86,10 @@ public class MemberServiceImpl implements MemberService {
     memberRepository.save(member);
   }
 
+  @Override
+  public Member patchMember(Member member) {
+    return memberRepository.save(member);
+  }
 
   @Override
   public Page<Member> searchMembers(MemberSearchDto memberSearchDto, Pageable pageable) {
@@ -110,8 +116,6 @@ public class MemberServiceImpl implements MemberService {
     log.info(
         "==== searchOrderMemberDto.getOrderEndDate() : " + searchOrderMemberDto.getOrderEndDate());
     log.info("==== searchOrderMemberDto.getLoginId() : " + searchOrderMemberDto.getLoginId());
-
-
 
     Page<Tuple> tuples = memberRepository.getMembersByDsl(searchOrderMemberDto, pageable);
     log.info("==========tuples getTotalPages : " + tuples.getTotalPages());
@@ -167,5 +171,10 @@ public class MemberServiceImpl implements MemberService {
     addOrderMemberDto.setMileage(member.getMileage());
 
     return addOrderMemberDto;
+  }
+
+  public List<UserCartProductDto> getUserCartProduct(Long userId) {
+    return cartProductRepository.findCartProductById(userId);
+
   }
 }

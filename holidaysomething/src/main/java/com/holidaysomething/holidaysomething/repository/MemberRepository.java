@@ -1,5 +1,6 @@
 package com.holidaysomething.holidaysomething.repository;
 
+import com.holidaysomething.holidaysomething.domain.CartProduct;
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Order;
 import com.holidaysomething.holidaysomething.dto.CurrentMemberDto;

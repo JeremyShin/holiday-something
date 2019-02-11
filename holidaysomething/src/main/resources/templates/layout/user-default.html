@@ -2,21 +2,36 @@
 <html xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-  <head th:replace="fragments/config :: configFragment"></head>
-  <div>
-    <header th:replace="fragments/header :: userHeaderFragment"></header>
-  </div>
+  <head
+      layout:fragment="head"
+      th:replace="fragments/config :: configFragment">
 
-  <div>
-    <div layout:fragment="userTitle" class="user-dashboard"> <div>...</div> </div>
-  </div>
+  </head>
 
+<<<<<<< HEAD
   <div>
     <div layout:fragment="userContents" class="user-content"></div>
   </div>
+=======
+  <body>
+    <header th:replace="fragments/header :: userHeaderFragment">
+>>>>>>> aa2ee74e7e5a077239dcf56c1daa9b6a45c8af4a
 
-  <footer th:replace="fragments/footer:: userFooterFragment"></footer>
+    </header>
 
-<!--  <body th:replace="fragments/config :: configFragment"></body>-->
+    <div
+        layout:fragment="userTitle"
+        class="user-dashboard">
 
+    </div>
+
+    <!-- 카트 -->
+    <div layout:fragment="userContents">
+
+    </div>
+
+    <footer th:replace="fragments/footer :: userFooterFragment">
+
+    </footer>
+  </body>
 </html>

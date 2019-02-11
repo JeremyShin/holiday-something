@@ -159,7 +159,6 @@ VALUES(29,'buyeraddr29','afa29@gmail.com','buyer29','postcode29','01099233263','
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
 VALUES(30,'buyeraddr30','afa30@gmail.com','buyer30','postcode30','01099233267','http://suunyvale.com/30','merchant30','msg30','name30','whatmethod30','pg1');
 
-
 INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
 VALUES (null, '인천광역시 미추홀구 토금북로28번길 15', '104호', '경비실에 맡겨주세요.', '010-8693-3454', '22186', '권은철', '305672231034', 3000, NULL, NULL);
 INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
@@ -251,7 +250,6 @@ INSERT INTO orders (id, order_number, date, total_price, status, mileage, member
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137528', '2018-11-11', 3000, 1, 30, 24, 28, 28);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137529', '2018-09-11', 4500, 1, 40, 22, 29, 29);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137530', '2018-10-29', 4500, 1, 40, 29, 22, 30);
-
 
 -- INSERT INTO product_category (id,name,parent_id,orders) VALUES (1,'문구', 0 ,1);
 -- INSERT INTO product_category (id,name,parent_id,orders) VALUES (2,'디자인', 0 ,2);
@@ -571,7 +569,7 @@ VALUES (null, 3, 'image/jpeg', '63895234-3452.jpg', 'https://www.petitcolas.net/
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
 VALUES (null, 3, 'image/jpeg', '23698423-5743.jpg', 'https://www.petitcolas.net/watermarking/image_database/peppers.jpg', '2018-12-21 12:22:42', 24983, 'peppers', '2018-12-23 18:52:42', 27);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/jpeg', '68930523-4568.jpg', 'https://www.petitcolas.net/watermarking/image_database/pills.jpg', '2018-05-05 13:52:51', 13598, 'pills', '2018-05-14 11:52:49', 28);
+VALUES (null, 1, 'image/jpeg', '68930523-4568.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-05-05 13:52:51', 13598, 'pills.jpg', '2018-05-14 11:52:49', 28);
 
 
 INSERT INTO cart_product(price, quantity, member_id, product_id) VALUES (3000, 1, 1, 1);
@@ -607,7 +605,7 @@ INSERT INTO cart_product(price, quantity, member_id, product_id) VALUES (1000, 1
 
 
 INSERT INTO role(name) values('ADMIN');
--- INSERT INTO role(name) values('USER');
+INSERT INTO role(name) values('USER');
 -- INSERT INTO role(name) values('NONE');
 --
 INSERT INTO member_role(member_id,role_id) values(1,1);

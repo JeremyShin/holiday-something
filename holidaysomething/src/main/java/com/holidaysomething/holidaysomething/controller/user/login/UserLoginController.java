@@ -2,36 +2,27 @@ package com.holidaysomething.holidaysomething.controller.user.login;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Role;
+import com.holidaysomething.holidaysomething.repository.RoleRepository;
+import com.holidaysomething.holidaysomething.dto.UserCartProductDto;
 import com.holidaysomething.holidaysomething.security.MemberUserDetails;
 import com.holidaysomething.holidaysomething.service.member.MemberService;
 import java.security.Principal;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.SessionFactory;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
 /**
  * @author choijaeyong on 18/01/2019.
@@ -46,6 +37,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 public class UserLoginController {
 
   private final MemberService memberService;
+  private final RoleRepository roleRepository;
 
   private final BCryptPasswordEncoder passwordEncoder;
 
@@ -97,22 +89,22 @@ public class UserLoginController {
 //    memberService.addRole(role1);
 //    log.info("======== role1  등록.");
 
-    Role role2 = new Role();
-    role2.setId(2l);
-    role2.setName("USER");
-    memberService.addRole(role2);
-    log.info("======== role2  등록.");
+//    Role role2 = new Role();
+//    role2.setId(2l);
+//    role2.setName("USER");
+//    memberService.addRole(role2);
+//    log.info("======== role2  등록.");
 
+    Role userRole = roleRepository.getOne(2l);
     Set<Role> roleSet = new HashSet<>();
     //roleSet.add(role1);
-    roleSet.add(role2);
+    roleSet.add(userRole);
     member.setRoles(roleSet);
     //LocalDate로 바꾸면서 안들어감 ㅠㅠ
 //    Date today = new Date();
 //    member.setBirthday(today);
     LocalDate birthday = LocalDate.parse("1991-01-31");
     member.setBirthday(birthday);
-
 
     memberService.addMember(member);
 
@@ -191,6 +183,8 @@ public class UserLoginController {
     log.info("======= httpSession.getCreationTime() : " + httpSession.getCreationTime());
     log.info("=======  httpSession.getLastAccessedTime() : " + httpSession.getLastAccessedTime());
 
+    //log.info("******** loginUser.getMember().getOrders().size() : "+ loginUser.getMember().getOrders().size());
+
     return "user/temp";
   }
 
@@ -205,5 +199,61 @@ public class UserLoginController {
     return "/user/login?error=true";
   }*/
 
+  @GetMapping("/info")
+  public String showInfo(@RequestParam("userId") String userId) {
 
+    return "user/login/login-info";
+  }
+
+  /**
+   * 현재 로그인된 유저가 갖고있는 cart_product 목록을 가져온다.
+   *
+   * @param userId 현재 로그인 되어 있는 유저의 id
+   * @return cart 페이지(cart.html)
+   *
+   * 상품-옵션 별 수량 --> 현재 table에 정의되어 있지 않음, 나중에 구현
+   *
+   * TODO: 현재는 url에 id를 입력해야 함. 향후 Authentication을 사용해 현재 로그인 되어 있는 유저의 cart를 가져오는 것으로 수정
+   */
+  @GetMapping("/cart")
+  public String cart(@RequestParam("id") Long userId, ModelMap modelMap) {
+    List<UserCartProductDto> cartProducts = memberService.getUserCartProduct(userId);
+    modelMap.addAttribute("cartProducts", cartProducts);
+
+    int totalPrice = 0;
+    int totalShippingPrice = 0;
+    for (UserCartProductDto cartProduct : cartProducts) {
+      totalPrice += (cartProduct.getSellingPrice() * cartProduct.getQuantity());
+      totalShippingPrice += cartProduct.getShippingPrice();
+    }
+    int totalPaymentPrice = totalPrice + totalShippingPrice;
+    modelMap.addAttribute("totalPrice", totalPrice);
+    modelMap.addAttribute("productCount", cartProducts.size());
+    modelMap.addAttribute("totalShippingPrice", totalShippingPrice);
+    modelMap.addAttribute("totalPaymentPrice", totalPaymentPrice);
+
+//    log.info("============= UserCartProductDto 반복문 =============");
+//    for (UserCartProductDto userCartProductDto : cartProducts) {
+//      log.info("cartProductId: " + userCartProductDto.getCartProductId());
+//      log.info("productId: " + userCartProductDto.getProductId());
+//      log.info("productName: " + userCartProductDto.getProductName());
+//      log.info("quantity: " + userCartProductDto.getQuantity());
+//      log.info("originalPrice: " + userCartProductDto.getOriginalPrice());
+//      log.info("sellingPrice: " + userCartProductDto.getSellingPrice());
+//      log.info("shippingPrice: " + userCartProductDto.getShippingPrice());
+//      log.info("imagePath: " + userCartProductDto.getImagePath());
+//      log.info("==================================================");
+//    }
+
+    return "user/cart";
+  }
 }
+
+
+
+
+
+
+
+
+

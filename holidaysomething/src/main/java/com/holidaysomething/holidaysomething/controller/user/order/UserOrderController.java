@@ -49,22 +49,22 @@ public class UserOrderController {
   private final ShippingService shippingService;
 
   //어떤 회원이 주문했는지 받아오기, 어떤 상품을 주문했는지 받아오기
-  @GetMapping
-  public String order(Model model,
-      @AuthenticationPrincipal MemberUserDetails userDetails,
-      ProductOrderInfoCommand poc){
-
-    AddOrderMemberDto addOrderMemberDto = memberService.findMemberById(userDetails.getId());
-    model.addAttribute("addOrderMemberDto",addOrderMemberDto);
-
-    // ProductOrderInfoCommand 를 ProductOrderInfo의 리스트로 바꾸어주는 메소드
-    List<ProductOrderInfoDto> productOrderInfoDtos = productOrderService.fromProductOrderInfoCommandToProductOrderInfoList(poc);
-
-
-    //model.addAttribute("productOrderInfoDto", productOrderInfoDto);
-
-    return "user/order";
-  }
+//  @GetMapping
+//  public String order(Model model,
+//      @AuthenticationPrincipal MemberUserDetails userDetails,
+//      ProductOrderInfoCommand poc){
+//
+//    AddOrderMemberDto addOrderMemberDto = memberService.findMemberById(userDetails.getId());
+//    model.addAttribute("addOrderMemberDto",addOrderMemberDto);
+//
+//    // ProductOrderInfoCommand 를 ProductOrderInfo의 리스트로 바꾸어주는 메소드
+//    List<ProductOrderInfoDto> productOrderInfoDtos = productOrderService.fromProductOrderInfoCommandToProductOrderInfoList(poc);
+//
+//
+//    //model.addAttribute("productOrderInfoDto", productOrderInfoDto);
+//
+//    return "user/order";
+//  }
 
   //주문 버튼을 누르면, orderd_product, order, shipping, payment에 데이터가 추가됨
 
@@ -104,7 +104,7 @@ public class UserOrderController {
   @PostMapping("/finish")
   public void orderComplete(Model model,
       ShippingDto shippingDto,
-      @RequestBody ProductOrderDetailCommand poc,
+      ProductOrderDetailCommand poc,
       ProductOrderCompleteDto productOrderCompleteDto,
       @AuthenticationPrincipal MemberUserDetails userDetails){
     //주문테이블 등록

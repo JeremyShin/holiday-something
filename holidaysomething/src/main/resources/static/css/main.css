@@ -137,7 +137,8 @@
 }
 
 .user-dashboard {
-  width: 100%;
+  /*width: 100%;*/
+  margin: 10px 50px 10px 50px;
 }
 
 .user-content {
@@ -186,4 +187,164 @@
 
 .user-header-category:hover .middle-category {
   display: block; /* 마우스 커서 올리면 서브메뉴 보이게 하기 */
+}
+
+/* User Product-detail Page CSS */
+#root-info {
+  width: 100%;
+  height: auto;
+  min-height: 520px;
+  margin-top: 5%;
+}
+
+#top-info-left {
+  width: 45%;
+  height: auto;
+  position: relative;
+  float: left;
+}
+#top-info-right {
+  width: 55%;
+  height: auto;
+  position: relative;
+  float: right;
+}
+#top-info-left-abs {
+  position: absolute;
+  top: 0px;
+  left: 10%;
+  right: 2%;
+}
+
+#top-info-right-abs {
+  position: absolute;
+  top: 0px;
+  left: 3%;
+  right: 10%;
+}
+
+#option-selector {
+  width: 100%;
+  height: 32px;
+  background-color: white;
+  font-size: 13px;
+  padding-left: 12px;
+}
+
+#order-index-result {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  text-align: right;
+  display: none;
+}
+
+#order-index-total-price {
+  color: red;
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+.order-index-button {
+  width: 25px;
+  text-align: center;
+}
+
+.order-option-delete-button {
+  width: 25px;
+  text-align: center;
+}
+
+.option-order-quantity {
+  width: 40px;
+  text-align: center;
+  IME-MODE:disabled;
+}
+
+.shopping-bag-button {
+  width: 49%;
+  height: 43px;
+  background-color: white;
+  font-weight: bold;
+  margin: 0px;
+  border-radius:10px 0 10px 0;
+}
+
+.buy-now-button {
+  width: 50%;
+  height: 43px;
+  border: none;
+  background-color: black;
+  font-weight: bold;
+  color: white;
+  margin: 0px;
+  border-radius:10px 0 10px 0;
+}
+
+.buy-now-button:hover {
+  background-color: #F7D358;
+}
+
+.order-index-table-option {
+  width: 49%;
+  height: 50px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.order-index-table-price {
+  width: 20%;
+  font-size: 17px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.order-index-table-quantity {
+  width: 25%;
+  text-align: right;
+}
+
+.order-index-table-delete {
+  width: 5%;
+}
+
+.order-index-hidden-price {
+  width : 1%;
+}
+
+.product-info {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.product-info-margin {
+  margin-top: 5%;
+}
+
+.product-name {
+  font-size: 25px;
+  color: black;
+  font-weight: bold;
+}
+
+.product-price {
+  font-size: 24px;
+  color: red;
+  font-weight: bold;
+}
+
+.li-line-height {
+  line-height: 25px;
+}
+
+.product-table-th {
+  width: 30%;
+  border: 1px solid #d3d3d3;
+  padding: 10px;
+}
+
+.product-table-td {
+  width: 70%;
+  border: 1px solid #d3d3d3;
+  padding: 23px;
 }

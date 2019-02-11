@@ -3,14 +3,14 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xml:th="http:/www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-      layout:decorate="~{layout/user-default.html}">
+      layout:decorate="~{layout/user-default}">
 
 <!--<head th:include="fragments/header :: userHeaderFragment">-->
   <!--<title id="pageTitle">Page title</title>-->
 <!--</head>-->
 
 <head th:include="fragments/config :: configFragment">
-  <title id="pageTitle">Page title</title>
+  <title id="pageTitle">Holiday Something</title>
   <!-- other elements you want to reference in your layout -->
 </head>
 
@@ -26,6 +26,7 @@
   <!-- 사용자가 인증 되었을 때 보인다. name 은 principal 의 getName 인듯...?-->
   <div sec:authorize="isAuthenticated()">
     Hello <span sec:authentication="name"></span>
+    <!--<a th:href="@{'/user/'+ ${#authentication.principal.id}}">memberInfo</a>-->
   </div>
 
   <form method='POST' th:action="@{/user/add}">

@@ -21,10 +21,10 @@ const HeaderCategoriesWrapper = styled.div`
     font-size: 15px;
     font-weight: 600;
   }
-  & a {
+  & > div > a {
     text-decoration: none;
   }
-  & a:visited {
+  & > div > a:visited {
     color: inherit;
   }
 `;
@@ -33,11 +33,12 @@ class HeaderCategories extends Component {
   render() {
     return (
       <HeaderCategoriesWrapper className="header-categories">
-        <div><a href="{#}">Stationery</a></div>
-        <div><a href="{#}">D.I.Y</a></div>
-        <div><a href="{#}">Fashion</a></div>
-        <div><a href="{#}">Design</a></div>
-        <div><a href="{#}">Soap</a></div>
+        {/* 이렇게만 해도 8080 포트 상에서 실행할 때는 mypage와 /product/* 페이지 사이를 잘 이동한다. */}
+        {/* 단, 3000 포트에서 react 테스트 시 다른 포트(8080)로 이동하는 방법은 아직 모르겠다. */}
+        <div><a href="/product/1">Stationery</a></div>
+        <div><a href="/product/2">D.I.Y</a></div>
+        <div><a href="/product/3">Fashion</a></div>
+        <div><a href="/product/4">Food</a></div>
       </HeaderCategoriesWrapper>
     );
   }
