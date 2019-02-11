@@ -38,6 +38,4 @@ public interface MemberService {
 
   // 나중에 불필요.테스트용으로 만드는거.
   void addRole(Role role);
-
-  List<UserCartProductDto> getUserCartProduct(Long userId);
 }
