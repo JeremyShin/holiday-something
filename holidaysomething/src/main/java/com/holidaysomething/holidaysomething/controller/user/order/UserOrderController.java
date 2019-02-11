@@ -100,6 +100,8 @@ public class UserOrderController {
     return "user/order";
   }
 
+  ProductOrderDetailDtos[1].img
+
   /* 주문 Checkout -> Order, Shipping, Ordered_Product 테이블에 각각 값 저장 */
   @PostMapping("/finish")
   public void orderComplete(Model model,
