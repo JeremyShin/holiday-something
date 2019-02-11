@@ -1,5 +1,7 @@
 package com.holidaysomething.holidaysomething.service.product;
 
+import com.holidaysomething.holidaysomething.dto.ProductOrderDetailCommand;
+import com.holidaysomething.holidaysomething.dto.ProductOrderDetailDto;
 import com.holidaysomething.holidaysomething.dto.ProductOrderInfoCommand;
 import com.holidaysomething.holidaysomething.dto.ProductOrderInfoDto;
 import java.util.List;
@@ -17,5 +19,12 @@ public class ProductOrderServiceImpl implements ProductOrderService {
       ProductOrderInfoCommand poc) {
     List<ProductOrderInfoDto> productOrderInfoDtos = poc.getProductOrderInfoDtos();
     return productOrderInfoDtos;
+  }
+
+  @Override
+  public List<ProductOrderDetailDto> fromProductOrderDetailCommandToProductOrderDetailList(
+      ProductOrderDetailCommand poc) {
+    List<ProductOrderDetailDto> productOrderDetailDtos = poc.getProductOrderDetailDtos();
+    return productOrderDetailDtos;
   }
 }

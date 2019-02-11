@@ -4,17 +4,22 @@ import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.dto.AddOrderMemberDto;
+import com.holidaysomething.holidaysomething.dto.ProductDetailDto;
 import com.holidaysomething.holidaysomething.dto.ProductOptionCommand;
 import com.holidaysomething.holidaysomething.dto.ProductOptionDto;
+import com.holidaysomething.holidaysomething.dto.ProductOrderCompleteDto;
+import com.holidaysomething.holidaysomething.dto.ProductOrderDetailCommand;
 import com.holidaysomething.holidaysomething.dto.ProductOrderDetailDto;
 import com.holidaysomething.holidaysomething.dto.ProductOrderInfoCommand;
 import com.holidaysomething.holidaysomething.dto.ProductOrderInfoDto;
+import com.holidaysomething.holidaysomething.dto.ShippingDto;
 import com.holidaysomething.holidaysomething.security.MemberUserDetails;
 import com.holidaysomething.holidaysomething.service.member.MemberService;
 import com.holidaysomething.holidaysomething.service.order.OrderService;
 import com.holidaysomething.holidaysomething.service.product.ProductOptionService;
 import com.holidaysomething.holidaysomething.service.product.ProductOrderService;
 import com.holidaysomething.holidaysomething.service.product.ProductService;
+import com.holidaysomething.holidaysomething.service.shipping.ShippingService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -41,6 +46,7 @@ public class UserOrderController {
   private final ProductOrderService productOrderService;
   private final ProductOptionService productOptionService;
   private final ProductService productService;
+  private final ShippingService shippingService;
 
   //어떤 회원이 주문했는지 받아오기, 어떤 상품을 주문했는지 받아오기
   @GetMapping
@@ -96,6 +102,29 @@ public class UserOrderController {
 
   /* 주문 Checkout -> Order, Shipping, Ordered_Product 테이블에 각각 값 저장 */
   @PostMapping("/finish")
+  public void orderComplete(Model model,
+      ShippingDto shippingDto,
+      @RequestBody ProductOrderDetailCommand poc,
+      ProductOrderCompleteDto productOrderCompleteDto,
+      @AuthenticationPrincipal MemberUserDetails userDetails){
+    //주문테이블 등록
+    //ProductOrderDetailCommand ->  List<ProductOrderDetail>
+    List<ProductOrderDetailDto> productOrderDetailDtos =
+        productOrderService.fromProductOrderDetailCommandToProductOrderDetailList(poc);
+
+    productOrderCompleteDto.setMemberId(userDetails.getMember().getId());
+    log.info("주문완료" + productOrderDetailDtos.get(0).getProductName());
+    //orderService.add(productOrderCompleteDto, productOrderDetailDtos.get(0));
+
+    // 주문 등록한 order_id를 받아와야함
+    // 주문상품 테이블 등록
 
 
+
+    // 배송테이블 등록
+    // 문제 : 배송테이블에 언제 등록을 해줄것인가?
+    shippingService.addShipping(shippingDto);
+
+
+  }
 }
