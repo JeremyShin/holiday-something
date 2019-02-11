@@ -8,6 +8,24 @@ const RecentOrderWrapper = styled.div`
 class RecentOrder extends Component {
   render() {
     const { user } = this.props;
+    
+    let orders;
+    if (user.orders === null) {
+      orders = '';
+    } else {
+      console.log(user);
+      // orders = user.member.orders.map((order) => {
+      orders = user.orders.map((order) => {
+        return (
+          <tr key={order.id}>
+            <td>{order.date}</td>
+            <td>{order.orderedProduct[0].product.name}</td>
+            <td>{order.orderNumber}</td>
+            <td>{order.totalPrice}원</td>
+          </tr>
+        )
+      })
+    }
 
     return (
       <RecentOrderWrapper>
@@ -22,7 +40,8 @@ class RecentOrder extends Component {
             </tr>
           </thead>
           <tbody>
-            {user.orders.map((order) => {
+            {orders}
+            {/* {user.orders.map((order) => {
               return (
                 <tr key={order.id}>
                   <td>{order.date}</td>
@@ -31,7 +50,7 @@ class RecentOrder extends Component {
                   <td>{order.totalPrice}원</td>
                 </tr>
               )
-            })}
+            })} */}
           </tbody>
         </table>
       </RecentOrderWrapper>

@@ -3,19 +3,19 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:text-align="http://www.w3.org/1999/xhtml"
       xml:th="http:/www.thymeleaf.org"
-      layout:decorate="~{layout/user-default.html}">
+      layout:decorate="~{layout/user-default}">
 
 <head th:include="fragments/header :: userHeaderFragment">
   <title id="pageTitle">temp</title>
 </head>
 
-<body>
-<h1>Temp!! 정보확인용! </h1>
-<label th:text="${id}"></label>
-<label th:text="${username}"></label>
-<label th:text="${nickname}"></label>
 
-</body>
+<div layout:fragment="userContents">
+  <h1>Temp!! 정보확인용! </h1>
+  <label th:text="${id}"></label>
+  <label th:text="${username}"></label>
+  <label th:text="${nickname}"></label>
+</div>
 
 
 </html>

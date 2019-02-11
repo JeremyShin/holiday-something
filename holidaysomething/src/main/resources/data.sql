@@ -249,8 +249,8 @@ INSERT INTO orders (id, order_number, date, total_price, status, mileage, member
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112960137526', '2018-11-15', 3000, '배송완료', 30, 18, 26, 26);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112960137527', NOW(), 3000, '배송완료', 30, 20, 27, 27);
 INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137528', '2018-11-11', 3000, '배송준비중', 30, 24, 28, 28);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137529', '2018-09-11', 4500, '배송준비중', 40, 22, 29, 29);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137530', '2018-10-29', 4500, '배송준비중', 40, 29, 22, 30);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137529', '2018-09-11', 4500, '배송준비중', 40, 1, 29, 29);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137530', '2018-10-29', 4500, '배송준비중', 40, 1, 22, 30);
 
 
 -- INSERT INTO product_category (id,name,parent_id,orders) VALUES (1,'문구', 0 ,1);
@@ -607,7 +607,7 @@ INSERT INTO cart_product(price, quantity, member_id, product_id) VALUES (1000, 1
 
 
 INSERT INTO role(name) values('ADMIN');
--- INSERT INTO role(name) values('USER');
+INSERT INTO role(name) values('USER');
 -- INSERT INTO role(name) values('NONE');
 --
 INSERT INTO member_role(member_id,role_id) values(1,1);
@@ -803,6 +803,13 @@ INSERT INTO product_image(id, category, file_type, original_file_name, path, reg
 VALUES (null, 1, 'image/jpeg', '004.jpg', 'https://holidaysomething-webservice-s3.s3.ap-northeast-2.amazonaws.com/static/images/', '2019-02-07 12:52:08', 864623.0, 'b39df3cd-adf6-4300-a35a-8ce5c07ababf', '2019-02-07 12:52:08', 46);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
 VALUES (null, 2, 'image/jpeg', '006.jpg', 'https://holidaysomething-webservice-s3.s3.ap-northeast-2.amazonaws.com/static/images/', '2019-02-07 12:52:08', 676785.0, '9271b541-0fa4-4ee0-a3e8-ade9ed0dc80a', '2019-02-07 12:52:08', 46);
+
+
+INSERT INTO product_detail(id, description) VALUES (null, '중국산이야~ 사과즙이야!');
+INSERT INTO product (id,code,manufacturer,name,optional_price_text,original_price,quantity,selling_price,shipping_price,product_category_id,product_detail_id,manufacturing_price, selling_quantity,safe_quantity,mileage,display,manufacture_date,reg_date,release_date)
+VALUES (46,'11231319','중국','짝퉁사과즙',NULL,10000,10,800,2500,45,45,1, 0, 3, 0, false,  '2018-12-24 12:22:05',  '2018-12-25 09:22:05',  '2018-12-25 10:22:05');
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
+VALUES (null, 1, 'image/jpeg', 'appletea.jpg', 'https://img.29cm.co.kr/contents/itemDetail/201801/', '2018-12-03 09:23:35', 13900.0, 'cut4_120180126142433.jpg?width=700', '2018-12-03 09:33:35', 46);
 
 
 

@@ -15,7 +15,7 @@ const MainContentHeader = (props) => {
       <p>{props.user.nickname}</p>
       <div>
         <p>마일리지</p>
-        <p>{props.user.mileage}</p>
+        <p>{props.user.mileage} 점</p>
       </div>
     </MainContentHeaderWrapper>
   );

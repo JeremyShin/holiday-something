@@ -117,13 +117,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .formLogin()
         .loginPage("/user/login")
         .loginProcessingUrl("/user/authenticate")
-        .usernameParameter("loginId").passwordParameter("password")
+        .usernameParameter("loginId").passwordParameter("password") // login form의 name과 맞춰줘야 한다.
 //        .defaultSuccessUrl("/user/after")
         .successHandler(successHandler()) // 로그인 이전 페이지로 이동할때 사용.
 //        .failureHandler(failureHandler());
         .failureUrl("/user/login?error=true");
 
-    http.csrf().disable();
+//    http.csrf().disable();
 
     /*
     예외처리??? 로그인 id, password 입력 글자수 제한은 정규표현식 이용해서 프론트에서도
@@ -151,9 +151,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http
         .logout()
         .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
-        .logoutSuccessUrl("/")
         .invalidateHttpSession(true) // logout 시 모든 세션을 없애주는건가?
-        .deleteCookies("JSESSIONID") // remember me?? 쿠키 삭제하는것도 써줘야할듯.
+        .deleteCookies("auth_code", "JSESSIONID") // remember me?? 쿠키 삭제하는것도 써줘야할듯.
+        .logoutSuccessUrl("/")
         .permitAll();
 
     http

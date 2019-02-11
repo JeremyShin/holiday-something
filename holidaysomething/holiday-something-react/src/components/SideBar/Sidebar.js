@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './SideBar.css'
 
 const SideBarWrapper = styled.div`
@@ -14,9 +14,9 @@ class SideBar extends Component {
     return (
       <SideBarWrapper>
         <h3 className="user-name">{this.props.user.name}님</h3>
-        <Link to="/orders"><p>주문배송 조회</p></Link>
-        <Link to="/account"><p>회원정보 수정</p></Link>
-        <Link to="/mileage"><p>마일리지 현황</p></Link>
+        <NavLink to="/orders" className="Nav_link"><p>주문배송 조회</p></NavLink>
+        <NavLink to="/account" className="Nav_link"><p>회원정보 수정</p></NavLink>
+        <NavLink to="/mileage" className="Nav_link"><p>마일리지 현황</p></NavLink>
       </SideBarWrapper>
     );
   }
