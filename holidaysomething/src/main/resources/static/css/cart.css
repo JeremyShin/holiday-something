@@ -11,18 +11,50 @@ button {
 
 .cart-tbl {
   width: 100%;
-  margin: 150px auto 40px auto;
+  margin: 150px auto 22px auto;
 }
 
-.tr-first {
+.result-tbl {
+  margin-top: 60px;
+  margin-bottom: 80px;
+}
+
+.cart-tr-th {
   border-top: 4px solid #000000;
   border-bottom: 1px solid #D4D4D4;
 }
 
-.tr-first th {
+.cart-tr-th th {
+  text-align: center;
+}
+
+.product-list th {
   padding: 6px;
   font-size: 12px;
+}
+
+.total-pay th {
+  padding: 17px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.pay-price {
+  border-bottom: 1px solid #000000;
+}
+
+.pay-price td {
   text-align: center;
+  padding: 20px 10px;
+}
+
+.price-large-txt {
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+.price-large-txt:first-child {
+  display: block;
 }
 
 .th-checkbox {
@@ -45,6 +77,14 @@ button {
 
 .tr-product td:nth-child(n+2):nth-child(-n+4) {
   border-right: 1px solid #D4D4D4;
+}
+
+.tr-product td:nth-child(3) {
+  width: 13%;
+}
+
+.tr-product td:nth-child(n+4):nth-child(-n+5) {
+  width: 15%;
 }
 
 .tr-product td:nth-last-child(-n+3) {
@@ -95,6 +135,11 @@ button {
 .tr-product-info {
   display: flex;
   width: 100%;
+  padding-right: 30px;
+}
+
+.tr-product-info div:last-child {
+  margin-left: auto;
 }
 
 .product-image-div {
@@ -133,6 +178,20 @@ button {
 
 .product-option {
   font-size: 12px;
+}
+
+.btn-remove button {
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  text-indent: -9999em;
+  padding: 8px;
+  font-size: .75rem;
+  line-height: 1em;
+  border: 1px solid #d4d4d4;
+  color: #a0a0a0;
+  background: url('http://img.29cm.co.kr/mall/order/icon-remove.png') no-repeat 9px 50%;
+  background-size: 40px auto;
 }
 
 .input-quantity {
@@ -195,6 +254,23 @@ button {
   justify-content: space-between;
 }
 
+.cart-tbl-below p {
+  font-size: 12px;
+}
+
+.dlt-product-btn button {
+  padding: 8px 14px;
+  border: 1px solid #a0a0a0;
+  color: #303033;
+  font-size: 1.2rem;
+  line-height: 1.3333em;
+}
+
+.dlt-product-btn button:hover {
+  border: 1px solid #000;
+  color: #000;
+}
+
 .tbl-th {
   display: flex;
 }
@@ -213,7 +289,7 @@ button {
 
 .order-btn-wrap {
   width: 600px;
-  margin: 10px auto;
+  margin: 60px auto 10px auto;
 }
 
 .btn-shopping {
@@ -222,7 +298,7 @@ button {
   border-radius: 0;
   height: 60px;
   color: #303033;
-  font-size: 1em;
+  font-size: 1.1em;
   font-weight: 600;
   line-height: 60px;
   vertical-align: top;
@@ -232,7 +308,7 @@ button {
   width: 275px;
   height: 60px;
   line-height: 60px;
-  font-size: 1.5rem;
+  font-size: 2.3rem;
   font-weight: 600;
   color: #fff;
   background-color: #000;
