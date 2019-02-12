@@ -123,7 +123,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        .failureHandler(failureHandler());
         .failureUrl("/user/login?error=true");
 
-    http.csrf().disable();
+//    http.csrf().disable();
 
     /*
     예외처리??? 로그인 id, password 입력 글자수 제한은 정규표현식 이용해서 프론트에서도

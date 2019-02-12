@@ -90,6 +90,7 @@
       </table>
 
       <button type="submit" id="productOptionFormSubmit">삭제</button>
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
     </form>
 
     <!-- Page 번호 -->
