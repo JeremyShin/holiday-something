@@ -152,17 +152,7 @@
             <label>적립금 : </label>
             <input name="mileage" type="text" placeholder="Mileage" id="inputMileage">
           </div>
-          <div>
-            <label th:class="${#fields.hasErrors('quantity')} ? 'fieldError'">재고??? : </label>quantity
-            <input name="quantity" type="text" placeholder="Quantity" id="inputQuantity"
-                   th:field="*{quantity}" th:class="${#fields.hasErrors('quantity')} ? 'fieldError'">
-            <label th:if="${#fields.errors('quantity')}" th:errors="*{quantity}">input is
-              incorrect</label>
-          </div>
-          <div>
-            <label>안전재고?? : </label>
-            <input name="safeQuantity" placeholder="Safe Quantity" id="inputSafeQuantity">
-          </div>
+
           <div>
             <label>화면에 바로 보여줄거에요? </label>
             <input name="display" type="checkbox" id="checkDisplay">
@@ -186,26 +176,6 @@
           </div>
 
         </div>
-
-        <div>
-          <label>메인 이미지 등록</label><br>
-          <input name="mainImage" type="file" id="inputMainImage">
-        </div>
-        <div>
-          <label>서브 이미지 등록</label>
-          <input name="subImages" type="file">
-          <input name="subImages" type="file">
-          <input name="subImages" type="file">
-          <input name="subImages" type="file">
-        </div>
-        <div>
-          <input type="button" id="saveBtn" value="상품등록">
-        </div>
-        <div>
-          <input hidden type="submit" id="submitBtn">
-        </div>
-
-      </div>
       <!-- TODO 일단 주석 처리, Ajax csrf 문제를 해결해야 함 -->
       <!--<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
 
@@ -267,7 +237,6 @@
                   + youtubeId
                   + '"  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
             }
-          });
 
           $(document).ready(function () {
             $('#editSection').tuiEditor({
