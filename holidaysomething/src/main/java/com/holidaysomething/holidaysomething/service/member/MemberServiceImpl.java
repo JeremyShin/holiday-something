@@ -30,7 +30,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberServiceImpl implements MemberService {
 
   private final MemberRepository memberRepository;
-  private final CartProductRepository cartProductRepository;
   private final RoleRepository roleRepository;
 
   @Override
@@ -152,11 +151,5 @@ public class MemberServiceImpl implements MemberService {
   @Transactional
   public void addRole(Role role) {
     roleRepository.save(role);
-
-  }
-
-  @Override
-  public List<UserCartProductDto> getUserCartProduct(Long userId) {
-    return cartProductRepository.findCartProductById(userId);
   }
 }
