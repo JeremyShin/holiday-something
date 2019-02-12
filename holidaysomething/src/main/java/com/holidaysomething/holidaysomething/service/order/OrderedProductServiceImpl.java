@@ -45,6 +45,7 @@ public class OrderedProductServiceImpl implements OrderedProductService {
       orderedProduct.setMileage(product.getMileage());
       orderedProduct.setQuantity(orderInfo.getQuantity());
       orderedProduct.setProduct(product);
+      orderedProduct.setProductOption(productOption);
 
       orderedProductRepository.save(orderedProduct);
 

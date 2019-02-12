@@ -48,6 +48,10 @@ public class OrderedProduct {
   @JoinColumn(name = "product_id")
   private Product product;
 
+  @ManyToOne
+  @JoinColumn(name = "option_id")
+  private ProductOption productOption;
+
   @OneToOne
   @JoinColumn(name = "exchange_refund_id")
   @JsonIgnore
