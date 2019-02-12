@@ -18,7 +18,7 @@
 <div layout:fragment="content">
   <!-- 사용자 스크립트 추가 -->
   <th:block layout:fragment="script">
-    <script th:src="@{/js/popup.js}"></script>
+    <script th:src="@{/static/js/popup.js}"></script>
   </th:block>
   <br>
   <br>
@@ -76,10 +76,6 @@
       </td>
     </tr>
     <tr>
-      <td>재고</td>
-      <td><label th:text="${product.quantity}"></label></td>
-      <td>안전재고</td>
-      <td><label th:text="${product.safeQuantity}"></label></td>
       <td>출시일</td>
       <td><label
           th:text="${#temporals.format(product.releaseDate , 'yyyy-MM-dd HH:mm:ss')}"></label></td>
