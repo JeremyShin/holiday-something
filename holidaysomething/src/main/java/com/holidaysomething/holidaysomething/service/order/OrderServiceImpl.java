@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
   @Override
   public Order add(Integer totalUseMileage,
       List<ProductOrderInfoDto> orderInfos, Long memberId) {
-    String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-ddHH:mm:ss"));
     int totalPrice = 0;
 
     log.info("서비스입니다.");

@@ -5,6 +5,7 @@ import com.holidaysomething.holidaysomething.domain.Order;
 import com.holidaysomething.holidaysomething.domain.OrderedProduct;
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
+import com.holidaysomething.holidaysomething.domain.Shipping;
 import com.holidaysomething.holidaysomething.dto.AddOrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.ProductDetailDto;
 import com.holidaysomething.holidaysomething.dto.ProductOptionCommand;
@@ -139,11 +140,11 @@ public class UserOrderController {
     List<OrderedProduct> orderedProducts = orderedProductService.add(order.getId(), orderInfos);
 
     // 배송테이블 등록
-    // 문제 : 배송테이블에 언제 등록을 해줄것인가?
-    shippingService.addShipping(shippingDto);
+    ShippingDto shippingResult = shippingService.addShipping(shippingDto);
 
     model.addAttribute("order", order);
     model.addAttribute("orderedProducts", orderedProducts);
+    model.addAttribute("shipping",shippingResult);
 
     return "user/order-complete";
   }
