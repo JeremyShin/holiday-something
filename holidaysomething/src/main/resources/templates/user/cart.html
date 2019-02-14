@@ -29,7 +29,7 @@
         <th class="th-checkbox">
           <!--<input type="checkbox"/>-->
           <input type="checkbox" id="checkbox-all"/>
-          <label for="checkbox-all">
+          <label for="checkbox-all" id="checkbox-all-label">
             <div><i class="fa fa-check"></i></div>
           </label>
         </th>
@@ -101,12 +101,10 @@
     <!-- 상품 삭제 버튼 / 상품 만료일 안내 -->
     <div class="cart-tbl-below">
       <div class="dlt-product-btn">
-        <button>선택상품 삭제</button>
+        <button class="remove-selected-products">선택상품 삭제</button>
         <button>품절상품 삭제</button>
       </div>
-      <div>
-        <p>장바구니는 접속 종료 후 60일 동안 보관됩니다.</p>
-      </div>
+      <p>장바구니는 접속 종료 후 60일 동안 보관됩니다.</p>
     </div>
 
     <!-- 총 결제금액 계산 결과 (표) -->
