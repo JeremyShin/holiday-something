@@ -41,8 +41,8 @@ public class Order {
   @Column(nullable = false)
   private int totalPrice;
 
-  @Column(nullable = false)
-  private String status;
+  @Column
+  private Integer status;
 
   @Column(columnDefinition = "integer default 0")
   private int mileage;

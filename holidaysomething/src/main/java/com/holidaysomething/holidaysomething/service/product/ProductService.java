@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.service.product;
 
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
+import com.holidaysomething.holidaysomething.dto.ProductOrderDetailDto;
 import com.holidaysomething.holidaysomething.dto.SearchDto;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 public interface ProductService {
 
   //Product findByProductNameContaining(String productName);
+
+  ProductOrderDetailDto getProductForOrder(Long productId, Long optionId, Integer quantity);
 
   Page<Product> findByProductNameContaining(String productName, Pageable pageable);
 

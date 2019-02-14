@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.service.member;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Role;
+import com.holidaysomething.holidaysomething.dto.AddOrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.CurrentMemberDto;
 import com.holidaysomething.holidaysomething.dto.MemberMileageDto;
 import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
@@ -31,6 +32,7 @@ public class MemberServiceImpl implements MemberService {
 
   private final MemberRepository memberRepository;
   private final RoleRepository roleRepository;
+  private final CartProductRepository cartProductRepository;
 
   @Override
   @Transactional(readOnly = true)
@@ -151,5 +153,28 @@ public class MemberServiceImpl implements MemberService {
   @Transactional
   public void addRole(Role role) {
     roleRepository.save(role);
+
+  }
+
+  @Override
+  public AddOrderMemberDto findMemberById(Long id) {
+    AddOrderMemberDto addOrderMemberDto = new AddOrderMemberDto();
+
+    Member member = memberRepository.findMemberById(id);
+
+    addOrderMemberDto.setName(member.getName());
+    addOrderMemberDto.setPhone(member.getPhone());
+    addOrderMemberDto.setEmail(member.getEmail());
+    addOrderMemberDto.setAddress1(member.getAddress1());
+    addOrderMemberDto.setAddress2(member.getAddress2());
+    addOrderMemberDto.setPostcode(member.getPostcode());
+    addOrderMemberDto.setMileage(member.getMileage());
+
+    return addOrderMemberDto;
+  }
+
+  public List<UserCartProductDto> getUserCartProduct(Long userId) {
+    return cartProductRepository.findCartProductById(userId);
+
   }
 }

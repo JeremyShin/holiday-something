@@ -52,13 +52,7 @@ public class ProductAddDto {
   @Min(value = 0, message = "shippingPrice higher than 0")
   private Integer shippingPrice;
 
-  @NotNull(message = "quantity must be not null")
-  @Min(value = 0, message = "quantity higher than 0")
-  private Integer quantity;
-
   private Integer sellingQuantity;
-
-  private Integer safeQuantity;
 
   private Integer mileage;
 
