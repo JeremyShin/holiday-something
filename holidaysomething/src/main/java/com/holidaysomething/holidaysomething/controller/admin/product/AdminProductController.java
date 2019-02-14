@@ -227,4 +227,6 @@ AdminProductController {
         return "admin/product/detail";
     }
 
+    // 상품 수정
+
 }

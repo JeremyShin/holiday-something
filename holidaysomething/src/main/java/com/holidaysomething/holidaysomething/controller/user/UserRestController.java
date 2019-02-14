@@ -5,10 +5,12 @@ import com.holidaysomething.holidaysomething.dto.AuthenticatedMemberDto;
 import com.holidaysomething.holidaysomething.dto.CurrentMemberDto;
 import com.holidaysomething.holidaysomething.security.MemberUserDetails;
 import com.holidaysomething.holidaysomething.service.member.MemberService;
+import com.holidaysomething.holidaysomething.service.product.CartProductService;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -17,12 +19,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -33,9 +37,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserRestController {
 
   private MemberService memberService;
+  private CartProductService cartProductService;
 
-  public UserRestController(MemberService memberService) {
+  public UserRestController(
+      MemberService memberService,
+      CartProductService cartProductService) {
     this.memberService = memberService;
+    this.cartProductService = cartProductService;
   }
 
   /**
@@ -148,5 +156,15 @@ public class UserRestController {
     }
 
     return memberService.patchMember(member);
+  }
+
+  @DeleteMapping("/user/cart/{cartProductId}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteCartProduct(@PathVariable("cartProductId") Long id) {
+    try {
+      cartProductService.removeCartProductById(id);
+    } catch (EmptyResultDataAccessException e) {
+      e.printStackTrace();
+    }
   }
 }

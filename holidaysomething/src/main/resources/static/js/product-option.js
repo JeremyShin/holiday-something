@@ -163,6 +163,7 @@ let finishModify = function (source) {
   let req = new XMLHttpRequest();
   req.open('POST', '/admin/product/option/modify', true);
   req.setRequestHeader('Content-type', 'application/json');
+  req.setRequestHeader('X-CSRF-Token', $('input[name="_csrf"]').val());
   req.send(JSON.stringify({
     id: id.innerText,
     name: name.value,

@@ -10,11 +10,13 @@ import org.springframework.data.repository.query.Param;
 public interface CartProductRepository extends JpaRepository<CartProduct, Long> {
 
   @Query(value = "SELECT new com.holidaysomething.holidaysomething.dto.UserCartProductDto"
-      + "(cp.id, p.id, p.name, cp.quantity, p.originalPrice, p.sellingPrice, p.shippingPrice, pi.path) "
+      + "(cp.id, p.id, p.name, cp.quantity, p.originalPrice, p.sellingPrice, p.shippingPrice, "
+      + "pi.path, po.name, po.price, po.description) "
       + "FROM CartProduct as cp "
       + "INNER JOIN Member as m ON cp.member.id = m.id "
       + "INNER JOIN Product as p ON cp.product.id = p.id "
       + "INNER JOIN ProductImage as pi ON p.id = pi.product.id "
+      + "INNER JOIN ProductOption as po ON cp.productOption.id = po.id "
       + "WHERE m.id = (:userId)")
   List<UserCartProductDto> findCartProductById(@Param("userId") Long userId);
 }

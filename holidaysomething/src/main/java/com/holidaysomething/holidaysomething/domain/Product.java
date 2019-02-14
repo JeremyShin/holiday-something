@@ -15,10 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -61,14 +57,8 @@ public class Product {
   @Column(nullable = false, columnDefinition = "integer default 0")
   private Integer shippingPrice;
 
-  @Column(nullable = false, columnDefinition = "integer default 0")
-  private Integer quantity;
-
   @Column(columnDefinition = "integer default 0")
   private Integer sellingQuantity;
-
-  @Column(columnDefinition = "integer default 0")
-  private Integer safeQuantity;
 
   @Column(columnDefinition = "integer default 0")
   private Integer mileage;

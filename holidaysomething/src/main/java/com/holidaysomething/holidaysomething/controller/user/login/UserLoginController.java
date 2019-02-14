@@ -204,49 +204,6 @@ public class UserLoginController {
 
     return "user/login/login-info";
   }
-
-  /**
-   * 현재 로그인된 유저가 갖고있는 cart_product 목록을 가져온다.
-   *
-   * @param userId 현재 로그인 되어 있는 유저의 id
-   * @return cart 페이지(cart.html)
-   *
-   * 상품-옵션 별 수량 --> 현재 table에 정의되어 있지 않음, 나중에 구현
-   *
-   * TODO: 현재는 url에 id를 입력해야 함. 향후 Authentication을 사용해 현재 로그인 되어 있는 유저의 cart를 가져오는 것으로 수정
-   */
-  @GetMapping("/cart")
-  public String cart(@RequestParam("id") Long userId, ModelMap modelMap) {
-    List<UserCartProductDto> cartProducts = memberService.getUserCartProduct(userId);
-    modelMap.addAttribute("cartProducts", cartProducts);
-
-    int totalPrice = 0;
-    int totalShippingPrice = 0;
-    for (UserCartProductDto cartProduct : cartProducts) {
-      totalPrice += (cartProduct.getSellingPrice() * cartProduct.getQuantity());
-      totalShippingPrice += cartProduct.getShippingPrice();
-    }
-    int totalPaymentPrice = totalPrice + totalShippingPrice;
-    modelMap.addAttribute("totalPrice", totalPrice);
-    modelMap.addAttribute("productCount", cartProducts.size());
-    modelMap.addAttribute("totalShippingPrice", totalShippingPrice);
-    modelMap.addAttribute("totalPaymentPrice", totalPaymentPrice);
-
-//    log.info("============= UserCartProductDto 반복문 =============");
-//    for (UserCartProductDto userCartProductDto : cartProducts) {
-//      log.info("cartProductId: " + userCartProductDto.getCartProductId());
-//      log.info("productId: " + userCartProductDto.getProductId());
-//      log.info("productName: " + userCartProductDto.getProductName());
-//      log.info("quantity: " + userCartProductDto.getQuantity());
-//      log.info("originalPrice: " + userCartProductDto.getOriginalPrice());
-//      log.info("sellingPrice: " + userCartProductDto.getSellingPrice());
-//      log.info("shippingPrice: " + userCartProductDto.getShippingPrice());
-//      log.info("imagePath: " + userCartProductDto.getImagePath());
-//      log.info("==================================================");
-//    }
-
-    return "user/cart";
-  }
 }
 
 

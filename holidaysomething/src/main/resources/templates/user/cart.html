@@ -22,37 +22,78 @@
   </head>
 
   <div layout:fragment="userTitle">
+
     <!-- 카트 상품 리스트(표) -->
     <table class="cart-tbl">
-      <tr>
-        <th><input type="checkbox"/></th>
+      <tr class="cart-tr-th product-list">
+        <th class="th-checkbox">
+          <!--<input type="checkbox"/>-->
+          <input type="checkbox" id="checkbox-all"/>
+          <label for="checkbox-all">
+            <div><i class="fa fa-check"></i></div>
+          </label>
+        </th>
         <th>상품 정보</th>
         <th>수량</th>
         <th>주문금액</th>
         <th>배송비</th>
       </tr>
-      <tr th:each="cartProduct : ${cartProducts}">
-        <td>
-          <input type="checkbox" th:value="${cartProduct.productId}"/>
+      <tr class="tr-product" th:each="cartProduct : ${cartProducts}">
+        <!-- checkbox -->
+        <td class="tr-checkbox">
+          <!--<input type="checkbox" th:value="${cartProduct.productId}"/>-->
+          <input type="checkbox" th:id="${cartProduct.cartProductId}" checked />
+          <label th:for="${cartProduct.cartProductId}">
+            <div><i class="fa fa-check"></i></div>
+          </label>
         </td>
-        <td class="cart-product-info-col">
-          <div>
-            <img class="cart-image" th:src="${cartProduct.imagePath}" alt="product_image_path" />
+        <!-- 상품 정보 -->
+        <td class="tr-product-info">
+          <div class="product-image-div">
+            <img th:src="${cartProduct.imagePath}" alt="product_image_path" />
           </div>
           <div>
-            <p th:text="${cartProduct.productName}">productName</p>
-            <p><span th:text="${#numbers.formatDecimal(cartProduct.originalPrice, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
-            <p><span th:text="${#numbers.formatDecimal(cartProduct.sellingPrice, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
+            <p class="product-name" th:text="${cartProduct.productName}"></p>
+            <p class="product-price product-original-price">
+              <span th:text="${#numbers.formatDecimal(cartProduct.originalPrice, 0, 'COMMA', 0, 'POINT')} + '원'"></span>
+            </p>
+            <p class="product-price product-selling-price">
+              <span th:with="discountRate = ${((0.0 + cartProduct.originalPrice - cartProduct.sellingPrice) / cartProduct.originalPrice) * 100}"
+                  th:text="${cartProduct.originalPrice != cartProduct.sellingPrice} ?
+              '[' + ${#numbers.formatDecimal(discountRate, 0, 'COMMA', 0, 'POINT')} + '%]'
+              + ${#numbers.formatDecimal(cartProduct.sellingPrice, 0, 'COMMA', 0, 'POINT')} + '원' : '&nbsp;'"></span>
+            </p>
+            <p class="product-price product-option-price">
+              <span th:text="${cartProduct.productOptionPrice != null} ?
+              '옵션추가비용 ' + ${#numbers.formatDecimal(cartProduct.productOptionPrice, 0, 'COMMA', 0, 'POINT')} + '원' : '&nbsp;'"></span>
+            </p>
+            <p class="product-option">
+              <span th:text="${cartProduct.productOptionName != null} ?
+              '옵션: ' + ${cartProduct.productOptionName} : '&nbsp;'"></span>
+            </p>
+          </div>
+          <div class="btn-remove-div">  <!-- Cart에서 상품 삭제 -->
+            <button class="btn-remove" th:id="${cartProduct.cartProductId}"></button>
           </div>
         </td>
+        <!-- 수량 -->
         <td>
-          <span th:text="${cartProduct.quantity}">수량</span>
+          <div class="input-quantity">
+            <button class="quantity-minus">-</button>
+            <input type="text" th:value="${cartProduct.quantity}">
+            <button class="quantity-plus">+</button>
+          </div>
         </td>
-        <td th:with="result=${cartProduct.sellingPrice * cartProduct.quantity}">
+        <!-- 주문금액 -->
+        <td class="cart-order-price" th:with="result = ${cartProduct.productOptionPrice == null}
+                ? ${cartProduct.sellingPrice * cartProduct.quantity} : ${(cartProduct.sellingPrice + cartProduct.productOptionPrice) * cartProduct.quantity}">
           <p><span th:text="${#numbers.formatDecimal(result, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
+          <button class="btn-buynow">Buy Now</button>
         </td>
+        <!-- 배송비 -->
         <td>
-          <p><span th:text="${#numbers.formatDecimal(cartProduct.shippingPrice, 0, 'COMMA', 0, 'POINT')}"></span> 원</p>
+          <p><span th:text="${cartProduct.shippingPrice > 0} ?
+          ${#numbers.formatDecimal(cartProduct.shippingPrice, 0, 'COMMA', 0, 'POINT')} + ' 원' : '무료 배송'"></span></p>
         </td>
       </tr>
     </table>
@@ -68,36 +109,28 @@
       </div>
     </div>
 
-    <!-- 총 결제금액 계산 결과(표) -->
-    <div class="cart-cal-total-price">
-      <ul class="tbl-list">
-        <li class="tbl-th">
-          <div class="tbl-td">
-            <span>총 주문금액</span>
-          </div>
-          <div class="tbl-td">
-            <span>총 배송비</span>
-          </div>
-          <div class="tbl-td">
-            <span>총 결제금액</span>
-          </div>
-        </li>
-        <li class="tbl-tr">
-          <div class="tbl-td">
-            <p><span th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
-            <p>총 <span th:text="${#numbers.formatDecimal(productCount, 0, 'COMMA', 0, 'POINT')}"></span> 개</p>
-          </div>
+    <!-- 총 결제금액 계산 결과 (표) -->
+    <table class="cart-tbl result-tbl">
+      <tr class="cart-tr-th total-pay">
+        <th>총 주문금액</th>
+        <th>총 배송비</th>
+        <th>총 결제금액</th>
+      </tr>
+      <tr class="pay-price">
+        <td>
+          <span class="price-large-txt" th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 0, 'POINT')} + '원'"></span>
+          <span>총 <span th:text="${#numbers.formatDecimal(productCount, 0, 'COMMA', 0, 'POINT')} + ' 개'"></span></span>
+        </td>
+        <td>
           <span>+</span>
-          <div class="tbl-td">
-            <p><span th:text="${#numbers.formatDecimal(totalShippingPrice, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
-          </div>
+          <span class="price-large-txt" th:text="${#numbers.formatDecimal(totalShippingPrice, 0, 'COMMA', 0, 'POINT')} + '원'"></span>
+        </td>
+        <td>
           <span>=</span>
-          <div class="tbl-td">
-            <p><span th:text="${#numbers.formatDecimal(totalPaymentPrice, 0, 'COMMA', 0, 'POINT')}"></span>원</p>
-          </div>
-        </li>
-      </ul>
-    </div>
+          <span class="price-large-txt" th:text="${#numbers.formatDecimal(totalPaymentPrice, 0, 'COMMA', 0, 'POINT')} + '원'"></span>
+        </td>
+      </tr>
+    </table>
 
     <!-- 쇼핑 계속 / 결제화면 버튼 -->
     <div class="order-btn-wrap">
@@ -110,5 +143,9 @@
   <div layout:fragment="userContents">
 
   </div>
+
+  <th:block layout:fragment="script-body">
+    <script th:src="@{/static/js/cart.js}"></script>
+  </th:block>
 
 </html>

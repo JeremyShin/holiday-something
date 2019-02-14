@@ -1,3 +1,8 @@
+body {
+  font-family: "Montserrat", "Apple SD Gothic Neo", NanumBarunGothic,
+              "나눔바른고딕", Malgun Gothic, "맑은 고딕", dotum, sans-serif;
+}
+
 button {
   background: transparent;
   cursor: pointer;
@@ -5,26 +10,266 @@ button {
 }
 
 .cart-tbl {
-  /*width: 600px;*/
-  margin: 150px auto 40px auto;
+  width: 100%;
+  margin: 150px auto 22px auto;
 }
 
-.cart-product-info-col {
+.result-tbl {
+  margin-top: 60px;
+  margin-bottom: 80px;
+}
+
+.cart-tr-th {
+  border-top: 4px solid #000000;
+  border-bottom: 1px solid #D4D4D4;
+}
+
+.cart-tr-th th {
+  text-align: center;
+}
+
+.product-list th {
+  padding: 6px;
+  font-size: 12px;
+}
+
+.total-pay th {
+  padding: 17px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.pay-price {
+  border-bottom: 1px solid #000000;
+}
+
+.pay-price td {
+  text-align: center;
+  padding: 20px 10px;
+}
+
+.price-large-txt {
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+.price-large-txt:first-child {
+  display: block;
+}
+
+.th-checkbox {
+  padding: 30px 0;
+  width: 4.5%;
+}
+
+.tr-product:not(:last-child) {
+  border-bottom: 1px solid #D4D4D4;
+}
+
+.tr-product:last-child {
+  border-bottom: 1px solid #000000;
+}
+
+.tr-product td {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.tr-product td:nth-child(n+2):nth-child(-n+4) {
+  border-right: 1px solid #D4D4D4;
+}
+
+.tr-product td:nth-child(3) {
+  width: 13%;
+}
+
+.tr-product td:nth-child(n+4):nth-child(-n+5) {
+  width: 15%;
+}
+
+.tr-product td:nth-last-child(-n+3) {
+  text-align: center;
+}
+
+.tr-checkbox {
+  width: 4.5%;
+  text-align: center;
+}
+
+/***************************/
+/*CHECKBOX*/
+.th-checkbox input, .tr-checkbox input {
+  display:none;
+}
+
+.th-checkbox label div, .tr-checkbox label div {
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  display: inline-block;
+  border: 2px solid #fff;
+  text-align: center;
+  line-height: 20px;
+  margin-right: 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  background: rgba(135, 135, 135, 0.07);
+}
+
+.th-checkbox label i, .tr-checkbox label i {
+  font-size: 16px;
+  opacity: 0.3;
+  color: #a3a3a3;
+}
+
+/* 체크 되어 있을 때 */
+.th-checkbox input:checked+label i, .tr-checkbox input:checked+label i {
+  opacity: 1;
+  color: #D8D8D8;
+}
+
+.th-checkbox input:checked+label div, .tr-checkbox input:checked+label div {
+  background: #405EF6;
+}
+
+.tr-product-info {
   display: flex;
+  width: 100%;
+  padding-right: 30px;
 }
 
-.cart-image {
+.tr-product-info div:last-child {
+  margin-left: auto;
+}
+
+.product-image-div {
+  padding-right: 25px;
+}
+
+.product-image-div img {
   width: 90px;
   height: 90px;
 }
 
-.cart-tbl input[type='checkbox'] {
+.product-name {
+  font-size: 18px;
+  font-weight: 600;
+}
 
+.product-price {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.product-original-price {
+  color: #A0A0A0;
+  margin-bottom: 3px;
+}
+
+.product-selling-price {
+  color: #f54923;
+  margin-bottom: 3px;
+}
+
+.product-option-price {
+  color: #000000;
+  margin-bottom: 12px;
+}
+
+.product-option {
+  font-size: 12px;
+}
+
+.btn-remove-div button {
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  text-indent: -9999em;
+  padding: 8px;
+  font-size: .75rem;
+  line-height: 1em;
+  border: 1px solid #d4d4d4;
+  color: #a0a0a0;
+  background: url('http://img.29cm.co.kr/mall/order/icon-remove.png') no-repeat 9px 50%;
+  background-size: 40px auto;
+}
+
+.input-quantity {
+  display: flex;
+  justify-content: center;
+}
+
+.input-quantity button {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #d4d4d4;
+  border-radius: 0;
+  background: #fff;
+  font-size: 15px;
+  color: #d4d4d4;
+  cursor: pointer;
+  text-decoration: none;
+  vertical-align: top;
+}
+
+.input-quantity input {
+  width: 35px;
+  height: 28px;
+  padding-top: 2px;
+  border: 1px solid #d4d4d4;
+  border-width: 1px 0;
+  margin: 0;
+  font-size: 13px;
+  color: #666;
+  text-align: center;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+
+.cart-order-price {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.cart-order-price span {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.btn-buynow {
+  width: 94px;
+  height: 34px;
+  line-height: 30px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #000;
+  border: 0;
+  margin-top: 20px;
 }
 
 .cart-tbl-below {
   display: flex;
   justify-content: space-between;
+}
+
+.cart-tbl-below p {
+  font-size: 12px;
+}
+
+.dlt-product-btn button {
+  padding: 8px 14px;
+  border: 1px solid #a0a0a0;
+  color: #303033;
+  font-size: 1.2rem;
+  line-height: 1.3333em;
+}
+
+.dlt-product-btn button:hover {
+  border: 1px solid #000;
+  color: #000;
 }
 
 .tbl-th {
@@ -45,7 +290,7 @@ button {
 
 .order-btn-wrap {
   width: 600px;
-  margin: 10px auto;
+  margin: 60px auto 10px auto;
 }
 
 .btn-shopping {
@@ -54,7 +299,7 @@ button {
   border-radius: 0;
   height: 60px;
   color: #303033;
-  font-size: 1em;
+  font-size: 1.1em;
   font-weight: 600;
   line-height: 60px;
   vertical-align: top;
@@ -64,7 +309,7 @@ button {
   width: 275px;
   height: 60px;
   line-height: 60px;
-  font-size: 1.5rem;
+  font-size: 2.3rem;
   font-weight: 600;
   color: #fff;
   background-color: #000;

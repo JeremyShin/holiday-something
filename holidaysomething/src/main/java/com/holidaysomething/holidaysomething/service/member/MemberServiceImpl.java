@@ -31,8 +31,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberServiceImpl implements MemberService {
 
   private final MemberRepository memberRepository;
-  private final CartProductRepository cartProductRepository;
   private final RoleRepository roleRepository;
+  private final CartProductRepository cartProductRepository;
 
   @Override
   @Transactional(readOnly = true)
