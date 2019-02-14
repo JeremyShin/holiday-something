@@ -148,15 +148,25 @@ public class UserOrderController {
 
     return "user/order-complete";
   }
-
-  @GetMapping("/finish")
-  public void orderComplete(Model model,
-      ShippingDto shippingDto,
-      ProductOrderDetailCommand poc,
-      ProductOrderCompleteDto productOrderCompleteDto,
-      @AuthenticationPrincipal MemberUserDetails userDetails) {
-
-  }
+//
+//  @GetMapping("/finish")
+//  public String orderComplete(Model model,
+//      @AuthenticationPrincipal MemberUserDetails userDetails,
+//      @RequestParam("order") Long orderId) {
+//
+//    log.info("하하");
+//    String ha = "ha";
+//    Long memberId = userDetails.getMember().getId();
+//    model.addAttribute("ha", ha);
+//    log.info("주문번호는" + orderId);
+//
+//    // 주문 조회
+//
+//
+//
+//
+//    return "/user/order-complete";
+//  }
 
 
 
