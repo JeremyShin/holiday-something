@@ -32,11 +32,16 @@
   <!--  div 는 기본이 block! -->
 
 
-  <table style="margin-left: 50px;" border="1">
+  <table style="margin-left: 10%; margin-right: 10%;" border="1">
 
     <tr>
-      <td rowspan="3" colspan="2"><img onclick="doImgPop('/static/img/macbook.jpeg')"
-                                       th:src="@{/static/img/macbook.jpeg}"/></td>
+      <td rowspan="3" colspan="2">
+        <div>
+          <img class="img-responsive center-block" width="150px" height="150px"
+               th:src="${productImageMain}" onclick="OnloadImg(this.src)"/>
+        </div>
+
+      </td>
       <td colspan="2">상품이름</td>
       <td colspan="2"><label th:text="${product.name}"></label></td>
     </tr>

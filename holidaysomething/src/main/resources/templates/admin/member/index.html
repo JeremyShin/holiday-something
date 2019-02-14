@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/admin-default}">
+
+<head th:include="fragments/config :: configFragment">
+  <title id="pageTitle">Page title</title>
+  <!-- other elements you want to reference in your layout -->
+</head>
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+</th:block>
+
+<!-- 사용자 스크립트 추가 -->
+<th:block layout:fragment="script">
+</th:block>
+
+<div layout:fragment="content">
+  <h1>회원 관리페이지입니다.</h1>
+  <h1>Admin ! ! !</h1>
+  <p><a href="/admin/member/search">회원 검색 페이지 입니다.</a></p>
+  <p><a href="/admin/member/order/search">회원 주문 관리 페이지 입니다.</a></p>
+  <p><a href="/admin/member/mileage/search">회원 마일리지 관리 페이지 입니다.</a></p>
+</div>
+
+</html>
