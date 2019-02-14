@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xml:th="http:/www.thymeleaf.org"
+      layout:decorate="~{layout/user-default.html}">
+
+<head>
+  <title id="pageTitle">유저 &mdash; 주문</title>
+</head>
+
+<div layout:fragment="userContents">
+  <div>
+      <form method="post" action="/user/product/order/finish">
+
+        <!-- 주문 정보 -->
+        <div>
+            <h1>주문자 정보</h1>
+            <div>
+              <div>
+                <span>주문자<span style="color: red"> * </span></span>
+                  <span>
+                      <input type="text" name="orderMemberNameInput" th:value="${addOrderMemberDto.name}" >
+                    </span>
+              </div>
+
+              <div>
+               <span>연락처<span style="color: red"> * </span></span>
+                  <span>
+                      <input type="text" name="orderMemberPhoneInput" th:value="${addOrderMemberDto.phone}">
+                    </span>
+              </div>
+
+              <div>
+                <span>이메일<span style="color: red"> * </span></span>
+                  <span>
+                      <input type="text" name="orderMemberEmailInput" th:value="${addOrderMemberDto.email}">
+                    </span>
+              </div>
+            </div>
+
+
+            <h1>배송 정보</h1>
+              <div>
+                <div>
+                  <input type="radio" name="addressType" value="existingAddress" checked="checked" /> 기존 배송지
+                  <input type="radio" name="addressType" value="newAddress" onclick="removeInputText()"/> 신규 입력
+                </div>
+
+                <div id="orderShippingDiv" style="display: block;">
+                  <div>
+                    <span>수령인<span style="color: red"> * </span></span>
+                    <span>
+                      <input type="text" id="orderRecipientNameInput" name="orderRecipientNameInput" th:value="${addOrderMemberDto.name}" placeholder="수령">
+                    </span>
+                  </div>
+
+                  <!-- 우편번호 검색 -->
+                  <div>
+                    <span>배송지<span style="color: red"> * </span></span>
+
+                    <input type="text" th:value="${addOrderMemberDto.postcode}" id="orderRecipientPostcodeInput" name="orderRecipientPostcodeInput" placeholder="우편번호"> <!--postcode-->
+                    <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+                    <input type="text" th:value="${addOrderMemberDto.address1}" id="orderRecipientAddress1Input" name="orderRecipientAddress1Input" placeholder="도로명주소"> <!--address1-->
+                    <span id="guide" style="color:#999;display:none"></span>
+                    <input type="text" th:value="${addOrderMemberDto.address2}" id="orderRecipientAddress2Input" name="orderRecipientAddress2Input" placeholder="상세주소"> <!--address2-->
+                  </div>
+
+                  <div>
+                    <span>연락처<span style="color: red"> * </span></span>
+                    <span>
+                      <input type="text" name="orderRecipientPhoneInput" id="orderRecipientPhoneInput" th:value="${addOrderMemberDto.phone}" placeholder="연락처">
+                    </span>
+                  </div>
+
+                  <div>
+                    <span>배송시 요청사항</span>
+                    <span>
+                      <input type="text" name="orderRecipientMessageInput" placeholder="배송시 요청사항을 입해주세요">
+                         <div style="font-size: x-small" >
+                           <div>- 도서산간 지역의 경우 추후 수령 시 추가 배송비가 발생할 수 있으며, 해외배송은 불가합니다.</div>
+                           <div>- 배송지 불분명 및 수신불가 연락처 기입으로 반송되는 왕복 택배 비용은 구매자 부담으로 정확한 주소 및 통화 가능한 연락처 필수 기입.</div>
+                           <div>- 대리 주문으로 해외 주소로 발송 전, 주문품 꼭 확인해주세요. 오배송 및 불량 교환에 따른 배송비는 국내 택배 비용만 지원됩니다.</div>
+                        </div>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+
+
+          <h1>마일리지</h1>
+            <div class="mileageDiv">
+              <div>
+                <span> 마일리지 : </span>
+                <input type="text" name="orderMemberMileageInput" id="orderMemberUseMileage" th:value="0" onchange="RecalcuSubTotal(this)"></div>
+              <div>
+                <span> 보유 마일리지 : </span>
+                <span name="orderMemberMileageInput" id="orderMemberHasMileage" th:text="${addOrderMemberDto.mileage}"></span>
+                <span style="display:none" id="hiddenMileage" th:text="${addOrderMemberDto.mileage}"></span>
+                <input id="btnUseAllMileage" type="button" onclick="useAllMileage()" value="모두사용">
+              </div>
+            </div>
+
+          <h1>결제 정보</h1>
+          <div>
+            <div>입금계좌 : 우체국 주미선 012591-02-325779</div>
+          </div>
+        </div>
+
+        <!-- 주문할 상품 -->
+        <div>
+          오른쪽으로 가줄래?
+          <!-- 돌아가는 코드 -->
+          <div th:each="productOrderDetailDto, stat : ${productOrderDetailDtos}" th:with="index=${stat.index}">
+            <!--<p th:text="${productOrderDetailDtos[__${index}__].img}">zzzzz</p>-->
+              키득<img  th:text="${stat.index}" th:src="${productOrderDetailDto.img}" width="100px" height="100px" alt="공사중,,,">
+              <div th:text="${productOrderDetailDto.manufacturer}">###</div>
+              <div th:text="${productOrderDetailDto.productName}">###</div>
+              <div th:text="${productOrderDetailDto.optionName}">###</div>
+            <input type="hidden" th:name="'productOrderDetailDtos[' + ${stat.index} + '].img'">
+            <input type="hidden" th:name="'productOrderDetailDtos[' + ${stat.index} + '].manufacturer'">
+            <input type="hidden" th:name="'productOrderDetailDtos[' + ${stat.index} + '].productName'">
+            <input type="hidden" th:name="'productOrderDetailDtos[' + ${stat.index} + '].optionName'">
+          </div>
+
+          <!--hidden으로 상품정보와 옵션 정보를 보내줌-->
+          <div th:each="productOrderInfoDto, stat : ${productOrderInfoDtos}" th:with="index=${stat.index}">
+            <span th:text="${productOrderInfoDto.productId}">zxsdsdaf상품아이디당</span>
+            <input type="hidden" th:name="'productOrderInfoDtos[' + ${stat.index} + '].productId'" th:value="${productOrderInfoDto.productId}">
+            <input type="hidden" th:name="'productOrderInfoDtos[' + ${stat.index} + '].optionId'" th:value="${productOrderInfoDto.optionId}">
+            <input type="hidden" th:name="'productOrderInfoDtos[' + ${stat.index} + '].quantity'" th:value="${productOrderInfoDto.quantity}">
+          </div>
+
+
+
+            <div>
+              총 상품금액 : <input type="text" name="orderTotalProductPrice" id="orderTotalProductPrice" th:value="${#aggregates.sum(productOrderDetailDtos.![sellingPrice])}">원</input>
+              배송비 : <input type="text" name="orderTotalShippingPrice" id="orderTotalShippingPrice" th:value="${#aggregates.sum(productOrderDetailDtos.![shippingPrice])}">원</span>
+              마일리지 사용 : <input type="text" name="orderTotalUseMileage" id="orderTotalUseMileage" th:value="0">원</span>
+              총 결제금액 : <input type="text" name="orderTotalPayment" id="orderTotalPayment" th:value="${#aggregates.sum(productOrderDetailDtos.![sellingPrice]) + #aggregates.sum(productOrderDetailDtos.![shippingPrice])}">원</span>
+              <span style="display:none" id="hiddenTotalPayment" th:text="${#aggregates.sum(productOrderDetailDtos.![sellingPrice]) + #aggregates.sum(productOrderDetailDtos.![shippingPrice])}">원</span>
+            </div>
+          으아아아아아아아아
+        </div>
+
+
+        <div>
+            <div>
+                <input value="제출" type="submit"/>
+            </div>
+        </div>
+
+
+      </form>
+  </div>
+</div>
+
+<th:block layout:fragment="script">
+  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+  <script th:src="@{/static/js/user-order.js}"></script>
+</th:block>
+
+
+
+
+</html>

@@ -35,7 +35,8 @@ import java.util.Optional;
 @RequestMapping("/admin/product")
 @Slf4j
 @RequiredArgsConstructor
-public class AdminProductController {
+public class
+AdminProductController {
 
     private final ProductService productService;
     private final ProductOptionService productOptionService;

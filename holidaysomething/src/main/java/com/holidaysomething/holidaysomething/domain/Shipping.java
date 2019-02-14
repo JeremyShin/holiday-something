@@ -35,7 +35,7 @@ public class Shipping {
   @Column(nullable = false)
   private String addressDetail;
 
-  @Column(nullable = false)
+  @Column
   private String message;
 
   @Column(nullable = false)
@@ -43,9 +43,6 @@ public class Shipping {
 
   @Column(length = 50, nullable = false)
   private String shippingNumber;
-
-//  @Column(length = 50, nullable = false)
-//  private String status;
 
   private LocalDateTime startDate;
   private LocalDateTime arrivalDate;

@@ -169,20 +169,20 @@ function optionAdd(option, defaultId, defaultPrice) {
         // productId 값을 보내기 위한 hidden type 의 input
         let productIdInput = document.createElement('input');
         productIdInput.setAttribute('type', 'hidden');
-        productIdInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].productId');
+        productIdInput.setAttribute('name', 'ProductOrderInfoDtos[' + num + '].productId');
         productIdInput.setAttribute('form', 'orderForm');
         productIdInput.setAttribute('value', productId);  // productId 를 설정
         // optionId 값을 보내기 위한 hidden type 의 input
         let optionIdInput = document.createElement('input');
         optionIdInput.setAttribute('type', 'hidden');
-        optionIdInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].optionId');
+        optionIdInput.setAttribute('name', 'ProductOrderInfoDtos[' + num + '].optionId');
         optionIdInput.setAttribute('form', 'orderForm');
         optionIdInput.setAttribute('class', 'order-index-hidden-option-id');
         optionIdInput.setAttribute('value', option.id);    // 해당 optionId 값을 설정
         // quantity 값을 설정하는 input
         let orderQuantityInput = document.createElement('input');
         orderQuantityInput.setAttribute('type', 'text');
-        orderQuantityInput.setAttribute('name', 'ProductOrderInfoDto[' + num + '].quantity');
+        orderQuantityInput.setAttribute('name', 'ProductOrderInfoDtos[' + num + '].quantity');
         orderQuantityInput.setAttribute('class', 'option-order-quantity');
         orderQuantityInput.setAttribute('form', 'orderForm');
         orderQuantityInput.setAttribute('value', '1');      // 해당 값이 변경되면 총 금액이 변경됨

@@ -3,6 +3,7 @@ package com.holidaysomething.holidaysomething.service.member;
 import com.holidaysomething.holidaysomething.domain.CartProduct;
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Role;
+import com.holidaysomething.holidaysomething.dto.AddOrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.CurrentMemberDto;
 import com.holidaysomething.holidaysomething.dto.MemberMileageDto;
 import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
@@ -15,6 +16,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface MemberService {
+
+  AddOrderMemberDto findMemberById(Long id);
 
   Member findMemberByLoginId(String loginId);
 

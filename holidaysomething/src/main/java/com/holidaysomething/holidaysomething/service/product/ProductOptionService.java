@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.service.product;
 
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.dto.ProductOptionCommand;
+import com.holidaysomething.holidaysomething.dto.ProductOrderDetailDto;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +14,8 @@ public interface ProductOptionService {
   List<ProductOption> getProductOptionsByProductId(Long productId);
 
   ProductOption getProductOption(Long id);
+
+  ProductOrderDetailDto getProductOptionForOrder(ProductOrderDetailDto productOrderDetailDto, ProductOption productOption, Integer quantity);
 
   void deleteProductOption(Long id);
 
