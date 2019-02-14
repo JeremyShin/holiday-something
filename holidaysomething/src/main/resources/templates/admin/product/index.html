@@ -16,6 +16,13 @@
 <th:block layout:fragment="script">
 </th:block>
 
+<!-- product left-navbar 추가 -->
+<div layout:fragment="leftNavbarFragment">
+  <aside th:replace="fragments/left-navbar :: leftNavbarFragment">
+
+  </aside>
+</div>
+
 <div layout:fragment="content">
   <h1>상품 관리페이지입니다.</h1>
   <h1>Admin ! ! !</h1>

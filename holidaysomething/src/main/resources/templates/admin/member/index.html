@@ -16,6 +16,14 @@
 <th:block layout:fragment="script">
 </th:block>
 
+<!--<aside th:replace="fragments/left-navbar :: leftNavbarFragment">-->
+<div layout:fragment="leftNavbarFragment">
+  <aside th:replace="fragments/left-navbar2 :: leftNavbarFragment">
+
+  </aside>
+</div>
+
+
 <div layout:fragment="content">
   <h1>회원 관리페이지입니다.</h1>
   <h1>Admin ! ! !</h1>

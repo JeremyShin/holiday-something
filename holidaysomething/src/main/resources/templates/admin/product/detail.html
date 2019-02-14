@@ -14,6 +14,13 @@
 <th:block layout:fragment="css">
 </th:block>
 
+<!-- product left-navbar 추가 -->
+<div layout:fragment="leftNavbarFragment">
+  <aside th:replace="fragments/left-navbar :: leftNavbarFragment">
+
+  </aside>
+</div>
+
 
 <div layout:fragment="content">
   <!-- 사용자 스크립트 추가 -->
