@@ -26,7 +26,7 @@ public class ProductListCategoryDto {
   public ProductListCategoryDto() {
   }
 
-  // 대분류용.
+  // 소분류에서 대,중 분류 불러올 때 사용.
   public ProductListCategoryDto(Long childId, String childName, Long parentId, String parentName) {
     this.parentId = parentId;
     this.parentName = parentName;

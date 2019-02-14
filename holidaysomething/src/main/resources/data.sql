@@ -36,8 +36,8 @@ INSERT INTO exchange_refund(apply_date, approve, approve_date, price, type) VALU
 INSERT INTO exchange_refund(apply_date, approve, approve_date, price, type) VALUES (now(), 1, now(), 3000, '환불');
 
 
-INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, reg_date, last_login)
-VALUES (null, 'root', '1234', 'root@naver.com', '김루트', 'rootnickname', '02-1111-1111', '1977-11-10', '04557', '서울특별시 중구 퇴계로', '211-5', 1, 1, 1, 1, null, '여성', '2019-01-01 00:00:01', '2019-01-01 05:00:01');
+INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, reg_date, last_login, mileage)
+VALUES (null, 'root', '1234', 'root@naver.com', '김루트', 'rootnickname', '02-1111-1111', '1977-11-10', '04557', '서울특별시 중구 퇴계로', '211-5', 1, 1, 1, 1, null, '여성', '2019-01-01 00:00:01', '2019-01-01 05:00:01', 200);
 INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, reg_date, last_login)
 VALUES (null, 'holiday', '1234', 'holidaysomething@gmail.com', '김홀리', 'holidaysomething', '02-7622-7622', '1988-12-31', '04547', '서울특별시 중구 동호로', '361', 1, 1, 1, 1, null, '여성', '2018-12-12 00:00:01', '2019-01-01 05:00:01');
 INSERT INTO member (id, login_id, password, email, name, nickname, phone, birthday, postcode, address1, address2, receive_email, receive_sms, marketing, personal_info, recommender, sex, reg_date, last_login)
@@ -159,99 +159,97 @@ VALUES(29,'buyeraddr29','afa29@gmail.com','buyer29','postcode29','01099233263','
 INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
 VALUES(30,'buyeraddr30','afa30@gmail.com','buyer30','postcode30','01099233267','http://suunyvale.com/30','merchant30','msg30','name30','whatmethod30','pg1');
 
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '인천광역시 미추홀구 토금북로28번길 15', '104호', '경비실에 맡겨주세요.', '010-8693-3454', '22186', '권은철', '305672231034', 3000, NULL, NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '경기도 부천시 상일로 71', '1801동 739호', '집 앞에 놓아 주세요.', '010-2353-3462', '14597', '전민수', '897340523489', 3000, NULL, NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '경기도 부천시 중동로 204', '1307동 107호', '부재 시 경비실에 맡겨주세요.', '010-3468-2359', '14581', '신용권', '702345368234', 0, NULL, NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '경기 부천시 중동 1293-1', '104동 703호', '경비실에 맡겨주세요.', '010-6823-3453', '14533', '강경미', '345790702345', 3000, '2018-12-25 22:24:53', NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '서울특별시 양천구 오목로15길 11', '602호', '배송 전 연락주세요.', '010-6893-9621', '07935', '신윤철', '709235240475', 3000, '2018-06-24 12:35:51', NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '서울특별시 양천구 중앙로29길 108', '102동 803호', '부재 시 경비실에 맡겨주세요.', '010-6983-3456', '08060', '김규민', '857239034985', 3000, '2018-04-23 18:24:34', NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '서울특별시 양천구 목동서로 340', '901동 402호', '집 앞에 놓아 주세요.', '010-9682-9862', '08089', '주미선', '520456789234', 3000, '2018-04-23 18:24:34', '2018-04-26 17:34:35');
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '서울특별시 영등포구 당산로 68', '102동 1023호', '부재 시 경비실에 맡겨주세요.', '010-9825-0286', '07292', '최재용', '502734898750', 3000, '2018-12-23 13:24:12', NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '서울특별시 영등포구 영중로 15', '302호', '배송 전 연락주세요.', '010-9826-0872', '07305', '김준형', '068923458964', 3000, NULL, NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '서울특별시 영등포구 도신로29길 28', '110동 309호', '배송 전 연락주세요.', '010-0972-9863', '07365', '장태희', '68934550245', 3000, NULL, NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '서울특별시 영등포구 여의나루로 76', '101호', '부재 시 경비실에 맡겨주세요.', '010-8629-9862', '07329', '정시윤', '798345893402', 0, '2018-10-17 13:52:11', NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '서울특별시 영등포구 여의대방로 359', '302호', '경비실에 맡겨주세요.', '010-9862-0987', '07334', '김세화', '689235560289', 3000, NULL, NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '서울특별시 영등포구 국제금융로 106', '203호', '부재 시 경비실에 맡겨주세요.', '010-6578-6982', '07343', '장현준', '899823665948', 3000, NULL, NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '서울특별시 마포구 마포대로 58', '5023호', '부재 시 경비실에 맡겨주세요.', '010-8962-9862', '04168', '윤지수', '134298734543', 3000, NULL, NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '서울특별시 마포구 도화길 28', '110동 302호', '배송 전 연락주세요.', '010-7836-9862', '04170', '배대준', '235897463459', 0, '2018-05-24 13:53:12', NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '서울특별시 마포구 백범로 205', '103동 604호', '부재 시 경비실에 맡겨주세요.', '010-9862-9861', '04194', '김지수', '789234678343', 0, '2018-09-23 18:23:35', '2018-09-24 21:32:53');
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '서울특별시 용산구 임정로 26', '102호', '집 앞에 놓아 주세요.', '010-5678-9863', '04311', '김수정', '689234739485', 3000, '2018-12-31 09:59:12', '2019-01-04 13:34:41');
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '서울특별시 성동구 독서당로 156', '8동 1023호', '배송 전 연락주세요.', '010-6892-3456', '04736', '김진선', '435925493334', 3000, NULL, NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '서울특별시 강남구 논현로 841', '스타벅스', '배송 전 연락주세요.', '010-6578-6782', '06031', '신원식', '345243998423', 3000, '2018-04-22 14:53:24', NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '경기도 성남시 분당구 동판교로 123', '105동 302호', '부재 시 경비실에 맡겨주세요.', '010-2578-9863', '13528', '민경수', '235467682353', 3000, '2018-11-11 23:32:12', '2018-11-17 14:24:32');
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '경기도 성남시 분당구 대왕판교로606번길 10', '103동 803호', '경비실에 맡겨주세요.', '010-9683-6982', '13530', '최다빈', '795239858344', 3500, '2018-06-11 15:24:34', NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '경기도 성남시 분당구 백현로 100', '606호', '부재 시 경비실에 맡겨주세요.', '010-6892-6982', '13596', '김대인', '789235423894', 3000, NULL, NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '경기 성남시 분당구 금곡동 305-2', '119동 203호', '배송 전 연락주세요.', '010-6872-6892', '13552', '문주현', '976983458634', 3000, NULL, NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '충청남도 천안시 서북구 시청로 39', '108동 803호', '배송 전 연락주세요.', '010-7192-1202', '31164', '박지호', '328956398534', 4000, NULL, NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '충청남도 아산시 배방읍 호서로79번길 20', '203호', '부재 시 경비실에 맡겨주세요.', '010-7582-6129', '31499', '차지형', '689235893535', 3000, NULL, NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '충남 홍성군 홍북읍 신경리 928', '108동 304호', '배송 전 연락주세요.', '010-6892-7832', '32263', '김성박', '789235968234', 3000, '2018-12-09 20:34:12', NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '대구 중구 남산동 3006', '102동 503호', '집 앞에 놓아 주세요.', '010-6398-9242', '41961', '이봉원', '709235678923', 3000, NULL, NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '대구광역시 남구 성당로50길 33', '104호', '배송 전 연락주세요.', '010-5782-6823', '42400', '이세준', '689235687235', 2500, '2018-09-13 14:42:12', NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '부산광역시 부산진구 동평로 352', '106동 305호', '부재 시 경비실에 맡겨주세요.', '010-5782-8728', '47206', '윤세현', '990896809098', 3000, '2018-12-11 15:21:23', NULL);
+INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
+VALUES (null, '제주특별자치도 제주시 첨단로 213-4', '102호', '배송 전 연락주세요.', '010-6384-6230', '63309', '김혜비', '435345345354', 3000, NULL, NULL);
 
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '인천광역시 미추홀구 토금북로28번길 15', '104호', '경비실에 맡겨주세요.', '010-8693-3454', '22186', '권은철', '305672231034', 3000, NULL, NULL, '입금 확인');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '경기도 부천시 상일로 71', '1801동 739호', '집 앞에 놓아 주세요.', '010-2353-3462', '14597', '전민수', '897340523489', 3000, NULL, NULL, '배송 준비중');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '경기도 부천시 중동로 204', '1307동 107호', '부재 시 경비실에 맡겨주세요.', '010-3468-2359', '14581', '신용권', '702345368234', 0, NULL, NULL, '입금 확인');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '경기 부천시 중동 1293-1', '104동 703호', '경비실에 맡겨주세요.', '010-6823-3453', '14533', '강경미', '345790702345', 3000, '2018-12-25 22:24:53', NULL, '배송중');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '서울특별시 양천구 오목로15길 11', '602호', '배송 전 연락주세요.', '010-6893-9621', '07935', '신윤철', '709235240475', 3000, '2018-06-24 12:35:51', NULL, '배송 출발');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '서울특별시 양천구 중앙로29길 108', '102동 803호', '부재 시 경비실에 맡겨주세요.', '010-6983-3456', '08060', '김규민', '857239034985', 3000, '2018-04-23 18:24:34', NULL, '배송중');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '서울특별시 양천구 목동서로 340', '901동 402호', '집 앞에 놓아 주세요.', '010-9682-9862', '08089', '주미선', '520456789234', 3000, '2018-04-23 18:24:34', '2018-04-26 17:34:35', '배송 완료');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '서울특별시 영등포구 당산로 68', '102동 1023호', '부재 시 경비실에 맡겨주세요.', '010-9825-0286', '07292', '최재용', '502734898750', 3000, '2018-12-23 13:24:12', NULL, '배송중');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '서울특별시 영등포구 영중로 15', '302호', '배송 전 연락주세요.', '010-9826-0872', '07305', '김준형', '068923458964', 3000, NULL, NULL, '배송 준비중');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '서울특별시 영등포구 도신로29길 28', '110동 309호', '배송 전 연락주세요.', '010-0972-9863', '07365', '장태희', '68934550245', 3000, NULL, NULL, '입금 확인');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '서울특별시 영등포구 여의나루로 76', '101호', '부재 시 경비실에 맡겨주세요.', '010-8629-9862', '07329', '정시윤', '798345893402', 0, '2018-10-17 13:52:11', NULL, '배송중');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '서울특별시 영등포구 여의대방로 359', '302호', '경비실에 맡겨주세요.', '010-9862-0987', '07334', '김세화', '689235560289', 3000, NULL, NULL, '배송 준비중');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '서울특별시 영등포구 국제금융로 106', '203호', '부재 시 경비실에 맡겨주세요.', '010-6578-6982', '07343', '장현준', '899823665948', 3000, NULL, NULL, '입금 확인');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '서울특별시 마포구 마포대로 58', '5023호', '부재 시 경비실에 맡겨주세요.', '010-8962-9862', '04168', '윤지수', '134298734543', 3000, NULL, NULL, '입금 확인');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '서울특별시 마포구 도화길 28', '110동 302호', '배송 전 연락주세요.', '010-7836-9862', '04170', '배대준', '235897463459', 0, '2018-05-24 13:53:12', NULL, '배송중');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '서울특별시 마포구 백범로 205', '103동 604호', '부재 시 경비실에 맡겨주세요.', '010-9862-9861', '04194', '김지수', '789234678343', 0, '2018-09-23 18:23:35', '2018-09-24 21:32:53', '배송 완료');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '서울특별시 용산구 임정로 26', '102호', '집 앞에 놓아 주세요.', '010-5678-9863', '04311', '김수정', '689234739485', 3000, '2018-12-31 09:59:12', '2019-01-04 13:34:41', '배송 완료');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '서울특별시 성동구 독서당로 156', '8동 1023호', '배송 전 연락주세요.', '010-6892-3456', '04736', '김진선', '435925493334', 3000, NULL, NULL, '배송 준비중');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '서울특별시 강남구 논현로 841', '스타벅스', '배송 전 연락주세요.', '010-6578-6782', '06031', '신원식', '345243998423', 3000, '2018-04-22 14:53:24', NULL, '배송중');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '경기도 성남시 분당구 동판교로 123', '105동 302호', '부재 시 경비실에 맡겨주세요.', '010-2578-9863', '13528', '민경수', '235467682353', 3000, '2018-11-11 23:32:12', '2018-11-17 14:24:32', '배송 완료');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '경기도 성남시 분당구 대왕판교로606번길 10', '103동 803호', '경비실에 맡겨주세요.', '010-9683-6982', '13530', '최다빈', '795239858344', 3500, '2018-06-11 15:24:34', NULL, '배송중');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '경기도 성남시 분당구 백현로 100', '606호', '부재 시 경비실에 맡겨주세요.', '010-6892-6982', '13596', '김대인', '789235423894', 3000, NULL, NULL, '입금 확인');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '경기 성남시 분당구 금곡동 305-2', '119동 203호', '배송 전 연락주세요.', '010-6872-6892', '13552', '문주현', '976983458634', 3000, NULL, NULL, '배송 준비중');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '충청남도 천안시 서북구 시청로 39', '108동 803호', '배송 전 연락주세요.', '010-7192-1202', '31164', '박지호', '328956398534', 4000, NULL, NULL, '배송 준비중');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '충청남도 아산시 배방읍 호서로79번길 20', '203호', '부재 시 경비실에 맡겨주세요.', '010-7582-6129', '31499', '차지형', '689235893535', 3000, NULL, NULL, '입금 확인');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '충남 홍성군 홍북읍 신경리 928', '108동 304호', '배송 전 연락주세요.', '010-6892-7832', '32263', '김성박', '789235968234', 3000, '2018-12-09 20:34:12', NULL, '배송중');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '대구 중구 남산동 3006', '102동 503호', '집 앞에 놓아 주세요.', '010-6398-9242', '41961', '이봉원', '709235678923', 3000, NULL, NULL, '입금 확인');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '대구광역시 남구 성당로50길 33', '104호', '배송 전 연락주세요.', '010-5782-6823', '42400', '이세준', '689235687235', 2500, '2018-09-13 14:42:12', NULL, '배송중');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '부산광역시 부산진구 동평로 352', '106동 305호', '부재 시 경비실에 맡겨주세요.', '010-5782-8728', '47206', '윤세현', '990896809098', 3000, '2018-12-11 15:21:23', NULL, '배송중');
-INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date, status)
-VALUES (null, '제주특별자치도 제주시 첨단로 213-4', '102호', '배송 전 연락주세요.', '010-6384-6230', '63309', '김혜비', '435345345354', 3000, NULL, NULL, '입금 확인');
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110240057512', NOW(), 12000, 1, 120, 2, 2, 2);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110230057613', '2018-11-22', 12000, 1, 120, 18, 3, 3);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110360057614', '2018-10-01', 9000, 1, 90, 18, 4, 4);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110350057415', '2018-11-29', 6500, 1, 60, 18, 5, 5);
 
-
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110240057512', NOW(), 12000, '구매확정', 120, 2, 2, 2);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110230057613', '2018-11-22', 12000, '구매확정', 120, 18, 3, 3);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110360057614', '2018-10-01', 9000, '구매확정', 90, 18, 4, 4);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110350057415', '2018-11-29', 6500, '구매확정', 60, 18, 5, 5);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110350057516', '2018-11-01', 6500, '구매확정', 60, 3, 6, 6);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111050067517', '2018-11-02', 4500, '구매확정', 40, 3, 7, 7);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111060037518', '2018-11-14', 10000, '구매확정', 100, 4, 8, 8);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111050137519', '2018-11-29', 14000, '구매확정', 140, 5, 9, 9);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111050138510', '2018-12-02', 4000, '구매확정', 40, 6, 10, 10);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111750147511', '2018-11-30', 3000, '구매확정', 30, 5, 11, 11);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111750137512', '2018-10-22', 3000, '구매확정', 30, 5, 12, 12);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111950137513', '2018-11-11', 5500, '구매확정', 50, 18, 13, 13);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111950137514', NOW(), 2500, '구매확정', 20, 6, 14, 14);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112250137515', NOW(), 2500, '구매확정', 20, 6, 15, 15);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137516', '2018-11-13', 1100, '구매확정', 10, 18, 16, 16);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137517', '2018-12-05', 2200, '구매확정', 20, 18, 17, 17);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137518', '2018-11-21', 5000, '구매확정', 50, 7, 18, 18);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137519', '2018-11-01', 5000, '구매확정', 50, 9, 19, 19);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137520', '2018-11-15', 3000, '구매확정', 30, 9, 20, 20);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137521', '2018-09-01', 2000, '구매확정', 20, 11, 21, 21);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018113060137522', '2018-11-04', 3000, '구매확정', 30, 11, 22, 22);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137523', '2016-10-10', 3000, '구매확정', 30, 22, 23, 23);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112860137524', NOW(), 16000, '배송완료', 160, 15, 24, 24);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112960137525', NOW(), 8000, '배송완료', 80, 17, 25, 25);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112960137526', '2018-11-15', 3000, '배송완료', 30, 18, 26, 26);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112960137527', NOW(), 3000, '배송완료', 30, 20, 27, 27);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137528', '2018-11-11', 3000, '배송준비중', 30, 24, 28, 28);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137529', '2018-09-11', 4500, '배송준비중', 40, 22, 29, 29);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137530', '2018-10-29', 4500, '배송준비중', 40, 29, 22, 30);
-
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018110350057516', '2018-11-01', 6500, 1, 60, 3, 6, 6);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111050067517', '2018-11-02', 4500, 1, 40, 3, 7, 7);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111060037518', '2018-11-14', 10000, 1, 100, 4, 8, 8);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111050137519', '2018-11-29', 14000, 1, 140, 5, 9, 9);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111050138510', '2018-12-02', 4000, 1, 40, 6, 10, 10);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111750147511', '2018-11-30', 3000, 1, 30, 5, 11, 11);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111750137512', '2018-10-22', 3000, 1, 30, 5, 12, 12);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111950137513', '2018-11-11', 5500, 1, 50, 18, 13, 13);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018111950137514', NOW(), 2500, 1, 20, 6, 14, 14);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112250137515', NOW(), 2500, 1, 20, 6, 15, 15);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137516', '2018-11-13', 1100, 1, 10, 18, 16, 16);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137517', '2018-12-05', 2200, 1, 20, 18, 17, 17);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137518', '2018-11-21', 5000, 1, 50, 7, 18, 18);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137519', '2018-11-01', 5000, 1, 50, 9, 19, 19);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137520', '2018-11-15', 3000, 1, 30, 9, 20, 20);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137521', '2018-09-01', 2000, 1, 20, 11, 21, 21);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018113060137522', '2018-11-04', 3000, 1, 30, 11, 22, 22);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112560137523', '2016-10-10', 3000, 1, 30, 22, 23, 23);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112860137524', NOW(), 16000, 1, 160, 15, 24, 24);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112960137525', NOW(), 8000, 1, 80, 17, 25, 25);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112960137526', '2018-11-15', 3000, 1, 30, 18, 26, 26);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018112960137527', NOW(), 3000, 1, 30, 20, 27, 27);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137528', '2018-11-11', 3000, 1, 30, 24, 28, 28);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137529', '2018-09-11', 4500, 1, 40, 22, 29, 29);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id) VALUES(null, '2018120360137530', '2018-10-29', 4500, 1, 40, 29, 22, 30);
 
 -- INSERT INTO product_category (id,name,parent_id,orders) VALUES (1,'문구', 0 ,1);
 -- INSERT INTO product_category (id,name,parent_id,orders) VALUES (2,'디자인', 0 ,2);
@@ -571,7 +569,7 @@ VALUES (null, 3, 'image/jpeg', '63895234-3452.jpg', 'https://www.petitcolas.net/
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
 VALUES (null, 3, 'image/jpeg', '23698423-5743.jpg', 'https://www.petitcolas.net/watermarking/image_database/peppers.jpg', '2018-12-21 12:22:42', 24983, 'peppers', '2018-12-23 18:52:42', 27);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/jpeg', '68930523-4568.jpg', 'https://www.petitcolas.net/watermarking/image_database/pills.jpg', '2018-05-05 13:52:51', 13598, 'pills', '2018-05-14 11:52:49', 28);
+VALUES (null, 1, 'image/jpeg', '68930523-4568.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-05-05 13:52:51', 13598, 'pills.jpg', '2018-05-14 11:52:49', 28);
 
 
 INSERT INTO cart_product(price, quantity, member_id, product_id) VALUES (3000, 1, 1, 1);
@@ -607,7 +605,7 @@ INSERT INTO cart_product(price, quantity, member_id, product_id) VALUES (1000, 1
 
 
 INSERT INTO role(name) values('ADMIN');
--- INSERT INTO role(name) values('USER');
+INSERT INTO role(name) values('USER');
 -- INSERT INTO role(name) values('NONE');
 --
 INSERT INTO member_role(member_id,role_id) values(1,1);

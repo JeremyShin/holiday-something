@@ -1,5 +1,6 @@
 package com.holidaysomething.holidaysomething.repository;
 
+import com.holidaysomething.holidaysomething.domain.CartProduct;
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.domain.Order;
 import com.holidaysomething.holidaysomething.dto.CurrentMemberDto;
@@ -74,6 +75,9 @@ public interface MemberRepository extends JpaRepository<Member, Long>, MemberRep
 
   // member search by loginId
   Member findMemberByLoginId(String loginId);
+
+  // 주문 페이지에서 member search by id
+  Member findMemberById(Long id);
 
   @Query(value = "SELECT new com.holidaysomething.holidaysomething.dto.CurrentMemberDto"
                 + "(m.id, m.name, m.nickname, m.mileage, o.id, "

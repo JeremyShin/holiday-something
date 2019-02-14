@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:text-align="http://www.w3.org/1999/xhtml"
+      xml:th="http:/www.thymeleaf.org"
+      layout:decorate="~{layout/user-default.html}">
+
+<head th:include="fragments/config :: configFragment">
+  <title id="pageTitle">signup</title>
+  <!-- other elements you want to reference in your layout -->
+</head>
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+
+</th:block>
+
+
+<div layout:fragment="userContents">
+  <th:block layout:fragment="script">
+
+  </th:block>
+
+  <h1> 회원 가입을 축하합니다.</h1>
+  <h1> 로그인 해주세요</h1>
+
+
+</div>
+
+
+</body>
+
+
+</html>

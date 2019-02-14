@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.User;
 @Setter
 public class MemberUserDetails extends User {
 
+
   private String nickname;
   private Long id;
   private Member member;

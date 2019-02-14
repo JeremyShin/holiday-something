@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.springframework.org/schema/data/jaxb"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/default.html}">
+      layout:decorate="~{layout/admin-default}">
 
 <head th:include="fragments/config :: configFragment">
   <title id="pageTitle">Page title</title>
@@ -104,7 +104,7 @@
 
   <!-- 사용자 스크립트 추가 -->
   <th:block layout:fragment="script">
-    <script th:src="@{/js/product-option.js}"></script>
+    <script th:src="@{/static/js/product-option.js}"></script>
   </th:block>
 
 </div>

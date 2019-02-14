@@ -28,13 +28,15 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/product")
 @Slf4j
 @RequiredArgsConstructor
-public class AdminProductController {
+public class
+AdminProductController {
 
     private final ProductService productService;
     private final ProductOptionService productOptionService;
@@ -91,7 +93,8 @@ public class AdminProductController {
 
             imageStreamService.save(mainImage, productAddDto.getProductDetailId());
             for(MultipartFile multipartFile : subImages) {
-                imageStreamService.save(multipartFile, productAddDto.getProductDetailId());
+                if (!multipartFile.isEmpty())
+                    imageStreamService.save(multipartFile, productAddDto.getProductDetailId());
             }
 
             return "redirect:/admin/product/add";

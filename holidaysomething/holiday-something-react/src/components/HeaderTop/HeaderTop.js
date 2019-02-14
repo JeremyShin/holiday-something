@@ -30,7 +30,7 @@ const HeaderTop = () => {
       <div className="header-search">
         <FiSearch/> Search
       </div>
-      <LogoImg src={hsLogo} alt="hs-logo" className="hsLogo" />
+      <a href="/"><LogoImg src={hsLogo} alt="hs-logo" className="hsLogo" /></a>
       <div className="header-sign-in-cart">
         <FaRegUser/> Sign in
         <FiShoppingCart/> Cart
