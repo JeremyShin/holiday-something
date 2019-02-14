@@ -17,79 +17,60 @@
           주문번호 : <span th:text="${order.orderNumber}"></span>
         </div>
 
-
-
-        <h1>주문자 정보</h1>
-        <span th:text="${order}"></span>
+        <h1>주문 상품 정보</h1>
         <div>
-          <div>
-            <span>주문자<span style="color: red"> * </span></span>
-
-          </div>
-
-          <div>
-            <span>연락처<span style="color: red"> * </span></span>
-          </div>
-
-          <div>
-            <span>이메일<span style="color: red"> * </span></span>
+           <span>주문상품정보/</span><span th:text="${#lists.size(productOrderDetailDtos)}">개</span>
+          <div th:each="productOrderDetailDtos, stat : ${productOrderDetailDtos}" th:with="index=${stat.index}">
+            키득<img  th:text="${stat.index}" th:src="${productOrderDetailDtos.img}" width="100px" height="100px" alt="공사중,,,">
+            <div th:text="${productOrderDetailDtos.manufacturer}">###</div>
+            <div th:text="${productOrderDetailDtos.productName}">###</div>
+            <div th:text="${productOrderDetailDtos.optionName}">###</div>
+            <div th:text="${productOrderDetailDtos.quantity}">###</div>
+            <div th:text="${orderStatus}">###</div>
           </div>
         </div>
+
+
+        <h1>주문 정보</h1>
+        <div> 무통장입</div>
+        주문일<div th:text="${order.date}">###</div>
+        총결제금액<div th:text="${productOrderCompleteDto.orderTotalPayment}"></div>
+        배송비<div th:text="${shipping.orderTotalShippingPrice}"></div>
+        주문상태<div th:text="${orderStatus}">###</div>
+
+
 
 
         <h1>배송 정보</h1>
         <div>
-          <div>
-            <input type="radio" name="addressType" value="existingAddress" checked="checked" /> 기존 배송지
-            <input type="radio" name="addressType" value="newAddress" onclick="removeInputText()"/> 신규 입력
-          </div>
-
           <div id="orderShippingDiv" style="display: block;">
-            <div>
-              <span>수령인<span style="color: red"> * </span></span>
-            </div>
-
             <!-- 우편번호 검색 -->
             <div>
-              <span>배송지<span style="color: red"> * </span></span>
+              <span>받으시는 분</span></span>
+              <div th:text="${shipping.orderRecipientNameInput}">###</div>
             </div>
 
             <div>
-              <span>연락처<span style="color: red"> * </span></span>
+              <span>휴대폰 번호</span>
+              <div th:text="${shipping.orderRecipientPhoneInput}">###</div>
+            </div>
+
+            <div>
+              <span>주소</span>
+              <span th:text="'('+ ${shipping.orderRecipientPostcodeInput} + ')' "></span>
+              <span th:text="${shipping.orderRecipientAddress1Input}">###</span>
+              <span th:text="${orderRecipientAddress2Input}">###</span>
             </div>
 
             <div>
               <span>배송시 요청사항</span>
+              <div th:text="${shipping.orderRecipientMessageInput}">###</div>
             </div>
 
           </div>
         </div>
 
-
-        <h1>마일리지</h1>
-        <div class="mileageDiv">
-          <div>
-            <span> 마일리지 : </span>
-          <div>
-            <span> 보유 마일리지 : </span>
-                     </div>
-        </div>
-
-        <h1>결제 정보</h1>
-        <div>
-          <div>입금계좌 : 우체국 주미선 012591-02-325779</div>
-        </div>
-      </div>
-
       <!-- 주문할 상품 -->
-      <div>
-        오른쪽으로 가줄래?
-        <!-- 돌아가는 코드 -->
-
-        <input type="hidden" name="order" th:value="${order}">
-
-        으아아아아아아아아
-      </div>
   </div>
 </div>
 </div>
