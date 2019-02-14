@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
@@ -8,14 +9,8 @@
 
   </head>
 
-<<<<<<< HEAD
-  <div>
-    <div layout:fragment="userContents" class="user-content"></div>
-  </div>
-=======
   <body>
     <header th:replace="fragments/header :: userHeaderFragment">
->>>>>>> aa2ee74e7e5a077239dcf56c1daa9b6a45c8af4a
 
     </header>
 
@@ -33,5 +28,9 @@
     <footer th:replace="fragments/footer :: userFooterFragment">
 
     </footer>
+
+    <th:block layout:fragment="script-body">
+
+    </th:block>
   </body>
 </html>

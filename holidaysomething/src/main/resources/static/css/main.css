@@ -20,7 +20,7 @@
 }
 
 .header-menu {
-  width: 100px;
+  width: 80px;
   height: 100%;
   text-align: center;
   align-self: center;
@@ -35,7 +35,7 @@
 }
 
 .header-menu {
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 500;
 }
 
@@ -112,7 +112,7 @@
   background-color: rgba(214, 214, 214, 0.57);
 }
 
-#product-option-list-tbl th:nth-of-type(1), td:nth-of-type(1) {
+#product-option-list-tbl th:nth-of-type(1), #product-option-list-tbl td:nth-of-type(1) {
   text-align: left;
 }
 
@@ -155,17 +155,6 @@
 }
 
 .user-header-category{
-<<<<<<< HEAD
-  float:left; width: 25%; padding:10px; text-align: center;
-}
-
-.order-hr{
-  border: 0;
-  height: 3px;
-  background: #282c34;
-  width: 50%;
-  float: left;
-=======
   float: left;
   width: 25%;
   padding: 20px;
@@ -182,7 +171,6 @@
   width: 200px;
   z-index: 200;
   list-style: none; /* 리스트 쩜 없애기 */
->>>>>>> origin/develop
 }
 
 .user-header-category:hover .middle-category {
