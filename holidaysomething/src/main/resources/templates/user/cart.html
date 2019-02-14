@@ -38,10 +38,9 @@
         <th>주문금액</th>
         <th>배송비</th>
       </tr>
-      <tr class="tr-product" th:each="cartProduct : ${cartProducts}">
+      <tr class="tr-product" th:each="cartProduct, iStat : ${cartProducts}">
         <!-- checkbox -->
         <td class="tr-checkbox">
-          <!--<input type="checkbox" th:value="${cartProduct.productId}"/>-->
           <input type="checkbox" th:id="${cartProduct.cartProductId}" checked />
           <label th:for="${cartProduct.cartProductId}">
             <div><i class="fa fa-check"></i></div>
@@ -91,10 +90,16 @@
           <button class="btn-buynow">Buy Now</button>
         </td>
         <!-- 배송비 -->
-        <td>
+        <td class="cart-order-shipping-price">
           <p><span th:text="${cartProduct.shippingPrice > 0} ?
           ${#numbers.formatDecimal(cartProduct.shippingPrice, 0, 'COMMA', 0, 'POINT')} + ' 원' : '무료 배송'"></span></p>
         </td>
+
+        <!-- 'CHECK OUT' 버튼 눌렀을 때, 상품 정보 전송 -->
+        <!-- TODO: quantity 변경 시 가격에 반영해야 함 -->
+        <input type="hidden" th:name="'ProductOrderInfoDtos[' + ${iStat.index} + '].productId'" th:value="${cartProduct.productId}" form="orderForm" >
+        <input type="hidden" th:name="'ProductOrderInfoDtos[' + ${iStat.index} + '].optionId'" th:value="${cartProduct.productOptionId}" form="orderForm" >
+        <input type="hidden" th:name="'ProductOrderInfoDtos[' + ${iStat.index} + '].quantity'" th:value="${cartProduct.quantity}" form="orderForm" >
       </tr>
     </table>
 
@@ -131,10 +136,10 @@
     </table>
 
     <!-- 쇼핑 계속 / 결제화면 버튼 -->
-    <div class="order-btn-wrap">
-      <button class="btn-shopping" type="button">CONTINUE SHOPPING</button>
-      <button class="btn-checkout" type="button">CHECK OUT</button>
-    </div>
+    <form class="order-btn-wrap" action="/user/product/order" method="post" id="orderForm">
+      <button class="btn-shopping" type="submit">CONTINUE SHOPPING</button>
+      <button class="btn-checkout" type="submit">CHECK OUT</button>
+    </form>
   </div>
 
   <!-- 카트 -->

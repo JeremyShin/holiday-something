@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 카트 페이지에서 각 상품 수량 '-' / '+' 버튼 클릭 시 수량 변경
+  // TODO: 우측 '주문금액', 하단 '총 주문금액', '총 결제금액'에도 반영해야 함
   let quantityMinusBtn = document.querySelectorAll('.quantity-minus');
   quantityMinusBtn.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -41,7 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // TODO: 선택상품 삭제
+  // 선택상품 삭제
+  // TODO: refresh해야 화면에 반영 됨
   let removeProductsBtn = document.querySelector('.remove-selected-products');
   removeProductsBtn.addEventListener('click', () => {
     let ids = [];
