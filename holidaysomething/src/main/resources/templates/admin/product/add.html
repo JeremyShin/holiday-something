@@ -19,8 +19,15 @@
     </th:block>
   </head>
 
-  <!-- 위에서 적은 layout 파일에서
-      layout:fragment="content" 라고 되어 있는 tag 내부에 아래 div의 내부가 들어간다. -->
+      <!-- product left-navbar 추가 -->
+      <div layout:fragment="leftNavbarFragment">
+        <aside th:replace="fragments/left-navbar :: leftNavbarFragment">
+
+        </aside>
+      </div>
+
+      <!-- 위에서 적은 layout 파일에서
+          layout:fragment="content" 라고 되어 있는 tag 내부에 아래 div의 내부가 들어간다. -->
   <div layout:fragment="content">
     <h1>Product Add</h1>
 
