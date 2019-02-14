@@ -11,7 +11,7 @@ public interface CartProductRepository extends JpaRepository<CartProduct, Long> 
 
   @Query(value = "SELECT new com.holidaysomething.holidaysomething.dto.UserCartProductDto"
       + "(cp.id, p.id, p.name, cp.quantity, p.originalPrice, p.sellingPrice, p.shippingPrice, "
-      + "pi.path, po.name, po.price, po.description) "
+      + "pi.path, po.id, po.name, po.price, po.description) "
       + "FROM CartProduct as cp "
       + "INNER JOIN Member as m ON cp.member.id = m.id "
       + "INNER JOIN Product as p ON cp.product.id = p.id "
