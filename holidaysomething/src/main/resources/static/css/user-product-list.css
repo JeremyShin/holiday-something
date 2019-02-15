@@ -6,6 +6,8 @@
 
 #banner {
   height: 200px;
+  /*margin-left: 10%;*/
+  /*margin-right: 10%;*/
 }
 
 #banner-title {
@@ -27,17 +29,23 @@
   background: #f6f6f6;
   -webkit-display: flex;
   display: flex;
+  margin-left: 50px;
+  margin-right: 50px;
+  /*margin-right: 10%;*/
+  /*margin-left: 10%;*/
   height: 50px;
 }
 
 #sorting1 {
   flex: 1;
-  margin-left: 100px;
+  margin-top: 10px;
+  /*margin-left: 100px;*/
 }
 
 #sorting2 {
   flex: 2;
-  margin-right: 100px;
+  margin-top: 5px;
+  /*margin-right: 100px;*/
 }
 
 #totalItem {
@@ -50,7 +58,28 @@
 #dropdown {
   height: 42px;
   /*align-self: flex-end;*/
+  margin-right: 50px;
   float: right;
+}
+
+#productList {
+  display: grid;
+  margin-left: 100px;
+  margin-right: 100px;
+  /*margin-left: 10%;*/
+  /*margin-right: 10%;*/
+  grid-template-columns: repeat(auto-fit, 25%);
+}
+
+#productImage {
+  padding: 15px;
+}
+
+#productImage img {
+  /*width:100%;*/
+  /*object-fit: contain;*/
+  width: 180px;
+  height: 180px;
 }
 
 #product h5 {

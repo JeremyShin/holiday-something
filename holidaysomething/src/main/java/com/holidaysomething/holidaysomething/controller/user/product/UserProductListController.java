@@ -37,7 +37,7 @@ public class UserProductListController {
   // 소분류 카테고리 눌렀을 때 조회돼야 하는 상품 리슷트!
   @GetMapping("/{categoryId}")
   public String productList(@PathVariable("categoryId") Long categoryId,
-      @PageableDefault(size = 10, sort = "name", direction = Direction.ASC) Pageable pageable
+      @PageableDefault(size = 12, sort = "name", direction = Direction.ASC) Pageable pageable
       , ModelMap model) {
 
     if (categoryId == 0l) {
