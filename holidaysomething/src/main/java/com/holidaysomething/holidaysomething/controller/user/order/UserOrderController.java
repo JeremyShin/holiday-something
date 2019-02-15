@@ -134,13 +134,11 @@ public class UserOrderController {
       productOrderDetailDtos.add(productOrderDetailDto);
     }
 
-    String orderStatus = ShippingStatus.getValuesByKey(order.getStatus());
-    log.info("주문상태는" + orderStatus);
+    productOrderCompleteDto.setStatus(ShippingStatus.getValuesByKey(order.getStatus()));
 
     model.addAttribute("order", order);
     model.addAttribute("productOrderDetailDtos", productOrderDetailDtos);
     model.addAttribute("shipping",shippingResult);
-    model.addAttribute("orderStatus", orderStatus);
     model.addAttribute("productOrderCompleteDto", productOrderCompleteDto);
 
     return "user/order-complete";
