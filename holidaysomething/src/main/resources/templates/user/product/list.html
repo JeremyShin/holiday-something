@@ -113,16 +113,16 @@
 
     </div>
 
-    <div style="display: grid; margin-left: 100px; margin-right: 100px;
+    <div style="display: grid; margin-left: 10%; margin-right: 10%;
       grid-template-columns: repeat(auto-fit, 25%);" id="productList" class=".col-xs-6 .col-md-4">
       <!-- class=".col-xs-6 .col-md-4" -->
       <div id="product" th:each="productListDto : ${productListImageDtos}">
         <div style="padding:15px;">
-          <!-- class="img-responsive"빼고 이걸 넣어도 똑같다. style="width:100%; object-fit: contain;"
+          <!-- class="img-responsive"빼고 이걸 넣어도 똑같다.  style="width:100%; object-fit: contain;"
           이미지 높이 차이? 이미지를 리사이징 하는게 빠를듯...-->
           <img style="width: 100%; height:100%; object-fit: contain;"
                th:src="${productListDto.imagePath + productListDto.imageName}"/>
-          <!-- th:href="@{'/product/' + ${categoryId} + '/' + ${productListDto.productId}  }" -->
+          <!--th:href="@{'/product/' + ${categoryId} + '/' + ${productListDto.productId}  }" -->
         </div>
         <h5 th:text="${productListDto.productName}"></h5>
         <span th:text="${productListDto.sellingPrice}"></span>

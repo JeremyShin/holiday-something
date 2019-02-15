@@ -41,6 +41,11 @@ public class AdminMemberController {
 
   private final MemberService memberService;
 
+  @GetMapping
+  public String member() {
+    return "admin/member/index";
+  }
+
 
   /**
    * @param searchOrderMemberDto : input 검색 데이터를 담기 위한 Dto

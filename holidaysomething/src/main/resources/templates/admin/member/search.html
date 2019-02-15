@@ -9,6 +9,13 @@
   <!-- other elements you want to reference in your layout -->
 </head>
 
+<!-- member left-navbar 추가 -->
+<div layout:fragment="leftNavbarFragment">
+  <aside th:replace="fragments/left-navbar2 :: leftNavbarFragment">
+
+  </aside>
+</div>
+
 <div layout:fragment="content">
   <h1>고객검색 페이지</h1>
 

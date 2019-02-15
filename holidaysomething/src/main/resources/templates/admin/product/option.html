@@ -12,6 +12,13 @@
 <th:block layout:fragment="css">
 </th:block>
 
+<!-- product left-navbar 추가 -->
+<div layout:fragment="leftNavbarFragment">
+  <aside th:replace="fragments/left-navbar :: leftNavbarFragment">
+
+  </aside>
+</div>
+
 <div layout:fragment="content">
   <h1>옵션 검색</h1>
   <h2>옵션 목록 <span>[총 <strong th:text="${productOptionListSize}"></strong>개]</span></h2>
