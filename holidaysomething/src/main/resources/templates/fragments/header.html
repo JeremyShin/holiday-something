@@ -18,162 +18,220 @@
     </a>
   </header>
 
-<header th:fragment="userHeaderFragment" id="userHeader">
-  <div class="nav">
-    <div id="container">
-      <!--메인페이지에서 상품명 검색-->
-      <div class="user-header" style="order: 1;">
-        <div>
-          <form action="/search" method="get">
-            <input type="hidden" name="type" value="product">
-            <input type="search" name="q" value="" placeholder="Search" aria-label="Search"
-                   data-instant="attached" autocomplete="off">
-          </form>
-        </div>
+  <!--<header th:fragment="userHeaderFragment" id="userHeader">-->
+    <!--<div class="nav">-->
+      <!--<div id="container">-->
+        <!--&lt;!&ndash;메인페이지에서 상품명 검색&ndash;&gt;-->
+        <!--<div class="user-header" style="order: 1;">-->
+          <!--<div>-->
+            <!--<form action="/search" method="get">-->
+              <!--<input type="hidden" name="type" value="product">-->
+              <!--<input type="search" name="q" value="" placeholder="Search" aria-label="Search"-->
+                     <!--data-instant="attached" autocomplete="off">-->
+            <!--</form>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--&lt;!&ndash;로고&ndash;&gt;-->
+        <!--<div class="user-header" style="order: 2;">-->
+          <!--<div>-->
+            <!--<a href="/"><Img src="/static/img/logo.png" alt="앗!로고가 없네요." width="100px" height="100px"></a>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--&lt;!&ndash;회원가입, 로그인, 장바구니&ndash;&gt;-->
+        <!--<div class="user-header" style="order: 3;">-->
+          <!--<div>-->
+
+            <!--<div class="user-header" sec:authorize="isAuthenticated()">-->
+              <!--<span sec:authentication="name"></span>-->
+              <!--&lt;!&ndash;<a th:href="@{'/user/'+ ${#authentication.principal.id}}">memberInfo</a>&ndash;&gt;-->
+            <!--</div>-->
+
+            <!--<div class="user-header" sec:authorize="!isAuthenticated()">-->
+              <!--<a href="/user/join"> signup </a>-->
+            <!--</div>-->
+
+            <!--<div class="user-header" sec:authorize="!isAuthenticated()">-->
+              <!--<a href="/user/login"> login </a>-->
+            <!--</div>-->
+
+            <!--<div class="user-header" sec:authorize="isAuthenticated()">-->
+              <!--<a href="/user/logout"> logout </a>-->
+            <!--</div>-->
+
+            <!--<div class="user-header">-->
+              <!--<a href="/user/cart"> cart </a>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--&lt;!&ndash;카테고리&ndash;&gt;-->
+      <!--<div>-->
+        <!--<div class="user-header-category">-->
+          <!--<a data-categoryid="1" th:href="@{'/product/1'}">-->
+            <!--STATIONERY-->
+          <!--</a>-->
+          <!--<ul class="middle-category">-->
+            <!--<li><a href="#">PENCIL</a>-->
+              <!--<ul class="small-category">-->
+                <!--<li><a href="#">4B</a></li>-->
+                <!--<li><a href="#">SHARP</a></li>-->
+                <!--<li><a href="#">HIGHLIGHTER</a></li>-->
+              <!--</ul>-->
+            <!--</li>-->
+            <!--<li><a href="#">POSTIT</a>-->
+              <!--<ul class="small-category">-->
+                <!--<li><a href="#">COLORFUL</a></li>-->
+                <!--<li><a href="#">CHARACTER</a></li>-->
+                <!--<li><a href="#">BIG</a></li>-->
+              <!--</ul>-->
+            <!--</li>-->
+            <!--<li><a href="#">NOTE</a>-->
+              <!--<ul class="small-category">-->
+                <!--<li><a href="#">LINED</a></li>-->
+                <!--<li><a href="#">NON-LINED</a></li>-->
+                <!--<li><a href="#">DIARY</a></li>-->
+              <!--</ul>-->
+            <!--</li>-->
+          <!--</ul>-->
+        <!--</div>-->
+
+        <!--<div class="user-header-category">-->
+          <!--<a data-categoryid="2" th:href="@{'/product/2'}">-->
+            <!--D.I.Y-->
+          <!--</a>-->
+          <!--<ul class="middle-category">-->
+            <!--<li><a href="#">TOY</a>-->
+              <!--<ul class="small-category">-->
+                <!--<li><a href="#">LEGO</a></li>-->
+                <!--<li><a href="#">DOLL</a></li>-->
+              <!--</ul>-->
+            <!--</li>-->
+            <!--<li><a href="#">FURNITURE</a>-->
+              <!--<ul class="small-category">-->
+                <!--<li><a href="#">DESK</a></li>-->
+                <!--<li><a href="#">CHAIR</a></li>-->
+                <!--<li><a href="#">TABLE</a></li>-->
+              <!--</ul>-->
+            <!--</li>-->
+            <!--<li><a href="#">BAG</a>-->
+              <!--<ul class="small-category">-->
+                <!--<li><a href="#">BACKPACK</a></li>-->
+                <!--<li><a href="#">CROSSBAG</a></li>-->
+                <!--<li><a href="#">HANDBAG</a></li>-->
+              <!--</ul>-->
+            <!--</li>-->
+          <!--</ul>-->
+        <!--</div>-->
+        <!--<div class="user-header-category">-->
+          <!--<a data-categoryid="3" th:href="@{'/product/3'}">-->
+            <!--FASHION-->
+          <!--</a>-->
+          <!--<ul class="middle-category">-->
+            <!--<li><a href="#">MAN</a>-->
+              <!--<ul class="small-category">-->
+                <!--<li><a href="#">TOP</a></li>-->
+                <!--<li><a href="#">BOTTOM</a></li>-->
+                <!--<li><a href="#">SHOES</a></li>-->
+              <!--</ul>-->
+            <!--</li>-->
+            <!--<li><a href="#">WOMAN</a>-->
+              <!--<ul class="small-category">-->
+                <!--<li><a href="#">TOP</a></li>-->
+                <!--<li><a href="#">BOTTOM</a></li>-->
+                <!--<li><a href="#">SHOES</a></li>-->
+              <!--</ul>-->
+            <!--</li>-->
+          <!--</ul>-->
+        <!--</div>-->
+        <!--<div class="user-header-category">-->
+          <!--<a data-categoryid="4" th:href="@{'/product/4'}">-->
+            <!--FOOD-->
+          <!--</a>-->
+          <!--<ul class="middle-category">-->
+            <!--<li><a th:href="@{'/product/36'}">SEAFOOD</a>-->
+              <!--<ul class="small-category">-->
+                <!--<li><a th:href="@{'/product/39'}">SALMON</a></li>-->
+                <!--<li><a th:href="@{'/product/40'}">CLAM</a></li>-->
+                <!--<li><a th:href="@{'/product/41'}">OCTOPUS</a></li>-->
+              <!--</ul>-->
+            <!--</li>-->
+            <!--<li><a th:href="@{'/product/37'}">MEAT</a>-->
+              <!--<ul class="small-category">-->
+                <!--<li><a th:href="@{'/product/42'}">BEEF</a></li>-->
+                <!--<li><a th:href="@{'/product/43'}">PORK</a></li>-->
+                <!--<li><a th:href="@{'/product/44'}">CHICKEN</a></li>-->
+              <!--</ul>-->
+            <!--</li>-->
+            <!--<li><a th:href="@{'/product/38'}">DESSERT</a>-->
+              <!--<ul class="small-category">-->
+                <!--<li><a th:href="@{'/product/45'}">TEA</a></li>-->
+                <!--<li><a th:href="@{'/product/46'}">ICECREAM</a></li>-->
+              <!--</ul>-->
+            <!--</li>-->
+          <!--</ul>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</header>-->
+
+  <section th:fragment="userHeaderFragment" id="userHeader">
+    <div class="header-top">
+      <div class="header-search">
+        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" placeholder="Search" aria-label="Search" />
       </div>
+      <a href="/">
+        <img src="/static/img/hs-logo.png" alt="logo" class="hs-logo" />
+      </a>
 
-      <!--로고-->
-      <div class="user-header" style="order: 2;">
-        <div>
-          <a href="/"><Img src="/static/img/logo.png" alt="앗!로고가 없네요." width="100px" height="100px"></a>
+      <div class="header-sign-in-cart">
+        <div sec:authorize="!isAuthenticated()">
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em">
+            <path d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z"></path>
+          </svg>
+          <a href="/user/login">Sign In</a>
         </div>
-      </div>
 
-      <!--회원가입, 로그인, 장바구니-->
-      <div class="user-header" style="order: 3;">
+        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
         <div>
+          <a href="/user/cart">Cart</a>
+        </div>
 
-          <div class="user-header" sec:authorize="isAuthenticated()">
-            <span sec:authentication="name"></span>
-            <!--<a th:href="@{'/user/'+ ${#authentication.principal.id}}">memberInfo</a>-->
-          </div>
-
-          <div class="user-header" sec:authorize="!isAuthenticated()">
-            <a href="/user/join"> signup </a>
-          </div>
-
-          <div class="user-header" sec:authorize="!isAuthenticated()">
-            <a href="/user/login"> login </a>
-          </div>
-
-          <div class="user-header" sec:authorize="isAuthenticated()">
-            <a href="/user/logout"> logout </a>
-          </div>
-
-          <div class="user-header">
-            <a href="/user/cart"> cart </a>
-          </div>
+        <div sec:authorize="isAuthenticated()">
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em">
+            <path d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z"></path>
+          </svg>
+          <a href="/user/logout">Log Out</a>
         </div>
       </div>
     </div>
 
-    <!--카테고리-->
-    <div>
-      <div class="user-header-category">
-        <a data-categoryid="1" th:href="@{'/product/1'}">
-          STATIONERY
-        </a>
-        <ul class="middle-category">
-          <li><a href="#">PENCIL</a>
-            <ul class="small-category">
-              <li><a href="#">4B</a></li>
-              <li><a href="#">SHARP</a></li>
-              <li><a href="#">HIGHLIGHTER</a></li>
-            </ul>
-          </li>
-          <li><a href="#">POSTIT</a>
-            <ul class="small-category">
-              <li><a href="#">COLORFUL</a></li>
-              <li><a href="#">CHARACTER</a></li>
-              <li><a href="#">BIG</a></li>
-            </ul>
-          </li>
-          <li><a href="#">NOTE</a>
-            <ul class="small-category">
-              <li><a href="#">LINED</a></li>
-              <li><a href="#">NON-LINED</a></li>
-              <li><a href="#">DIARY</a></li>
-            </ul>
-          </li>
-        </ul>
+    <div class="header-categories">
+      <div>
+        <a href="/product/1">Stationery</a>
       </div>
-
-      <div class="user-header-category">
-        <a data-categoryid="2" th:href="@{'/product/2'}">
-          D.I.Y
-        </a>
-        <ul class="middle-category">
-          <li><a href="#">TOY</a>
-            <ul class="small-category">
-              <li><a href="#">LEGO</a></li>
-              <li><a href="#">DOLL</a></li>
-            </ul>
-          </li>
-          <li><a href="#">FURNITURE</a>
-            <ul class="small-category">
-              <li><a href="#">DESK</a></li>
-              <li><a href="#">CHAIR</a></li>
-              <li><a href="#">TABLE</a></li>
-            </ul>
-          </li>
-          <li><a href="#">BAG</a>
-            <ul class="small-category">
-              <li><a href="#">BACKPACK</a></li>
-              <li><a href="#">CROSSBAG</a></li>
-              <li><a href="#">HANDBAG</a></li>
-            </ul>
-          </li>
-        </ul>
+      <div>
+        <a href="/product/2">D.I.Y</a>
       </div>
-      <div class="user-header-category">
-        <a data-categoryid="3" th:href="@{'/product/3'}">
-          FASHION
-        </a>
-        <ul class="middle-category">
-          <li><a href="#">MAN</a>
-            <ul class="small-category">
-              <li><a href="#">TOP</a></li>
-              <li><a href="#">BOTTOM</a></li>
-              <li><a href="#">SHOES</a></li>
-            </ul>
-          </li>
-          <li><a href="#">WOMAN</a>
-            <ul class="small-category">
-              <li><a href="#">TOP</a></li>
-              <li><a href="#">BOTTOM</a></li>
-              <li><a href="#">SHOES</a></li>
-            </ul>
-          </li>
-        </ul>
+      <div>
+        <a href="/product/3">Fashion</a>
       </div>
-      <div class="user-header-category">
-        <a data-categoryid="4" th:href="@{'/product/4'}">
-          FOOD
-        </a>
-        <ul class="middle-category">
-          <li><a th:href="@{'/product/36'}">SEAFOOD</a>
-            <ul class="small-category">
-              <li><a th:href="@{'/product/39'}">SALMON</a></li>
-              <li><a th:href="@{'/product/40'}">CLAM</a></li>
-              <li><a th:href="@{'/product/41'}">OCTOPUS</a></li>
-            </ul>
-          </li>
-          <li><a th:href="@{'/product/37'}">MEAT</a>
-            <ul class="small-category">
-              <li><a th:href="@{'/product/42'}">BEEF</a></li>
-              <li><a th:href="@{'/product/43'}">PORK</a></li>
-              <li><a th:href="@{'/product/44'}">CHICKEN</a></li>
-            </ul>
-          </li>
-          <li><a th:href="@{'/product/38'}">DESSERT</a>
-            <ul class="small-category">
-              <li><a th:href="@{'/product/45'}">TEA</a></li>
-              <li><a th:href="@{'/product/46'}">ICECREAM</a></li>
-            </ul>
-          </li>
-        </ul>
+      <div>
+        <a href="/product/4">Food</a>
       </div>
     </div>
-  </div>
-</header>
+
+    <hr class="header-hr">
+  </section>
+
 </html>

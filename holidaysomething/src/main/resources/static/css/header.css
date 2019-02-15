@@ -1,0 +1,77 @@
+#userHeader {
+  z-index: 5;
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+#userHeader a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.header-hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #D4D4D4;
+  padding: 0;
+}
+
+.hs-logo {
+  height: 60px;
+  width: auto;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 40px 0 40px;
+  margin: 0 180px;
+  max-width: 1440px;
+  height: 68px;
+  align-items: center;
+  font-size: 16px;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #363636;
+}
+
+.header-search input {
+  width: 80px;
+}
+
+.header-categories {
+  display: flex;
+  justify-content: center;
+  max-width: 1260px;
+  margin: 0 auto;
+  margin-top: 10px;
+  font-family: Helvetica, Arial, sans-serif;
+  letter-spacing: 0.15px;
+  font-size: 12px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.88;
+  text-align: center;
+  color: #333;
+}
+
+.header-categories > div {
+  margin-right: 40px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.header-categories > div > a {
+  text-decoration: none;
+}
+
+.header-categories > div > a:visited {
+  color: inherit;
+}
+
+.header-sign-in-cart {
+  display: flex;
+}

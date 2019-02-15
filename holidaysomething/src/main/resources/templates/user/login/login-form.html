@@ -11,7 +11,7 @@
 
 <!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
-
+  <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/header.css}"/>
 </th:block>
 
 
@@ -46,6 +46,10 @@
       </tr>
     </table>
   </form>
+
+  <button type="button">
+    <a href="/user/join">Sign Up</a>
+  </button>
 
 
   <br/>
