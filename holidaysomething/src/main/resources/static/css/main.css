@@ -13,10 +13,13 @@
   text-decoration: none;
 }
 
+.header-img-a {
+  margin: auto 20px auto 5px;
+}
+
 #header img {
   width: auto;
   height: 30px;
-  margin: auto 20px auto 5px;
 }
 
 .header-menu {
@@ -43,6 +46,10 @@
   vertical-align: middle;
   line-height: normal;
   text-decoration: none;
+}
+
+.header-admin-home-btn {
+  margin-left: auto;
 }
 
 #container {
