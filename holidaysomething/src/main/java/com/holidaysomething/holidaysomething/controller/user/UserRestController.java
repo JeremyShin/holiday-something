@@ -158,6 +158,9 @@ public class UserRestController {
     return memberService.patchMember(member);
   }
 
+  /**
+   * cart 내의 특정 상품을 cart에서 삭제
+   */
   @DeleteMapping("/user/cart/{cartProductId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteCartProduct(@PathVariable("cartProductId") Long id) {

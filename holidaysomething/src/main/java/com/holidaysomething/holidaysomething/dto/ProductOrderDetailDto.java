@@ -1,7 +1,5 @@
 package com.holidaysomething.holidaysomething.dto;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,13 +40,4 @@ public class ProductOrderDetailDto {
 
   @NotNull
   private  Integer quantity;
-
-//  private List<String> optionName;
-//
-//  private List<Integer> optionPrice;
-
-//  public ProductOrderDetailDto() {
-//    this.optionName = new ArrayList<>();
-//    this.optionPrice = new ArrayList<>();
-//  }
 }
