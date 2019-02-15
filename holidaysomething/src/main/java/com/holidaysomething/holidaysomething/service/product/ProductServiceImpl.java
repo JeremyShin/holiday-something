@@ -117,6 +117,7 @@ public class ProductServiceImpl implements ProductService {
     productOrderDetailDto.setOriginalPrice(product.getOriginalPrice());
     productOrderDetailDto.setSellingPrice(product.getSellingPrice());
     productOrderDetailDto.setShippingPrice(product.getShippingPrice());
+    productOrderDetailDto.setQuantity(quantity);
 
     ProductOption productOption = productOptionRepository.findProductOptionById(optionId);
     productOrderDetailDto.setOptionId(productOption.getId());
