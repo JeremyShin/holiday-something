@@ -13,9 +13,12 @@
     </header>
 
     <div id="container">
-      <aside th:replace="fragments/left-navbar :: leftNavbarFragment">
+      <!--<aside th:replace="fragments/left-navbar :: leftNavbarFragment2">-->
+      <div layout:fragment="leftNavbarFragment">
+        <aside>
 
-      </aside>
+        </aside>
+      </div>
       <div layout:fragment="content" id="dashboard">
 
       </div>

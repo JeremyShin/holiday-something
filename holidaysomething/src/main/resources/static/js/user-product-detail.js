@@ -124,7 +124,6 @@ function optionAdd(option, defaultId, defaultPrice) {
         deleteButton.setAttribute('type', 'button');
         deleteButton.setAttribute('class', 'order-option-delete-button');
         deleteButton.setAttribute('onclick', 'deleteOption(this)');
-        deleteButton.innerText = 'x';
         td5.appendChild(deleteButton);
 
         my_tbody.appendChild(td1);
@@ -272,7 +271,7 @@ function shoppingBag() {
         return false
     } else {
         alert("장바구니에 상품이 담겼습니다.");
-        value.action = "/user/product/shoppingbag";
+        value.action = "/product/shoppingbag";
         value.submit();
     }
 }

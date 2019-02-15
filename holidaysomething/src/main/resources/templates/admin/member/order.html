@@ -12,6 +12,13 @@
 <th:block layout:fragment="css">
 </th:block>
 
+<!-- member left-navbar 추가 -->
+<div layout:fragment="leftNavbarFragment">
+  <aside th:replace="fragments/left-navbar2 :: leftNavbarFragment">
+
+  </aside>
+</div>
+
 
 <div layout:fragment="content">
   <!-- 사용자 스크립트 추가 -->
@@ -105,8 +112,8 @@
           <td th:text="${orderMemberDto.member.email}">###</td>
           <td th:text="${orderMemberDto.member.nickname}">###</td>
           <td th:text="${orderMemberDto.member.phone}">###</td>
-          <!--<td th:text="${orderMemberDto.member.birthday}">###</td>-->
-          <td th:text="${#dates.format(orderMemberDto.member.birthday,'yyyy-MM-dd')}">###</td>
+          <td th:text="${orderMemberDto.member.birthday}">###</td>
+          <!--<td th:text="${#dates.format(orderMemberDto.member.birthday,'yyyy-MM-dd')}">###</td>-->
           <!--<td th:text="${orderMemberDto.date}">###</td>-->
           <td th:text="${#temporals.format(orderMemberDto.date , 'yyyy-MM-dd HH:mm:ss')}">###</td>
           <td th:text="${orderMemberDto.orderNumber}">###</td>

@@ -41,6 +41,11 @@ public class AdminMemberController {
 
   private final MemberService memberService;
 
+  @GetMapping
+  public String member() {
+    return "admin/member/index";
+  }
+
 
   /**
    * @param searchOrderMemberDto : input 검색 데이터를 담기 위한 Dto
@@ -52,7 +57,7 @@ public class AdminMemberController {
       BindingResult bindingResult,
 //      @RequestParam(value = "date1", required = false) @DateTimeFormat(pattern = "MMddyyyy") String date1,
 //      @RequestParam(value = "date2", required = false) @DateTimeFormat(iso = ISO.DATE) String date2,
-      ModelMap model, @PageableDefault(size = 1) Pageable pageable) {
+      ModelMap model, @PageableDefault(size = 5) Pageable pageable) {
 
     /*
       date1 , date2 가 stringbuffer 이면 null 도 아니고 "" 도 아니고.처음부터 capacity가 16이다...

@@ -187,7 +187,7 @@ AdminProductController {
     //
 
     /**
-     * @author JDragon 기간검색시 앞 시각이 뒷 시각보다 미래면 안되는 것과 같은. 검색 조건 validation 이 필요하다.
+     * @author JDragon
      */
     @GetMapping("/{productId}")
     public String productDetail(@PathVariable("productId") Long productId,
@@ -218,7 +218,12 @@ AdminProductController {
         Page<ProductOption> productOptions = productOptionService
                 .getProductOptionsByProductId(productId, pageable);
 
+        ProductImage productImageMain = productImageService
+            .getProductImageMain(productId, 1l);
+
         model.addAttribute("productOptions", productOptions);
+        model.addAttribute("productImageMain",
+            productImageMain.getPath() + productImageMain.getStoredFileName());
 
         int pageCount = productOptions.getTotalPages();
         model.addAttribute("pageCount", pageCount);
