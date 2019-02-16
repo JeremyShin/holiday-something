@@ -90,7 +90,6 @@
                 <!-- th:onclick="'selectOptionChange(this.value, \'' +${product.id} +'\',\''+${product.sellingPrice}+'\')'" -->
                 <select name="selectOption" id="option-selector" th:onchange="'selectOptionChange(this.value, \'' + ${product.id} + '\',\''+ ${product.sellingPrice} + '\')'">
                     <option disabled selected>옵션 선택</option>
-                    <option value="0">없음</option>
                     <option th:each="productOption : ${productOptions}"
                             th:value="'{&quot;id&quot;:&quot;' + ${productOption.id} + '&quot;, &quot;name&quot;:&quot;' + ${productOption.name} + '&quot;, &quot;price&quot;:' + ${productOption.price} + '}'"
                             th:utext="@{${productOption.name} + ' [+' + ${productOption.price} + ']'}"/>

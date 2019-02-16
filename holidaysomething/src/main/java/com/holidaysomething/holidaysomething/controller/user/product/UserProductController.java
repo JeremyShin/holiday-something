@@ -54,11 +54,14 @@ public class UserProductController {
     public String cart(@AuthenticationPrincipal MemberUserDetails userDetails,
                        ProductOrderInfoCommand poc) {
 
-
         List<ProductOrderInfoDto> productOrderInfoDtos = poc.getProductOrderInfoDtos();
 
         for(ProductOrderInfoDto productOrderInfoDto : productOrderInfoDtos) {
-            cartProductService.save(productOrderInfoDto, userDetails.getId());
+            if(productOrderInfoDto.getProductId() != null
+                    && productOrderInfoDto.getOptionId() != null
+                    && productOrderInfoDto.getQuantity() != null) {
+                cartProductService.save(productOrderInfoDto, userDetails.getId());
+            }
         }
 
 //        return "redirect:/";
