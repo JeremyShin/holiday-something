@@ -35,7 +35,7 @@ public class CartProductRepositoryTest {
 //        List<UserCartProductDto> cartProductById = cartProductRepository.findCartProductById(1L);
 //        List<CartProduct> cartProducts = cartProductRepository.findCartProductByUserId(1L);
 
-        CartProduct cartProduct1 = cartProductRepository.getCartProductByIds(1L, 1L, 1L);
+        CartProduct cartProduct1 = cartProductRepository.findCartProductByIds(1L, 1L, 1L);
         if (cartProduct1 == null) {
             CartProduct cartProduct2 = new CartProduct();
 

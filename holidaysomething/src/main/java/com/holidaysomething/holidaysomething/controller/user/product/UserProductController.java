@@ -34,15 +34,14 @@ public class UserProductController {
     @GetMapping("{categoryId}/{productId}")
     public String productDetail(@PathVariable("categoryId") Long categoryId,
                                 @PathVariable("productId") Long productId,
+                                @AuthenticationPrincipal MemberUserDetails userDetails,
                                 ModelMap modelMap) {
-
-        Product product = productService.getProduct(categoryId, productId);
-
+        // 로그인 유무 Check
+        modelMap.addAttribute("loginCheck", userDetails != null);
         // 상품 그 자체
-        modelMap.addAttribute("product", product);
+        modelMap.addAttribute("product", productService.getProduct(categoryId, productId));
         // 해당 상품에 포함되는 옵션들
         modelMap.addAttribute("productOptions", productOptionService.getProductOptionsByProductId(productId));
-
         // 해당 상품의 MainImage(1L) & SubImage(2L)
         modelMap.addAttribute("mainImage", productImageService.getProductImageMain(productId, 1L));
         modelMap.addAttribute("subImages", productImageService.getProductImageSub(productId, 2L));

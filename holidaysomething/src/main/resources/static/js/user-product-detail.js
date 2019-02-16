@@ -172,7 +172,13 @@ function plusQuantity(source) {
 }
 
 // shopping bag 버튼 클릭 이벤트
-function shoppingBag() {
+function shoppingBag(loginCheck) {
+
+    if(loginCheck === "false") {
+        alert("로그인이 필요한 서비스입니다.");
+        return false;
+    }
+
     let value = document.getElementById('orderForm');
     let check = document.getElementsByClassName('option-order-quantity');
 
@@ -194,7 +200,12 @@ function shoppingBag() {
 }
 
 // buy now 버튼 클릭 이벤트
-function buyNow() {
+function buyNow(loginCheck) {
+    if(loginCheck === "false") {
+        alert("로그인이 필요한 서비스입니다.");
+        return false;
+    }
+
     let value = document.getElementById('orderForm');
     let check = document.getElementsByClassName('option-order-quantity');
 

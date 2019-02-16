@@ -114,8 +114,8 @@
             <div id="orderRequestForm">
                 <!--`orderIndex`에 선택된 옵션과 상품의 수량, 상품 번호가 넘어감-->
                 <form method="post" name="productOrder" id="orderForm">
-                    <input type="button" class="shopping-bag-button" value="SHOPPING BAG" onclick="shoppingBag();"/>
-                    <input type="button" class="buy-now-button" value="BUY NOW" onclick="buyNow();"/>
+                    <input type="button" class="shopping-bag-button" value="SHOPPING BAG" th:onclick="'shoppingBag(\'' + ${loginCheck} + '\')'"/>
+                    <input type="button" class="buy-now-button" value="BUY NOW" th:onclick="'buyNow(\'' + ${loginCheck} + '\')'"/>
                 </form>
             </div>
         </div>
