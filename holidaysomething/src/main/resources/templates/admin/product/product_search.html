@@ -124,7 +124,8 @@
       <tr th:each="product : ${allProductList != null ? allProductList : allProductListSearchResult}">
         <td th:text="${product.id}">###</td>
         <td th:text="${product.code}">###</td>
-        <td th:text="${product.name}">###</td>
+        <td>1244</td>
+        <!--<td><a href="/admin/product/${product.id}">  <td th:text="${product.name}">###</td></a> </td>-->
         <td th:text="${product.sellingPrice}">###</td>
         <td th:text="${product.sellingQuantity}">###</td>
         <td th:text="${product.manufacturer}">###</td>

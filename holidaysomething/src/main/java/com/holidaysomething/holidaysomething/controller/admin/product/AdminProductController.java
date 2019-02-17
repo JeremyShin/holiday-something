@@ -10,6 +10,8 @@ import com.holidaysomething.holidaysomething.service.product.ProductAddService;
 import com.holidaysomething.holidaysomething.service.product.ProductImageService;
 import com.holidaysomething.holidaysomething.service.product.ProductOptionService;
 import com.holidaysomething.holidaysomething.service.product.ProductService;
+import java.util.ArrayList;
+import java.util.Iterator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -66,6 +68,43 @@ AdminProductController {
         model.addAttribute("product", product);
         return "admin/product/add";
     }
+
+    @GetMapping("/update")
+    public String productUpdate(ModelMap model, @RequestParam("id") Long productId) {
+
+        // 이미지와 설명을 한번에 읽어오는 쿼리문을 만들어야 한다. 미구현.
+        Product product = productService.getProduct(productId);
+        String description = product.getProductDetail().getDescription();
+
+        log.info(
+            "********** product.getProductImages().size() : " + product.getProductImages().size());
+
+        Iterator<ProductImage> itr = product.getProductImages().iterator();
+        ProductImage mainImage = null;
+        List<ProductImage> subImages = new ArrayList<>();
+
+        while (itr.hasNext()) {
+            ProductImage temp = itr.next();
+            if (temp.getCategory() == 1) {
+                mainImage = temp;
+            } else {
+                subImages.add(temp);
+            }
+        }
+
+        log.info("**** mainImage.getOriginalFileName() " + mainImage.getOriginalFileName());
+        for (ProductImage productImage : subImages) {
+            log.info(
+                "#### productImage.getOriginalFileName() : " + productImage.getOriginalFileName());
+        }
+
+        model.addAttribute("product", product);
+        model.addAttribute("description", description);
+        model.addAttribute("mainImage", mainImage);
+        model.addAttribute("subImages", subImages);
+        return "admin/product/update";
+    }
+
 
 
     /**
