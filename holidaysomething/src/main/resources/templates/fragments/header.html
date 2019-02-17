@@ -69,6 +69,7 @@
 
       <!--&lt;!&ndash;카테고리&ndash;&gt;-->
       <!--<div>-->
+
         <!--<div class="user-header-category">-->
           <!--<a data-categoryid="1" th:href="@{'/product/1'}">-->
             <!--STATIONERY-->
@@ -81,7 +82,7 @@
                 <!--<li><a href="#">HIGHLIGHTER</a></li>-->
               <!--</ul>-->
             <!--</li>-->
-            <!--<li><a href="#">POSTIT</a>-->
+            <!--<li><a href="#">POST IT</a>-->
               <!--<ul class="small-category">-->
                 <!--<li><a href="#">COLORFUL</a></li>-->
                 <!--<li><a href="#">CHARACTER</a></li>-->
@@ -125,6 +126,7 @@
             <!--</li>-->
           <!--</ul>-->
         <!--</div>-->
+
         <!--<div class="user-header-category">-->
           <!--<a data-categoryid="3" th:href="@{'/product/3'}">-->
             <!--FASHION-->
@@ -146,6 +148,7 @@
             <!--</li>-->
           <!--</ul>-->
         <!--</div>-->
+
         <!--<div class="user-header-category">-->
           <!--<a data-categoryid="4" th:href="@{'/product/4'}">-->
             <!--FOOD-->
@@ -180,11 +183,9 @@
   <section th:fragment="userHeaderFragment" id="userHeader">
     <div class="header-top">
       <div class="header-search">
-        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <input type="text" placeholder="Search" aria-label="Search" />
+        <i class="fas fa-search"></i>
+        <input type="search" placeholder="Search" aria-label="Search" autocomplete="off" />
+               <!--name="q" data-instant="attached"-->
       </div>
       <a href="/">
         <img src="/static/img/hs-logo.png" alt="logo" class="hs-logo" />
@@ -192,43 +193,135 @@
 
       <div class="header-sign-in-cart">
         <div sec:authorize="!isAuthenticated()">
-          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em">
-            <path d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z"></path>
-          </svg>
+          <i class="fas fa-user"></i>
           <a href="/user/login">Sign In</a>
         </div>
 
-        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em">
-          <circle cx="9" cy="21" r="1"></circle>
-          <circle cx="20" cy="21" r="1"></circle>
-          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-        </svg>
         <div>
+          <i class="fas fa-shopping-cart"></i>
           <a href="/user/cart">Cart</a>
         </div>
 
         <div sec:authorize="isAuthenticated()">
-          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em">
-            <path d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z"></path>
-          </svg>
+          <i class="fas fa-sign-out-alt"></i>
           <a href="/user/logout">Log Out</a>
         </div>
       </div>
     </div>
 
     <div class="header-categories">
-      <div>
-        <a href="/product/1">Stationery</a>
-      </div>
-      <div>
-        <a href="/product/2">D.I.Y</a>
-      </div>
-      <div>
-        <a href="/product/3">Fashion</a>
-      </div>
-      <div>
-        <a href="/product/4">Food</a>
-      </div>
+      <ul class="site-nav">
+
+        <li class="site-nav-dropdown">
+          <div><a href="/product/1">Stationery</a></div>
+          <div class="nav-group-wrapper">
+            <div class="child-group">
+              <p>PENCIL</p>
+              <div class="grand-child-wrapper">
+                <a href="#">4B</a>
+                <a href="#">SHARP</a>
+                <a href="#">HIGHLIGHTER</a>
+              </div>
+            </div>
+            <div class="child-group">
+              <p>POST-IT</p>
+              <div class="grand-child-wrapper">
+                <a href="#">COLORFUL</a>
+                <a href="#">CHARACTER</a>
+                <a href="#">BIG</a>
+              </div>
+            </div>
+            <div class="child-group">
+              <p>NOTE</p>
+              <div class="grand-child-wrapper">
+                <a href="#">LINED</a>
+                <a href="#">NON-LINED</a>
+                <a href="#">DIARY</a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="site-nav-dropdown">
+          <div><a href="/product/2">D.I.Y</a></div>
+          <div class="nav-group-wrapper">
+            <div class="child-group">
+              <p>TOY</p>
+              <div class="grand-child-wrapper">
+                <a href="#">LEGO</a>
+                <a href="#">DOLL</a>
+              </div>
+            </div>
+            <div class="child-group">
+              <p>FURNITURE</p>
+              <div class="grand-child-wrapper">
+                <a href="#">DESK</a>
+                <a href="#">CHAIR</a>
+                <a href="#">TABLE</a>
+              </div>
+            </div>
+            <div class="child-group">
+              <p>BAG</p>
+              <div class="grand-child-wrapper">
+                <a href="#">BACKPACK</a>
+                <a href="#">CROSSBAG-LINED</a>
+                <a href="#">HANDBAG</a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="site-nav-dropdown">
+          <div><a href="/product/3">Fashion</a></div>
+          <div class="nav-group-wrapper">
+            <div class="child-group">
+              <p>MAN</p>
+              <div class="grand-child-wrapper">
+                <a href="#">TOP</a>
+                <a href="#">BOTTOM</a>
+                <a href="#">SHOES</a>
+              </div>
+            </div>
+            <div class="child-group">
+              <p>WOMAN</p>
+              <div class="grand-child-wrapper">
+                <a href="#">TOP</a>
+                <a href="#">BOTTOM</a>
+                <a href="#">SHOES</a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="site-nav-dropdown">
+          <div><a href="/product/4">Food</a></div>
+          <div class="nav-group-wrapper">
+            <div class="child-group">
+              <p>SEAFOOD</p>
+              <div class="grand-child-wrapper">
+                <a href="#">SALMON</a>
+                <a href="#">CLAM</a>
+                <a href="#">OCTOPUS</a>
+              </div>
+            </div>
+            <div class="child-group">
+              <p>MEAT</p>
+              <div class="grand-child-wrapper">
+                <a href="#">BEEF</a>
+                <a href="#">PORK</a>
+                <a href="#">CHICKEN</a>
+              </div>
+            </div>
+            <div class="child-group">
+              <p>DESSERT</p>
+              <div class="grand-child-wrapper">
+                <a href="#">TEA</a>
+                <a href="#">ICECREAM</a>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
 
     <hr class="header-hr">
