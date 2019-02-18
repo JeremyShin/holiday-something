@@ -64,6 +64,6 @@ public class UserProductController {
         }
 
 //        return "redirect:/";
-        return "redirect:/user/cart?id=" + userDetails.getId();
+        return "redirect:/user/cart";
     }
 }
