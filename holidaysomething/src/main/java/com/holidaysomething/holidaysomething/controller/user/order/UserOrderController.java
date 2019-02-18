@@ -2,9 +2,7 @@ package com.holidaysomething.holidaysomething.controller.user.order;
 
 import com.holidaysomething.holidaysomething.domain.Order;
 import com.holidaysomething.holidaysomething.domain.OrderedProduct;
-import com.holidaysomething.holidaysomething.domain.Product;
-import com.holidaysomething.holidaysomething.domain.ProductOption;
-import com.holidaysomething.holidaysomething.domain.Shipping;
+import com.holidaysomething.holidaysomething.domain.constant.ShippingStatus;
 import com.holidaysomething.holidaysomething.dto.AddOrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.ProductOrderCompleteDto;
 import com.holidaysomething.holidaysomething.dto.ProductOrderDetailDto;
