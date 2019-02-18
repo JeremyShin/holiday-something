@@ -34,15 +34,14 @@ public class UserProductController {
     @GetMapping("{categoryId}/{productId}")
     public String productDetail(@PathVariable("categoryId") Long categoryId,
                                 @PathVariable("productId") Long productId,
+                                @AuthenticationPrincipal MemberUserDetails userDetails,
                                 ModelMap modelMap) {
-
-        Product product = productService.getProduct(categoryId, productId);
-
+        // 로그인 유무 Check
+        modelMap.addAttribute("loginCheck", userDetails != null);
         // 상품 그 자체
-        modelMap.addAttribute("product", product);
+        modelMap.addAttribute("product", productService.getProduct(categoryId, productId));
         // 해당 상품에 포함되는 옵션들
         modelMap.addAttribute("productOptions", productOptionService.getProductOptionsByProductId(productId));
-
         // 해당 상품의 MainImage(1L) & SubImage(2L)
         modelMap.addAttribute("mainImage", productImageService.getProductImageMain(productId, 1L));
         modelMap.addAttribute("subImages", productImageService.getProductImageSub(productId, 2L));
@@ -54,14 +53,17 @@ public class UserProductController {
     public String cart(@AuthenticationPrincipal MemberUserDetails userDetails,
                        ProductOrderInfoCommand poc) {
 
-
         List<ProductOrderInfoDto> productOrderInfoDtos = poc.getProductOrderInfoDtos();
 
         for(ProductOrderInfoDto productOrderInfoDto : productOrderInfoDtos) {
-            cartProductService.save(productOrderInfoDto, userDetails.getId());
+            if(productOrderInfoDto.getProductId() != null
+                    && productOrderInfoDto.getOptionId() != null
+                    && productOrderInfoDto.getQuantity() != null) {
+                cartProductService.save(productOrderInfoDto, userDetails.getId());
+            }
         }
 
 //        return "redirect:/";
-        return "redirect:/user/cart?id=" + userDetails.getId();
+        return "redirect:/user/cart";
     }
 }

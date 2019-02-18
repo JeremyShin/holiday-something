@@ -19,4 +19,7 @@ public interface CartProductRepository extends JpaRepository<CartProduct, Long> 
       + "INNER JOIN ProductOption as po ON cp.productOption.id = po.id "
       + "WHERE m.id = (:userId)")
   List<UserCartProductDto> findCartProductById(@Param("userId") Long userId);
+
+  @Query(value = "SELECT cp FROM CartProduct cp WHERE cp.product.id=(:productId) and cp.member.id=(:userId) and cp.productOption.id=(:optionId)")
+  CartProduct findCartProductByIds(@Param("userId") Long userId, @Param("productId") Long productId, @Param("optionId") Long optionId);
 }
