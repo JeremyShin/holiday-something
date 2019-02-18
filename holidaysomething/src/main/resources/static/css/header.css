@@ -1,3 +1,7 @@
+body * {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
 #userHeader {
   z-index: 5;
   position: relative;
@@ -35,7 +39,6 @@
   height: 68px;
   align-items: center;
   font-size: 16px;
-  font-family: Helvetica, Arial, sans-serif;
   color: #363636;
 }
 
@@ -75,7 +78,6 @@
   justify-content: center;
   max-width: 1350px;
   margin: 10px auto 0 auto;
-  font-family: Helvetica, Arial, sans-serif;
   letter-spacing: 0.15px;
   font-size: 12px;
   font-style: normal;
@@ -133,14 +135,20 @@ ul {
 }
 
 .nav-group-wrapper div div a {
-  line-height: 25px;
-  font-size: 90%;
   display: block;
+  font-size: 17px;
+  line-height: 24px;
 }
 
 .site-nav-dropdown > div:nth-child(1) {
-  height: 40px;
+  height: 56px;
   width: 100px;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.site-nav-dropdown > div:nth-child(1) > a {
+  font-family: 'Indie Flower', cursive;
 }
 
 .site-nav-dropdown div:hover + .nav-group-wrapper,
@@ -149,12 +157,19 @@ ul {
 }
 
 .child-group {
-  margin: 20px 40px 10px 40px;
+  margin: 20px 12px 10px 12px;
   text-align: left;
 }
 
 .child-group p {
   color: #9B9B9B;
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.grand-child-wrapper {
+  font-family: 'Poppins', sans-serif;
 }
 
 .header-sign-in-cart {
