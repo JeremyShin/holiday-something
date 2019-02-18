@@ -754,7 +754,7 @@ INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id
 INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 1, 11, 6, 24);
 INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 1, 12, 6, 22);
 INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 3, 13, 34, 73);
-INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 3, 14, 43, 93);
+-- INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 3, 14, 43, 93);
 INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 3, 14, 41, 88);
 INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 1, 14, 43, 93);
 INSERT INTO cart_product (id, quantity, member_id, product_id, product_option_id) VALUES (NULL, 2, 15, 15, 51);
