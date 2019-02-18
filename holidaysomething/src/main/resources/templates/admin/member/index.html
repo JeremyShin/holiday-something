@@ -16,20 +16,20 @@
 <th:block layout:fragment="script">
 </th:block>
 
-<!-- product left-navbar 추가 -->
+<!--<aside th:replace="fragments/left-navbar :: leftNavbarFragment">-->
 <div layout:fragment="leftNavbarFragment">
-  <aside th:replace="fragments/left-navbar :: leftNavbarFragment">
+  <aside th:replace="fragments/left-navbar2 :: leftNavbarFragment">
 
   </aside>
 </div>
 
+
 <div layout:fragment="content">
-  <h1>상품 관리페이지입니다.</h1>
+  <h1>회원 관리페이지입니다.</h1>
   <h1>Admin ! ! !</h1>
-  <p><a href="/admin/product/category">상품 분류관리 페이지 입니다.</a></p>
-  <p><a href="/admin/product/option">상품 옵션관리 페이지 입니다.</a></p>
-  <p><a href="/admin/product/search">상품 검색 페이지 입니다.</a></p>
-  <p><a href="/admin/product/add">상품 등록 페이지 입니다.</a></p>
+  <p><a href="/admin/member/search">회원 검색 페이지 입니다.</a></p>
+  <p><a href="/admin/member/order/search">회원 주문 관리 페이지 입니다.</a></p>
+  <p><a href="/admin/member/mileage/search">회원 마일리지 관리 페이지 입니다.</a></p>
 </div>
 
 </html>

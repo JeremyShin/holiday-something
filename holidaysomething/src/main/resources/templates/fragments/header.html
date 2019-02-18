@@ -3,24 +3,24 @@
       xml:th="http:/www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-<header th:fragment="headerFragment" id="header">
-  <img src="/static/img/logo.png"/>
-  <a href="/admin/product/">
-    <div class="header-menu">상품관리</div>
-  </a>
-  <a href="#">
-    <div class="header-menu">주문관리</div>
-  </a>
-  <a href="#">
-    <div class="header-menu">고객관리</div>
-  </a>
-  <a href="#">
-    <div class="header-menu">게시판관리</div>
-  </a>
-  <a href="#">
-    <div class="header-menu">프로모션</div>
-  </a>
-</header>
+  <header th:fragment="headerFragment" id="header">
+    <img src="/static/img/logo.png"/>
+    <a href="/admin/product/">
+      <div class="header-menu">상품관리</div>
+    </a>
+    <!--<a href="#">-->
+    <!--<div class="header-menu">주문관리</div>-->
+    <!--</a>-->
+    <a href="/admin/member/">
+      <div class="header-menu">고객관리</div>
+    </a>
+    <!--<a href="#">-->
+    <!--<div class="header-menu">게시판관리</div>-->
+    <!--</a>-->
+    <!--<a href="#">-->
+    <!--<div class="header-menu">프로모션</div>-->
+    <!--</a>-->
+  </header>
 
 <header th:fragment="userHeaderFragment" id="userHeader">
   <div class="nav">

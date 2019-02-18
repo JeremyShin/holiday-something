@@ -231,11 +231,16 @@ button {
 .cart-order-price {
   font-size: 18px;
   font-weight: 600;
+  text-align: center;
 }
 
 .cart-order-price span {
   font-size: 22px;
   font-weight: 700;
+}
+
+.cart-order-shipping-price {
+  text-align: center;
 }
 
 .btn-buynow {

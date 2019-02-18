@@ -3,6 +3,8 @@ package com.holidaysomething.holidaysomething.controller.user.member;
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.dto.MemberAddDto;
 import com.holidaysomething.holidaysomething.service.member.MemberAddService;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,11 @@ public class MemberAddController {
         model.addAttribute("member", member);
 
         return "/user/login/join";
+    }
+
+    @GetMapping("/login/joinSuccess")
+    public String loginSuccess() {
+        return "/user/login/joinSuccess";
     }
 
     @PostMapping("/join")
