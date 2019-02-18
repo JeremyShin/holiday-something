@@ -10,6 +10,10 @@
   <!-- other elements you want to reference in your layout -->
 </head>
 
+<th:block layout:fragment="css">
+  <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/header.css}"/>
+</th:block>
+
 <div layout:fragment="userTitle">
 
   <a href="/admin/product">백오피스로</a>

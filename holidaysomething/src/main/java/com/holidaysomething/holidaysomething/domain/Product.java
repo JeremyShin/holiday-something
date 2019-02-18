@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -69,10 +70,10 @@ public class Product {
   private LocalDateTime manufactureDate;
   private LocalDateTime releaseDate;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private ProductCategory productCategory;
 
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "product_detail_id")
   @JsonIgnore
   private ProductDetail productDetail;
