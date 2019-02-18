@@ -6,100 +6,150 @@
 
 <head>
   <title id="pageTitle">유저 &mdash; 주문</title>
+
+  <!-- 사용자 CSS 추가 -->
+  <!-- layout:fragment="xxx" => decorate 파일에 있는 xxx와 이름이 맞아야만 HTML에 포함된다 -->
+  <th:block layout:fragment="css">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/order.css}"/>
+  </th:block>
+
 </head>
 
-<div layout:fragment="userContents">
-  <div>
-      <!-- 주문 정보 -->
-      <div>
-        <div>
-          주문이 완료되었습니다.
-          주문번호 : <span th:text="${order.orderNumber}"></span>
-        </div>
-
-
-
-        <h1>주문자 정보</h1>
-        <span th:text="${order}"></span>
-        <div>
-          <div>
-            <span>주문자<span style="color: red"> * </span></span>
-
-          </div>
-
-          <div>
-            <span>연락처<span style="color: red"> * </span></span>
-          </div>
-
-          <div>
-            <span>이메일<span style="color: red"> * </span></span>
-          </div>
-        </div>
-
-
-        <h1>배송 정보</h1>
-        <div>
-          <div>
-            <input type="radio" name="addressType" value="existingAddress" checked="checked" /> 기존 배송지
-            <input type="radio" name="addressType" value="newAddress" onclick="removeInputText()"/> 신규 입력
-          </div>
-
-          <div id="orderShippingDiv" style="display: block;">
-            <div>
-              <span>수령인<span style="color: red"> * </span></span>
-            </div>
-
-            <!-- 우편번호 검색 -->
-            <div>
-              <span>배송지<span style="color: red"> * </span></span>
-            </div>
-
-            <div>
-              <span>연락처<span style="color: red"> * </span></span>
-            </div>
-
-            <div>
-              <span>배송시 요청사항</span>
-            </div>
-
-          </div>
-        </div>
-
-
-        <h1>마일리지</h1>
-        <div class="mileageDiv">
-          <div>
-            <span> 마일리지 : </span>
-          <div>
-            <span> 보유 마일리지 : </span>
-                     </div>
-        </div>
-
-        <h1>결제 정보</h1>
-        <div>
-          <div>입금계좌 : 우체국 주미선 012591-02-325779</div>
-        </div>
-      </div>
-
-      <!-- 주문할 상품 -->
-      <div>
-        오른쪽으로 가줄래?
-        <!-- 돌아가는 코드 -->
-
-        <input type="hidden" name="order" th:value="${order}">
-
-        으아아아아아아아아
-      </div>
-  </div>
-</div>
-</div>
-
-<th:block layout:fragment="script">
-  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-  <script th:src="@{/static/js/user-order.js}"></script>
+<th:block layout:fragment="css">
+  <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/header.css}"/>
 </th:block>
 
+<div layout:fragment="userContents">
+  <div class="order-container">
+      <!-- 주문 정보 -->
+        <div class="order-confirm">
+          <div></div>
+          <div class="order-complete-font">주문이 완료되었습니다.</div>
+          <div class="order-number">주문번호 : <span th:text="${order.orderNumber}"></span></div>
+        </div>
 
+    <!-- 주문 상품 리스트 -->
 
+    <table class="cart-tbl">
+      <tr class="cart-tr-th product-list">
+        <th>상품 정보</th>
+        <th>수량</th>
+        <th>주문금액</th>
+        <th>진행상태</th>
+      </tr>
+      <tr class="tr-product" th:each="productOrderDetailDtos, stat : ${productOrderDetailDtos}" th:with="index=${stat.index}">
+        <!-- 상품 정보 -->
+        <td class="tr-product-info">
+          <div class="product-image-div">
+            <img th:src="${productOrderDetailDtos.img}" width="100px" height="100px" alt="공사중,,,">
+          </div>
+          <div>
+            <p class="product-name" th:text="${productOrderDetailDtos.productName}"></p>
+            <p class="product-price product-original-price">
+              <span th:text="${#numbers.formatDecimal(productOrderDetailDtos.originalPrice, 0, 'COMMA', 0, 'POINT')} + '원'"></span>
+            </p>
+            <p class="product-price product-selling-price">
+              <span th:with="discountRate = ${((0.0 + productOrderDetailDtos.originalPrice - productOrderDetailDtos.sellingPrice) / productOrderDetailDtos.originalPrice) * 100}"
+                    th:text="${productOrderDetailDtos.originalPrice != productOrderDetailDtos.sellingPrice} ?
+              '[' + ${#numbers.formatDecimal(discountRate, 0, 'COMMA', 0, 'POINT')} + '%]'
+              + ${#numbers.formatDecimal(productOrderDetailDtos.sellingPrice, 0, 'COMMA', 0, 'POINT')} + '원' : '&nbsp;'"></span>
+            </p>
+            <p class="product-price product-option-price">
+              <span th:text="${productOrderDetailDtos.optionPrice != null} ?
+              '옵션추가비용 ' + ${#numbers.formatDecimal(productOrderDetailDtos.optionPrice, 0, 'COMMA', 0, 'POINT')} + '원' : '&nbsp;'"></span>
+            </p>
+            <p class="product-option">
+              <span th:text="${productOrderDetailDtos.optionName != null} ?
+              '옵션: ' + ${productOrderDetailDtos.optionName} : '&nbsp;'"></span>
+            </p>
+          </div>
+        </td>
+        <!-- 수량 -->
+        <td>
+          <div class="input-quantity">
+          <p><span th:text="${productOrderDetailDtos.quantity}"></span></p>
+          </div>
+        </td>
+        <!-- 주문금액 -->
+        <td class="cart-order-price" th:with="result = ${productOrderDetailDtos.sellingPrice}">
+           <span th:text="${productOrderDetailDtos.optionPrice != null} ?
+              ${#numbers.formatDecimal(productOrderDetailDtos.optionPrice + result, 0, 'COMMA', 0, 'POINT')} + '원' :
+              ${#numbers.formatDecimal(productOrderDetailDtos.sellingPrice, 0, 'COMMA', 0, 'POINT')} + '원'"></span>
+        </td>
+        <!-- 배송비 -->
+        <td>
+          <p><span th:text="${productOrderCompleteDto.status}"></span></p>
+        </td>
+      </tr>
+    </table>
+
+    <div class="product-info-margin">
+      <div class="product-info-name" style="border-bottom:4px solid black; line-height: 40px;">
+        <span style="font-size: 20px; font-weight: bold">결제정보</span>
+      </div>
+      <table width="100%">
+        <tbody>
+        <tr>
+          <th class="product-table-th">결제방법</th>
+          <td class="product-table-td">무통장입금</td>
+        </tr>
+        <tr>
+          <th class="product-table-th">주문일</th>
+          <td class="product-table-td" th:text="${#temporals.format(order.date, 'yyyy-MM-dd')}">테스트</td>
+        </tr>
+        <tr>
+          <th class="product-table-th">총결제금액</th>
+          <td class="product-table-td" th:text="${productOrderCompleteDto.orderTotalPayment}">
+            테스트
+          </td>
+        </tr>
+        <tr>
+          <th class="product-table-th">배송비</th>
+          <td class="product-table-td" th:text="${shipping.orderTotalShippingPrice}">테스트</td>
+        </tr>
+        <tr>
+          <th class="product-table-th">주문상태</th>
+          <td class="product-table-td" th:text="${productOrderCompleteDto.status}">테스트</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="product-info-margin">
+      <div class="product-info-name" style="border-bottom:4px solid black; line-height: 40px;">
+        <span style="font-size: 20px; font-weight: bold">배송정보</span>
+      </div>
+      <table width="100%">
+        <tbody>
+        <tr>
+          <th class="product-table-th">받으시는 분</th>
+          <td class="product-table-td" th:text="${shipping.orderRecipientNameInput}">테스트</td>
+        </tr>
+        <tr>
+          <th class="product-table-th">휴대폰 번호</th>
+          <td class="product-table-td" th:text="${shipping.orderRecipientPhoneInput}">테스트</td>
+        </tr>
+        <tr>
+          <th class="product-table-th">주소</th>
+          <td class="product-table-td">
+            <span th:text="${orderRecipientAddress2Input == null} ?
+            '('+ ${shipping.orderRecipientPostcodeInput} + ')' + ${shipping.orderRecipientAddress1Input} :
+             '('+ ${shipping.orderRecipientPostcodeInput} + ')' + ${shipping.orderRecipientAddress1Input} + ${orderRecipientAddress2Input}">###</span>
+          </td>
+        </tr>
+        <tr>
+          <th class="product-table-th">배송시 요청사항</th>
+          <td class="product-table-td" th:text="${shipping.orderRecipientMessageInput}">테스트</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+        <div class="order-btn-wrap">
+          <input type="button" class="btn-shopping" value="CONTINUE SHOPPING" onclick="location.href='/';">
+          <input type="button" class="btn-order-shipping-search" value="주문 / 배송조회" onclick="location.href='/mypage';">
+        </div>
+  </div>
+</div>
 
 </html>

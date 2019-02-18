@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.controller.user.order;
 
 import com.holidaysomething.holidaysomething.domain.Order;
 import com.holidaysomething.holidaysomething.domain.OrderedProduct;
+import com.holidaysomething.holidaysomething.domain.constant.ShippingStatus;
 import com.holidaysomething.holidaysomething.dto.AddOrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.ProductOrderCompleteDto;
 import com.holidaysomething.holidaysomething.dto.ProductOrderDetailDto;
@@ -40,7 +41,8 @@ public class UserOrderController {
   private final ShippingService shippingService;
   private final OrderedProductService orderedProductService;
 
-  //주문 버튼을 누르면, ordered_product, order, shipping, payment에 데이터가 추가됨
+  //주문 버튼을 누르면, orderd_product, order, shipping, payment에 데이터가 추가됨
+
   /**
    * @Author : Misun Joo 이전페이지(상품상세, 장바구니)로부터 ProductOrderInfoDto, 현재 주문하는 멤버의 정보를 받아와서 Order 페이지에
    * 뿌려줌 PostMapping으로 하는 이유는, GetMapping으로 받아오면 URL에 너무 많은 정보가 표시되며, 길이에 제한도 있기 때문임
@@ -110,10 +112,22 @@ public class UserOrderController {
     // 배송테이블 등록
     ShippingDto shippingResult = shippingService.addShipping(shippingDto);
 
-    model.addAttribute("order", order);
-    model.addAttribute("orderedProducts", orderedProducts);
-    model.addAttribute("shipping", shippingResult);
+    List<ProductOrderDetailDto> productOrderDetailDtos = new ArrayList<>();
 
+    for (OrderedProduct orderedProduct : orderedProducts) {
+      ProductOrderDetailDto productOrderDetailDto =
+          productService.getProductForOrder(orderedProduct.getProduct().getId(),
+              orderedProduct.getProductOption().getId(), orderedProduct.getQuantity());
+      productOrderDetailDtos.add(productOrderDetailDto);
+    }
+
+    productOrderCompleteDto.setStatus(ShippingStatus.getValuesByKey(order.getStatus()));
+
+    model.addAttribute("order", order);
+    model.addAttribute("productOrderDetailDtos", productOrderDetailDtos);
+    model.addAttribute("shipping",shippingResult);
+    model.addAttribute("productOrderCompleteDto", productOrderCompleteDto);
+    
     return "user/order-complete";
   }
 }

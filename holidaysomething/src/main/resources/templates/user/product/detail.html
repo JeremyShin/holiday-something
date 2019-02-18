@@ -11,6 +11,10 @@
     <!-- other elements you want to reference in your layout -->
 </head>
 
+<th:block layout:fragment="css">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/header.css}"/>
+</th:block>
+
 <!-- 상품 판매 정보 -->
 <div layout:fragment="productInfo">
     <div id='top-info-left'>
