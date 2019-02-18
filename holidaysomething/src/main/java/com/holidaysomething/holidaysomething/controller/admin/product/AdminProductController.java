@@ -128,12 +128,12 @@ AdminProductController {
         } else {
             //등록작업
             productAddDto.setRegDate(LocalDateTime.now());
-            productAddService.productRegister(productAddDto);
+            Product savedProduct = productAddService.productRegister(productAddDto);
 
-            imageStreamService.save(mainImage, productAddDto.getProductDetailId());
+            imageStreamService.save(mainImage, savedProduct.getProductDetail().getId());
             for(MultipartFile multipartFile : subImages) {
                 if (!multipartFile.isEmpty())
-                    imageStreamService.save(multipartFile, productAddDto.getProductDetailId());
+                    imageStreamService.save(multipartFile, savedProduct.getProductDetail().getId());
             }
 
             return "redirect:/admin/product/add";

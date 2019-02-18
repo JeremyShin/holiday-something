@@ -50,10 +50,11 @@ public class ProductAddServiceImpl implements ProductAddService {
    */
   @Override
   @Transactional
-  public Product productDtoToProduct(ProductAddDto productDto) {
+  public Product productDtoToProduct(ProductAddDto productDto, ProductDetail productDetail) {
 
     Product product = new Product();
 
+    product.setProductDetail(productDetail);
     product.setName(productDto.getName());
     product.setOriginalPrice(productDto.getOriginalPrice());
     product.setSellingPrice(productDto.getSellingPrice());
@@ -96,7 +97,8 @@ public class ProductAddServiceImpl implements ProductAddService {
   public Product productRegister(ProductAddDto productAddDto) {
 
     ProductDetail productDetail = new ProductDetail();
-    productDetail.setId(productAddDto.getProductDetailId());
+    productDetail.setDescription(productAddDto.getDescription());
+    ProductDetail savedProductDetail = productDetailRepository.save(productDetail);
 
     // id를 이용해서 상품에 넣어야 하는 카테고리 인스턴스를 생성해야해!
     // 왜? 카테고리가 fk 를 가지고 있어!. 근데 이 fk 를 등록하려면 카테고리 인스턴스가 필요해!
@@ -104,7 +106,7 @@ public class ProductAddServiceImpl implements ProductAddService {
         productAddDto.getProductCategoryId());
 
     // 상품 등록하기 위해 Dto 객체를 Product(Domain) 객체로 바꿔주기~
-    Product product = productDtoToProduct(productAddDto);
+    Product product = productDtoToProduct(productAddDto, savedProductDetail);
 
     // 상품에 set 해줘버리기~
     product.setProductDetail(productDetail);

@@ -59,7 +59,7 @@
       <!-- End(카테고리)-->
 
       <!-- th:field="*{product.productOptions.description}" 이런식으로 해도 된다는데... 실패했었음.-->
-      <form onsubmit="return validate()" action="#" th:action="@{/admin/product/add}" method="post"
+      <form onsubmit="return validate()" action="#" th:action="@{/admin/product/add}" method="post" id="product-add-form"
             enctype="multipart/form-data" th:object="${product}">
 
         <!-- Start(현재 선택한 카테고리가 무엇인지 보여주는 부분) -->
@@ -313,32 +313,42 @@
                 "productDetail": content,
 
               };
-              let jsonData = JSON.stringify(JSONObject);
-              $.ajax({
-                // url : '/api/boards/${categoryId}/write',
-                url: '/admin/product/add/api',
-                headers: {
-                  'X-CSRF-Token': $('input[name="_csrf"]').val()
-                },
-                method: 'post',
-                data: jsonData,
-                dataType: "text",
-                contentType: "application/json",
-                success: function (data) {
-                  // alert('등록되었습니다. OK');
-                  // console.log(data);
-                  // // $(location).attr('href','/boards/${categoryId}/list');
-                  // $(location).attr('href','/admin/product/');
-                  console.log("여기로 왔지?");
-                  console.log("받아온 값은?? : " + data);
-                  $("#hiddenProductDetailId").val(data);
-                  console.log($("#hiddenProductDetailId").val());
-                  $("#submitBtn").trigger('click');
-                },
-                error: function (err) {
-                  console.log(err);
-                }
-              });
+              // ProductDetail.description
+                let addForm = document.getElementById('product-add-form');
+                let createdInput = document.createElement('input');
+                createdInput.setAttribute('type', 'hidden');
+                createdInput.setAttribute('name', 'description');
+                createdInput.setAttribute('value', content);
+                addForm.appendChild(createdInput);
+
+                $("#submitBtn").trigger('click');
+
+              // let jsonData = JSON.stringify(JSONObject);
+              // $.ajax({
+              //   // url : '/api/boards/${categoryId}/write',
+              //   url: '/admin/product/add/api',
+              //   headers: {
+              //     'X-CSRF-Token': $('input[name="_csrf"]').val()
+              //   },
+              //   method: 'post',
+              //   data: jsonData,
+              //   dataType: "text",
+              //   contentType: "application/json",
+              //   success: function (data) {
+              //     // alert('등록되었습니다. OK');
+              //     // console.log(data);
+              //     // // $(location).attr('href','/boards/${categoryId}/list');
+              //     // $(location).attr('href','/admin/product/');
+              //     console.log("여기로 왔지?");
+              //     console.log("받아온 값은?? : " + data);
+              //     $("#hiddenProductDetailId").val(data);
+              //     console.log($("#hiddenProductDetailId").val());
+              //     $("#submitBtn").trigger('click');
+              //   },
+              //   error: function (err) {
+              //     console.log(err);
+              //   }
+              // });
             }
           });
         </script>
