@@ -130,7 +130,9 @@ AdminProductController {
             productAddDto.setRegDate(LocalDateTime.now());
             Product savedProduct = productAddService.productRegister(productAddDto);
 
-            imageStreamService.save(mainImage, savedProduct.getProductDetail().getId());
+            if (!mainImage.isEmpty())
+                imageStreamService.save(mainImage, savedProduct.getProductDetail().getId());
+
             for(MultipartFile multipartFile : subImages) {
                 if (!multipartFile.isEmpty())
                     imageStreamService.save(multipartFile, savedProduct.getProductDetail().getId());
