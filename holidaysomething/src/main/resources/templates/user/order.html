@@ -8,20 +8,18 @@
   <title id="pageTitle">유저 &mdash; 주문</title>
 
   <th:block layout:fragment="css">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/header.css}"/>
     <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/order.css}"/>
   </th:block>
 
-</head>
 
-<th:block layout:fragment="css">
-  <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/header.css}"/>
-</th:block>
+</head>
 
 <div layout:fragment="userContents">
   <div class="entire-container">
-      <form method="post" action="/user/product/order/finish">
+    <form method="post" action="/user/product/order/finish">
 
-        <div class="two-container">
+      <div class="two-container">
         <!-- 주문 정보 -->
         <div class="left-container">
           <div class="product-info-margin">
@@ -30,26 +28,26 @@
             </div>
             <table class = "opacity" width="100%">
               <tbody>
-                <tr>
-                  <th class="order-product-table-th">주문자<span style="color: red"> * </span></th>
-                    <td class="order-product-table-td">
-                      <input type="text" name="orderMemberNameInput" th:value="${addOrderMemberDto.name}" >
-                    </td>
-                </tr>
+              <tr>
+                <th class="order-product-table-th">주문자<span style="color: red"> * </span></th>
+                <td class="order-product-table-td">
+                  <input type="text" name="orderMemberNameInput" th:value="${addOrderMemberDto.name}" >
+                </td>
+              </tr>
 
-                <tr>
-                  <th class="order-product-table-th">연락처<span style="color: red"> * </span></th>
-                    <td class="order-product-table-td">
-                      <input type="text" name="orderMemberPhoneInput" th:value="${addOrderMemberDto.phone}">
-                    </td>
-                </tr>
+              <tr>
+                <th class="order-product-table-th">연락처<span style="color: red"> * </span></th>
+                <td class="order-product-table-td">
+                  <input type="text" name="orderMemberPhoneInput" th:value="${addOrderMemberDto.phone}">
+                </td>
+              </tr>
 
-                <tr>
-                  <th class="order-product-table-th">이메일<span style="color: red"> * </span></th>
-                    <td class="order-product-table-td">
-                      <input type="text" name="orderMemberEmailInput" th:value="${addOrderMemberDto.email}">
-                    </td>
-                </tr>
+              <tr>
+                <th class="order-product-table-th">이메일<span style="color: red"> * </span></th>
+                <td class="order-product-table-td">
+                  <input type="text" name="orderMemberEmailInput" th:value="${addOrderMemberDto.email}">
+                </td>
+              </tr>
               </tbody>
             </table>
           </div>
@@ -121,9 +119,9 @@
                   <input type="text" name="orderMemberMileageInput" id="orderMemberUseMileage" th:value="0" onchange="RecalcuSubTotal(this)">
                   <input id="btnUseAllMileage" type="button" onclick="useAllMileage()" value="모두사용">
                   <p>
-                  <span> 보유 마일리지 : </span>
-                  <span name="orderMemberMileageInput" id="orderMemberHasMileage" th:text="${addOrderMemberDto.mileage}"></span>
-                  <span style="display:none" id="hiddenMileage" th:text="${addOrderMemberDto.mileage}"></span>
+                    <span> 보유 마일리지 : </span>
+                    <span name="orderMemberMileageInput" id="orderMemberHasMileage" th:text="${addOrderMemberDto.mileage}"></span>
+                    <span style="display:none" id="hiddenMileage" th:text="${addOrderMemberDto.mileage}"></span>
                   </p>
                 </td>
               </tr>
@@ -147,7 +145,7 @@
               </tbody>
             </table>
           </div>
-  </div>
+        </div>
 
         <!-- 주문할 상품 -->
         <div class="right-container">
@@ -173,7 +171,7 @@
 
                   <p class="product-price product-selling-price">
                     <span th:with="discountRate = ${((0.0 + productOrderDetailDto.originalPrice - productOrderDetailDto.sellingPrice) / productOrderDetailDto.originalPrice) * 100}"
-                      th:text="${productOrderDetailDto.originalPrice != productOrderDetailDto.sellingPrice} ?
+                          th:text="${productOrderDetailDto.originalPrice != productOrderDetailDto.sellingPrice} ?
                       '[' + ${#numbers.formatDecimal(discountRate, 0, 'COMMA', 0, 'POINT')} + '%]' : ''"></span>
 
                     <span th:with="result = ${productOrderDetailDto.sellingPrice}" th:text="${productOrderDetailDto.optionPrice != null} ?
@@ -200,9 +198,9 @@
             </div>
           </table>
 
-            <!--<div>-->
-              <!--<div><span style="display:none" id="hiddenTotalPayment" th:text="${#aggregates.sum(productOrderDetailDtos.![sellingPrice]) + #aggregates.sum(productOrderDetailDtos.![shippingPrice])}">원</span></div>-->
-            <!--</div>-->
+          <!--<div>-->
+          <!--<div><span style="display:none" id="hiddenTotalPayment" th:text="${#aggregates.sum(productOrderDetailDtos.![sellingPrice]) + #aggregates.sum(productOrderDetailDtos.![shippingPrice])}">원</span></div>-->
+          <!--</div>-->
 
           <table width="100%">
             <tbody>
@@ -246,17 +244,17 @@
             <div></div>
             <div>
               <input class="center-button" value="주문하기" type="submit"/>
-            <div>
-              <div></div>
+              <div>
+                <div></div>
+              </div>
+
+            </div>
+
           </div>
 
-        </div>
-
-      </div>
 
 
-
-      </form>
+    </form>
   </div>
 </div>
 
@@ -264,7 +262,6 @@
   <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
   <script th:src="@{/static/js/user-order.js}"></script>
 </th:block>
-
 
 
 
