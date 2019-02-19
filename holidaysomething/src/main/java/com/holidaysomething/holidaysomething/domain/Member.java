@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
@@ -106,18 +108,18 @@ public class Member {
 
   @JsonIgnore // 마이페이지 메인에서는 일단 필요 없어서 ignore 처리
   @OneToMany(mappedBy = "member")
-  private Set<CartProduct> cartProducts;
+  private Set<CartProduct> cartProducts = new HashSet<>();
 
-  // TODO: JsonIgnore 안하면 "Could not write JSON: failed to lazily initialize a collection of role~" 에러 발생
+  // TODO: JsonIgnore 안하면 "Could not write JSON: failed to lazily initialize a collection of role..." 에러 발생
   // TODO: JsonIgnore 하면 위의 에러는 발생하지 않지만 orders에 데이터가 안들어감
   // Eager loading을 하면 member를 조회하는 순간 order 내부까지 다 조회해서 포함된다.
-  @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
-  private List<Order> orders;
+  @OneToMany(mappedBy = "member")
+  private Set<Order> orders = new HashSet<>();
 
   @JsonIgnore // 마이페이지 메인에서는 일단 필요 없어서 ignore 처리
   @ManyToMany
   @JoinTable(name = "member_role",
       joinColumns = @JoinColumn(name = "member_id", referencedColumnName = "id"),
       inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-  private Set<Role> roles;
+  private Set<Role> roles = new HashSet<>();
 }

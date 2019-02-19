@@ -3,6 +3,7 @@ package com.holidaysomething.holidaysomething.domain;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -60,6 +61,6 @@ public class Order {
   @JoinColumn(name = "payment_id")
   private Payment payment;
 
-  @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
-  private Set<OrderedProduct> orderedProduct;
+  @OneToMany(mappedBy = "order")
+  private Set<OrderedProduct> orderedProduct = new HashSet<>();
 }
