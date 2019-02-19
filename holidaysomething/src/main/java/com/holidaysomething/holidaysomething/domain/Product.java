@@ -70,15 +70,15 @@ public class Product {
   private LocalDateTime manufactureDate;
   private LocalDateTime releaseDate;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   private ProductCategory productCategory;
 
-  @OneToOne(fetch = FetchType.LAZY)
+  @OneToOne
   @JoinColumn(name = "product_detail_id")
   @JsonIgnore
   private ProductDetail productDetail;
 
-  @OneToMany(mappedBy = "product")
+  @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
   private Set<ProductImage> productImages;
 
   @OneToMany(mappedBy = "product")

@@ -71,54 +71,53 @@ public class Member {
   @Column(nullable = false)
   private String address2;
 
+  @JsonIgnore
   @Column(nullable = false)
   @CreationTimestamp
-  @JsonIgnore
   private LocalDateTime regDate;
 
+  @JsonIgnore
   @Column(nullable = false)
   @UpdateTimestamp
-  @JsonIgnore
   private LocalDateTime lastLogin;
 
-  @Column(nullable = false)
   @JsonIgnore
+  @Column(nullable = false)
   private boolean receiveEmail;
 
-  @Column(nullable = false)
   @JsonIgnore
+  @Column(nullable = false)
   private boolean receiveSms;
 
-  @Column(nullable = false)
   @JsonIgnore
+  @Column(nullable = false)
   private boolean marketing;
 
-  @Column(nullable = false)
   @JsonIgnore
+  @Column(nullable = false)
   private boolean personalInfo;
 
-  @Column(length = 20)
   @JsonIgnore
+  @Column(length = 20)
   private String recommender;
 
   @Column(length = 10, nullable = false)
   private String sex;
 
-  @OneToMany(mappedBy = "member")
   @JsonIgnore // 마이페이지 메인에서는 일단 필요 없어서 ignore 처리
+  @OneToMany(mappedBy = "member")
   private Set<CartProduct> cartProducts;
 
-  //TODO: JsonIgnore 안하면 "Could not write JSON: failed to lazily initialize a collection of role~" 에러 발생
-  //TODO: JsonIgnore 하면 위의 에러는 발생하지 않지만 orders에 데이터가 안들어감
-
+  // TODO: JsonIgnore 안하면 "Could not write JSON: failed to lazily initialize a collection of role~" 에러 발생
+  // TODO: JsonIgnore 하면 위의 에러는 발생하지 않지만 orders에 데이터가 안들어감
   // Eager loading을 하면 member를 조회하는 순간 order 내부까지 다 조회해서 포함된다.
   @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
   private List<Order> orders;
 
+  @JsonIgnore // 마이페이지 메인에서는 일단 필요 없어서 ignore 처리
   @ManyToMany
   @JoinTable(name = "member_role",
       joinColumns = @JoinColumn(name = "member_id", referencedColumnName = "id"),
       inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-  @JsonIgnore // 마이페이지 메인에서는 일단 필요 없어서 ignore 처리
   private Set<Role> roles;
 }

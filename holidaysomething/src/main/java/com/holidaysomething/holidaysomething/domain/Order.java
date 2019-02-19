@@ -48,19 +48,18 @@ public class Order {
   @Column(columnDefinition = "integer default 0")
   private int mileage;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "member_id")
   private Member member;
 
-  @OneToOne(fetch = FetchType.LAZY)
+  @OneToOne
   @JoinColumn(name = "shipping_id")
   private Shipping shipping;
 
-  @OneToOne(fetch = FetchType.LAZY)
+  @OneToOne
   @JoinColumn(name = "payment_id")
   private Payment payment;
 
-  // 현재 로그인 된 member의 id로부터 회원정보, 주문정보 등을 가져오기 위해 양방향으로 변경
-  @OneToMany(mappedBy = "order")
+  @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
   private Set<OrderedProduct> orderedProduct;
 }

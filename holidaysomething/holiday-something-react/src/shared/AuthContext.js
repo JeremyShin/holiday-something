@@ -18,8 +18,8 @@ class AuthProvider extends Component {
   };
 
   _callApi = () => {
-    return fetch('http://localhost:8080/api/userTmp?id=11')
-    // return fetch('http://localhost:8080/api/user/authenticated')  // 현재 로그인된 유저
+    // return fetch('http://localhost:8080/api/userTmp?id=11')
+    return fetch('http://localhost:8080/api/user/authenticated')  // 현재 로그인된 유저
           .then(response => response.json())
           .then(json => json)
           .catch(err => console.error(err));

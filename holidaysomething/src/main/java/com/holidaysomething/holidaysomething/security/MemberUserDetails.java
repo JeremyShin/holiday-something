@@ -10,12 +10,10 @@ import org.springframework.security.core.userdetails.User;
 /**
  * @author choijaeyong on 18/01/2019.
  * @project holidaysomething
- * @description
  */
 @Getter
 @Setter
 public class MemberUserDetails extends User {
-
 
   private String nickname;
   private Long id;

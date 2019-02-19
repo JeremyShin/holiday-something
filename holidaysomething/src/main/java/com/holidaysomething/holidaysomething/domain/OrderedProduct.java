@@ -41,19 +41,19 @@ public class OrderedProduct {
   // 사용자가 신청한 personal 옵션
   private String personalOption;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "order_id")
   private Order order;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "product_id")
   private Product product;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "option_id")
   private ProductOption productOption;
 
-  @OneToOne(fetch = FetchType.LAZY)
+  @OneToOne
   @JoinColumn(name = "exchange_refund_id")
   @JsonIgnore
   private ExchangeRefund exchangeRefund;

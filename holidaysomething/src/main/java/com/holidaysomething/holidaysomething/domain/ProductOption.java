@@ -34,7 +34,7 @@ public class ProductOption {
   @Column(nullable = false)
   private Integer quantity;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "product_id")
   private Product product;
 
