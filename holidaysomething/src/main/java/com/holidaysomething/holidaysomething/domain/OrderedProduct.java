@@ -53,8 +53,8 @@ public class OrderedProduct {
   @JoinColumn(name = "option_id")
   private ProductOption productOption;
 
+  @JsonIgnore
   @OneToOne
   @JoinColumn(name = "exchange_refund_id")
-  @JsonIgnore
   private ExchangeRefund exchangeRefund;
 }
