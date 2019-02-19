@@ -107,7 +107,7 @@ public class AdminProductOptionController {
     modelMap.addAttribute("pageCount", pageCount);
     modelMap.addAttribute("productOptionsSearchResult", productOptions);
 
-    return "/admin/product/option";
+    return "admin/product/option";
   }
 
   /* 옵션 등록 */
