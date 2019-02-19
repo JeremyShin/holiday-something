@@ -99,7 +99,7 @@ public class AdminMemberController {
     Page<Member> members = memberService.findAllOrSearch(searchDto, pageable);
     modelMap.addAttribute("members", members);
 
-    return "/admin/member/mileage-search";
+    return "admin/member/mileage-search";
   }
 
   @GetMapping("/mileage/modify")
@@ -107,7 +107,7 @@ public class AdminMemberController {
 
     modelMap.addAttribute("member", memberService.findMemberByLoginId(loginId));
 
-    return "/admin/member/mileage-modify";
+    return "admin/member/mileage-modify";
   }
 
   @PostMapping("/mileage/modify")

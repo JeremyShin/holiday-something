@@ -46,7 +46,7 @@ public class UserProductController {
         modelMap.addAttribute("mainImage", productImageService.getProductImageMain(productId, 1L));
         modelMap.addAttribute("subImages", productImageService.getProductImageSub(productId, 2L));
 
-        return "/user/product/detail";
+        return "user/product/detail";
     }
 
     @PostMapping("/shoppingbag")

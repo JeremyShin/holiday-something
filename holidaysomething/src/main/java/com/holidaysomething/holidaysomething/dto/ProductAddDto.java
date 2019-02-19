@@ -72,9 +72,9 @@ public class ProductAddDto {
   @NotNull(message = "productCategory must be not null")
   private Long productCategoryId;
 
-  //private ProductDetail productDetail;
-//  @NotNull(message = "productDetail must be not null")
-  private Long productDetailId;
+  @NotNull(message = "description must be not null")
+  private String description;
+//  private Long productDetailId;
 
   private Set<ProductImage> productImages;
   private Set<ProductOption> productOptions;
