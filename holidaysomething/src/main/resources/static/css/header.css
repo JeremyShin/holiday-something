@@ -108,7 +108,7 @@ body * {
 .header-categories {
   display: flex;
   justify-content: center;
-  max-width: 1350px;
+  max-width: 100%;
   margin: 10px auto 0 auto;
   letter-spacing: 0.15px;
   font-size: 12px;
@@ -159,7 +159,7 @@ ul {
   padding: 0 100px 15px 100px;
   width: 100%;
   display: none;
-  height: 165px;
+  height: 200px;
   position: absolute;
   background-color: white;
   justify-content: space-around;
