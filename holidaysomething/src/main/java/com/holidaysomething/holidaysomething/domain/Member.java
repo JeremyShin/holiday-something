@@ -112,6 +112,7 @@ public class Member {
   //TODO: JsonIgnore 하면 위의 에러는 발생하지 않지만 orders에 데이터가 안들어감
 
   // Eager loading을 하면 member를 조회하는 순간 order 내부까지 다 조회해서 포함된다.
+  // TODO : FetchType.EAGER 일 경우 MemberRepository.findAll() 을 할 경우 Query 가 너무 많이 발생합니다...(LAZY 일 경우 1번만 select 함)
   @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
   private List<Order> orders;
 
