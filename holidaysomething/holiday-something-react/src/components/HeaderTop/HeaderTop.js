@@ -31,7 +31,7 @@ const HeaderTop = () => {
         <FiSearch/> Search
       </div>
       <a href="/"><LogoImg src={hsLogo} alt="hs-logo" className="hsLogo" /></a>
-      <div className="header-sign-in-cart">
+      <div className="header-menu-right">
         <FaRegUser/> Sign in
         <FiShoppingCart/> Cart
       </div>
