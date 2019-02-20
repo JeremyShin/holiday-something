@@ -73,6 +73,10 @@ body * {
   -webkit-appearance: none;
 }
 
+.header-logo-link {
+  margin-right: -98px;
+}
+
 .header-categories {
   display: flex;
   justify-content: center;
@@ -172,15 +176,15 @@ ul {
   font-family: 'Poppins', sans-serif;
 }
 
-.header-sign-in-cart {
+.header-menu-right {
   display: flex;
 }
 
-.header-sign-in-cart div {
+.header-menu-right div {
   font-size: 14px;
   font-weight: normal;
 }
 
-.header-sign-in-cart div:not(:last-of-type) {
-  margin-right: 50px;
+.header-menu-right div:not(:last-of-type) {
+  margin-right: 30px;
 }

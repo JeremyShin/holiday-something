@@ -9,9 +9,18 @@ button {
   outline: none;
 }
 
+.order-flow {
+  margin-top: 230px;
+}
+
+.order-flow ol {
+  list-style: none;
+  display: flex;
+}
+
 .cart-tbl {
   width: 100%;
-  margin: 150px auto 22px auto;
+  margin: 60px auto 22px auto;
 }
 
 .result-tbl {

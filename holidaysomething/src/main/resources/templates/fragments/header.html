@@ -25,24 +25,29 @@
         <input type="search" placeholder="Search" aria-label="Search" autocomplete="off" />
                <!--name="q" data-instant="attached"-->
       </div>
-      <a href="/">
+      <a href="/" class="header-logo-link">
         <img src="/static/img/hs-logo.png" alt="logo" class="hs-logo" />
       </a>
 
-      <div class="header-sign-in-cart">
+      <div class="header-menu-right">
         <div sec:authorize="!isAuthenticated()">
           <i class="fas fa-user"></i>
-          <a href="/user/login">Sign In</a>
+          <a href="/user/login">SIGN IN</a>
         </div>
 
         <div>
           <i class="fas fa-shopping-cart"></i>
-          <a href="/user/cart">Cart</a>
+          <a href="/user/cart">CART</a>
+        </div>
+
+        <div sec:authorize="isAuthenticated()">
+          <i class="fas fa-user"></i>
+          <a href="/mypage">MYPAGE</a>
         </div>
 
         <div sec:authorize="isAuthenticated()">
           <i class="fas fa-sign-out-alt"></i>
-          <a href="/user/logout">Log Out</a>
+          <a href="/user/logout">LOG OUT</a>
         </div>
       </div>
     </div>
