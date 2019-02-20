@@ -25,11 +25,17 @@
         <input type="search" placeholder="Search" aria-label="Search" autocomplete="off" />
                <!--name="q" data-instant="attached"-->
       </div>
-      <a href="/" class="header-logo-link">
+
+      <a href="/">
         <img src="/static/img/hs-logo.png" alt="logo" class="hs-logo" />
       </a>
 
       <div class="header-menu-right">
+        <div sec:authorize-url="/admin" class="header-admin">  <!-- 관리자만 -->
+          <i class="fas fa-tools"></i>
+          <a href="/admin">ADMIN</a>
+        </div>
+
         <div sec:authorize="!isAuthenticated()">
           <i class="fas fa-user"></i>
           <a href="/user/login">SIGN IN</a>
