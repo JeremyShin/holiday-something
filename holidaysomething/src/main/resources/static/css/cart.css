@@ -9,6 +9,10 @@ button {
   outline: none;
 }
 
+ol {
+  padding-left: 40px;
+}
+
 .order-flow {
   margin-top: 230px;
 }
@@ -58,7 +62,7 @@ button {
 }
 
 .price-large-txt {
-  font-size: 2.2rem;
+  font-size: 22px;
   font-weight: 600;
 }
 
@@ -161,14 +165,21 @@ button {
 }
 
 .product-name {
+  margin-bottom: 10px;
   font-size: 18px;
   font-weight: 600;
 }
 
-.product-price {
+.product-price:not(:last-child) {
+  margin-top: 0;
+  margin-bottom: 3px;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.05em;
+}
+
+.product-price:last-child {
+  margin-bottom: 12px;
 }
 
 .product-original-price {
@@ -188,6 +199,7 @@ button {
 
 .product-option {
   font-size: 12px;
+  margin-top: 12px;
 }
 
 .btn-remove-div button {
@@ -256,7 +268,7 @@ button {
   width: 94px;
   height: 34px;
   line-height: 30px;
-  font-size: 1.4rem;
+  font-size: 14px;
   font-weight: 600;
   color: #fff;
   background-color: #000;
@@ -277,7 +289,7 @@ button {
   padding: 8px 14px;
   border: 1px solid #a0a0a0;
   color: #303033;
-  font-size: 1.2rem;
+  font-size: 12px;
   line-height: 1.3333em;
 }
 
@@ -313,7 +325,7 @@ button {
   border-radius: 0;
   height: 60px;
   color: #303033;
-  font-size: 1.1em;
+  font-size: 15px;
   font-weight: 600;
   line-height: 60px;
   vertical-align: top;
@@ -323,7 +335,7 @@ button {
   width: 275px;
   height: 60px;
   line-height: 60px;
-  font-size: 2.3rem;
+  font-size: 23px;
   font-weight: 600;
   color: #fff;
   background-color: #000;

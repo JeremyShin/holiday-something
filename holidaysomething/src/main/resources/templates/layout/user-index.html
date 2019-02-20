@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+  <head
+      layout:fragment="head"
+      th:replace="fragments/config :: configFragment">
+
+  </head>
+
+  <body>
+    <section th:replace="fragments/header :: userHeaderFragment">
+
+    </section>
+
+    <div
+        layout:fragment="indexDashboard"
+        class="index-dashboard">
+
+    </div>
+
+    <!-- 카트 -->
+    <div layout:fragment="userContents">
+
+    </div>
+
+    <footer th:replace="fragments/footer :: userFooterFragment">
+
+    </footer>
+
+    <th:block layout:fragment="script-body">
+
+    </th:block>
+  </body>
+</html>

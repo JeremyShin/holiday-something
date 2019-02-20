@@ -19,7 +19,7 @@ body * {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid #D4D4D4;
+  /*border-top: 1px solid #D4D4D4;  !* TODO: hover 때만 생기도록 할 예정 *! */
   padding: 0;
   margin: 0;
 }
