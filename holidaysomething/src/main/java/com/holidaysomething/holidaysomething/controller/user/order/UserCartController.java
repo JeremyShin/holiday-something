@@ -33,8 +33,8 @@ public class UserCartController {
   @GetMapping("/cart")
   public String cartAuth(Authentication authentication, ModelMap modelMap) {
     if (authentication == null) {
-      log.info("No authenticated user.");
-      return "/";
+      log.info("\"/user/cart\": No authenticated user.");
+      return "redirect:/user/login";
     }
 
     Long userId = ((MemberUserDetails) authentication.getPrincipal()).getMember().getId();
