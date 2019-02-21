@@ -125,12 +125,7 @@ public class AdminMemberController {
       return "redirect:/admin/member/mileage/search";
     }
   }
-//
-//  @GetMapping("/search")
-//  public String memberSearch(){
-//    return "admin/member/search";
-//  }
-
+  
   @GetMapping("/search")
   public String memberSearch(ModelMap modelMap, @ModelAttribute MemberSearchDto memberSearchDto,
       @RequestParam(value = "page", defaultValue = "1")int page){
