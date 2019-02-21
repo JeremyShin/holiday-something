@@ -111,14 +111,19 @@ public class AdminMemberController {
   }
 
   @PostMapping("/mileage/modify")
-  public String mileageModifyPost(@ModelAttribute("mileageModify") MemberMileageDto memberMileageDto) {
+  public String mileageModifyPost(@Valid @ModelAttribute("mileageModify") MemberMileageDto memberMileageDto,
+                                  BindingResult bindingResult) {
 
-    if (memberMileageDto.getAddMileage() < 0 || !memberMileageDto.isPossible())
+    if (bindingResult.hasErrors() || !memberMileageDto.isPossible()) {
+      for (ObjectError error : bindingResult.getAllErrors()) {
+        log.info(error.getDefaultMessage());
+      }
       return "redirect:/admin";
+    } else {
+      memberService.updateMember(memberMileageDto);
 
-    memberService.updateMember(memberMileageDto);
-
-    return "redirect:/admin/member/mileage/search";
+      return "redirect:/admin/member/mileage/search";
+    }
   }
 //
 //  @GetMapping("/search")

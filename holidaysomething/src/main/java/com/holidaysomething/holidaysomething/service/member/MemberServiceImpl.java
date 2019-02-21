@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.jni.Error;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -80,7 +81,10 @@ public class MemberServiceImpl implements MemberService {
       mileage += memberMileageDto.getAddMileage();
     } else if (memberMileageDto.getPlusOrMinus().equals("-")) {
       mileage += memberMileageDto.getAddMileage() * -1;
+    } else {
+      throw new RuntimeException("plus or minus can press only one");
     }
+
     member.setMileage(mileage);
 
     memberRepository.save(member);
