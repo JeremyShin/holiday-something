@@ -64,8 +64,9 @@ AdminProductController {
     public String productAdd(ModelMap model) {
         //List<ProductCategory> categories = productAddService.productCategoryList(0l);
         //model.addAttribute("categories", categories);
-        Product product = new Product();
+      ProductAddDto product = new ProductAddDto();
         model.addAttribute("product", product);
+
         return "admin/product/add";
     }
 
@@ -137,6 +138,15 @@ AdminProductController {
                 if (!multipartFile.isEmpty())
                     imageStreamService.save(multipartFile, savedProduct.getProductDetail().getId());
             }
+
+          Integer optionQuantity = productAddDto.getQuantity();
+          ProductOption productOption = new ProductOption();
+          productOption.setName("기본값");
+          productOption.setProduct(savedProduct);
+          productOption.setQuantity(optionQuantity);
+
+          productOptionService.save(productOption);
+
 
             return "redirect:/admin/product/add";
         }

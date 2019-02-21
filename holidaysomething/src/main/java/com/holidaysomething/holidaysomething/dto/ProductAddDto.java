@@ -76,6 +76,7 @@ public class ProductAddDto {
   private String description;
 //  private Long productDetailId;
 
-  private Set<ProductImage> productImages;
-  private Set<ProductOption> productOptions;
+  @NotNull(message = "quantity must be not null")
+  private Integer quantity;
+
 }
