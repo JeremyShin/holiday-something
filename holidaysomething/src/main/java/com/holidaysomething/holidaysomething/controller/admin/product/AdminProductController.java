@@ -144,6 +144,7 @@ AdminProductController {
           productOption.setName("기본값");
           productOption.setProduct(savedProduct);
           productOption.setQuantity(optionQuantity);
+          productOption.setPrice(0);
 
           productOptionService.save(productOption);
 

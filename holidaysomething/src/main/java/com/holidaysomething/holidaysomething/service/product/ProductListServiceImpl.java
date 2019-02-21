@@ -41,6 +41,14 @@ public class ProductListServiceImpl implements ProductListService {
       Page<ProductListImageDto> productListImageDtoPage =
           productRepository.findProductsImageByCategoryId3(categoryId, pageable);
 
+      log.info(
+          "************  productListImageDtoPage.getTotalElements() : " + productListImageDtoPage
+              .getTotalElements());
+      for (ProductListImageDto productListImageDto : productListImageDtoPage) {
+        log.info("**********  리스트 상품아이디 이름 : " + productListImageDto.getProductId() + "     "
+            + productListImageDto.getProductName());
+      }
+
       ProductListCategoryDto productListCategoryDto = new ProductListCategoryDto();
 
       List<ProductCategory> categoryList = new ArrayList<>();
