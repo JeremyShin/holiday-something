@@ -208,7 +208,7 @@
               <th class="order-product-table-th">총 상품금액 </th>
               <td class="order-product-table-td">
                 <input type="hidden" name="orderTotalProductPrice" id="orderTotalProductPrice" th:value="${#aggregates.sum(productOrderDetailDtos.![sellingPrice])}">
-                <span th:text="${#aggregates.sum(productOrderDetailDtos.![sellingPrice])}">원</span>
+                <span id="orderTotalPriceSpan" th:text="${#aggregates.sum(productOrderDetailDtos.![sellingPrice])}">원</span>
               </td>
             </tr>
 
@@ -224,7 +224,7 @@
               <th class="order-product-table-th">마일리지 사용</th>
               <td class="order-product-table-td">
                 <input type="hidden" name="orderTotalUseMileage" id="orderTotalUseMileage" th:value="0">
-                <span th:text="0">원</span>
+                <span id="spanOrderTotalUseMileage" th:text="0">원</span>
               </td>
             </tr>
 
@@ -232,7 +232,7 @@
               <th class="order-product-table-th">총 결제금액</th>
               <td class="order-product-table-td">
                 <input type="hidden" name="orderTotalPayment" id="orderTotalPayment" th:value="${#aggregates.sum(productOrderDetailDtos.![sellingPrice]) + #aggregates.sum(productOrderDetailDtos.![shippingPrice])}">
-                <span th:text="${#aggregates.sum(productOrderDetailDtos.![sellingPrice]) + #aggregates.sum(productOrderDetailDtos.![shippingPrice])}">원</span>
+                <span id="spanOrderTotalPayment" th:text="${#aggregates.sum(productOrderDetailDtos.![sellingPrice]) + #aggregates.sum(productOrderDetailDtos.![shippingPrice])}">원</span>
               </td>
             </tr>
 

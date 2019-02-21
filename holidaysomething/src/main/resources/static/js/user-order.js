@@ -77,29 +77,43 @@ let removeInputText = function () {
 /* 모든 마일리지 사용 / 마일리지 사용 안함 api */
 let useAllMileage = function() {
   let btnName = document.getElementById("btnUseAllMileage");
-
   if (btnName.value === "모두사용"){
     btnName.value = "사용안함";
   } else {
     btnName.value = "모두사용";
   }
 
-  let jsUseMileageInput = document.getElementById("orderMemberUseMileage");
-  let jsHasMileage = document.getElementById("orderMemberHasMileage");
-  let jsTotalPayment = document.getElementById("orderTotalPayment");
-  let jsTotalProductPrice = document.getElementById("orderTotalProductPrice");
-  let jsTotalShippingPrice = document.getElementById("orderTotalShippingPrice");
+  let mileageUseInput = document.getElementById("orderMemberUseMileage"); // 사용할 마일리지
+  let valMileageUseInput = mileageUseInput.value; // 사용할 마일리지의 초기값
 
-  let jsUseMileageInputValue = jsUseMileageInput.value;
-  let jsHasMileageValue = jsHasMileage.innerText;
-  let jsTotalProductPriceValue = parseInt(jsTotalProductPrice.innerText);
-  let jsTotalShippingPriceValue = parseInt(jsTotalShippingPrice.innerText);
+  let mileageHas = document.getElementById("orderMemberHasMileage"); // 보유한 마일리지
+  let valMileageHas = mileageHas.innerText;
 
-  jsUseMileageInput.value = jsHasMileageValue;
-  jsHasMileage.innerText = jsUseMileageInputValue;
+  let totalPayment = document.getElementById("spanOrderTotalPayment");
 
-  document.getElementById("orderTotalUseMileage").innerText = jsHasMileageValue;
-  jsTotalPayment.innerText = jsTotalProductPriceValue + jsTotalShippingPriceValue - parseInt(jsUseMileageInput.value);
+  let productPrice= document.getElementById("orderTotalPriceSpan");
+  let valProductPrice = productPrice.innerText;
+
+  let shippingPrice = document.getElementById("orderTotalShippingPrice");
+  let valShippingPrice = shippingPrice.value;
+
+  let totalMileageUse = document.getElementById("spanOrderTotalUseMileage"); // 최종 사용할 마일리지의 span text
+  let valMileageUse = totalMileageUse.innerText;
+
+  mileageUseInput.value = valMileageHas; //보유마일리를 모두 사용할 마일리지에 넣어줌
+  mileageHas.innerText = valMileageUseInput;
+  totalMileageUse.innerText = mileageUseInput.value;
+
+
+  console.log(valProductPrice);
+  console.log(totalMileageUse.innerText);
+  console.log(valShippingPrice);
+
+
+  console.log(parseInt(valProductPrice) + parseInt(valShippingPrice) - parseInt(totalMileageUse.innerText));
+
+  totalPayment.innerText = (parseInt(valProductPrice) + parseInt(valShippingPrice) - parseInt(totalMileageUse.innerText));
+
 };
 
 /* 마일리지 부분사용 api */
