@@ -39,7 +39,8 @@ public class UserProductController {
         // 로그인 유무 Check
         modelMap.addAttribute("loginCheck", userDetails != null);
         // 상품 그 자체
-        modelMap.addAttribute("product", productService.getProduct(categoryId, productId));
+//        modelMap.addAttribute("product", productService.getProduct(categoryId, productId));
+        modelMap.addAttribute("product", productService.getProduct(productId));
         // 해당 상품에 포함되는 옵션들
         modelMap.addAttribute("productOptions", productOptionService.getProductOptionsByProductId(productId));
         // 해당 상품의 MainImage(1L) & SubImage(2L)
