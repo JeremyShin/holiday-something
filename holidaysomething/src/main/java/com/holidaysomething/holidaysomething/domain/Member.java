@@ -59,7 +59,7 @@ public class Member {
   private String phone;
 
   @Column(columnDefinition = "integer default 0")
-  private Integer mileage;
+  private int mileage;
 
   @Column(nullable = false)
   private LocalDate birthday;
