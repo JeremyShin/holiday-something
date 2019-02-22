@@ -86,7 +86,7 @@ public class AdminMemberController {
         model.addAttribute("orderMemberDtoPage", orderMemberDtoPage);
 
       }
-      return "/admin/member/order";
+      return "admin/member/order";
 
     }
 
