@@ -113,6 +113,7 @@ public class Member {
   // TODO: JsonIgnore 안하면 "Could not write JSON: failed to lazily initialize a collection of role..." 에러 발생
   // TODO: JsonIgnore 하면 위의 에러는 발생하지 않지만 orders에 데이터가 안들어감
   // Eager loading을 하면 member를 조회하는 순간 order 내부까지 다 조회해서 포함된다.
+
   @OneToMany(mappedBy = "member")
   private Set<Order> orders = new HashSet<>();
 

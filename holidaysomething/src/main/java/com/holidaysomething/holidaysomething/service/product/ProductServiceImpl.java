@@ -92,15 +92,6 @@ public class ProductServiceImpl implements ProductService {
 
   @Override
   @Transactional(readOnly = true)
-  public Page<Product> getBestFiveProduct(Long categoryId, Long productId) {
-    // TODO `Page`를 사용하지 않고 `limit`와 같이 범위를 지정해주는 것으로 바꿔보자
-    // 상위 5개만 불러오기 위함
-    PageRequest pageRequest = PageRequest.of(0, 5);
-    return productRepository.findByProductCategoryIdAndIdIsNotOrderBySellingPrice(categoryId, productId, pageRequest);
-  }
-
-  @Override
-  @Transactional(readOnly = true)
   public Product getProduct(Long categoryId, Long id) {
       return productRepository.findByProductCategoryIdAndId(categoryId, id);
   }

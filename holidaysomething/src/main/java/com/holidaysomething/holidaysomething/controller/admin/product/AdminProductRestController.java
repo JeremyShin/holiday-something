@@ -80,8 +80,7 @@ public class AdminProductRestController {
 //    return "redirect:/admin/product/product_detail";
   }
 
-  /**
-   * @author : Junhyeong Kim
+   /**
    * @description : 이미지 업로드
    */
   @PostMapping("/image-files/api")
@@ -90,24 +89,5 @@ public class AdminProductRestController {
     String saveFileName = imageStreamService.save(multipartFile, productId);
 
     return "/admin/product/image-files/" + saveFileName;
-  }
-
-  @PostMapping("/add/api")
-  public Long productAddPost(
-          @RequestBody ProductDetailDto productDetail) {
-
-//    if (bindingResult.hasErrors()) {
-//      for (ObjectError error : bindingResult.getAllErrors()) {
-//        log.info(error.getDefaultMessage());
-//        //model.addAttribute("product", product);
-//      }
-////      return "admin/product/add";
-//    } else {
-      //등록작업
-
-      ProductDetail detail = productDetailService.save(productDetail.getProductDetail());
-
-      return detail.getId();
-//    }
   }
 }
