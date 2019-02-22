@@ -1,11 +1,9 @@
 package com.holidaysomething.holidaysomething.controller.user;
 
 import com.holidaysomething.holidaysomething.domain.Member;
-import com.holidaysomething.holidaysomething.dto.CurrentMemberDto;
 import com.holidaysomething.holidaysomething.security.MemberUserDetails;
 import com.holidaysomething.holidaysomething.service.member.MemberService;
 import com.holidaysomething.holidaysomething.service.product.CartProductService;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -72,11 +70,14 @@ public class UserRestController {
    * 회원정보 수정: mypage 회원정보 수정 > 입력한 필드(ex. email)에 한해 정보 수정
    */
   @PatchMapping(path = "/user/account", consumes = "application/json")
-  public Member patchMember(Authentication authentication,
+  public ResponseEntity<Member> patchMember(Authentication authentication,
                             @RequestBody Member patch) {
     MemberUserDetails memberUserDetails = (MemberUserDetails) authentication.getPrincipal();
     Long id = memberUserDetails.getId();
     Member member = memberService.getCurrentMemberInfo(id);
+    if (member == null) {
+      return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
 
 //    if (patch.getId() != null) {
 //      member.setId(patch.getId());
@@ -121,7 +122,8 @@ public class UserRestController {
 //      member.setOrders(patch.getOrders());
 //    }
 
-    return memberService.patchMember(member);
+//    return memberService.patchMember(member);
+    return new ResponseEntity<>(member, HttpStatus.OK);
   }
 
   /**

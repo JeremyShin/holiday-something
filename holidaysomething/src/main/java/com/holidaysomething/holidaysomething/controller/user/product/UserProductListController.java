@@ -12,19 +12,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author choijaeyong on 25/01/2019.
  * @project holidaysomething
- * @description
  */
 @Controller
 @RequestMapping("/product")
@@ -40,7 +36,7 @@ public class UserProductListController {
       @PageableDefault(size = 12, sort = "name", direction = Direction.ASC) Pageable pageable
       , ModelMap model) {
 
-    if (categoryId == 0l) {
+    if (categoryId == 0L) {
       log.info("================== categoryId 가 0이다.main 으로 간다.");
       return "redirect:/";
     }
