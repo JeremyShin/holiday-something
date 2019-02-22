@@ -10,21 +10,10 @@ public enum ShippingStatus {
 
   private int code;
   private String description;
-  private String description2;
 
-  ShippingStatus(){
-
-  }
-
- ShippingStatus(int code, String description) {
+  ShippingStatus(int code, String description) {
     this.code = code;
     this.description = description;
-  }
-
-  ShippingStatus(int code, String description, String description2) {
-    this.code = code;
-    this.description = description;
-    this.description2 = description2;
   }
 
   public int getCode() {
@@ -33,10 +22,6 @@ public enum ShippingStatus {
 
   public String getDescription() {
     return this.description;
-  }
-
-  public String getDescription2() {
-    return this.description2;
   }
 
   public static String getValuesByKey(int key){
@@ -58,5 +43,4 @@ public enum ShippingStatus {
     }
     return description;
   }
-
 }

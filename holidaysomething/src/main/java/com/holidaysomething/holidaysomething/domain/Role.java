@@ -12,7 +12,6 @@ import lombok.Setter;
 /**
  * @author choijaeyong on 18/01/2019.
  * @project holidaysomething
- * @description
  */
 
 @Entity

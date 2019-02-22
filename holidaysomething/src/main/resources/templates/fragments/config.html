@@ -14,6 +14,55 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+
+  <!--&lt;!&ndash; UIkit CSS &ndash;&gt;-->
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/css/uikit.min.css" />-->
+  <!--&lt;!&ndash; UIkit JS &ndash;&gt;-->
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>-->
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script>-->
+
+  <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/main.css}"/>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:500,700|Do+Hyeon|Noto+Sans+KR:400,700"
+        rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Indie+Flower|Poppins" rel="stylesheet">
+  <link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+  <!-- 사용자 CSS 영역이 들어감 -->
+  <!-- th:block 자체는 HTML에 렌더링되지 않는다. -->
+  <th:block layout:fragment="css">
+
+  </th:block>
+
+  <!-- 공통으로 쓰이는 js 파일을 넣는다.-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- 사용자 스크립트 영역이 들어감 -->
+  <th:block layout:fragment="script">
+
+  </th:block>
+</head>
+
+<head th:fragment="indexConfigFragment">
+  <meta charset="UTF-8"/>
+  <link rel="shortcut icon" href="/static/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+  <title th:include=":: #pageTitle">Layout Generic Title </title>
+
+  <!-- 공통으로 쓰이는 css 파일을 넣는다.-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+
+  <!-- UIkit CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/css/uikit.min.css" />
+  <!-- UIkit JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script>
+
   <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/main.css}"/>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:500,700|Do+Hyeon|Noto+Sans+KR:400,700"
         rel="stylesheet"/>

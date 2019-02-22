@@ -174,7 +174,8 @@
           <label for="inputMainImage" th:text="${mainImage.originalFileName}">Select file</label>
 
           <div th:if="${mainImage != null}">
-            <img src="" width="100px" height="100px"/>
+            <img th:src="${mainImage.path + mainImage.storedFileName}" width="100px"
+                 height="100px"/>
           </div>
         </div>
         <div>

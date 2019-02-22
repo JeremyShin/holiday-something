@@ -3,6 +3,7 @@ package com.holidaysomething.holidaysomething.domain;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -48,19 +49,18 @@ public class Order {
   @Column(columnDefinition = "integer default 0")
   private int mileage;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "member_id")
   private Member member;
 
-  @OneToOne(fetch = FetchType.LAZY)
+  @OneToOne
   @JoinColumn(name = "shipping_id")
   private Shipping shipping;
 
-  @OneToOne(fetch = FetchType.LAZY)
+  @OneToOne
   @JoinColumn(name = "payment_id")
   private Payment payment;
 
-  // 현재 로그인 된 member의 id로부터 회원정보, 주문정보 등을 가져오기 위해 양방향으로 변경
   @OneToMany(mappedBy = "order")
-  private Set<OrderedProduct> orderedProduct;
+  private Set<OrderedProduct> orderedProduct = new HashSet<>();
 }

@@ -145,7 +145,7 @@
 
 .user-dashboard {
   /*width: 100%;*/
-  margin: 10px 50px 10px 50px;
+  margin: 0 50px 10px 50px;
 }
 
 .user-content {
@@ -171,9 +171,9 @@
 .user-header-category .middle-category {
   display: none; /* 평상시에는 서브메뉴가 안보이게 하기 */
   height: auto;
-  padding: 0px;
-  margin: 0px;
-  border: 0px;
+  padding: 0;
+  margin: 0;
+  border: 0;
   position: absolute;
   width: 200px;
   z-index: 200;

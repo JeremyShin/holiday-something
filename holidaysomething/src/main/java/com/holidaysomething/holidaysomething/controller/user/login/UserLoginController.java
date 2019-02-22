@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * @author choijaeyong on 18/01/2019.
  * @project holidaysomething
- * @description
  */
 
 @Controller
@@ -83,26 +82,10 @@ public class UserLoginController {
     member.setPersonalInfo(false);
     member.setSex("없음.");
 
-//    Role role1 = new Role();
-//    role1.setId(1l);
-//    role1.setName("ADMIN");
-//    memberService.addRole(role1);
-//    log.info("======== role1  등록.");
-
-//    Role role2 = new Role();
-//    role2.setId(2l);
-//    role2.setName("USER");
-//    memberService.addRole(role2);
-//    log.info("======== role2  등록.");
-
-    Role userRole = roleRepository.getOne(2l);
+    Role userRole = roleRepository.getOne(2L);
     Set<Role> roleSet = new HashSet<>();
-    //roleSet.add(role1);
     roleSet.add(userRole);
     member.setRoles(roleSet);
-    //LocalDate로 바꾸면서 안들어감 ㅠㅠ
-//    Date today = new Date();
-//    member.setBirthday(today);
     LocalDate birthday = LocalDate.parse("1991-01-31");
     member.setBirthday(birthday);
 
@@ -187,17 +170,6 @@ public class UserLoginController {
 
     return "user/temp";
   }
-
-//  @ExceptionHandler(NoHandlerFoundException.class)
-
-  /*@ExceptionHandler(UsernameNotFoundException.class)
-  public String LoginIdNotSuitedException() {
-    //@RequestParam(value = "msg") String msg
-
-
-
-    return "/user/login?error=true";
-  }*/
 
   @GetMapping("/info")
   public String showInfo(@RequestParam("userId") String userId) {

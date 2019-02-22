@@ -10,14 +10,11 @@
   <!-- 사용자 CSS 추가 -->
   <!-- layout:fragment="xxx" => decorate 파일에 있는 xxx와 이름이 맞아야만 HTML에 포함된다 -->
   <th:block layout:fragment="css">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/header.css}"/>
     <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/order.css}"/>
   </th:block>
 
 </head>
-
-<th:block layout:fragment="css">
-  <link rel="stylesheet" type="text/css" media="screen" th:href="@{/static/css/header.css}"/>
-</th:block>
 
 <div layout:fragment="userContents">
   <div class="order-container">
