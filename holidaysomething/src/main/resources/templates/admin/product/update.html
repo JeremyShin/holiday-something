@@ -180,10 +180,20 @@
         </div>
         <div>
           <label>서브 이미지 등록</label>
-          <input name="subImages" type="file">
-          <input name="subImages" type="file">
-          <input name="subImages" type="file">
-          <input name="subImages" type="file">
+          <!--<div th:each="index : ${#numbers.sequence(0, 3)}">-->
+          <div th:each="subImage : ${subImages}">
+            <div th:if="${subImage == null}">
+              <input name="subImages" type="file">
+            </div>
+
+            <input type="file" name="subImage" id="inputSubImage" class="hidden"/>
+            <label for="inputSubImage" th:text="${subImage.originalFileName}">Select file</label>
+            <img th:src="${subImage.path + subImage.storedFileName}" width="100px" height="100px"/>
+          </div>
+          <!--<input name="subImages" type="file">-->
+          <!--<input name="subImages" type="file">-->
+          <!--<input name="subImages" type="file">-->
+          <!--<input name="subImages" type="file">-->
         </div>
         <div>
           <input type="button" id="saveBtn" value="상품등록">
