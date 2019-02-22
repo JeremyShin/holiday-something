@@ -52,17 +52,6 @@ public class UserRestController {
   }
 
   /**
-   * < 현재 안쓰임 >
-   * id를 통해 CurrentMemberDto 객체가 제대로 리턴되지만,
-   * order -> orderNumber -> ... 으로 계속 방향을 진행하는 것이 불가능해
-   * id로 Member 객체를 얻고 Q객체의 방향성을 이용하는 getCurrentUserInfo()를 사용하기로 했다.
-   */
-  @GetMapping("/user/recentOrder")
-  public List<CurrentMemberDto> getCurrentUserInfo(@RequestParam("id") Long userId) {
-    return memberService.getCurrentMemberInfoJPQL(userId);
-  }
-
-  /**
    * 현재 로그인 되어있는 user 정보를 받아온다.
    */
   @GetMapping("/user/authenticated")
@@ -80,45 +69,39 @@ public class UserRestController {
   }
 
   /**
-   * 회원정보 수정: 현재 로그인 되어있는 member의 property 중 null이 아닌 것들을 실제 data에 반영
+   * 회원정보 수정: mypage 회원정보 수정 > 입력한 필드(ex. email)에 한해 정보 수정
    */
-//  @PatchMapping(path = "/user", consumes = "application/json")
-//  public Member patchMember(Authentication authentication,
-//                            @RequestBody Member patch) {
+  @PatchMapping(path = "/user/account", consumes = "application/json")
+  public Member patchMember(Authentication authentication,
+                            @RequestBody Member patch) {
+    MemberUserDetails memberUserDetails = (MemberUserDetails) authentication.getPrincipal();
+    Long id = memberUserDetails.getId();
+    Member member = memberService.getCurrentMemberInfo(id);
 
-//    MemberUserDetails memberUserDetails = (MemberUserDetails) authentication.getPrincipal();
-//    Member member = memberUserDetails.getMember();
-  @PatchMapping(path = "/user/{id}", consumes = "application/json")
-  public Member patchMember(@PathVariable("id") Long memberId,
-      @RequestBody Member patch) {
-    log.info("patch Email: " + patch.getEmail());
-
-    Member member = memberService.getCurrentMemberInfo(memberId);
-
-    if (patch.getId() != null) {
-      member.setId(patch.getId());
-    }
-    if (patch.getLoginId() != null) {
-      member.setLoginId(patch.getLoginId());
-    }
+//    if (patch.getId() != null) {
+//      member.setId(patch.getId());
+//    }
+//    if (patch.getLoginId() != null) {
+//      member.setLoginId(patch.getLoginId());
+//    }
     if (patch.getPassword() != null) {
       member.setPassword(patch.getPassword());
     }
     if (patch.getEmail() != null) {
       member.setEmail(patch.getEmail());
     }
-    if (patch.getName() != null) {
-      member.setName(patch.getName());
-    }
-    if (patch.getNickname() != null) {
-      member.setNickname(patch.getNickname());
-    }
+//    if (patch.getName() != null) {
+//      member.setName(patch.getName());
+//    }
+//    if (patch.getNickname() != null) {
+//      member.setNickname(patch.getNickname());
+//    }
     if (patch.getPhone() != null) {
       member.setPhone(patch.getPhone());
     }
-    if (patch.getMileage() != null) {
-      member.setMileage(patch.getMileage());
-    }
+//    if (patch.getMileage() != null) {
+//      member.setMileage(patch.getMileage());
+//    }
     if (patch.getBirthday() != null) {
       member.setBirthday(patch.getBirthday());
     }
@@ -131,12 +114,12 @@ public class UserRestController {
     if (patch.getAddress2() != null) {
       member.setAddress2(patch.getAddress2());
     }
-    if (patch.getSex() != null) {
-      member.setSex(patch.getSex());
-    }
-    if (patch.getOrders() != null) {
-      member.setOrders(patch.getOrders());
-    }
+//    if (patch.getSex() != null) {
+//      member.setSex(patch.getSex());
+//    }
+//    if (patch.getOrders() != null) {
+//      member.setOrders(patch.getOrders());
+//    }
 
     return memberService.patchMember(member);
   }

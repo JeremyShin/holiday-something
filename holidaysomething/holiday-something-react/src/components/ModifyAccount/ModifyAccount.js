@@ -214,7 +214,7 @@ class ModifyEmailDiv extends Component {
       return;
     }
     
-    return fetch('http://localhost:8080/api/user/11', {
+    return fetch('/api/user/account', {
       headers: { 
         "Content-Type": "application/json",
       },
@@ -227,7 +227,7 @@ class ModifyEmailDiv extends Component {
     .then(alert("이메일이 변경되었습니다."))
     .then(window.location.replace("/mypage"))
     .catch(err => console.error(err));
-  }
+  };
 
   render() {
     return (
@@ -244,7 +244,7 @@ class ModifyEmailDiv extends Component {
       </div>
     )
   }
-};
+}
 
 // '휴대폰번호변경' 버튼
 class ModifyPhoneBtn extends Component {
