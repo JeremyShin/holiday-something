@@ -1,30 +1,25 @@
 package com.holidaysomething.holidaysomething.controller.admin.product;
 
-import com.holidaysomething.holidaysomething.domain.*;
-import com.holidaysomething.holidaysomething.dto.ProductAddDto;
+import com.holidaysomething.holidaysomething.domain.ProductCategory;
+import com.holidaysomething.holidaysomething.domain.ProductDetail;
+import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.dto.ProductDetailDto;
 import com.holidaysomething.holidaysomething.dto.ProductOptionDto;
 import com.holidaysomething.holidaysomething.service.fileupload.ImageStreamService;
-import com.holidaysomething.holidaysomething.service.product.*;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.time.LocalDateTime;
+import com.holidaysomething.holidaysomething.service.product.ProductAddService;
+import com.holidaysomething.holidaysomething.service.product.ProductDetailService;
+import com.holidaysomething.holidaysomething.service.product.ProductOptionService;
 import java.util.List;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/admin/product")
@@ -38,8 +33,7 @@ public class AdminProductRestController {
   private final ProductDetailService productDetailService;
 
   /**
-   * @author Gyumin Kim
-   * 상품 등록시 대분류 읽어오기
+   * @author Gyumin Kim 상품 등록시 대분류 읽어오기
    */
   @GetMapping("/subcategory/{largerId}")
   public List<ProductCategory> productSubCategories(@PathVariable("largerId") Long largerId) {
@@ -66,7 +60,7 @@ public class AdminProductRestController {
    * @description : 옵션 수정
    */
   @PostMapping(path = "/option/modify",
-              consumes = "application/json")
+      consumes = "application/json")
   public void productOptionModifyPost(@RequestBody ProductOptionDto productOptionDto) {
     ProductOption productOption = productOptionService.getProductOption(productOptionDto.getId());
 
@@ -85,9 +79,28 @@ public class AdminProductRestController {
    */
   @PostMapping("/image-files/api")
   public String handleFileUpload(@RequestParam("descriptionImage") MultipartFile multipartFile,
-                                 Long productId) {
+      Long productId) {
     String saveFileName = imageStreamService.save(multipartFile, productId);
 
     return "/admin/product/image-files/" + saveFileName;
+  }
+
+  @PostMapping("/add/api")
+  public Long productAddPost(
+      @RequestBody ProductDetailDto productDetail) {
+
+//    if (bindingResult.hasErrors()) {
+//      for (ObjectError error : bindingResult.getAllErrors()) {
+//        log.info(error.getDefaultMessage());
+//        //model.addAttribute("product", product);
+//      }
+////      return "admin/product/add";
+//    } else {
+    //등록작업
+
+    ProductDetail detail = productDetailService.save(productDetail.getProductDetail());
+
+    return detail.getId();
+//    }
   }
 }
