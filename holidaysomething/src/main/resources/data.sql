@@ -662,11 +662,11 @@ INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, ex
 
 
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-3.jpg', 'https://contents.sixshop.com/thumbnails/uploadedFiles/30497/product/', '2018-12-03 09:23:35', 13900.0, 'image_1537526126133_2500.jpg', '2018-12-03 09:33:35', 1);
+VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-3.jpg', 'https://post-phinf.pstatic.net/MjAxNzExMTBfMjI4/MDAxNTEwMzAxMTI2ODA5.3y9YCyLGR_7T2YNPfMuj3CYC9SQ3WrtC4Pgo3KguWU8g.G8Erotk8e9xfwR1eLIuObDdz0IjKGkwemPceb-8tbFUg.JPEG/3.JPG?type=w1200', '2018-12-03 09:23:35', 13900.0, 'image_1537526126133_2500.jpg', '2018-12-03 09:33:35', 1);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-1.jpg', 'https://contents.sixshop.com/thumbnails/uploadedFiles/30497/product/', '2018-12-13 19:23:35', 23839, 'image_1537526152021_2500.jpg', '2018-12-13 20:23:35', 2);
+VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-1.jpg', 'https://post-phinf.pstatic.net/MjAxNzExMTBfMjI4/MDAxNTEwMzAxMTI2ODA5.3y9YCyLGR_7T2YNPfMuj3CYC9SQ3WrtC4Pgo3KguWU8g.G8Erotk8e9xfwR1eLIuObDdz0IjKGkwemPceb-8tbFUg.JPEG/3.JPG?type=w1200', '2018-12-13 19:23:35', 23839, 'image_1537526152021_2500.jpg', '2018-12-13 20:23:35', 2);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-2.jpg', 'https://contents.sixshop.com/thumbnails/uploadedFiles/30497/product/', '2018-12-09 11:52:49', 23295, 'image_1537526140470_2500.jpg', NULL, 3);
+VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-2.jpg', 'https://post-phinf.pstatic.net/MjAxNzExMTBfMjI4/MDAxNTEwMzAxMTI2ODA5.3y9YCyLGR_7T2YNPfMuj3CYC9SQ3WrtC4Pgo3KguWU8g.G8Erotk8e9xfwR1eLIuObDdz0IjKGkwemPceb-8tbFUg.JPEG/3.JPG?type=w1200', '2018-12-09 11:52:49', 23295, 'image_1537526140470_2500.jpg', NULL, 3);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
 VALUES (null, 1, 'image/webp', '89734598-3598.webp', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-27 15:24:49', 23298, 'waterfall.jpg', NULL, 3);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
