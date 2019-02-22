@@ -137,6 +137,15 @@
           </div>
 
           <div>
+            <label th:class="${#fields.hasErrors('quantity')} ? 'fieldError'">재고 : </label>
+            <input name="quantity" id="inputQuantity"
+                   th:class="${#fields.hasErrors('quantity')} ? 'fieldError'" type="text"
+                   placeholder="Quantity">
+            <label th:if="${#fields.errors('quantity')}" th:errors="*{quantity}">input is
+              incorrect</label>
+          </div>
+
+          <div>
             <label>제조일 : </label>
             <input name="manufactureDate" type="datetime-local" placeholder="Manufacture Date"
                    id="inputDate1" th:field="*{manufactureDate}"

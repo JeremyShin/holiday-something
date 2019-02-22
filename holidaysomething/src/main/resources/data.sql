@@ -662,65 +662,65 @@ INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, ex
 
 
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-3.jpg', 'https://contents.sixshop.com/thumbnails/uploadedFiles/30497/product/image_1537526126133_2500.jpg', '2018-12-03 09:23:35', 13900.0, 'holidaymemopad', '2018-12-03 09:33:35', 1);
+VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-3.jpg', 'https://contents.sixshop.com/thumbnails/uploadedFiles/30497/product/', '2018-12-03 09:23:35', 13900.0, 'image_1537526126133_2500.jpg', '2018-12-03 09:33:35', 1);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-1.jpg', 'https://contents.sixshop.com/thumbnails/uploadedFiles/30497/product/image_1537526152021_2500.jpg', '2018-12-13 19:23:35', 23839, 'stickerpack', '2018-12-13 20:23:35', 2);
+VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-1.jpg', 'https://contents.sixshop.com/thumbnails/uploadedFiles/30497/product/', '2018-12-13 19:23:35', 23839, 'image_1537526152021_2500.jpg', '2018-12-13 20:23:35', 2);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-2.jpg', 'https://contents.sixshop.com/thumbnails/uploadedFiles/30497/product/image_1537526140470_2500.jpg', '2018-12-09 11:52:49', 23295, 'myownholiday', NULL, 3);
+VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-2.jpg', 'https://contents.sixshop.com/thumbnails/uploadedFiles/30497/product/', '2018-12-09 11:52:49', 23295, 'image_1537526140470_2500.jpg', NULL, 3);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/webp', '89734598-3598.webp', 'https://www.petitcolas.net/watermarking/image_database/waterfall.jpg', '2018-12-27 15:24:49', 23298, 'waterfall', NULL, 3);
+VALUES (null, 1, 'image/webp', '89734598-3598.webp', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-27 15:24:49', 23298, 'waterfall.jpg', NULL, 3);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', '86723953-9872.jpg', 'https://www.petitcolas.net/watermarking/image_database/water.jpg', '2017-03-31 17:34:09', 14529, 'water', '2017-04-02 11:24:52', 3);
+VALUES (null, 1, 'image/jpeg', '86723953-9872.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2017-03-31 17:34:09', 14529, 'water.jpg', '2017-04-02 11:24:52', 3);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/gif', '34609583-3452.gif', 'https://www.petitcolas.net/watermarking/image_database/watch.jpg', '2018-08-07 11:52:49', 25389, 'watch', '2018-08-12 11:52:49', 4);
+VALUES (null, 1, 'image/gif', '34609583-3452.gif', 'https://www.petitcolas.net/watermarking/image_database/', '2018-08-07 11:52:49', 25389, 'watch.jpg', '2018-08-12 11:52:49', 4);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', '23865349-8346.jpg', 'https://www.petitcolas.net/watermarking/image_database/wildflowers.jpg', '2018-12-12 22:34:49', 7682, 'wildflowers', '2018-12-13 11:52:09', 5);
+VALUES (null, 1, 'image/jpeg', '23865349-8346.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-12 22:34:49', 7682, 'wildflowers.jpg', '2018-12-13 11:52:09', 5);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', '34689534-9734.jpg', 'https://www.petitcolas.net/watermarking/image_database/alu.jpg', '2018-04-22 07:52:49', 39872, 'alu', '2018-04-25 11:38:49', 6);
+VALUES (null, 1, 'image/jpeg', '34689534-9734.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-04-22 07:52:49', 39872, 'alu.jpg', '2018-04-25 11:38:49', 6);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/png', '27340985-3456.png', 'https://homepages.cae.wisc.edu/~ece533/images/tulips.png', '2018-11-11 11:52:49', 59872, 'tulips', '2018-12-09 11:52:49', 7);
+VALUES (null, 1, 'image/png', '27340985-3456.png', 'https://homepages.cae.wisc.edu/~ece533/images/', '2018-11-11 11:52:49', 59872, 'tulips.png', '2018-12-09 11:52:49', 7);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', '68923545-7248.jpg', 'https://www.petitcolas.net/watermarking/image_database/bandon.jpg', '2018-12-25 19:34:49', 38972, 'bandon', '2018-12-26 11:52:49', 8);
+VALUES (null, 1, 'image/jpeg', '68923545-7248.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-25 19:34:49', 38972, 'bandon.jpg', '2018-12-26 11:52:49', 8);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/webp', '38975343-2369.webp', 'https://www.petitcolas.net/watermarking/image_database/terraux.jpg', '2018-07-31 16:23:49', 23522, 'terraux', '2018-08-05 00:00:00', 9);
+VALUES (null, 2, 'image/webp', '38975343-2369.webp', 'https://www.petitcolas.net/watermarking/image_database/', '2018-07-31 16:23:49', 23522, 'terraux.jpg', '2018-08-05 00:00:00', 9);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/jpeg', '13068953-6389.jpg', 'https://www.petitcolas.net/watermarking/image_database/brandyrose.jpg', '2018-06-09 15:32:49', 135882, 'brandyrose', '2018-06-10 11:52:49', 10);
+VALUES (null, 2, 'image/jpeg', '13068953-6389.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-06-09 15:32:49', 135882, 'brandyrose.jpg', '2018-06-10 11:52:49', 10);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/jpeg', '06892568-6980.jpg', 'https://www.petitcolas.net/watermarking/image_database/fourviere.jpg', '2018-04-09 10:52:49', 235892, 'fourviere', '2018-04-09 21:52:49', 11);
+VALUES (null, 2, 'image/jpeg', '06892568-6980.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-04-09 10:52:49', 235892, 'fourviere.jpg', '2018-04-09 21:52:49', 11);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/webp', '37489324-9383.webp', 'https://www.petitcolas.net/watermarking/image_database/bear.jpg', '2018-07-24 19:34:00', 63589, 'bear', '2018-07-26 14:52:34', 12);
+VALUES (null, 2, 'image/webp', '37489324-9383.webp', 'https://www.petitcolas.net/watermarking/image_database/', '2018-07-24 19:34:00', 63589, 'bear.jpg', '2018-07-26 14:52:34', 12);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/jpeg', '36984323-3709.jpg', 'https://www.petitcolas.net/watermarking/image_database/kid.jpg', '2018-12-14 21:34:12', 89623, 'kid', NULL, 13);
+VALUES (null, 2, 'image/jpeg', '36984323-3709.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-14 21:34:12', 89623, 'kid.jpg', NULL, 13);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/gif', '62089452-6893.gif', 'https://www.petitcolas.net/watermarking/image_database/z1x25.jpg', '2018-12-19 11:52:49', 1983, 'z1x25', '2018-12-20 20:52:13', 14);
+VALUES (null, 2, 'image/gif', '62089452-6893.gif', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-19 11:52:49', 1983, 'z1x25.jpg', '2018-12-20 20:52:13', 14);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/jpeg', '72364980-3679.jpg', 'https://www.petitcolas.net/watermarking/image_database/lochness.gif', '2018-11-01 10:52:33', 8962, 'lochness', '2018-11-10 11:52:50', 15);
+VALUES (null, 2, 'image/jpeg', '72364980-3679.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-11-01 10:52:33', 8962, 'lochness.gif', '2018-11-10 11:52:50', 15);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/jpeg', '27323476-7689.jpg', 'https://www.petitcolas.net/watermarking/image_database/papermachine.jpg', '2018-12-10 10:52:21', 7862, 'papermachine', '2018-12-10 09:52:49', 16);
+VALUES (null, 2, 'image/jpeg', '27323476-7689.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-10 10:52:21', 7862, 'papermachine.jpg', '2018-12-10 09:52:49', 16);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/jpeg', '23689542-7982.jpg', 'https://www.petitcolas.net/watermarking/image_database/skyline_arch.jpg', '2018-12-25 14:22:05', 49862, 'skyline_arch', '2019-01-03 11:24:14', 17);
+VALUES (null, 2, 'image/jpeg', '23689542-7982.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-25 14:22:05', 49862, 'skyline_arch.jpg', '2019-01-03 11:24:14', 17);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/webp', '28733452-9073.webp', 'https://www.petitcolas.net/watermarking/image_database/pueblo_bonito.jpg', '2018-12-24 10:52:42', 98763, 'pueblo_bonito', NULL, 18);
+VALUES (null, 2, 'image/webp', '28733452-9073.webp', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-24 10:52:42', 98763, 'pueblo_bonito.jpg', NULL, 18);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/gif', '60893452-3638.gif', 'https://www.petitcolas.net/watermarking/image_database/newyork.gif', '2017-12-09 11:52:49', 308754, 'newyork', '2018-01-22 19:52:24', 19);
+VALUES (null, 3, 'image/gif', '60893452-3638.gif', 'https://www.petitcolas.net/watermarking/image_database/', '2017-12-09 11:52:49', 308754, 'newyork.gif', '2018-01-22 19:52:24', 19);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/jpeg', '23465089-3790.jpg', 'https://www.petitcolas.net/watermarking/image_database/F14.jpg', '2018-12-11 18:24:04', 49762, 'F14', '2018-12-14 11:22:59', 20);
+VALUES (null, 3, 'image/jpeg', '23465089-3790.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-11 18:24:04', 49762, 'F14.jpg', '2018-12-14 11:22:59', 20);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/jpeg', '23764935-3698.jpg', 'https://www.petitcolas.net/watermarking/image_database/opera.jpg', '2018-12-18 11:54:34', 3498, 'opera', '2018-12-20 11:22:39', 21);
+VALUES (null, 3, 'image/jpeg', '23764935-3698.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-18 11:54:34', 3498, 'opera.jpg', '2018-12-20 11:22:39', 21);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/gif', '68235345-3456.gif', 'https://www.petitcolas.net/watermarking/image_database/arctic_hare.jpg', '2018-12-22 04:34:49', 8792, 'arctic_hare', '2018-12-23 20:52:34', 22);
+VALUES (null, 3, 'image/gif', '68235345-3456.gif', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-22 04:34:49', 8792, 'arctic_hare.jpg', '2018-12-23 20:52:34', 22);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/jpeg', '06983645-2360.jpg', 'https://www.petitcolas.net/watermarking/image_database/baboon.jpg', '2018-10-09 17:22:42', 21984, 'baboon', '2018-10-11 12:52:22', 23);
+VALUES (null, 3, 'image/jpeg', '06983645-2360.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-10-09 17:22:42', 21984, 'baboon.jpg', '2018-10-11 12:52:22', 23);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/gif', '60892345-6893.gif', 'https://www.petitcolas.net/watermarking/image_database/f16.jpg', '2018-12-29 14:52:49', 29843, 'f16', '2018-12-31 11:42:14', 24);
+VALUES (null, 3, 'image/gif', '60892345-6893.gif', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-29 14:52:49', 29843, 'f16.jpg', '2018-12-31 11:42:14', 24);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/webp', '19874343-9834.webp', 'https://www.petitcolas.net/watermarking/image_database/fishingboat.jpg', '2018-02-08 11:22:23', 5983, 'fishingboat', '2018-02-11 09:54:29', 25);
+VALUES (null, 3, 'image/webp', '19874343-9834.webp', 'https://www.petitcolas.net/watermarking/image_database/', '2018-02-08 11:22:23', 5983, 'fishingboat.jpg', '2018-02-11 09:54:29', 25);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/jpeg', '63895234-3452.jpg', 'https://www.petitcolas.net/watermarking/image_database/lena.jpg', '2018-12-03 16:42:43', 49872, 'lena', NULL, 26);
+VALUES (null, 3, 'image/jpeg', '63895234-3452.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-03 16:42:43', 49872, 'lena.jpg', NULL, 26);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/jpeg', '23698423-5743.jpg', 'https://www.petitcolas.net/watermarking/image_database/peppers.jpg', '2018-12-21 12:22:42', 24983, 'peppers', '2018-12-23 18:52:42', 27);
+VALUES (null, 3, 'image/jpeg', '23698423-5743.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-21 12:22:42', 24983, 'peppers.jpg', '2018-12-23 18:52:42', 27);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/jpeg', '68930523-4568.jpg', 'https://www.petitcolas.net/watermarking/image_database/pills.jpg', '2018-05-05 13:52:51', 13598, 'pills', '2018-05-14 11:52:49', 28);
+VALUES (null, 3, 'image/jpeg', '68930523-4568.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-05-05 13:52:51', 13598, 'pills.jpg', '2018-05-14 11:52:49', 28);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
 VALUES (null, 1, 'image/jpeg', 'hamburger.jpg', 'https://img.29cm.co.kr/next-product/2019/01/14/', '2018-12-03 09:23:35', 13900.0, '8011ae05e3d74b34bf812d661d762ed1_20190114210829.png?width=700', '2018-12-03 09:33:35', 31);
 INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)

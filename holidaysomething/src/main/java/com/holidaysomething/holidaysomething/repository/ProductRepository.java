@@ -74,12 +74,6 @@ public interface ProductRepository extends JpaRepository<Product, Long>, Product
 
   Product findByProductCategoryIdAndId(Long productCategoryId, Long id);
 
-  // 해당 카테고리의 판매량이 높은 순서로 상품 검색(자기 자신은 제외)
-  // SELECT * FROM product WHERE product_category_id = :categoryId AND id != :productId ORDER BY selling_quantity DESC limit 5;
-  // TODO 1 + N 문제 발생 어떻게 해결할까...
-  @Query(value = "SELECT p FROM Product p WHERE p.productCategory.id = :categoryId AND id <> :productId ORDER BY sellingQuantity")
-  Page<Product> findByProductCategoryIdAndIdIsNotOrderBySellingPrice(@Param("categoryId") Long productCategoryId, @Param("productId") Long productId, Pageable pageable);
-
   /************************************************************* '검색분류'로 검색하는 경우 *************/
 
   /********** User *************/

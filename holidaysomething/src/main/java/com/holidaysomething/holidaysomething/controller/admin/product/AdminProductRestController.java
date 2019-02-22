@@ -74,8 +74,7 @@ public class AdminProductRestController {
 //    return "redirect:/admin/product/product_detail";
   }
 
-  /**
-   * @author : Junhyeong Kim
+   /**
    * @description : 이미지 업로드
    */
   @PostMapping("/image-files/api")
