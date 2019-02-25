@@ -13,7 +13,7 @@ public class UserMainController {
 
   @GetMapping
   public String index(){
-    return "/user/index";
+    return "user/index";
   }
 
   @RequestMapping("/mypage")

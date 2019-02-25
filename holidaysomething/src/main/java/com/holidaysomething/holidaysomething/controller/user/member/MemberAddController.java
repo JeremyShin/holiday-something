@@ -33,12 +33,12 @@ public class MemberAddController {
         Member member = new Member();
         model.addAttribute("member", member);
 
-        return "/user/login/join";
+        return "user/login/join";
     }
 
     @GetMapping("/login/joinSuccess")
     public String loginSuccess() {
-        return "/user/login/joinSuccess";
+        return "user/login/joinSuccess";
     }
 
     @PostMapping("/join")
@@ -50,13 +50,13 @@ public class MemberAddController {
             for(ObjectError error : bindingResult.getAllErrors()) {
                 log.info(error.getDefaultMessage());
             }
-            return "/user/login/join";
+            return "user/login/join";
         } else {
             memberAddDto.setRegDate(LocalDateTime.now());
             memberAddDto.setLastLogin(LocalDateTime.now());
             memberAddService.memberRegister(memberAddDto);
 
-            return "/user/login/joinSuccess";
+            return "user/login/joinSuccess";
         }
 
 
