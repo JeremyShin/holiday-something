@@ -36,7 +36,6 @@ public class UserOrderController {
   private final OrderService orderService;
   private final MemberService memberService;
   private final ProductOrderService productOrderService;
-  private final ProductOptionService productOptionService;
   private final ProductService productService;
   private final ShippingService shippingService;
   private final OrderedProductService orderedProductService;

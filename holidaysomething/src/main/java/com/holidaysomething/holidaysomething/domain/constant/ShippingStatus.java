@@ -28,18 +28,24 @@ public enum ShippingStatus {
     String description = null;
 
     switch (key){
-      case 1: description = WAIT_DEPOSIT.description;
-      break;
-      case 2: description = COMPLETE_DEPOSIT.description;
-      break;
-      case 3: description = WAIT_SHIPPING.description;
-      break;
-      case 4: description = START_SHIPPING.description;
-      break;
-      case 5: description = DOING_SHIPPING.description;
-      break;
-      case 6: description = COMPLETE_SHIPPING.description;
-      break;
+      case 1:
+        description = WAIT_DEPOSIT.description;
+        break;
+      case 2:
+        description = COMPLETE_DEPOSIT.description;
+        break;
+      case 3:
+        description = WAIT_SHIPPING.description;
+        break;
+      case 4:
+        description = START_SHIPPING.description;
+        break;
+      case 5:
+        description = DOING_SHIPPING.description;
+        break;
+      case 6:
+        description = COMPLETE_SHIPPING.description;
+        break;
     }
     return description;
   }

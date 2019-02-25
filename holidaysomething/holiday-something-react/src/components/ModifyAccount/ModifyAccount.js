@@ -258,35 +258,68 @@ class ModifyPhoneBtn extends Component {
 }
 
 // 휴대폰 변경 form (show/hide toggle)
-const ModifyPhoneDiv = () => {
-  return (
-    <div className="edit-box">
-      <div className="hp-in">
-        <form>
-          <div className="phone-field">
-            <div className="user-cell-first">
-              <select>
-                <option value="010">010</option>
-                <option value="011">011</option>
-                <option value="016">016</option>
-                <option value="017">017</option>
-                <option value="018">018</option>
-                <option value="019">019</option>
-              </select>
+class ModifyPhoneDiv extends Component {
+  // 휴대폰번호 변경 '변경하기' 버튼 눌렀을 때
+  submitPhone = () => {
+    let editBox = document.querySelector('.edit-box');
+    let phone1select = document.getElementsByClassName('user-cell-first')[0].getElementsByTagName('select');
+    let phone1 = phone1select[0].options[phone1select[0].selectedIndex].value;
+    let phone2 = editBox.querySelectorAll('.input-box')[0].firstChild.value;
+    let phone3 = editBox.querySelectorAll('.input-box')[1].firstChild.value;
+    console.log(`Modifying phone number to: ${phone1}-${phone2}-${phone3}`);
+    if (phone1 === '' || phone2 === '' || phone3 === '') {
+      alert('휴대폰번호를 입력하세요.');
+      return;
+    }
+    const phone = `${phone1}-${phone2}-${phone3}`;
+
+    return fetch('/api/user/account', {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        phone: phone,
+      }),
+    })
+    .then(response => console.log(response))
+    .then(alert("휴대폰번호가 변경되었습니다."))
+    .then(window.location.replace("/mypage"))
+    .catch(err => console.error(err));
+  };
+
+  render() {
+    return (
+      <div className="edit-box">
+        <div className="hp-in">
+          <form>
+            <div className="phone-field">
+              <div className="user-cell-first">
+                <select>
+                  <option value="010">010</option>
+                  <option value="011">011</option>
+                  <option value="016">016</option>
+                  <option value="017">017</option>
+                  <option value="018">018</option>
+                  <option value="019">019</option>
+                </select>
+              </div>
+              <div className="dash">-</div>
+              <div className="input-box">
+                <input type="tel"/>
+              </div>
+              <div className="dash">-</div>
+              <div className="input-box">
+                <input type="tel"/>
+              </div>
+              <input type="button" className="btn-black" value="변경하기"
+                     onClick={this.submitPhone.bind(this)}/>
             </div>
-            <div className="dash">-</div>
-            <div className="input-box">
-              <input type="tel" />
-            </div>
-            <div className="dash">-</div>
-            <div className="input-box">
-              <input type="tel" />
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
-  )
-};
+    )
+  }
+}
 
 export default ModifyAccount;
