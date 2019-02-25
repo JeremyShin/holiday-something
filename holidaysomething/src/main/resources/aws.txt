@@ -1,0 +1,10 @@
+# AWS 마스터 계정 또는 IAMUSER 정보
+cloud.aws.credentials.accessKey=
+cloud.aws.credentials.secretKey=
+
+# AWS S3 bucket의 정보
+cloud.aws.s3.bucket=holidaysomething-webservice-s3
+cloud.aws.s3.bucket.dirName=static
+cloud.aws.region.static=ap-northeast-2
+cloud.aws.stack.auto=false
+cloud.aws.credentials.instanceProfile=true
