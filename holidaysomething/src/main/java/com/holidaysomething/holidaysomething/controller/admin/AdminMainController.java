@@ -12,7 +12,6 @@ public class AdminMainController {
 
   @GetMapping
   public String index() {
-    log.info("index method");
     return "admin/index";
   }
 }

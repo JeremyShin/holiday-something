@@ -18,7 +18,7 @@ class AuthProvider extends Component {
   };
 
   _callApi = () => {
-    // return fetch('/api/userTmp?id=11')
+    // return fetch('/api/user/11')
     return fetch('/api/user/authenticated')  // 현재 로그인된 유저
           .then(response => response.json())
           .then(json => json)

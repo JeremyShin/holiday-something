@@ -33,7 +33,8 @@ public class AdminProductRestController {
   private final ProductDetailService productDetailService;
 
   /**
-   * @author Gyumin Kim 상품 등록시 대분류 읽어오기
+   * @author Gyumin Kim
+   * 상품 등록시 대분류 읽어오기
    */
   @GetMapping("/subcategory/{largerId}")
   public List<ProductCategory> productSubCategories(@PathVariable("largerId") Long largerId) {
