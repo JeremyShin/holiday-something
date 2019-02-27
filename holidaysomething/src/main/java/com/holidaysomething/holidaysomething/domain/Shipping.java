@@ -35,7 +35,6 @@ public class Shipping {
   @Column(nullable = false)
   private String addressDetail;
 
-  @Column
   private String message;
 
   @Column(nullable = false)

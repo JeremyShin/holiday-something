@@ -246,7 +246,6 @@ public class AdminProductController {
       pageable = PageRequest.of(0, 5);
     }
 
-    //Page<ProductOption> productOptions =
     Page<ProductOption> productOptions = productOptionService
         .getProductOptionsByProductId(productId, pageable);
 
@@ -255,7 +254,8 @@ public class AdminProductController {
 
     model.addAttribute("productOptions", productOptions);
     model.addAttribute("productImageMain",
-        productImageMain.getPath() + productImageMain.getStoredFileName());
+        productImageMain != null ?
+        productImageMain.getPath() + productImageMain.getStoredFileName() : "not found");
 
     int pageCount = productOptions.getTotalPages();
     model.addAttribute("pageCount", pageCount);

@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,7 +42,6 @@ public class Order {
   @Column(nullable = false)
   private int totalPrice;
 
-  @Column
   private Integer status;
 
   @Column(columnDefinition = "integer default 0")
@@ -56,10 +54,6 @@ public class Order {
   @OneToOne
   @JoinColumn(name = "shipping_id")
   private Shipping shipping;
-
-  @OneToOne
-  @JoinColumn(name = "payment_id")
-  private Payment payment;
 
   @OneToMany(mappedBy = "order")
   private Set<OrderedProduct> orderedProduct = new HashSet<>();

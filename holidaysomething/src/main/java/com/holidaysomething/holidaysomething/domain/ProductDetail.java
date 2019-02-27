@@ -6,7 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,9 +20,7 @@ public class ProductDetail {
   private Long id;
 
   @Lob
-//  @NotEmpty(message = "description must be not null")
   private String description;
-
 
   public ProductDetail(String description) {
     this.description = description;

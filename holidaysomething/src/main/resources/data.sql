@@ -1,9 +1,5 @@
 -- alter table product_image_category default character set utf8;
 
--- INSERT INTO product_image_category (id, name) VALUES (1, '상세이미지');
--- INSERT INTO product_image_category (id, name) VALUES (2, '목록이미지');
--- INSERT INTO product_image_category (id, name) VALUES (3, '추가이미지');
-
 INSERT INTO exchange_refund(apply_date, approve, approve_date, price, type) VALUES (now(), 1, now(), 3000, '환불');
 INSERT INTO exchange_refund(apply_date, approve, approve_date, price, type) VALUES (now(), 1, now(), 3000, '환불');
 INSERT INTO exchange_refund(apply_date, approve, approve_date, price, type) VALUES (now(), 1, now(), 3000, '환불');
@@ -100,69 +96,6 @@ VALUES (null, 'TooMuchTalker', '1234', 'TooMuchTalker61@gmail.com', '박찬호',
 
 
 
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(1,'buyeraddr1','afa1@gmail.com','buyer1','postcode1','01099233293','http://suunyvale.com/1','merchant1','msg1','name1','whatmethod1','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(2,'buyeraddr2','afa2@gmail.com','buyer2','postcode2','01099233291','http://suunyvale.com/2','merchant2','msg2','name2','whatmethod2','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(3,'buyeraddr3','afa3@gmail.com','buyer3','postcode3','01099233292','http://suunyvale.com/3','merchant3','msg3','name3','whatmethod3','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(4,'buyeraddr4','afa4@gmail.com','buyer4','postcode4','01099233294','http://suunyvale.com/4','merchant4','msg4','name4','whatmethod4','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(5,'buyeraddr5','afa5@gmail.com','buyer5','postcode5','01099233295','http://suunyvale.com/5','merchant5','msg5','name5','whatmethod5','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(6,'buyeraddr6','afa6@gmail.com','buyer6','postcode6','01099233296','http://suunyvale.com/6','merchant6','msg6','name6','whatmethod6','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(7,'buyeraddr7','afa7@gmail.com','buyer7','postcode7','01099233297','http://suunyvale.com/7','merchant7','msg7','name7','whatmethod7','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(8,'buyeraddr8','afa8@gmail.com','buyer8','postcode8','01099233298','http://suunyvale.com/8','merchant8','msg8','name8','whatmethod8','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(9,'buyeraddr9','afa9@gmail.com','buyer9','postcode9','01099233299','http://suunyvale.com/9','merchant9','msg9','name9','whatmethod9','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(10,'buyeraddr10','afa10@gmail.com','buyer10','postcode10','01099233212','http://suunyvale.com/10','merchant10','msg10','name10','whatmethod10','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(11,'buyeraddr11','afa11@gmail.com','buyer11','postcode11','01099233231','http://suunyvale.com/11','merchant11','msg11','name11','whatmethod11','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(12,'buyeraddr12','afa12@gmail.com','buyer12','postcode12','01099233232','http://suunyvale.com/12','merchant12','msg12','name12','whatmethod12','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(13,'buyeraddr13','afa13@gmail.com','buyer13','postcode13','01099233233','http://suunyvale.com/13','merchant13','msg13','name13','whatmethod13','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(14,'buyeraddr14','afa14@gmail.com','buyer14','postcode14','01099233234','http://suunyvale.com/14','merchant14','msg14','name14','whatmethod14','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(15,'buyeraddr15','afa15@gmail.com','buyer15','postcode15','01099233234','http://suunyvale.com/15','merchant15','msg15','name15','whatmethod15','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(16,'buyeraddr16','afa16@gmail.com','buyer16','postcode16','01099233236','http://suunyvale.com/16','merchant16','msg16','name16','whatmethod16','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(17,'buyeraddr17','afa17@gmail.com','buyer17','postcode17','01099233237','http://suunyvale.com/17','merchant17','msg17','name17','whatmethod17','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(18,'buyeraddr18','afa18@gmail.com','buyer18','postcode18','01099233238','http://suunyvale.com/18','merchant18','msg18','name18','whatmethod18','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(19,'buyeraddr19','afa19@gmail.com','buyer19','postcode19','01099233239','http://suunyvale.com/19','merchant19','msg19','name19','whatmethod19','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(20,'buyeraddr20','afa20@gmail.com','buyer20','postcode20','01099233240','http://suunyvale.com/20','merchant20','msg20','name20','whatmethod20','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(21,'buyeraddr21','afa21@gmail.com','buyer21','postcode21','01099233251','http://suunyvale.com/21','merchant21','msg21','name21','whatmethod21','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(22,'buyeraddr22','afa22@gmail.com','buyer22','postcode22','01099233252','http://suunyvale.com/22','merchant22','msg22','name22','whatmethod22','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(23,'buyeraddr23','afa23@gmail.com','buyer23','postcode23','01099233256','http://suunyvale.com/23','merchant23','msg23','name23','whatmethod23','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(24,'buyeraddr24','afa24@gmail.com','buyer24','postcode24','01099233267','http://suunyvale.com/24','merchant24','msg24','name24','whatmethod24','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(25,'buyeraddr25','afa25@gmail.com','buyer25','postcode25','01099233298','http://suunyvale.com/25','merchant25','msg25','name25','whatmethod25','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(26,'buyeraddr26','afa26@gmail.com','buyer26','postcode26','01099233277','http://suunyvale.com/26','merchant26','msg26','name26','whatmethod26','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(27,'buyeraddr27','afa27@gmail.com','buyer27','postcode27','01099233266','http://suunyvale.com/27','merchant27','msg27','name27','whatmethod27','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(28,'buyeraddr28','afa28@gmail.com','buyer28','postcode28','01099233296','http://suunyvale.com/28','merchant28','msg28','name28','whatmethod28','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(29,'buyeraddr29','afa29@gmail.com','buyer29','postcode29','01099233263','http://suunyvale.com/29','merchant29','msg29','name29','whatmethod29','pg1');
-INSERT INTO payment(amount,buyer_addr,buyer_email,buyer_name,buyer_postcode,buyer_tel,m_redirect_url,merchant_uid,msg,name,pay_method,pg)
-VALUES(30,'buyeraddr30','afa30@gmail.com','buyer30','postcode30','01099233267','http://suunyvale.com/30','merchant30','msg30','name30','whatmethod30','pg1');
-
-
-
 INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
 VALUES (null, '인천광역시 미추홀구 토금북로28번길 15', '104호', '경비실에 맡겨주세요.', '010-8693-3454', '22186', '권은철', '305672231034', 3000, NULL, NULL);
 INSERT INTO shipping(id, address, address_detail, message, phone, postcode, recipient, shipping_number, shipping_price, start_date, arrival_date)
@@ -226,64 +159,64 @@ VALUES (null, '제주특별자치도 제주시 첨단로 213-4', '102호', '배�
 
 
 
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018110240057512', '2018-11-20', 12000, 1, 120, 1, 2, 2);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018110230057613', '2018-11-22', 12000, 1, 120, 18, 3, 3);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018110360057614', '2018-10-01', 9000, 1, 90, 18, 4, 4);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018110350057415', '2018-11-29', 6500, 1, 60, 18, 5, 5);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018110350057516', '2018-11-01', 6500, 1, 60, 3, 6, 6);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018111050067517', '2018-11-02', 4500, 1, 40, 3, 7, 7);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018111060037518', '2018-11-14', 10000, 1, 100, 4, 8, 8);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018111050137519', '2018-11-29', 14000, 1, 140, 5, 9, 9);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018111050138510', '2018-12-02', 4000, 1, 40, 6, 10, 10);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018111750147511', '2018-11-30', 3000, 1, 30, 5, 11, 11);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018111750137512', '2018-10-22', 3000, 1, 30, 5, 12, 12);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018111950137513', '2018-11-11', 5500, 1, 50, 18, 13, 13);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018111950137514', '2018-04-22', 2500, 1, 20, 6, 14, 14);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018112250137515', '2018-11-29', 2500, 1, 20, 6, 15, 15);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018112560137516', '2018-11-13', 1100, 1, 10, 18, 16, 16);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018112560137517', '2018-12-05', 2200, 1, 20, 18, 17, 17);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018112560137518', '2018-11-21', 5000, 1, 50, 7, 18, 18);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018112560137519', '2018-11-01', 5000, 1, 50, 9, 19, 19);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018112560137520', '2018-11-15', 3000, 1, 30, 9, 20, 20);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018112560137521', '2018-09-01', 2000, 1, 20, 11, 21, 21);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018113060137522', '2018-11-04', 3000, 1, 30, 11, 22, 22);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018112560137523', '2016-10-10', 3000, 1, 30, 22, 23, 23);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018112860137524', '2018-10-12', 16000, 1, 160, 15, 24, 24);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018112960137525', '2018-11-22', 8000, 1, 80, 1, 25, 25);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018112960137526', '2018-11-15', 3000, 1, 30, 1, 26, 26);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018112960137527', '2018-11-30', 3000, 1, 30, 20, 27, 27);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018120360137528', '2018-11-11', 3000, 1, 30, 24, 28, 28);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018120360137529', '2018-09-11', 4500, 1, 40, 22, 29, 29);
-INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id, payment_id)
-VALUES (null, '2018120360137530', '2018-10-29', 4500, 1, 40, 29, 22, 30);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018110240057512', '2018-11-20', 12000, 1, 120, 1, 2);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018110230057613', '2018-11-22', 12000, 1, 120, 18, 3);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018110360057614', '2018-10-01', 9000, 1, 90, 18, 4);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018110350057415', '2018-11-29', 6500, 1, 60, 18, 5);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018110350057516', '2018-11-01', 6500, 1, 60, 3, 6);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018111050067517', '2018-11-02', 4500, 1, 40, 3, 7);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018111060037518', '2018-11-14', 10000, 1, 100, 4, 8);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018111050137519', '2018-11-29', 14000, 1, 140, 5, 9);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018111050138510', '2018-12-02', 4000, 1, 40, 6, 10);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018111750147511', '2018-11-30', 3000, 1, 30, 5, 11);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018111750137512', '2018-10-22', 3000, 1, 30, 5, 12);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018111950137513', '2018-11-11', 5500, 1, 50, 18, 13);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018111950137514', '2018-04-22', 2500, 1, 20, 6, 14);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018112250137515', '2018-11-29', 2500, 1, 20, 6, 15);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018112560137516', '2018-11-13', 1100, 1, 10, 18, 16);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018112560137517', '2018-12-05', 2200, 1, 20, 18, 17);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018112560137518', '2018-11-21', 5000, 1, 50, 7, 18);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018112560137519', '2018-11-01', 5000, 1, 50, 9, 19);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018112560137520', '2018-11-15', 3000, 1, 30, 9, 20);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018112560137521', '2018-09-01', 2000, 1, 20, 11, 21);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018113060137522', '2018-11-04', 3000, 1, 30, 11, 22);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018112560137523', '2016-10-10', 3000, 1, 30, 22, 23);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018112860137524', '2018-10-12', 16000, 1, 160, 15, 24);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018112960137525', '2018-11-22', 8000, 1, 80, 1, 25);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018112960137526', '2018-11-15', 3000, 1, 30, 1, 26);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018112960137527', '2018-11-30', 3000, 1, 30, 20, 27);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018120360137528', '2018-11-11', 3000, 1, 30, 24, 28);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018120360137529', '2018-09-11', 4500, 1, 40, 22, 29);
+INSERT INTO orders (id, order_number, date, total_price, status, mileage, member_id, shipping_id)
+VALUES (null, '2018120360137530', '2018-10-29', 4500, 1, 40, 29, 22);
 
 
 -- INSERT INTO product_category (id,name,parent_id,orders) VALUES (1,'문구', 0 ,1);
@@ -661,96 +594,96 @@ INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, ex
 INSERT INTO ordered_product (order_price, quantity, mileage, personal_option, exchange_refund_id, order_id, product_id) VALUES(1100000,200,2400,NULL,NULL,23,11);
 
 
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-3.jpg', 'https://post-phinf.pstatic.net/MjAxNzExMTBfMjI4/MDAxNTEwMzAxMTI2ODA5.3y9YCyLGR_7T2YNPfMuj3CYC9SQ3WrtC4Pgo3KguWU8g.G8Erotk8e9xfwR1eLIuObDdz0IjKGkwemPceb-8tbFUg.JPEG/3.JPG?type=w1200', '2018-12-03 09:23:35', 13900.0, 'image_1537526126133_2500.jpg', '2018-12-03 09:33:35', 1);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-1.jpg', 'https://post-phinf.pstatic.net/MjAxNzExMTBfMjI4/MDAxNTEwMzAxMTI2ODA5.3y9YCyLGR_7T2YNPfMuj3CYC9SQ3WrtC4Pgo3KguWU8g.G8Erotk8e9xfwR1eLIuObDdz0IjKGkwemPceb-8tbFUg.JPEG/3.JPG?type=w1200', '2018-12-13 19:23:35', 23839, 'image_1537526152021_2500.jpg', '2018-12-13 20:23:35', 2);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-2.jpg', 'https://post-phinf.pstatic.net/MjAxNzExMTBfMjI4/MDAxNTEwMzAxMTI2ODA5.3y9YCyLGR_7T2YNPfMuj3CYC9SQ3WrtC4Pgo3KguWU8g.G8Erotk8e9xfwR1eLIuObDdz0IjKGkwemPceb-8tbFUg.JPEG/3.JPG?type=w1200', '2018-12-09 11:52:49', 23295, 'image_1537526140470_2500.jpg', NULL, 3);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/webp', '89734598-3598.webp', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-27 15:24:49', 23298, 'waterfall.jpg', NULL, 3);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', '86723953-9872.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2017-03-31 17:34:09', 14529, 'water.jpg', '2017-04-02 11:24:52', 3);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/gif', '34609583-3452.gif', 'https://www.petitcolas.net/watermarking/image_database/', '2018-08-07 11:52:49', 25389, 'watch.jpg', '2018-08-12 11:52:49', 4);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', '23865349-8346.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-12 22:34:49', 7682, 'wildflowers.jpg', '2018-12-13 11:52:09', 5);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', '34689534-9734.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-04-22 07:52:49', 39872, 'alu.jpg', '2018-04-25 11:38:49', 6);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/png', '27340985-3456.png', 'https://homepages.cae.wisc.edu/~ece533/images/', '2018-11-11 11:52:49', 59872, 'tulips.png', '2018-12-09 11:52:49', 7);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', '68923545-7248.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-25 19:34:49', 38972, 'bandon.jpg', '2018-12-26 11:52:49', 8);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/webp', '38975343-2369.webp', 'https://www.petitcolas.net/watermarking/image_database/', '2018-07-31 16:23:49', 23522, 'terraux.jpg', '2018-08-05 00:00:00', 9);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/jpeg', '13068953-6389.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-06-09 15:32:49', 135882, 'brandyrose.jpg', '2018-06-10 11:52:49', 10);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/jpeg', '06892568-6980.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-04-09 10:52:49', 235892, 'fourviere.jpg', '2018-04-09 21:52:49', 11);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/webp', '37489324-9383.webp', 'https://www.petitcolas.net/watermarking/image_database/', '2018-07-24 19:34:00', 63589, 'bear.jpg', '2018-07-26 14:52:34', 12);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/jpeg', '36984323-3709.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-14 21:34:12', 89623, 'kid.jpg', NULL, 13);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/gif', '62089452-6893.gif', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-19 11:52:49', 1983, 'z1x25.jpg', '2018-12-20 20:52:13', 14);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/jpeg', '72364980-3679.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-11-01 10:52:33', 8962, 'lochness.gif', '2018-11-10 11:52:50', 15);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/jpeg', '27323476-7689.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-10 10:52:21', 7862, 'papermachine.jpg', '2018-12-10 09:52:49', 16);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/jpeg', '23689542-7982.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-25 14:22:05', 49862, 'skyline_arch.jpg', '2019-01-03 11:24:14', 17);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 2, 'image/webp', '28733452-9073.webp', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-24 10:52:42', 98763, 'pueblo_bonito.jpg', NULL, 18);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/gif', '60893452-3638.gif', 'https://www.petitcolas.net/watermarking/image_database/', '2017-12-09 11:52:49', 308754, 'newyork.gif', '2018-01-22 19:52:24', 19);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/jpeg', '23465089-3790.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-11 18:24:04', 49762, 'F14.jpg', '2018-12-14 11:22:59', 20);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/jpeg', '23764935-3698.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-18 11:54:34', 3498, 'opera.jpg', '2018-12-20 11:22:39', 21);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/gif', '68235345-3456.gif', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-22 04:34:49', 8792, 'arctic_hare.jpg', '2018-12-23 20:52:34', 22);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/jpeg', '06983645-2360.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-10-09 17:22:42', 21984, 'baboon.jpg', '2018-10-11 12:52:22', 23);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/gif', '60892345-6893.gif', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-29 14:52:49', 29843, 'f16.jpg', '2018-12-31 11:42:14', 24);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/webp', '19874343-9834.webp', 'https://www.petitcolas.net/watermarking/image_database/', '2018-02-08 11:22:23', 5983, 'fishingboat.jpg', '2018-02-11 09:54:29', 25);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/jpeg', '63895234-3452.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-03 16:42:43', 49872, 'lena.jpg', NULL, 26);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/jpeg', '23698423-5743.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-21 12:22:42', 24983, 'peppers.jpg', '2018-12-23 18:52:42', 27);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 3, 'image/jpeg', '68930523-4568.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-05-05 13:52:51', 13598, 'pills.jpg', '2018-05-14 11:52:49', 28);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'hamburger.jpg', 'https://img.29cm.co.kr/next-product/2019/01/14/', '2018-12-03 09:23:35', 13900.0, '8011ae05e3d74b34bf812d661d762ed1_20190114210829.png?width=700', '2018-12-03 09:33:35', 31);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'chicken.jpg', 'https://img.29cm.co.kr/next-product/2019/01/14/', '2018-12-03 09:23:35', 13900.0, 'fe89c823d7394e6eac6c449a293fe542_20190114205858.png?width=700', '2018-12-03 09:33:35', 32);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'bacon.jpg', 'https://img.29cm.co.kr/contents/itemDetail/201801/', '2018-12-03 09:23:35', 13900.0, 'cut4_720180118133643.jpg?width=700', '2018-12-03 09:33:35', 33);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'sososo.jpg', 'https://img.29cm.co.kr/next-product/2018/04/24/', '2018-12-03 09:23:35', 13900.0, '0ef71b1c159648b789c4937788a0b86c_20180424142703.jpg?width=700', '2018-12-03 09:33:35', 34);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'galbi.jpg', 'https://img.29cm.co.kr/next-product/2019/01/09/', '2018-12-03 09:23:35', 13900.0, 'c91412a952d34d59ab186b0360db54b1_20190109111710.jpg?width=700', '2018-12-03 09:33:35', 35);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'chickengalbi.jpg', 'http://gwmart.kr/data/goods/201704/10164933large.jpg', '2018-12-03 09:23:35', 13900.0, 'cut4_1120171204135145.jpg?width=700', '2018-12-03 09:33:35', 36);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'chickengalbi2.jpg', 'https://img.29cm.co.kr/next-product/2018/11/02/', '2018-12-03 09:23:35', 13900.0, 'f9413d160821441d9a3476b0125dfe35_20181102160805.jpg?width=700', '2018-12-03 09:33:35', 37);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'sogogisoup.jpg', 'https://img.29cm.co.kr/next-product/2018/09/11/', '2018-12-03 09:23:35', 13900.0, '9f2fa8c20ef44b25baf12eb62829d1ed_20180911123846.jpg?width=700', '2018-12-03 09:33:35', 38);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'beefcurry.jpg', 'https://img.29cm.co.kr/next-product/2018/12/18/', '2018-12-03 09:23:35', 13900.0, '116bc5d3f1e1441aabac176809ad8f46_20181218132458.JPG?width=700', '2018-12-03 09:33:35', 39);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'salmon1.jpg', 'https://img.29cm.co.kr/next-product/2018/06/15/', '2018-12-03 09:23:35', 13900.0, 'b4da673d129042a097982a5122ec9f8e_20180615164147.jpg?width=700', '2018-12-03 09:33:35', 40);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'dog1.jpg', 'https://seoul-p-studio.bunjang.net/product/53782482_1_1457518903_w640.jpg', '2018-12-03 09:23:35', 13900.0, 'cut4_520160721163429.jpg?width=700', '2018-12-03 09:33:35', 41);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'octo2.jpg', 'http://clami.co.kr/wp-content/uploads/2018/10/', '2018-12-03 09:23:35', 13900.0, '%ED%94%BC%EB%AC%B8%EC%96%B4_%EB%A9%94%EC%9D%B8.jpg', '2018-12-03 09:33:35', 42);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'clam.jpg', 'http://clami.co.kr/wp-content/uploads/2017/11/%EC%B9%BC%EC%A1%B0%EA%B0%9C_%EC%83%81%EC%84%B81.jpg', '2018-12-03 09:23:35', 13900.0, '%EC%B9%BC%EC%A1%B0%EA%B0%9C_%EB%A9%94%EC%9D%B8.jpg', '2018-12-03 09:33:35', 43);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'icecream.jpg', 'https://img.29cm.co.kr/next-product/2018/07/27/', '2018-12-03 09:23:35', 13900.0, '0933c30c5d3d414f9a1f0a0060ce79e4_20180727143233.jpg?width=700', '2018-12-03 09:33:35', 44);
-INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, update_date, product_id)
-VALUES (null, 1, 'image/jpeg', 'appletea.jpg', 'https://img.29cm.co.kr/contents/itemDetail/201801/', '2018-12-03 09:23:35', 13900.0, 'cut4_120180126142433.jpg?width=700', '2018-12-03 09:33:35', 45);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-3.jpg', 'https://post-phinf.pstatic.net/MjAxNzExMTBfMjI4/MDAxNTEwMzAxMTI2ODA5.3y9YCyLGR_7T2YNPfMuj3CYC9SQ3WrtC4Pgo3KguWU8g.G8Erotk8e9xfwR1eLIuObDdz0IjKGkwemPceb-8tbFUg.JPEG/3.JPG?type=w1200', '2018-12-03 09:23:35', 13900.0, 'image_1537526126133_2500.jpg', 1);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-1.jpg', 'https://post-phinf.pstatic.net/MjAxNzExMTBfMjI4/MDAxNTEwMzAxMTI2ODA5.3y9YCyLGR_7T2YNPfMuj3CYC9SQ3WrtC4Pgo3KguWU8g.G8Erotk8e9xfwR1eLIuObDdz0IjKGkwemPceb-8tbFUg.JPEG/3.JPG?type=w1200', '2018-12-13 19:23:35', 23839, 'image_1537526152021_2500.jpg', 2);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', 'KakaoTalk_Photo_2018-12-07-12-24-04-2.jpg', 'https://post-phinf.pstatic.net/MjAxNzExMTBfMjI4/MDAxNTEwMzAxMTI2ODA5.3y9YCyLGR_7T2YNPfMuj3CYC9SQ3WrtC4Pgo3KguWU8g.G8Erotk8e9xfwR1eLIuObDdz0IjKGkwemPceb-8tbFUg.JPEG/3.JPG?type=w1200', '2018-12-09 11:52:49', 23295, 'image_1537526140470_2500.jpg', 3);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 2, 'image/webp', '89734598-3598.webp', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-27 15:24:49', 23298, 'waterfall.jpg', 3);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 2, 'image/jpeg', '86723953-9872.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2017-03-31 17:34:09', 14529, 'water.jpg', 3);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/gif', '34609583-3452.gif', 'https://www.petitcolas.net/watermarking/image_database/', '2018-08-07 11:52:49', 25389, 'watch.jpg', 4);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', '23865349-8346.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-12 22:34:49', 7682, 'wildflowers.jpg', 5);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', '34689534-9734.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-04-22 07:52:49', 39872, 'alu.jpg', 6);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/png', '27340985-3456.png', 'https://homepages.cae.wisc.edu/~ece533/images/', '2018-11-11 11:52:49', 59872, 'tulips.png', 7);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', '68923545-7248.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-25 19:34:49', 38972, 'bandon.jpg', 8);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 2, 'image/webp', '38975343-2369.webp', 'https://www.petitcolas.net/watermarking/image_database/', '2018-07-31 16:23:49', 23522, 'terraux.jpg', 9);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 2, 'image/jpeg', '13068953-6389.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-06-09 15:32:49', 135882, 'brandyrose.jpg', 10);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 2, 'image/jpeg', '06892568-6980.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-04-09 10:52:49', 235892, 'fourviere.jpg', 11);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 2, 'image/webp', '37489324-9383.webp', 'https://www.petitcolas.net/watermarking/image_database/', '2018-07-24 19:34:00', 63589, 'bear.jpg', 12);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 2, 'image/jpeg', '36984323-3709.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-14 21:34:12', 89623, 'kid.jpg', 13);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 2, 'image/gif', '62089452-6893.gif', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-19 11:52:49', 1983, 'z1x25.jpg', 14);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 2, 'image/jpeg', '72364980-3679.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-11-01 10:52:33', 8962, 'lochness.gif', 15);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 2, 'image/jpeg', '27323476-7689.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-10 10:52:21', 7862, 'papermachine.jpg', 16);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 2, 'image/jpeg', '23689542-7982.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-25 14:22:05', 49862, 'skyline_arch.jpg', 17);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 2, 'image/webp', '28733452-9073.webp', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-24 10:52:42', 98763, 'pueblo_bonito.jpg', 18);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 3, 'image/gif', '60893452-3638.gif', 'https://www.petitcolas.net/watermarking/image_database/', '2017-12-09 11:52:49', 308754, 'newyork.gif', 19);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 3, 'image/jpeg', '23465089-3790.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-11 18:24:04', 49762, 'F14.jpg', 20);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 3, 'image/jpeg', '23764935-3698.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-18 11:54:34', 3498, 'opera.jpg', 21);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 3, 'image/gif', '68235345-3456.gif', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-22 04:34:49', 8792, 'arctic_hare.jpg', 22);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 3, 'image/jpeg', '06983645-2360.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-10-09 17:22:42', 21984, 'baboon.jpg', 23);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 3, 'image/gif', '60892345-6893.gif', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-29 14:52:49', 29843, 'f16.jpg', 24);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 3, 'image/webp', '19874343-9834.webp', 'https://www.petitcolas.net/watermarking/image_database/', '2018-02-08 11:22:23', 5983, 'fishingboat.jpg', 25);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 3, 'image/jpeg', '63895234-3452.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-03 16:42:43', 49872, 'lena.jpg', 26);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 3, 'image/jpeg', '23698423-5743.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-12-21 12:22:42', 24983, 'peppers.jpg', 27);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 3, 'image/jpeg', '68930523-4568.jpg', 'https://www.petitcolas.net/watermarking/image_database/', '2018-05-05 13:52:51', 13598, 'pills.jpg', 28);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', 'hamburger.jpg', 'https://img.29cm.co.kr/next-product/2019/01/14/', '2018-12-03 09:23:35', 13900.0, '8011ae05e3d74b34bf812d661d762ed1_20190114210829.png?width=700', 31);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', 'chicken.jpg', 'https://img.29cm.co.kr/next-product/2019/01/14/', '2018-12-03 09:23:35', 13900.0, 'fe89c823d7394e6eac6c449a293fe542_20190114205858.png?width=700', 32);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', 'bacon.jpg', 'https://img.29cm.co.kr/contents/itemDetail/201801/', '2018-12-03 09:23:35', 13900.0, 'cut4_720180118133643.jpg?width=700', 33);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', 'sososo.jpg', 'https://img.29cm.co.kr/next-product/2018/04/24/', '2018-12-03 09:23:35', 13900.0, '0ef71b1c159648b789c4937788a0b86c_20180424142703.jpg?width=700', 34);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', 'galbi.jpg', 'https://img.29cm.co.kr/next-product/2019/01/09/', '2018-12-03 09:23:35', 13900.0, 'c91412a952d34d59ab186b0360db54b1_20190109111710.jpg?width=700', 35);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', 'chickengalbi.jpg', 'http://gwmart.kr/data/goods/201704/10164933large.jpg', '2018-12-03 09:23:35', 13900.0, 'cut4_1120171204135145.jpg?width=700', 36);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', 'chickengalbi2.jpg', 'https://img.29cm.co.kr/next-product/2018/11/02/', '2018-12-03 09:23:35', 13900.0, 'f9413d160821441d9a3476b0125dfe35_20181102160805.jpg?width=700', 37);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', 'sogogisoup.jpg', 'https://img.29cm.co.kr/next-product/2018/09/11/', '2018-12-03 09:23:35', 13900.0, '9f2fa8c20ef44b25baf12eb62829d1ed_20180911123846.jpg?width=700', 38);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', 'beefcurry.jpg', 'https://img.29cm.co.kr/next-product/2018/12/18/', '2018-12-03 09:23:35', 13900.0, '116bc5d3f1e1441aabac176809ad8f46_20181218132458.JPG?width=700', 39);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', 'salmon1.jpg', 'https://img.29cm.co.kr/next-product/2018/06/15/', '2018-12-03 09:23:35', 13900.0, 'b4da673d129042a097982a5122ec9f8e_20180615164147.jpg?width=700', 40);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', 'dog1.jpg', 'https://seoul-p-studio.bunjang.net/product/53782482_1_1457518903_w640.jpg', '2018-12-03 09:23:35', 13900.0, 'cut4_520160721163429.jpg?width=700', 41);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', 'octo2.jpg', 'http://clami.co.kr/wp-content/uploads/2018/10/', '2018-12-03 09:23:35', 13900.0, '%ED%94%BC%EB%AC%B8%EC%96%B4_%EB%A9%94%EC%9D%B8.jpg', 42);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', 'clam.jpg', 'http://clami.co.kr/wp-content/uploads/2017/11/%EC%B9%BC%EC%A1%B0%EA%B0%9C_%EC%83%81%EC%84%B81.jpg', '2018-12-03 09:23:35', 13900.0, '%EC%B9%BC%EC%A1%B0%EA%B0%9C_%EB%A9%94%EC%9D%B8.jpg', 43);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', 'icecream.jpg', 'https://img.29cm.co.kr/next-product/2018/07/27/', '2018-12-03 09:23:35', 13900.0, '0933c30c5d3d414f9a1f0a0060ce79e4_20180727143233.jpg?width=700', 44);
+INSERT INTO product_image(id, category, file_type, original_file_name, path, reg_date, size, stored_file_name, product_id)
+VALUES (null, 1, 'image/jpeg', 'appletea.jpg', 'https://img.29cm.co.kr/contents/itemDetail/201801/', '2018-12-03 09:23:35', 13900.0, 'cut4_120180126142433.jpg?width=700', 45);
 
 
 

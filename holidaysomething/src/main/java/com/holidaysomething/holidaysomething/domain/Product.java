@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,20 +33,18 @@ public class Product {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  // String은 form 태그 안에 input 에서 아무것도 입력하지 않으면 null 로 처리되는게 안리ㅏ
-  // "" 로 처리된다.
   @Column(length = 100, nullable = false)
   private String name;
 
-  //할인 적용전 원가
+  // 할인 적용전 원가
   @Column(nullable = false)
   private Integer originalPrice;
 
-  //할인 및 마일리지 적용 후 판매가
+  // 할인 적용 후 판매가
   @Column(nullable = false)
   private Integer sellingPrice;
 
-  //제조가
+  // 제조가
   @Column(nullable = false)
   private Integer manufacturingPrice;
 
@@ -78,10 +77,10 @@ public class Product {
   @JsonIgnore
   private ProductDetail productDetail;
 
-  @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
-  private Set<ProductImage> productImages;
+  @OneToMany(mappedBy = "product")
+  private Set<ProductImage> productImages = new HashSet<>();
 
   @OneToMany(mappedBy = "product")
   @JsonIgnore
-  private Set<ProductOption> productOptions;
+  private Set<ProductOption> productOptions = new HashSet<>();
 }
