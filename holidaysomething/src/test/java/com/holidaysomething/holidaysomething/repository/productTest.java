@@ -23,7 +23,7 @@
 //
 //  @Test
 //  public void 상품명순으로_모든_상품가져오기() throws Exception {
-//    List<Product> products = productRepository.findAlByOrderByName();
+//    List<Product> products = productRepository.findAllByOrderByName();
 //    for (Product product : products) {
 //      System.out.println("상품명은" + product.getName() + "상품코드는 " + product.getCode());
 //    }

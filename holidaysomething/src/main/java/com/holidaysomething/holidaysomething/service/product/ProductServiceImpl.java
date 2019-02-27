@@ -13,7 +13,6 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,13 +37,13 @@ public class ProductServiceImpl implements ProductService {
   @Override
   @Transactional(readOnly = true)
   public List<Product> getAllProducts() {
-    return productRepository.findAlByOrderByName();
+    return productRepository.findAllByOrderByName();
   }
 
   @Override
   @Transactional(readOnly = true)
   public Product getProduct(Long id) {
-    return productRepository.findProductById(id);
+    return productRepository.getOne(id);
   }
 
   @Override
@@ -100,7 +99,7 @@ public class ProductServiceImpl implements ProductService {
   public ProductOrderDetailDto getProductForOrder(Long productId, Long optionId, Integer quantity) {
     ProductOrderDetailDto productOrderDetailDto = new ProductOrderDetailDto();
 
-    Product product = productRepository.findProductById(productId);
+    Product product = productRepository.getOne(productId);
     productOrderDetailDto.setProductId(product.getId());
     productOrderDetailDto.setProductName(product.getName());
     productOrderDetailDto.setManufacturer(product.getManufacturer());

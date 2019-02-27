@@ -7,6 +7,7 @@ import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductDetail;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.repository.ProductDetailRepository;
+import com.holidaysomething.holidaysomething.repository.ProductImageRepository;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,8 +33,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class S3ImageStreamServiceImpl implements ImageStreamService {
 
-    private final ProductRepository productRepository;
-    private final ProductDetailRepository productDetailRepository;
+    private final ProductImageRepository productImageRepository;
     private final AmazonS3Client amazonS3Client;
 
     // S3 버킷의 이름
@@ -96,7 +96,7 @@ public class S3ImageStreamServiceImpl implements ImageStreamService {
                 productImage.setCategory(3L);
                 break;
         }
-        productRepository.save(productImage);
+        productImageRepository.save(productImage);
 
         return productImage.getStoredFileName();
     }

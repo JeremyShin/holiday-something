@@ -2,6 +2,7 @@ package com.holidaysomething.holidaysomething.service.fileupload;
 
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
+import com.holidaysomething.holidaysomething.repository.ProductImageRepository;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class DevImageStreamServiceImpl implements ImageStreamService {
 
-    private final ProductRepository productRepository;
+    private final ProductImageRepository productImageRepository;
 
     // Linux: /home/{user}/test
     private static String fileUploadDir = System.getProperty("user.home") + "/test/";
@@ -89,7 +90,7 @@ public class DevImageStreamServiceImpl implements ImageStreamService {
                 productImage.setCategory(3L);
                 break;
         }
-        productRepository.save(productImage);
+        productImageRepository.save(productImage);
 
         return productImage.getStoredFileName();
     }
@@ -124,5 +125,3 @@ public class DevImageStreamServiceImpl implements ImageStreamService {
         } // finally
     }
 }
-//    }
-//}

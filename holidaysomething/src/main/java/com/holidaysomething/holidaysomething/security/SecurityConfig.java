@@ -98,7 +98,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    log.info("=================== 성공 ");
 
     // .antMatchers("/admin/**").hasRole("ADMIN") 와 같은 특정 조건이 위로 와야되나보다...?
     http.authorizeRequests()
@@ -160,9 +159,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .tokenValiditySeconds(70000);
     // key 는 토큰의 내용을 생성할 때 사용한다는데....? 뭔말인지....?
     // 기본값은 2주인데 여기서 바꿀 수 있다.
-
-    log.info("======= 끝");
-
   }
 
 

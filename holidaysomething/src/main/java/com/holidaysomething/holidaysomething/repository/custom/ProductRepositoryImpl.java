@@ -14,6 +14,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
+/**
+ * @author Gyumin Kim
+ */
 @Slf4j
 public class ProductRepositoryImpl extends QuerydslRepositorySupport implements
     ProductRepositoryCustom {
@@ -87,8 +90,6 @@ public class ProductRepositoryImpl extends QuerydslRepositorySupport implements
           .parse(startDateSelect + " 00:00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
       LocalDateTime endLocalDateTime = LocalDateTime
           .parse(endDateSelect + " 23:59:59", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-      log.info("startLocalDateTime: " + startLocalDateTime);
-      log.info("endLocalDateTime: " + endLocalDateTime);
 
       // 상품 제조일
       if (dateValue.equals("manufactureDate")) {
@@ -103,19 +104,6 @@ public class ProductRepositoryImpl extends QuerydslRepositorySupport implements
     // 최종 검색 결과
     List<Product> productList = getQuerydsl().applyPagination(pageable, jpqlQuery).fetch();
     long totalCount = jpqlQuery.fetchCount();
-
-    log.info("총 " + productList.size() + "개 product 조회 결과");
-    log.info("==============================");
-    for (Product product : productList) {
-      log.info(product.getId().toString());
-      log.info(product.getName());
-      log.info(product.getCode());
-      log.info(product.getProductCategory().getName());
-      log.info(product.getManufacturer());
-      log.info(product.getManufactureDate().toString());
-      log.info(product.getRegDate().toString());
-      log.info("==============================");
-    }
 
     return new PageImpl<>(productList, pageable, totalCount);
   }
