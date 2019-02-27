@@ -1,5 +1,7 @@
 package com.holidaysomething.holidaysomething.controller.user.order;
 
+import com.holidaysomething.holidaysomething.dto.ProductOrderInfoCommand;
+import com.holidaysomething.holidaysomething.dto.ProductOrderInfoDto;
 import com.holidaysomething.holidaysomething.dto.UserCartProductDto;
 import com.holidaysomething.holidaysomething.security.MemberUserDetails;
 import com.holidaysomething.holidaysomething.service.product.CartProductService;
@@ -7,9 +9,11 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -54,5 +58,22 @@ public class UserCartController {
     modelMap.addAttribute("totalPaymentPrice", totalPaymentPrice);
 
     return "user/cart";
+  }
+
+  @PostMapping("/cart")
+  public String cart(@AuthenticationPrincipal MemberUserDetails userDetails,
+      ProductOrderInfoCommand poc) {
+
+    List<ProductOrderInfoDto> productOrderInfoDtos = poc.getProductOrderInfoDtos();
+
+    for (ProductOrderInfoDto productOrderInfoDto : productOrderInfoDtos) {
+      if (productOrderInfoDto.getProductId() != null
+          && productOrderInfoDto.getOptionId() != null
+          && productOrderInfoDto.getQuantity() != null) {
+        cartProductService.save(productOrderInfoDto, userDetails.getId());
+      }
+    }
+
+    return "redirect:/user/cart";
   }
 }

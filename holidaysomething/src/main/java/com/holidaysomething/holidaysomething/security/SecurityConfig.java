@@ -103,7 +103,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // .antMatchers("/admin/**").hasRole("ADMIN") 와 같은 특정 조건이 위로 와야되나보다...?
     http.authorizeRequests()
         .antMatchers("/admin/**").hasRole("ADMIN")
-//        .antMatchers("/user/after").hasRole("ADMIN")
         .antMatchers("/**").permitAll();
 //          .antMatchers("/user/add").permitAll()
 //          .antMatchers("/user/login").permitAll()
@@ -118,9 +117,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .loginPage("/user/login")
         .loginProcessingUrl("/user/authenticate")
         .usernameParameter("loginId").passwordParameter("password") // login form의 name과 맞춰줘야 한다.
-//        .defaultSuccessUrl("/user/after")
         .successHandler(successHandler()) // 로그인 이전 페이지로 이동할때 사용.
-//        .failureHandler(failureHandler());
         .failureUrl("/user/login?error=true");
 
     http.csrf().disable();

@@ -172,7 +172,7 @@ function plusQuantity(source) {
 }
 
 // shopping bag 버튼 클릭 이벤트
-function shoppingBag(loginCheck) {
+function cart(loginCheck) {
 
     if(loginCheck === "false") {
         alert("로그인이 필요한 서비스입니다.");
@@ -194,7 +194,7 @@ function shoppingBag(loginCheck) {
         return false
     } else {
         alert("장바구니에 상품이 담겼습니다.");
-        value.action = "/product/shoppingbag";
+        value.action = "/user/cart";
         value.submit();
     }
 }
