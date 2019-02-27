@@ -1,4 +1,4 @@
-package com.holidaysomething.holidaysomething.controller.user.member;
+package com.holidaysomething.holidaysomething.controller.user.api;
 
 import com.holidaysomething.holidaysomething.domain.Member;
 import com.holidaysomething.holidaysomething.security.MemberUserDetails;

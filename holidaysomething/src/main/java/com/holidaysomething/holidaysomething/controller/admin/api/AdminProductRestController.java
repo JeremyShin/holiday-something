@@ -1,13 +1,10 @@
 package com.holidaysomething.holidaysomething.controller.admin.api;
 
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
-import com.holidaysomething.holidaysomething.domain.ProductDetail;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
-import com.holidaysomething.holidaysomething.dto.ProductDetailDto;
 import com.holidaysomething.holidaysomething.dto.ProductOptionDto;
 import com.holidaysomething.holidaysomething.service.fileupload.ImageStreamService;
 import com.holidaysomething.holidaysomething.service.product.ProductAddService;
-import com.holidaysomething.holidaysomething.service.product.ProductDetailService;
 import com.holidaysomething.holidaysomething.service.product.ProductOptionService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-//@RequestMapping("/admin/product")
 @RequestMapping("/api/admin/product")
 @Slf4j
 @RequiredArgsConstructor
@@ -34,8 +30,7 @@ public class AdminProductRestController {
   private final ImageStreamService imageStreamService;
 
   /**
-   * @author Gyumin Kim
-   * 상품 등록시 대분류 읽어오기
+   * @author Gyumin Kim 상품 등록시 대분류 읽어오기
    */
   @GetMapping("/subcategory/{largerId}")
   public List<ProductCategory> productSubCategories(@PathVariable("largerId") Long largerId) {
@@ -43,8 +38,7 @@ public class AdminProductRestController {
   }
 
   /**
-   * @author Misun Joo
-   * 옵션 수정
+   * @author Misun Joo 옵션 수정
    */
   @PatchMapping(path = "/option",
       consumes = "application/json")
@@ -58,7 +52,7 @@ public class AdminProductRestController {
     productOptionService.save(productOption);
   }
 
-   /**
+  /**
    * 이미지 업로드
    */
   @PostMapping("/image-files")
