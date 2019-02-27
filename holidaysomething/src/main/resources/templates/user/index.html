@@ -34,12 +34,6 @@
     <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"></ul>
   </div>
 
-  <!-- 로그인 되어있지 않은 경우, mock 데이터로 임시 계정 생성 -->
-  <div sec:authorize="!isAuthenticated()">
-    <form method='POST' th:action="@{/user/add}">
-      <input type="submit" value="임시회원 등록">
-    </form>
-  </div>
 </div>
 
 <div layout:fragment="userContents">
