@@ -4,7 +4,6 @@ import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductDetail;
 import com.holidaysomething.holidaysomething.dto.ProductAddDto;
-import com.holidaysomething.holidaysomething.dto.ProductDto;
 import com.holidaysomething.holidaysomething.repository.ProductCategoryRepository;
 import com.holidaysomething.holidaysomething.repository.ProductDetailRepository;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;

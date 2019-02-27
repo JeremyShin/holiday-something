@@ -12,9 +12,6 @@ public class SearchDto {
     if (searchType == null || searchType.isEmpty()) {
       return false;
     }
-    if (keyword == null || keyword.isEmpty()) {
-      return false;
-    }
-    return true;
+    return keyword != null && !keyword.isEmpty();
   }
 }

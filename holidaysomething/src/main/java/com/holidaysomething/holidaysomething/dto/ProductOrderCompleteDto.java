@@ -8,6 +8,7 @@ import lombok.ToString;
 @Getter @Setter
 @ToString
 public class ProductOrderCompleteDto {
+
   // 주문번호   / 가격 / 진행상태 / 마일리지 사용
   private String orderNumber;
   private String status;
@@ -17,5 +18,4 @@ public class ProductOrderCompleteDto {
   private Integer orderTotalPayment;
 
   private Long memberId;
-
 }

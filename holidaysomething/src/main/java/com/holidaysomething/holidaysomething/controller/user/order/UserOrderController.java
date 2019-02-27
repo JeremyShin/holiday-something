@@ -3,7 +3,7 @@ package com.holidaysomething.holidaysomething.controller.user.order;
 import com.holidaysomething.holidaysomething.domain.Order;
 import com.holidaysomething.holidaysomething.domain.OrderedProduct;
 import com.holidaysomething.holidaysomething.domain.constant.ShippingStatus;
-import com.holidaysomething.holidaysomething.dto.AddOrderMemberDto;
+import com.holidaysomething.holidaysomething.dto.MemberOrderDto;
 import com.holidaysomething.holidaysomething.dto.ProductOrderCompleteDto;
 import com.holidaysomething.holidaysomething.dto.ProductOrderDetailDto;
 import com.holidaysomething.holidaysomething.dto.ProductOrderInfoCommand;
@@ -50,7 +50,7 @@ public class UserOrderController {
       @AuthenticationPrincipal MemberUserDetails userDetails,
       ProductOrderInfoCommand poc) {
 
-    AddOrderMemberDto addOrderMemberDto = memberService.findMemberById(userDetails.getId());
+    MemberOrderDto memberOrderDto = memberService.findMemberById(userDetails.getId());
 
     List<ProductOrderInfoDto> productOrderInfoDtos = poc.getProductOrderInfoDtos();
     List<ProductOrderDetailDto> productOrderDetailDtos = new ArrayList<>();
@@ -62,7 +62,7 @@ public class UserOrderController {
       productOrderDetailDtos.add(productOrderDetailDto);
     }
 
-    model.addAttribute("addOrderMemberDto", addOrderMemberDto);
+    model.addAttribute("addOrderMemberDto", memberOrderDto);
     model.addAttribute("productOrderInfoDtos", productOrderInfoDtos);
     model.addAttribute("productOrderDetailDtos", productOrderDetailDtos);
 

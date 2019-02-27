@@ -31,21 +31,21 @@
               <tr>
                 <th class="order-product-table-th">주문자<span style="color: red"> * </span></th>
                 <td class="order-product-table-td">
-                  <input type="text" name="orderMemberNameInput" th:value="${addOrderMemberDto.name}" >
+                  <input type="text" name="orderMemberNameInput" th:value="${memberOrderDto.name}" >
                 </td>
               </tr>
 
               <tr>
                 <th class="order-product-table-th">연락처<span style="color: red"> * </span></th>
                 <td class="order-product-table-td">
-                  <input type="text" name="orderMemberPhoneInput" th:value="${addOrderMemberDto.phone}">
+                  <input type="text" name="orderMemberPhoneInput" th:value="${memberOrderDto.phone}">
                 </td>
               </tr>
 
               <tr>
                 <th class="order-product-table-th">이메일<span style="color: red"> * </span></th>
                 <td class="order-product-table-td">
-                  <input type="text" name="orderMemberEmailInput" th:value="${addOrderMemberDto.email}">
+                  <input type="text" name="orderMemberEmailInput" th:value="${memberOrderDto.email}">
                 </td>
               </tr>
               </tbody>
@@ -66,25 +66,25 @@
               <tr>
                 <th class="order-product-table-th">수령인<span style="color: red"> * </span></th>
                 <td class="order-product-table-td">
-                  <input type="text" id="orderRecipientNameInput" name="orderRecipientNameInput" th:value="${addOrderMemberDto.name}" placeholder="수령">
+                  <input type="text" id="orderRecipientNameInput" name="orderRecipientNameInput" th:value="${memberOrderDto.name}" placeholder="수령">
                 </td>
               </tr>
 
               <tr>
                 <th class="order-product-table-th">배송지<span style="color: red"> * </span></th>
                 <td class="order-product-table-td">
-                  <input type="text" th:value="${addOrderMemberDto.postcode}" id="orderRecipientPostcodeInput" name="orderRecipientPostcodeInput" placeholder="우편번호"> <!--postcode-->
+                  <input type="text" th:value="${memberOrderDto.postcode}" id="orderRecipientPostcodeInput" name="orderRecipientPostcodeInput" placeholder="우편번호"> <!--postcode-->
                   <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-                  <input type="text" th:value="${addOrderMemberDto.address1}" id="orderRecipientAddress1Input" name="orderRecipientAddress1Input" placeholder="도로명주소"> <!--address1-->
+                  <input type="text" th:value="${memberOrderDto.address1}" id="orderRecipientAddress1Input" name="orderRecipientAddress1Input" placeholder="도로명주소"> <!--address1-->
                   <span id="guide" style="color:#999;display:none"></span>
-                  <input type="text" th:value="${addOrderMemberDto.address2}" id="orderRecipientAddress2Input" name="orderRecipientAddress2Input" placeholder="상세주소"> <!--address2-->
+                  <input type="text" th:value="${memberOrderDto.address2}" id="orderRecipientAddress2Input" name="orderRecipientAddress2Input" placeholder="상세주소"> <!--address2-->
                 </td>
               </tr>
 
               <tr>
                 <th class="order-product-table-th">연락처<span style="color: red"> * </span></th>
                 <td class="order-product-table-td">
-                  <input type="text" name="orderRecipientPhoneInput" id="orderRecipientPhoneInput" th:value="${addOrderMemberDto.phone}" placeholder="연락처">
+                  <input type="text" name="orderRecipientPhoneInput" id="orderRecipientPhoneInput" th:value="${memberOrderDto.phone}" placeholder="연락처">
                 </td>
               </tr>
 
@@ -120,8 +120,8 @@
                   <input id="btnUseAllMileage" type="button" onclick="useAllMileage()" value="모두사용">
                   <p>
                     <span> 보유 마일리지 : </span>
-                    <span name="orderMemberMileageInput" id="orderMemberHasMileage" th:text="${addOrderMemberDto.mileage}"></span>
-                    <span style="display:none" id="hiddenMileage" th:text="${addOrderMemberDto.mileage}"></span>
+                    <span name="orderMemberMileageInput" id="orderMemberHasMileage" th:text="${memberOrderDto.mileage}"></span>
+                    <span style="display:none" id="hiddenMileage" th:text="${memberOrderDto.mileage}"></span>
                   </p>
                 </td>
               </tr>

@@ -28,5 +28,4 @@ public class ShippingDto {
 
   @NotNull
   private Integer orderTotalShippingPrice;
-
 }

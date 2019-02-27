@@ -22,9 +22,6 @@ public class OrderMemberDto {
   }
 
   public boolean isEmpty() {
-    if (member == null && orderNumber == null && date == null) {
-      return true;
-    }
-    return false;
+    return member == null && orderNumber == null && date == null;
   }
 }

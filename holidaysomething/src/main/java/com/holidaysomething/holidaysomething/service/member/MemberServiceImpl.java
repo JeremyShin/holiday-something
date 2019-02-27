@@ -1,7 +1,7 @@
 package com.holidaysomething.holidaysomething.service.member;
 
 import com.holidaysomething.holidaysomething.domain.Member;
-import com.holidaysomething.holidaysomething.dto.AddOrderMemberDto;
+import com.holidaysomething.holidaysomething.dto.MemberOrderDto;
 import com.holidaysomething.holidaysomething.dto.MemberMileageDto;
 import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
@@ -27,7 +27,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberServiceImpl implements MemberService {
 
   private final MemberRepository memberRepository;
-  private final CartProductRepository cartProductRepository;
 
   @Override
   @Transactional(readOnly = true)
@@ -106,19 +105,19 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   @Transactional(readOnly = true)
-  public AddOrderMemberDto findMemberById(Long id) {
-    AddOrderMemberDto addOrderMemberDto = new AddOrderMemberDto();
+  public MemberOrderDto findMemberById(Long id) {
+    MemberOrderDto memberOrderDto = new MemberOrderDto();
 
     Member member = memberRepository.findMemberById(id);
 
-    addOrderMemberDto.setName(member.getName());
-    addOrderMemberDto.setPhone(member.getPhone());
-    addOrderMemberDto.setEmail(member.getEmail());
-    addOrderMemberDto.setAddress1(member.getAddress1());
-    addOrderMemberDto.setAddress2(member.getAddress2());
-    addOrderMemberDto.setPostcode(member.getPostcode());
-    addOrderMemberDto.setMileage(member.getMileage());
+    memberOrderDto.setName(member.getName());
+    memberOrderDto.setPhone(member.getPhone());
+    memberOrderDto.setEmail(member.getEmail());
+    memberOrderDto.setAddress1(member.getAddress1());
+    memberOrderDto.setAddress2(member.getAddress2());
+    memberOrderDto.setPostcode(member.getPostcode());
+    memberOrderDto.setMileage(member.getMileage());
 
-    return addOrderMemberDto;
+    return memberOrderDto;
   }
 }

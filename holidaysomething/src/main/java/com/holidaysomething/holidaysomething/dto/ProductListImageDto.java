@@ -1,21 +1,16 @@
 package com.holidaysomething.holidaysomething.dto;
 
-import com.holidaysomething.holidaysomething.domain.Product;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  * @author choijaeyong on 25/01/2019.
- * @project holidaysomething
- * @description
- * User 페이지에서
- * 카테고리를 검색 조건으로 해서 해당 카테고리의 상품 리스트를 불러올 때 필요한 DTO.
+ * @project holidaysomething User 페이지에서 카테고리를 검색 조건으로 해서 해당 카테고리의 상품 리스트를 불러올 때 필요한 DTO.
  */
 @Getter
 @Setter
 public class ProductListImageDto {
 
-  //private Product product;
   private Long productId;
   private String productName;
   private Integer sellingPrice;

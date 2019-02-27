@@ -2,11 +2,9 @@ package com.holidaysomething.holidaysomething.dto;
 
 import javax.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
-public class AddOrderMemberDto {
+public class MemberOrderDto {
   @NotNull(message = "email must not be null")
   private String email;
 

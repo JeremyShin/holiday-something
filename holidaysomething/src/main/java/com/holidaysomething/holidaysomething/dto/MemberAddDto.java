@@ -3,9 +3,7 @@ package com.holidaysomething.holidaysomething.dto;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 
 @Data
 public class MemberAddDto {

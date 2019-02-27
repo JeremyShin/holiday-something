@@ -1,31 +1,13 @@
 package com.holidaysomething.holidaysomething.dto;
 
-import com.holidaysomething.holidaysomething.domain.ProductCategory;
-import com.holidaysomething.holidaysomething.domain.ProductDetail;
-import com.holidaysomething.holidaysomething.domain.ProductImage;
-import com.holidaysomething.holidaysomething.domain.ProductOption;
 import java.time.LocalDateTime;
-import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
 public class ProductAddDto {
-
 
   @NotEmpty(message = "name must be not null")
   private String name;
@@ -68,13 +50,11 @@ public class ProductAddDto {
   @NotEmpty(message = "releaseDate must be not null")
   private String releaseDate;
 
-  //private ProductCategory productCategory;
   @NotNull(message = "productCategory must be not null")
   private Long productCategoryId;
 
   @NotNull(message = "description must be not null")
   private String description;
-//  private Long productDetailId;
 
   @NotNull(message = "quantity must be not null")
   private Integer quantity;
