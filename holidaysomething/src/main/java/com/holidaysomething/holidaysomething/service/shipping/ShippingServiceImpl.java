@@ -8,17 +8,18 @@ import java.time.format.DateTimeFormatter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class ShippingServiceImpl implements ShippingService{
+public class ShippingServiceImpl implements ShippingService {
+
   private final ShippingRepository shippingRepository;
 
   @Override
   public ShippingDto addShipping(ShippingDto shippingDto) {
-    String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    String currentTime = LocalDateTime.now()
+        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     currentTime = currentTime.replace(":", "");
     currentTime = currentTime.replace("-", "");
     currentTime = currentTime.trim();
@@ -32,8 +33,6 @@ public class ShippingServiceImpl implements ShippingService{
     shipping.setMessage(shippingDto.getOrderRecipientMessageInput());
     shipping.setShippingPrice(shippingDto.getOrderTotalShippingPrice());
     shipping.setShippingNumber(currentTime);
-    //배송 시작 날짜
-    //배송 완료 날짜
 
     shippingRepository.save(shipping);
 

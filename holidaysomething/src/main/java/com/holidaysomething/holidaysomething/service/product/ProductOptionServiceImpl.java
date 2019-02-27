@@ -3,7 +3,6 @@ package com.holidaysomething.holidaysomething.service.product;
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
 import com.holidaysomething.holidaysomething.dto.ProductOptionCommand;
-import com.holidaysomething.holidaysomething.dto.ProductOrderDetailDto;
 import com.holidaysomething.holidaysomething.repository.ProductOptionRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +32,7 @@ public class ProductOptionServiceImpl implements ProductOptionService {
   }
 
   @Override
+  @Transactional
   public void deleteProductOption(Long id) {
     productOptionRepository.deleteById(id);
   }
@@ -50,6 +50,7 @@ public class ProductOptionServiceImpl implements ProductOptionService {
   }
 
   @Override
+  @Transactional(readOnly = true)
   public Page<ProductOption> getAllProductOptionsByDescriptionPage(String description,
       Pageable pageable) {
     return productOptionRepository
@@ -57,6 +58,7 @@ public class ProductOptionServiceImpl implements ProductOptionService {
   }
 
   @Override
+  @Transactional(readOnly = true)
   public Page<ProductOption> getAllProductOptionsByPricePage(String price, Pageable pageable) {
     return productOptionRepository.findAllProductOptionByPriceContaining(price, pageable);
   }
@@ -68,7 +70,7 @@ public class ProductOptionServiceImpl implements ProductOptionService {
   }
 
   @Override
-  @Transactional
+  @Transactional(readOnly = true)
   public Page<ProductOption> getProductOptionsByProductId(Long productId, Pageable pageable) {
     return productOptionRepository.findByProductId(productId, pageable);
   }
@@ -76,8 +78,7 @@ public class ProductOptionServiceImpl implements ProductOptionService {
   @Override
   @Transactional
   public List<ProductOption> fromProductOptionCommandToProductOptionList(ProductOptionCommand poc) {
-    List<ProductOption> productOptions = poc.getProductOptions();
-    return productOptions;
+    return poc.getProductOptions();
   }
 
   @Override
@@ -93,24 +94,8 @@ public class ProductOptionServiceImpl implements ProductOptionService {
   }
 
   @Override
+  @Transactional(readOnly = true)
   public List<ProductOption> getProductOptionsByProductId(Long productId) {
     return productOptionRepository.findByProductId(productId);
-  }
-
-  @Override
-  public ProductOrderDetailDto getProductOptionForOrder(ProductOrderDetailDto productOrderDetailDto, ProductOption productOption, Integer quantity) {
-    log.info("주문 서비스 입니다.");
-    log.info("넘어온 옵션의 아이디는 " + productOption.getId());
-    log.info("검색한 옵션의 아이디는" + productOption.getId());
-
-    productOrderDetailDto.setOptionId(productOption.getId());
-    productOrderDetailDto.setOptionName(productOption.getName());
-    productOrderDetailDto.setOptionPrice(productOption.getPrice());
-    productOrderDetailDto.setQuantity(quantity);
-
-//    productOrderDetailDto.getOptionName().add(productOption.getName());
-//    productOrderDetailDto.getOptionPrice().add(productOption.getPrice());
-
-    return  productOrderDetailDto;
   }
 }

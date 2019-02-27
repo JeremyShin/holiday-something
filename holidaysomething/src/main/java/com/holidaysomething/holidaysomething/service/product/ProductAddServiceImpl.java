@@ -28,18 +28,20 @@ public class ProductAddServiceImpl implements ProductAddService {
   private final ProductRepository productRepository;
 
   @Override
+  @Transactional(readOnly = true)
   public Page<Product> getAllProducts(Pageable pageable) {
     return productRepository.findAll(pageable);
   }
 
   @Override
-  @Transactional
+  @Transactional(readOnly = true)
   public List<ProductCategory> productCategoryList(Long parentId) {
     return productCategoryRepository.findCategory(parentId);
   }
 
   /**
-   * @author JDragon DTO 객체를 Product(도메인) 객체로 바꿔주는 메소드.
+   * @author JDragon
+   * DTO 객체를 Product(도메인) 객체로 바꿔주는 메소드.
    */
   @Override
   @Transactional
@@ -62,9 +64,6 @@ public class ProductAddServiceImpl implements ProductAddService {
 
     String manufactureDateStr = productDto.getManufactureDate() + ":00";
     String releaseDateStr = productDto.getReleaseDate() + ":00";
-
-    log.info("=== manufactureDateStr : " + manufactureDateStr);
-    log.info("=== releaseDateStr : " + releaseDateStr);
 
     LocalDateTime manufactureDate = LocalDateTime
         .parse(manufactureDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
@@ -108,7 +107,5 @@ public class ProductAddServiceImpl implements ProductAddService {
     productRepository.save(product);
 
     return product;
-
-
   }
 }

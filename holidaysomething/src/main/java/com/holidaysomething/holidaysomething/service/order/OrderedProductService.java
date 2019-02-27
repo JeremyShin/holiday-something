@@ -6,5 +6,4 @@ import java.util.List;
 
 public interface OrderedProductService {
   List<OrderedProduct> add(Long orderId, List<ProductOrderInfoDto> orderInfos);
-
 }

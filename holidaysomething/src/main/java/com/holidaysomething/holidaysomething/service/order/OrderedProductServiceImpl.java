@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class OrderedProductServiceImpl implements OrderedProductService {
+
   private final OrderRepository orderRepository;
   private final OrderedProductRepository orderedProductRepository;
   private final ProductRepository productRepository;
@@ -36,9 +37,9 @@ public class OrderedProductServiceImpl implements OrderedProductService {
 
       orderedProduct.setOrder(order);
 
-      if(productOption.getPrice() != null){
+      if (productOption.getPrice() != null){
         orderedProduct.setOrderPrice(product.getSellingPrice()  + productOption.getPrice());
-      }else {
+      } else {
         orderedProduct.setOrderPrice(product.getSellingPrice());
       }
 
@@ -48,9 +49,9 @@ public class OrderedProductServiceImpl implements OrderedProductService {
       orderedProduct.setProductOption(productOption);
 
       orderedProductRepository.save(orderedProduct);
-
       orderedProducts.add(orderedProduct);
     }
+
     return orderedProducts;
   }
 }

@@ -13,8 +13,6 @@ import com.holidaysomething.holidaysomething.security.MemberUserDetails;
 import com.holidaysomething.holidaysomething.service.member.MemberService;
 import com.holidaysomething.holidaysomething.service.order.OrderService;
 import com.holidaysomething.holidaysomething.service.order.OrderedProductService;
-import com.holidaysomething.holidaysomething.service.product.ProductOptionService;
-import com.holidaysomething.holidaysomething.service.product.ProductOrderService;
 import com.holidaysomething.holidaysomething.service.product.ProductService;
 import com.holidaysomething.holidaysomething.service.shipping.ShippingService;
 import java.util.ArrayList;
@@ -35,7 +33,6 @@ public class UserOrderController {
 
   private final OrderService orderService;
   private final MemberService memberService;
-  private final ProductOrderService productOrderService;
   private final ProductService productService;
   private final ShippingService shippingService;
   private final OrderedProductService orderedProductService;
@@ -45,8 +42,8 @@ public class UserOrderController {
    *
    * 주문 버튼을 누르면, orderd_product, order, shipping, payment에 데이터가 추가됨
    *
-   * 이전페이지(상품상세, 장바구니)로부터 ProductOrderInfoDto, 현재 주문하는 멤버의 정보를 받아와서 Order 페이지에 뿌려줌
-   * PostMapping으로 하는 이유는, GetMapping으로 받아오면 URL에 너무 많은 정보가 표시되며, 길이에 제한도 있기 때문임
+   * 이전페이지(상품상세, 장바구니)로부터 ProductOrderInfoDto, 현재 주문하는 멤버의 정보를 받아와서 Order 페이지에 뿌려줌 PostMapping으로 하는
+   * 이유는, GetMapping으로 받아오면 URL에 너무 많은 정보가 표시되며, 길이에 제한도 있기 때문임
    */
   @PostMapping
   public String orderPost(Model model,
@@ -83,8 +80,7 @@ public class UserOrderController {
       @AuthenticationPrincipal MemberUserDetails userDetails) {
 
     // 주문테이블 등록
-    List<ProductOrderInfoDto> orderInfos = productOrderService
-        .fromProductOrderInfoCommandToProductOrderInfoList(poc);
+    List<ProductOrderInfoDto> orderInfos = poc.getProductOrderInfoDtos();
 
     Long memberId = userDetails.getMember().getId();
     Order order = orderService
@@ -108,9 +104,9 @@ public class UserOrderController {
 
     model.addAttribute("order", order);
     model.addAttribute("productOrderDetailDtos", productOrderDetailDtos);
-    model.addAttribute("shipping",shippingResult);
+    model.addAttribute("shipping", shippingResult);
     model.addAttribute("productOrderCompleteDto", productOrderCompleteDto);
-    
+
     return "user/order-complete";
   }
 }

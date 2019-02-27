@@ -1,22 +1,17 @@
 package com.holidaysomething.holidaysomething.service.product;
 
 import com.holidaysomething.holidaysomething.domain.CartProduct;
-import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.dto.ProductOrderInfoDto;
 import com.holidaysomething.holidaysomething.dto.UserCartProductDto;
 import com.holidaysomething.holidaysomething.repository.CartProductRepository;
-import java.util.List;
-
 import com.holidaysomething.holidaysomething.repository.MemberRepository;
 import com.holidaysomething.holidaysomething.repository.ProductOptionRepository;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
-import com.holidaysomething.holidaysomething.service.member.MemberService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * @author Gyumin Kim
@@ -50,7 +45,8 @@ public class CartProductServiceImpl implements CartProductService {
     Long productId = productOrderInfoDto.getProductId();
     Long optionId = productOrderInfoDto.getOptionId();
 
-    CartProduct tmpCartProduct = cartProductRepository.findCartProductByIds(userId, productId, optionId);
+    CartProduct tmpCartProduct = cartProductRepository
+        .findCartProductByIds(userId, productId, optionId);
     // 사용자가 중복된 상품을 카트에 담을 경우 수량만 Update 해주도록 구현함
     if (tmpCartProduct == null) {
       CartProduct cartProduct = new CartProduct();

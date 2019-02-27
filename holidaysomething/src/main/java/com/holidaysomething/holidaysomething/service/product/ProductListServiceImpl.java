@@ -12,13 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author choijaeyong on 25/01/2019.
  * @project holidaysomething
- * @description
  */
-
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -27,12 +26,11 @@ public class ProductListServiceImpl implements ProductListService {
   private final ProductRepository productRepository;
   private final ProductCategoryRepository productCategoryRepository;
 
-
   @Override
+  @Transactional(readOnly = true)
   public ProductListCategoryDto productList(long categoryId, Pageable pageable) {
 
     ProductCategory pc = productCategoryRepository.findProductCategoryById(categoryId);
-    log.info("======= 카테고리 depth 는 " + pc.getDepth() + " 입니다.");
 
     if (pc.getDepth() == 1) {
       // 대분류. 위에 pc 의 id 만 가져가면 된다.
@@ -40,14 +38,6 @@ public class ProductListServiceImpl implements ProductListService {
       // Dto 객체를 만들어서 함께 리턴한다.
       Page<ProductListImageDto> productListImageDtoPage =
           productRepository.findProductsImageByCategoryId3(categoryId, pageable);
-
-      log.info(
-          "************  productListImageDtoPage.getTotalElements() : " + productListImageDtoPage
-              .getTotalElements());
-      for (ProductListImageDto productListImageDto : productListImageDtoPage) {
-        log.info("**********  리스트 상품아이디 이름 : " + productListImageDto.getProductId() + "     "
-            + productListImageDto.getProductName());
-      }
 
       ProductListCategoryDto productListCategoryDto = new ProductListCategoryDto();
 
@@ -75,7 +65,7 @@ public class ProductListServiceImpl implements ProductListService {
 
       List<ProductCategory> categoryList = new ArrayList<>();
       ProductCategory home = new ProductCategory();
-      home.setId(0l);
+      home.setId(0L);
       home.setName("HOME");
       categoryList.add(home);
       categoryList.add(bigCategory);
@@ -96,7 +86,7 @@ public class ProductListServiceImpl implements ProductListService {
 
       List<ProductCategory> categoryList = new ArrayList<>();
       ProductCategory home = new ProductCategory();
-      home.setId(0l);
+      home.setId(0L);
       home.setName("HOME");
       categoryList.add(home);
 
@@ -117,6 +107,4 @@ public class ProductListServiceImpl implements ProductListService {
       return productListCategoryDto;
     }
   }
-
-
 }
