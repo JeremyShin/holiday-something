@@ -76,25 +76,35 @@ public class MemberRestController {
       return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
+    // TODO: Custom exception 만들고, 각 if문을 try-catch로 묶기
+    // http://bitly.kr/sIS06 참고
     if (patch.getPassword() != null) {
+      log.info("Password 수정: " + patch.getPassword());
+
       member.setPassword(patch.getPassword());
     }
     if (patch.getEmail() != null) {
+      log.info("Email 수정: " + patch.getEmail());
       member.setEmail(patch.getEmail());
     }
     if (patch.getPhone() != null) {
+      log.info("Phone 수정: " + patch.getPhone());
       member.setPhone(patch.getPhone());
     }
     if (patch.getBirthday() != null) {
+      log.info("Birthday 수정: " + patch.getBirthday());
       member.setBirthday(patch.getBirthday());
     }
     if (patch.getPostcode() != null) {
+      log.info("Postcode 수정: " + patch.getPostcode());
       member.setPostcode(patch.getPostcode());
     }
     if (patch.getAddress1() != null) {
+      log.info("Address1 수정: " + patch.getAddress1());
       member.setAddress1(patch.getAddress1());
     }
     if (patch.getAddress2() != null) {
+      log.info("Address2 수정: " + patch.getAddress2());
       member.setAddress2(patch.getAddress2());
     }
 
