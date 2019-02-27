@@ -54,11 +54,6 @@ public class AdminProductController {
     return "admin/product/index";
   }
 
-  @GetMapping("/category")
-  public String productCategory() {
-    return "admin/product/category";
-  }
-
   /**
    * @author JDragon
    * 상품 등록하기 페이지
