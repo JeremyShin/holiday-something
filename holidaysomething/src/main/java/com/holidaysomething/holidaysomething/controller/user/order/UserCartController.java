@@ -25,10 +25,9 @@ public class UserCartController {
   private final CartProductService cartProductService;
 
   /**
-   * 현재 로그인된 유저가 갖고있는 cart_product 목록을 가져온다.
-   *
    * @param authentication 현재 로그인 되어 있는 유저 정보
    * @return cart 페이지(cart.html)
+   * 현재 로그인된 유저가 갖고있는 cart_product 목록을 가져온다.
    */
   @GetMapping("/cart")
   public String cartAuth(Authentication authentication, ModelMap modelMap) {

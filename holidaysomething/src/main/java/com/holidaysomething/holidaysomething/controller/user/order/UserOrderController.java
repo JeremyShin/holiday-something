@@ -40,24 +40,21 @@ public class UserOrderController {
   private final ShippingService shippingService;
   private final OrderedProductService orderedProductService;
 
-  //주문 버튼을 누르면, orderd_product, order, shipping, payment에 데이터가 추가됨
-
   /**
-   * @Author : Misun Joo 이전페이지(상품상세, 장바구니)로부터 ProductOrderInfoDto, 현재 주문하는 멤버의 정보를 받아와서 Order 페이지에
-   * 뿌려줌 PostMapping으로 하는 이유는, GetMapping으로 받아오면 URL에 너무 많은 정보가 표시되며, 길이에 제한도 있기 때문임
+   * @author Misun Joo
+   *
+   * 주문 버튼을 누르면, orderd_product, order, shipping, payment에 데이터가 추가됨
+   *
+   * 이전페이지(상품상세, 장바구니)로부터 ProductOrderInfoDto, 현재 주문하는 멤버의 정보를 받아와서 Order 페이지에 뿌려줌
+   * PostMapping으로 하는 이유는, GetMapping으로 받아오면 URL에 너무 많은 정보가 표시되며, 길이에 제한도 있기 때문임
    */
   @PostMapping
   public String orderPost(Model model,
       @AuthenticationPrincipal MemberUserDetails userDetails,
       ProductOrderInfoCommand poc) {
 
-    log.info("POC: " + poc.getProductOrderInfoDtos());
-    log.info("주문페이지입니다.");
-
     AddOrderMemberDto addOrderMemberDto = memberService.findMemberById(userDetails.getId());
 
-    // ProductOrderInfoCommand 를 ProductOrderInfo의 리스트로 바꾸어주는 메소드
-    // 주문할 상품들의 목록
     List<ProductOrderInfoDto> productOrderInfoDtos = poc.getProductOrderInfoDtos();
     List<ProductOrderDetailDto> productOrderDetailDtos = new ArrayList<>();
 
@@ -68,15 +65,16 @@ public class UserOrderController {
       productOrderDetailDtos.add(productOrderDetailDto);
     }
 
+    model.addAttribute("addOrderMemberDto", addOrderMemberDto);
     model.addAttribute("productOrderInfoDtos", productOrderInfoDtos);
     model.addAttribute("productOrderDetailDtos", productOrderDetailDtos);
-    model.addAttribute("addOrderMemberDto", addOrderMemberDto);
 
     return "user/order";
   }
 
-
-  /* 주문 Checkout -> Order, Shipping, Ordered_Product 테이블에 각각 값 저장 */
+  /**
+   * 주문 Checkout -> Order, Shipping, Ordered_Product 테이블에 각각 값 저장
+   */
   @PostMapping("/finish")
   public String orderCompletePost(Model model,
       ShippingDto shippingDto,
@@ -84,33 +82,19 @@ public class UserOrderController {
       ProductOrderCompleteDto productOrderCompleteDto,
       @AuthenticationPrincipal MemberUserDetails userDetails) {
 
-    log.info("총 결제금액은  " + productOrderCompleteDto.getOrderTotalPayment());
-    log.info("총 마일리지는  " + productOrderCompleteDto.getOrderTotalUseMileage());
-    log.info("command 객체의 사이즈는" + poc.getProductOrderInfoDtos().size());
-
-    //주문테이블 등록
+    // 주문테이블 등록
     List<ProductOrderInfoDto> orderInfos = productOrderService
         .fromProductOrderInfoCommandToProductOrderInfoList(poc);
-    log.info("orderInfos의 사이즈는" + orderInfos.size());
-    log.info("orderInfo의 productId는" + orderInfos.get(0).getProductId());
 
     Long memberId = userDetails.getMember().getId();
-    log.info("회원의 아이디는 " + memberId);
     Order order = orderService
         .add(productOrderCompleteDto.getOrderTotalUseMileage(), orderInfos, memberId);
 
-    log.info("오더아이디 " + order.getId());
-    log.info("주문번호" + order.getOrderNumber());
-    log.info("마일리지" + order.getMileage());
-    log.info("금액" + order.getTotalPrice());
-
-    // 주문 등록한 order_id를 받아와야함
     // 주문상품 테이블 등록
     List<OrderedProduct> orderedProducts = orderedProductService.add(order.getId(), orderInfos);
 
     // 배송테이블 등록
     ShippingDto shippingResult = shippingService.addShipping(shippingDto);
-
     List<ProductOrderDetailDto> productOrderDetailDtos = new ArrayList<>();
 
     for (OrderedProduct orderedProduct : orderedProducts) {
