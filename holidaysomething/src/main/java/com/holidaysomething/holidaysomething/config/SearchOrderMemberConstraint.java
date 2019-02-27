@@ -11,8 +11,8 @@ import javax.validation.Payload;
 /**
  * @author JDragon on 15/01/2019.
  * @project holidaysomething
- * @description 기존의 Size 및 Pattern Annotation 을 이용하면 해당 필드에 해당하는 input에 값을 반드시 입력해야만 한다. 반드시 입력하지
- * 않아도 되게 방지? 해주는 역할을 하는 annotation!
+ * 기존의 Size 및 Pattern Annotation 을 이용하면 해당 필드에 해당하는 input에 값을 반드시 입력해야만 한다.
+ * 반드시 입력하지 않아도 되게 방지? 해주는 역할을 하는 annotation!
  */
 @Documented
 @Constraint(validatedBy = SearchOrderMemberValidator.class)

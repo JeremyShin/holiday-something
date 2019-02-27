@@ -272,7 +272,7 @@
                   fd.append('descriptionImage', blob);
                   $.ajax({
                     type: 'POST',
-                    url: '/admin/product/image-files/api',
+                    url: '/api/admin/product/image-files',
                     headers: {
                       'X-CSRF-Token': $('input[name="_csrf"]').val()
                     },

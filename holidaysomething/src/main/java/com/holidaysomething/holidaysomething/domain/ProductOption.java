@@ -1,8 +1,6 @@
 package com.holidaysomething.holidaysomething.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,13 +23,11 @@ public class ProductOption {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = true)
   private String name;
 
   @Lob
   private String description;
 
-  @Column(nullable = false)
   private Integer quantity;
 
   @ManyToOne

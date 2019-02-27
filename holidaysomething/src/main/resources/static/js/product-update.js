@@ -89,7 +89,7 @@ function checkInteger(reInteger, what, message) {
 window.onload = function () {
   var html = '';
   var method = "onclick='getCategoryList(";
-  $.getJSON("/admin/product/add/subcategories/" + 0,
+  $.getJSON("/api/admin/product/subcategory/" + 0,
       function (list) {
         $(list).each(
             function () {
@@ -109,7 +109,7 @@ function getCategoryList(parentId) {
   var html = '';
   var method = "onclick='getCategoryBrandList(";
 
-  $.getJSON("/admin/product/add/subcategories/" + parentId,
+  $.getJSON("/api/admin/product/subcategory/" + parentId,
       function (list) {
         $(list).each(
             function () {
@@ -130,7 +130,7 @@ function getCategoryBrandList(parentId) {
   var html = '';
   var method = "onclick='getCategoryList(";
 
-  $.getJSON("/admin/product/add/subcategories/" + parentId,
+  $.getJSON("/api/admin/product/subcategory/" + parentId,
       function (list) {
         // $("#currentCategory").html("<label>"+ this.id + "</label>");
         $(list).each(

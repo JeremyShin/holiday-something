@@ -69,6 +69,7 @@ public class MemberRestController {
   @PatchMapping(path = "/account", consumes = "application/json")
   public ResponseEntity<Member> patchMember(Authentication authentication,
       @RequestBody Member patch) {
+
     MemberUserDetails memberUserDetails = (MemberUserDetails) authentication.getPrincipal();
     Long id = memberUserDetails.getId();
     Member member = memberService.getCurrentMemberInfo(id);

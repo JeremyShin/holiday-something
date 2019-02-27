@@ -161,7 +161,7 @@ let finishModify = function (source) {
   let desc = document.getElementById('modifiedDesc');
 
   let req = new XMLHttpRequest();
-  req.open('POST', '/admin/product/option/modify', true);
+  req.open('PATCH', '/api/admin/product/option', true);
   req.setRequestHeader('Content-type', 'application/json');
   req.setRequestHeader('X-CSRF-Token', $('input[name="_csrf"]').val());
   req.send(JSON.stringify({

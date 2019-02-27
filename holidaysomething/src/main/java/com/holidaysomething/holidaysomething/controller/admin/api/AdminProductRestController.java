@@ -1,4 +1,4 @@
-package com.holidaysomething.holidaysomething.controller.admin.product;
+package com.holidaysomething.holidaysomething.controller.admin.api;
 
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductDetail;
@@ -13,6 +13,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/admin/product")
+//@RequestMapping("/admin/product")
+@RequestMapping("/api/admin/product")
 @Slf4j
 @RequiredArgsConstructor
 public class AdminProductRestController {
@@ -30,7 +32,6 @@ public class AdminProductRestController {
   private final ProductOptionService productOptionService;
   private final ProductAddService productAddService;
   private final ImageStreamService imageStreamService;
-  private final ProductDetailService productDetailService;
 
   /**
    * @author Gyumin Kim
@@ -38,29 +39,14 @@ public class AdminProductRestController {
    */
   @GetMapping("/subcategory/{largerId}")
   public List<ProductCategory> productSubCategories(@PathVariable("largerId") Long largerId) {
-    log.info("========================================================");
-    log.info("productSubCategories 진입, largerId: " + largerId);
-    List<ProductCategory> categories = productAddService.productCategoryList(largerId);
-    log.info("========================================================");
-
-    return categories;
+    return productAddService.productCategoryList(largerId);
   }
 
-  /*
-   * @author : JDragon
-   * @description : 상품 등록시 대중소 카테고리 읽어오기
+  /**
+   * @author Misun Joo
+   * 옵션 수정
    */
-  @GetMapping("/add/subcategories/{parentId}")
-  public List<ProductCategory> getLowLevelCategories(@PathVariable("parentId") Long parentId) {
-    List<ProductCategory> categories = productAddService.productCategoryList(parentId);
-    return categories;
-  }
-
-  /*
-   * @author : Misun Joo
-   * @description : 옵션 수정
-   */
-  @PostMapping(path = "/option/modify",
+  @PatchMapping(path = "/option",
       consumes = "application/json")
   public void productOptionModifyPost(@RequestBody ProductOptionDto productOptionDto) {
     ProductOption productOption = productOptionService.getProductOption(productOptionDto.getId());
@@ -70,38 +56,16 @@ public class AdminProductRestController {
     productOption.setDescription(productOptionDto.getDescription());
 
     productOptionService.save(productOption);
-
-    // 옵션 수정 후 현재 페이지로 redirect
-//    return "redirect:/admin/product/product_detail";
   }
 
    /**
-   * @description : 이미지 업로드
+   * 이미지 업로드
    */
-  @PostMapping("/image-files/api")
+  @PostMapping("/image-files")
   public String handleFileUpload(@RequestParam("descriptionImage") MultipartFile multipartFile,
       Long productId) {
     String saveFileName = imageStreamService.save(multipartFile, productId);
 
     return "/admin/product/image-files/" + saveFileName;
-  }
-
-  @PostMapping("/add/api")
-  public Long productAddPost(
-      @RequestBody ProductDetailDto productDetail) {
-
-//    if (bindingResult.hasErrors()) {
-//      for (ObjectError error : bindingResult.getAllErrors()) {
-//        log.info(error.getDefaultMessage());
-//        //model.addAttribute("product", product);
-//      }
-////      return "admin/product/add";
-//    } else {
-    //등록작업
-
-    ProductDetail detail = productDetailService.save(productDetail.getProductDetail());
-
-    return detail.getId();
-//    }
   }
 }

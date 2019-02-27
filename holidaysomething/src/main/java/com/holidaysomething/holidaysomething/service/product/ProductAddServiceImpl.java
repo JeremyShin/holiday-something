@@ -35,15 +35,8 @@ public class ProductAddServiceImpl implements ProductAddService {
   @Override
   @Transactional
   public List<ProductCategory> productCategoryList(Long parentId) {
-    List<ProductCategory> categories = productCategoryRepository.findCategory(parentId);
-    log.info("========================================================");
-    log.info("categoryId (" + parentId + ")의 자식 카테고리 " + categories.size() + "개 불러옴");
-    for (int i = 0; i < categories.size(); i++) {
-      log.info(i + 1 + ". " + categories.get(i).getName());
-    }
-    return categories;
+    return productCategoryRepository.findCategory(parentId);
   }
-
 
   /**
    * @author JDragon DTO 객체를 Product(도메인) 객체로 바꿔주는 메소드.

@@ -2,7 +2,7 @@ let updateMiddleCategory = function (option) {
   let largeId = option.value;
   console.log(`updateMiddleCategory(${largeId}) is triggered`);
 
-  $.getJSON(`/admin/product/subcategory/${largeId}`,
+  $.getJSON(`/api/admin/product/subcategory/${largeId}`,
       function (category) {
         let productMiddleCategorySelect = document.getElementsByName(
             'productMiddleCategoryId')[0];
@@ -33,7 +33,7 @@ let updateSmallCategory = function (option) {
   let middleId = option.value;
   console.log(`updateMiddleCategory(${middleId}) is triggered`);
 
-  $.getJSON(`/admin/product/subcategory/${middleId}`,
+  $.getJSON(`/api/admin/product/subcategory/${middleId}`,
       function (category) {
         let productSmallCategorySelect = document.getElementsByName(
             'productSmallCategoryId')[0];
