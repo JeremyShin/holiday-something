@@ -107,7 +107,7 @@ public class AdminMemberController {
   }
 
   /**
-   * 회원 마일리지 조회
+   * 회원 조회
    */
   @GetMapping("/search")
   public String memberSearch(ModelMap modelMap, @ModelAttribute MemberSearchDto memberSearchDto,

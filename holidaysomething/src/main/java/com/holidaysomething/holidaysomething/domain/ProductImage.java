@@ -25,6 +25,7 @@ public class ProductImage {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  // 1이면 메인이미지, 2는 서브이미지, 3은 하단 상세이미지
   private Long category;
 
 // TODO : storedFileName에 경로도 같이 저장하면 불러오기가 편한데 사용한 곳이 있는 것 같다...

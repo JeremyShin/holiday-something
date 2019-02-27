@@ -33,6 +33,7 @@ public class AdminProductOptionController {
   @GetMapping
   public String productOptions(ModelMap modelMap,
       @RequestParam(value = "page", defaultValue = "1") int page) {
+
     int productOptionListSize = productOptionService.getAllProductOptions().size();
     modelMap.addAttribute("productOptionListSize", productOptionListSize);
 
@@ -50,6 +51,7 @@ public class AdminProductOptionController {
   @GetMapping("/bundle")
   public String productOptionBundle(ModelMap modelMap,
       @RequestParam("size") int size) {
+
     List<ProductOption> productOptionList = productOptionService.getAllProductOptions();
     int productOptionListSize = productOptionList.size();
     modelMap.addAttribute("productOptionList", productOptionList);
@@ -69,10 +71,9 @@ public class AdminProductOptionController {
   @PostMapping("/delete")
   public String deleteProductOption(@RequestParam("productOptionId") String[] productOptionIds) {
 
-    // check된 row를 `productOptions` 테이블에서 삭제
+    // check 된 row를 `productOptions` 테이블에서 삭제
     for (String id : productOptionIds) {
       productOptionService.deleteProductOption(Long.parseLong(id));
-      log.info(id + "번 productOptions 삭제 완료");
     }
 
     // 옵션 삭제 후 현재 페이지로 redirect
@@ -82,45 +83,50 @@ public class AdminProductOptionController {
   @GetMapping("/search")
   public String searchProductOption(
       ModelMap modelMap,
-      @RequestParam("productOptionSearchField") String productOptionSearchField,
-      @RequestParam("productOptionSearchValue") String productOptionSearchValue) {
-    log.info("productOptionSearchField: " + productOptionSearchField);
-    log.info("productOptionSearchValue: " + productOptionSearchValue);
+      @RequestParam("productOptionSearchField") String field,
+      @RequestParam("productOptionSearchValue") String value) {
 
     // `product_option`에서 productOptionSearchField가 productOptionSearchValue인 row를 검색
     // 검색된 결과를 페이징 처리하여 보여준다
     Page<ProductOption> productOptions = new PageImpl<>(new ArrayList<>());
     Pageable pageable = PageRequest.of(0, 10);
 
-    if (productOptionSearchField.equals("name")) {
-      productOptions = productOptionService
-          .getAllProductOptionsByNamePage(productOptionSearchValue, pageable);
-    } else if (productOptionSearchField.equals("description")) {
-      productOptions = productOptionService
-          .getAllProductOptionsByDescriptionPage(productOptionSearchValue, pageable);
-    } else if (productOptionSearchField.equals("price")) {
-      productOptions = productOptionService
-          .getAllProductOptionsByPricePage(productOptionSearchValue, pageable);
+    switch (field) {
+      case "name":
+        productOptions = productOptionService
+            .getAllProductOptionsByNamePage(value, pageable);
+        break;
+      case "description":
+        productOptions = productOptionService
+            .getAllProductOptionsByDescriptionPage(value, pageable);
+        break;
+      case "price":
+        productOptions = productOptionService
+            .getAllProductOptionsByPricePage(value, pageable);
+        break;
     }
     int pageCount = productOptions.getTotalPages();
-    log.info("pageCount: " + pageCount);
     modelMap.addAttribute("pageCount", pageCount);
     modelMap.addAttribute("productOptionsSearchResult", productOptions);
 
     return "admin/product/option";
   }
 
-  /* 옵션 등록 */
+  /**
+   * 옵션 등록 페이지
+   */
   @GetMapping("/add")
   public String addProductOption(Model model) {
-    // 모든 상품목록 가져오기
+
     List<Product> products = productService.getAllProducts();
     model.addAttribute("products", products);
 
     return "admin/product/option-add";
   }
 
-  /* 옵션 등록 */
+  /**
+   * 옵션 등록
+   */
   @PostMapping("/add")
   public String addProductOption(
       @RequestParam(value = "productId", defaultValue = "") Long productId,
