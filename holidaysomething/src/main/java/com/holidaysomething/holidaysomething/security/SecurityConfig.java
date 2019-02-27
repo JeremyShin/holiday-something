@@ -3,7 +3,6 @@ package com.holidaysomething.holidaysomething.security;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -16,27 +15,14 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * @author choijaeyong on 18/01/2019.
- * @project holidaysomething
- * @description forbidden(403) 에러시 봐야할 곳. 1. Ajax 로 post 전송 할 때, forbidden 오류가 날 수 있다. 그때 ajax 메소드
- * 안에 headers: {'X-CSRF-Token': $('input[name="_csrf"]').val()} 추가해주면 된다.
+ * @project holidaysomething forbidden(403) 에러시 봐야할 곳. 1. Ajax 로 post 전송 할 때, forbidden 오류가 날 수 있다.
+ * 그때 ajax 메소드 안에 headers: {'X-CSRF-Token': $('input[name="_csrf"]').val()} 추가해주면 된다.
  *
  * 2. root로 로그인을 하지 않고 /admin/** 로 접근하면 forbidden 에러가 난다.
  */
-
-//@EnableAutoConfiguration
-@EnableWebSecurity
-@Configuration
 @Slf4j
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-  //private final UserDetailsService userDetailsService;
-
-//  private final BCryptPasswordEncoder passwordEncoder;
-
-//  @Bean
-//  public static PasswordEncoder passwordEncoder() {
-//    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-//  }
 
   @Bean
   public UserDetailsService userDetailsService() {
@@ -54,11 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     return new AuthSuccessHandler("/");  // default로 이동할 url
   }
 
-  @Bean
-  public AuthFailureHandler failureHandler() {
-    return new AuthFailureHandler();
-  }
-
   // 세션 동시에 몇개 존재할 수 있게 할건지 정하는 빈?? baeldung
   // 추가하니까 계속 403 에러 난다...
 //  @Bean
@@ -66,35 +47,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    return new HttpSessionEventPublisher();
 //  }
 
-  /*
-    인증에 대한 처리를 아예 무시할 경로를 설정.
-    ex> http://localhost:8080/logo.gif
-    AntPathRequestMatcher : ant 문법으로 path를 지정. ant :빌드도구
-    /css/** , /js/**, /images/**, /webjars/**, ** /favicon.ico
-     */
-
   @Override
   public void configure(WebSecurity web) throws Exception {
-//    web.ignoring()
-//        .antMatchers(
-//            "/resources/**",
-//            "/static/**", "/css/**", "/js/**", "/img/**", "/webjars/**");
 
     web.ignoring()
         .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
         .requestMatchers(new AntPathRequestMatcher("/**.html"))
         .requestMatchers(new AntPathRequestMatcher("/static/**"));
-
   }
-
-  /*
-    http://localhost:8080/logout - 로그아웃처리
-    http://localhost:8080/ - 모두 접근가능
-    http://localhost:8080/admin/** - admin권한 사용자만 접근 가능.
-    http://localhost:8080/members/login - 아무나 접근할 수 있다.
-    http://localhost:8080/admin/** - member권한 사용자만 접근 가능
-    GET http://localhost:8080/members/login - 로그인 화면
-     */
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
@@ -133,8 +93,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     3. failureUrl로 처리? /user/login 에 파라미터 추가해주고... 아 아닌듯.
      */
 
-
-
 //    http.sessionManagement()
 //        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 //
@@ -161,21 +119,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // 기본값은 2주인데 여기서 바꿀 수 있다.
   }
 
-
-  // auth 에 UserDetailsService를 등록하고 인코더를 등록.
+  // auth에 UserDetailsService를 등록하고 인코더를 등록.
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    log.info("======= AuthenticationManagerBuilder");
     auth
         .userDetailsService(userDetailsService())
         .passwordEncoder(passwordEncoder());
   }
-
-//  @Bean
-//  public DaoAuthenticationProvider authenticationProvider() {
-//    DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-//    authenticationProvider.setUserDetailsService(userDetailsService);
-//    authenticationProvider.setPasswordEncoder(passwordEncoder());
-//    return authenticationProvider;
-//  }
 }

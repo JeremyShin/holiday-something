@@ -1,8 +1,6 @@
 package com.holidaysomething.holidaysomething.security;
 
 import java.io.IOException;
-import java.security.Principal;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,7 +21,7 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
 
   @Override
   public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-      Authentication authentication) throws ServletException, IOException {
+      Authentication authentication) throws IOException {
     HttpSession session = request.getSession();
 
     MemberUserDetails principal = (MemberUserDetails) authentication.getPrincipal();
