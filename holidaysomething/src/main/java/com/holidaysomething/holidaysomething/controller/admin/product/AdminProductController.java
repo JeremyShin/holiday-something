@@ -4,6 +4,7 @@ import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.domain.ProductCategory;
 import com.holidaysomething.holidaysomething.domain.ProductImage;
 import com.holidaysomething.holidaysomething.domain.ProductOption;
+import com.holidaysomething.holidaysomething.dto.AdminProductSearchDto;
 import com.holidaysomething.holidaysomething.dto.ProductAddDto;
 import com.holidaysomething.holidaysomething.service.fileupload.ImageStreamService;
 import com.holidaysomething.holidaysomething.service.product.ProductAddService;
@@ -188,16 +189,17 @@ public class AdminProductController {
    */
   @PostMapping("/search")
   public String productSearchPost(ModelMap modelMap,
-      @RequestParam(value = "productSearchClassification", required = false) String searchClassificationValue,
-      @RequestParam(value = "productSearchClassificationInput", required = false) String searchClassificationInput,
-      @RequestParam(value = "productLargeCategoryId", required = false) Long largeId,
-      @RequestParam(value = "productMiddleCategoryId", required = false) Long middleId,
-      @RequestParam(value = "productSmallCategoryId", required = false) Long smallId,
-      @RequestParam(value = "productDate", required = false) String dateValue,
-      @RequestParam(value = "productRegDateStart", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String startDateSelect,
-      @RequestParam(value = "productRegDateEnd", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") String endDateSelect) {
+      AdminProductSearchDto dto) {
 
-    // 모든 상품 리스트를 불러온다(페이지)
+    String searchClassificationValue = dto.getProductSearchClassification();
+    String searchClassificationInput = dto.getProductSearchClassificationInput();
+    Long largeId = dto.getProductLargeCategoryId();
+    Long middleId = dto.getProductMiddleCategoryId();
+    Long smallId = dto.getProductSmallCategoryId();
+    String dateValue = dto.getProductDate();
+    String startDateSelect = dto.getProductRegDateStart();
+    String endDateSelect = dto.getProductRegDateEnd();
+
     // TODO: 검색 결과도 페이징 처리 필요
     Pageable pageable = PageRequest.of(0, 10);
 

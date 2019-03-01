@@ -3,7 +3,6 @@ package com.holidaysomething.holidaysomething.repository;
 import com.holidaysomething.holidaysomething.domain.Product;
 import com.holidaysomething.holidaysomething.dto.ProductListImageDto;
 import com.holidaysomething.holidaysomething.repository.custom.ProductRepositoryCustom;
-import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,21 +11,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface ProductRepository extends JpaRepository<Product, Long>, ProductRepositoryCustom {
-
-  //admin : product searching by name
-  @Query(value = "SELECT p FROM Product p WHERE p.name LIKE CONCAT('%', :productName, '%')")
-  Page<Product> findByProductNameContaining(@Param("productName") String productName,
-      Pageable pageable);
-
-  //admin : product searching by code
-  @Query(value = "SELECT p FROM Product p WHERE p.code LIKE CONCAT('%', :productCode, '%')")
-  Page<Product> findByProductCodeContaining(@Param("productCode") String productCode,
-      Pageable pageable);
-
-  //admin : product searching by date
-  @Query(value = "SELECT p FROM Product p WHERE p.regDate BETWEEN :regdateStart AND :regdateEnd")
-  Page<Product> findByProductRegdate(@Param("regdateStart") LocalDateTime regdateStart,
-      @Param("regdateEnd") LocalDateTime regdateEnd, Pageable pageable);
 
   @Query("select count(p) from Product p")
   int countAll();

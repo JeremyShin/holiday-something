@@ -7,6 +7,7 @@ import com.holidaysomething.holidaysomething.dto.ProductOrderDetailDto;
 import com.holidaysomething.holidaysomething.repository.ProductImageRepository;
 import com.holidaysomething.holidaysomething.repository.ProductOptionRepository;
 import com.holidaysomething.holidaysomething.repository.ProductRepository;
+import com.holidaysomething.holidaysomething.repository.custom.ProductRepositoryImpl;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductServiceImpl implements ProductService {
 
   private final ProductRepository productRepository;
+  private final ProductRepositoryImpl productRepositoryImpl;
   private final ProductImageRepository productImageRepository;
   private final ProductOptionRepository productOptionRepository;
 
@@ -48,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
       String searchClassificationInput, Long largeId, Long middleId, Long smallId,
       String dateValue, String startDateSelect, String endDateSelect, Pageable pageable) {
 
-    return productRepository.findProducts(searchClassificationValue, searchClassificationInput,
+    return productRepositoryImpl.findProducts(searchClassificationValue, searchClassificationInput,
         largeId, middleId, smallId, dateValue, startDateSelect, endDateSelect, pageable);
   }
 
