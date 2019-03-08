@@ -7,7 +7,6 @@ import com.holidaysomething.holidaysomething.dto.MemberSearchDto;
 import com.holidaysomething.holidaysomething.dto.OrderMemberDto;
 import com.holidaysomething.holidaysomething.dto.SearchDto;
 import com.holidaysomething.holidaysomething.dto.SearchOrderMemberDto;
-import com.holidaysomething.holidaysomething.repository.CartProductRepository;
 import com.holidaysomething.holidaysomething.repository.MemberRepository;
 import com.querydsl.core.Tuple;
 import java.time.LocalDateTime;
@@ -31,7 +30,7 @@ public class MemberServiceImpl implements MemberService {
   @Override
   @Transactional(readOnly = true)
   public Page<Member> findAllOrSearch(SearchDto searchDto, Pageable pageable) {
-    if (searchDto.isSearched()) {
+    if (searchDto.isValid()) {
       return memberRepository.findMembersByLoginId(searchDto.getKeyword(), pageable);
     } else {
       return memberRepository.findAll(pageable);

@@ -8,7 +8,7 @@ public class SearchDto {
   private String searchType;
   private String keyword;
 
-  public boolean isSearched() {
+  public boolean isValid() {
     if (searchType == null || searchType.isEmpty()) {
       return false;
     }

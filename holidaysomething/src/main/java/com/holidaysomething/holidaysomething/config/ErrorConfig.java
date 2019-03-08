@@ -17,6 +17,12 @@ import org.springframework.http.HttpStatus;
 //@Configuration
 public class ErrorConfig {
 
+  /**
+   * Customizing Embedded Servlet Containers
+   * ConfigurableServletWebServerFactory를 직접 customizing하는 방법
+   * (TomcatServletWebServerFactory 객체를 등록)
+   * 참고: https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-developing-web-applications.html#boot-features-customizing-configurableservletwebserverfactory-directly
+   */
   @Bean
   public ConfigurableServletWebServerFactory webServerFactory() {
     TomcatServletWebServerFactory factory = new

@@ -110,7 +110,8 @@ public class AdminMemberController {
    * 회원 조회
    */
   @GetMapping("/search")
-  public String memberSearch(ModelMap modelMap, @ModelAttribute MemberSearchDto memberSearchDto,
+  public String memberSearch(ModelMap modelMap,
+      @ModelAttribute MemberSearchDto memberSearchDto,
       @RequestParam(value = "page", defaultValue = "1") int page) {
 
     if (memberSearchDto.hasValue()) {
