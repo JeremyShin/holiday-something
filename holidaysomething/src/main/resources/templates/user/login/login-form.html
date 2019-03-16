@@ -20,36 +20,46 @@
 
   </th:block>
 
-  <h1>Login</h1>
-  <div th:if="${param.error}">
-    <!--<span th:if="${#session.getAttribute('errMsg')}" th:text="${#session.getAttribute('errMsg')}">test</span>-->
-    <!--<span th:if="${#session.getAttribute('errMsg')}" th:text="${#session.getAttribute('errMsg')}">test</span>-->
-    Unable to login. Check your id and pw.
+  <div style="margin-left: 35%;">
+    <h1>Login</h1>
+    <div th:if="${param.error}">
+      <!--<span th:if="${#session.getAttribute('errMsg')}" th:text="${#session.getAttribute('errMsg')}">test</span>-->
+      <!--<span th:if="${#session.getAttribute('errMsg')}" th:text="${#session.getAttribute('errMsg')}">test</span>-->
+      Unable to login. Check your id and pw.
+    </div>
+
+    <form method='POST' th:action="@{/user/authenticate}">
+      <table>
+        <tr>
+          <td>LoginId:</td>
+          <td><input type='text' name='loginId'></td>
+        </tr>
+        <tr>
+          <td>Password:</td>
+          <td><input type='password' name='password'/></td>
+        </tr>
+        <tr>
+          <td>Remember Me:</td>
+          <td><input type="checkbox" name="remember-me"/></td>
+        </tr>
+        <tr>
+          <td>
+            <div style="margin-left: auto; margin-right: auto;">
+              <input type="submit"/>
+              <button type="button">
+                <a href="/user/join">Sign Up</a>
+              </button>
+            </div>
+          </td>
+        </tr>
+
+
+      </table>
+
+    </form>
+
+
   </div>
-
-  <form method='POST' th:action="@{/user/authenticate}">
-    <table>
-      <tr>
-        <td>LoginId:</td>
-        <td><input type='text' name='loginId'></td>
-      </tr>
-      <tr>
-        <td>Password:</td>
-        <td><input type='password' name='password'/></td>
-      </tr>
-      <tr>
-        <td>Remember Me:</td>
-        <td><input type="checkbox" name="remember-me"/></td>
-      </tr>
-      <tr>
-        <td><input type="submit"/></td>
-      </tr>
-    </table>
-  </form>
-
-  <button type="button">
-    <a href="/user/join">Sign Up</a>
-  </button>
 
 
   <br/>
