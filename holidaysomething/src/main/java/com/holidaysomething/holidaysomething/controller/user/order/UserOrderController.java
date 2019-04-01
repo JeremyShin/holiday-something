@@ -62,7 +62,7 @@ public class UserOrderController {
       productOrderDetailDtos.add(productOrderDetailDto);
     }
 
-    model.addAttribute("addOrderMemberDto", memberOrderDto);
+    model.addAttribute("memberOrderDto", memberOrderDto);
     model.addAttribute("productOrderInfoDtos", productOrderInfoDtos);
     model.addAttribute("productOrderDetailDtos", productOrderDetailDtos);
 
